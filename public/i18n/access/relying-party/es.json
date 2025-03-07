@@ -1,0 +1,149 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creando nuevo relying party",
+      "tooltip": "Crea un nuevo registro de relying party"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un relying party"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viendo los valores de un relying party",
+      "tooltip": "Ver los valores de un relying party"
+    },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un relying party"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un relying party"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un relying party"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "api-key": {
+      "label": "Clave de API",
+      "placeholder": "Una identificación para la aplicación"
+    },
+    "apiKey": {
+      "error": {
+        "maxlength": "Clave de API tiene que tener menos de 250 caracteres",
+        "required": "Clave de API es obligatorio"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "- tiene que tener menos de 250 caracteres",
+        "required": "- es obligatorio"
+      },
+      "label": "-",
+      "placeholder": "El código identificativo de la aplicación"
+    },
+    "enabled": {
+      "label": "habilitado",
+      "placeholder": "Una marca que permite quitar el acceso a una cuenta sin borrarla"
+    }
+  },
+  "list": {
+    "column": {
+      "api-key": {
+        "title": "Clave de API",
+        "tooltip": "Clave de API"
+      },
+      "code": {
+        "title": "-",
+        "tooltip": "-"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "code": {
+      "label": "-",
+      "placeholder": ""
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Por defecto"
+      },
+      "placeholder": "Orden en el que recuperar los resultados"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "Búsqueda por texto"
+    }
+  }
+}

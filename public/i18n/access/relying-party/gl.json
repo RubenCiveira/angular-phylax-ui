@@ -1,0 +1,149 @@
+{
+  "action": {
+    "create": {
+      "createButton": "-- create",
+      "label": "-- create",
+      "title": "Crear un novo partido de confianza",
+      "tooltip": "Crea un novo rexistro de partido de confianza"
+    },
+    "delete": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que queres borrar",
+      "dismiss": "Aceptar",
+      "label": "-- delete",
+      "okBtn": "Eliminar o rexistro",
+      "report": "Limpado",
+      "title": "& Borrar",
+      "tooltip": "Modificar os valores dunha parte dependente"
+    },
+    "delete-selection": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que desexas eliminar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "& Borrar",
+      "okBtn": "Limpar os rexistros",
+      "progress": "A borrar",
+      "report": "Elimináronse os rexistros",
+      "title": "Borrar o & escollido",
+      "tooltip": "Borrar os rexistros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle",
+      "title": "Enxergar os valores de partido dependente",
+      "tooltip": "Vexa os valores dunha parte dependente"
+    },
+    "disable": {
+      "cancelBtn": "Non desactivar",
+      "content": "Confirma que queres desactivar",
+      "dismiss": "Aceptar",
+      "label": "desactivar",
+      "okBtn": "desactivar rexistro",
+      "report": "Foi desactivado",
+      "title": "desactivar",
+      "tooltip": "Modificar os valores dunha parte dependente"
+    },
+    "disable-selection": {
+      "cancelBtn": "Non desactivar",
+      "content": "Confirma que desexa desactivar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "desactivar",
+      "okBtn": "desactivar rexistros",
+      "progress": "A desactivar",
+      "report": "Disque se desactivaron",
+      "title": "desactivar selección",
+      "tooltip": "desactivar os rexistros escollidos"
+    },
+    "edit": {
+      "label": "edit",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar os valores dunha parte dependente"
+    },
+    "enable": {
+      "cancelBtn": "Non habilitar",
+      "content": "Confirma que queres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar",
+      "okBtn": "posibilitar a inscrición",
+      "report": "Se tiveres habilitado",
+      "title": "habilitar",
+      "tooltip": "Modificar os valores dunha parte dependente"
+    },
+    "enable-selection": {
+      "cancelBtn": "Non habilitar",
+      "content": "Confirma que desexa activar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar",
+      "okBtn": "posibilitar as inscricións",
+      "progress": "Estar habilitado",
+      "report": "Habilitáronse rexistros",
+      "title": "habilitar a selección",
+      "tooltip": "habilitar os rexistros seleccionados"
+    }
+  },
+  "form-group": {
+    "api-key": {
+      "label": "Chave da API",
+      "placeholder": "Unha ID para a aplicación"
+    },
+    "apiKey": {
+      "error": {
+        "maxlength": "A clave API debe ter menos de 250 caracteres",
+        "required": "Requírese clave de API"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "- debe ser inferior a 250 caracteres",
+        "required": "é obrigatorio"
+      },
+      "label": "-",
+      "placeholder": "O código de identificación da solicitude"
+    },
+    "enabled": {
+      "label": "habilitar",
+      "placeholder": "Unha marca que permite eliminar o acceso a unha conta sen borrala"
+    }
+  },
+  "list": {
+    "column": {
+      "api-key": {
+        "title": "tecla api",
+        "tooltip": "tecla api"
+      },
+      "code": {
+        "title": "código",
+        "tooltip": "código"
+      },
+      "enabled": {
+        "title": "activado",
+        "tooltip": "activado"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "code": {
+      "label": "-",
+      "placeholder": ""
+    },
+    "order": {
+      "label": "Orde",
+      "options": {
+        "code-asc": "código-asc",
+        "code-desc": "codigo-desc",
+        "null": "Por defecto"
+      },
+      "placeholder": "Orde na que recuperar resultados"
+    },
+    "search": {
+      "label": "procura",
+      "placeholder": "Buscar por texto"
+    }
+  }
+}

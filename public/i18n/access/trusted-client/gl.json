@@ -1,0 +1,174 @@
+{
+  "action": {
+    "create": {
+      "createButton": "-- create",
+      "label": "-- create",
+      "title": "Crear un novo cliente de confianza",
+      "tooltip": "Crea un novo rexistro de clientes de confianza"
+    },
+    "delete": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que queres borrar",
+      "dismiss": "Aceptar",
+      "label": "-- delete",
+      "okBtn": "Eliminar o rexistro",
+      "report": "Limpado",
+      "title": "& Borrar",
+      "tooltip": "Modificar os valores dun cliente de confianza"
+    },
+    "delete-selection": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que desexas eliminar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "& Borrar",
+      "okBtn": "Limpar os rexistros",
+      "progress": "A borrar",
+      "report": "Elimináronse os rexistros",
+      "title": "Borrar o & escollido",
+      "tooltip": "Borrar os rexistros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle",
+      "title": "Ver os valores dun cliente de confianza",
+      "tooltip": "Vexa os valores dun cliente de confianza"
+    },
+    "disable": {
+      "cancelBtn": "Non desactivar",
+      "content": "Confirma que queres desactivar",
+      "dismiss": "Aceptar",
+      "label": "desactivar",
+      "okBtn": "desactivar rexistro",
+      "report": "Foi desactivado",
+      "title": "desactivar",
+      "tooltip": "Modificar os valores dun cliente de confianza"
+    },
+    "disable-selection": {
+      "cancelBtn": "Non desactivar",
+      "content": "Confirma que desexa desactivar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "desactivar",
+      "okBtn": "desactivar rexistros",
+      "progress": "A desactivar",
+      "report": "Disque se desactivaron",
+      "title": "desactivar selección",
+      "tooltip": "desactivar os rexistros escollidos"
+    },
+    "edit": {
+      "label": "edit",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar os valores dun cliente de confianza"
+    },
+    "enable": {
+      "cancelBtn": "Non habilitar",
+      "content": "Confirma que queres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar",
+      "okBtn": "posibilitar a inscrición",
+      "report": "Se tiveres habilitado",
+      "title": "habilitar",
+      "tooltip": "Modificar os valores dun cliente de confianza"
+    },
+    "enable-selection": {
+      "cancelBtn": "Non habilitar",
+      "content": "Confirma que desexa activar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar",
+      "okBtn": "posibilitar as inscricións",
+      "progress": "Estar habilitado",
+      "report": "Habilitáronse rexistros",
+      "title": "habilitar a selección",
+      "tooltip": "habilitar os rexistros seleccionados"
+    }
+  },
+  "form-group": {
+    "allowed-redirects": {
+      "label": "redireccións permitidas",
+      "placeholder": "Se permitimos o inicio de sesión directo da aplicación obrigamos a indicar un segredo"
+    },
+    "allowedRedirects": {
+      "error": {
+        "maxlength": "redireccións permitidas deben ser inferiores a 250 caracteres"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "- debe ser inferior a 250 caracteres",
+        "required": "é obrigatorio"
+      },
+      "label": "-",
+      "placeholder": "O código de identificación da solicitude"
+    },
+    "enabled": {
+      "label": "habilitar",
+      "placeholder": "Unha marca que permite eliminar o acceso a unha conta sen borrala"
+    },
+    "public-allow": {
+      "label": "permiso público",
+      "placeholder": "Se os usuarios verdadeiros poden usar estes clientes para acceder co fluxo de código público"
+    },
+    "publicAllow": {
+      "error": {
+        "required": "requírese permiso público"
+      }
+    },
+    "secret-oauth": {
+      "label": "segredo de oauth",
+      "placeholder": "Se o usuario non está delegado a frase para identificar"
+    },
+    "secretOauth": {
+      "error": {
+        "maxlength": "segredo oauth debe ser inferior a 250 caracteres"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "allowed-redirects": {
+        "title": "redireccións permitidas",
+        "tooltip": "redireccións permitidas"
+      },
+      "code": {
+        "title": "código",
+        "tooltip": "código"
+      },
+      "enabled": {
+        "title": "activado",
+        "tooltip": "activado"
+      },
+      "public-allow": {
+        "title": "público permiten",
+        "tooltip": "público permiten"
+      },
+      "secret-oauth": {
+        "title": "secreto oauth",
+        "tooltip": "secreto oauth"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "code": {
+      "label": "-",
+      "placeholder": ""
+    },
+    "order": {
+      "label": "Orde",
+      "options": {
+        "code-asc": "código-asc",
+        "code-desc": "codigo-desc",
+        "null": "Por defecto"
+      },
+      "placeholder": "Orde na que recuperar resultados"
+    },
+    "search": {
+      "label": "procura",
+      "placeholder": "Buscar por texto"
+    }
+  }
+}

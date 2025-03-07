@@ -1,0 +1,106 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creando nuevo tenant terms of use",
+      "tooltip": "Crea un nuevo registro de tenant terms of use"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un tenant terms of use"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viendo los valores de un tenant terms of use",
+      "tooltip": "Ver los valores de un tenant terms of use"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un tenant terms of use"
+    }
+  },
+  "form-group": {
+    "activation-date": {
+      "label": "Fecha Activación",
+      "placeholder": "El fecha de activación de los términos de uso del inquilino",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "attached": {
+      "label": "adosado",
+      "placeholder": "El adjunto de los términos de uso del inquilino"
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino es obligatorio"
+      },
+      "label": "inquilino",
+      "placeholder": "La cuenta a la que pertenece"
+    },
+    "text": {
+      "error": {
+        "required": "Texto es obligatorio"
+      },
+      "label": "Texto",
+      "placeholder": "Términos de uso de El text de tenant"
+    }
+  },
+  "list": {
+    "column": {
+      "activation-date": {
+        "title": "Fecha Activación",
+        "tooltip": "Fecha Activación"
+      },
+      "attached": {
+        "title": "adosado",
+        "tooltip": "adosado"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "text": {
+        "title": "Texto",
+        "tooltip": "Texto"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "buscar",
+      "placeholder": "Búsqueda por texto"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": ""
+    }
+  }
+}

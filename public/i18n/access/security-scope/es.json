@@ -1,0 +1,152 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creando nuevo security scope",
+      "tooltip": "Crea un nuevo registro de security scope"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un security scope"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viendo los valores de un security scope",
+      "tooltip": "Ver los valores de un security scope"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un security scope"
+    }
+  },
+  "form-group": {
+    "domain": {
+      "error": {
+        "maxlength": "dominio tiene que tener menos de 250 caracteres",
+        "required": "dominio es obligatorio"
+      },
+      "label": "dominio",
+      "placeholder": "grupo funcional"
+    },
+    "kind": {
+      "error": {
+        "maxlength": "tipo tiene que tener menos de 250 caracteres"
+      },
+      "label": "tipo",
+      "placeholder": "El kind de security scope"
+    },
+    "public-access": {
+      "label": "Acceso público",
+      "placeholder": "El acceso público de alcance de seguridad"
+    },
+    "relying-party": {
+      "label": "usuario del certificado",
+      "placeholder": "El confiado parte de alcance de seguridad"
+    },
+    "resource": {
+      "error": {
+        "maxlength": "recursos tiene que tener menos de 250 caracteres",
+        "required": "recursos es obligatorio"
+      },
+      "label": "recursos",
+      "placeholder": "Una clave de grupo de etiquetas para mostrar el alcance"
+    },
+    "scope": {
+      "error": {
+        "maxlength": "alcance tiene que tener menos de 250 caracteres",
+        "required": "alcance es obligatorio"
+      },
+      "label": "alcance",
+      "placeholder": "Una etiqueta para mostrar el alcance"
+    },
+    "trusted-client": {
+      "label": "Cliente de confianza",
+      "placeholder": "El cliente de confianza de alcance de seguridad"
+    },
+    "visibility": {
+      "label": "visibilidad",
+      "options": {
+        "authorized": "AUTORIZADO",
+        "explicit": "EXPLICITO",
+        "public": "PÚBLICO"
+      },
+      "placeholder": "El visibility de security scope"
+    }
+  },
+  "list": {
+    "column": {
+      "domain": {
+        "title": "dominio",
+        "tooltip": "dominio"
+      },
+      "kind": {
+        "title": "tipo",
+        "tooltip": "tipo"
+      },
+      "public-access": {
+        "title": "Acceso público",
+        "tooltip": "Acceso público"
+      },
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      },
+      "resource": {
+        "title": "recursos",
+        "tooltip": "recursos"
+      },
+      "scope": {
+        "title": "alcance",
+        "tooltip": "alcance"
+      },
+      "trusted-client": {
+        "title": "Cliente de confianza",
+        "tooltip": "Cliente de confianza"
+      },
+      "visibility": {
+        "title": "visibilidad",
+        "tooltip": "visibilidad"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "relying-partys": {
+      "label": "partys que confían",
+      "placeholder": ""
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "Búsqueda por texto"
+    },
+    "trusted-clients": {
+      "label": "Clientes de confianza",
+      "placeholder": ""
+    }
+  }
+}
