@@ -23,7 +23,7 @@ export class SecurityDomainViewListComponent {
   list: Shift<SecurityDomainProjection[], SecurityDomainFilter>;
 
   constructor(repository: SecurityDomainRepository) {
-    this.list = repository.projections(['tenant']);
+    this.list = repository.projections([]);
     effect(() => {
       setTimeout(() => this.makeSearch());
     });
@@ -41,9 +41,6 @@ export class SecurityDomainViewListComponent {
     if (external?.name) {
       result.name = external.name;
     }
-    if (external?.tenants) {
-      result.tenants = external.tenants;
-    }
     if (filter?.search) {
       result.search = filter.search;
     }
@@ -52,9 +49,6 @@ export class SecurityDomainViewListComponent {
     }
     if (filter?.name) {
       result.name = filter.name;
-    }
-    if (filter?.tenants?.$ref) {
-      result.tenants = filter.tenants.$ref;
     }
     if (filter?.order) {
       result.order = filter.order;

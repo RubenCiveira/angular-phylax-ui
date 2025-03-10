@@ -14,9 +14,19 @@ import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [SecurityDomainViewScopesComponent],
   exports: [SecurityDomainViewScopesComponent],
-  imports: [CommonModule, FormsModule, MatSelectModule, MatCardModule, 
-    MatIconModule, MatInputModule, ReactiveFormsModule,
-    MatFormFieldModule, MatButtonModule, MatSlideToggleModule, TranslocoModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatSelectModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    TranslocoModule,
+  ],
   providers: [provideTranslocoScope({ scope: 'access/security-domain', alias: 'access.security-domain' })],
   bootstrap: [],
 })

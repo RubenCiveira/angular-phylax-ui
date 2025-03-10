@@ -25,7 +25,7 @@ export class GroupedItem {
   constructor(
     public readonly label: string,
     public readonly uid: string,
-    public readonly checked: string | undefined
+    public readonly checked: string | undefined,
   ) {}
 }
 
@@ -45,17 +45,17 @@ export class SecurityDomainViewScopesComponent implements Action {
 
   form: FormGroup;
   filterResource: string | null = '';
-  assignedReferences: {[key:string]: string} = {};
-  
+  assignedReferences: { [key: string]: string } = {};
+
   title = signal<string>('scopes');
   label = signal<string>('scopes');
   icon = signal<string>('gavel');
   tooltip = signal<string>('scopes');
   default = input<boolean>(false);
-  
+
   visibleValue = true;
   enabledValue = true;
-  
+
   allRelies = signal<RelyingParty[]>([]);
   allClients = signal<TrustedClient[]>([]);
   allScopes = signal<Grouped[]>([]);
@@ -105,13 +105,15 @@ export class SecurityDomainViewScopesComponent implements Action {
     const domain = this.selection()[0];
     this.allScopes.set([]);
     this.assignedReferences = {};
-    this.assigned.values({
-      securityDomains: [ domain.uid ]
-    }).subscribe((all) => {
-      all.forEach( item => {
-        this.assignedReferences[ item.securityScope!.$ref ] = item.uid;
+    this.assigned
+      .values({
+        securityDomains: [domain.uid],
+      })
+      .subscribe((all) => {
+        all.forEach((item) => {
+          this.assignedReferences[item.securityScope!.$ref] = item.uid;
+        });
       });
-    });
     this.clients.values({}).subscribe((all) => {
       this.allClients.set(all);
     });
@@ -145,15 +147,17 @@ export class SecurityDomainViewScopesComponent implements Action {
 
   toogle(item: GroupedItem) {
     const domain = this.selection()[0];
-    if( !!item.checked ) {
-      this.assigned.deleteByKey( item.checked ).subscribe();
+    if (!!item.checked) {
+      this.assigned.deleteByKey(item.checked).subscribe();
     } else {
-      this.assigned.add( {
-        uid: '',
-        securityDomain: { $ref: domain.uid },
-        securityScope: { $ref: item.uid },
-        version: 0
-      } ).subscribe();
+      this.assigned
+        .add({
+          uid: '',
+          securityDomain: { $ref: domain.uid },
+          securityScope: { $ref: item.uid },
+          version: 0,
+        })
+        .subscribe();
     }
   }
 

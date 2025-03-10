@@ -55,14 +55,6 @@
       <list-view-table>
         <ng-template
           listViewColumn
-          title="{{ 'access.security-domain.list.column.tenant.title' | transloco }}"
-          tooltip="{{ 'access.security-domain.list.column.tenant.tooltip' | transloco }}"
-          let-row="$implicit"
-        >
-          {{ row.tenant()?.name }}
-        </ng-template>
-        <ng-template
-          listViewColumn
           title="{{ 'access.security-domain.list.column.name.title' | transloco }}"
           tooltip="{{ 'access.security-domain.list.column.name.tooltip' | transloco }}"
           let-row="$implicit"
