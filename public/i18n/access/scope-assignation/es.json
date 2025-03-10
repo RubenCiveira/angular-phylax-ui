@@ -1,0 +1,94 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creando nuevo scope assignation",
+      "tooltip": "Crea un nuevo registro de scope assignation"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un scope assignation"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viendo los valores de un scope assignation",
+      "tooltip": "Ver los valores de un scope assignation"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un scope assignation"
+    }
+  },
+  "form-group": {
+    "security-domain": {
+      "label": "dominio de seguridad",
+      "placeholder": "El dominio de seguridad de asignación de alcance"
+    },
+    "security-scope": {
+      "label": "ámbito de seguridad",
+      "placeholder": "El ámbito de seguridad de la asignación del ámbito"
+    },
+    "securityDomain": {
+      "error": {
+        "required": "dominio de seguridad es obligatorio"
+      }
+    },
+    "securityScope": {
+      "error": {
+        "required": "ámbito de seguridad es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "security-domain": {
+        "title": "dominio de seguridad",
+        "tooltip": "dominio de seguridad"
+      },
+      "security-scope": {
+        "title": "ámbito de seguridad",
+        "tooltip": "ámbito de seguridad"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "buscar",
+      "placeholder": "Búsqueda por texto"
+    },
+    "security-domains": {
+      "label": "dominios de seguridad",
+      "placeholder": ""
+    },
+    "security-scopes": {
+      "label": "alcances de seguridad",
+      "placeholder": ""
+    }
+  }
+}

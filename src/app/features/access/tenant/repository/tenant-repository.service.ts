@@ -52,7 +52,7 @@ export class TenantRepository {
     return this.repo.canDeleteSelection();
   }
   deleteSelection(filter: TenantFilter): Observable<any> {
-    return this.repo.deleteSelection(filter);
+    return this.repo.deleteSelection(this.publicQueryFilter(filter));
   }
   retrieve(code: string): Observable<Tenant | undefined> {
     return this.repo.retrieve(code);
@@ -61,10 +61,10 @@ export class TenantRepository {
     return this.repo.projection(includes);
   }
   list(filter: TenantFilter): Observable<Slide<Tenant>> {
-    return this.repo.list(filter);
+    return this.repo.list(this.publicQueryFilter(filter));
   }
   values(filter: TenantFilter): Observable<Tenant[]> {
-    return this.repo.values(filter);
+    return this.repo.values(this.publicQueryFilter(filter));
   }
   projections(includes: string[]): Shift<TenantProjection[], TenantFilter> {
     return this.repo.projections(includes);
@@ -82,7 +82,7 @@ export class TenantRepository {
     return this.repo.canUsePartialsByKey();
   }
   enableSelection(filter: TenantFilter) {
-    return this.repo.partialBySelection(filter, { enabled: 'true' }, 'enable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'true' }, 'enable');
   }
   disable(key: string): Observable<Tenant> {
     return this.repo.partialByKey(
@@ -97,7 +97,7 @@ export class TenantRepository {
     return this.repo.canUsePartialsByKey();
   }
   disableSelection(filter: TenantFilter) {
-    return this.repo.partialBySelection(filter, { enabled: 'false' }, 'disable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'false' }, 'disable');
   }
   selectorProvider(filter?: Signal<TenantFilter>): SelectorProvider<Tenant, { $ref: string }> {
     return selectorProvider({
@@ -119,5 +119,24 @@ export class TenantRepository {
         return one.$ref === other.$ref;
       },
     });
+  }
+  private publicQueryFilter(filter: TenantFilter): TenantFilter {
+    const morphed = {} as any;
+    if (filter.search) {
+      morphed['search'] = filter.search;
+    }
+    if (filter.uids) {
+      morphed['uids'] = filter.uids;
+    }
+    if (filter.limit) {
+      morphed['limit'] = filter.limit;
+    }
+    if (filter.order) {
+      morphed['order'] = filter.order;
+    }
+    if (filter.name) {
+      morphed['name'] = filter.name;
+    }
+    return morphed;
   }
 }

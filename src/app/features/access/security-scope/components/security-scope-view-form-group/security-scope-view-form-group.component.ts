@@ -39,8 +39,9 @@ export class SecurityScopeViewFormGroupComponent extends SubFormEditable<Securit
         relyingParty: new FormControl<any>(null),
         resource: new FormControl<string>('', [Validators.required]),
         scope: new FormControl<string>('', [Validators.required]),
-        kind: new FormControl<string>(''),
-        visibility: new FormControl<any>('EXPLICIT'),
+        enabled: new FormControl<boolean>(true),
+        kind: new FormControl<any>('read'),
+        visibility: new FormControl<any>('explicit'),
         version: new FormControl<number>(0),
       }),
     );
@@ -66,8 +67,9 @@ export class SecurityScopeViewFormGroupComponent extends SubFormEditable<Securit
         relyingParty: null,
         resource: '',
         scope: '',
-        kind: '',
-        visibility: 'EXPLICIT',
+        enabled: true,
+        kind: 'read',
+        visibility: 'explicit',
         version: 0,
       };
     };

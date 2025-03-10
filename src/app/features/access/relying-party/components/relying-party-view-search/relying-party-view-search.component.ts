@@ -23,6 +23,7 @@ export class RelyingPartyViewSearchComponent extends SubFormEditable<any> {
       new FormGroup({
         search: new FormControl<string>(''),
         code: new FormControl<string>(''),
+        apiKey: new FormControl<string>(''),
         order: new FormControl<string>(''),
       }),
     );
@@ -43,6 +44,7 @@ export class RelyingPartyViewSearchComponent extends SubFormEditable<any> {
       return {
         search: '',
         code: '',
+        apiKey: '',
         order: '',
       };
     };

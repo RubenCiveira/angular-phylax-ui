@@ -11,11 +11,9 @@ export interface TenantConfig {
 }
 export interface TenantConfigFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
-  tenant?: string;
-  tenants?: string;
+  tenants?: string[];
 }
 export interface TenantConfigProjection {
   uid: string;

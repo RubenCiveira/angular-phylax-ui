@@ -9,7 +9,7 @@ import { ApiService } from '@common/data/api/api.service';
 import { TenantRepository } from '@features/access/tenant/repository/tenant-repository.service';
 import { selectorProvider, SelectorProvider } from '@common/data/selector-provider';
 import { Acl } from '@common/data/acl/acl.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RepositoryMetadata, RepositoryService } from '@common/data/repository/repository.service';
 import { Shift, Tick } from '@common/data/repository/repository.model';
 import { Injectable, Signal } from '@angular/core';
@@ -60,7 +60,7 @@ export class TenantConfigRepository {
     return this.repo.canDeleteSelection();
   }
   deleteSelection(filter: TenantConfigFilter): Observable<any> {
-    return this.repo.deleteSelection(filter);
+    return this.repo.deleteSelection(this.publicQueryFilter(filter));
   }
   retrieve(code: string): Observable<TenantConfig | undefined> {
     return this.repo.retrieve(code);
@@ -69,10 +69,10 @@ export class TenantConfigRepository {
     return this.repo.projection(includes);
   }
   list(filter: TenantConfigFilter): Observable<Slide<TenantConfig>> {
-    return this.repo.list(filter);
+    return this.repo.list(this.publicQueryFilter(filter));
   }
   values(filter: TenantConfigFilter): Observable<TenantConfig[]> {
-    return this.repo.values(filter);
+    return this.repo.values(this.publicQueryFilter(filter));
   }
   projections(includes: string[]): Shift<TenantConfigProjection[], TenantConfigFilter> {
     return this.repo.projections(includes);
@@ -91,11 +91,27 @@ export class TenantConfigRepository {
         return { $ref: item.uid! };
       },
       select: (ref: { $ref: string }) => {
-        return this.retrieve(ref['$ref']);
+        return ref['$ref'] ? this.retrieve(ref['$ref']) : of(undefined);
       },
       equals: (one: { $ref: string }, other: { $ref: string }) => {
         return one.$ref === other.$ref;
       },
     });
+  }
+  private publicQueryFilter(filter: TenantConfigFilter): TenantConfigFilter {
+    const morphed = {} as any;
+    if (filter.search) {
+      morphed['search'] = filter.search;
+    }
+    if (filter.uids) {
+      morphed['uids'] = filter.uids;
+    }
+    if (filter.limit) {
+      morphed['limit'] = filter.limit;
+    }
+    if (filter.tenants) {
+      morphed['tenants'] = filter.tenants;
+    }
+    return morphed;
   }
 }

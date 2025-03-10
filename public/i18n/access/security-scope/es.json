@@ -47,11 +47,20 @@
       "label": "dominio",
       "placeholder": "grupo funcional"
     },
+    "enabled": {
+      "label": "habilitado",
+      "placeholder": "El enabled de security scope"
+    },
     "kind": {
       "error": {
         "maxlength": "tipo tiene que tener menos de 250 caracteres"
       },
       "label": "tipo",
+      "options": {
+        "manage": "GESTIÓN",
+        "read": "LEER",
+        "write": "ESCRIBIR"
+      },
       "placeholder": "El kind de security scope"
     },
     "public-access": {
@@ -98,6 +107,10 @@
         "title": "dominio",
         "tooltip": "dominio"
       },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
       "kind": {
         "title": "tipo",
         "tooltip": "tipo"
@@ -138,6 +151,10 @@
   "search": {
     "relying-partys": {
       "label": "partys que confían",
+      "placeholder": ""
+    },
+    "resource": {
+      "label": "recursos",
       "placeholder": ""
     },
     "search": {

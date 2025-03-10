@@ -9,6 +9,12 @@
   <editable-text *ngIf="isVisible['search']" formControlName="search" label="access.security-domain.search.search" />
   <editable-text *ngIf="isVisible['name']" formControlName="name" label="access.security-domain.search.name" />
   <editable-choose
+    *ngIf="isVisible['enabled']"
+    formControlName="enabled"
+    label="access.security-domain.search.enabled"
+    [options]="['', 'true', 'false']"
+  />
+  <editable-choose
     *ngIf="isVisible['order']"
     formControlName="order"
     label="access.security-domain.search.order"

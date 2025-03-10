@@ -78,6 +78,11 @@
       "report": "Habilitáronse rexistros",
       "title": "habilitar a selección",
       "tooltip": "habilitar os rexistros seleccionados"
+    },
+    "scopes": {
+      "label": "escopos (scopes)",
+      "title": "escopos (scopes)",
+      "tooltip": "escopos (scopes)"
     }
   },
   "form-group": {
@@ -168,6 +173,15 @@
     }
   },
   "search": {
+    "enabled": {
+      "label": "habilitar",
+      "options": {
+        "false": "falso",
+        "null": "todos/as",
+        "true": "verdadeiro"
+      },
+      "placeholder": ""
+    },
     "name": {
       "label": "Nome",
       "placeholder": ""

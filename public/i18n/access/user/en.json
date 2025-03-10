@@ -79,6 +79,11 @@
       "title": "enable selection",
       "tooltip": "enable selected records"
     },
+    "identities": {
+      "label": "identities",
+      "title": "identities",
+      "tooltip": "identities"
+    },
     "unlock": {
       "cancelBtn": "No unlock",
       "content": "Confirm you want to unlock",

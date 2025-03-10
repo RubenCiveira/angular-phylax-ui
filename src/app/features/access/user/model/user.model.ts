@@ -18,14 +18,12 @@ export interface User {
 }
 export interface UserFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
   order?: string;
-  root?: string;
+  root?: string[];
   name?: string;
-  tenant?: string;
-  tenants?: string;
+  tenants?: string[];
 }
 export interface UserProjection {
   uid: string;

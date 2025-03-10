@@ -47,11 +47,20 @@
       "label": "domain",
       "placeholder": "functional group"
     },
+    "enabled": {
+      "label": "security cleared",
+      "placeholder": "The security scope enabled"
+    },
     "kind": {
       "error": {
         "maxlength": "type must be less than 250 characters"
       },
       "label": "type",
+      "options": {
+        "manage": "MANAGE",
+        "read": "READ",
+        "write": "WRITE"
+      },
       "placeholder": "The kind of security scope"
     },
     "public-access": {
@@ -98,6 +107,10 @@
         "title": "domain",
         "tooltip": "domain"
       },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
       "kind": {
         "title": "kind",
         "tooltip": "kind"
@@ -138,6 +151,10 @@
   "search": {
     "relying-partys": {
       "label": "partsys who trust",
+      "placeholder": ""
+    },
+    "resource": {
+      "label": "resources",
       "placeholder": ""
     },
     "search": {

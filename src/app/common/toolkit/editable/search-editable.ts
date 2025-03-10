@@ -27,6 +27,9 @@ export abstract class SearchEditable<V, R> extends BaseEditable<R> {
     effect(() => this.search.patchValue(this.provider().selection()));
     effect(() => {
       const searching = this.provider().searching();
+      if (searching) {
+        this.readyOptions();
+      }
       setTimeout(() => {
         if (this.control.enabled) {
           this.pending.set(searching);
@@ -35,12 +38,18 @@ export abstract class SearchEditable<V, R> extends BaseEditable<R> {
     });
   }
 
+  get options() {
+    return this.provider();
+  }
+
   override ngOnDestroy(): void {
     this.updateSubscription?.unsubscribe();
     this.searchSubscription?.unsubscribe();
     this.selectionSubscription?.unsubscribe();
     super.ngOnDestroy();
   }
+
+  readyOptions() {}
 
   searchOptions() {
     this.provider().search('');
@@ -55,11 +64,9 @@ export abstract class SearchEditable<V, R> extends BaseEditable<R> {
       const provider = this.provider();
       this.updateSubscription?.unsubscribe();
       this.updateSubscription = this.control.valueChanges.pipe(distinctUntilChanged()).subscribe((value) => {
-        console.log('SELECT FOR ', value);
         provider.select(value);
       });
       setTimeout(() => {
-        console.log('TIMEOUT FOR ', this.control.value);
         provider.select(this.control.value);
       });
     });
@@ -67,6 +74,7 @@ export abstract class SearchEditable<V, R> extends BaseEditable<R> {
 
   blur() {
     const text = this.search.value;
+    console.log('BLURR', text);
     if (!text) {
       this.select(null);
     } else if (typeof text === 'string') {

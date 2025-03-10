@@ -9,7 +9,7 @@ import {
   TenantTermsOfUseFilter,
 } from '@features/access/tenant-terms-of-use/model/tenant-terms-of-use.model';
 import { Acl } from '@common/data/acl/acl.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RepositoryMetadata, RepositoryService } from '@common/data/repository/repository.service';
 import { Shift, Tick } from '@common/data/repository/repository.model';
 import { Injectable, Signal } from '@angular/core';
@@ -60,7 +60,7 @@ export class TenantTermsOfUseRepository {
     return this.repo.canDeleteSelection();
   }
   deleteSelection(filter: TenantTermsOfUseFilter): Observable<any> {
-    return this.repo.deleteSelection(filter);
+    return this.repo.deleteSelection(this.publicQueryFilter(filter));
   }
   retrieve(code: string): Observable<TenantTermsOfUse | undefined> {
     return this.repo.retrieve(code);
@@ -69,10 +69,10 @@ export class TenantTermsOfUseRepository {
     return this.repo.projection(includes);
   }
   list(filter: TenantTermsOfUseFilter): Observable<Slide<TenantTermsOfUse>> {
-    return this.repo.list(filter);
+    return this.repo.list(this.publicQueryFilter(filter));
   }
   values(filter: TenantTermsOfUseFilter): Observable<TenantTermsOfUse[]> {
-    return this.repo.values(filter);
+    return this.repo.values(this.publicQueryFilter(filter));
   }
   projections(includes: string[]): Shift<TenantTermsOfUseProjection[], TenantTermsOfUseFilter> {
     return this.repo.projections(includes);
@@ -94,11 +94,27 @@ export class TenantTermsOfUseRepository {
         return { $ref: item.uid! };
       },
       select: (ref: { $ref: string }) => {
-        return this.retrieve(ref['$ref']);
+        return ref['$ref'] ? this.retrieve(ref['$ref']) : of(undefined);
       },
       equals: (one: { $ref: string }, other: { $ref: string }) => {
         return one.$ref === other.$ref;
       },
     });
+  }
+  private publicQueryFilter(filter: TenantTermsOfUseFilter): TenantTermsOfUseFilter {
+    const morphed = {} as any;
+    if (filter.search) {
+      morphed['search'] = filter.search;
+    }
+    if (filter.uids) {
+      morphed['uids'] = filter.uids;
+    }
+    if (filter.limit) {
+      morphed['limit'] = filter.limit;
+    }
+    if (filter.tenants) {
+      morphed['tenants'] = filter.tenants;
+    }
+    return morphed;
   }
 }

@@ -6,7 +6,7 @@ export interface LoginProvider {
   uid: string;
   tenant: { $ref: string } | null;
   name: string;
-  source: 'google' | 'github' | 'saml' | null;
+  source: 'google' | 'github' | 'saml';
   disabled?: boolean;
   directAccess?: boolean;
   publicKey?: string;
@@ -18,19 +18,17 @@ export interface LoginProvider {
 }
 export interface LoginProviderFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
   order?: string;
   name?: string;
-  tenant?: string;
-  tenants?: string;
+  tenants?: string[];
 }
 export interface LoginProviderProjection {
   uid: string;
   tenant: Signal<TenantProjection | null>;
   name: string;
-  source: 'google' | 'github' | 'saml' | null;
+  source: 'google' | 'github' | 'saml';
   disabled?: boolean;
   directAccess?: boolean;
   publicKey?: string;

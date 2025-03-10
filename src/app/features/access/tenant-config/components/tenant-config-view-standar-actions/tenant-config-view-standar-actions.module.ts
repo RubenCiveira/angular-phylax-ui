@@ -5,8 +5,8 @@ import { TenantConfigViewEditActionModule } from 'app/features/access/tenant-con
 import { TenantConfigViewDetailActionModule } from 'app/features/access/tenant-config/actions/tenant-config-view-detail-action/tenant-config-view-detail-action.module';
 import { TenantConfigViewDeleteActionModule } from 'app/features/access/tenant-config/actions/tenant-config-view-delete-action/tenant-config-view-delete-action.module';
 import { TenantConfigViewDeleteSelectionActionModule } from 'app/features/access/tenant-config/actions/tenant-config-view-delete-selection-action/tenant-config-view-delete-selection-action.module';
-import { TenantConfigViewConditionsSubListModule } from 'app/features/access/tenant-config/actions/tenant-config-view-conditions-sub-list/tenant-config-view-conditions-sub-list.module';
-import { TenantConfigViewProvidersSubListModule } from 'app/features/access/tenant-config/actions/tenant-config-view-providers-sub-list/tenant-config-view-providers-sub-list.module';
+import { TenantConfigViewConditionsModule } from 'app/features/access/tenant-config/actions/tenant-config-view-conditions/tenant-config-view-conditions.module';
+import { TenantConfigViewProvidersModule } from 'app/features/access/tenant-config/actions/tenant-config-view-providers/tenant-config-view-providers.module';
 import { TenantConfigViewStandarActionsComponent } from './tenant-config-view-standar-actions.component';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { NgModule } from '@angular/core';
@@ -16,13 +16,13 @@ import { NgModule } from '@angular/core';
   exports: [TenantConfigViewStandarActionsComponent],
   imports: [
     ActionContainerComponent,
-    TenantConfigViewConditionsSubListModule,
+    TenantConfigViewConditionsModule,
     TenantConfigViewCreateActionModule,
     TenantConfigViewDeleteActionModule,
     TenantConfigViewDeleteSelectionActionModule,
     TenantConfigViewDetailActionModule,
     TenantConfigViewEditActionModule,
-    TenantConfigViewProvidersSubListModule,
+    TenantConfigViewProvidersModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/tenant-config', alias: 'access.tenant-config' })],
   bootstrap: [],

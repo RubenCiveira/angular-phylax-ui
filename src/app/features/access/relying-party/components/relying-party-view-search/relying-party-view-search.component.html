@@ -2,6 +2,7 @@
 <form-layout [formGroup]="form">
   <editable-text *ngIf="isVisible['search']" formControlName="search" label="access.relying-party.search.search" />
   <editable-text *ngIf="isVisible['code']" formControlName="code" label="access.relying-party.search.code" />
+  <editable-text *ngIf="isVisible['apiKey']" formControlName="apiKey" label="access.relying-party.search.api-key" />
   <editable-choose
     *ngIf="isVisible['order']"
     formControlName="order"

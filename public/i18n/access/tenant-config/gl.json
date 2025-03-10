@@ -1,5 +1,10 @@
 {
   "action": {
+    "conditions": {
+      "label": "condicións",
+      "title": "condicións",
+      "tooltip": "condicións"
+    },
     "conditions-sub-list": {
       "label": "condicións",
       "title": "condicións",
@@ -41,6 +46,11 @@
       "label": "edit",
       "saveBtn": "Actualizar",
       "tooltip": "Modificar os valores dunha configuración de inquilino"
+    },
+    "providers": {
+      "label": "provedores",
+      "title": "provedores",
+      "tooltip": "provedores"
     },
     "providers-sub-list": {
       "label": "provedores",

@@ -10,13 +10,11 @@ export interface Role {
 }
 export interface RoleFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
   order?: string;
   name?: string;
-  tenant?: string;
-  tenants?: string;
+  tenants?: string[];
 }
 export interface RoleProjection {
   uid: string;

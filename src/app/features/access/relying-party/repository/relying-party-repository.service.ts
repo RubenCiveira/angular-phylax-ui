@@ -8,7 +8,7 @@ import {
 } from '@features/access/relying-party/model/relying-party.model';
 import { selectorProvider, SelectorProvider } from '@common/data/selector-provider';
 import { Acl } from '@common/data/acl/acl.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RepositoryMetadata, RepositoryService } from '@common/data/repository/repository.service';
 import { Shift, Tick } from '@common/data/repository/repository.model';
 import { Injectable, Signal } from '@angular/core';
@@ -56,7 +56,7 @@ export class RelyingPartyRepository {
     return this.repo.canDeleteSelection();
   }
   deleteSelection(filter: RelyingPartyFilter): Observable<any> {
-    return this.repo.deleteSelection(filter);
+    return this.repo.deleteSelection(this.publicQueryFilter(filter));
   }
   retrieve(code: string): Observable<RelyingParty | undefined> {
     return this.repo.retrieve(code);
@@ -65,10 +65,10 @@ export class RelyingPartyRepository {
     return this.repo.projection(includes);
   }
   list(filter: RelyingPartyFilter): Observable<Slide<RelyingParty>> {
-    return this.repo.list(filter);
+    return this.repo.list(this.publicQueryFilter(filter));
   }
   values(filter: RelyingPartyFilter): Observable<RelyingParty[]> {
-    return this.repo.values(filter);
+    return this.repo.values(this.publicQueryFilter(filter));
   }
   projections(includes: string[]): Shift<RelyingPartyProjection[], RelyingPartyFilter> {
     return this.repo.projections(includes);
@@ -86,7 +86,7 @@ export class RelyingPartyRepository {
     return this.repo.canUsePartialsByKey();
   }
   enableSelection(filter: RelyingPartyFilter) {
-    return this.repo.partialBySelection(filter, { enabled: 'true' }, 'enable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'true' }, 'enable');
   }
   disable(key: string): Observable<RelyingParty> {
     return this.repo.partialByKey(
@@ -101,7 +101,7 @@ export class RelyingPartyRepository {
     return this.repo.canUsePartialsByKey();
   }
   disableSelection(filter: RelyingPartyFilter) {
-    return this.repo.partialBySelection(filter, { enabled: 'false' }, 'disable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'false' }, 'disable');
   }
   selectorProvider(filter?: Signal<RelyingPartyFilter>): SelectorProvider<RelyingParty, { $ref: string }> {
     return selectorProvider({
@@ -117,11 +117,33 @@ export class RelyingPartyRepository {
         return { $ref: item.uid! };
       },
       select: (ref: { $ref: string }) => {
-        return this.retrieve(ref['$ref']);
+        return ref['$ref'] ? this.retrieve(ref['$ref']) : of(undefined);
       },
       equals: (one: { $ref: string }, other: { $ref: string }) => {
         return one.$ref === other.$ref;
       },
     });
+  }
+  private publicQueryFilter(filter: RelyingPartyFilter): RelyingPartyFilter {
+    const morphed = {} as any;
+    if (filter.search) {
+      morphed['search'] = filter.search;
+    }
+    if (filter.uids) {
+      morphed['uids'] = filter.uids;
+    }
+    if (filter.limit) {
+      morphed['limit'] = filter.limit;
+    }
+    if (filter.order) {
+      morphed['order'] = filter.order;
+    }
+    if (filter.apiKey) {
+      morphed['api-key'] = filter.apiKey;
+    }
+    if (filter.code) {
+      morphed['code'] = filter.code;
+    }
+    return morphed;
   }
 }

@@ -83,7 +83,7 @@ export abstract class SubFormEditable<T> extends BaseEditable<T> {
     const value = assigned ?? this.defaultValues();
     const defined = this.defined();
     const filled = { ...((value as any) || {}), ...defined };
-    const paramKeys = value ? Object.keys(value) : [];
+    const paramKeys = [...(defined ? Object.keys(defined) : []), ...(value ? Object.keys(value) : [])];
     Object.keys(this.form.controls).forEach((name) => {
       if (!paramKeys.includes(name)) {
         if (!this.isEditable[name]) {
@@ -100,11 +100,8 @@ export abstract class SubFormEditable<T> extends BaseEditable<T> {
     });
     const old = JSON.stringify(this.outerValue);
     const upd = JSON.stringify(filled);
-    console.log("El old es " + old );
-    console.log("El nuevo es " + upd)
     if (old !== upd) {
       this.outerValue = filled;
-      console.log("Assign value with ", filled);
       this.form.patchValue(filled, { onlySelf: true });
       this.value.set(filled);
     }

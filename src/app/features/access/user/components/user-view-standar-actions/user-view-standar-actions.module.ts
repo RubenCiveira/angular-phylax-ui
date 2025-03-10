@@ -11,6 +11,7 @@ import { UserViewEnableActionModule } from 'app/features/access/user/actions/use
 import { UserViewEnableSelectionActionModule } from 'app/features/access/user/actions/user-view-enable-selection-action/user-view-enable-selection-action.module';
 import { UserViewUnlockActionModule } from 'app/features/access/user/actions/user-view-unlock-action/user-view-unlock-action.module';
 import { UserViewUnlockSelectionActionModule } from 'app/features/access/user/actions/user-view-unlock-selection-action/user-view-unlock-selection-action.module';
+import { UserViewIdentitiesModule } from 'app/features/access/user/actions/user-view-identities/user-view-identities.module';
 import { UserViewStandarActionsComponent } from './user-view-standar-actions.component';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { NgModule } from '@angular/core';
@@ -29,6 +30,7 @@ import { NgModule } from '@angular/core';
     UserViewEditActionModule,
     UserViewEnableActionModule,
     UserViewEnableSelectionActionModule,
+    UserViewIdentitiesModule,
     UserViewUnlockActionModule,
     UserViewUnlockSelectionActionModule,
   ],

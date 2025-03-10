@@ -35,6 +35,7 @@ export class SecurityScopeViewSearchComponent extends SubFormEditable<any> {
     super(
       new FormGroup({
         search: new FormControl<string>(''),
+        resource: new FormControl<string>(''),
         trustedClients: new FormControl<any>(null),
         relyingPartys: new FormControl<any>(null),
       }),
@@ -57,6 +58,7 @@ export class SecurityScopeViewSearchComponent extends SubFormEditable<any> {
     this.defaultValues = () => {
       return {
         search: '',
+        resource: '',
         trustedClients: null,
         relyingPartys: null,
       };

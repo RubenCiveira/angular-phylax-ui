@@ -78,6 +78,11 @@
       "report": "Se han enable los registros",
       "title": "enable selección",
       "tooltip": "enable los registros seleccionados"
+    },
+    "scopes": {
+      "label": "scopes",
+      "title": "scopes",
+      "tooltip": "scopes"
     }
   },
   "form-group": {
@@ -168,6 +173,15 @@
     }
   },
   "search": {
+    "enabled": {
+      "label": "habilitado",
+      "options": {
+        "false": "false",
+        "null": "todo",
+        "true": "Verdadero"
+      },
+      "placeholder": ""
+    },
     "name": {
       "label": "Nombre",
       "placeholder": ""

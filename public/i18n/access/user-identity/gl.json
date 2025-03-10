@@ -1,0 +1,103 @@
+{
+  "action": {
+    "create": {
+      "createButton": "-- create",
+      "label": "-- create",
+      "title": "Crear nova identidade de usuario",
+      "tooltip": "Crear un novo rexistro de identidade de usuario"
+    },
+    "delete": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que queres borrar",
+      "dismiss": "Aceptar",
+      "label": "-- delete",
+      "okBtn": "Eliminar o rexistro",
+      "report": "Limpado",
+      "title": "& Borrar",
+      "tooltip": "Modificar os valores dunha identidade de usuario"
+    },
+    "delete-selection": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que desexas eliminar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "& Borrar",
+      "okBtn": "Limpar os rexistros",
+      "progress": "A borrar",
+      "report": "Elimináronse os rexistros",
+      "title": "Borrar o & escollido",
+      "tooltip": "Borrar os rexistros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle",
+      "title": "Ver os valores dunha identidade de usuario",
+      "tooltip": "Visualizar os valores dunha identidade de usuario"
+    },
+    "edit": {
+      "label": "edit",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar os valores dunha identidade de usuario"
+    }
+  },
+  "form-group": {
+    "relying-party": {
+      "label": "usuario do certificado",
+      "placeholder": "A parte de confianza parte da identidade do usuario"
+    },
+    "roles": {
+      "label": "Roles",
+      "placeholder": "Os roles de identidade do usuario"
+    },
+    "trusted-client": {
+      "label": "Cliente de confianza",
+      "placeholder": "O cliente de confianza da identidade do usuario"
+    },
+    "user": {
+      "error": {
+        "required": "usuario é requerido"
+      },
+      "label": "usuario",
+      "placeholder": "O usuario da identidade do usuario"
+    }
+  },
+  "list": {
+    "column": {
+      "relying-party": {
+        "title": "fiesta de fideicomiso",
+        "tooltip": "fiesta de fideicomiso"
+      },
+      "trusted-client": {
+        "title": "cliente de confianza",
+        "tooltip": "cliente de confianza"
+      },
+      "user": {
+        "title": "usuario",
+        "tooltip": "usuario"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "relying-partys": {
+      "label": "partys que confían",
+      "placeholder": ""
+    },
+    "search": {
+      "label": "procura",
+      "placeholder": "Buscar por texto"
+    },
+    "trusted-clients": {
+      "label": "Clientes de confianza",
+      "placeholder": ""
+    },
+    "users": {
+      "label": "Usuarios ",
+      "placeholder": ""
+    }
+  }
+}

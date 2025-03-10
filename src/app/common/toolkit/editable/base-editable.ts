@@ -150,6 +150,10 @@ export abstract class BaseEditable<T> implements ControlValueAccessor, Validator
     }
   }
 
+  protected refresh() {
+    this.onChange(this.value());
+  }
+
   protected bind(controls: FormControl[]) {
     this.binded.push(...controls);
   }

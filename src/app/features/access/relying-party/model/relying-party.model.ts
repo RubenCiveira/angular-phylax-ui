@@ -9,10 +9,10 @@ export interface RelyingParty {
 }
 export interface RelyingPartyFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
   order?: string;
+  apiKey?: string;
   code?: string;
 }
 export interface RelyingPartyProjection {

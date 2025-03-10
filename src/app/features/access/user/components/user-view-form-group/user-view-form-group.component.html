@@ -10,13 +10,6 @@
   <editable-password *ngIf="isVisible['password']" formControlName="password" label="access.user.form-group.password" />
   <editable-text *ngIf="isVisible['email']" formControlName="email" label="access.user.form-group.email" />
   <editable-check *ngIf="isVisible['enabled']" formControlName="enabled" label="access.user.form-group.enabled" />
-  <editable-chips
-    *ngIf="isVisible['roles']"
-    formControlName="roles"
-    label="access.user.form-group.roles"
-    [render]="rolesRender"
-    [provider]="rolesProvider"
-  />
   <editable-check
     *ngIf="isVisible['temporalPassword']"
     formControlName="temporalPassword"

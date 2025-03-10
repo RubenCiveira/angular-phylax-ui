@@ -1,5 +1,10 @@
 {
   "action": {
+    "conditions": {
+      "label": "conditions",
+      "title": "conditions",
+      "tooltip": "conditions"
+    },
     "conditions-sub-list": {
       "label": "conditions",
       "title": "conditions",
@@ -41,6 +46,11 @@
       "label": "Edit",
       "saveBtn": "Update",
       "tooltip": "Modify the values of a tenant config"
+    },
+    "providers": {
+      "label": "Providers",
+      "title": "Providers",
+      "tooltip": "Providers"
     },
     "providers-sub-list": {
       "label": "Providers",

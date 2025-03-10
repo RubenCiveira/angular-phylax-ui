@@ -18,7 +18,17 @@
     label="access.security-scope.form-group.resource"
   />
   <editable-text *ngIf="isVisible['scope']" formControlName="scope" label="access.security-scope.form-group.scope" />
-  <editable-text *ngIf="isVisible['kind']" formControlName="kind" label="access.security-scope.form-group.kind" />
+  <editable-check
+    *ngIf="isVisible['enabled']"
+    formControlName="enabled"
+    label="access.security-scope.form-group.enabled"
+  />
+  <editable-choose
+    *ngIf="isVisible['kind']"
+    formControlName="kind"
+    label="access.security-scope.form-group.kind"
+    [options]="['read', 'write', 'manage']"
+  />
   <editable-choose
     *ngIf="isVisible['visibility']"
     formControlName="visibility"

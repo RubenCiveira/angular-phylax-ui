@@ -35,6 +35,9 @@ export class SecurityDomainViewListComponent {
     if (external?.search) {
       result.search = external.search;
     }
+    if (external?.enabled) {
+      result.enabled = external.enabled;
+    }
     if (external?.name) {
       result.name = external.name;
     }
@@ -43,6 +46,9 @@ export class SecurityDomainViewListComponent {
     }
     if (filter?.search) {
       result.search = filter.search;
+    }
+    if (filter?.enabled) {
+      result.enabled = filter.enabled;
     }
     if (filter?.name) {
       result.name = filter.name;

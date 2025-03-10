@@ -10,7 +10,6 @@ export interface Tenant {
 }
 export interface TenantFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
   order?: string;

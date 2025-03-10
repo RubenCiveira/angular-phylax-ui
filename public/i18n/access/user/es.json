@@ -79,6 +79,11 @@
       "title": "enable selección",
       "tooltip": "enable los registros seleccionados"
     },
+    "identities": {
+      "label": "identities",
+      "title": "identities",
+      "tooltip": "identities"
+    },
     "unlock": {
       "cancelBtn": "No unlock",
       "content": "Confirme que quiere unlock",

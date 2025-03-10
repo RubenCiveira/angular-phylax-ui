@@ -11,7 +11,6 @@ export interface TrustedClient {
 }
 export interface TrustedClientFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
   order?: string;

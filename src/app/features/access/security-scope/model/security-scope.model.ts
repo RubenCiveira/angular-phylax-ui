@@ -9,19 +9,18 @@ export interface SecurityScope {
   relyingParty: { $ref: string } | null;
   resource: string;
   scope: string;
-  kind?: string;
-  visibility?: 'public' | 'authorized' | 'explicit';
+  enabled?: boolean;
+  kind?: 'read' | 'write' | 'manage' | null;
+  visibility?: 'public' | 'authorized' | 'explicit' | null;
   version?: number;
 }
 export interface SecurityScopeFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
-  trustedClient?: string;
-  trustedClients?: string;
-  relyingParty?: string;
-  relyingPartys?: string;
+  resource?: string;
+  trustedClients?: string[];
+  relyingPartys?: string[];
 }
 export interface SecurityScopeProjection {
   uid: string;
@@ -29,8 +28,9 @@ export interface SecurityScopeProjection {
   relyingParty: Signal<RelyingPartyProjection | null>;
   resource: string;
   scope: string;
-  kind?: string;
-  visibility?: 'public' | 'authorized' | 'explicit';
+  enabled?: boolean;
+  kind?: 'read' | 'write' | 'manage' | null;
+  visibility?: 'public' | 'authorized' | 'explicit' | null;
   version?: number;
 }
 export function securityScopeProjectionToValue(
@@ -47,6 +47,7 @@ export function securityScopeProjectionToValue(
         relyingParty: valueOfRelyingParty ? { $ref: valueOfRelyingParty } : null,
         resource: proyection.resource,
         scope: proyection.scope,
+        enabled: proyection.enabled,
         kind: proyection.kind,
         visibility: proyection.visibility,
         version: proyection.version,

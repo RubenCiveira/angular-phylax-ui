@@ -3,7 +3,6 @@ import { EditableSelectoneComponent } from 'app/common/toolkit/editable/editable
 import { EditableTextComponent } from 'app/common/toolkit/editable/editable-text/editable-text.component';
 import { EditablePasswordComponent } from 'app/common/toolkit/editable/editable-password/editable-password.component';
 import { EditableCheckComponent } from 'app/common/toolkit/editable/editable-check/editable-check.component';
-import { EditableChipsComponent } from 'app/common/toolkit/editable/editable-chips/editable-chips.component';
 import { EditableDatetimeComponent } from 'app/common/toolkit/editable/editable-datetime/editable-datetime.component';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
@@ -19,7 +18,6 @@ import { NgModule } from '@angular/core';
   imports: [
     CommonModule,
     EditableCheckComponent,
-    EditableChipsComponent,
     EditableDatetimeComponent,
     EditablePasswordComponent,
     EditableSelectoneComponent,

@@ -35,11 +35,17 @@ export class RelyingPartyViewListComponent {
     if (external?.search) {
       result.search = external.search;
     }
+    if (external?.apiKey) {
+      result.apiKey = external.apiKey;
+    }
     if (external?.code) {
       result.code = external.code;
     }
     if (filter?.search) {
       result.search = filter.search;
+    }
+    if (filter?.apiKey) {
+      result.apiKey = filter.apiKey;
     }
     if (filter?.code) {
       result.code = filter.code;

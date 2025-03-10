@@ -9,6 +9,7 @@ import { SecurityDomainViewEnableActionModule } from 'app/features/access/securi
 import { SecurityDomainViewEnableSelectionActionModule } from 'app/features/access/security-domain/actions/security-domain-view-enable-selection-action/security-domain-view-enable-selection-action.module';
 import { SecurityDomainViewDisableActionModule } from 'app/features/access/security-domain/actions/security-domain-view-disable-action/security-domain-view-disable-action.module';
 import { SecurityDomainViewDisableSelectionActionModule } from 'app/features/access/security-domain/actions/security-domain-view-disable-selection-action/security-domain-view-disable-selection-action.module';
+import { SecurityDomainViewScopesModule } from 'app/features/access/security-domain/actions/security-domain-view-scopes/security-domain-view-scopes.module';
 import { SecurityDomainViewStandarActionsComponent } from './security-domain-view-standar-actions.component';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { NgModule } from '@angular/core';
@@ -27,6 +28,7 @@ import { NgModule } from '@angular/core';
     SecurityDomainViewEditActionModule,
     SecurityDomainViewEnableActionModule,
     SecurityDomainViewEnableSelectionActionModule,
+    SecurityDomainViewScopesModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/security-domain', alias: 'access.security-domain' })],
   bootstrap: [],

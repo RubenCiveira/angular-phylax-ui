@@ -35,6 +35,9 @@ export class SecurityScopeViewListComponent {
     if (external?.search) {
       result.search = external.search;
     }
+    if (external?.resource) {
+      result.resource = external.resource;
+    }
     if (external?.trustedClients) {
       result.trustedClients = external.trustedClients;
     }
@@ -43,6 +46,9 @@ export class SecurityScopeViewListComponent {
     }
     if (filter?.search) {
       result.search = filter.search;
+    }
+    if (filter?.resource) {
+      result.resource = filter.resource;
     }
     if (filter?.trustedClients?.$ref) {
       result.trustedClients = filter.trustedClients.$ref;

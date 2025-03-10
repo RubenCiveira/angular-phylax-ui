@@ -47,11 +47,20 @@
       "label": "Dominio",
       "placeholder": "grupo funcional"
     },
+    "enabled": {
+      "label": "habilitar",
+      "placeholder": "O alcance da seguridade habilitou"
+    },
     "kind": {
       "error": {
         "maxlength": "tipo debe ser inferior a 250 caracteres"
       },
       "label": "tipo",
+      "options": {
+        "manage": "Xestionar",
+        "read": "Lidos",
+        "write": "Escribir"
+      },
       "placeholder": "O tipo de alcance da seguridade"
     },
     "public-access": {
@@ -98,6 +107,10 @@
         "title": "Dominio",
         "tooltip": "Dominio"
       },
+      "enabled": {
+        "title": "activado",
+        "tooltip": "activado"
+      },
       "kind": {
         "title": "tipo",
         "tooltip": "tipo"
@@ -138,6 +151,10 @@
   "search": {
     "relying-partys": {
       "label": "partys que confían",
+      "placeholder": ""
+    },
+    "resource": {
+      "label": "Recursos",
       "placeholder": ""
     },
     "search": {

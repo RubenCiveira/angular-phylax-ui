@@ -29,6 +29,7 @@ export class SecurityDomainViewSearchComponent extends SubFormEditable<any> {
         tenants: new FormControl<any>(null),
         search: new FormControl<string>(''),
         name: new FormControl<string>(''),
+        enabled: new FormControl<string>(''),
         order: new FormControl<string>(''),
       }),
     );
@@ -51,6 +52,7 @@ export class SecurityDomainViewSearchComponent extends SubFormEditable<any> {
         tenants: null,
         search: '',
         name: '',
+        enabled: '',
         order: '',
       };
     };

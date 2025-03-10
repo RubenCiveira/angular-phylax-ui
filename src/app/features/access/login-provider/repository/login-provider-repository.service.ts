@@ -9,7 +9,7 @@ import { ApiService } from '@common/data/api/api.service';
 import { TenantRepository } from '@features/access/tenant/repository/tenant-repository.service';
 import { selectorProvider, SelectorProvider } from '@common/data/selector-provider';
 import { Acl } from '@common/data/acl/acl.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RepositoryMetadata, RepositoryService } from '@common/data/repository/repository.service';
 import { Shift, Tick } from '@common/data/repository/repository.model';
 import { Injectable, Signal } from '@angular/core';
@@ -60,7 +60,7 @@ export class LoginProviderRepository {
     return this.repo.canDeleteSelection();
   }
   deleteSelection(filter: LoginProviderFilter): Observable<any> {
-    return this.repo.deleteSelection(filter);
+    return this.repo.deleteSelection(this.publicQueryFilter(filter));
   }
   retrieve(code: string): Observable<LoginProvider | undefined> {
     return this.repo.retrieve(code);
@@ -69,10 +69,10 @@ export class LoginProviderRepository {
     return this.repo.projection(includes);
   }
   list(filter: LoginProviderFilter): Observable<Slide<LoginProvider>> {
-    return this.repo.list(filter);
+    return this.repo.list(this.publicQueryFilter(filter));
   }
   values(filter: LoginProviderFilter): Observable<LoginProvider[]> {
-    return this.repo.values(filter);
+    return this.repo.values(this.publicQueryFilter(filter));
   }
   projections(includes: string[]): Shift<LoginProviderProjection[], LoginProviderFilter> {
     return this.repo.projections(includes);
@@ -90,7 +90,7 @@ export class LoginProviderRepository {
     return this.repo.canUsePartialsByKey();
   }
   enableSelection(filter: LoginProviderFilter) {
-    return this.repo.partialBySelection(filter, { disabled: 'false' }, 'enable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { disabled: 'false' }, 'enable');
   }
   disable(key: string): Observable<LoginProvider> {
     return this.repo.partialByKey(
@@ -105,7 +105,7 @@ export class LoginProviderRepository {
     return this.repo.canUsePartialsByKey();
   }
   disableSelection(filter: LoginProviderFilter) {
-    return this.repo.partialBySelection(filter, { disabled: 'true' }, 'disable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { disabled: 'true' }, 'disable');
   }
   public storeMetadata(file: File): Observable<UploadProgress> {
     return this.repo.storeFile('/-/temp-metadata', 'file', file);
@@ -124,11 +124,33 @@ export class LoginProviderRepository {
         return { $ref: item.uid! };
       },
       select: (ref: { $ref: string }) => {
-        return this.retrieve(ref['$ref']);
+        return ref['$ref'] ? this.retrieve(ref['$ref']) : of(undefined);
       },
       equals: (one: { $ref: string }, other: { $ref: string }) => {
         return one.$ref === other.$ref;
       },
     });
+  }
+  private publicQueryFilter(filter: LoginProviderFilter): LoginProviderFilter {
+    const morphed = {} as any;
+    if (filter.search) {
+      morphed['search'] = filter.search;
+    }
+    if (filter.uids) {
+      morphed['uids'] = filter.uids;
+    }
+    if (filter.limit) {
+      morphed['limit'] = filter.limit;
+    }
+    if (filter.order) {
+      morphed['order'] = filter.order;
+    }
+    if (filter.name) {
+      morphed['name'] = filter.name;
+    }
+    if (filter.tenants) {
+      morphed['tenants'] = filter.tenants;
+    }
+    return morphed;
   }
 }

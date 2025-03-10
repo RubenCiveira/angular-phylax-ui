@@ -87,6 +87,14 @@
         </ng-template>
         <ng-template
           listViewColumn
+          title="{{ 'access.security-scope.list.column.enabled.title' | transloco }}"
+          tooltip="{{ 'access.security-scope.list.column.enabled.tooltip' | transloco }}"
+          let-row="$implicit"
+        >
+          {{ row.enabled }}
+        </ng-template>
+        <ng-template
+          listViewColumn
           title="{{ 'access.security-scope.list.column.kind.title' | transloco }}"
           tooltip="{{ 'access.security-scope.list.column.kind.tooltip' | transloco }}"
           let-row="$implicit"

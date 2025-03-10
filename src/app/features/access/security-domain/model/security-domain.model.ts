@@ -15,13 +15,12 @@ export interface SecurityDomain {
 }
 export interface SecurityDomainFilter {
   search?: string;
-  uid?: string;
   uids?: string[];
   limit?: number;
   order?: string;
+  enabled?: boolean;
   name?: string;
-  tenant?: string;
-  tenants?: string;
+  tenants?: string[];
 }
 export interface SecurityDomainProjection {
   uid: string;

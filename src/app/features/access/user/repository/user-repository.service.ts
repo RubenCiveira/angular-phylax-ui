@@ -5,7 +5,7 @@ import { TenantRepository } from '@features/access/tenant/repository/tenant-repo
 import { selectorProvider, SelectorProvider } from '@common/data/selector-provider';
 import { User, UserFilter, UserProjection } from '@features/access/user/model/user.model';
 import { Acl } from '@common/data/acl/acl.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RepositoryMetadata, RepositoryService } from '@common/data/repository/repository.service';
 import { Shift, Tick } from '@common/data/repository/repository.model';
 import { Injectable, Signal } from '@angular/core';
@@ -56,7 +56,7 @@ export class UserRepository {
     return this.repo.canDeleteSelection();
   }
   deleteSelection(filter: UserFilter): Observable<any> {
-    return this.repo.deleteSelection(filter);
+    return this.repo.deleteSelection(this.publicQueryFilter(filter));
   }
   retrieve(code: string): Observable<User | undefined> {
     return this.repo.retrieve(code);
@@ -65,10 +65,10 @@ export class UserRepository {
     return this.repo.projection(includes);
   }
   list(filter: UserFilter): Observable<Slide<User>> {
-    return this.repo.list(filter);
+    return this.repo.list(this.publicQueryFilter(filter));
   }
   values(filter: UserFilter): Observable<User[]> {
-    return this.repo.values(filter);
+    return this.repo.values(this.publicQueryFilter(filter));
   }
   projections(includes: string[]): Shift<UserProjection[], UserFilter> {
     return this.repo.projections(includes);
@@ -86,7 +86,7 @@ export class UserRepository {
     return this.repo.canUsePartialsByKey();
   }
   disableSelection(filter: UserFilter) {
-    return this.repo.partialBySelection(filter, { enabled: 'false' }, 'disable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'false' }, 'disable');
   }
   enable(key: string): Observable<User> {
     return this.repo.partialByKey(
@@ -101,7 +101,7 @@ export class UserRepository {
     return this.repo.canUsePartialsByKey();
   }
   enableSelection(filter: UserFilter) {
-    return this.repo.partialBySelection(filter, { enabled: 'true' }, 'enable');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'true' }, 'enable');
   }
   unlock(key: string): Observable<User> {
     return this.repo.partialByKey(
@@ -116,7 +116,7 @@ export class UserRepository {
     return this.repo.canUsePartialsByKey();
   }
   unlockSelection(filter: UserFilter) {
-    return this.repo.partialBySelection(filter, { blockedUntil: null }, 'unlock');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { blockedUntil: null }, 'unlock');
   }
   selectorProvider(filter?: Signal<UserFilter>): SelectorProvider<User, { $ref: string }> {
     return selectorProvider({
@@ -132,11 +132,36 @@ export class UserRepository {
         return { $ref: item.uid! };
       },
       select: (ref: { $ref: string }) => {
-        return this.retrieve(ref['$ref']);
+        return ref['$ref'] ? this.retrieve(ref['$ref']) : of(undefined);
       },
       equals: (one: { $ref: string }, other: { $ref: string }) => {
         return one.$ref === other.$ref;
       },
     });
+  }
+  private publicQueryFilter(filter: UserFilter): UserFilter {
+    const morphed = {} as any;
+    if (filter.search) {
+      morphed['search'] = filter.search;
+    }
+    if (filter.uids) {
+      morphed['uids'] = filter.uids;
+    }
+    if (filter.limit) {
+      morphed['limit'] = filter.limit;
+    }
+    if (filter.order) {
+      morphed['order'] = filter.order;
+    }
+    if (filter.root) {
+      morphed['root'] = filter.root;
+    }
+    if (filter.name) {
+      morphed['name'] = filter.name;
+    }
+    if (filter.tenants) {
+      morphed['tenants'] = filter.tenants;
+    }
+    return morphed;
   }
 }

@@ -78,6 +78,11 @@
       "report": "Records have been enabled",
       "title": "enable selection",
       "tooltip": "enable selected records"
+    },
+    "scopes": {
+      "label": "Scopes",
+      "title": "Scopes",
+      "tooltip": "Scopes"
     }
   },
   "form-group": {
@@ -168,6 +173,15 @@
     }
   },
   "search": {
+    "enabled": {
+      "label": "security cleared",
+      "options": {
+        "false": "false",
+        "null": "all",
+        "true": "true"
+      },
+      "placeholder": ""
+    },
     "name": {
       "label": "Name",
       "placeholder": ""

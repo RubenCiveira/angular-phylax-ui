@@ -79,6 +79,11 @@
       "title": "habilitar a selección",
       "tooltip": "habilitar os rexistros seleccionados"
     },
+    "identities": {
+      "label": "identidades",
+      "title": "identidades",
+      "tooltip": "identidades"
+    },
     "unlock": {
       "cancelBtn": "Sen desbloqueo",
       "content": "Confirma que queres desbloquear",

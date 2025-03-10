@@ -11,6 +11,7 @@
 <ng-container *ngIf="!searching() || data()?.length">
   <div *ngIf="!mobile()" class="material-table">
     <div class="thead">
+      <span class="th" style="width: 52px" *ngIf="!!this.selectionMultiple()"></span>
       <ng-container *ngFor="let column of table()?.columns()">
         <span
           class="th"
