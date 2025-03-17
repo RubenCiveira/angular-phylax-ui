@@ -1,0 +1,207 @@
+{
+  "action": {
+    "create": {
+      "createButton": "-- create",
+      "label": "-- create",
+      "title": "Creación dun novo dominio de seguridade",
+      "tooltip": "Crear un novo rexistro de dominio de seguridade"
+    },
+    "delete": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que queres borrar",
+      "dismiss": "Aceptar",
+      "label": "-- delete",
+      "okBtn": "Eliminar o rexistro",
+      "report": "Limpado",
+      "title": "& Borrar",
+      "tooltip": "Modificar os valores dun dominio de seguridade"
+    },
+    "delete-selection": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que desexas eliminar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "& Borrar",
+      "okBtn": "Limpar os rexistros",
+      "progress": "A borrar",
+      "report": "Elimináronse os rexistros",
+      "title": "Borrar o & escollido",
+      "tooltip": "Borrar os rexistros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle",
+      "title": "Ver os valores dun dominio de seguridade",
+      "tooltip": "Visualizar os valores dun dominio de seguridade"
+    },
+    "disable": {
+      "cancelBtn": "Non desactivar",
+      "content": "Confirma que queres desactivar",
+      "dismiss": "Aceptar",
+      "label": "desactivar",
+      "okBtn": "desactivar rexistro",
+      "report": "Foi desactivado",
+      "title": "desactivar",
+      "tooltip": "Modificar os valores dun dominio de seguridade"
+    },
+    "disable-selection": {
+      "cancelBtn": "Non desactivar",
+      "content": "Confirma que desexa desactivar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "desactivar",
+      "okBtn": "desactivar rexistros",
+      "progress": "A desactivar",
+      "report": "Disque se desactivaron",
+      "title": "desactivar selección",
+      "tooltip": "desactivar os rexistros escollidos"
+    },
+    "edit": {
+      "label": "edit",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar os valores dun dominio de seguridade"
+    },
+    "enable": {
+      "cancelBtn": "Non habilitar",
+      "content": "Confirma que queres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar",
+      "okBtn": "posibilitar a inscrición",
+      "report": "Se tiveres habilitado",
+      "title": "habilitar",
+      "tooltip": "Modificar os valores dun dominio de seguridade"
+    },
+    "enable-selection": {
+      "cancelBtn": "Non habilitar",
+      "content": "Confirma que desexa activar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar",
+      "okBtn": "posibilitar as inscricións",
+      "progress": "Estar habilitado",
+      "report": "Habilitáronse rexistros",
+      "title": "habilitar a selección",
+      "tooltip": "habilitar os rexistros seleccionados"
+    },
+    "scopes": {
+      "label": "escopos (scopes)",
+      "title": "escopos (scopes)",
+      "tooltip": "escopos (scopes)"
+    }
+  },
+  "form-group": {
+    "enabled": {
+      "label": "habilitar",
+      "placeholder": "Unha marca que permite eliminar o acceso a unha conta sen borrala"
+    },
+    "level": {
+      "error": {
+        "required": "max é requerido"
+      },
+      "label": "máx",
+      "placeholder": "O usuario herda o nivel e só pode ver o dominio co seu nivel ou inferior"
+    },
+    "manage-all": {
+      "label": "todos os riscos operacionais",
+      "placeholder": "Permitir a escrita en todo o taboleiro"
+    },
+    "name": {
+      "error": {
+        "maxlength": "O nome debe ser inferior a 250 caracteres",
+        "required": "O teu nome é obrigatorio"
+      },
+      "label": "Nome",
+      "placeholder": "O nome de dominio de seguridade"
+    },
+    "read-all": {
+      "label": "ler todo",
+      "placeholder": "Permitir a lectura a través do taboleiro"
+    },
+    "relying-parties": {
+      "label": "umaasa mga fendeuse",
+      "placeholder": "As partes de confianza do dominio de seguridade"
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino é obrigatorio"
+      },
+      "label": "inquilino",
+      "placeholder": "Os usuarios que non teñen inquilinos son raíces do sistema"
+    },
+    "trusted-clients": {
+      "label": "Clientes de confianza",
+      "placeholder": "O Dominio de Seguridade Cliente de confianza"
+    },
+    "write-all": {
+      "label": "escribir todo",
+      "placeholder": "Permitir a escrita en todo o taboleiro"
+    }
+  },
+  "list": {
+    "column": {
+      "enabled": {
+        "title": "activado",
+        "tooltip": "activado"
+      },
+      "level": {
+        "title": "Nivel",
+        "tooltip": "Nivel"
+      },
+      "manage-all": {
+        "title": "xestionar todas",
+        "tooltip": "xestionar todas"
+      },
+      "name": {
+        "title": "nome",
+        "tooltip": "nome"
+      },
+      "read-all": {
+        "title": "ler todo",
+        "tooltip": "ler todo"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "write-all": {
+        "title": "escribir todo",
+        "tooltip": "escribir todo"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "enabled": {
+      "label": "habilitar",
+      "options": {
+        "false": "falso",
+        "null": "todos/as",
+        "true": "verdadeiro"
+      },
+      "placeholder": ""
+    },
+    "name": {
+      "label": "Nome",
+      "placeholder": ""
+    },
+    "order": {
+      "label": "Orde",
+      "options": {
+        "name-asc": "nome- asc",
+        "name-desc": "nome-desc",
+        "null": "Por defecto"
+      },
+      "placeholder": "Orde na que recuperar resultados"
+    },
+    "search": {
+      "label": "procura",
+      "placeholder": "Buscar por texto"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": ""
+    }
+  }
+}

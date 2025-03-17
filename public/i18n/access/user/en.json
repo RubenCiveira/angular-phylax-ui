@@ -231,6 +231,10 @@
     }
   },
   "search": {
+    "email": {
+      "label": "email",
+      "placeholder": ""
+    },
     "name": {
       "label": "Name",
       "placeholder": ""

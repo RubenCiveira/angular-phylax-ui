@@ -1,0 +1,6 @@
+projectKey=phylax-ui
+serverUrl=http://localhost:9000
+serverVersion=25.3.0.104237
+dashboardUrl=http://localhost:9000/dashboard?id=phylax-ui
+ceTaskId=6b43d729-8de9-4894-8fcc-20b00832dda0
+ceTaskUrl=http://localhost:9000/api/ce/task?id=6b43d729-8de9-4894-8fcc-20b00832dda0

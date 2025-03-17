@@ -9,43 +9,79 @@
 </mat-form-field>
 
 <ng-template #fileDialog>
-  <div style="display: flex">
+  <div class="dialog-header">
+    <h2 mat-dialog-title>{{ 'component.fileupload.selectFile' | transloco }}</h2>
     <button mat-icon-button (click)="dialogRef?.close()">
       <mat-icon>close</mat-icon>
     </button>
-    <p mat-dialog-title mat-dialog-title>
-      {{ 'component.fileupload.selectFile' | transloco }}
-    </p>
   </div>
-  <mat-dialog-content style="position: relative">
-    <div class="form-group img-registry mat-typography">
-      <button mat-stroked-button (click)="openFileBrowser($event, openButton)">
-        {{ 'component.fileupload.chooseFile' | transloco }}
-      </button>
-      <input #openButton style="display: none" (change)="showPreviewImage($event)" type="file" />
+
+  <mat-dialog-content>
+    <div *ngIf="uploadState() === 'select'" class="upload-view">
+      <div
+        class="dropzone"
+        [class.dragover]="isDragOver"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+      >
+        <div class="dropzone-content">
+          <mat-icon class="upload-icon">cloud_upload</mat-icon>
+          <p>{{ 'component.fileupload.dragAndDrop' | transloco }}</p>
+          <p class="or-divider">{{ 'component.fileupload.or' | transloco }}</p>
+          <button mat-flat-button color="primary" (click)="openFileBrowser($event, openButton)">
+            {{ 'component.fileupload.chooseFile' | transloco }}
+          </button>
+          <input #openButton style="display: none" (change)="showPreviewImage($event)" type="file" />
+        </div>
+      </div>
     </div>
-    <div *ngIf="loading()">
-      <mat-progress-bar [value]="progressValue()"></mat-progress-bar>
-      <span>{{ progressValue() }}%</span>
+    <!-- Upload Progress View -->
+    <div *ngIf="uploadState() === 'uploading'" class="upload-view">
+      <div class="progress-container">
+        <h3>{{ 'component.fileupload.uploading' | transloco }}</h3>
+        <p>{{ selectedFileName }}</p>
+        <mat-progress-bar [value]="progressValue()" color="primary"></mat-progress-bar>
+        <span class="progress-value">{{ progressValue() }}%</span>
+        <button mat-flat-button color="warn" class="cancel-button" (click)="cancelUpload()">
+          {{ 'component.fileupload.cancel' | transloco }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Upload Complete View -->
+    <div *ngIf="uploadState() === 'complete'" class="upload-view">
+      <div class="upload-complete">
+        <div class="file-summary">
+          <mat-icon class="success-icon">check_circle</mat-icon>
+          <h3>{{ 'component.fileupload.uploadComplete' | transloco }}</h3>
+
+          <div class="file-info">
+            <mat-icon>insert_drive_file</mat-icon>
+            <span class="file-name">{{ selectedFileName }}</span>
+          </div>
+
+          <!-- File Preview (if image) -->
+          <div *ngIf="isImageFile && filePreviewUrl" class="file-preview">
+            <img [src]="filePreviewUrl" alt="File preview" />
+          </div>
+
+          <button mat-stroked-button color="primary" class="discard-button" (click)="discardAndChooseAnother()">
+            {{ 'component.fileupload.discardAndChooseAnother' | transloco }}
+          </button>
+        </div>
+      </div>
     </div>
   </mat-dialog-content>
-  <mat-divider style="margin: 0px -25px 0px -25px"></mat-divider>
-  <mat-dialog-actions style="display: flex">
-    <span style="flex: 1"></span>
-    <button mat-button color="warn" (click)="save(null)">{{ 'component.fileupload.quit' | transloco }}</button>
-    <button [disabled]="!response()" mat-button color="primary" (click)="save(response())">
+
+  <mat-divider></mat-divider>
+
+  <mat-dialog-actions>
+    <button mat-button color="warn" (click)="save(null)">
+      {{ 'component.fileupload.quit' | transloco }}
+    </button>
+    <button [disabled]="!response()" mat-flat-button color="primary" (click)="save(response())">
       {{ 'component.fileupload.accept' | transloco }}
     </button>
   </mat-dialog-actions>
 </ng-template>
-<!--
-<ng-template #errorDialog>
-  <h5 mat-dialog-title>{{ 'component.fileupload.error' | transloco }}</h5>
-  <mat-dialog-content>
-    <p class="mat-typography">{{ 'component.fileupload.toBig' | transloco }}</p>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button (click)="errorDialogRef?.close()">{{ 'component.fileupload.close' | transloco }}</button>
-  </mat-dialog-actions>
-</ng-template>
--->

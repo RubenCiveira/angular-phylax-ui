@@ -1,0 +1,116 @@
+{
+  "action": {
+    "create": {
+      "createButton": "-- create",
+      "label": "-- create",
+      "title": "Creando novo rol",
+      "tooltip": "Crea un novo disco de rol"
+    },
+    "delete": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que queres borrar",
+      "dismiss": "Aceptar",
+      "label": "-- delete",
+      "okBtn": "Eliminar o rexistro",
+      "report": "Limpado",
+      "title": "& Borrar",
+      "tooltip": "Modificar os valores dun rol"
+    },
+    "delete-selection": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que desexas eliminar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "& Borrar",
+      "okBtn": "Limpar os rexistros",
+      "progress": "A borrar",
+      "report": "Elimináronse os rexistros",
+      "title": "Borrar o & escollido",
+      "tooltip": "Borrar os rexistros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle",
+      "title": "Ver os valores dun papel",
+      "tooltip": "Ver os valores do papel"
+    },
+    "edit": {
+      "label": "edit",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar os valores dun rol"
+    }
+  },
+  "form-group": {
+    "domain": {
+      "error": {
+        "required": "dominio é necesario"
+      },
+      "label": "Dominio",
+      "placeholder": "Dominio de rol"
+    },
+    "domains": {
+      "label": "Dominios",
+      "placeholder": "Os dominios de rol"
+    },
+    "name": {
+      "error": {
+        "maxlength": "O nome debe ser inferior a 250 caracteres",
+        "required": "O teu nome é obrigatorio"
+      },
+      "label": "Nome",
+      "placeholder": "O nome de usuario a identificar na pantalla de inicio de sesión"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "Os dominios sen inquilinos só se poden usar para administradores"
+    }
+  },
+  "list": {
+    "column": {
+      "domain": {
+        "title": "Dominio",
+        "tooltip": "Dominio"
+      },
+      "name": {
+        "title": "nome",
+        "tooltip": "nome"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "domains": {
+      "label": "Dominios",
+      "placeholder": ""
+    },
+    "name": {
+      "label": "Nome",
+      "placeholder": ""
+    },
+    "order": {
+      "label": "Orde",
+      "options": {
+        "name-asc": "nome- asc",
+        "name-desc": "nome-desc",
+        "null": "Por defecto"
+      },
+      "placeholder": "Orde na que recuperar resultados"
+    },
+    "search": {
+      "label": "procura",
+      "placeholder": "Buscar por texto"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": ""
+    }
+  }
+}

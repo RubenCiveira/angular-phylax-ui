@@ -1,0 +1,169 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creating new security scope",
+      "tooltip": "Create a new security scope record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a security scope"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Ticket passed",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viewing the Values of a Security Scope",
+      "tooltip": "View the values of a security scope"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a security scope"
+    }
+  },
+  "form-group": {
+    "domain": {
+      "error": {
+        "maxlength": "domain must be less than 250 characters",
+        "required": "Proficiency is required"
+      },
+      "label": "domain",
+      "placeholder": "functional group"
+    },
+    "enabled": {
+      "label": "security cleared",
+      "placeholder": "The security scope enabled"
+    },
+    "kind": {
+      "error": {
+        "maxlength": "type must be less than 250 characters"
+      },
+      "label": "type",
+      "options": {
+        "manage": "MANAGE",
+        "read": "READ",
+        "write": "WRITE"
+      },
+      "placeholder": "The kind of security scope"
+    },
+    "public-access": {
+      "label": "Public access",
+      "placeholder": "Public access of safety scope"
+    },
+    "relying-party": {
+      "label": "certificate user",
+      "placeholder": "The unsuspecting party starts from safety scope"
+    },
+    "resource": {
+      "error": {
+        "maxlength": "resources must be less than 250 characters",
+        "required": "resources is required"
+      },
+      "label": "resources",
+      "placeholder": "A label group key to show scope"
+    },
+    "scope": {
+      "error": {
+        "maxlength": "scope must be less than 250 characters",
+        "required": "scope is required"
+      },
+      "label": "extent",
+      "placeholder": "A label to show scope"
+    },
+    "trusted-client": {
+      "label": "Trusted client",
+      "placeholder": "The trusted security outreach customer"
+    },
+    "visibility": {
+      "label": "exposure",
+      "options": {
+        "authorized": "AUTHORIZED",
+        "explicit": "EXPLICIT",
+        "public": "PUBLIC"
+      },
+      "placeholder": "The visibility of security scope"
+    }
+  },
+  "list": {
+    "column": {
+      "domain": {
+        "title": "domain",
+        "tooltip": "domain"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "kind": {
+        "title": "kind",
+        "tooltip": "kind"
+      },
+      "public-access": {
+        "title": "public access",
+        "tooltip": "public access"
+      },
+      "relying-party": {
+        "title": "relying party",
+        "tooltip": "relying party"
+      },
+      "resource": {
+        "title": "resource",
+        "tooltip": "resource"
+      },
+      "scope": {
+        "title": "scope",
+        "tooltip": "scope"
+      },
+      "trusted-client": {
+        "title": "trusted client",
+        "tooltip": "trusted client"
+      },
+      "visibility": {
+        "title": "visibility",
+        "tooltip": "visibility"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "relying-partys": {
+      "label": "partsys who trust",
+      "placeholder": ""
+    },
+    "resource": {
+      "label": "resources",
+      "placeholder": ""
+    },
+    "search": {
+      "label": "search",
+      "placeholder": "Search by Text"
+    },
+    "trusted-clients": {
+      "label": "Trusted Clients",
+      "placeholder": ""
+    }
+  }
+}

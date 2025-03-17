@@ -1,0 +1,169 @@
+{
+  "action": {
+    "create": {
+      "createButton": "-- create",
+      "label": "-- create",
+      "title": "Crear un novo ámbito de seguridade",
+      "tooltip": "Crear un novo rexistro de alcance de seguridade"
+    },
+    "delete": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que queres borrar",
+      "dismiss": "Aceptar",
+      "label": "-- delete",
+      "okBtn": "Eliminar o rexistro",
+      "report": "Limpado",
+      "title": "& Borrar",
+      "tooltip": "Modificar os valores dun ámbito de seguridade"
+    },
+    "delete-selection": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que desexas eliminar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "& Borrar",
+      "okBtn": "Limpar os rexistros",
+      "progress": "A borrar",
+      "report": "Elimináronse os rexistros",
+      "title": "Borrar o & escollido",
+      "tooltip": "Borrar os rexistros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle",
+      "title": "Ver os valores dun ámbito de seguridade",
+      "tooltip": "Visualizar os valores dun ámbito de seguridade"
+    },
+    "edit": {
+      "label": "edit",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar os valores dun ámbito de seguridade"
+    }
+  },
+  "form-group": {
+    "domain": {
+      "error": {
+        "maxlength": "dominio debe ser inferior a 250 caracteres",
+        "required": "dominio é necesario"
+      },
+      "label": "Dominio",
+      "placeholder": "grupo funcional"
+    },
+    "enabled": {
+      "label": "habilitar",
+      "placeholder": "O alcance da seguridade habilitou"
+    },
+    "kind": {
+      "error": {
+        "maxlength": "tipo debe ser inferior a 250 caracteres"
+      },
+      "label": "tipo",
+      "options": {
+        "manage": "Xestionar",
+        "read": "Lidos",
+        "write": "Escribir"
+      },
+      "placeholder": "O tipo de alcance da seguridade"
+    },
+    "public-access": {
+      "label": "Aceso & público",
+      "placeholder": "Acceso público do ámbito da seguridade"
+    },
+    "relying-party": {
+      "label": "usuario do certificado",
+      "placeholder": "A festa insospeitada parte do ámbito da seguridade"
+    },
+    "resource": {
+      "error": {
+        "maxlength": "recursos deben ser inferiores a 250 caracteres",
+        "required": "requírense recursos"
+      },
+      "label": "Recursos",
+      "placeholder": "Unha chave de grupo de etiquetas para mostrar o alcance"
+    },
+    "scope": {
+      "error": {
+        "maxlength": "ámbito debe ser inferior a 250 caracteres",
+        "required": "ámbito se exige"
+      },
+      "label": "Rango:",
+      "placeholder": "Unha etiqueta para mostrar o alcance"
+    },
+    "trusted-client": {
+      "label": "Cliente de confianza",
+      "placeholder": "O cliente de seguridade de confianza"
+    },
+    "visibility": {
+      "label": "Visibilidade ",
+      "options": {
+        "authorized": "Autorizado",
+        "explicit": "EXPLICIT",
+        "public": "& Pública"
+      },
+      "placeholder": "A visibilidade do ámbito da seguridade"
+    }
+  },
+  "list": {
+    "column": {
+      "domain": {
+        "title": "Dominio",
+        "tooltip": "Dominio"
+      },
+      "enabled": {
+        "title": "activado",
+        "tooltip": "activado"
+      },
+      "kind": {
+        "title": "tipo",
+        "tooltip": "tipo"
+      },
+      "public-access": {
+        "title": "Aceso & público",
+        "tooltip": "Aceso & público"
+      },
+      "relying-party": {
+        "title": "fiesta de fideicomiso",
+        "tooltip": "fiesta de fideicomiso"
+      },
+      "resource": {
+        "title": "recurso",
+        "tooltip": "recurso"
+      },
+      "scope": {
+        "title": "alcance _",
+        "tooltip": "alcance _"
+      },
+      "trusted-client": {
+        "title": "cliente de confianza",
+        "tooltip": "cliente de confianza"
+      },
+      "visibility": {
+        "title": "Visibilidade",
+        "tooltip": "Visibilidade"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "relying-partys": {
+      "label": "partys que confían",
+      "placeholder": ""
+    },
+    "resource": {
+      "label": "Recursos",
+      "placeholder": ""
+    },
+    "search": {
+      "label": "procura",
+      "placeholder": "Buscar por texto"
+    },
+    "trusted-clients": {
+      "label": "Clientes de confianza",
+      "placeholder": ""
+    }
+  }
+}

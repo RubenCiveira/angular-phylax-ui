@@ -231,6 +231,10 @@
     }
   },
   "search": {
+    "email": {
+      "label": "correo electrónico",
+      "placeholder": ""
+    },
     "name": {
       "label": "Nome",
       "placeholder": ""

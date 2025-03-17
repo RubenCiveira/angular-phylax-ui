@@ -1,0 +1,106 @@
+{
+  "action": {
+    "create": {
+      "createButton": "-- create",
+      "label": "-- create",
+      "title": "Crear novos termos de uso do inquilino",
+      "tooltip": "Crear un novo rexistro de condicións de uso do inquilino"
+    },
+    "delete": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que queres borrar",
+      "dismiss": "Aceptar",
+      "label": "-- delete",
+      "okBtn": "Eliminar o rexistro",
+      "report": "Limpado",
+      "title": "& Borrar",
+      "tooltip": "Modificar os valores dun inquilino termos de uso"
+    },
+    "delete-selection": {
+      "cancelBtn": "Non borrar",
+      "content": "Confirma que desexas eliminar os rexistros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "& Borrar",
+      "okBtn": "Limpar os rexistros",
+      "progress": "A borrar",
+      "report": "Elimináronse os rexistros",
+      "title": "Borrar o & escollido",
+      "tooltip": "Borrar os rexistros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle",
+      "title": "Visualizar os valores dun inquilino termos de uso",
+      "tooltip": "Visualizar os valores dun inquilino termos de uso"
+    },
+    "edit": {
+      "label": "edit",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar os valores dun inquilino termos de uso"
+    }
+  },
+  "form-group": {
+    "activation-date": {
+      "label": "Data de activación",
+      "placeholder": "A data de activao das condies de utilizao do inquilino",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "attached": {
+      "label": "casa da cidade",
+      "placeholder": "Anexar os termos de uso do inquilino"
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino é obrigatorio"
+      },
+      "label": "inquilino",
+      "placeholder": "A conta á que pertence"
+    },
+    "text": {
+      "error": {
+        "required": "O texto é necesario"
+      },
+      "label": "Texto",
+      "placeholder": "Termos de uso do texto do inquilino"
+    }
+  },
+  "list": {
+    "column": {
+      "activation-date": {
+        "title": "data de activación",
+        "tooltip": "data de activación"
+      },
+      "attached": {
+        "title": "Anexo:",
+        "tooltip": "Anexo:"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "text": {
+        "title": "text",
+        "tooltip": "text"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "procura",
+      "placeholder": "Buscar por texto"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": ""
+    }
+  }
+}

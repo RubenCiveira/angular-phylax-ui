@@ -40,6 +40,9 @@ export class EditableDatetimeComponent extends BaseEditable<Date | null> {
     this.bind([this.day, this.hour]);
     this.subscriptions.add(
       this.control.valueChanges.subscribe((externalChange) => {
+        if (typeof externalChange === 'string') {
+          externalChange = new Date(externalChange);
+        }
         this.setValue(externalChange);
       }),
     );
@@ -47,6 +50,9 @@ export class EditableDatetimeComponent extends BaseEditable<Date | null> {
       this.day.valueChanges.subscribe((dayChange) => {
         const value = this.value();
         if (dayChange) {
+          if (typeof dayChange === 'string') {
+            dayChange = new Date(dayChange);
+          }
           const date = value ? new Date(value) : new Date();
           if (this.dayChange(date, dayChange)) {
             date.setFullYear(dayChange.getFullYear());
@@ -84,6 +90,12 @@ export class EditableDatetimeComponent extends BaseEditable<Date | null> {
   }
 
   private dayChange(one: Date, other: Date) {
+    if (!one && !other) {
+      return false;
+    }
+    if (!one || !other) {
+      return true;
+    }
     return (
       one.getFullYear() !== other.getFullYear() ||
       one.getMonth() !== other.getMonth() ||

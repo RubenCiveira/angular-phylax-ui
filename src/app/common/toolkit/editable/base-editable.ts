@@ -151,7 +151,14 @@ export abstract class BaseEditable<T> implements ControlValueAccessor, Validator
   }
 
   protected refresh() {
+    const dirty = this.control.dirty;
     this.onChange(this.value());
+    setTimeout(() => {
+      if (!dirty) {
+        this.control.markAsPristine();
+      }
+      this.control.updateValueAndValidity();
+    });
   }
 
   protected bind(controls: FormControl[]) {

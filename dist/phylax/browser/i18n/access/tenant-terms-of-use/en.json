@@ -1,0 +1,106 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creating new tenant terms of use",
+      "tooltip": "Create a new tenant terms of use record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Ticket passed",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viewing the values of a tenant terms of use",
+      "tooltip": "View the values of a tenant terms of use"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a tenant terms of use"
+    }
+  },
+  "form-group": {
+    "activation-date": {
+      "label": "Activation date",
+      "placeholder": "The date of activation of the tenant's terms of use",
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "attached": {
+      "label": "built against",
+      "placeholder": "The Tenant Terms of Use Attachment"
+    },
+    "tenant": {
+      "error": {
+        "required": "tenant is required"
+      },
+      "label": "renter",
+      "placeholder": "The account to which you belong"
+    },
+    "text": {
+      "error": {
+        "required": "Text is a required value"
+      },
+      "label": "Text:",
+      "placeholder": "Tenant Text Terms of Use"
+    }
+  },
+  "list": {
+    "column": {
+      "activation-date": {
+        "title": "activation date",
+        "tooltip": "activation date"
+      },
+      "attached": {
+        "title": "attached",
+        "tooltip": "attached"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "text": {
+        "title": "text",
+        "tooltip": "text"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "search",
+      "placeholder": "Search by Text"
+    },
+    "tenants": {
+      "label": "tenants,",
+      "placeholder": ""
+    }
+  }
+}
