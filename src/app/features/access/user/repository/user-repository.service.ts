@@ -107,7 +107,7 @@ export class UserRepository {
     return this.repo.partialByKey(
       key,
       {
-        blockedUntil: null,
+        blockedUntil: 'null',
       },
       'unlock',
     );
@@ -116,7 +116,7 @@ export class UserRepository {
     return this.repo.canUsePartialsByKey();
   }
   unlockSelection(filter: UserFilter) {
-    return this.repo.partialBySelection(this.publicQueryFilter(filter), { blockedUntil: null }, 'unlock');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { blockedUntil: 'null' }, 'unlock');
   }
   selectorProvider(filter?: Signal<UserFilter>): SelectorProvider<User, { $ref: string }> {
     return selectorProvider({

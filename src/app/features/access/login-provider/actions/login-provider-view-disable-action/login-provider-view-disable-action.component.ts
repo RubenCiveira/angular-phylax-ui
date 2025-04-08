@@ -75,7 +75,7 @@ export class LoginProviderViewDisableActionComponent implements Action, OnDestro
   }
 
   visible(items: any[]) {
-    return items.every((item) => item.disabled !== true) && this.visibleValue;
+    return items.every((item) => !item.disabled) && this.visibleValue;
   }
 
   enabled(items: any[]) {

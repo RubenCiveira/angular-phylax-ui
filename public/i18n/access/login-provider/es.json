@@ -150,6 +150,15 @@
       },
       "label": "inquilino",
       "placeholder": "La cuenta a la que pertenece"
+    },
+    "users-enabled-by-default": {
+      "label": "usuarios habilitados de forma predeterminada",
+      "placeholder": "Define si los usuarios creados con este proveedor están habilitados de forma predeterminada"
+    },
+    "usersEnabledByDefault": {
+      "error": {
+        "required": "usuarios habilitados de forma predeterminada es obligatorio"
+      }
     }
   },
   "list": {

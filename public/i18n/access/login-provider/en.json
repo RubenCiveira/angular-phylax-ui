@@ -150,6 +150,15 @@
       },
       "label": "renter",
       "placeholder": "The account to which you belong"
+    },
+    "users-enabled-by-default": {
+      "label": "users enabled by default",
+      "placeholder": "Defines whether users created with this provider are enabled by default"
+    },
+    "usersEnabledByDefault": {
+      "error": {
+        "required": "users enabled by default is required"
+      }
     }
   },
   "list": {
@@ -193,6 +202,10 @@
       "tenant": {
         "title": "tenant",
         "tooltip": "tenant"
+      },
+      "users-enabled-by-default": {
+        "title": "users enabled by default",
+        "tooltip": "users enabled by default"
       }
     },
     "filter": {

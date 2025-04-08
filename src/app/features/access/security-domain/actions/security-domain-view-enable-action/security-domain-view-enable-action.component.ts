@@ -75,7 +75,7 @@ export class SecurityDomainViewEnableActionComponent implements Action, OnDestro
   }
 
   visible(items: any[]) {
-    return items.every((item) => item.enabled !== true) && this.visibleValue;
+    return items.every((item) => !item.enabled) && this.visibleValue;
   }
 
   enabled(items: any[]) {

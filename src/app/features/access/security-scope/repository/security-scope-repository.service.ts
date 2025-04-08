@@ -81,6 +81,36 @@ export class SecurityScopeRepository {
   projections(includes: string[]): Shift<SecurityScopeProjection[], SecurityScopeFilter> {
     return this.repo.projections(includes);
   }
+  disable(key: string): Observable<SecurityScope> {
+    return this.repo.partialByKey(
+      key,
+      {
+        enabled: 'false',
+      },
+      'disable',
+    );
+  }
+  canDisableSelection() {
+    return this.repo.canUsePartialsByKey();
+  }
+  disableSelection(filter: SecurityScopeFilter) {
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'false' }, 'disable');
+  }
+  enable(key: string): Observable<SecurityScope> {
+    return this.repo.partialByKey(
+      key,
+      {
+        enabled: 'true',
+      },
+      'enable',
+    );
+  }
+  canEnableSelection() {
+    return this.repo.canUsePartialsByKey();
+  }
+  enableSelection(filter: SecurityScopeFilter) {
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { enabled: 'true' }, 'enable');
+  }
   selectorProvider(filter?: Signal<SecurityScopeFilter>): SelectorProvider<SecurityScope, { $ref: string }> {
     return selectorProvider({
       search: (text: string) => {

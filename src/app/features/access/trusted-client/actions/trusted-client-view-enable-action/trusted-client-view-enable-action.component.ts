@@ -75,7 +75,7 @@ export class TrustedClientViewEnableActionComponent implements Action, OnDestroy
   }
 
   visible(items: any[]) {
-    return items.every((item) => item.enabled !== true) && this.visibleValue;
+    return items.every((item) => !item.enabled) && this.visibleValue;
   }
 
   enabled(items: any[]) {

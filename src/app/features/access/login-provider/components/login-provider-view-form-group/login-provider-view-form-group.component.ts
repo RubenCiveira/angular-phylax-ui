@@ -39,7 +39,7 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
         privateKey: new FormControl<string>(''),
         certificate: new FormControl<string>(''),
         metadata: new FormControl<string>(''),
-        enabledByDefault: new FormControl<boolean>(false, [Validators.required]),
+        usersEnabledByDefault: new FormControl<boolean>(false, [Validators.required]),
         version: new FormControl<number>(0),
       }),
     );
@@ -70,7 +70,7 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
         privateKey: '',
         certificate: '',
         metadata: '',
-        enabledByDefault: false,
+        usersEnabledByDefault: false,
         version: 0,
       };
     };

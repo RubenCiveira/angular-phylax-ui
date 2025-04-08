@@ -13,7 +13,7 @@ export interface LoginProvider {
   privateKey?: string;
   certificate?: string;
   metadata?: string;
-  enabledByDefault: boolean;
+  usersEnabledByDefault: boolean;
   version?: number;
 }
 export interface LoginProviderFilter {
@@ -35,7 +35,7 @@ export interface LoginProviderProjection {
   privateKey?: string;
   certificate?: string;
   metadata?: string;
-  enabledByDefault: boolean;
+  usersEnabledByDefault: boolean;
   version?: number;
 }
 export function loginProviderProjectionToValue(
@@ -54,7 +54,7 @@ export function loginProviderProjectionToValue(
         privateKey: proyection.privateKey,
         certificate: proyection.certificate,
         metadata: proyection.metadata,
-        enabledByDefault: proyection.enabledByDefault,
+        usersEnabledByDefault: proyection.usersEnabledByDefault,
         version: proyection.version,
       }
     : null;

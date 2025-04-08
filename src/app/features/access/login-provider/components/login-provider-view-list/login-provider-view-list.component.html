@@ -127,11 +127,11 @@
         </ng-template>
         <ng-template
           listViewColumn
-          title="{{ 'access.login-provider.list.column.enabled-by-default.title' | transloco }}"
-          tooltip="{{ 'access.login-provider.list.column.enabled-by-default.tooltip' | transloco }}"
+          title="{{ 'access.login-provider.list.column.users-enabled-by-default.title' | transloco }}"
+          tooltip="{{ 'access.login-provider.list.column.users-enabled-by-default.tooltip' | transloco }}"
           let-row="$implicit"
         >
-          {{ row.enabledByDefault }}
+          {{ row.usersEnabledByDefault }}
         </ng-template>
         <ng-template listViewColumn let-row="$implicit">
           <ng-container

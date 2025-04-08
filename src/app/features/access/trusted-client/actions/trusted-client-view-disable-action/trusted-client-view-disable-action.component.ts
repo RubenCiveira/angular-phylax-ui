@@ -75,7 +75,7 @@ export class TrustedClientViewDisableActionComponent implements Action, OnDestro
   }
 
   visible(items: any[]) {
-    return items.every((item) => item.enabled !== false) && this.visibleValue;
+    return items.every((item) => !!item.enabled) && this.visibleValue;
   }
 
   enabled(items: any[]) {

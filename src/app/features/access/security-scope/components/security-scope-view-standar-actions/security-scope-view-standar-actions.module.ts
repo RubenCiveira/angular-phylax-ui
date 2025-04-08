@@ -5,6 +5,10 @@ import { SecurityScopeViewEditActionModule } from 'app/features/access/security-
 import { SecurityScopeViewDetailActionModule } from 'app/features/access/security-scope/actions/security-scope-view-detail-action/security-scope-view-detail-action.module';
 import { SecurityScopeViewDeleteActionModule } from 'app/features/access/security-scope/actions/security-scope-view-delete-action/security-scope-view-delete-action.module';
 import { SecurityScopeViewDeleteSelectionActionModule } from 'app/features/access/security-scope/actions/security-scope-view-delete-selection-action/security-scope-view-delete-selection-action.module';
+import { SecurityScopeViewDisableActionModule } from 'app/features/access/security-scope/actions/security-scope-view-disable-action/security-scope-view-disable-action.module';
+import { SecurityScopeViewDisableSelectionActionModule } from 'app/features/access/security-scope/actions/security-scope-view-disable-selection-action/security-scope-view-disable-selection-action.module';
+import { SecurityScopeViewEnableActionModule } from 'app/features/access/security-scope/actions/security-scope-view-enable-action/security-scope-view-enable-action.module';
+import { SecurityScopeViewEnableSelectionActionModule } from 'app/features/access/security-scope/actions/security-scope-view-enable-selection-action/security-scope-view-enable-selection-action.module';
 import { SecurityScopeViewStandarActionsComponent } from './security-scope-view-standar-actions.component';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { NgModule } from '@angular/core';
@@ -18,7 +22,11 @@ import { NgModule } from '@angular/core';
     SecurityScopeViewDeleteActionModule,
     SecurityScopeViewDeleteSelectionActionModule,
     SecurityScopeViewDetailActionModule,
+    SecurityScopeViewDisableActionModule,
+    SecurityScopeViewDisableSelectionActionModule,
     SecurityScopeViewEditActionModule,
+    SecurityScopeViewEnableActionModule,
+    SecurityScopeViewEnableSelectionActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/security-scope', alias: 'access.security-scope' })],
   bootstrap: [],

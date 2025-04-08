@@ -535,7 +535,7 @@ export class RepositoryService<T, F> {
           baseRef?.forEach((item: any) => {
             const copy = JSON.parse(JSON.stringify(item));
             includes.forEach((include) => {
-              if (item[include]['$ref']) {
+              if (item[include] && item[include]['$ref']) {
                 const refRepository = this.meta.reference!(include);
                 if (!refRepository) {
                   throw new Error('There is no ref repository for ' + include);
