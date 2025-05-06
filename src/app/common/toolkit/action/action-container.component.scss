@@ -16,8 +16,11 @@
 .toolbar {
   display: flex;
   align-items: center;
+  padding: 10px 5px;
 }
 
 .toolbar .toolbar-title {
   flex: 1;
+  font-size: var(--mat-sys-title-large-size);
+  font-family: var(--mat-sys-title-large-font);
 }

@@ -15,8 +15,8 @@
   gap: 1rem;
   position: relative;
   width: 220px;
-  background-color: var(--mat-sys-surface-container);
-  border-right: 1px solid var(--md-sys-color-outline);
+  background-color: var(--mat-sys-surface-container-low);
+  border-right: 1px solid var(--mat-sys-surface-container);
 }
 .sidebar.hide {
   width: 0;
@@ -53,7 +53,7 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: var(--mat-sys-surface-container);
+  background-color: var(--mat-sys-surface-container-low);
 }
 
 header .title {
@@ -65,8 +65,8 @@ main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: var(--mat-sys-surface-container-lowest);
-  padding: 20px;
+  background-color: var(--mat-sys-surface-container-low);
+  padding: 20px 40px;
 }
 
 .content-page {
@@ -76,9 +76,11 @@ main {
   overflow: hidden;
   max-width: 1500px;
   width: 100%;
-  padding: 10px 25px;
   margin: auto;
   box-sizing: border-box;
+  background-color: var(--mat-sys-surface-container-lowest);
+  border: solid silver 1px;
+  border-radius: 8px;
 }
 
 /* Mobile: Overlay sidebar */
