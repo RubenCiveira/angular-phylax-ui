@@ -202,6 +202,10 @@
       "tenant": {
         "title": "inquilino",
         "tooltip": "inquilino"
+      },
+      "users-enabled-by-default": {
+        "title": "usuarios habilitados de forma predeterminada",
+        "tooltip": "usuarios habilitados de forma predeterminada"
       }
     },
     "filter": {
