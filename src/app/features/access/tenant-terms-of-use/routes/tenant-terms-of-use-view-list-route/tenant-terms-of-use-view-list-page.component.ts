@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   selector: 'tenant-terms-of-use-view-list-page',
   template: '<tenant-terms-of-use-view-list />',
   standalone: false,
-  styles: [
-    ':host { flex: 1; display: flex; flex-direction: column; overflow: hidden; border:solid silver 1px; border-radious: 8px; }',
-  ],
+  styles: [':host { flex: 1; display: flex; flex-direction: column; overflow: hidden; }'],
 })
 export class TenantTermsOfUseViewListPageComponent {}

@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   selector: 'security-domain-view-list-page',
   template: '<security-domain-view-list />',
   standalone: false,
-  styles: [
-    ':host { flex: 1; display: flex; flex-direction: column; overflow: hidden; border:solid silver 1px; border-radious: 8px; }',
-  ],
+  styles: [':host { flex: 1; display: flex; flex-direction: column; overflow: hidden; }'],
 })
 export class SecurityDomainViewListPageComponent {}
