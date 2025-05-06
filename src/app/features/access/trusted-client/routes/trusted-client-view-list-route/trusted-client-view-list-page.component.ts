@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   selector: 'trusted-client-view-list-page',
   template: '<trusted-client-view-list />',
   standalone: false,
-  styles: [':host { flex: 1; display: flex; flex-direction: column; overflow: hidden; }'],
+  styles: [
+    ':host { flex: 1; display: flex; flex-direction: column; overflow: hidden;  border-radius: var(--mat-sys-corner-medium); box-shadow: var(--mat-sys-level4); margin: 15px; }',
+  ],
 })
 export class TrustedClientViewListPageComponent {}

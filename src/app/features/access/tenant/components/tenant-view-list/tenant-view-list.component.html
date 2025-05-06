@@ -32,10 +32,11 @@
     </mat-expansion-panel>
   </div>
   <div class="main">
-    <div *ngIf="!list.searching() && list()?.length == 0">
+    <div class="page" *ngIf="!list.searching() && list()?.length == 0">
       <h1>No content</h1>
     </div>
     <list-view
+      *ngIf="list.searching() || (list()?.length || 0) > 0"
       [searching]="list.searching()"
       [data]="list()"
       (next)="next()"

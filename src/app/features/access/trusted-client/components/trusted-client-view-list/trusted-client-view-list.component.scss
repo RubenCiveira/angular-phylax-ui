@@ -11,3 +11,10 @@
   flex-direction: column;
   overflow: hidden;
 }
+.page {
+  padding: 10px 50px;
+}
+.page h1 {
+  font-size: var(--mat-sys-title-large-size);
+  font-family: var(--mat-sys-title-large-font);
+}
