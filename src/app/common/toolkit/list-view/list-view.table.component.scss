@@ -10,10 +10,16 @@
 .material-table .thead {
   width: 100%;
   display: flex;
-  font-weight: bold;
-  background-color: var(--mat-sys-secondary-container);
   flex-direction: row;
   border-bottom: solid black 1px;
+  
+  background-color: var(--mat-sys-secondary-container);
+  color: var(--mdc-protected-button-label-text-color, var(--mat-sys-primary));
+  font-family: var(--mdc-protected-button-label-text-font, var(--mat-sys-label-large-font));
+  font-size: var(--mdc-protected-button-label-text-size, var(--mat-sys-label-large-size));
+  letter-spacing: var(--mdc-protected-button-label-text-tracking, var(--mat-sys-label-large-tracking));
+  text-transform: var(--mdc-protected-button-label-text-transform);
+  font-weight: var(--mdc-protected-button-label-text-weight, var(--mat-sys-label-large-weight));
 }
 
 .material-table .tbody {
@@ -44,11 +50,14 @@
   height: 52px;
   overflow: hidden;
   box-sizing: border-box;
+
 }
 
-.material-table td {
-  border-bottom: 1px solid #e0e0e0;
-  color: #555;
+.material-table .td {
+  font-family: var(--mdc-protected-button-label-text-font, var(--mat-sys-label-large-font));
+  font-size: var(--mdc-protected-button-label-text-size, var(--mat-sys-label-large-size));
+  letter-spacing: var(--mdc-protected-button-label-text-tracking, var(--mat-sys-label-large-tracking));
+  text-transform: var(--mdc-protected-button-label-text-transform);
 }
 
 .material-table .td.small {

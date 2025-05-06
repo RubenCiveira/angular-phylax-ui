@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   template: '<tenant-view-list />',
   standalone: false,
   styles: [
-    ':host { flex: 1; display: flex; flex-direction: column; overflow: hidden; background-color: white; border-radius: 12px; box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.3); }',
+    ':host { flex: 1; display: flex; flex-direction: column; overflow: hidden; box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.3); }',
   ],
 })
 export class TenantViewListPageComponent {}
