@@ -121,5 +121,3 @@ export class TenantTermsOfUseRepository {
     return morphed;
   }
 }
-
-}
