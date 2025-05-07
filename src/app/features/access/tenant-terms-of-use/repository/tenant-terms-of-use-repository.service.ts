@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
 import { RepositoryMetadata, RepositoryService } from '@common/data/repository/repository.service';
 import { Shift, Tick } from '@common/data/repository/repository.model';
 import { Injectable, Signal } from '@angular/core';
-import { Slide, UploadProgress } from '@common/data/repository/provider/repository-provider.interface';
+import { Slide, DownloadBlob, UploadProgress } from '@common/data/repository/provider/repository-provider.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TenantTermsOfUseRepository {
@@ -77,7 +77,10 @@ export class TenantTermsOfUseRepository {
   projections(includes: string[]): Shift<TenantTermsOfUseProjection[], TenantTermsOfUseFilter> {
     return this.repo.projections(includes);
   }
-  public storeAttached(file: File): Observable<UploadProgress> {
+  downloadAttached(item: TenantTermsOfUse): Observable<DownloadBlob> | null {
+    return item.attached ? this.repo.downloadFile(item.attached) : null;
+  }
+  storeAttached(file: File): Observable<UploadProgress> {
     return this.repo.storeFile('/-/temp-attached', 'file', file);
   }
   selectorProvider(filter?: Signal<TenantTermsOfUseFilter>): SelectorProvider<TenantTermsOfUse, { $ref: string }> {
@@ -117,4 +120,6 @@ export class TenantTermsOfUseRepository {
     }
     return morphed;
   }
+}
+
 }

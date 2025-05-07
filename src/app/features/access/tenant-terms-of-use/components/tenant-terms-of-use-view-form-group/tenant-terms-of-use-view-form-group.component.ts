@@ -6,6 +6,7 @@ import { Acl } from 'app/common/data/acl/acl.model';
 import { TenantTermsOfUse } from 'app/features/access/tenant-terms-of-use/model/tenant-terms-of-use.model';
 import { SubFormEditable } from 'app/common/toolkit/editable/subform-editable';
 import { TenantRepository } from 'app/features/access/tenant/repository/tenant-repository.service';
+import { DownloadBlob } from '@common/data/repository/provider/repository-provider.interface';
 import { TenantTermsOfUseRepository } from 'app/features/access/tenant-terms-of-use/repository/tenant-terms-of-use-repository.service';
 import { Observable } from 'rxjs';
 import { UploadProgress } from 'app/common/data/repository/provider/repository-provider.interface';
@@ -26,6 +27,7 @@ export class TenantTermsOfUseViewFormGroupComponent extends SubFormEditable<Tena
   tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantFilter = input<TenantFilter>({ limit: 100 });
   uploadAttached: (file: File) => Observable<UploadProgress>;
+  downloadAttached: () => null | Observable<DownloadBlob>;
   public constructor(tenantTermsOfUseRespository: TenantTermsOfUseRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
@@ -44,6 +46,7 @@ export class TenantTermsOfUseViewFormGroupComponent extends SubFormEditable<Tena
     effect(() => {
       const vals = this.acl();
       const value = this.value();
+      this.downloadAttached = () => (value ? tenantTermsOfUseRespository.downloadAttached(value) : null);
       const on = this.uid() ? vals?.specific : vals?.generic;
       setTimeout(() => {
         this.definedFixed.set(on?.fields?.noEditables || []);
@@ -52,6 +55,7 @@ export class TenantTermsOfUseViewFormGroupComponent extends SubFormEditable<Tena
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.uploadAttached = (file) => tenantTermsOfUseRespository.storeAttached(file);
+    this.downloadAttached = () => null;
     this.defaultValues = () => {
       return {
         uid: '',

@@ -34,9 +34,27 @@ export class ApiService {
     );
   }
 
+  download(endpoint: string, params?: any): Observable<HttpResponse<Blob>> {
+    return this.prepare(
+      new HttpRequest('GET', endpoint, {
+        params: params,
+        responseType: 'blob',
+      }),
+    ).pipe(
+      mergeMap((sreq) => this.http.request(sreq)),
+      filter((event): event is HttpResponse<Blob> => event instanceof HttpResponse),
+      catchError((error) => {
+        this.errorService.initialiceError(error);
+        return throwError(() => error);
+      }),
+    );
+  }
+
   upload(endpoint: string, name: string, file: File, params?: any): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     formData.append(name, file);
+    formData.append(name + 'Name', file.name);
+    formData.append(name + 'Type', file.type);
     return this.sendUpload(
       new HttpRequest('POST', endpoint, formData, {
         params: params,
@@ -72,24 +90,25 @@ export class ApiService {
 
   private sendUpload(req: HttpRequest<any>): Observable<HttpEvent<string>> {
     return this.prepare(req).pipe(
+      mergeMap((sreq) => this.http.request(sreq) as Observable<HttpEvent<string>>),
       catchError((error) => {
         this.errorService.initialiceError(error);
         return throwError(() => error);
       }),
-      mergeMap((sreq) => this.http.request(sreq) as Observable<HttpEvent<string>>),
     );
   }
 
   private send<T>(req: HttpRequest<T>): Observable<T> {
     return this.prepare(req).pipe(
+      mergeMap((sreq) => this.http.request(sreq)),
+      filter((event): event is HttpResponse<T> => event instanceof HttpResponse),
+      map((event) => {
+        return this.convertDates((event as HttpResponse<T>).body!);
+      }),
       catchError((error) => {
-        console.error('Error', error);
         this.errorService.initialiceError(error);
         return throwError(() => error);
       }),
-      mergeMap((sreq) => this.http.request(sreq)),
-      filter((event): event is HttpResponse<T> => event instanceof HttpResponse),
-      map((event) => this.convertDates((event as HttpResponse<T>).body!)),
     );
   }
 
@@ -143,6 +162,8 @@ export class ApiService {
           prefix = 'https://' + key;
         } else if (url.startsWith(key)) {
           prefix = key;
+        } else if (url.startsWith(api.url)) {
+          prefix = api.url;
         }
         if (prefix.length > 0) {
           matched = true;
@@ -176,7 +197,6 @@ export class ApiService {
         }),
         take(1),
         timeout(maxTimeout), // Espera un máximo de 1 segundo
-        catchError(() => of({} as any)), // Si excede el tiempo, lanza un valor con token null
         map((identity) => {
           if (identity.token) {
             headers = headers.set('Authorization', 'Bearer ' + identity.token);
@@ -188,6 +208,7 @@ export class ApiService {
           }
           return req.clone({ url, headers });
         }),
+        catchError(() => of({} as any)), // Si excede el tiempo, lanza un valor con token null
       );
     } else {
       return of(req.clone({ url, headers }));

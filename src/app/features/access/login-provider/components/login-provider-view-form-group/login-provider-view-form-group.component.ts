@@ -6,6 +6,7 @@ import { Acl } from 'app/common/data/acl/acl.model';
 import { SubFormEditable } from 'app/common/toolkit/editable/subform-editable';
 import { TenantRepository } from 'app/features/access/tenant/repository/tenant-repository.service';
 import { LoginProviderRepository } from 'app/features/access/login-provider/repository/login-provider-repository.service';
+import { DownloadBlob } from '@common/data/repository/provider/repository-provider.interface';
 import { LoginProvider } from 'app/features/access/login-provider/model/login-provider.model';
 import { Observable } from 'rxjs';
 import { UploadProgress } from 'app/common/data/repository/provider/repository-provider.interface';
@@ -26,6 +27,7 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
   tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantFilter = input<TenantFilter>({ limit: 100 });
   uploadMetadata: (file: File) => Observable<UploadProgress>;
+  downloadMetadata: () => null | Observable<DownloadBlob>;
   public constructor(loginProviderRespository: LoginProviderRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
@@ -50,6 +52,7 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
     effect(() => {
       const vals = this.acl();
       const value = this.value();
+      this.downloadMetadata = () => (value ? loginProviderRespository.downloadMetadata(value) : null);
       const on = this.uid() ? vals?.specific : vals?.generic;
       setTimeout(() => {
         this.definedFixed.set(on?.fields?.noEditables || []);
@@ -58,6 +61,7 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.uploadMetadata = (file) => loginProviderRespository.storeMetadata(file);
+    this.downloadMetadata = () => null;
     this.defaultValues = () => {
       return {
         uid: '',

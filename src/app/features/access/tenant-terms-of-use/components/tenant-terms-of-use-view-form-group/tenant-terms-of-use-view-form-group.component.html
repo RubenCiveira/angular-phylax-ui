@@ -11,6 +11,7 @@
     *ngIf="isVisible['attached']"
     formControlName="attached"
     label="access.tenant-terms-of-use.form-group.attached"
+    [download]="downloadAttached"
     [upload]="uploadAttached"
   />
   <editable-datetime

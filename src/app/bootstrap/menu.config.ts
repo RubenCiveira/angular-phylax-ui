@@ -7,7 +7,7 @@ export function menuRoutes(_appConfig: AppConfigService, _mfeConfig: MicroFrontC
   return [
     {
       path: 'tenant-management',
-      data: { label: 'Tenants management', path: 'Access' },
+      data: { label: 'Tenants', path: 'Access' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
         import('@features/access/tenant/routes/tenant-view-list-route/tenant-view-list-route.module').then(
@@ -16,7 +16,7 @@ export function menuRoutes(_appConfig: AppConfigService, _mfeConfig: MicroFrontC
     },
     {
       path: 'tenant-config',
-      data: { label: 'Tenants', path: 'Access' },
+      data: { label: 'Tenants Config', path: 'Access' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
         import(
@@ -25,7 +25,7 @@ export function menuRoutes(_appConfig: AppConfigService, _mfeConfig: MicroFrontC
     },
     {
       path: 'security-domains',
-      data: { label: 'Tenants', path: 'Access' },
+      data: { label: 'Security domain', path: 'Access' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
         import(
@@ -33,8 +33,17 @@ export function menuRoutes(_appConfig: AppConfigService, _mfeConfig: MicroFrontC
         ).then((m) => m.SecurityDomainViewListRouteModule),
     },
     {
+      path: 'roles',
+      data: { label: 'Roles', path: 'Access' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/access/role/routes/role-view-list-route/role-view-list-route.module').then(
+          (m) => m.RoleViewListRouteModule,
+        ),
+    },
+    {
       path: 'users',
-      data: { label: 'Tenants', path: 'Access' },
+      data: { label: 'Users', path: 'Access' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
         import('@features/access/user/routes/user-view-list-route/user-view-list-route.module').then(
@@ -59,22 +68,27 @@ export function menu(): MenuItem[] {
       icon: 'badge',
       subItems: [
         {
-          label: 'users',
+          label: 'Users',
           icon: 'group',
           route: 'users',
         },
         {
-          label: 'securities',
+          label: 'Security groups',
           icon: 'group',
           route: 'security-domains',
         },
         {
-          label: 'Manage tenants',
+          label: 'Tenants',
           icon: 'domain',
           route: 'tenant-management',
         },
         {
-          label: 'Config tenants',
+          label: 'Roles',
+          icon: 'role',
+          route: 'roles',
+        },
+        {
+          label: 'Tenants Config',
           icon: 'domain',
           route: 'tenant-config',
         },

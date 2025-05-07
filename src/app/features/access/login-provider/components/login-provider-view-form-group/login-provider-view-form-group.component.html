@@ -42,6 +42,7 @@
     *ngIf="isVisible['metadata']"
     formControlName="metadata"
     label="access.login-provider.form-group.metadata"
+    [download]="downloadMetadata"
     [upload]="uploadMetadata"
   />
   <editable-check

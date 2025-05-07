@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   template: '<scope-assignation-view-list />',
   standalone: false,
   styles: [
-    ':host { flex: 1; display: flex; flex-direction: column; overflow: hidden;  border-radius: var(--mat-sys-corner-medium); box-shadow: var(--mat-sys-level4); margin: 15px; }',
+    ':host { flex: 1; display: flex; flex-direction: column; overflow: hidden;  border-radius: var(--mat-sys-corner-medium); box-shadow: var(--mat-sys-level3); margin: 15px; }',
   ],
 })
 export class ScopeAssignationViewListPageComponent {}

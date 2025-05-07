@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
 import { RepositoryMetadata, RepositoryService } from '@common/data/repository/repository.service';
 import { Shift, Tick } from '@common/data/repository/repository.model';
 import { Injectable, Signal } from '@angular/core';
-import { Slide, UploadProgress } from '@common/data/repository/provider/repository-provider.interface';
+import { Slide, DownloadBlob, UploadProgress } from '@common/data/repository/provider/repository-provider.interface';
 
 @Injectable({ providedIn: 'root' })
 export class LoginProviderRepository {
@@ -107,7 +107,10 @@ export class LoginProviderRepository {
   disableSelection(filter: LoginProviderFilter) {
     return this.repo.partialBySelection(this.publicQueryFilter(filter), { disabled: 'true' }, 'disable');
   }
-  public storeMetadata(file: File): Observable<UploadProgress> {
+  downloadMetadata(item: LoginProvider): Observable<DownloadBlob> | null {
+    return item.metadata ? this.repo.downloadFile(item.metadata) : null;
+  }
+  storeMetadata(file: File): Observable<UploadProgress> {
     return this.repo.storeFile('/-/temp-metadata', 'file', file);
   }
   selectorProvider(filter?: Signal<LoginProviderFilter>): SelectorProvider<LoginProvider, { $ref: string }> {

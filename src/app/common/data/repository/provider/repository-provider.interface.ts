@@ -46,6 +46,7 @@ export interface RepositoryProvider<T, F> {
   update(key: string, item: any): Observable<T>;
   patch(key: string, data: any): Observable<T>;
   delete(key: string): Observable<void>;
+  downloadFile(endpoint: string): Observable<DownloadBlob>;
   storeFile(endpoint: string, name: string, file: File): Observable<UploadProgress>;
 
   patchAllForQuery?: (of: string, query: F, data: any) => Observable<any>;
@@ -103,6 +104,13 @@ export interface RecordExport {
   name: string;
 }
 */
+
+export class DownloadBlob {
+  public constructor(
+    public readonly data: Blob,
+    public readonly name: string,
+  ) {}
+}
 
 export class UploadProgress {
   public progressPercent: number;

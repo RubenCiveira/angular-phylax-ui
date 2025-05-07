@@ -1,0 +1,19 @@
+<div *ngIf="retrySuccess" class="success">
+  <p>
+    {{ 'controls.errorhandler.retrySuccess'  }}
+    <button mat-icon-button (click)="redirect('.')">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </p>
+</div>
+<div *ngIf="retryError" class="error">
+  <p>
+    {{ 'controls.errorhandler.retryError'  }}
+    <button mat-icon-button (click)="redirect('/')">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </p>
+</div>
+<div *ngIf="showBody" class="mat-typography">
+  <app-page-error [asColumn]="true" [error]="data.error"></app-page-error>
+</div>
