@@ -35,11 +35,20 @@ export class UserIdentityViewListComponent {
     if (external?.search) {
       result.search = external.search;
     }
+    if (external?.user) {
+      result.user = external.user;
+    }
     if (external?.users) {
       result.users = external.users;
     }
+    if (external?.relyingParty) {
+      result.relyingParty = external.relyingParty;
+    }
     if (external?.relyingPartys) {
       result.relyingPartys = external.relyingPartys;
+    }
+    if (external?.trustedClient) {
+      result.trustedClient = external.trustedClient;
     }
     if (external?.trustedClients) {
       result.trustedClients = external.trustedClients;
@@ -47,11 +56,20 @@ export class UserIdentityViewListComponent {
     if (filter?.search) {
       result.search = filter.search;
     }
+    if (filter?.user?.$ref) {
+      result.user = filter.user.$ref;
+    }
     if (filter?.users?.$ref) {
       result.users = filter.users.$ref;
     }
+    if (filter?.relyingParty?.$ref) {
+      result.relyingParty = filter.relyingParty.$ref;
+    }
     if (filter?.relyingPartys?.$ref) {
       result.relyingPartys = filter.relyingPartys.$ref;
+    }
+    if (filter?.trustedClient?.$ref) {
+      result.trustedClient = filter.trustedClient.$ref;
     }
     if (filter?.trustedClients?.$ref) {
       result.trustedClients = filter.trustedClients.$ref;

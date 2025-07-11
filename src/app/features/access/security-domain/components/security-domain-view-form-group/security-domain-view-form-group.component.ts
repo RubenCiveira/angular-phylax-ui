@@ -18,7 +18,7 @@ import { effect, computed, Component } from '@angular/core';
 export class SecurityDomainViewFormGroupComponent extends SubFormEditable<SecurityDomain> {
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
   uid = computed(() => this.value()?.uid);
-  public constructor(securityDomainRespository: SecurityDomainRepository) {
+  public constructor(securityDomainRepository: SecurityDomainRepository) {
     super(
       new FormGroup({
         uid: new FormControl<string>(''),
@@ -31,7 +31,7 @@ export class SecurityDomainViewFormGroupComponent extends SubFormEditable<Securi
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = securityDomainRespository.acl();
+    this.acl = securityDomainRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

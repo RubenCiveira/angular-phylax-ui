@@ -15,7 +15,8 @@
     "main": {
       "type": "oidc",
       "force-https": false,
-      "url": "http://localhost:8090/oauth/openid/{{tenant}}/.well-known/openid-configuration",
+      "redirect": "http://localhost:4200/login-redirect",
+      "url": "http://localhost:8090/oauth/openid//{{tenant}}/.well-known/openid-configuration",
       "issuer": "http://localhost:8090/oauth/openid/{{tenant}}",
       "client-id": "phylax-ui",
       "scope": "openid profile email",

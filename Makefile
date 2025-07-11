@@ -23,5 +23,5 @@ docker-build:
 	docker build --no-cache --force-rm -f src/docker/Dockerfile -t civi/phylax-ui .
 
 docker-run:
-	docker run -p 4200:80 -e APP_ROOT="/" --name angular-container civi/phylax-ui
+	docker run -p 8003:80 -e APP_ROOT="/" --name phylax-ui -v ./src/docker/env.local/conf:/usr/share/nginx/html/config civi/phylax-ui &
 	

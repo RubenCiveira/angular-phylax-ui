@@ -9,6 +9,6 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   constructor(router: Router) {
-    router.navigate(['es-ES', 'Test']);
+    router.navigate(['en-EN', 'main']);
   }
 }

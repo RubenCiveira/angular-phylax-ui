@@ -249,6 +249,7 @@ export class RepositoryService<T, F> {
   list(query: F): Observable<Slide<T>> {
     // let observer: Subscriber<T[]> | undefined;
     let hasNextValue = false;
+    const paged = (query as any).cursor !== undefined || (query as any).since !== undefined;
     const listKey = JSON.stringify(query);
     const obs = new Observable<Slide<T>>((observer) => {
       let suscrip = new Subscription();
@@ -271,6 +272,9 @@ export class RepositoryService<T, F> {
               content: [],
             };
             hasNextValue = data.content.length > 0; // data.hasNext;
+            if (paged && data.content.length === 0) {
+              delete this.listMap[listKey];
+            }
             data.content.forEach((row: any) => {
               const key = this.itemKey(row);
               const item = this.mapItem(row);
@@ -294,7 +298,11 @@ export class RepositoryService<T, F> {
               );
               // Si este elemento cambia => also fire
             });
-            this.listMap[listKey].cache.touch(result);
+            if (!paged || data.content.length !== 0) {
+              this.listMap[listKey].cache.touch(result);
+            } else {
+              observer.next(result);
+            }
           }),
         );
       }
@@ -305,6 +313,7 @@ export class RepositoryService<T, F> {
           }
         }),
       );
+
       return () => {
         // this.listMap[listKey].cache.cancelWaiting(wait);
         // suscrip?.unsubscribe();
@@ -454,6 +463,7 @@ export class RepositoryService<T, F> {
       this.list(ll.query).subscribe();
     });
   }
+
   private evictItems() {
     Object.values(this.cacheItem).forEach((item) => {
       item.remove();

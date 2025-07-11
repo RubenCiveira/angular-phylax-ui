@@ -17,13 +17,15 @@ import { MatInputModule } from '@angular/material/input';
         placeholder="{{ label() + '.placeholder' | transloco }}"
         [formControl]="control"
       >
-        <mat-option *ngFor="let op of options()" [value]="op">{{
-          label() + '.options.' + (!!op ? op : 'null') | transloco
-        }}</mat-option>
+        @for (op of options(); track $index) {
+          <mat-option [value]="op">{{ label() + '.options.' + (!!op ? op : 'null') | transloco }}</mat-option>
+        }
       </mat-select>
-      <mat-error *ngFor="let error of errorMessages()">
-        {{ label() + '.error.' + error | transloco }}
-      </mat-error>
+      @for (error of errorMessages(); track $index) {
+        <mat-error>
+          {{ label() + '.error.' + error | transloco }}
+        </mat-error>
+      }
     </mat-form-field>
   `,
   selector: 'editable-choose',

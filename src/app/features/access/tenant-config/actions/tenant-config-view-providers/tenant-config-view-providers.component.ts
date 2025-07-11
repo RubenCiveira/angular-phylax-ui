@@ -3,10 +3,8 @@ import { TenantConfig } from 'app/features/access/tenant-config/model/tenant-con
 import { TranslocoService } from '@jsverse/transloco';
 import { ActionContainerComponent } from 'app/common/toolkit/action/action-container.component';
 import { Action } from 'app/common/toolkit/action/action.model';
-import { Tick } from 'app/common/data/repository/repository.model';
-import { Acl } from 'app/common/data/acl/acl.model';
 import { TenantConfigRepository } from 'app/features/access/tenant-config/repository/tenant-config-repository.service';
-import { computed, input, viewChild, Component, signal, TemplateRef } from '@angular/core';
+import { input, viewChild, Component, signal, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'tenant-config-view-providers',
@@ -28,8 +26,8 @@ export class TenantConfigViewProvidersComponent implements Action {
   tooltip = signal<string>('providers');
   default = input<boolean>(false);
 
-  visibleValue = true;
-  enabledValue = true;
+  visibleValue = signal(true);
+  enabledValue = signal(true);
 
   constructor(
     private readonly repository: TenantConfigRepository,

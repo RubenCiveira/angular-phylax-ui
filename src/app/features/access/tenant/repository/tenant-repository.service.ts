@@ -37,9 +37,12 @@ export class TenantRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: Tenant): Observable<Tenant> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: Tenant): Observable<Tenant> {
@@ -126,7 +129,7 @@ export class TenantRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;

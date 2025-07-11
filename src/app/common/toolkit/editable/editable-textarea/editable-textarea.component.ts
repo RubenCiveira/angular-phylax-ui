@@ -11,15 +11,17 @@ import { MatInputModule } from '@angular/material/input';
   template: `
     <mat-form-field>
       <mat-label>{{ label() + '.label' | transloco }}</mat-label>
-      <input
+      <textarea
         matInput
         [required]="required()"
         placeholder="{{ label() + '.placeholder' | transloco }}"
         [formControl]="control"
-      />
-      <mat-error *ngFor="let error of errorMessages()">
-        {{ label() + '.error.' + error | transloco }}
-      </mat-error>
+      ></textarea>
+      @for (error of errorMessages(); track $index) {
+        <mat-error>
+          {{ label() + '.error.' + error | transloco }}
+        </mat-error>
+      }
     </mat-form-field>
   `,
   selector: 'editable-textarea',

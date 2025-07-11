@@ -5,7 +5,9 @@
   <mat-chip-grid [required]="required()" #chipList [disabled]="control.disabled">
     <mat-chip-row [removable]="!control.disabled" (removed)="removeChip(item)" *ngFor="let item of control.value">
       {{ render().display(item) }}
-      <mat-icon matChipRemove *ngIf="!control.disabled">cancel</mat-icon>
+      @if (!control.disabled) {
+        <mat-icon matChipRemove>cancel</mat-icon>
+      }
     </mat-chip-row>
 
     <input
@@ -19,16 +21,24 @@
       [formControl]="search"
       [matAutocomplete]="autoForChips"
     />
-    <mat-progress-bar *ngIf="provider().searching()" mode="indeterminate"></mat-progress-bar>
+    @if (provider().searching()) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
   </mat-chip-grid>
-  <mat-icon matSuffix *ngIf="!control.disabled" (click)="searchOptions()">keyboard_arrow_down</mat-icon>
-  <mat-error *ngFor="let error of errorMessages()">
-    {{ label() + '.error.' + error | transloco }}
-  </mat-error>
+  @if (!control.disabled) {
+    <mat-icon matSuffix (click)="searchOptions()">keyboard_arrow_down</mat-icon>
+  }
+  @for (error of errorMessages(); track $index) {
+    <mat-error>
+      {{ label() + '.error.' + error | transloco }}
+    </mat-error>
+  }
 </mat-form-field>
 
 <mat-autocomplete #autoForChips (optionSelected)="addSelectChip($event.option.value)">
-  <mat-option *ngFor="let item of provider()()" [value]="item">
-    {{ provider().display(item) }}
-  </mat-option>
+  @for (item of provider()(); track $index) {
+    <mat-option [value]="item">
+      {{ provider().display(item) }}
+    </mat-option>
+  }
 </mat-autocomplete>

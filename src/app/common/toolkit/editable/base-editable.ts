@@ -65,7 +65,7 @@ export abstract class BaseEditable<T> implements ControlValueAccessor, Validator
   protected pending = signal(false);
   protected touched = signal(false);
   protected control!: FormControl;
-  protected errorMessages = signal<string[]>(['fail']);
+  protected errorMessages = signal<string[]>([]);
 
   private onChange = (_: T | null) => {};
   private onTouched = () => {};

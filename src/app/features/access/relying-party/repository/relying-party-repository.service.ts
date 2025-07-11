@@ -41,9 +41,12 @@ export class RelyingPartyRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: RelyingParty): Observable<RelyingParty> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: RelyingParty): Observable<RelyingParty> {
@@ -130,7 +133,7 @@ export class RelyingPartyRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;

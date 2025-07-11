@@ -60,20 +60,6 @@
     }
   },
   "list": {
-    "column": {
-      "relying-party": {
-        "title": "usuario del certificado",
-        "tooltip": "usuario del certificado"
-      },
-      "trusted-client": {
-        "title": "Cliente de confianza",
-        "tooltip": "Cliente de confianza"
-      },
-      "user": {
-        "title": "usuario",
-        "tooltip": "usuario"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -83,6 +69,10 @@
     }
   },
   "search": {
+    "relying-party": {
+      "label": "usuario del certificado",
+      "placeholder": ""
+    },
     "relying-partys": {
       "label": "partys que confían",
       "placeholder": ""
@@ -91,8 +81,16 @@
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
     },
+    "trusted-client": {
+      "label": "Cliente de confianza",
+      "placeholder": ""
+    },
     "trusted-clients": {
       "label": "Clientes de confianza",
+      "placeholder": ""
+    },
+    "user": {
+      "label": "usuario",
       "placeholder": ""
     },
     "users": {

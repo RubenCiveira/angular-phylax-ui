@@ -38,8 +38,14 @@ export class SecurityScopeViewListComponent {
     if (external?.resource) {
       result.resource = external.resource;
     }
+    if (external?.trustedClient) {
+      result.trustedClient = external.trustedClient;
+    }
     if (external?.trustedClients) {
       result.trustedClients = external.trustedClients;
+    }
+    if (external?.relyingParty) {
+      result.relyingParty = external.relyingParty;
     }
     if (external?.relyingPartys) {
       result.relyingPartys = external.relyingPartys;
@@ -50,8 +56,14 @@ export class SecurityScopeViewListComponent {
     if (filter?.resource) {
       result.resource = filter.resource;
     }
+    if (filter?.trustedClient?.$ref) {
+      result.trustedClient = filter.trustedClient.$ref;
+    }
     if (filter?.trustedClients?.$ref) {
       result.trustedClients = filter.trustedClients.$ref;
+    }
+    if (filter?.relyingParty?.$ref) {
+      result.relyingParty = filter.relyingParty.$ref;
     }
     if (filter?.relyingPartys?.$ref) {
       result.relyingPartys = filter.relyingPartys.$ref;

@@ -23,7 +23,7 @@ export class UserViewFormGroupComponent extends SubFormEditable<User> {
   uid = computed(() => this.value()?.uid);
   tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantFilter = input<TenantFilter>({ limit: 100 });
-  public constructor(userRespository: UserRepository, tenantRepository: TenantRepository) {
+  public constructor(userRepository: UserRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         uid: new FormControl<string>(''),
@@ -40,7 +40,7 @@ export class UserViewFormGroupComponent extends SubFormEditable<User> {
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = userRespository.acl();
+    this.acl = userRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

@@ -41,7 +41,7 @@ type UploadState = 'select' | 'uploading' | 'complete';
 })
 export class EditableUploadComponent extends BaseEditable<any> {
   upload = input.required<(file: File) => Observable<UploadProgress>>();
-  download = input.required<() => Observable<DownloadBlob> | null>();
+  download = input.required<(url: string) => Observable<DownloadBlob> | null>();
 
   loading = signal<boolean>(false);
   progressValue = signal<number>(0);
@@ -69,7 +69,7 @@ export class EditableUploadComponent extends BaseEditable<any> {
     if (callback == null) {
       alert('No callback');
     } else {
-      const subs = callback();
+      const subs = callback(this.value());
       subs?.subscribe((blob) => {
         const downloadUrl = window.URL.createObjectURL(blob.data);
         const a = document.createElement('a');

@@ -39,7 +39,7 @@ export class UserIdentityViewFormGroupComponent extends SubFormEditable<UserIden
   rolesFilter = input<RoleFilter>({ limit: 100 });
   rolesRender: ChipsDisplay<Role, { role: { $ref: string } }>;
   public constructor(
-    userIdentityRespository: UserIdentityRepository,
+    userIdentityRepository: UserIdentityRepository,
     userRepository: UserRepository,
     relyingPartyRepository: RelyingPartyRepository,
     trustedClientRepository: TrustedClientRepository,
@@ -55,7 +55,7 @@ export class UserIdentityViewFormGroupComponent extends SubFormEditable<UserIden
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = userIdentityRespository.acl();
+    this.acl = userIdentityRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -93,7 +93,7 @@ export class UserIdentityViewFormGroupComponent extends SubFormEditable<UserIden
         return (
           item
             ? {
-                uid: new Date().getTime(),
+                uid: userIdentityRepository.generateComb(),
                 version: 0,
                 role: { $ref: item.uid },
               }

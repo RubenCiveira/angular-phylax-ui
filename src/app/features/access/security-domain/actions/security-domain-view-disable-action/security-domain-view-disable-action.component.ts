@@ -32,8 +32,9 @@ export class SecurityDomainViewDisableActionComponent implements Action, OnDestr
   tooltip = signal<string>('disable el elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  noMatchSignal = signal(false);
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
 
@@ -50,7 +51,7 @@ export class SecurityDomainViewDisableActionComponent implements Action, OnDestr
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.disable', {}, 'access/security-domain').subscribe((val) => {
       if (val.label) {
@@ -75,7 +76,8 @@ export class SecurityDomainViewDisableActionComponent implements Action, OnDestr
   }
 
   visible(items: any[]) {
-    return items.every((item) => !!item.enabled) && this.visibleValue;
+    const canApply = items.every((item) => !!item.enabled) && true;
+    return canApply ? this.visibleValue : this.noMatchSignal;
   }
 
   enabled(items: any[]) {
@@ -108,6 +110,6 @@ export class SecurityDomainViewDisableActionComponent implements Action, OnDestr
     });
   }
   private allowed(allow: Acl | undefined) {
-    return !!allow?.allows?.find((info) => info.name == 'disable');
+    return !!allow?.allows?.find((info) => info.name == 'disable')?.allowed;
   }
 }

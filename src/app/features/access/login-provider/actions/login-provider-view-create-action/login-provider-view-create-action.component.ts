@@ -29,8 +29,8 @@ export class LoginProviderViewCreateActionComponent implements Action {
   tooltip = signal<string>('Crea un nuevo item');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
@@ -47,7 +47,7 @@ export class LoginProviderViewCreateActionComponent implements Action {
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.create', {}, 'access/login-provider').subscribe((val) => {
       if (val.label) {
@@ -83,6 +83,6 @@ export class LoginProviderViewCreateActionComponent implements Action {
     this.repository.add(value).subscribe(() => this.container()?.close());
   }
   private allowed(allow: Acl | undefined) {
-    return !!allow?.allows?.find((info) => info.name == 'create');
+    return !!allow?.allows?.find((info) => info.name == 'create')?.allowed;
   }
 }

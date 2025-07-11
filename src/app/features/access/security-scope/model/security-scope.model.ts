@@ -19,7 +19,9 @@ export interface SecurityScopeFilter {
   uids?: string[];
   limit?: number;
   resource?: string;
+  trustedClient?: string[];
   trustedClients?: string[];
+  relyingParty?: string[];
   relyingPartys?: string[];
 }
 export interface SecurityScopeProjection {

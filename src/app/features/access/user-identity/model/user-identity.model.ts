@@ -15,8 +15,11 @@ export interface UserIdentityFilter {
   search?: string;
   uids?: string[];
   limit?: number;
+  user?: string[];
   users?: string[];
+  relyingParty?: string[];
   relyingPartys?: string[];
+  trustedClient?: string[];
   trustedClients?: string[];
 }
 export interface UserIdentityProjection {

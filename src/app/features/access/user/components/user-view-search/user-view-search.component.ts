@@ -25,17 +25,20 @@ export class UserViewSearchComponent extends SubFormEditable<any> {
   tenantsFilter = input<TenantFilter>({ limit: 100 });
   rootProvider: SelectorProvider<Tenant, { $ref: string }>;
   rootFilter = input<TenantFilter>({ limit: 100 });
-  public constructor(userRespository: UserRepository, tenantRepository: TenantRepository) {
+  tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
+  tenantFilter = input<TenantFilter>({ limit: 100 });
+  public constructor(userRepository: UserRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         tenants: new FormControl<any>(null),
         search: new FormControl<string>(''),
         root: new FormControl<any>(null),
         name: new FormControl<string>(''),
+        tenant: new FormControl<any>(null),
         order: new FormControl<string>(''),
       }),
     );
-    this.acl = userRespository.acl();
+    this.acl = userRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -50,12 +53,14 @@ export class UserViewSearchComponent extends SubFormEditable<any> {
     });
     this.tenantsProvider = tenantRepository.selectorProvider(this.tenantsFilter);
     this.rootProvider = tenantRepository.selectorProvider(this.rootFilter);
+    this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.defaultValues = () => {
       return {
         tenants: null,
         search: '',
         root: null,
         name: '',
+        tenant: null,
         order: '',
       };
     };

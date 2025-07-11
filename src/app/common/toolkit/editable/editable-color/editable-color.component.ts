@@ -18,9 +18,11 @@ import { MatInputModule } from '@angular/material/input';
         placeholder="{{ label() + '.placeholder' | transloco }}"
         [formControl]="control"
       />
-      <mat-error *ngFor="let error of errorMessages()">
-        {{ label() + '.error.' + error | transloco }}
-      </mat-error>
+      @for (error of errorMessages(); track $index) {
+        <mat-error>
+          {{ label() + '.error.' + error | transloco }}
+        </mat-error>
+      }
     </mat-form-field>
   `,
   selector: 'editable-color',

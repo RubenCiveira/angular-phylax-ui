@@ -21,9 +21,11 @@ import { MatInputModule } from '@angular/material/input';
         [formControl]="control"
         onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
       />
-      <mat-error *ngFor="let error of errorMessages()">
-        {{ label() + '.error.' + error | transloco }}
-      </mat-error>
+      @for (error of errorMessages(); track $index) {
+        <mat-error>
+          {{ label() + '.error.' + error | transloco }}
+        </mat-error>
+      }
     </mat-form-field>
   `,
   selector: 'editable-integer',

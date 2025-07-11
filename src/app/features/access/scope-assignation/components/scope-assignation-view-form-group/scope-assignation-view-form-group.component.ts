@@ -28,7 +28,7 @@ export class ScopeAssignationViewFormGroupComponent extends SubFormEditable<Scop
   securityScopeProvider: SelectorProvider<SecurityScope, { $ref: string }>;
   securityScopeFilter = input<SecurityScopeFilter>({ limit: 100 });
   public constructor(
-    scopeAssignationRespository: ScopeAssignationRepository,
+    scopeAssignationRepository: ScopeAssignationRepository,
     securityDomainRepository: SecurityDomainRepository,
     securityScopeRepository: SecurityScopeRepository,
   ) {
@@ -40,7 +40,7 @@ export class ScopeAssignationViewFormGroupComponent extends SubFormEditable<Scop
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = scopeAssignationRespository.acl();
+    this.acl = scopeAssignationRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

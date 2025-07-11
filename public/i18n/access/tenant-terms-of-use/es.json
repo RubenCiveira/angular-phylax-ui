@@ -41,7 +41,7 @@
   "form-group": {
     "activation-date": {
       "label": "Fecha Activación",
-      "placeholder": "El fecha de activación de los términos de uso del inquilino",
+      "placeholder": "Fecha en que se activan las condiciones de uso",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -49,42 +49,24 @@
     },
     "attached": {
       "label": "adosado",
-      "placeholder": "El adjunto de los términos de uso del inquilino"
+      "placeholder": "Un archivo adjunto opcional, por ejemplo, p d f o documento firmado"
     },
     "tenant": {
       "error": {
         "required": "inquilino es obligatorio"
       },
       "label": "inquilino",
-      "placeholder": "La cuenta a la que pertenece"
+      "placeholder": "El inquilino al que pertenece este documento de condiciones de uso"
     },
     "text": {
       "error": {
         "required": "Texto es obligatorio"
       },
       "label": "Texto",
-      "placeholder": "Términos de uso de El text de tenant"
+      "placeholder": "El contenido del documento de condiciones de uso"
     }
   },
   "list": {
-    "column": {
-      "activation-date": {
-        "title": "Fecha Activación",
-        "tooltip": "Fecha Activación"
-      },
-      "attached": {
-        "title": "adosado",
-        "tooltip": "adosado"
-      },
-      "tenant": {
-        "title": "inquilino",
-        "tooltip": "inquilino"
-      },
-      "text": {
-        "title": "Texto",
-        "tooltip": "Texto"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -97,6 +79,10 @@
     "search": {
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": ""
     },
     "tenants": {
       "label": "inquilinos",

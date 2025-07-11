@@ -35,6 +35,9 @@ export class RoleViewListComponent {
     if (external?.name) {
       result.name = external.name;
     }
+    if (external?.tenant) {
+      result.tenant = external.tenant;
+    }
     if (external?.tenants) {
       result.tenants = external.tenants;
     }
@@ -43,6 +46,9 @@ export class RoleViewListComponent {
     }
     if (filter?.name) {
       result.name = filter.name;
+    }
+    if (filter?.tenant?.$ref) {
+      result.tenant = filter.tenant.$ref;
     }
     if (filter?.tenants?.$ref) {
       result.tenants = filter.tenants.$ref;

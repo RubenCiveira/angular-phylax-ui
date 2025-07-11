@@ -31,7 +31,7 @@ export class RoleViewFormGroupComponent extends SubFormEditable<Role> {
   domainsFilter = input<SecurityDomainFilter>({ limit: 100 });
   domainsRender: ChipsDisplay<SecurityDomain, { securityDomain: { $ref: string } }>;
   public constructor(
-    roleRespository: RoleRepository,
+    roleRepository: RoleRepository,
     tenantRepository: TenantRepository,
     securityDomainRepository: SecurityDomainRepository,
   ) {
@@ -44,7 +44,7 @@ export class RoleViewFormGroupComponent extends SubFormEditable<Role> {
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = roleRespository.acl();
+    this.acl = roleRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -80,7 +80,7 @@ export class RoleViewFormGroupComponent extends SubFormEditable<Role> {
         return (
           item
             ? {
-                uid: new Date().getTime(),
+                uid: roleRepository.generateComb(),
                 version: 0,
                 securityDomain: { $ref: item.uid },
               }

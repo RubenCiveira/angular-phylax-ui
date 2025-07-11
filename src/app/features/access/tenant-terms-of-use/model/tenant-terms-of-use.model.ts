@@ -14,6 +14,7 @@ export interface TenantTermsOfUseFilter {
   search?: string;
   uids?: string[];
   limit?: number;
+  tenant?: string[];
   tenants?: string[];
 }
 export interface TenantTermsOfUseProjection {

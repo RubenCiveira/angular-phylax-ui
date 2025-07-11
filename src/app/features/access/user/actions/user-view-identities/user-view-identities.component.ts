@@ -2,11 +2,9 @@
 import { TranslocoService } from '@jsverse/transloco';
 import { ActionContainerComponent } from 'app/common/toolkit/action/action-container.component';
 import { Action } from 'app/common/toolkit/action/action.model';
-import { Tick } from 'app/common/data/repository/repository.model';
-import { Acl } from 'app/common/data/acl/acl.model';
 import { UserRepository } from 'app/features/access/user/repository/user-repository.service';
+import { input, viewChild, Component, signal, TemplateRef } from '@angular/core';
 import { User } from 'app/features/access/user/model/user.model';
-import { computed, input, viewChild, Component, signal, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'user-view-identities',
@@ -28,8 +26,8 @@ export class UserViewIdentitiesComponent implements Action {
   tooltip = signal<string>('identities');
   default = input<boolean>(false);
 
-  visibleValue = true;
-  enabledValue = true;
+  visibleValue = signal(true);
+  enabledValue = signal(true);
 
   constructor(
     private readonly repository: UserRepository,

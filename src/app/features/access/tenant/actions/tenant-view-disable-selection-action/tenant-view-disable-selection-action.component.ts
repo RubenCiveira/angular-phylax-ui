@@ -33,8 +33,9 @@ export class TenantViewDisableSelectionActionComponent implements Action, OnDest
   tooltip = signal<string>('Borra el elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  noMatchSignal = signal(false);
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
 
@@ -52,7 +53,7 @@ export class TenantViewDisableSelectionActionComponent implements Action, OnDest
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.disable-selection', {}, 'access/tenant').subscribe((val) => {
       if (val.label) {
@@ -80,7 +81,8 @@ export class TenantViewDisableSelectionActionComponent implements Action, OnDest
   }
 
   visible(items: any[]) {
-    return items.every((item) => item.enabled !== false) && this.visibleValue;
+    const canApply = items.every((item) => item.enabled !== false) && true;
+    return canApply ? this.visibleValue : this.noMatchSignal;
   }
 
   enabled(items: any[]) {
@@ -121,6 +123,6 @@ export class TenantViewDisableSelectionActionComponent implements Action, OnDest
     });
   }
   private allowed(allow: Acl | undefined) {
-    return this.repository.canDeleteSelection() && !!allow?.allows?.find((info) => info.name == 'disable');
+    return this.repository.canDeleteSelection() && !!allow?.allows?.find((info) => info.name == 'disable')?.allowed;
   }
 }

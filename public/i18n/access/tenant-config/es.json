@@ -5,11 +5,6 @@
       "title": "conditions",
       "tooltip": "conditions"
     },
-    "conditions-sub-list": {
-      "label": "conditions",
-      "title": "conditions",
-      "tooltip": "conditions"
-    },
     "create": {
       "createButton": "Create",
       "label": "Create",
@@ -51,17 +46,12 @@
       "label": "providers",
       "title": "providers",
       "tooltip": "providers"
-    },
-    "providers-sub-list": {
-      "label": "providers",
-      "title": "providers",
-      "tooltip": "providers"
     }
   },
   "form-group": {
     "force-mfa": {
       "label": "fuerza mfa",
-      "placeholder": "El force mfa de inquilino config"
+      "placeholder": "Indica si la autenticación multifactor m f a se aplica para el inquilino"
     },
     "forceMfa": {
       "error": {
@@ -70,7 +60,7 @@
     },
     "inner-label": {
       "label": "etiqueta interior",
-      "placeholder": "El inquilino podría usar estos campos para etiquetar la aplicación para los usuarios"
+      "placeholder": "Una etiqueta personalizable que los inquilinos pueden usar para personalizar la aplicación u i"
     },
     "innerLabel": {
       "error": {
@@ -82,24 +72,10 @@
         "required": "inquilino es obligatorio"
       },
       "label": "inquilino",
-      "placeholder": "El nombre para identificar la cuenta"
+      "placeholder": "El inquilino al que se aplica esta configuración"
     }
   },
   "list": {
-    "column": {
-      "force-mfa": {
-        "title": "fuerza mfa",
-        "tooltip": "fuerza mfa"
-      },
-      "inner-label": {
-        "title": "etiqueta interior",
-        "tooltip": "etiqueta interior"
-      },
-      "tenant": {
-        "title": "inquilino",
-        "tooltip": "inquilino"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -112,6 +88,10 @@
     "search": {
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": ""
     },
     "tenants": {
       "label": "inquilinos",

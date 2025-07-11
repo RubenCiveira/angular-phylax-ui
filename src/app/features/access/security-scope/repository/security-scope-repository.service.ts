@@ -49,9 +49,12 @@ export class SecurityScopeRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: SecurityScope): Observable<SecurityScope> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: SecurityScope): Observable<SecurityScope> {
@@ -138,7 +141,7 @@ export class SecurityScopeRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
@@ -146,8 +149,14 @@ export class SecurityScopeRepository {
     if (filter.resource) {
       morphed['resource'] = filter.resource;
     }
+    if (filter.trustedClient) {
+      morphed['trusted-client'] = filter.trustedClient;
+    }
     if (filter.trustedClients) {
       morphed['trusted-clients'] = filter.trustedClients;
+    }
+    if (filter.relyingParty) {
+      morphed['relying-party'] = filter.relyingParty;
     }
     if (filter.relyingPartys) {
       morphed['relying-partys'] = filter.relyingPartys;

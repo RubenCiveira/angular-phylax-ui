@@ -45,9 +45,12 @@ export class LoginProviderRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: LoginProvider): Observable<LoginProvider> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: LoginProvider): Observable<LoginProvider> {
@@ -107,8 +110,8 @@ export class LoginProviderRepository {
   disableSelection(filter: LoginProviderFilter) {
     return this.repo.partialBySelection(this.publicQueryFilter(filter), { disabled: 'true' }, 'disable');
   }
-  downloadMetadata(item: LoginProvider): Observable<DownloadBlob> | null {
-    return item.metadata ? this.repo.downloadFile(item.metadata) : null;
+  downloadMetadata(url?: string): Observable<DownloadBlob> | null {
+    return url ? this.repo.downloadFile(url) : null;
   }
   storeMetadata(file: File): Observable<UploadProgress> {
     return this.repo.storeFile('/-/temp-metadata', 'file', file);
@@ -140,7 +143,7 @@ export class LoginProviderRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
@@ -150,6 +153,9 @@ export class LoginProviderRepository {
     }
     if (filter.name) {
       morphed['name'] = filter.name;
+    }
+    if (filter.tenant) {
+      morphed['tenant'] = filter.tenant;
     }
     if (filter.tenants) {
       morphed['tenants'] = filter.tenants;

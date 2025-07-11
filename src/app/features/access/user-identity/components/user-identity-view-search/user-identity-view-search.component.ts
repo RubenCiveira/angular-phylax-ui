@@ -29,10 +29,16 @@ export class UserIdentityViewSearchComponent extends SubFormEditable<any> {
   trustedClientsFilter = input<TrustedClientFilter>({ limit: 100 });
   relyingPartysProvider: SelectorProvider<RelyingParty, { $ref: string }>;
   relyingPartysFilter = input<RelyingPartyFilter>({ limit: 100 });
+  relyingPartyProvider: SelectorProvider<RelyingParty, { $ref: string }>;
+  relyingPartyFilter = input<RelyingPartyFilter>({ limit: 100 });
+  trustedClientProvider: SelectorProvider<TrustedClient, { $ref: string }>;
+  trustedClientFilter = input<TrustedClientFilter>({ limit: 100 });
+  userProvider: SelectorProvider<User, { $ref: string }>;
+  userFilter = input<UserFilter>({ limit: 100 });
   usersProvider: SelectorProvider<User, { $ref: string }>;
   usersFilter = input<UserFilter>({ limit: 100 });
   public constructor(
-    userIdentityRespository: UserIdentityRepository,
+    userIdentityRepository: UserIdentityRepository,
     trustedClientRepository: TrustedClientRepository,
     relyingPartyRepository: RelyingPartyRepository,
     userRepository: UserRepository,
@@ -42,10 +48,13 @@ export class UserIdentityViewSearchComponent extends SubFormEditable<any> {
         search: new FormControl<string>(''),
         trustedClients: new FormControl<any>(null),
         relyingPartys: new FormControl<any>(null),
+        relyingParty: new FormControl<any>(null),
+        trustedClient: new FormControl<any>(null),
+        user: new FormControl<any>(null),
         users: new FormControl<any>(null),
       }),
     );
-    this.acl = userIdentityRespository.acl();
+    this.acl = userIdentityRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -60,12 +69,18 @@ export class UserIdentityViewSearchComponent extends SubFormEditable<any> {
     });
     this.trustedClientsProvider = trustedClientRepository.selectorProvider(this.trustedClientsFilter);
     this.relyingPartysProvider = relyingPartyRepository.selectorProvider(this.relyingPartysFilter);
+    this.relyingPartyProvider = relyingPartyRepository.selectorProvider(this.relyingPartyFilter);
+    this.trustedClientProvider = trustedClientRepository.selectorProvider(this.trustedClientFilter);
+    this.userProvider = userRepository.selectorProvider(this.userFilter);
     this.usersProvider = userRepository.selectorProvider(this.usersFilter);
     this.defaultValues = () => {
       return {
         search: '',
         trustedClients: null,
         relyingPartys: null,
+        relyingParty: null,
+        trustedClient: null,
+        user: null,
         users: null,
       };
     };

@@ -1,163 +1,10 @@
 {
-  "action": {
-    "create": {
-      "createButton": "Create",
-      "label": "Create",
-      "title": "Creating new login provider",
-      "tooltip": "Create a new provider login record"
-    },
-    "delete": {
-      "cancelBtn": "Do not delete",
-      "content": "Confirm you want to delete",
-      "dismiss": "Accept",
-      "label": "Delete",
-      "okBtn": "Delete Record ",
-      "report": " has been cleared.",
-      "title": "Ticket passed",
-      "tooltip": "Modify the values of a login provider"
-    },
-    "delete-selection": {
-      "cancelBtn": "Do not delete",
-      "content": "Confirm that you want to delete the selected records",
-      "dismiss": "Accept",
-      "label": "Ticket passed",
-      "okBtn": "Delete Records",
-      "progress": "Deleting",
-      "report": "It can NOT be deleted",
-      "title": "Clear selection.",
-      "tooltip": "Clear selected logs"
-    },
-    "detail": {
-      "label": "Detail",
-      "title": "Viewing the values of a login provider",
-      "tooltip": "View a login provider's values"
-    },
-    "disable": {
-      "cancelBtn": "Do not disable",
-      "content": "Confirm you want to disable",
-      "dismiss": "Accept",
-      "label": "disable",
-      "okBtn": "disable registration",
-      "report": "Has been disabled",
-      "title": "disable",
-      "tooltip": "Modify the values of a login provider"
-    },
-    "disable-selection": {
-      "cancelBtn": "Do not disable",
-      "content": "Confirm that you want to disable the selected records",
-      "dismiss": "Accept",
-      "label": "disable",
-      "okBtn": "disable logs",
-      "progress": "Disabling",
-      "report": "Records have been disabled",
-      "title": "disable selection",
-      "tooltip": "disable selected records"
-    },
-    "edit": {
-      "label": "Edit",
-      "saveBtn": "Update",
-      "tooltip": "Modify the values of a login provider"
-    },
-    "enable": {
-      "cancelBtn": "No enable",
-      "content": "Confirm you want to enable",
-      "dismiss": "Accept",
-      "label": "enable",
-      "okBtn": "enable registration",
-      "report": "If you have enable",
-      "title": "enable",
-      "tooltip": "Modify the values of a login provider"
-    },
-    "enable-selection": {
-      "cancelBtn": "No enable",
-      "content": "Confirm that you want to enable the selected records",
-      "dismiss": "Accept",
-      "label": "enable",
-      "okBtn": "enable registrations",
-      "progress": "Being enabled",
-      "report": "Records have been enabled",
-      "title": "enable selection",
-      "tooltip": "enable selected records"
-    }
-  },
   "form-group": {
-    "certificate": {
-      "label": "certification",
-      "placeholder": "The login provider certificate"
-    },
-    "direct-access": {
-      "label": "direct access",
-      "placeholder": "If set to true the login will use this method by default"
-    },
-    "disabled": {
-      "label": "dectivated",
-      "placeholder": "The disabled login provider"
-    },
-    "enabled-by-default": {
-      "label": "Enabled by default",
-      "placeholder": "The default enabled login provider"
-    },
-    "enabledByDefault": {
-      "error": {
-        "required": "Enabled by default is required"
-      }
-    },
-    "metadata": {
-      "label": "metadata",
-      "placeholder": "A file with verification information if necessary"
-    },
-    "name": {
-      "error": {
-        "maxlength": "Name must be less than 250 characters",
-        "required": "Name obligatory"
-      },
-      "label": "Name",
-      "placeholder": "The name of the login provider"
-    },
-    "private-key": {
-      "label": "private key",
-      "placeholder": "Used to internally verify the codes that the user brings"
-    },
-    "privateKey": {
-      "error": {
-        "maxlength": "private key must be less than 250 characters"
-      }
-    },
-    "public-key": {
-      "label": "PK, public key",
-      "placeholder": "Used to leave it to the user and to present it to the supplier"
-    },
-    "publicKey": {
-      "error": {
-        "maxlength": "public key must be less than 250 characters"
-      }
-    },
     "source": {
-      "error": {
-        "required": "font is required"
-      },
-      "label": "source",
       "options": {
         "github": "GITHUB",
         "google": "GOOGLE",
         "saml": "SAML"
-      },
-      "placeholder": "The login provider source"
-    },
-    "tenant": {
-      "error": {
-        "required": "tenant is required"
-      },
-      "label": "renter",
-      "placeholder": "The account to which you belong"
-    },
-    "users-enabled-by-default": {
-      "label": "users enabled by default",
-      "placeholder": "Defines whether users created with this provider are enabled by default"
-    },
-    "usersEnabledByDefault": {
-      "error": {
-        "required": "users enabled by default is required"
       }
     }
   },
@@ -174,10 +21,6 @@
       "disabled": {
         "title": "disabled",
         "tooltip": "disabled"
-      },
-      "enabled-by-default": {
-        "title": "enabled by default",
-        "tooltip": "enabled by default"
       },
       "metadata": {
         "title": "metadata",
@@ -207,36 +50,15 @@
         "title": "users enabled by default",
         "tooltip": "users enabled by default"
       }
-    },
-    "filter": {
-      "button": "Filter"
-    },
-    "search": {
-      "button": "Search",
-      "title": "Search"
     }
   },
   "search": {
-    "name": {
-      "label": "Name",
-      "placeholder": ""
-    },
     "order": {
-      "label": "order",
       "options": {
         "name-asc": "name-asc",
         "name-desc": "name-desc",
         "null": "Default"
-      },
-      "placeholder": "Order in which to retrieve results"
-    },
-    "search": {
-      "label": "search",
-      "placeholder": "Search by Text"
-    },
-    "tenants": {
-      "label": "tenants,",
-      "placeholder": ""
+      }
     }
   }
 }

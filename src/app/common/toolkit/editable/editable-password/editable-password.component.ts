@@ -26,14 +26,18 @@ import { MatDividerModule } from '@angular/material/divider';
         matInput
         [value]="'*****'"
         [required]="required()"
-        [disabled]="true"
+        [readonly]="true"
         type="password"
         placeholder="{{ label() + '.placeholder' | transloco }}"
       />
-      <button mat-button *ngIf="!control.disabled" matSuffix (click)="chPass()">Cambiar</button>
-      <mat-error *ngFor="let error of errorMessages()">
-        {{ label() + '.error.' + error | transloco }}
-      </mat-error>
+      @if (!control.disabled) {
+        <button mat-button matSuffix (click)="chPass()">Cambiar</button>
+      }
+      @for (error of errorMessages(); track $index) {
+        <mat-error>
+          {{ label() + '.error.' + error | transloco }}
+        </mat-error>
+      }
     </mat-form-field>
 
     <ng-template #changeDialog>
@@ -71,12 +75,12 @@ import { MatDividerModule } from '@angular/material/divider';
               >
                 <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
               </button>
-              <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('required')">
-                La contraseña es obligatoria
-              </mat-error>
-              <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('minlength')">
-                La contraseña debe tener al menos 6 caracteres
-              </mat-error>
+              @if (passwordForm.get('newPassword')?.hasError('required')) {
+                <mat-error> La contraseña es obligatoria </mat-error>
+              }
+              @if (passwordForm.get('newPassword')?.hasError('minlength')) {
+                <mat-error> La contraseña debe tener al menos 6 caracteres </mat-error>
+              }
             </mat-form-field>
 
             <!-- Confirm Password Field -->
@@ -99,17 +103,14 @@ import { MatDividerModule } from '@angular/material/divider';
               >
                 <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
               </button>
-              <mat-error *ngIf="passwordForm.get('confirmPassword')?.hasError('required')">
-                La confirmación de contraseña es obligatoria
-              </mat-error>
-              <mat-error
-                *ngIf="
-                  passwordForm.hasError('passwordMismatch') &&
-                  !passwordForm.get('confirmPassword')?.hasError('required')
-                "
-              >
-                Las contraseñas no coinciden
-              </mat-error>
+              @if (passwordForm.get('confirmPassword')?.hasError('required')) {
+                <mat-error> La confirmación de contraseña es obligatoria </mat-error>
+              }
+              @if (
+                passwordForm.hasError('passwordMismatch') && !passwordForm.get('confirmPassword')?.hasError('required')
+              ) {
+                <mat-error> Las contraseñas no coinciden </mat-error>
+              }
             </mat-form-field>
           </form>
         </div>

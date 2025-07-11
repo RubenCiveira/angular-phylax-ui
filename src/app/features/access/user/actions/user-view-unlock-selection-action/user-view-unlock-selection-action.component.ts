@@ -33,8 +33,9 @@ export class UserViewUnlockSelectionActionComponent implements Action, OnDestroy
   tooltip = signal<string>('Borra el elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  noMatchSignal = signal(false);
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
 
@@ -52,7 +53,7 @@ export class UserViewUnlockSelectionActionComponent implements Action, OnDestroy
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.unlock-selection', {}, 'access/user').subscribe((val) => {
       if (val.label) {
@@ -80,7 +81,8 @@ export class UserViewUnlockSelectionActionComponent implements Action, OnDestroy
   }
 
   visible(items: any[]) {
-    return this.visibleValue;
+    const canApply = true;
+    return canApply ? this.visibleValue : this.noMatchSignal;
   }
 
   enabled(items: any[]) {
@@ -121,6 +123,6 @@ export class UserViewUnlockSelectionActionComponent implements Action, OnDestroy
     });
   }
   private allowed(allow: Acl | undefined) {
-    return this.repository.canDeleteSelection() && !!allow?.allows?.find((info) => info.name == 'unlock');
+    return this.repository.canDeleteSelection() && !!allow?.allows?.find((info) => info.name == 'unlock')?.allowed;
   }
 }

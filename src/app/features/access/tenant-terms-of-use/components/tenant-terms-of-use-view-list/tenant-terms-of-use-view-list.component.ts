@@ -35,11 +35,17 @@ export class TenantTermsOfUseViewListComponent {
     if (external?.search) {
       result.search = external.search;
     }
+    if (external?.tenant) {
+      result.tenant = external.tenant;
+    }
     if (external?.tenants) {
       result.tenants = external.tenants;
     }
     if (filter?.search) {
       result.search = filter.search;
+    }
+    if (filter?.tenant?.$ref) {
+      result.tenant = filter.tenant.$ref;
     }
     if (filter?.tenants?.$ref) {
       result.tenants = filter.tenants.$ref;

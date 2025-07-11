@@ -23,7 +23,7 @@ export class TenantConfigViewFormGroupComponent extends SubFormEditable<TenantCo
   uid = computed(() => this.value()?.uid);
   tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantFilter = input<TenantFilter>({ limit: 100 });
-  public constructor(tenantConfigRespository: TenantConfigRepository, tenantRepository: TenantRepository) {
+  public constructor(tenantConfigRepository: TenantConfigRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         uid: new FormControl<string>(''),
@@ -33,7 +33,7 @@ export class TenantConfigViewFormGroupComponent extends SubFormEditable<TenantCo
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = tenantConfigRespository.acl();
+    this.acl = tenantConfigRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

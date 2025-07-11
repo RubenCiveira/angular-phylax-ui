@@ -27,8 +27,8 @@ export class TenantTermsOfUseViewFormGroupComponent extends SubFormEditable<Tena
   tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantFilter = input<TenantFilter>({ limit: 100 });
   uploadAttached: (file: File) => Observable<UploadProgress>;
-  downloadAttached: () => null | Observable<DownloadBlob>;
-  public constructor(tenantTermsOfUseRespository: TenantTermsOfUseRepository, tenantRepository: TenantRepository) {
+  downloadAttached: (url?: string) => null | Observable<DownloadBlob>;
+  public constructor(tenantTermsOfUseRepository: TenantTermsOfUseRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         uid: new FormControl<string>(''),
@@ -39,14 +39,13 @@ export class TenantTermsOfUseViewFormGroupComponent extends SubFormEditable<Tena
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = tenantTermsOfUseRespository.acl();
+    this.acl = tenantTermsOfUseRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
     effect(() => {
       const vals = this.acl();
       const value = this.value();
-      this.downloadAttached = () => (value ? tenantTermsOfUseRespository.downloadAttached(value) : null);
       const on = this.uid() ? vals?.specific : vals?.generic;
       setTimeout(() => {
         this.definedFixed.set(on?.fields?.noEditables || []);
@@ -54,8 +53,8 @@ export class TenantTermsOfUseViewFormGroupComponent extends SubFormEditable<Tena
       });
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
-    this.uploadAttached = (file) => tenantTermsOfUseRespository.storeAttached(file);
-    this.downloadAttached = () => null;
+    this.uploadAttached = (file) => tenantTermsOfUseRepository.storeAttached(file);
+    this.downloadAttached = (url) => tenantTermsOfUseRepository.downloadAttached(url);
     this.defaultValues = () => {
       return {
         uid: '',

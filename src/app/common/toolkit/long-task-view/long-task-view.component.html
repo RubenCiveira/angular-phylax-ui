@@ -2,98 +2,131 @@
 <h2 mat-dialog-title>{{ title }}</h2>
 <mat-dialog-content>
   <div style="min-width: 600px"></div>
-  <ng-container *ngIf="status !== 'FINISHED' && status !== 'FAILED'">
+  @if (status !== 'FINISHED' && status !== 'FAILED') {
     <h1>Working with {{ step }} {{ currentStepProgress }}</h1>
-    <mat-spinner *ngIf="!known" [mode]="'indeterminate'"></mat-spinner>
-    <mat-spinner *ngIf="known" [mode]="'determinate'" value="{{ currentStepProgress }}"></mat-spinner>
-  </ng-container>
-  <ng-container *ngIf="status == 'FAILED'">
+    @if (known) {
+      <mat-spinner [mode]="'determinate'" value="{{ currentStepProgress }}"></mat-spinner>
+    } @else {
+      <mat-spinner [mode]="'indeterminate'"></mat-spinner>
+    }
+  }
+  @if (status === 'FAILED') {
     <h1>The process failed</h1>
-  </ng-container>
-  <mat-accordion class="headers-align" multi *ngIf="status === 'FINISHED'">
-    <mat-expansion-panel *ngFor="let task of tasks">
-      <mat-expansion-panel-header>
-        <mat-panel-title> {{ task.name }} </mat-panel-title>
-        <mat-panel-description>
-          Correctos: {{ task.oks.length || 0 }} / {{ task.processedItems }}
-          <mat-icon *ngIf="!task.errors.length && !task.warns.length">check_circle</mat-icon>
-          <mat-icon *ngIf="!task.errors.length && task.warns.length">warning</mat-icon>
-          <mat-icon *ngIf="task.errors.length">error</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  }
+  @if (status === 'FINISHED') {
+    <mat-accordion class="headers-align" multi>
+      @for (task of tasks; track $index) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ task.name }} </mat-panel-title>
+            <mat-panel-description>
+              Correctos: {{ task.oks.length || 0 }} / {{ task.processedItems }}
+              @if (!task.errors.length && !task.warns.length) {
+                <mat-icon>check_circle</mat-icon>
+              }
+              @if (!task.errors.length && task.warns.length) {
+                <mat-icon>warning</mat-icon>
+              }
+              @if (task.errors.length) {
+                <mat-icon>error</mat-icon>
+              }
+            </mat-panel-description>
+          </mat-expansion-panel-header>
 
-      <ng-container *ngIf="allTheSame(task)">
-        <ul>
-          <li *ngFor="let ok of task.oks">{{ ok }}</li>
-
-          <li *ngFor="let warn of task.warns">
-            {{ warn.item }}
+          @if (allTheSame(task)) {
             <ul>
-              <li *ngFor="let fail of warn.fails">
-                {{ fail }}
-              </li>
-            </ul>
-          </li>
-          <li *ngFor="let error of task.errors">
-            {{ error.item }}
-            <ul>
-              <li *ngFor="let fail of error.fails">
-                {{ fail }}
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </ng-container>
-
-      <mat-accordion class="headers-align" multi *ngIf="!allTheSame(task)">
-        <mat-expansion-panel *ngIf="task.oks?.length">
-          <mat-expansion-panel-header>
-            <mat-panel-title> Correctos </mat-panel-title>
-            <mat-panel-description> {{ task.oks.length }} / {{ task.processedItems }} </mat-panel-description>
-          </mat-expansion-panel-header>
-          <ul>
-            <ng-container *ngFor="let ok of task.oks">
-              <li>{{ ok }}</li>
-            </ng-container>
-          </ul>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel *ngIf="task.warns?.length">
-          <mat-expansion-panel-header>
-            <mat-panel-title> Para revisar </mat-panel-title>
-            <mat-panel-description> {{ task.warns.length }} / {{ task.processedItems }} </mat-panel-description>
-          </mat-expansion-panel-header>
-          <ul>
-            <ng-container *ngFor="let warn of task.warns">
-              {{ warn.item }}
-              <ul>
-                <li *ngFor="let fail of warn.fails">
-                  {{ fail }}
+              @for (ok of task.oks; track $index) {
+                <li>{{ ok }}</li>
+              }
+              @for (warn of task.warns; track $index) {
+                <li>
+                  {{ warn.item }}
+                  <ul>
+                    @for (fail of warn.fails; track $index) {
+                      <li>
+                        {{ fail }}
+                      </li>
+                    }
+                  </ul>
                 </li>
-              </ul>
-            </ng-container>
-          </ul>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel *ngIf="task.errors?.length">
-          <mat-expansion-panel-header>
-            <mat-panel-title> Con errores </mat-panel-title>
-            <mat-panel-description> {{ task.errors.length }} / {{ task.processedItems }} </mat-panel-description>
-          </mat-expansion-panel-header>
-          <ul>
-            <ng-container *ngFor="let error of task.errors">
-              {{ error.item }}
-              <ul>
-                <li *ngFor="let fail of error.fails">
-                  {{ fail }}
+              }
+              @for (error of task.errors; track $index) {
+                <li>
+                  {{ error.item }}
+                  <ul>
+                    @for (fail of error.fails; track $index) {
+                      <li>
+                        {{ fail }}
+                      </li>
+                    }
+                  </ul>
                 </li>
-              </ul>
-            </ng-container>
-          </ul>
+              }
+            </ul>
+          } @else {
+            <mat-accordion class="headers-align">
+              @if (task.oks.length) {
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> Correctos </mat-panel-title>
+                    <mat-panel-description> {{ task.oks.length }} / {{ task.processedItems }} </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <ul>
+                    @for (ok of task.oks; track $index) {
+                      <li>{{ ok }}</li>
+                    }
+                  </ul>
+                </mat-expansion-panel>
+              }
+              @if (task.warns.length) {
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> Para revisar </mat-panel-title>
+                    <mat-panel-description> {{ task.warns.length }} / {{ task.processedItems }} </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <ul>
+                    @for (warn of task.warns; track $index) {
+                      {{ warn.item }}
+                      <ul>
+                        @for (fail of warn.fails; track $index) {
+                          <li>
+                            {{ fail }}
+                          </li>
+                        }
+                      </ul>
+                    }
+                  </ul>
+                </mat-expansion-panel>
+              }
+
+              @if (task.errors.length) {
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> Con errores </mat-panel-title>
+                    <mat-panel-description>
+                      {{ task.errors.length }} / {{ task.processedItems }}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <ul>
+                    @for (error of task.errors; track $index) {
+                      {{ error.item }}
+                      <ul>
+                        @for (fail of error.fails; track $index) {
+                          <li>
+                            {{ fail }}
+                          </li>
+                        }
+                      </ul>
+                    }
+                  </ul>
+                </mat-expansion-panel>
+              }
+            </mat-accordion>
+          }
         </mat-expansion-panel>
-      </mat-accordion>
-    </mat-expansion-panel>
-  </mat-accordion>
+      }
+    </mat-accordion>
+  }
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>

@@ -117,7 +117,7 @@ export class OidcIdentityHandlerService implements IdentityHandler {
   private configureForTenant(tenant: string, setup: any) {
     const config: AuthConfig = {
       responseType: 'code',
-      redirectUri: this.currentUrl(),
+      redirectUri: setup['redirect'] ?? this.currentUrl(),
       issuer: this.forCurrent(setup['issuer'], tenant),
       requireHttps: !!setup['force-https'],
       // The SPA's id. The SPA is registerd with this id at the auth-server

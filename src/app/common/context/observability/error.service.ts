@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorModalComponent } from '@common/toolkit/error-modal/error-modal.component';
 import { SpanStatusCode } from '@opentelemetry/api';
 import { AppConfigService } from '../config/app-config.service';
-import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
+import { InstrumentationService } from './instrumentation.service';
 
 export interface HiddenError {
   hidden: boolean;
@@ -19,24 +19,23 @@ export class ErrorService {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private appConfig: AppConfigService,
-    // private provider: WebTracerProvider
-  ) {
-  }
+    private provider: InstrumentationService,
+  ) {}
 
   public storeError(error: any) {
     console.error('Store error', error);
-    // const msg = error.message || 'Error no especificado';
-    // this.appConfig['name'].subscribe(msg => {
-    //   console.log("HAS TRACER");
-    //   const tracer = this.provider.getTracer( msg );
-    //   const span = tracer.startSpan(msg);
-    //   span.setStatus({
-    //      code: SpanStatusCode.ERROR,
-    //      message: msg
-    //    });
-    //   span.recordException(error);  // Esto registrará el stack trace y otros detalles del error
-    //   span.end();
-    // });
+    const msg = error.message || 'Error no especificado';
+    this.appConfig['name'].subscribe((name) => {
+      console.log('HAS TRACER');
+      const tracer = this.provider.getTracer(msg);
+      const span = tracer.startSpan(msg);
+      span.setStatus({
+        code: SpanStatusCode.ERROR,
+        message: msg,
+      });
+      span.recordException(error); // Esto registrará el stack trace y otros detalles del error
+      span.end();
+    });
   }
 
   public notifyError(message: string) {
@@ -46,8 +45,8 @@ export class ErrorService {
   private debugError(error: any) {
     this.storeError(error);
     // this.displayedError = true;
+    console.error('Error ', error);
     if (error.status === 422) {
-      console.error('Error con los datos entrantes');
       this.snackBar
         .open('Ha ocurrido un error, la lista de datos enviados es incorrecta', undefined, { duration: 2000 })
         .afterDismissed()
@@ -57,16 +56,14 @@ export class ErrorService {
           },
         });
     } else {
-      if (error.status !== 401) {
-        this.dialog
-          .open(ErrorModalComponent, { data: { error: error } })
-          .afterClosed()
-          .subscribe({
-            next: () => {
-              this.displayedError = false;
-            },
-          });
-      }
+      this.dialog
+        .open(ErrorModalComponent, { data: { error: error } })
+        .afterClosed()
+        .subscribe({
+          next: () => {
+            this.displayedError = false;
+          },
+        });
     }
   }
 

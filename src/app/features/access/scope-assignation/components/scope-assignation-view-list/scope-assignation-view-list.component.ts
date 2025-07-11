@@ -35,8 +35,14 @@ export class ScopeAssignationViewListComponent {
     if (external?.search) {
       result.search = external.search;
     }
+    if (external?.securityDomain) {
+      result.securityDomain = external.securityDomain;
+    }
     if (external?.securityDomains) {
       result.securityDomains = external.securityDomains;
+    }
+    if (external?.securityScope) {
+      result.securityScope = external.securityScope;
     }
     if (external?.securityScopes) {
       result.securityScopes = external.securityScopes;
@@ -44,8 +50,14 @@ export class ScopeAssignationViewListComponent {
     if (filter?.search) {
       result.search = filter.search;
     }
+    if (filter?.securityDomain?.$ref) {
+      result.securityDomain = filter.securityDomain.$ref;
+    }
     if (filter?.securityDomains?.$ref) {
       result.securityDomains = filter.securityDomains.$ref;
+    }
+    if (filter?.securityScope?.$ref) {
+      result.securityScope = filter.securityScope.$ref;
     }
     if (filter?.securityScopes?.$ref) {
       result.securityScopes = filter.securityScopes.$ref;

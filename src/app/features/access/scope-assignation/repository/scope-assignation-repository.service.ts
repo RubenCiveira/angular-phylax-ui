@@ -49,9 +49,12 @@ export class ScopeAssignationRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: ScopeAssignation): Observable<ScopeAssignation> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: ScopeAssignation): Observable<ScopeAssignation> {
@@ -108,13 +111,19 @@ export class ScopeAssignationRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
     }
+    if (filter.securityDomain) {
+      morphed['security-domain'] = filter.securityDomain;
+    }
     if (filter.securityDomains) {
       morphed['security-domains'] = filter.securityDomains;
+    }
+    if (filter.securityScope) {
+      morphed['security-scope'] = filter.securityScope;
     }
     if (filter.securityScopes) {
       morphed['security-scopes'] = filter.securityScopes;

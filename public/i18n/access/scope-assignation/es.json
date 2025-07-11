@@ -59,16 +59,6 @@
     }
   },
   "list": {
-    "column": {
-      "security-domain": {
-        "title": "dominio de seguridad",
-        "tooltip": "dominio de seguridad"
-      },
-      "security-scope": {
-        "title": "ámbito de seguridad",
-        "tooltip": "ámbito de seguridad"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -82,8 +72,16 @@
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
     },
+    "security-domain": {
+      "label": "dominio de seguridad",
+      "placeholder": ""
+    },
     "security-domains": {
       "label": "dominios de seguridad",
+      "placeholder": ""
+    },
+    "security-scope": {
+      "label": "ámbito de seguridad",
       "placeholder": ""
     },
     "security-scopes": {

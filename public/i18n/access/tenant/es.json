@@ -83,7 +83,7 @@
   "form-group": {
     "access-to-all-applications": {
       "label": "acceso a todas las aplicaciones",
-      "placeholder": "Los usuarios de un inquilino podrían acceder a todas las partes y clientes o solo a esos explícitos"
+      "placeholder": "Define si los usuarios de este inquilino pueden acceder a todas las partes y clientes o solo a los asignados explícitamente"
     },
     "domain": {
       "error": {
@@ -98,7 +98,7 @@
         "required": "habilitado es obligatorio"
       },
       "label": "habilitado",
-      "placeholder": "El indicador para permitir el uso de la cuenta sin eliminarla"
+      "placeholder": "Los usuarios de un inquilino no habilitado no pudieron iniciar sesión en el sistema"
     },
     "name": {
       "error": {
@@ -110,32 +110,14 @@
     },
     "reling-parties": {
       "label": "reling parties",
-      "placeholder": "El reling parties de inquilino"
+      "placeholder": "Una lista de los servicios o aplicaciones de las partes confiables asociados con este inquilino"
     },
     "trusted-clients": {
       "label": "Clientes de confianza",
-      "placeholder": "El trusted clients de inquilino"
+      "placeholder": "Una lista de o clientes de autenticación marcados como de confianza para este inquilino"
     }
   },
   "list": {
-    "column": {
-      "access-to-all-applications": {
-        "title": "acceso a todas las aplicaciones",
-        "tooltip": "acceso a todas las aplicaciones"
-      },
-      "domain": {
-        "title": "dominio",
-        "tooltip": "dominio"
-      },
-      "enabled": {
-        "title": "habilitado",
-        "tooltip": "habilitado"
-      },
-      "name": {
-        "title": "Nombre",
-        "tooltip": "Nombre"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -151,11 +133,6 @@
     },
     "order": {
       "label": "orden",
-      "options": {
-        "name-asc": "Nombre ASC",
-        "name-desc": "Nombre: DESC",
-        "null": "Por defecto"
-      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {

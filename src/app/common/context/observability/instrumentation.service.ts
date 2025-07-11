@@ -2,17 +2,28 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { trace, Tracer } from '@opentelemetry/api';
 import { registerInstrumentations } from '@opentelemetry/instrumentation';
-
-import { WebTracerProvider, BatchSpanProcessor } from '@opentelemetry/sdk-trace-web';
+import {
+  WebTracerProvider,
+  BatchSpanProcessor,
+  SimpleSpanProcessor,
+  ConsoleSpanExporter,
+  SpanProcessor,
+} from '@opentelemetry/sdk-trace-web';
 import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
-import { BatchLogRecordProcessor, LoggerProvider } from '@opentelemetry/sdk-logs';
+import {
+  BatchLogRecordProcessor,
+  ConsoleLogRecordExporter,
+  LoggerProvider,
+  SimpleLogRecordProcessor,
+} from '@opentelemetry/sdk-logs';
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
-import { Resource } from '@opentelemetry/resources';
+import { Resource, resourceFromAttributes } from '@opentelemetry/resources';
 import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
-
 import { AppConfigService } from '@common/context/config/app-config.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { ZoneContextManager } from '@opentelemetry/context-zone';
+
 export const APP_INSTRUMETATION: InjectionToken<string> = new InjectionToken<string>('APP_INSTRUMETATION');
 
 function buildInstrumentation(conf: AppConfigService) {
@@ -32,6 +43,9 @@ export function provideInstrumentation() {
 @Injectable({ providedIn: 'root' })
 export class InstrumentationService {
   private conf: AppConfigService;
+
+  private tracerMap = new Map<string, Tracer>();
+
   constructor(
     private router: Router,
     @Inject(APP_INSTRUMETATION) instrumentation: any,
@@ -39,29 +53,36 @@ export class InstrumentationService {
     this.conf = instrumentation.conf;
   }
 
+  public getTracer(name: string = 'default'): Tracer {
+    if (!this.tracerMap.has(name)) {
+      this.tracerMap.set(name, trace.getTracer(name));
+    }
+    return this.tracerMap.get(name)!;
+  }
+
+  public startSpan(name: string, tracerName = 'default', attributes: Record<string, any> = {}) {
+    const tracer = this.getTracer(tracerName);
+    const span = tracer.startSpan(name, { attributes });
+    return span;
+  }
+
   public activate() {
     this.conf['telemetry'].subscribe((conf) => {
       if (!conf['name']) {
-        console.log('No telemetry agent');
+        console.log('No telemetry agent, add telemetry.name to the config');
         return;
       }
       // TODO: ¿podemos añadir usuario, device...?
-      /*
-ATTR_SERVICE_VERSION
-      */
-      const resource = new Resource({
+      const resource = resourceFromAttributes({
         [ATTR_SERVICE_NAME]: conf['name'],
       });
-
       if (conf['exporter']['tracer']) {
         this.registerSpan(conf, resource);
         this.registerRouter(trace.getTracer('angular-router'));
       }
-
       if (conf['exporter']['logger']) {
         this.registerLogger(conf, resource);
       }
-
       const routeTracer = trace.getTracer('angular-router');
       this.router.events.subscribe((event) => {
         if (event instanceof NavigationEnd) {
@@ -77,20 +98,19 @@ ATTR_SERVICE_VERSION
   }
 
   private registerSpan(conf: any, resource: Resource) {
+    const exporters: SpanProcessor[] = [];
+    if (conf['exporter']['tracer']) {
+      exporters.push(new BatchSpanProcessor(new OTLPTraceExporter(conf['exporter']['tracer'])));
+    } else {
+      exporters.push(new SimpleSpanProcessor(new ConsoleSpanExporter()));
+    }
     const provider = new WebTracerProvider({
       resource,
+      spanProcessors: exporters,
     });
-    // For demo purposes only, immediately log traces to the console
-    // provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
-    // Batch traces before sending them to HoneyComb
-    // new OTLPTraceExporter({
-    //   url: 'https://api.honeycomb.io/v1/traces',
-    //   headers: {
-    //     'x-honeycomb-team': 'ezsQEOa8eVe2JEXjJlzMLd',
-    //   },
-
-    provider.addSpanProcessor(new BatchSpanProcessor(new OTLPTraceExporter(conf['exporter']['tracer'])));
-    provider.register();
+    provider.register({
+      contextManager: new ZoneContextManager(),
+    });
     registerInstrumentations({
       instrumentations: [
         getWebAutoInstrumentations({
@@ -117,46 +137,53 @@ ATTR_SERVICE_VERSION
   }
 
   private registerLogger(conf: any, resource: Resource) {
-    // const exporter = new OTLPLogExporter({
-    //   url: 'https://api.honeycomb.io/v1/logs',
-    //   headers: {
-    //     'x-honeycomb-team': 'ezsQEOa8eVe2JEXjJlzMLd', // Reemplaza con tu clave
-    //   },
-    // });
-    // const exporter = new OTLPLogExporter(conf['exporter']['logger']);
     const loggerProvider = new LoggerProvider({
       resource,
     });
-    // loggerProvider.addLogRecordProcessor(new SimpleLogRecordProcessor(exporter));
-    loggerProvider.addLogRecordProcessor(
-      new BatchLogRecordProcessor(new OTLPLogExporter(conf['exporter']['logger']), {
-        maxExportBatchSize: 100, // Máximo número de logs por lote
-        scheduledDelayMillis: 5000, // Tiempo máximo de espera para enviar un lote (en ms)
-        exportTimeoutMillis: 30000, // Tiempo máximo permitido para exportar un lote
-      }),
-    );
+    if (conf['exporter']['logger']) {
+      loggerProvider.addLogRecordProcessor(
+        new BatchLogRecordProcessor(new OTLPLogExporter(conf['exporter']['logger']), {
+          maxExportBatchSize: 100, // Máximo número de logs por lote
+          scheduledDelayMillis: 5000, // Tiempo máximo de espera para enviar un lote (en ms)
+          exportTimeoutMillis: 30000, // Tiempo máximo permitido para exportar un lote
+        }),
+      );
+    } else {
+      loggerProvider.addLogRecordProcessor(new SimpleLogRecordProcessor(new ConsoleLogRecordExporter()));
+    }
     const logger = loggerProvider.getLogger('default-logger');
+
+    function safeReplacer() {
+      const seen = new WeakSet();
+      return function (_key: string, value: any) {
+        if (typeof value === 'object' && value !== null) {
+          if (seen.has(value)) {
+            return '[Circular]';
+          }
+          seen.add(value);
+        }
+        return value;
+      };
+    }
 
     const originalConsoleLog = console.log;
     const originalConsoleError = console.error;
-    const tracer = trace.getTracer('console-logger');
 
     console.log = (...args: any[]) => {
       originalConsoleLog.apply(console, args);
       logger.emit({
-        body: args.join(' '),
+        body: JSON.stringify(args, safeReplacer(), 2),
         severityText: 'INFO',
         attributes: {
           timestamp: new Date().toISOString(),
         },
       });
-      // span.end();
     };
 
     console.error = (...args: any[]) => {
       originalConsoleError.apply(console, args);
       logger.emit({
-        body: args.join(' '),
+        body: JSON.stringify(args, safeReplacer(), 2),
         severityText: 'ERROR',
         attributes: {
           timestamp: new Date().toISOString(),

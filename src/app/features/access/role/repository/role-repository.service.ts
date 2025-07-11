@@ -41,9 +41,12 @@ export class RoleRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: Role): Observable<Role> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: Role): Observable<Role> {
@@ -100,7 +103,7 @@ export class RoleRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
@@ -110,6 +113,9 @@ export class RoleRepository {
     }
     if (filter.name) {
       morphed['name'] = filter.name;
+    }
+    if (filter.tenant) {
+      morphed['tenant'] = filter.tenant;
     }
     if (filter.tenants) {
       morphed['tenants'] = filter.tenants;

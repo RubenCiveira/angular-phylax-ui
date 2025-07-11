@@ -24,25 +24,29 @@ import { SearchEditable } from '../search-editable';
         [formControl]="search"
       />
       <span matSuffix style="display: flex">
-        <mat-icon *ngIf="!control.disabled" (click)="searchOptions(); $event.preventDefault()"
-          >keyboard_arrow_down</mat-icon
-        >
+        @if (!control.disabled) {
+          <mat-icon (click)="searchOptions(); $event.preventDefault()">keyboard_arrow_down</mat-icon>
+        }
       </span>
       <mat-autocomplete
         #auto="matAutocomplete"
         [displayWith]="displayItem()"
         (optionSelected)="optionSelected($event.option.value)"
       >
-        @for (item of options() || []; track item) {
+        @for (item of options() || []; track $index) {
           <mat-option [value]="item">
             {{ provider().display(item) }}
           </mat-option>
         }
       </mat-autocomplete>
-      <mat-progress-bar *ngIf="provider().searching()" mode="indeterminate"></mat-progress-bar>
-      <mat-error *ngFor="let error of errorMessages()">
-        {{ label() + '.error.' + error | transloco }}
-      </mat-error>
+      @if (provider().searching()) {
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      }
+      @for (error of errorMessages(); track $index) {
+        <mat-error>
+          {{ label() + '.error.' + error | transloco }}
+        </mat-error>
+      }
     </mat-form-field>
   `,
   selector: 'editable-selectone',

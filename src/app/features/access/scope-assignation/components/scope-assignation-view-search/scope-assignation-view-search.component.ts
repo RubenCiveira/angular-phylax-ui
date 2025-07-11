@@ -23,23 +23,29 @@ import { effect, computed, Component, input } from '@angular/core';
 export class ScopeAssignationViewSearchComponent extends SubFormEditable<any> {
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
   uid = computed(() => this.value()?.uid);
+  securityDomainProvider: SelectorProvider<SecurityDomain, { $ref: string }>;
+  securityDomainFilter = input<SecurityDomainFilter>({ limit: 100 });
   securityDomainsProvider: SelectorProvider<SecurityDomain, { $ref: string }>;
   securityDomainsFilter = input<SecurityDomainFilter>({ limit: 100 });
   securityScopesProvider: SelectorProvider<SecurityScope, { $ref: string }>;
   securityScopesFilter = input<SecurityScopeFilter>({ limit: 100 });
+  securityScopeProvider: SelectorProvider<SecurityScope, { $ref: string }>;
+  securityScopeFilter = input<SecurityScopeFilter>({ limit: 100 });
   public constructor(
-    scopeAssignationRespository: ScopeAssignationRepository,
+    scopeAssignationRepository: ScopeAssignationRepository,
     securityDomainRepository: SecurityDomainRepository,
     securityScopeRepository: SecurityScopeRepository,
   ) {
     super(
       new FormGroup({
+        securityDomain: new FormControl<any>(null),
         securityDomains: new FormControl<any>(null),
         search: new FormControl<string>(''),
         securityScopes: new FormControl<any>(null),
+        securityScope: new FormControl<any>(null),
       }),
     );
-    this.acl = scopeAssignationRespository.acl();
+    this.acl = scopeAssignationRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -52,13 +58,17 @@ export class ScopeAssignationViewSearchComponent extends SubFormEditable<any> {
         this.definedHidden.set(on?.fields?.noVisibles || []);
       });
     });
+    this.securityDomainProvider = securityDomainRepository.selectorProvider(this.securityDomainFilter);
     this.securityDomainsProvider = securityDomainRepository.selectorProvider(this.securityDomainsFilter);
     this.securityScopesProvider = securityScopeRepository.selectorProvider(this.securityScopesFilter);
+    this.securityScopeProvider = securityScopeRepository.selectorProvider(this.securityScopeFilter);
     this.defaultValues = () => {
       return {
+        securityDomain: null,
         securityDomains: null,
         search: '',
         securityScopes: null,
+        securityScope: null,
       };
     };
   }

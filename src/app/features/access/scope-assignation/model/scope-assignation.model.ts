@@ -13,7 +13,9 @@ export interface ScopeAssignationFilter {
   search?: string;
   uids?: string[];
   limit?: number;
+  securityDomain?: string[];
   securityDomains?: string[];
+  securityScope?: string[];
   securityScopes?: string[];
 }
 export interface ScopeAssignationProjection {

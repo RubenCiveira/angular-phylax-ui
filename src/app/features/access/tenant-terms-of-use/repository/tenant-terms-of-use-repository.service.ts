@@ -45,9 +45,12 @@ export class TenantTermsOfUseRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: TenantTermsOfUse): Observable<TenantTermsOfUse> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: TenantTermsOfUse): Observable<TenantTermsOfUse> {
@@ -77,8 +80,8 @@ export class TenantTermsOfUseRepository {
   projections(includes: string[]): Shift<TenantTermsOfUseProjection[], TenantTermsOfUseFilter> {
     return this.repo.projections(includes);
   }
-  downloadAttached(item: TenantTermsOfUse): Observable<DownloadBlob> | null {
-    return item.attached ? this.repo.downloadFile(item.attached) : null;
+  downloadAttached(url?: string): Observable<DownloadBlob> | null {
+    return url ? this.repo.downloadFile(url) : null;
   }
   storeAttached(file: File): Observable<UploadProgress> {
     return this.repo.storeFile('/-/temp-attached', 'file', file);
@@ -110,10 +113,13 @@ export class TenantTermsOfUseRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
+    }
+    if (filter.tenant) {
+      morphed['tenant'] = filter.tenant;
     }
     if (filter.tenants) {
       morphed['tenants'] = filter.tenants;

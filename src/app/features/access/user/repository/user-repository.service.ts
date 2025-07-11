@@ -41,9 +41,12 @@ export class UserRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: User): Observable<User> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: User): Observable<User> {
@@ -145,7 +148,7 @@ export class UserRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
@@ -158,6 +161,9 @@ export class UserRepository {
     }
     if (filter.name) {
       morphed['name'] = filter.name;
+    }
+    if (filter.tenant) {
+      morphed['tenant'] = filter.tenant;
     }
     if (filter.tenants) {
       morphed['tenants'] = filter.tenants;

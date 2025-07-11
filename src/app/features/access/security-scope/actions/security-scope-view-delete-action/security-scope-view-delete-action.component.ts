@@ -32,8 +32,8 @@ export class SecurityScopeViewDeleteActionComponent implements Action, OnDestroy
   tooltip = signal<string>('Borra el elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
 
@@ -50,7 +50,7 @@ export class SecurityScopeViewDeleteActionComponent implements Action, OnDestroy
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.delete', {}, 'access/security-scope').subscribe((val) => {
       if (val.label) {
@@ -108,6 +108,6 @@ export class SecurityScopeViewDeleteActionComponent implements Action, OnDestroy
     });
   }
   private allowed(allow: Acl | undefined) {
-    return !!allow?.allows?.find((info) => info.name == 'delete');
+    return !!allow?.allows?.find((info) => info.name == 'delete')?.allowed;
   }
 }

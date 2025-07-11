@@ -18,7 +18,7 @@ import { effect, computed, Component } from '@angular/core';
 export class SecurityDomainViewSearchComponent extends SubFormEditable<any> {
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
   uid = computed(() => this.value()?.uid);
-  public constructor(securityDomainRespository: SecurityDomainRepository) {
+  public constructor(securityDomainRepository: SecurityDomainRepository) {
     super(
       new FormGroup({
         search: new FormControl<string>(''),
@@ -27,7 +27,7 @@ export class SecurityDomainViewSearchComponent extends SubFormEditable<any> {
         order: new FormControl<string>(''),
       }),
     );
-    this.acl = securityDomainRespository.acl();
+    this.acl = securityDomainRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

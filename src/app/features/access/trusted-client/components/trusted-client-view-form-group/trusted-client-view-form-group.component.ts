@@ -18,7 +18,7 @@ import { effect, computed, Component } from '@angular/core';
 export class TrustedClientViewFormGroupComponent extends SubFormEditable<TrustedClient> {
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
   uid = computed(() => this.value()?.uid);
-  public constructor(trustedClientRespository: TrustedClientRepository) {
+  public constructor(trustedClientRepository: TrustedClientRepository) {
     super(
       new FormGroup({
         uid: new FormControl<string>(''),
@@ -30,7 +30,7 @@ export class TrustedClientViewFormGroupComponent extends SubFormEditable<Trusted
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = trustedClientRespository.acl();
+    this.acl = trustedClientRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

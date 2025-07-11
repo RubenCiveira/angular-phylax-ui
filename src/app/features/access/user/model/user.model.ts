@@ -23,6 +23,7 @@ export interface UserFilter {
   order?: string;
   root?: string[];
   name?: string;
+  tenant?: string[];
   tenants?: string[];
 }
 export interface UserProjection {

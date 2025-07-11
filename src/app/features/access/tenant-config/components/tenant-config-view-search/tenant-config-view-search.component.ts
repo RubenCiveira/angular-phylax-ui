@@ -23,14 +23,17 @@ export class TenantConfigViewSearchComponent extends SubFormEditable<any> {
   uid = computed(() => this.value()?.uid);
   tenantsProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantsFilter = input<TenantFilter>({ limit: 100 });
-  public constructor(tenantConfigRespository: TenantConfigRepository, tenantRepository: TenantRepository) {
+  tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
+  tenantFilter = input<TenantFilter>({ limit: 100 });
+  public constructor(tenantConfigRepository: TenantConfigRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         tenants: new FormControl<any>(null),
         search: new FormControl<string>(''),
+        tenant: new FormControl<any>(null),
       }),
     );
-    this.acl = tenantConfigRespository.acl();
+    this.acl = tenantConfigRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -44,10 +47,12 @@ export class TenantConfigViewSearchComponent extends SubFormEditable<any> {
       });
     });
     this.tenantsProvider = tenantRepository.selectorProvider(this.tenantsFilter);
+    this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.defaultValues = () => {
       return {
         tenants: null,
         search: '',
+        tenant: null,
       };
     };
   }

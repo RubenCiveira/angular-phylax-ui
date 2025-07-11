@@ -18,7 +18,7 @@ import { effect, computed, Component } from '@angular/core';
 export class TenantViewSearchComponent extends SubFormEditable<any> {
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
   uid = computed(() => this.value()?.uid);
-  public constructor(tenantRespository: TenantRepository) {
+  public constructor(tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         search: new FormControl<string>(''),
@@ -26,7 +26,7 @@ export class TenantViewSearchComponent extends SubFormEditable<any> {
         order: new FormControl<string>(''),
       }),
     );
-    this.acl = tenantRespository.acl();
+    this.acl = tenantRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

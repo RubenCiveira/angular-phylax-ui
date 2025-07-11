@@ -32,8 +32,9 @@ export class UserViewUnlockActionComponent implements Action, OnDestroy {
   tooltip = signal<string>('unlock el elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  noMatchSignal = signal(false);
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
 
@@ -50,7 +51,7 @@ export class UserViewUnlockActionComponent implements Action, OnDestroy {
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.unlock', {}, 'access/user').subscribe((val) => {
       if (val.label) {
@@ -75,7 +76,8 @@ export class UserViewUnlockActionComponent implements Action, OnDestroy {
   }
 
   visible(items: any[]) {
-    return items.every((item) => !!item.blockedUntil) && this.visibleValue;
+    const canApply = items.every((item) => !!item.blockedUntil) && true;
+    return canApply ? this.visibleValue : this.noMatchSignal;
   }
 
   enabled(items: any[]) {
@@ -108,6 +110,6 @@ export class UserViewUnlockActionComponent implements Action, OnDestroy {
     });
   }
   private allowed(allow: Acl | undefined) {
-    return !!allow?.allows?.find((info) => info.name == 'unlock');
+    return !!allow?.allows?.find((info) => info.name == 'unlock')?.allowed;
   }
 }

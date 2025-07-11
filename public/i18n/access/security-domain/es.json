@@ -113,57 +113,12 @@
       "label": "leer todo",
       "placeholder": "Permitir leer en todos los ámbitos"
     },
-    "relying-parties": {
-      "label": "umaasa mga partido",
-      "placeholder": "El confiado partes de dominio de seguridad"
-    },
-    "tenant": {
-      "error": {
-        "required": "inquilino es obligatorio"
-      },
-      "label": "inquilino",
-      "placeholder": "Los usuarios que no tienen inquilino son raíces del sistema"
-    },
-    "trusted-clients": {
-      "label": "Clientes de confianza",
-      "placeholder": "El cliente de confianza de dominio de seguridad"
-    },
     "write-all": {
       "label": "escribir todo",
       "placeholder": "Permitir escribir en todos los ámbitos"
     }
   },
   "list": {
-    "column": {
-      "enabled": {
-        "title": "habilitado",
-        "tooltip": "habilitado"
-      },
-      "level": {
-        "title": "máx.",
-        "tooltip": "máx."
-      },
-      "manage-all": {
-        "title": "todos los riesgos operativos ",
-        "tooltip": "todos los riesgos operativos "
-      },
-      "name": {
-        "title": "Nombre",
-        "tooltip": "Nombre"
-      },
-      "read-all": {
-        "title": "leer todo",
-        "tooltip": "leer todo"
-      },
-      "tenant": {
-        "title": "inquilino",
-        "tooltip": "inquilino"
-      },
-      "write-all": {
-        "title": "escribir todo",
-        "tooltip": "escribir todo"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -175,11 +130,6 @@
   "search": {
     "enabled": {
       "label": "habilitado",
-      "options": {
-        "false": "false",
-        "null": "todo",
-        "true": "Verdadero"
-      },
       "placeholder": ""
     },
     "name": {
@@ -188,20 +138,11 @@
     },
     "order": {
       "label": "orden",
-      "options": {
-        "name-asc": "Nombre ASC",
-        "name-desc": "Nombre: DESC",
-        "null": "Por defecto"
-      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
-    },
-    "tenants": {
-      "label": "inquilinos",
-      "placeholder": ""
     }
   }
 }

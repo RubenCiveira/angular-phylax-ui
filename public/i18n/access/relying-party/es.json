@@ -105,20 +105,6 @@
     }
   },
   "list": {
-    "column": {
-      "api-key": {
-        "title": "Clave de API",
-        "tooltip": "Clave de API"
-      },
-      "code": {
-        "title": "-",
-        "tooltip": "-"
-      },
-      "enabled": {
-        "title": "habilitado",
-        "tooltip": "habilitado"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -138,11 +124,6 @@
     },
     "order": {
       "label": "orden",
-      "options": {
-        "code-asc": "code-asc",
-        "code-desc": "code-desc",
-        "null": "Por defecto"
-      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {

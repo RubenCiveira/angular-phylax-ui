@@ -53,9 +53,12 @@ export class UserIdentityRepository {
   checkAcl(key?: string): Observable<Acl> {
     return this.repo.checkAcl(key || null);
   }
+  generateComb(): string {
+    return this.repo.generateComb();
+  }
 
   add(item: UserIdentity): Observable<UserIdentity> {
-    item['uid'] = this.repo.generateComb();
+    item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
   update(item: UserIdentity): Observable<UserIdentity> {
@@ -112,16 +115,25 @@ export class UserIdentityRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids;
+      morphed['uids'] = filter.uids.join(',');
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
     }
+    if (filter.user) {
+      morphed['user'] = filter.user;
+    }
     if (filter.users) {
       morphed['users'] = filter.users;
     }
+    if (filter.relyingParty) {
+      morphed['relying-party'] = filter.relyingParty;
+    }
     if (filter.relyingPartys) {
       morphed['relying-partys'] = filter.relyingPartys;
+    }
+    if (filter.trustedClient) {
+      morphed['trusted-client'] = filter.trustedClient;
     }
     if (filter.trustedClients) {
       morphed['trusted-clients'] = filter.trustedClients;

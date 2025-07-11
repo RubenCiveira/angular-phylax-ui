@@ -28,7 +28,7 @@ export class SecurityScopeViewFormGroupComponent extends SubFormEditable<Securit
   relyingPartyProvider: SelectorProvider<RelyingParty, { $ref: string }>;
   relyingPartyFilter = input<RelyingPartyFilter>({ limit: 100 });
   public constructor(
-    securityScopeRespository: SecurityScopeRepository,
+    securityScopeRepository: SecurityScopeRepository,
     trustedClientRepository: TrustedClientRepository,
     relyingPartyRepository: RelyingPartyRepository,
   ) {
@@ -45,7 +45,7 @@ export class SecurityScopeViewFormGroupComponent extends SubFormEditable<Securit
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = securityScopeRespository.acl();
+    this.acl = securityScopeRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

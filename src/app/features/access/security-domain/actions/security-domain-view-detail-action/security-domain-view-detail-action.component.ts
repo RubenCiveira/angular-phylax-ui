@@ -29,8 +29,8 @@ export class SecurityDomainViewDetailActionComponent implements Action {
   tooltip = signal<string>('Muestra el detalle del elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   constructor(transloco: TranslocoService) {
     transloco.selectTranslateObject('action.detail', {}, 'access/security-domain').subscribe((val) => {
@@ -58,6 +58,6 @@ export class SecurityDomainViewDetailActionComponent implements Action {
   }
   run(): void {}
   private allowed(allow: Acl | undefined) {
-    return !!allow?.allows?.find((info) => info.name == 'retrieve');
+    return !!allow?.allows?.find((info) => info.name == 'retrieve')?.allowed;
   }
 }

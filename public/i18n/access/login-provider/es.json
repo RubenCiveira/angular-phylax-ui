@@ -83,28 +83,19 @@
   "form-group": {
     "certificate": {
       "label": "certificado",
-      "placeholder": "El certificate de login provider"
+      "placeholder": "El certificado del proveedor utilizado para la verificación de la firma si es necesario"
     },
     "direct-access": {
       "label": "acceso directo",
-      "placeholder": "Si se marca como verdadera el login usará este método por defecto"
+      "placeholder": "Si es true, el sistema utilizará por defecto este método de inicio de sesión sin necesidad de selección"
     },
     "disabled": {
       "label": "desactivado",
-      "placeholder": "El disabled de login provider"
-    },
-    "enabled-by-default": {
-      "label": "Habilitado por defecto",
-      "placeholder": "El habilitado por defecto de login provider"
-    },
-    "enabledByDefault": {
-      "error": {
-        "required": "Habilitado por defecto es obligatorio"
-      }
+      "placeholder": "Indica si este proveedor está actualmente deshabilitado"
     },
     "metadata": {
       "label": "metadatos",
-      "placeholder": "Un fichero con información de verificación si es necesario"
+      "placeholder": "Un archivo de metadatos requerido por algunos proveedores para la configuración, por ejemplo, un descriptor m l"
     },
     "name": {
       "error": {
@@ -112,11 +103,11 @@
         "required": "Nombre es obligatorio"
       },
       "label": "Nombre",
-      "placeholder": "El nombre de login provider"
+      "placeholder": "Un nombre que identifica a este proveedor de inicio de sesión dentro del inquilino"
     },
     "private-key": {
       "label": "clave privada",
-      "placeholder": "Usada para verificar internamente los codigos que trae el usuario"
+      "placeholder": "Clave privada utilizada internamente para validar los códigos devueltos por el proveedor de identidad"
     },
     "privateKey": {
       "error": {
@@ -125,7 +116,7 @@
     },
     "public-key": {
       "label": "clave pública",
-      "placeholder": "Usada para dejarsela al usuario y que la presente al proveedor"
+      "placeholder": "Una clave pública compartida con los usuarios para interactuar con el proveedor de identidad"
     },
     "publicKey": {
       "error": {
@@ -137,19 +128,14 @@
         "required": "fuente es obligatorio"
       },
       "label": "fuente",
-      "options": {
-        "github": "GitHub",
-        "google": "GOOGLE",
-        "saml": "SAML"
-      },
-      "placeholder": "El source de login provider"
+      "placeholder": "El protocolo o sistema de origen utilizado para la autenticación, por ejemplo, g o o g l e g i t h u b s a m l"
     },
     "tenant": {
       "error": {
         "required": "inquilino es obligatorio"
       },
       "label": "inquilino",
-      "placeholder": "La cuenta a la que pertenece"
+      "placeholder": "El inquilino para el que está configurado este proveedor de inicio de sesión"
     },
     "users-enabled-by-default": {
       "label": "usuarios habilitados de forma predeterminada",
@@ -162,52 +148,6 @@
     }
   },
   "list": {
-    "column": {
-      "certificate": {
-        "title": "certificado",
-        "tooltip": "certificado"
-      },
-      "direct-access": {
-        "title": "acceso directo",
-        "tooltip": "acceso directo"
-      },
-      "disabled": {
-        "title": "desactivado",
-        "tooltip": "desactivado"
-      },
-      "enabled-by-default": {
-        "title": "Habilitado por defecto",
-        "tooltip": "Habilitado por defecto"
-      },
-      "metadata": {
-        "title": "metadatos",
-        "tooltip": "metadatos"
-      },
-      "name": {
-        "title": "Nombre",
-        "tooltip": "Nombre"
-      },
-      "private-key": {
-        "title": "clave privada",
-        "tooltip": "clave privada"
-      },
-      "public-key": {
-        "title": "clave pública",
-        "tooltip": "clave pública"
-      },
-      "source": {
-        "title": "fuente",
-        "tooltip": "fuente"
-      },
-      "tenant": {
-        "title": "inquilino",
-        "tooltip": "inquilino"
-      },
-      "users-enabled-by-default": {
-        "title": "usuarios habilitados de forma predeterminada",
-        "tooltip": "usuarios habilitados de forma predeterminada"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -223,16 +163,15 @@
     },
     "order": {
       "label": "orden",
-      "options": {
-        "name-asc": "Nombre ASC",
-        "name-desc": "Nombre: DESC",
-        "null": "Por defecto"
-      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": ""
     },
     "tenants": {
       "label": "inquilinos",

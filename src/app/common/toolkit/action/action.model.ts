@@ -13,8 +13,8 @@ export interface Action {
   tooltip: Signal<string>;
   title: Signal<string>;
 
-  visible(items: any[]): boolean;
-  enabled(items: any[]): boolean;
+  visible(items: any[]): Signal<boolean>;
+  enabled(items: any[]): Signal<boolean>;
 
   run(): void;
 

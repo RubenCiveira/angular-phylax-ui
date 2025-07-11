@@ -32,7 +32,7 @@ export class TenantViewFormGroupComponent extends SubFormEditable<Tenant> {
   relingPartiesFilter = input<RelyingPartyFilter>({ limit: 100 });
   relingPartiesRender: ChipsDisplay<RelyingParty, { relyingParty: { $ref: string } }>;
   public constructor(
-    tenantRespository: TenantRepository,
+    tenantRepository: TenantRepository,
     trustedClientRepository: TrustedClientRepository,
     relyingPartyRepository: RelyingPartyRepository,
   ) {
@@ -48,7 +48,7 @@ export class TenantViewFormGroupComponent extends SubFormEditable<Tenant> {
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = tenantRespository.acl();
+    this.acl = tenantRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -83,7 +83,7 @@ export class TenantViewFormGroupComponent extends SubFormEditable<Tenant> {
         return (
           item
             ? {
-                uid: new Date().getTime(),
+                uid: tenantRepository.generateComb(),
                 version: 0,
                 trustedClient: { $ref: item.uid },
               }
@@ -113,7 +113,7 @@ export class TenantViewFormGroupComponent extends SubFormEditable<Tenant> {
         return (
           item
             ? {
-                uid: new Date().getTime(),
+                uid: tenantRepository.generateComb(),
                 version: 0,
                 relyingParty: { $ref: item.uid },
               }

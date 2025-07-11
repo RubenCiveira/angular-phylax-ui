@@ -23,16 +23,19 @@ export class LoginProviderViewSearchComponent extends SubFormEditable<any> {
   uid = computed(() => this.value()?.uid);
   tenantsProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantsFilter = input<TenantFilter>({ limit: 100 });
-  public constructor(loginProviderRespository: LoginProviderRepository, tenantRepository: TenantRepository) {
+  tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
+  tenantFilter = input<TenantFilter>({ limit: 100 });
+  public constructor(loginProviderRepository: LoginProviderRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         tenants: new FormControl<any>(null),
         search: new FormControl<string>(''),
         name: new FormControl<string>(''),
+        tenant: new FormControl<any>(null),
         order: new FormControl<string>(''),
       }),
     );
-    this.acl = loginProviderRespository.acl();
+    this.acl = loginProviderRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -46,11 +49,13 @@ export class LoginProviderViewSearchComponent extends SubFormEditable<any> {
       });
     });
     this.tenantsProvider = tenantRepository.selectorProvider(this.tenantsFilter);
+    this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.defaultValues = () => {
       return {
         tenants: null,
         search: '',
         name: '',
+        tenant: null,
         order: '',
       };
     };

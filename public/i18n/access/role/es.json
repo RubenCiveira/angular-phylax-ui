@@ -39,13 +39,6 @@
     }
   },
   "form-group": {
-    "domain": {
-      "error": {
-        "required": "dominio es obligatorio"
-      },
-      "label": "dominio",
-      "placeholder": "El domain de role"
-    },
     "domains": {
       "label": "dominios",
       "placeholder": "El domains de role"
@@ -64,20 +57,6 @@
     }
   },
   "list": {
-    "column": {
-      "domain": {
-        "title": "dominio",
-        "tooltip": "dominio"
-      },
-      "name": {
-        "title": "Nombre",
-        "tooltip": "Nombre"
-      },
-      "tenant": {
-        "title": "inquilino",
-        "tooltip": "inquilino"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -87,26 +66,21 @@
     }
   },
   "search": {
-    "domains": {
-      "label": "dominios",
-      "placeholder": ""
-    },
     "name": {
       "label": "Nombre",
       "placeholder": ""
     },
     "order": {
       "label": "orden",
-      "options": {
-        "name-asc": "Nombre ASC",
-        "name-desc": "Nombre: DESC",
-        "null": "Por defecto"
-      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": ""
     },
     "tenants": {
       "label": "inquilinos",

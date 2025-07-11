@@ -33,8 +33,8 @@ export class TrustedClientViewDeleteSelectionActionComponent implements Action, 
   tooltip = signal<string>('Borra el elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
 
@@ -52,7 +52,7 @@ export class TrustedClientViewDeleteSelectionActionComponent implements Action, 
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.delete-selection', {}, 'access/trusted-client').subscribe((val) => {
       if (val.label) {
@@ -121,6 +121,6 @@ export class TrustedClientViewDeleteSelectionActionComponent implements Action, 
     });
   }
   private allowed(allow: Acl | undefined) {
-    return this.repository.canDeleteSelection() && !!allow?.allows?.find((info) => info.name == 'delete');
+    return this.repository.canDeleteSelection() && !!allow?.allows?.find((info) => info.name == 'delete')?.allowed;
   }
 }

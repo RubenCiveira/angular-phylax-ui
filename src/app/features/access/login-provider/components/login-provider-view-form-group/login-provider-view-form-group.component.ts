@@ -27,8 +27,8 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
   tenantProvider: SelectorProvider<Tenant, { $ref: string }>;
   tenantFilter = input<TenantFilter>({ limit: 100 });
   uploadMetadata: (file: File) => Observable<UploadProgress>;
-  downloadMetadata: () => null | Observable<DownloadBlob>;
-  public constructor(loginProviderRespository: LoginProviderRepository, tenantRepository: TenantRepository) {
+  downloadMetadata: (url?: string) => null | Observable<DownloadBlob>;
+  public constructor(loginProviderRepository: LoginProviderRepository, tenantRepository: TenantRepository) {
     super(
       new FormGroup({
         uid: new FormControl<string>(''),
@@ -45,14 +45,13 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = loginProviderRespository.acl();
+    this.acl = loginProviderRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
     effect(() => {
       const vals = this.acl();
       const value = this.value();
-      this.downloadMetadata = () => (value ? loginProviderRespository.downloadMetadata(value) : null);
       const on = this.uid() ? vals?.specific : vals?.generic;
       setTimeout(() => {
         this.definedFixed.set(on?.fields?.noEditables || []);
@@ -60,8 +59,8 @@ export class LoginProviderViewFormGroupComponent extends SubFormEditable<LoginPr
       });
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
-    this.uploadMetadata = (file) => loginProviderRespository.storeMetadata(file);
-    this.downloadMetadata = () => null;
+    this.uploadMetadata = (file) => loginProviderRepository.storeMetadata(file);
+    this.downloadMetadata = (url) => loginProviderRepository.downloadMetadata(url);
     this.defaultValues = () => {
       return {
         uid: '',

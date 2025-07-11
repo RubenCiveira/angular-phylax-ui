@@ -21,12 +21,12 @@ import { LocalRouterService } from './local-router.service';
 @Component({
   selector: 'local-route-context',
   template: `
-    <ng-container *ngIf="currentTemplate">
+    @if (currentTemplate) {
       <ng-container *ngTemplateOutlet="currentTemplate"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="!templates || templates.length == 0">
+    }
+    @if (!templates || templates.length == 0) {
       <h1>To use a local route, provide each route as a template with [localRoute] directive</h1>
-    </ng-container>
+    }
   `,
   providers: [LocalRouterService],
 })

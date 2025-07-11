@@ -22,6 +22,7 @@ export interface LoginProviderFilter {
   limit?: number;
   order?: string;
   name?: string;
+  tenant?: string[];
   tenants?: string[];
 }
 export interface LoginProviderProjection {

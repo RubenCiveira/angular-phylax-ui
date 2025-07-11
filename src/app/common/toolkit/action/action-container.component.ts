@@ -43,45 +43,47 @@ export interface ItemMapper<T> {
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <ng-container *ngFor="let action of otherActions()">
-          <button
-            *ngIf="action.contextual && !action.multiple && action.visible([row])"
-            mat-menu-item
-            (click)="executeAction(action.name, [row])"
-            [disabled]="!action.enabled([row])"
-          >
-            <mat-icon *ngIf="action.icon()">{{ action.icon() }}</mat-icon> {{ action.label() }}
-          </button>
-        </ng-container>
+        @for (action of menuActions(); track $index) {
+          @if (action.contextual && !action.multiple && action.visible([row])()) {
+            <button mat-menu-item (click)="executeAction(action.name, [row])" [disabled]="!action.enabled([row])()">
+              @if (action.icon()) {
+                <mat-icon>{{ action.icon() }}</mat-icon>
+              }
+              {{ action.label() }}
+            </button>
+          }
+        }
       </mat-menu>
     </ng-template>
 
     <ng-template #toolbarTemplate>
-      <ng-container *ngFor="let action of otherActions()">
+      @for (action of toolbarActions(); track $index) {
         <button
-          *ngIf="!action.contextual && action.visible(selectionModel.selected())"
           mat-raised-button
           (click)="executeAction(action.name)"
-          [disabled]="!action.enabled(selectionModel.selected())"
+          [disabled]="!action.enabled(selectionModel.selected())()"
         >
-          <mat-icon *ngIf="action.icon()">{{ action.icon() }}</mat-icon>
+          @if (action.icon()) {
+            <mat-icon>{{ action.icon() }}</mat-icon>
+          }
           {{ action.label() }}
         </button>
-      </ng-container>
+      }
     </ng-template>
 
     <ng-template #selectionTemplate>
-      <ng-container *ngFor="let action of actions()">
+      @for (action of multipleActions(); track $index) {
         <button
-          *ngIf="action.contextual && action.multiple && action.visible(selectionModel.selected())"
           mat-raised-button
           (click)="executeAction(action.name, selectionModel.selected())"
-          [disabled]="!action.enabled(selectionModel.selected())"
+          [disabled]="!action.enabled(selectionModel.selected())()"
         >
-          <mat-icon *ngIf="action.icon()">{{ action.icon() }}</mat-icon>
+          @if (action.icon()) {
+            <mat-icon>{{ action.icon() }}</mat-icon>
+          }
           {{ action.label() }}
         </button>
-      </ng-container>
+      }
     </ng-template>
 
     <ng-template #activeTemplate>
@@ -90,46 +92,101 @@ export interface ItemMapper<T> {
           <mat-icon>arrow_back</mat-icon>
         </button>
         <div class="toolbar-title">{{ current()?.title() }}</div>
-        <ng-container *ngFor="let action of otherActions()">
+        @for (action of dialogActions(); track $index) {
           <button
-            *ngIf="
-              action.contextual &&
-              !action.multiple &&
-              selectionModel.selected().length == 1 &&
-              action.visible(selectionModel.selected())
-            "
             mat-raised-button
             (click)="executeAction(action.name, selectionModel.selected())"
-            [disabled]="!action.enabled(selectionModel.selected())"
+            [disabled]="!action.enabled(selectionModel.selected())()"
           >
-            <mat-icon *ngIf="action.icon">{{ action.icon() }}</mat-icon>
+            @if (action.icon()) {
+              <mat-icon>{{ action.icon() }}</mat-icon>
+            }
             {{ action.label() }}
           </button>
-        </ng-container>
+        }
+        @if (dialogMenu().length > 0) {
+          <button mat-icon-button [matMenuTriggerFor]="theDialogMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #theDialogMenu="matMenu">
+            @for (action of dialogMenu(); track $index) {
+              <button
+                mat-menu-item
+                (click)="executeAction(action.name, selectionModel.selected())"
+                [disabled]="!action.enabled(selectionModel.selected())()"
+              >
+                @if (action.icon()) {
+                  <mat-icon>{{ action.icon() }}</mat-icon>
+                }
+                {{ action.label() }}
+              </button>
+            }
+          </mat-menu>
+        }
       </div>
     </ng-template>
 
     <div class="content">
-      <ng-container *ngIf="activeRender; else masterView">
-        <ng-container *ngTemplateOutlet="theActiveTemplate() || null"></ng-container>
-
+      @if (activeRender) {
+        <ng-container [ngTemplateOutlet]="theActiveTemplate() || null"></ng-container>
         <ng-container [ngTemplateOutlet]="activeRender"></ng-container>
-      </ng-container>
-      <ng-template #masterView>
-        <ng-container *ngIf="masterTemplate()" [ngTemplateOutlet]="masterTemplate()!"></ng-container>
-      </ng-template>
+      } @else {
+        @if (masterTemplate()) {
+          <ng-container [ngTemplateOutlet]="masterTemplate()!"></ng-container>
+        }
+      }
     </div>
   `,
 })
 export class ActionContainerComponent implements OnDestroy {
+  maxIcons = signal(2);
   name = input<string>('container');
   mapper = input<ItemMapper<any>>();
 
   actions = contentChildren<Action>('action');
-  otherActions = computed(() => {
+  menuActions = computed(() => {
     const actions = this.actions();
     const on = this.current();
-    return actions.filter((act) => act.name != on?.name);
+    return actions.filter((act) => act.name != on?.name && act.visible(this.selectionModel.selected())());
+  });
+  multipleActions = computed(() => {
+    const actions = this.actions();
+    return actions.filter(
+      (action) => action.contextual && action.multiple && action.visible(this.selectionModel.selected())(),
+    );
+  });
+  toolbarActions = computed(() => {
+    const actions = this.actions();
+    const max = this.maxIcons();
+    return actions
+      .filter((action) => !action.contextual && action.visible(this.selectionModel.selected())())
+      .slice(0, max);
+  });
+  dialogActions = computed(() => {
+    const actions = this.actions();
+    const max = this.maxIcons();
+    return actions
+      .filter(
+        (action) =>
+          action.contextual &&
+          !action.multiple &&
+          this.selectionModel.selected().length == 1 &&
+          action.visible(this.selectionModel.selected())(),
+      )
+      .slice(0, max);
+  });
+  dialogMenu = computed(() => {
+    const actions = this.actions();
+    const max = this.maxIcons();
+    return actions
+      .filter(
+        (action) =>
+          action.contextual &&
+          !action.multiple &&
+          this.selectionModel.selected().length == 1 &&
+          action.visible(this.selectionModel.selected())(),
+      )
+      .slice(max + 1);
   });
 
   activeRender?: TemplateRef<any>;
@@ -217,8 +274,8 @@ export class ActionContainerComponent implements OnDestroy {
     const actions = this.actions();
     const posibles = actions
       .filter((act) => act.default() && this.contextMatch(act, items))
-      .filter((act) => act.visible(items))
-      .filter((act) => act.enabled(items));
+      .filter((act) => act.visible(items)())
+      .filter((act) => act.enabled(items)());
     if (posibles.length > 0) {
       this.executeAction(posibles[0].name, items);
     } else {

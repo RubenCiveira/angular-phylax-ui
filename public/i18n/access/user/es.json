@@ -157,10 +157,6 @@
       "label": "proveedor",
       "placeholder": "Si se identificó con un proveedor se marca con cual aunque el proveedor cambie luego"
     },
-    "roles": {
-      "label": "roles",
-      "placeholder": "El roles de user"
-    },
     "temporal-password": {
       "label": "contraseña temporal",
       "placeholder": "El temporal password de user"
@@ -172,56 +168,9 @@
     "use-second-factors": {
       "label": "utilizar segundos factores",
       "placeholder": "Si es true, el usuario tiene un OTP para forzar el mfa en el inicio de sesión"
-    },
-    "useSecondFactors": {
-      "error": {
-        "required": "utilizar segundos factores es obligatorio"
-      }
     }
   },
   "list": {
-    "column": {
-      "blocked-until": {
-        "title": "Bloqueado hasta",
-        "tooltip": "Bloqueado hasta"
-      },
-      "email": {
-        "title": "correo electrónico ",
-        "tooltip": "correo electrónico "
-      },
-      "enabled": {
-        "title": "habilitado",
-        "tooltip": "habilitado"
-      },
-      "language": {
-        "title": "idioma",
-        "tooltip": "idioma"
-      },
-      "name": {
-        "title": "Nombre",
-        "tooltip": "Nombre"
-      },
-      "password": {
-        "title": "contraseña",
-        "tooltip": "contraseña"
-      },
-      "provider": {
-        "title": "proveedor",
-        "tooltip": "proveedor"
-      },
-      "temporal-password": {
-        "title": "contraseña temporal",
-        "tooltip": "contraseña temporal"
-      },
-      "tenant": {
-        "title": "inquilino",
-        "tooltip": "inquilino"
-      },
-      "use-second-factors": {
-        "title": "utilizar segundos factores",
-        "tooltip": "utilizar segundos factores"
-      }
-    },
     "filter": {
       "button": "Filtrar"
     },
@@ -231,21 +180,12 @@
     }
   },
   "search": {
-    "email": {
-      "label": "correo electrónico ",
-      "placeholder": ""
-    },
     "name": {
       "label": "Nombre",
       "placeholder": ""
     },
     "order": {
       "label": "orden",
-      "options": {
-        "name-asc": "Nombre ASC",
-        "name-desc": "Nombre: DESC",
-        "null": "Por defecto"
-      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "root": {
@@ -255,6 +195,10 @@
     "search": {
       "label": "buscar",
       "placeholder": "Búsqueda por texto"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": ""
     },
     "tenants": {
       "label": "inquilinos",

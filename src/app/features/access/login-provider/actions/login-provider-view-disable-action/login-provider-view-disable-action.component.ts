@@ -32,8 +32,9 @@ export class LoginProviderViewDisableActionComponent implements Action, OnDestro
   tooltip = signal<string>('disable el elemento seleccionado');
   default = input<boolean>(false);
 
-  visibleValue = false;
-  enabledValue = true;
+  noMatchSignal = signal(false);
+  visibleValue = signal(false);
+  enabledValue = signal(true);
 
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
 
@@ -50,7 +51,7 @@ export class LoginProviderViewDisableActionComponent implements Action, OnDestro
   ) {
     this.acl = repository.acl();
     this.acl.fetch(null).subscribe((info) => {
-      this.visibleValue = this.allowed(info?.generic);
+      this.visibleValue.set(this.allowed(info?.generic));
     });
     transloco.selectTranslateObject('action.disable', {}, 'access/login-provider').subscribe((val) => {
       if (val.label) {
@@ -75,7 +76,8 @@ export class LoginProviderViewDisableActionComponent implements Action, OnDestro
   }
 
   visible(items: any[]) {
-    return items.every((item) => !item.disabled) && this.visibleValue;
+    const canApply = items.every((item) => !item.disabled) && true;
+    return canApply ? this.visibleValue : this.noMatchSignal;
   }
 
   enabled(items: any[]) {
@@ -108,6 +110,6 @@ export class LoginProviderViewDisableActionComponent implements Action, OnDestro
     });
   }
   private allowed(allow: Acl | undefined) {
-    return !!allow?.allows?.find((info) => info.name == 'disable');
+    return !!allow?.allows?.find((info) => info.name == 'disable')?.allowed;
   }
 }

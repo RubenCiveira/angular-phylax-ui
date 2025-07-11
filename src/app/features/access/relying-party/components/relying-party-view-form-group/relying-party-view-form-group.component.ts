@@ -18,7 +18,7 @@ import { RelyingParty } from 'app/features/access/relying-party/model/relying-pa
 export class RelyingPartyViewFormGroupComponent extends SubFormEditable<RelyingParty> {
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;
   uid = computed(() => this.value()?.uid);
-  public constructor(relyingPartyRespository: RelyingPartyRepository) {
+  public constructor(relyingPartyRepository: RelyingPartyRepository) {
     super(
       new FormGroup({
         uid: new FormControl<string>(''),
@@ -28,7 +28,7 @@ export class RelyingPartyViewFormGroupComponent extends SubFormEditable<RelyingP
         version: new FormControl<number>(0),
       }),
     );
-    this.acl = relyingPartyRespository.acl();
+    this.acl = relyingPartyRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });

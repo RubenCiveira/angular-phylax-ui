@@ -3,8 +3,8 @@ import { Routes, ROUTES } from '@angular/router';
 import { ContainerComponent } from './layout/container/components/container/container.component';
 import { AppConfigService, MicroFrontConfigService } from '@common/context/config/app-config.service';
 import { menuRoutes } from './menu.config';
-import { UnauthorizedComponent } from './layout/pages/unauthorized/unauthorized.component';
 import { UnknownComponent } from './layout/pages/unknown/unknown.component';
+import { HomeComponent } from './layout/pages/home/home.component';
 
 export function provideConfiguredRoutes() {
   function initializeRoutes(appConfig: AppConfigService, mfeConfig: MicroFrontConfigService) {
@@ -14,6 +14,14 @@ export function provideConfiguredRoutes() {
         component: ContainerComponent,
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         children: aditioanlRoutes(appConfig, mfeConfig),
+      },
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: '**',
+        component: UnknownComponent,
       },
     ];
   }
@@ -29,10 +37,6 @@ function aditioanlRoutes(appConfig: AppConfigService, mfeConfig: MicroFrontConfi
   const base = menuRoutes(appConfig, mfeConfig);
   return [
     ...base,
-    {
-      path: 'error/_unauthorized',
-      component: UnauthorizedComponent,
-    },
     {
       path: '**',
       component: UnknownComponent,

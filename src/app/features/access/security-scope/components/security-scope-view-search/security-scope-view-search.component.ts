@@ -27,8 +27,12 @@ export class SecurityScopeViewSearchComponent extends SubFormEditable<any> {
   trustedClientsFilter = input<TrustedClientFilter>({ limit: 100 });
   relyingPartysProvider: SelectorProvider<RelyingParty, { $ref: string }>;
   relyingPartysFilter = input<RelyingPartyFilter>({ limit: 100 });
+  trustedClientProvider: SelectorProvider<TrustedClient, { $ref: string }>;
+  trustedClientFilter = input<TrustedClientFilter>({ limit: 100 });
+  relyingPartyProvider: SelectorProvider<RelyingParty, { $ref: string }>;
+  relyingPartyFilter = input<RelyingPartyFilter>({ limit: 100 });
   public constructor(
-    securityScopeRespository: SecurityScopeRepository,
+    securityScopeRepository: SecurityScopeRepository,
     trustedClientRepository: TrustedClientRepository,
     relyingPartyRepository: RelyingPartyRepository,
   ) {
@@ -38,9 +42,11 @@ export class SecurityScopeViewSearchComponent extends SubFormEditable<any> {
         resource: new FormControl<string>(''),
         trustedClients: new FormControl<any>(null),
         relyingPartys: new FormControl<any>(null),
+        trustedClient: new FormControl<any>(null),
+        relyingParty: new FormControl<any>(null),
       }),
     );
-    this.acl = securityScopeRespository.acl();
+    this.acl = securityScopeRepository.acl();
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
@@ -55,12 +61,16 @@ export class SecurityScopeViewSearchComponent extends SubFormEditable<any> {
     });
     this.trustedClientsProvider = trustedClientRepository.selectorProvider(this.trustedClientsFilter);
     this.relyingPartysProvider = relyingPartyRepository.selectorProvider(this.relyingPartysFilter);
+    this.trustedClientProvider = trustedClientRepository.selectorProvider(this.trustedClientFilter);
+    this.relyingPartyProvider = relyingPartyRepository.selectorProvider(this.relyingPartyFilter);
     this.defaultValues = () => {
       return {
         search: '',
         resource: '',
         trustedClients: null,
         relyingPartys: null,
+        trustedClient: null,
+        relyingParty: null,
       };
     };
   }
