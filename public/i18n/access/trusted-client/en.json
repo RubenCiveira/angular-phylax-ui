@@ -1,4 +1,126 @@
 {
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creating new trusted client",
+      "tooltip": "Create a new trusted client record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Ticket passed",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viewing the values of a trusted client",
+      "tooltip": "View the values of a trusted client"
+    },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "disable",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "disable",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
+    }
+  },
+  "form-group": {
+    "allowed-redirects": {
+      "label": "allowed redirects",
+      "placeholder": "If we allow direct login of the app we force to indicate a secret"
+    },
+    "allowedRedirects": {
+      "error": {
+        "maxlength": "allowed redirects must be less than 250 characters"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "- must be less than 250 characters",
+        "required": "is required."
+      },
+      "label": "-",
+      "placeholder": "The identification code of the application"
+    },
+    "enabled": {
+      "label": "security cleared",
+      "placeholder": "A mark that allows you to remove access to an account without deleting it"
+    },
+    "public-allow": {
+      "label": "public permission",
+      "placeholder": "Whether true users can use these clients to access with the public code stream"
+    },
+    "publicAllow": {
+      "error": {
+        "required": "public permission is required"
+      }
+    },
+    "secret-oauth": {
+      "label": "oauth secret",
+      "placeholder": "If the user is not delegated the phrase to identify"
+    },
+    "secretOauth": {
+      "error": {
+        "maxlength": "oauth secret must be less than 250 characters"
+      }
+    }
+  },
   "list": {
     "column": {
       "allowed-redirects": {
@@ -21,15 +143,32 @@
         "title": "secret oauth",
         "tooltip": "secret oauth"
       }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
     }
   },
   "search": {
+    "code": {
+      "label": "-",
+      "placeholder": ""
+    },
     "order": {
+      "label": "order",
       "options": {
         "code-asc": "code-asc",
         "code-desc": "code-desc",
         "null": "Default"
-      }
+      },
+      "placeholder": "Order in which to retrieve results"
+    },
+    "search": {
+      "label": "search",
+      "placeholder": "Search by Text"
     }
   }
 }

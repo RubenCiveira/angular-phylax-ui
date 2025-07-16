@@ -60,6 +60,20 @@
     }
   },
   "list": {
+    "column": {
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      },
+      "trusted-client": {
+        "title": "Cliente de confianza",
+        "tooltip": "Cliente de confianza"
+      },
+      "user": {
+        "title": "usuario",
+        "tooltip": "usuario"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },

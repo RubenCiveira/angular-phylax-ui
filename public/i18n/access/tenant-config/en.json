@@ -1,4 +1,80 @@
 {
+  "action": {
+    "conditions": {
+      "label": "conditions",
+      "title": "conditions",
+      "tooltip": "conditions"
+    },
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creating new tenant config",
+      "tooltip": "Create a new tenant config record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a tenant config"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Ticket passed",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Viewing the values of a tenant config",
+      "tooltip": "View the values of a tenant config"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a tenant config"
+    },
+    "providers": {
+      "label": "Providers",
+      "title": "Providers",
+      "tooltip": "Providers"
+    }
+  },
+  "form-group": {
+    "force-mfa": {
+      "label": "mfa force",
+      "placeholder": "Indicates whether m f a multi-factor authentication applies for the tenant"
+    },
+    "forceMfa": {
+      "error": {
+        "required": "mfa force is required"
+      }
+    },
+    "inner-label": {
+      "label": "interior label",
+      "placeholder": "A customizable tag that tenants can use to customize the app or"
+    },
+    "innerLabel": {
+      "error": {
+        "maxlength": "inner tag must be less than 250 characters"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "tenant is required"
+      },
+      "label": "renter",
+      "placeholder": "The tenant to whom this setting applies"
+    }
+  },
   "list": {
     "column": {
       "force-mfa": {
@@ -13,6 +89,27 @@
         "title": "tenant",
         "tooltip": "tenant"
       }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "search",
+      "placeholder": "Search by Text"
+    },
+    "tenant": {
+      "label": "renter",
+      "placeholder": ""
+    },
+    "tenants": {
+      "label": "tenants,",
+      "placeholder": ""
     }
   }
 }

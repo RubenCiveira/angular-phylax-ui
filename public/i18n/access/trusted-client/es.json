@@ -122,6 +122,28 @@
     }
   },
   "list": {
+    "column": {
+      "allowed-redirects": {
+        "title": "redirecciones permitidas",
+        "tooltip": "redirecciones permitidas"
+      },
+      "code": {
+        "title": "-",
+        "tooltip": "-"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "public-allow": {
+        "title": "permiso público",
+        "tooltip": "permiso público"
+      },
+      "secret-oauth": {
+        "title": "oauth secreto",
+        "tooltip": "oauth secreto"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },
@@ -137,6 +159,11 @@
     },
     "order": {
       "label": "orden",
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Por defecto"
+      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {

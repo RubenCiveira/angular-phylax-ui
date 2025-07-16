@@ -171,6 +171,48 @@
     }
   },
   "list": {
+    "column": {
+      "blocked-until": {
+        "title": "Bloqueado hasta",
+        "tooltip": "Bloqueado hasta"
+      },
+      "email": {
+        "title": "correo electrónico ",
+        "tooltip": "correo electrónico "
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "language": {
+        "title": "idioma",
+        "tooltip": "idioma"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "password": {
+        "title": "contraseña",
+        "tooltip": "contraseña"
+      },
+      "provider": {
+        "title": "proveedor",
+        "tooltip": "proveedor"
+      },
+      "temporal-password": {
+        "title": "contraseña temporal",
+        "tooltip": "contraseña temporal"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "use-second-factors": {
+        "title": "utilizar segundos factores",
+        "tooltip": "utilizar segundos factores"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },
@@ -186,6 +228,11 @@
     },
     "order": {
       "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Por defecto"
+      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "root": {

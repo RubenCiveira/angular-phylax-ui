@@ -87,6 +87,11 @@
     },
     "kind": {
       "label": "tipo",
+      "options": {
+        "manage": "GESTIÓN",
+        "read": "LEER",
+        "write": "ESCRIBIR"
+      },
       "placeholder": "El kind de security scope"
     },
     "relying-party": {
@@ -115,10 +120,45 @@
     },
     "visibility": {
       "label": "visibilidad",
+      "options": {
+        "authorized": "AUTORIZADO",
+        "explicit": "EXPLICITO",
+        "public": "PÚBLICO"
+      },
       "placeholder": "El visibility de security scope"
     }
   },
   "list": {
+    "column": {
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "kind": {
+        "title": "tipo",
+        "tooltip": "tipo"
+      },
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      },
+      "resource": {
+        "title": "recursos",
+        "tooltip": "recursos"
+      },
+      "scope": {
+        "title": "alcance",
+        "tooltip": "alcance"
+      },
+      "trusted-client": {
+        "title": "Cliente de confianza",
+        "tooltip": "Cliente de confianza"
+      },
+      "visibility": {
+        "title": "visibilidad",
+        "tooltip": "visibilidad"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },

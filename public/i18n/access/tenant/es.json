@@ -118,6 +118,24 @@
     }
   },
   "list": {
+    "column": {
+      "access-to-all-applications": {
+        "title": "acceso a todas las aplicaciones",
+        "tooltip": "acceso a todas las aplicaciones"
+      },
+      "domain": {
+        "title": "dominio",
+        "tooltip": "dominio"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },
@@ -133,6 +151,11 @@
     },
     "order": {
       "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Por defecto"
+      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {

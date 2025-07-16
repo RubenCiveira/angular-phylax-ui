@@ -1,4 +1,64 @@
 {
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create",
+      "title": "Creating new user identity",
+      "tooltip": "Create a new user identity record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a user identity"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Ticket passed",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail",
+      "title": "Seeing the values of a user identity",
+      "tooltip": "View the values of a user identity"
+    },
+    "edit": {
+      "label": "Edit",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a user identity"
+    }
+  },
+  "form-group": {
+    "relying-party": {
+      "label": "certificate user",
+      "placeholder": "The trusted party starts from the identity of the user"
+    },
+    "roles": {
+      "label": "roles",
+      "placeholder": "The identity roles of the user"
+    },
+    "trusted-client": {
+      "label": "Trusted client",
+      "placeholder": "The trusted client of the user's identity"
+    },
+    "user": {
+      "error": {
+        "required": "Username is required"
+      },
+      "label": "manual",
+      "placeholder": "The user of user identity"
+    }
+  },
   "list": {
     "column": {
       "relying-party": {
@@ -13,6 +73,43 @@
         "title": "user",
         "tooltip": "user"
       }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "relying-party": {
+      "label": "certificate user",
+      "placeholder": ""
+    },
+    "relying-partys": {
+      "label": "partsys who trust",
+      "placeholder": ""
+    },
+    "search": {
+      "label": "search",
+      "placeholder": "Search by Text"
+    },
+    "trusted-client": {
+      "label": "Trusted client",
+      "placeholder": ""
+    },
+    "trusted-clients": {
+      "label": "Trusted Clients",
+      "placeholder": ""
+    },
+    "user": {
+      "label": "manual",
+      "placeholder": ""
+    },
+    "users": {
+      "label": "users",
+      "placeholder": ""
     }
   }
 }

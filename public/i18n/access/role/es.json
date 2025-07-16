@@ -57,6 +57,16 @@
     }
   },
   "list": {
+    "column": {
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },
@@ -72,6 +82,11 @@
     },
     "order": {
       "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Por defecto"
+      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {

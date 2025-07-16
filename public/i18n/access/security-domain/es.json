@@ -119,6 +119,32 @@
     }
   },
   "list": {
+    "column": {
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "level": {
+        "title": "máx.",
+        "tooltip": "máx."
+      },
+      "manage-all": {
+        "title": "todos los riesgos operativos ",
+        "tooltip": "todos los riesgos operativos "
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "read-all": {
+        "title": "leer todo",
+        "tooltip": "leer todo"
+      },
+      "write-all": {
+        "title": "escribir todo",
+        "tooltip": "escribir todo"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },
@@ -130,6 +156,11 @@
   "search": {
     "enabled": {
       "label": "habilitado",
+      "options": {
+        "false": "false",
+        "null": "todo",
+        "true": "Verdadero"
+      },
       "placeholder": ""
     },
     "name": {
@@ -138,6 +169,11 @@
     },
     "order": {
       "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Por defecto"
+      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {

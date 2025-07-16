@@ -128,6 +128,11 @@
         "required": "fuente es obligatorio"
       },
       "label": "fuente",
+      "options": {
+        "github": "GitHub",
+        "google": "GOOGLE",
+        "saml": "SAML"
+      },
       "placeholder": "El protocolo o sistema de origen utilizado para la autenticación, por ejemplo, g o o g l e g i t h u b s a m l"
     },
     "tenant": {
@@ -148,6 +153,48 @@
     }
   },
   "list": {
+    "column": {
+      "certificate": {
+        "title": "certificado",
+        "tooltip": "certificado"
+      },
+      "direct-access": {
+        "title": "acceso directo",
+        "tooltip": "acceso directo"
+      },
+      "disabled": {
+        "title": "desactivado",
+        "tooltip": "desactivado"
+      },
+      "metadata": {
+        "title": "metadatos",
+        "tooltip": "metadatos"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "private-key": {
+        "title": "clave privada",
+        "tooltip": "clave privada"
+      },
+      "public-key": {
+        "title": "clave pública",
+        "tooltip": "clave pública"
+      },
+      "source": {
+        "title": "fuente",
+        "tooltip": "fuente"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "users-enabled-by-default": {
+        "title": "usuarios habilitados de forma predeterminada",
+        "tooltip": "usuarios habilitados de forma predeterminada"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },
@@ -163,6 +210,11 @@
     },
     "order": {
       "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Por defecto"
+      },
       "placeholder": "Orden en el que recuperar los resultados"
     },
     "search": {

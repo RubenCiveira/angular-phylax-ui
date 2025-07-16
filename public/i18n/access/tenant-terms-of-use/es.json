@@ -67,6 +67,24 @@
     }
   },
   "list": {
+    "column": {
+      "activation-date": {
+        "title": "Fecha Activación",
+        "tooltip": "Fecha Activación"
+      },
+      "attached": {
+        "title": "adosado",
+        "tooltip": "adosado"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "text": {
+        "title": "Texto",
+        "tooltip": "Texto"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },

@@ -76,6 +76,20 @@
     }
   },
   "list": {
+    "column": {
+      "force-mfa": {
+        "title": "fuerza mfa",
+        "tooltip": "fuerza mfa"
+      },
+      "inner-label": {
+        "title": "etiqueta interior",
+        "tooltip": "etiqueta interior"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      }
+    },
     "filter": {
       "button": "Filtrar"
     },
