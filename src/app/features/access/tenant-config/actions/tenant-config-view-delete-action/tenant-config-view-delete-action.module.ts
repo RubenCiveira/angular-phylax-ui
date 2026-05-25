@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
     TenantConfigViewFormGroupModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/tenant-config', alias: 'access.tenant-config' })],
+  providers: [provideTranslocoScope({ scope: 'access/tenant-config', alias: 'access/tenant-config' })],
   bootstrap: [],
 })
 export class TenantConfigViewDeleteActionModule {}

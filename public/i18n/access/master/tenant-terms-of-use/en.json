@@ -1,0 +1,26 @@
+{
+  "list": {
+    "column": {
+      "activation-date": {
+        "title": "activation date",
+        "tooltip": "activation date"
+      },
+      "attached": {
+        "title": "attached",
+        "tooltip": "attached"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "text": {
+        "title": "text",
+        "tooltip": "text"
+      }
+    }
+  }
+}

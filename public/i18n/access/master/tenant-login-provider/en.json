@@ -1,0 +1,64 @@
+{
+  "form-group": {
+    "source": {
+      "options": {
+        "github": "GITHUB",
+        "google": "GOOGLE",
+        "saml": "SAML"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "certificate": {
+        "title": "certificate",
+        "tooltip": "certificate"
+      },
+      "direct-access": {
+        "title": "direct access",
+        "tooltip": "direct access"
+      },
+      "disabled": {
+        "title": "disabled",
+        "tooltip": "disabled"
+      },
+      "metadata": {
+        "title": "metadata",
+        "tooltip": "metadata"
+      },
+      "name": {
+        "title": "name",
+        "tooltip": "name"
+      },
+      "private-key": {
+        "title": "private key",
+        "tooltip": "private key"
+      },
+      "public-key": {
+        "title": "public key",
+        "tooltip": "public key"
+      },
+      "source": {
+        "title": "source",
+        "tooltip": "source"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "users-enabled-by-default": {
+        "title": "users enabled by default",
+        "tooltip": "users enabled by default"
+      }
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "name-asc": "name-asc",
+        "name-desc": "name-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

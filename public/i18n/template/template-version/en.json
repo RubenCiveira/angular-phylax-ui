@@ -1,0 +1,91 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create template version",
+      "title": "Creating new template version",
+      "tooltip": "Create a new template version record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete template version",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a version template"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete template version",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail template version",
+      "title": "Viewing the values of a template version",
+      "tooltip": "View the values of a template version"
+    },
+    "edit": {
+      "label": "Edit template version",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a version template"
+    }
+  },
+  "form-group": {
+    "contentHtml": {
+      "error": {
+        "maxlength": "HTML content must be less than 250 characters",
+        "required": "Html content is required."
+      }
+    },
+    "contentText": {
+      "error": {
+        "maxlength": "Content text must be less than 250 characters"
+      }
+    },
+    "subject": {
+      "error": {
+        "maxlength": "subject must be less than 250 characters"
+      }
+    },
+    "template": {
+      "error": {
+        "required": "template is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "content-html": {
+        "title": "content html",
+        "tooltip": "content html"
+      },
+      "content-text": {
+        "title": "content text",
+        "tooltip": "content text"
+      },
+      "subject": {
+        "title": "subject",
+        "tooltip": "subject"
+      },
+      "template": {
+        "title": "template",
+        "tooltip": "template"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  }
+}

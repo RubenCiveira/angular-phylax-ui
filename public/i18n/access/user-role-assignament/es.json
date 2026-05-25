@@ -1,0 +1,71 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create user role assignament",
+      "title": "Creando nuevo user role assignament",
+      "tooltip": "Crea un nuevo registro de user role assignament"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete user role assignament",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un user role assignament"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar user role assignament",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail user role assignament",
+      "title": "Viendo los valores de un user role assignament",
+      "tooltip": "Ver los valores de un user role assignament"
+    },
+    "edit": {
+      "label": "Edit user role assignament",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un user role assignament"
+    }
+  },
+  "form-group": {
+    "user": {
+      "error": {
+        "required": "usuario es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      },
+      "trusted-client": {
+        "title": "Cliente de confianza",
+        "tooltip": "Cliente de confianza"
+      },
+      "user": {
+        "title": "usuario",
+        "tooltip": "usuario"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

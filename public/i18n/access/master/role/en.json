@@ -1,0 +1,77 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create role",
+      "title": "Creating New",
+      "tooltip": "Create a new role record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete role",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a role"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete Role",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail role",
+      "title": "Viewing the Values of a Role",
+      "tooltip": "View Role Values"
+    },
+    "edit": {
+      "label": "Edit Role Privilege",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a role"
+    }
+  },
+  "form-group": {
+    "name": {
+      "error": {
+        "maxlength": "Name must be less than 250 characters",
+        "required": "Name obligatory"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "name": {
+        "title": "name",
+        "tooltip": "name"
+      },
+      "relying-party": {
+        "title": "relying party",
+        "tooltip": "relying party"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "name-asc": "name-asc",
+        "name-desc": "name-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create message",
+      "title": "Creando nuevo message",
+      "tooltip": "Crea un nuevo registro de message"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete message",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un message"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar message",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail message",
+      "title": "Viendo los valores de un message",
+      "tooltip": "Ver los valores de un message"
+    },
+    "edit": {
+      "label": "Edit message",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un message"
+    }
+  },
+  "form-group": {
+    "content": {
+      "error": {
+        "required": "contenido es obligatorio"
+      }
+    },
+    "created-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "createdAt": {
+      "error": {
+        "required": "creado en es obligatorio"
+      }
+    },
+    "lock-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "retries": {
+      "error": {
+        "required": "reintentos es obligatorio"
+      }
+    },
+    "send-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "target": {
+      "error": {
+        "maxlength": "Objetivo tiene que tener menos de 250 caracteres",
+        "required": "Objetivo es obligatorio"
+      }
+    },
+    "urgent": {
+      "error": {
+        "required": "urgente es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "content": {
+        "title": "contenido",
+        "tooltip": "contenido"
+      },
+      "created-at": {
+        "title": "creado en",
+        "tooltip": "creado en"
+      },
+      "lock-at": {
+        "title": "bloquear en",
+        "tooltip": "bloquear en"
+      },
+      "retries": {
+        "title": "reintentos",
+        "tooltip": "reintentos"
+      },
+      "send-at": {
+        "title": "Enviar a",
+        "tooltip": "Enviar a"
+      },
+      "target": {
+        "title": "Objetivo",
+        "tooltip": "Objetivo"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "urgent": {
+        "title": "urgente",
+        "tooltip": "urgente"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

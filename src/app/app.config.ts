@@ -2,14 +2,14 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
-import { provideConfiguration } from '@common/context/config/app-config.service';
+import { provideConfiguration } from '@shared/context/config/app-config.service';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
-import { provideI18nConfiguration, I18nLoaderService } from '@common/context/config/i18n-loader.service';
-import { provideInstrumentation } from '@common/context/observability/instrumentation.service';
-import { provideAuthorizationAccess } from '@common/context/authorization-access/authorization-access.provider';
+import { provideI18nConfiguration, I18nLoaderService } from '@shared/context/config/i18n-loader.service';
+import { provideInstrumentation } from '@shared/context/observability/instrumentation.service';
+import { provideAuthorizationAccess } from '@shared/context/authorization-access/authorization-access.provider';
 import { provideConfiguredRoutes } from './bootstrap/app.routes';
-import { OidcLoginModule } from '@common/context/identity/oidc-identity/oidc-login.module';
+import { OidcLoginModule } from '@shared/context/identity/oidc-identity/oidc-login.module';
 
 export const appConfig: ApplicationConfig = {
   providers: [

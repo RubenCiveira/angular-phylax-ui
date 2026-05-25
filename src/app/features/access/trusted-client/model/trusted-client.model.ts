@@ -3,10 +3,32 @@
 export interface TrustedClient {
   uid: string;
   code: string;
+  allowAllScopes?: boolean;
   publicAllow: boolean;
   secretOauth?: string;
-  allowedRedirects?: string;
-  enabled?: boolean;
+  isResourceServer: boolean;
+  requirePkce: boolean;
+  backChannelLogoutUri?: string;
+  backChannelLogoutSessionRequired?: boolean;
+  frontChannelLogoutUri?: string;
+  frontChannelLogoutSessionRequired?: boolean;
+  enabled: boolean;
+  registrationAccess?: string;
+  clientName?: string;
+  logoUri?: string;
+  clientUri?: string;
+  policyUri?: string;
+  tosUri?: string;
+  tokenEndpointAuthMethod: string;
+  grantTypesJson?: string;
+  responseTypesJson?: string;
+  dynamicallyRegistered?: boolean;
+  registeredAt?: Date;
+  allowedScopesM2m?: string;
+  m2mTokenTtlSeconds: number;
+  requestObjectSigningAlg?: string;
+  jwksUri?: string;
+  jwksJson?: string;
   version?: number;
 }
 export interface TrustedClientFilter {
@@ -14,15 +36,39 @@ export interface TrustedClientFilter {
   uids?: string[];
   limit?: number;
   order?: string;
+  withBackChannelUrl?: boolean;
+  withFrontChannelUrl?: boolean;
   code?: string;
 }
 export interface TrustedClientProjection {
   uid: string;
   code: string;
+  allowAllScopes?: boolean;
   publicAllow: boolean;
   secretOauth?: string;
-  allowedRedirects?: string;
-  enabled?: boolean;
+  isResourceServer: boolean;
+  requirePkce: boolean;
+  backChannelLogoutUri?: string;
+  backChannelLogoutSessionRequired?: boolean;
+  frontChannelLogoutUri?: string;
+  frontChannelLogoutSessionRequired?: boolean;
+  enabled: boolean;
+  registrationAccess?: string;
+  clientName?: string;
+  logoUri?: string;
+  clientUri?: string;
+  policyUri?: string;
+  tosUri?: string;
+  tokenEndpointAuthMethod: string;
+  grantTypesJson?: string;
+  responseTypesJson?: string;
+  dynamicallyRegistered?: boolean;
+  registeredAt?: Date;
+  allowedScopesM2m?: string;
+  m2mTokenTtlSeconds: number;
+  requestObjectSigningAlg?: string;
+  jwksUri?: string;
+  jwksJson?: string;
   version?: number;
 }
 export function trustedClientProjectionToValue(
@@ -32,10 +78,32 @@ export function trustedClientProjectionToValue(
     ? {
         uid: proyection.uid,
         code: proyection.code,
+        allowAllScopes: proyection.allowAllScopes,
         publicAllow: proyection.publicAllow,
         secretOauth: proyection.secretOauth,
-        allowedRedirects: proyection.allowedRedirects,
+        isResourceServer: proyection.isResourceServer,
+        requirePkce: proyection.requirePkce,
+        backChannelLogoutUri: proyection.backChannelLogoutUri,
+        backChannelLogoutSessionRequired: proyection.backChannelLogoutSessionRequired,
+        frontChannelLogoutUri: proyection.frontChannelLogoutUri,
+        frontChannelLogoutSessionRequired: proyection.frontChannelLogoutSessionRequired,
         enabled: proyection.enabled,
+        registrationAccess: proyection.registrationAccess,
+        clientName: proyection.clientName,
+        logoUri: proyection.logoUri,
+        clientUri: proyection.clientUri,
+        policyUri: proyection.policyUri,
+        tosUri: proyection.tosUri,
+        tokenEndpointAuthMethod: proyection.tokenEndpointAuthMethod,
+        grantTypesJson: proyection.grantTypesJson,
+        responseTypesJson: proyection.responseTypesJson,
+        dynamicallyRegistered: proyection.dynamicallyRegistered,
+        registeredAt: proyection.registeredAt,
+        allowedScopesM2m: proyection.allowedScopesM2m,
+        m2mTokenTtlSeconds: proyection.m2mTokenTtlSeconds,
+        requestObjectSigningAlg: proyection.requestObjectSigningAlg,
+        jwksUri: proyection.jwksUri,
+        jwksJson: proyection.jwksJson,
         version: proyection.version,
       }
     : null;

@@ -18,3 +18,8 @@
   font-size: var(--mat-sys-title-large-size);
   font-family: var(--mat-sys-title-large-font);
 }
+.search-form {
+  background-color: var(--mat-sys-surface-container-lowest);
+  border-radius: 12px;
+  margin: 10px;
+}

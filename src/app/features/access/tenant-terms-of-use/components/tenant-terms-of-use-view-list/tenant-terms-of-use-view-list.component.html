@@ -10,7 +10,11 @@
       <div style="display: flex; flex-direction: row; padding: 10px 10px 0 10px; align-items: center">
         <ng-container *ngTemplateOutlet="actions.theToolbarTemplate() || null"></ng-container>
         <div style="flex: 1"></div>
-        <button mat-raised-button (click)="panel.toggle()">
+        <button
+          mat-raised-button
+          aria-label="{{ panel.expanded ? hideSearchLabel() : showSearchLabel() }}"
+          (click)="panel.toggle()"
+        >
           @if (panel.expanded) {
             <mat-icon>keyboard_arrow_up</mat-icon>
           } @else {
@@ -18,12 +22,12 @@
           }
           {{ 'access.tenant-terms-of-use.list.filter.button' | transloco }}
         </button>
-        <button mat-icon-button (click)="reload()">
+        <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>
     }
-    <mat-expansion-panel #panel style="margin: 10px">
+    <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
       <h2>{{ 'access.tenant-terms-of-use.list.search.title' | transloco }}</h2>
       <tenant-terms-of-use-view-search #searchForm [formControl]="search" />
@@ -39,6 +43,8 @@
       </div>
     } @else {
       <list-view
+        [mode]="'card'"
+        [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
@@ -68,11 +74,27 @@
           </ng-template>
           <ng-template
             listViewColumn
+            title="{{ 'access.tenant-terms-of-use.list.column.relying-party.title' | transloco }}"
+            tooltip="{{ 'access.tenant-terms-of-use.list.column.relying-party.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.relyingParty()?.code }}
+          </ng-template>
+          <ng-template
+            listViewColumn
             title="{{ 'access.tenant-terms-of-use.list.column.text.title' | transloco }}"
             tooltip="{{ 'access.tenant-terms-of-use.list.column.text.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.text }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-terms-of-use.list.column.enabled.title' | transloco }}"
+            tooltip="{{ 'access.tenant-terms-of-use.list.column.enabled.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.enabled }}
           </ng-template>
           <ng-template
             listViewColumn

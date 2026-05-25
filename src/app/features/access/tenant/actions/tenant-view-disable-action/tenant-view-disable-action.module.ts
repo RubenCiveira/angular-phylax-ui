@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
     TenantViewFormGroupModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/tenant', alias: 'access.tenant' })],
+  providers: [provideTranslocoScope({ scope: 'access/tenant', alias: 'access/tenant' })],
   bootstrap: [],
 })
 export class TenantViewDisableActionModule {}

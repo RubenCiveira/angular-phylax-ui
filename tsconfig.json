@@ -6,8 +6,8 @@
       "@features/*": [
         "app/features/*"
       ],
-      "@common/*": [
-        "app/common/*"
+      "@shared/*": [
+        "app/shared/*"
       ]
     },
     "outDir": "./dist/out-tsc",

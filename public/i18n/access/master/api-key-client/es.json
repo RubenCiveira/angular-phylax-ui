@@ -1,0 +1,133 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create api key client",
+      "title": "Creando nuevo api key client",
+      "tooltip": "Crea un nuevo registro de api key client"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete api key client",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un api key client"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar api key client",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail api key client",
+      "title": "Viendo los valores de un api key client",
+      "tooltip": "Ver los valores de un api key client"
+    },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable api key client",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un api key client"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable api key client",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
+    "edit": {
+      "label": "Edit api key client",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un api key client"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable api key client",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un api key client"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable api key client",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "code": {
+      "error": {
+        "maxlength": "- tiene que tener menos de 250 caracteres",
+        "required": "- es obligatorio"
+      }
+    },
+    "enabled": {
+      "error": {
+        "required": "habilitado es obligatorio"
+      }
+    },
+    "key": {
+      "error": {
+        "maxlength": "llave tiene que tener menos de 250 caracteres"
+      }
+    },
+    "scopes": {
+      "error": {
+        "maxlength": "ámbitos tiene que tener menos de 250 caracteres"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "code": {
+        "title": "-",
+        "tooltip": "-"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "key": {
+        "title": "llave",
+        "tooltip": "llave"
+      },
+      "scopes": {
+        "title": "ámbitos",
+        "tooltip": "ámbitos"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

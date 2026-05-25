@@ -2,7 +2,7 @@
 import { TenantTermsOfUseViewStandarActionsModule } from 'app/features/access/tenant-terms-of-use/components/tenant-terms-of-use-view-standar-actions/tenant-terms-of-use-view-standar-actions.module';
 import { TenantTermsOfUseViewListComponent } from './tenant-terms-of-use-view-list.component';
 import { CommonModule } from '@angular/common';
-import { ListViewModule } from '@common/toolkit/list-view/list-view.module';
+import { ListViewModule } from '@shared/toolkit/list-view/list-view.module';
 import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { NgModule } from '@angular/core';
     TenantTermsOfUseViewStandarActionsModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/tenant-terms-of-use', alias: 'access.tenant-terms-of-use' })],
+  providers: [provideTranslocoScope({ scope: 'access/tenant-terms-of-use', alias: 'access/tenant-terms-of-use' })],
   bootstrap: [],
 })
 export class TenantTermsOfUseViewListModule {}

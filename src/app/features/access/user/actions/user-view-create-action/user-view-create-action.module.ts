@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
   declarations: [UserViewCreateActionComponent],
   exports: [UserViewCreateActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TranslocoModule, UserViewFormGroupModule],
-  providers: [provideTranslocoScope({ scope: 'access/user', alias: 'access.user' })],
+  providers: [provideTranslocoScope({ scope: 'access/user', alias: 'access/user' })],
   bootstrap: [],
 })
 export class UserViewCreateActionModule {}

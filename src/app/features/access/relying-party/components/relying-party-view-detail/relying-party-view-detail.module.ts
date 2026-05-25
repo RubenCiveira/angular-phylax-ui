@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
   declarations: [RelyingPartyViewDetailComponent],
   exports: [RelyingPartyViewDetailComponent],
   imports: [ReactiveFormsModule, RelyingPartyViewFormGroupModule],
-  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access.relying-party' })],
+  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access/relying-party' })],
   bootstrap: [],
 })
 export class RelyingPartyViewDetailModule {}

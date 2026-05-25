@@ -1,0 +1,75 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create client identity",
+      "title": "Creando nuevo client identity",
+      "tooltip": "Crea un nuevo registro de client identity"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete client identity",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un client identity"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar client identity",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail client identity",
+      "title": "Viendo los valores de un client identity",
+      "tooltip": "Ver los valores de un client identity"
+    },
+    "edit": {
+      "label": "Edit client identity",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un client identity"
+    }
+  },
+  "form-group": {
+    "user": {
+      "error": {
+        "required": "usuario es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      },
+      "roles": {
+        "title": "roles",
+        "tooltip": "roles"
+      },
+      "trusted-client": {
+        "title": "Cliente de confianza",
+        "tooltip": "Cliente de confianza"
+      },
+      "user": {
+        "title": "usuario",
+        "tooltip": "usuario"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

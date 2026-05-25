@@ -32,10 +32,52 @@
       "title": "Viewing the values of a tenant terms of use",
       "tooltip": "View the values of a tenant terms of use"
     },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "disable tenant terms of use",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "disable tenant terms of use",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
     "edit": {
       "label": "Edit",
       "saveBtn": "Update",
       "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable tenant terms of use",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable tenant terms of use",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
     }
   },
   "form-group": {
@@ -50,6 +92,11 @@
     "attached": {
       "label": "built against",
       "placeholder": "An optional attachment, e.g. p d f or signed document"
+    },
+    "enabled": {
+      "error": {
+        "required": "enabled is required"
+      }
     },
     "tenant": {
       "error": {
@@ -75,6 +122,14 @@
       "attached": {
         "title": "attached",
         "tooltip": "attached"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "relying-party": {
+        "title": "relying party",
+        "tooltip": "relying party"
       },
       "tenant": {
         "title": "tenant",

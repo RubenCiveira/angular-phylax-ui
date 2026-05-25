@@ -3,10 +3,11 @@ import {
   TenantConfigFilter,
   TenantConfigProjection,
 } from 'app/features/access/tenant-config/model/tenant-config.model';
+import { Shift } from '@shared/data/repository/repository.model';
 import { TenantConfigRepository } from 'app/features/access/tenant-config/repository/tenant-config-repository.service';
 import { FormControl } from '@angular/forms';
-import { Shift } from '@common/data/repository/repository.model';
-import { input, effect, Component } from '@angular/core';
+import { input, effect, Component, signal } from '@angular/core';
+import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({
   selector: 'tenant-config-view-list',
@@ -20,9 +21,14 @@ export class TenantConfigViewListComponent {
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
   search = new FormControl<any>(undefined);
+  showSearchLabel = signal('Refresh');
+  hideSearchLabel = signal('Refresh');
   list: Shift<TenantConfigProjection[], TenantConfigFilter>;
+  displayer: DisplayProvider<any>;
+  refreshDataLabel = signal('Refresh');
 
   constructor(repository: TenantConfigRepository) {
+    this.displayer = repository.displayProvider();
     this.list = repository.projections(['tenant']);
     effect(() => {
       setTimeout(() => this.makeSearch());

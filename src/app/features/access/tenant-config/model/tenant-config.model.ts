@@ -7,6 +7,24 @@ export interface TenantConfig {
   tenant: { $ref: string } | null;
   innerLabel?: string;
   forceMfa: boolean;
+  dynamicRegistrationPolicy?: 'open' | 'token-required' | 'disabled' | null;
+  allowRegister?: boolean;
+  enableRegisterUsers?: boolean;
+  magicLinkEnabled?: boolean;
+  requireEmailVerification: boolean;
+  invitationExpiryDays: number;
+  magicLinkExpiryMinutes: number;
+  sessionSsoTtlSeconds: number;
+  refreshTokenTtlSeconds: number;
+  webauthnEnabled?: boolean;
+  webauthnRpId?: string;
+  webauthnRpName?: string;
+  wellcomeEmail?: string;
+  registerdEmail?: string;
+  disabledUserEmail?: string;
+  enabledUserEmail?: string;
+  allowRecoverPass?: boolean;
+  recoverPassEmail?: string;
   version?: number;
 }
 export interface TenantConfigFilter {
@@ -21,6 +39,24 @@ export interface TenantConfigProjection {
   tenant: Signal<TenantProjection | null>;
   innerLabel?: string;
   forceMfa: boolean;
+  dynamicRegistrationPolicy?: 'open' | 'token-required' | 'disabled' | null;
+  allowRegister?: boolean;
+  enableRegisterUsers?: boolean;
+  magicLinkEnabled?: boolean;
+  requireEmailVerification: boolean;
+  invitationExpiryDays: number;
+  magicLinkExpiryMinutes: number;
+  sessionSsoTtlSeconds: number;
+  refreshTokenTtlSeconds: number;
+  webauthnEnabled?: boolean;
+  webauthnRpId?: string;
+  webauthnRpName?: string;
+  wellcomeEmail?: string;
+  registerdEmail?: string;
+  disabledUserEmail?: string;
+  enabledUserEmail?: string;
+  allowRecoverPass?: boolean;
+  recoverPassEmail?: string;
   version?: number;
 }
 export function tenantConfigProjectionToValue(
@@ -33,6 +69,24 @@ export function tenantConfigProjectionToValue(
         tenant: valueOfTenant ? { $ref: valueOfTenant } : null,
         innerLabel: proyection.innerLabel,
         forceMfa: proyection.forceMfa,
+        dynamicRegistrationPolicy: proyection.dynamicRegistrationPolicy,
+        allowRegister: proyection.allowRegister,
+        enableRegisterUsers: proyection.enableRegisterUsers,
+        magicLinkEnabled: proyection.magicLinkEnabled,
+        requireEmailVerification: proyection.requireEmailVerification,
+        invitationExpiryDays: proyection.invitationExpiryDays,
+        magicLinkExpiryMinutes: proyection.magicLinkExpiryMinutes,
+        sessionSsoTtlSeconds: proyection.sessionSsoTtlSeconds,
+        refreshTokenTtlSeconds: proyection.refreshTokenTtlSeconds,
+        webauthnEnabled: proyection.webauthnEnabled,
+        webauthnRpId: proyection.webauthnRpId,
+        webauthnRpName: proyection.webauthnRpName,
+        wellcomeEmail: proyection.wellcomeEmail,
+        registerdEmail: proyection.registerdEmail,
+        disabledUserEmail: proyection.disabledUserEmail,
+        enabledUserEmail: proyection.enabledUserEmail,
+        allowRecoverPass: proyection.allowRecoverPass,
+        recoverPassEmail: proyection.recoverPassEmail,
         version: proyection.version,
       }
     : null;

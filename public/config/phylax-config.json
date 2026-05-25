@@ -18,6 +18,7 @@
       "redirect": "http://localhost:4200/login-redirect",
       "url": "http://localhost:8090/oauth/openid//{{tenant}}/.well-known/openid-configuration",
       "issuer": "http://localhost:8090/oauth/openid/{{tenant}}",
+      "profile": "http://localhost:8090/oauth/openid/{{tenant}}/me",
       "client-id": "phylax-ui",
       "scope": "openid profile email",
       "audience": ["phylax-ui", "phylax-api"],
@@ -27,19 +28,13 @@
     }
   },
   "telemetry": {
-    "name": "",
+    "name": "phylax-ui",
     "exporter": {
       "tracer": {
-        "url": "https://xxxxxxx/v1/traces",
-        "headers": {
-          "x-honeycomb-team": "xxxx"
-        }
+        "url": "http://localhost:8090/v1/traces"
       },
       "logger": {
-        "url": "https://xxxxxx/v1/logs",
-        "headers": {
-          "x-honeycomb-team": "xxxx"
-        }
+        "url": "http://localhost:8090/v1/logs"
       }
     }
   }

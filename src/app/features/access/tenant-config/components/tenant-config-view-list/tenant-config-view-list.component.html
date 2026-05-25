@@ -10,7 +10,11 @@
       <div style="display: flex; flex-direction: row; padding: 10px 10px 0 10px; align-items: center">
         <ng-container *ngTemplateOutlet="actions.theToolbarTemplate() || null"></ng-container>
         <div style="flex: 1"></div>
-        <button mat-raised-button (click)="panel.toggle()">
+        <button
+          mat-raised-button
+          aria-label="{{ panel.expanded ? hideSearchLabel() : showSearchLabel() }}"
+          (click)="panel.toggle()"
+        >
           @if (panel.expanded) {
             <mat-icon>keyboard_arrow_up</mat-icon>
           } @else {
@@ -18,12 +22,12 @@
           }
           {{ 'access.tenant-config.list.filter.button' | transloco }}
         </button>
-        <button mat-icon-button (click)="reload()">
+        <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>
     }
-    <mat-expansion-panel #panel style="margin: 10px">
+    <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
       <h2>{{ 'access.tenant-config.list.search.title' | transloco }}</h2>
       <tenant-config-view-search #searchForm [formControl]="search" />
@@ -39,6 +43,8 @@
       </div>
     } @else {
       <list-view
+        [mode]="'list'"
+        [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
@@ -81,6 +87,150 @@
             let-row="$implicit"
           >
             {{ row.forceMfa }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.dynamic-registration-policy.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.dynamic-registration-policy.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.dynamicRegistrationPolicy }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.allow-register.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.allow-register.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.allowRegister }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.enable-register-users.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.enable-register-users.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.enableRegisterUsers }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.magic-link-enabled.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.magic-link-enabled.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.magicLinkEnabled }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.require-email-verification.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.require-email-verification.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.requireEmailVerification }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.invitation-expiry-days.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.invitation-expiry-days.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.invitationExpiryDays }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.magic-link-expiry-minutes.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.magic-link-expiry-minutes.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.magicLinkExpiryMinutes }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.session-sso-ttl-seconds.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.session-sso-ttl-seconds.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.sessionSsoTtlSeconds }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.refresh-token-ttl-seconds.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.refresh-token-ttl-seconds.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.refreshTokenTtlSeconds }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.webauthn-enabled.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.webauthn-enabled.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.webauthnEnabled }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.webauthn-rp-id.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.webauthn-rp-id.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.webauthnRpId }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.webauthn-rp-name.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.webauthn-rp-name.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.webauthnRpName }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.wellcome-email.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.wellcome-email.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.wellcomeEmail }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.registerd-email.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.registerd-email.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.registerdEmail }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.disabled-user-email.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.disabled-user-email.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.disabledUserEmail }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.enabled-user-email.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.enabled-user-email.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.enabledUserEmail }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.allow-recover-pass.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.allow-recover-pass.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.allowRecoverPass }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.tenant-config.list.column.recover-pass-email.title' | transloco }}"
+            tooltip="{{ 'access.tenant-config.list.column.recover-pass-email.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.recoverPassEmail }}
           </ng-template>
           <ng-template listViewColumn let-row="$implicit">
             <ng-container

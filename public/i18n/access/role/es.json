@@ -62,6 +62,10 @@
         "title": "Nombre",
         "tooltip": "Nombre"
       },
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      },
       "tenant": {
         "title": "inquilino",
         "tooltip": "inquilino"

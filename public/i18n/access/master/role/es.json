@@ -1,0 +1,77 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create role",
+      "title": "Creando nuevo role",
+      "tooltip": "Crea un nuevo registro de role"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete role",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un role"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar role",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail role",
+      "title": "Viendo los valores de un role",
+      "tooltip": "Ver los valores de un role"
+    },
+    "edit": {
+      "label": "Edit role",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un role"
+    }
+  },
+  "form-group": {
+    "name": {
+      "error": {
+        "maxlength": "Nombre tiene que tener menos de 250 caracteres",
+        "required": "Nombre es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Por defecto"
+      }
+    }
+  }
+}

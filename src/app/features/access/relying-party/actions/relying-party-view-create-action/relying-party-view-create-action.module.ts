@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
   declarations: [RelyingPartyViewCreateActionComponent],
   exports: [RelyingPartyViewCreateActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, RelyingPartyViewFormGroupModule, TranslocoModule],
-  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access.relying-party' })],
+  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access/relying-party' })],
   bootstrap: [],
 })
 export class RelyingPartyViewCreateActionModule {}

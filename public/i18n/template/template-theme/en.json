@@ -1,0 +1,66 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create template theme",
+      "title": "Creating new theme template",
+      "tooltip": "Create a new template theme record"
+    },
+    "edit": {
+      "label": "Edit template theme",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a theme template"
+    }
+  },
+  "form-group": {
+    "customCss": {
+      "error": {
+        "maxlength": "custom css must be less than 250 characters"
+      }
+    },
+    "name": {
+      "error": {
+        "maxlength": "Name must be less than 250 characters",
+        "required": "Name obligatory"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "tenant is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "custom-css": {
+        "title": "custom css",
+        "tooltip": "custom css"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "is-default": {
+        "title": "is default",
+        "tooltip": "is default"
+      },
+      "name": {
+        "title": "name",
+        "tooltip": "name"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      }
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "name-asc": "name-asc",
+        "name-desc": "name-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

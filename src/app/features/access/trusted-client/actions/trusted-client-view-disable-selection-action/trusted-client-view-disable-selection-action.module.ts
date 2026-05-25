@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
     TrustedClientViewFormGroupModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/trusted-client', alias: 'access.trusted-client' })],
+  providers: [provideTranslocoScope({ scope: 'access/trusted-client', alias: 'access/trusted-client' })],
   bootstrap: [],
 })
 export class TrustedClientViewDisableSelectionActionModule {}

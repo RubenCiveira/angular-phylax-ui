@@ -62,6 +62,10 @@
         "title": "name",
         "tooltip": "name"
       },
+      "relying-party": {
+        "title": "relying party",
+        "tooltip": "relying party"
+      },
       "tenant": {
         "title": "tenant",
         "tooltip": "tenant"

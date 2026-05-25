@@ -1,0 +1,71 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create platform identity",
+      "title": "Creando nuevo platform identity",
+      "tooltip": "Crea un nuevo registro de platform identity"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete platform identity",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un platform identity"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar platform identity",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail platform identity",
+      "title": "Viendo los valores de un platform identity",
+      "tooltip": "Ver los valores de un platform identity"
+    },
+    "edit": {
+      "label": "Edit platform identity",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un platform identity"
+    }
+  },
+  "form-group": {
+    "user": {
+      "error": {
+        "required": "usuario es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
+      },
+      "trusted-client": {
+        "title": "Cliente de confianza",
+        "tooltip": "Cliente de confianza"
+      },
+      "user": {
+        "title": "usuario",
+        "tooltip": "usuario"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

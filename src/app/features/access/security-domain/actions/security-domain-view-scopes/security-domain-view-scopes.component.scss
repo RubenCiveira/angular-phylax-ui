@@ -3,5 +3,25 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.scopes-container {
+  display: grid;
+  gap: 2rem;
+  margin: 2rem;
+  grid-auto-flow: row dense; /* Permite que los elementos ocupen el espacio libre */
+  grid-template-columns: repeat(auto-fit, minmax(26%, 1fr));
+}
+
+.scope-selector {
+  border: solid silver 1px;
+  display: flex;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.scope-selector .label {
+  flex: 1;
 }

@@ -1,5 +1,31 @@
 {
   "action": {
+    "accept": {
+      "cancelBtn": "Do not accept",
+      "content": "Confirm you want to accept",
+      "dismiss": "Accept",
+      "label": "accept user",
+      "okBtn": "accept registration",
+      "report": "Accepted",
+      "title": "accept",
+      "tooltip": "Modify a user's values"
+    },
+    "accept-selection": {
+      "cancelBtn": "Do not accept",
+      "content": "Confirm that you want to accept the selected records",
+      "dismiss": "Accept",
+      "label": "accept user",
+      "okBtn": "accept registrations",
+      "progress": "Accepting",
+      "report": "Records have been accepted",
+      "title": "accept selection",
+      "tooltip": "accept selected records"
+    },
+    "client-identities": {
+      "label": "clientIdentities",
+      "title": "clientIdentities",
+      "tooltip": "clientIdentities"
+    },
     "create": {
       "createButton": "Create",
       "label": "Create",
@@ -84,6 +110,32 @@
       "title": "identities",
       "tooltip": "identities"
     },
+    "platform-identities": {
+      "label": "platformIdentities",
+      "title": "platformIdentities",
+      "tooltip": "platformIdentities"
+    },
+    "reject": {
+      "cancelBtn": "No, reject",
+      "content": "Confirm you want to reject",
+      "dismiss": "Accept",
+      "label": "reject user",
+      "okBtn": "reject registration",
+      "report": "It has been rejected",
+      "title": "reject",
+      "tooltip": "Modify a user's values"
+    },
+    "reject-selection": {
+      "cancelBtn": "No, reject",
+      "content": "Confirm that you want to reject the selected records",
+      "dismiss": "Accept",
+      "label": "reject user",
+      "okBtn": "reject registrations",
+      "progress": "Rejecting",
+      "report": "Records have been rejected",
+      "title": "reject selection",
+      "tooltip": "reject selected records"
+    },
     "unlock": {
       "cancelBtn": "No unlock",
       "content": "Confirm you want to unlock",
@@ -104,9 +156,27 @@
       "report": "Records have been unlocked",
       "title": "unlock selection",
       "tooltip": "unlock the selected records"
+    },
+    "user-group-memberships": {
+      "label": "userGroupMemberships",
+      "title": "userGroupMemberships",
+      "tooltip": "userGroupMemberships"
+    },
+    "user-role-assignaments": {
+      "label": "userRoleAssignments",
+      "title": "userRoleAssignments",
+      "tooltip": "userRoleAssignments"
     }
   },
   "form-group": {
+    "approve": {
+      "options": {
+        "accepted": "ACCEPTED",
+        "pending": "PENDING",
+        "rejected": "REJECTED",
+        "unverified": "UNVERIFIED"
+      }
+    },
     "blocked-until": {
       "label": "Blocked until",
       "placeholder": "A blocked user cannot log in to the system until these dates in their login key will receive a generic message that is not allowed",
@@ -162,16 +232,39 @@
       "placeholder": "The temporary password of user"
     },
     "tenant": {
+      "error": {
+        "required": "tenant is required"
+      },
       "label": "renter",
       "placeholder": "Users who have no tenant are roots of the system"
     },
     "use-second-factors": {
       "label": "use second factors",
       "placeholder": "If true, the user has an OTP to force mfa at login"
+    },
+    "welcome-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "wellcome-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
     }
   },
   "list": {
     "column": {
+      "approve": {
+        "title": "approve",
+        "tooltip": "approve"
+      },
+      "approved": {
+        "title": "approved",
+        "tooltip": "approved"
+      },
       "blocked-until": {
         "title": "blocked until",
         "tooltip": "blocked until"
@@ -179,6 +272,10 @@
       "email": {
         "title": "email",
         "tooltip": "email"
+      },
+      "email-verified": {
+        "title": "email verified",
+        "tooltip": "email verified"
       },
       "enabled": {
         "title": "enabled",
@@ -200,6 +297,10 @@
         "title": "provider",
         "tooltip": "provider"
       },
+      "rejected": {
+        "title": "rejected",
+        "tooltip": "rejected"
+      },
       "temporal-password": {
         "title": "temporal password",
         "tooltip": "temporal password"
@@ -211,6 +312,14 @@
       "use-second-factors": {
         "title": "use second factors",
         "tooltip": "use second factors"
+      },
+      "welcome-at": {
+        "title": "welcome at",
+        "tooltip": "welcome at"
+      },
+      "wellcome-at": {
+        "title": "wellcome at",
+        "tooltip": "wellcome at"
       }
     },
     "filter": {

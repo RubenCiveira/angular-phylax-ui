@@ -1,0 +1,125 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create tenant login provider",
+      "title": "Creando nuevo tenant login provider",
+      "tooltip": "Crea un nuevo registro de tenant login provider"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete tenant login provider",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar tenant login provider",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail tenant login provider",
+      "title": "Viendo los valores de un tenant login provider",
+      "tooltip": "Ver los valores de un tenant login provider"
+    },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable tenant login provider",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable tenant login provider",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
+    "edit": {
+      "label": "Edit tenant login provider",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable tenant login provider",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable tenant login provider",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "name": {
+      "error": {
+        "maxlength": "Nombre tiene que tener menos de 250 caracteres",
+        "required": "Nombre es obligatorio"
+      }
+    },
+    "privateKey": {
+      "error": {
+        "maxlength": "clave privada tiene que tener menos de 250 caracteres"
+      }
+    },
+    "publicKey": {
+      "error": {
+        "maxlength": "clave pública tiene que tener menos de 250 caracteres"
+      }
+    },
+    "source": {
+      "error": {
+        "required": "fuente es obligatorio"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino es obligatorio"
+      }
+    },
+    "usersEnabledByDefault": {
+      "error": {
+        "required": "usuarios habilitados de forma predeterminada es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

@@ -3,31 +3,79 @@ import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { TranslocoService } from '@jsverse/transloco';
-import { AppStateService } from '@common/context/state/app-state.service';
-import { InstrumentationService } from '@common/context/observability/instrumentation.service';
-import { LayoutStateService } from './bootstrap/layout/container/service/layout-state.service';
-import { of } from 'rxjs';
+import { TranslocoService, TRANSLOCO_CONFIG } from '@jsverse/transloco';
+import { AppStateService } from '@shared/context/state/app-state.service';
+import { InstrumentationService } from '@shared/context/observability/instrumentation.service';
+import { LayoutStateService } from './bootstrap/layout/layout-state.service';
+import { BehaviorSubject, of } from 'rxjs';
+import { IDENTITY_PROVIDER } from '@shared/context/identity/identity-provider.interface';
+import { IdentityService } from '@shared/context/identity/identity.service';
+import { TenantRepository } from '@features/access/tenant/repository/tenant-repository.service';
+import { AppConfigService } from '@shared/context/config/app-config.service';
+import { RouteAccessService } from './bootstrap/layout/menu/route-accesible.service';
+import { selectorProvider } from '@shared/data/selector-provider';
 
 @Component({ selector: 'router-outlet', template: '' })
 class MockRouterOutlet {}
 
 // Mock para TranslocoService
 class MockTranslocoService {
+  config = { reRenderOnLangChange: false };
+  langChanges$ = new BehaviorSubject('en');
   translate = jasmine.createSpy('translate').and.returnValue('');
   setActiveLang = jasmine.createSpy('setActiveLang').and.returnValue('');
 }
 
 class MockAppStateService {
-  language = of('lang');
+  private languageSubject = new BehaviorSubject('lang');
+  private tenantSubject = new BehaviorSubject('main');
+  private contextSubject = new BehaviorSubject<any>(null);
+  language = Object.assign(this.languageSubject, {
+    set: jasmine.createSpy('set').and.callFake((value) => this.languageSubject.next(value)),
+  });
+  tenant = Object.assign(this.tenantSubject, {
+    set: jasmine.createSpy('set').and.callFake((value) => this.tenantSubject.next(value)),
+  });
+  context = {
+    tenant: Object.assign(this.contextSubject, {
+      set: jasmine.createSpy('set').and.callFake((value) => this.contextSubject.next(value)),
+    }),
+  };
+  userInfo = { main: of({ authenticated: false }) };
 }
 class MockInstrumentationService {
   activate = jasmine.createSpy('activate').and.returnValue('');
 }
 class MockLayoutStateService {
-  menu = {
-    set: jasmine.createSpy('set').and.returnValue(''),
-  };
+  private menuSubject = new BehaviorSubject([]);
+  menu = Object.assign(this.menuSubject, {
+    set: jasmine.createSpy('set').and.callFake((value) => this.menuSubject.next(value)),
+  });
+}
+
+class MockIdentityService {
+  bootstrap = jasmine.createSpy('bootstrap').and.returnValue(of(undefined));
+}
+
+class MockTenantRepository {
+  selectorProvider = jasmine.createSpy('selectorProvider').and.callFake(() =>
+    selectorProvider({
+      search: () => of([]),
+      select: () => of(undefined),
+      equals: () => false,
+      display: () => '',
+      value: () => ({ $ref: '' }),
+    }),
+  );
+}
+
+class MockAppConfigService {
+  ['meta.title'] = of('App');
+}
+
+class MockRouteAccessService {
+  checkRouteGuards = jasmine.createSpy('checkRouteGuards').and.returnValue(of(true));
+  isUrlActive = jasmine.createSpy('isUrlActive').and.returnValue(false);
 }
 
 describe('AppComponent', () => {
@@ -37,9 +85,23 @@ describe('AppComponent', () => {
       providers: [
         provideRouter([]),
         { provide: TranslocoService, useClass: MockTranslocoService },
+        {
+          provide: TRANSLOCO_CONFIG,
+          useValue: {
+            availableLangs: ['en'],
+            defaultLang: 'en',
+            reRenderOnLangChange: false,
+            prodMode: true,
+          },
+        },
         { provide: AppStateService, useClass: MockAppStateService },
         { provide: InstrumentationService, useClass: MockInstrumentationService },
         { provide: LayoutStateService, useClass: MockLayoutStateService },
+        { provide: IDENTITY_PROVIDER, useValue: [] },
+        { provide: IdentityService, useClass: MockIdentityService },
+        { provide: TenantRepository, useClass: MockTenantRepository },
+        { provide: AppConfigService, useClass: MockAppConfigService },
+        { provide: RouteAccessService, useClass: MockRouteAccessService },
       ], // Reemplazo de RouterTestingModule
     }).compileComponents();
   });

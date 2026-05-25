@@ -1,5 +1,31 @@
 {
   "action": {
+    "accept": {
+      "cancelBtn": "No accept",
+      "content": "Confirme que quiere accept",
+      "dismiss": "Aceptar",
+      "label": "accept user",
+      "okBtn": "accept registro",
+      "report": "Se ha accept",
+      "title": "accept",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "accept-selection": {
+      "cancelBtn": "No accept",
+      "content": "Confirme que quiere accept los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "accept user",
+      "okBtn": "accept registros",
+      "progress": "Se está accept",
+      "report": "Se han accept los registros",
+      "title": "accept selección",
+      "tooltip": "accept los registros seleccionados"
+    },
+    "client-identities": {
+      "label": "clientIdentities",
+      "title": "clientIdentities",
+      "tooltip": "clientIdentities"
+    },
     "create": {
       "createButton": "Create",
       "label": "Create",
@@ -84,6 +110,32 @@
       "title": "identities",
       "tooltip": "identities"
     },
+    "platform-identities": {
+      "label": "platformIdentities",
+      "title": "platformIdentities",
+      "tooltip": "platformIdentities"
+    },
+    "reject": {
+      "cancelBtn": "No reject",
+      "content": "Confirme que quiere reject",
+      "dismiss": "Aceptar",
+      "label": "reject user",
+      "okBtn": "reject registro",
+      "report": "Se ha reject",
+      "title": "reject",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "reject-selection": {
+      "cancelBtn": "No reject",
+      "content": "Confirme que quiere reject los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "reject user",
+      "okBtn": "reject registros",
+      "progress": "Se está reject",
+      "report": "Se han reject los registros",
+      "title": "reject selección",
+      "tooltip": "reject los registros seleccionados"
+    },
     "unlock": {
       "cancelBtn": "No unlock",
       "content": "Confirme que quiere unlock",
@@ -104,9 +156,27 @@
       "report": "Se han unlock los registros",
       "title": "unlock selección",
       "tooltip": "unlock los registros seleccionados"
+    },
+    "user-group-memberships": {
+      "label": "userGroupMemberships",
+      "title": "userGroupMemberships",
+      "tooltip": "userGroupMemberships"
+    },
+    "user-role-assignaments": {
+      "label": "userRoleAssignaments",
+      "title": "userRoleAssignaments",
+      "tooltip": "userRoleAssignaments"
     }
   },
   "form-group": {
+    "approve": {
+      "options": {
+        "accepted": "ACEPTADO",
+        "pending": "PENDIENTE",
+        "rejected": "RECHAZADO",
+        "unverified": "No verificado"
+      }
+    },
     "blocked-until": {
       "label": "Bloqueado hasta",
       "placeholder": "Un usuario bloqueado no puede iniciar sesión en el sistema hasta estas fechas en su tonalidad de inicio de sesión recibirá un mensaje genérico no permitido",
@@ -162,16 +232,39 @@
       "placeholder": "El temporal password de user"
     },
     "tenant": {
+      "error": {
+        "required": "inquilino es obligatorio"
+      },
       "label": "inquilino",
       "placeholder": "Los usuarios que no tienen inquilino son raíces del sistema"
     },
     "use-second-factors": {
       "label": "utilizar segundos factores",
       "placeholder": "Si es true, el usuario tiene un OTP para forzar el mfa en el inicio de sesión"
+    },
+    "welcome-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "wellcome-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
     }
   },
   "list": {
     "column": {
+      "approve": {
+        "title": "approve",
+        "tooltip": "approve"
+      },
+      "approved": {
+        "title": "aprobado",
+        "tooltip": "aprobado"
+      },
       "blocked-until": {
         "title": "Bloqueado hasta",
         "tooltip": "Bloqueado hasta"
@@ -179,6 +272,10 @@
       "email": {
         "title": "correo electrónico ",
         "tooltip": "correo electrónico "
+      },
+      "email-verified": {
+        "title": "Correo Electrónico Verificado",
+        "tooltip": "Correo Electrónico Verificado"
       },
       "enabled": {
         "title": "habilitado",
@@ -200,6 +297,10 @@
         "title": "proveedor",
         "tooltip": "proveedor"
       },
+      "rejected": {
+        "title": "rechazado",
+        "tooltip": "rechazado"
+      },
       "temporal-password": {
         "title": "contraseña temporal",
         "tooltip": "contraseña temporal"
@@ -211,6 +312,14 @@
       "use-second-factors": {
         "title": "utilizar segundos factores",
         "tooltip": "utilizar segundos factores"
+      },
+      "welcome-at": {
+        "title": "Bienvenido a",
+        "tooltip": "Bienvenido a"
+      },
+      "wellcome-at": {
+        "title": "wellcome en",
+        "tooltip": "wellcome en"
       }
     },
     "filter": {

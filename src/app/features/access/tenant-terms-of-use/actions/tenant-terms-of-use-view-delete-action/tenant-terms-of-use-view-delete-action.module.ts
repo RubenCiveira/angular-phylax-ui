@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
     TenantTermsOfUseViewFormGroupModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/tenant-terms-of-use', alias: 'access.tenant-terms-of-use' })],
+  providers: [provideTranslocoScope({ scope: 'access/tenant-terms-of-use', alias: 'access/tenant-terms-of-use' })],
   bootstrap: [],
 })
 export class TenantTermsOfUseViewDeleteActionModule {}

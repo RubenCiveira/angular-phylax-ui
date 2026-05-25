@@ -2,7 +2,7 @@
 import { UserViewStandarActionsModule } from 'app/features/access/user/components/user-view-standar-actions/user-view-standar-actions.module';
 import { UserViewListComponent } from './user-view-list.component';
 import { CommonModule } from '@angular/common';
-import { ListViewModule } from '@common/toolkit/list-view/list-view.module';
+import { ListViewModule } from '@shared/toolkit/list-view/list-view.module';
 import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { NgModule } from '@angular/core';
     UserViewSearchModule,
     UserViewStandarActionsModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/user', alias: 'access.user' })],
+  providers: [provideTranslocoScope({ scope: 'access/user', alias: 'access/user' })],
   bootstrap: [],
 })
 export class UserViewListModule {}

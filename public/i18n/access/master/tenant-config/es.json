@@ -1,0 +1,113 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create tenant config",
+      "title": "Creando nuevo tenant config",
+      "tooltip": "Crea un nuevo registro de tenant config"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete tenant config",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un tenant config"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar tenant config",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail tenant config",
+      "title": "Viendo los valores de un tenant config",
+      "tooltip": "Ver los valores de un tenant config"
+    },
+    "edit": {
+      "label": "Edit tenant config",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un tenant config"
+    }
+  },
+  "form-group": {
+    "forceMfa": {
+      "error": {
+        "required": "fuerza mfa es obligatorio"
+      }
+    },
+    "innerLabel": {
+      "error": {
+        "maxlength": "etiqueta interior tiene que tener menos de 250 caracteres"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "allow-recover-pass": {
+        "title": "permitir pase de recuperación",
+        "tooltip": "permitir pase de recuperación"
+      },
+      "allow-register": {
+        "title": "Permitir registrar:",
+        "tooltip": "Permitir registrar:"
+      },
+      "disabled-user-email": {
+        "title": "correo electrónico de usuario deshabilitado",
+        "tooltip": "correo electrónico de usuario deshabilitado"
+      },
+      "enable-register-users": {
+        "title": "habilitar registrar usuarios",
+        "tooltip": "habilitar registrar usuarios"
+      },
+      "enabled-user-email": {
+        "title": "correo electrónico de usuario habilitado",
+        "tooltip": "correo electrónico de usuario habilitado"
+      },
+      "force-mfa": {
+        "title": "fuerza mfa",
+        "tooltip": "fuerza mfa"
+      },
+      "inner-label": {
+        "title": "etiqueta interior",
+        "tooltip": "etiqueta interior"
+      },
+      "recover-pass-email": {
+        "title": "recuperar correo electrónico de pase",
+        "tooltip": "recuperar correo electrónico de pase"
+      },
+      "registerd-email": {
+        "title": "email registerd",
+        "tooltip": "email registerd"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "wellcome-email": {
+        "title": "correo electrónico de wellcome",
+        "tooltip": "correo electrónico de wellcome"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

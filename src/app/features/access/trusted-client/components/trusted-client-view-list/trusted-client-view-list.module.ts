@@ -2,7 +2,7 @@
 import { TrustedClientViewStandarActionsModule } from 'app/features/access/trusted-client/components/trusted-client-view-standar-actions/trusted-client-view-standar-actions.module';
 import { TrustedClientViewListComponent } from './trusted-client-view-list.component';
 import { CommonModule } from '@angular/common';
-import { ListViewModule } from '@common/toolkit/list-view/list-view.module';
+import { ListViewModule } from '@shared/toolkit/list-view/list-view.module';
 import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { NgModule } from '@angular/core';
     TrustedClientViewSearchModule,
     TrustedClientViewStandarActionsModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/trusted-client', alias: 'access.trusted-client' })],
+  providers: [provideTranslocoScope({ scope: 'access/trusted-client', alias: 'access/trusted-client' })],
   bootstrap: [],
 })
 export class TrustedClientViewListModule {}

@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
   declarations: [TenantViewDetailComponent],
   exports: [TenantViewDetailComponent],
   imports: [ReactiveFormsModule, TenantViewFormGroupModule],
-  providers: [provideTranslocoScope({ scope: 'access/tenant', alias: 'access.tenant' })],
+  providers: [provideTranslocoScope({ scope: 'access/tenant', alias: 'access/tenant' })],
   bootstrap: [],
 })
 export class TenantViewDetailModule {}

@@ -1,5 +1,16 @@
 {
   "action": {
+    "conditions": {
+      "label": "conditions",
+      "title": "conditions",
+      "tooltip": "conditions"
+    },
+    "config": {
+      "label": "config",
+      "saveBtn": "Update",
+      "title": "config",
+      "tooltip": "config"
+    },
     "create": {
       "createButton": "Create",
       "label": "Create",
@@ -78,6 +89,11 @@
       "report": "Se han enable los registros",
       "title": "enable selección",
       "tooltip": "enable los registros seleccionados"
+    },
+    "providers": {
+      "label": "providers",
+      "title": "providers",
+      "tooltip": "providers"
     }
   },
   "form-group": {
@@ -99,6 +115,17 @@
       },
       "label": "habilitado",
       "placeholder": "Los usuarios de un inquilino no habilitado no pudieron iniciar sesión en el sistema"
+    },
+    "mark-for-delete-time": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "markForDelete": {
+      "error": {
+        "required": "Marcar para eliminar es obligatorio"
+      }
     },
     "name": {
       "error": {
@@ -131,9 +158,21 @@
         "title": "habilitado",
         "tooltip": "habilitado"
       },
+      "mark-for-delete": {
+        "title": "Marcar para eliminar",
+        "tooltip": "Marcar para eliminar"
+      },
+      "mark-for-delete-time": {
+        "title": "Marcar para eliminar",
+        "tooltip": "Marcar para eliminar"
+      },
       "name": {
         "title": "Nombre",
         "tooltip": "Nombre"
+      },
+      "root": {
+        "title": "raíz",
+        "tooltip": "raíz"
       }
     },
     "filter": {
@@ -152,6 +191,8 @@
     "order": {
       "label": "orden",
       "options": {
+        "domain-asc": "domain-asc",
+        "domain-desc": "domain-desc",
         "name-asc": "Nombre ASC",
         "name-desc": "Nombre: DESC",
         "null": "Por defecto"

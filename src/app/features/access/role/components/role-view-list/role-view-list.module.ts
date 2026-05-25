@@ -2,7 +2,7 @@
 import { RoleViewStandarActionsModule } from 'app/features/access/role/components/role-view-standar-actions/role-view-standar-actions.module';
 import { RoleViewListComponent } from './role-view-list.component';
 import { CommonModule } from '@angular/common';
-import { ListViewModule } from '@common/toolkit/list-view/list-view.module';
+import { ListViewModule } from '@shared/toolkit/list-view/list-view.module';
 import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { NgModule } from '@angular/core';
     RoleViewStandarActionsModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/role', alias: 'access.role' })],
+  providers: [provideTranslocoScope({ scope: 'access/role', alias: 'access/role' })],
   bootstrap: [],
 })
 export class RoleViewListModule {}

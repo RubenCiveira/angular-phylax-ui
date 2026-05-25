@@ -10,7 +10,11 @@
       <div style="display: flex; flex-direction: row; padding: 10px 10px 0 10px; align-items: center">
         <ng-container *ngTemplateOutlet="actions.theToolbarTemplate() || null"></ng-container>
         <div style="flex: 1"></div>
-        <button mat-raised-button (click)="panel.toggle()">
+        <button
+          mat-raised-button
+          aria-label="{{ panel.expanded ? hideSearchLabel() : showSearchLabel() }}"
+          (click)="panel.toggle()"
+        >
           @if (panel.expanded) {
             <mat-icon>keyboard_arrow_up</mat-icon>
           } @else {
@@ -18,12 +22,12 @@
           }
           {{ 'access.trusted-client.list.filter.button' | transloco }}
         </button>
-        <button mat-icon-button (click)="reload()">
+        <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>
     }
-    <mat-expansion-panel #panel style="margin: 10px">
+    <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
       <h2>{{ 'access.trusted-client.list.search.title' | transloco }}</h2>
       <trusted-client-view-search #searchForm [formControl]="search" />
@@ -39,6 +43,8 @@
       </div>
     } @else {
       <list-view
+        [mode]="'card'"
+        [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
@@ -68,6 +74,14 @@
           </ng-template>
           <ng-template
             listViewColumn
+            title="{{ 'access.trusted-client.list.column.allow-all-scopes.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.allow-all-scopes.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.allowAllScopes }}
+          </ng-template>
+          <ng-template
+            listViewColumn
             title="{{ 'access.trusted-client.list.column.public-allow.title' | transloco }}"
             tooltip="{{ 'access.trusted-client.list.column.public-allow.tooltip' | transloco }}"
             let-row="$implicit"
@@ -84,11 +98,53 @@
           </ng-template>
           <ng-template
             listViewColumn
-            title="{{ 'access.trusted-client.list.column.allowed-redirects.title' | transloco }}"
-            tooltip="{{ 'access.trusted-client.list.column.allowed-redirects.tooltip' | transloco }}"
+            title="{{ 'access.trusted-client.list.column.is-resource-server.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.is-resource-server.tooltip' | transloco }}"
             let-row="$implicit"
           >
-            {{ row.allowedRedirects }}
+            {{ row.isResourceServer }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.require-pkce.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.require-pkce.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.requirePkce }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.back-channel-logout-uri.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.back-channel-logout-uri.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.backChannelLogoutUri }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.back-channel-logout-session-required.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.back-channel-logout-session-required.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.backChannelLogoutSessionRequired }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.front-channel-logout-uri.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.front-channel-logout-uri.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.frontChannelLogoutUri }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.front-channel-logout-session-required.title' | transloco }}"
+            tooltip="{{
+              'access.trusted-client.list.column.front-channel-logout-session-required.tooltip' | transloco
+            }}"
+            let-row="$implicit"
+          >
+            {{ row.frontChannelLogoutSessionRequired }}
           </ng-template>
           <ng-template
             listViewColumn
@@ -97,6 +153,134 @@
             let-row="$implicit"
           >
             {{ row.enabled }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.registration-access.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.registration-access.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.registrationAccess }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.client-name.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.client-name.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.clientName }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.logo-uri.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.logo-uri.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.logoUri }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.client-uri.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.client-uri.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.clientUri }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.policy-uri.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.policy-uri.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.policyUri }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.tos-uri.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.tos-uri.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.tosUri }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.token-endpoint-auth-method.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.token-endpoint-auth-method.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.tokenEndpointAuthMethod }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.grant-types-json.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.grant-types-json.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.grantTypesJson }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.response-types-json.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.response-types-json.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.responseTypesJson }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.dynamically-registered.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.dynamically-registered.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.dynamicallyRegistered }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.registered-at.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.registered-at.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.registeredAt }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.allowed-scopes-m-2m.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.allowed-scopes-m-2m.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.allowedScopesM2m }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.m-2m-token-ttl-seconds.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.m-2m-token-ttl-seconds.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.m2mTokenTtlSeconds }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.request-object-signing-alg.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.request-object-signing-alg.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.requestObjectSigningAlg }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.jwks-uri.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.jwks-uri.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.jwksUri }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.trusted-client.list.column.jwks-json.title' | transloco }}"
+            tooltip="{{ 'access.trusted-client.list.column.jwks-json.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.jwksJson }}
           </ng-template>
           <ng-template listViewColumn let-row="$implicit">
             <ng-container

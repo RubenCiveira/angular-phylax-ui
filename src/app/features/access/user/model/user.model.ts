@@ -8,11 +8,13 @@ export interface User {
   name: string;
   password: string;
   email?: string;
+  wellcomeAt?: Date;
+  emailVerified?: boolean;
   enabled?: boolean;
+  approve?: 'unverified' | 'pending' | 'accepted' | 'rejected' | null;
   temporalPassword?: boolean;
   useSecondFactors?: boolean;
   blockedUntil?: Date;
-  language?: string;
   provider?: string;
   version?: number;
 }
@@ -21,7 +23,6 @@ export interface UserFilter {
   uids?: string[];
   limit?: number;
   order?: string;
-  root?: string[];
   name?: string;
   tenant?: string[];
   tenants?: string[];
@@ -32,11 +33,13 @@ export interface UserProjection {
   name: string;
   password: string;
   email?: string;
+  wellcomeAt?: Date;
+  emailVerified?: boolean;
   enabled?: boolean;
+  approve?: 'unverified' | 'pending' | 'accepted' | 'rejected' | null;
   temporalPassword?: boolean;
   useSecondFactors?: boolean;
   blockedUntil?: Date;
-  language?: string;
   provider?: string;
   version?: number;
 }
@@ -49,11 +52,13 @@ export function userProjectionToValue(proyection: User | UserProjection | null |
         name: proyection.name,
         password: proyection.password,
         email: proyection.email,
+        wellcomeAt: proyection.wellcomeAt,
+        emailVerified: proyection.emailVerified,
         enabled: proyection.enabled,
+        approve: proyection.approve,
         temporalPassword: proyection.temporalPassword,
         useSecondFactors: proyection.useSecondFactors,
         blockedUntil: proyection.blockedUntil,
-        language: proyection.language,
         provider: proyection.provider,
         version: proyection.version,
       }

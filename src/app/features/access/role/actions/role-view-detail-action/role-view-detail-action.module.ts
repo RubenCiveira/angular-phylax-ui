@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
   declarations: [RoleViewDetailActionComponent],
   exports: [RoleViewDetailActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, RoleViewDetailModule, TranslocoModule],
-  providers: [provideTranslocoScope({ scope: 'access/role', alias: 'access.role' })],
+  providers: [provideTranslocoScope({ scope: 'access/role', alias: 'access/role' })],
   bootstrap: [],
 })
 export class RoleViewDetailActionModule {}

@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
     RelyingPartyViewFormGroupModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access.relying-party' })],
+  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access/relying-party' })],
   bootstrap: [],
 })
 export class RelyingPartyViewDeleteActionModule {}

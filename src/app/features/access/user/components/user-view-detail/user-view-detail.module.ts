@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
   declarations: [UserViewDetailComponent],
   exports: [UserViewDetailComponent],
   imports: [ReactiveFormsModule, UserViewFormGroupModule],
-  providers: [provideTranslocoScope({ scope: 'access/user', alias: 'access.user' })],
+  providers: [provideTranslocoScope({ scope: 'access/user', alias: 'access/user' })],
   bootstrap: [],
 })
 export class UserViewDetailModule {}

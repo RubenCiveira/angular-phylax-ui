@@ -2,7 +2,7 @@
 import { TenantViewStandarActionsModule } from 'app/features/access/tenant/components/tenant-view-standar-actions/tenant-view-standar-actions.module';
 import { TenantViewListComponent } from './tenant-view-list.component';
 import { CommonModule } from '@angular/common';
-import { ListViewModule } from '@common/toolkit/list-view/list-view.module';
+import { ListViewModule } from '@shared/toolkit/list-view/list-view.module';
 import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { NgModule } from '@angular/core';
     TenantViewStandarActionsModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/tenant', alias: 'access.tenant' })],
+  providers: [provideTranslocoScope({ scope: 'access/tenant', alias: 'access/tenant' })],
   bootstrap: [],
 })
 export class TenantViewListModule {}

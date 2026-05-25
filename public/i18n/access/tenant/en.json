@@ -1,5 +1,16 @@
 {
   "action": {
+    "conditions": {
+      "label": "conditions",
+      "title": "conditions",
+      "tooltip": "conditions"
+    },
+    "config": {
+      "label": "config",
+      "saveBtn": "Update",
+      "title": "config",
+      "tooltip": "config"
+    },
     "create": {
       "createButton": "Create",
       "label": "Create",
@@ -78,6 +89,11 @@
       "report": "Records have been enabled",
       "title": "enable selection",
       "tooltip": "enable selected records"
+    },
+    "providers": {
+      "label": "Providers",
+      "title": "Providers",
+      "tooltip": "Providers"
     }
   },
   "form-group": {
@@ -99,6 +115,17 @@
       },
       "label": "security cleared",
       "placeholder": "Users of a non-enabled tenant could not log into the system"
+    },
+    "mark-for-delete-time": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "markForDelete": {
+      "error": {
+        "required": "Flag to delete is required"
+      }
     },
     "name": {
       "error": {
@@ -131,9 +158,21 @@
         "title": "enabled",
         "tooltip": "enabled"
       },
+      "mark-for-delete": {
+        "title": "mark for delete",
+        "tooltip": "mark for delete"
+      },
+      "mark-for-delete-time": {
+        "title": "mark for delete time",
+        "tooltip": "mark for delete time"
+      },
       "name": {
         "title": "name",
         "tooltip": "name"
+      },
+      "root": {
+        "title": "root",
+        "tooltip": "root"
       }
     },
     "filter": {
@@ -152,6 +191,8 @@
     "order": {
       "label": "order",
       "options": {
+        "domain-asc": "domain-asc",
+        "domain-desc": "domain-desc",
         "name-asc": "name-asc",
         "name-desc": "name-desc",
         "null": "Default"

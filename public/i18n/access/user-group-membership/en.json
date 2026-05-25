@@ -1,0 +1,79 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create user group membership",
+      "title": "Creating new user group membership",
+      "tooltip": "Create a new user group membership record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete user group membership",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a user group membership"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete user group membership",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail user group membership",
+      "title": "Viewing the values of a user group membership",
+      "tooltip": "View the values of a user group membership"
+    },
+    "edit": {
+      "label": "Edit user group membership",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a user group membership"
+    }
+  },
+  "form-group": {
+    "user": {
+      "error": {
+        "required": "Username is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "groups": {
+        "title": "groups",
+        "tooltip": "groups"
+      },
+      "relying-party": {
+        "title": "relying party",
+        "tooltip": "relying party"
+      },
+      "roles": {
+        "title": "roles",
+        "tooltip": "roles"
+      },
+      "trusted-client": {
+        "title": "trusted client",
+        "tooltip": "trusted client"
+      },
+      "user": {
+        "title": "user",
+        "tooltip": "user"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  }
+}

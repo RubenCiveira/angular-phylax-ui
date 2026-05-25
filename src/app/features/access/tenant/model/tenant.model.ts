@@ -3,9 +3,11 @@
 export interface Tenant {
   uid: string;
   name: string;
+  root?: boolean;
   domain: string;
   enabled: boolean;
-  accessToAllApplications?: boolean;
+  markForDelete: boolean;
+  markForDeleteTime?: Date;
   version?: number;
 }
 export interface TenantFilter {
@@ -18,9 +20,11 @@ export interface TenantFilter {
 export interface TenantProjection {
   uid: string;
   name: string;
+  root?: boolean;
   domain: string;
   enabled: boolean;
-  accessToAllApplications?: boolean;
+  markForDelete: boolean;
+  markForDeleteTime?: Date;
   version?: number;
 }
 export function tenantProjectionToValue(proyection: Tenant | TenantProjection | null | undefined): Tenant | null {
@@ -28,9 +32,11 @@ export function tenantProjectionToValue(proyection: Tenant | TenantProjection | 
     ? {
         uid: proyection.uid,
         name: proyection.name,
+        root: proyection.root,
         domain: proyection.domain,
         enabled: proyection.enabled,
-        accessToAllApplications: proyection.accessToAllApplications,
+        markForDelete: proyection.markForDelete,
+        markForDeleteTime: proyection.markForDeleteTime,
         version: proyection.version,
       }
     : null;

@@ -49,6 +49,13 @@
     }
   },
   "form-group": {
+    "dynamic-registration-policy": {
+      "options": {
+        "disabled": "disabled",
+        "open": "open",
+        "token-required": "token_required"
+      }
+    },
     "force-mfa": {
       "label": "mfa force",
       "placeholder": "Indicates whether m f a multi-factor authentication applies for the tenant"
@@ -67,16 +74,75 @@
         "maxlength": "inner tag must be less than 250 characters"
       }
     },
+    "invitationExpiryDays": {
+      "error": {
+        "required": "invitation expiration days is required"
+      }
+    },
+    "magicLinkExpiryMinutes": {
+      "error": {
+        "required": "magic link expiry minutes is required"
+      }
+    },
+    "refreshTokenTtlSeconds": {
+      "error": {
+        "required": "update token ttl seconds is required"
+      }
+    },
+    "requireEmailVerification": {
+      "error": {
+        "required": "Require email verification"
+      }
+    },
+    "sessionSsoTtlSeconds": {
+      "error": {
+        "required": "sso ttl seconds session is required"
+      }
+    },
     "tenant": {
       "error": {
         "required": "tenant is required"
       },
       "label": "renter",
       "placeholder": "The tenant to whom this setting applies"
+    },
+    "webauthnRpId": {
+      "error": {
+        "maxlength": "webauthn rp id must be less than 250 characters"
+      }
+    },
+    "webauthnRpName": {
+      "error": {
+        "maxlength": "webauthn rp name must be less than 250 characters"
+      }
     }
   },
   "list": {
     "column": {
+      "allow-recover-pass": {
+        "title": "allow recover pass",
+        "tooltip": "allow recover pass"
+      },
+      "allow-register": {
+        "title": "allow register",
+        "tooltip": "allow register"
+      },
+      "disabled-user-email": {
+        "title": "disabled user email",
+        "tooltip": "disabled user email"
+      },
+      "dynamic-registration-policy": {
+        "title": "dynamic registration policy",
+        "tooltip": "dynamic registration policy"
+      },
+      "enable-register-users": {
+        "title": "enable register users",
+        "tooltip": "enable register users"
+      },
+      "enabled-user-email": {
+        "title": "enabled user email",
+        "tooltip": "enabled user email"
+      },
       "force-mfa": {
         "title": "force mfa",
         "tooltip": "force mfa"
@@ -85,9 +151,61 @@
         "title": "inner label",
         "tooltip": "inner label"
       },
+      "invitation-expiry-days": {
+        "title": "invitation expiry days",
+        "tooltip": "invitation expiry days"
+      },
+      "magic-link-enabled": {
+        "title": "magic link enabled",
+        "tooltip": "magic link enabled"
+      },
+      "magic-link-expiry-minutes": {
+        "title": "magic link expiry minutes",
+        "tooltip": "magic link expiry minutes"
+      },
+      "recover-pass-email": {
+        "title": "recover pass email",
+        "tooltip": "recover pass email"
+      },
+      "refresh-token-ttl-seconds": {
+        "title": "refresh token ttl seconds",
+        "tooltip": "refresh token ttl seconds"
+      },
+      "registerd-email": {
+        "title": "registerd email",
+        "tooltip": "registerd email"
+      },
+      "require-email-verification": {
+        "title": "require email verification",
+        "tooltip": "require email verification"
+      },
+      "session-sso-ttl-seconds": {
+        "title": "session sso ttl seconds",
+        "tooltip": "session sso ttl seconds"
+      },
       "tenant": {
         "title": "tenant",
         "tooltip": "tenant"
+      },
+      "webauthn-enabled": {
+        "title": "webauthn enabled",
+        "tooltip": "webauthn enabled"
+      },
+      "webauthn-rp-id": {
+        "title": "webauthn rp id",
+        "tooltip": "webauthn rp id"
+      },
+      "webauthn-rp-name": {
+        "title": "webauthn rp name",
+        "tooltip": "webauthn rp name"
+      },
+      "welcome-email": {
+        "title": "welcome email",
+        "tooltip": "welcome email"
+      },
+      "wellcome-email": {
+        "title": "wellcome email",
+        "tooltip": "wellcome email"
       }
     },
     "filter": {

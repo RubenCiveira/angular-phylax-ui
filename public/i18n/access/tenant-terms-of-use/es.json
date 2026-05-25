@@ -32,10 +32,52 @@
       "title": "Viendo los valores de un tenant terms of use",
       "tooltip": "Ver los valores de un tenant terms of use"
     },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable tenant terms of use",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un tenant terms of use"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable tenant terms of use",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
     "edit": {
       "label": "Edit",
       "saveBtn": "Update",
       "tooltip": "Modificar los valores de un tenant terms of use"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable tenant terms of use",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un tenant terms of use"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable tenant terms of use",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
     }
   },
   "form-group": {
@@ -50,6 +92,11 @@
     "attached": {
       "label": "adosado",
       "placeholder": "Un archivo adjunto opcional, por ejemplo, p d f o documento firmado"
+    },
+    "enabled": {
+      "error": {
+        "required": "habilitado es obligatorio"
+      }
     },
     "tenant": {
       "error": {
@@ -75,6 +122,14 @@
       "attached": {
         "title": "adosado",
         "tooltip": "adosado"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "relying-party": {
+        "title": "usuario del certificado",
+        "tooltip": "usuario del certificado"
       },
       "tenant": {
         "title": "inquilino",

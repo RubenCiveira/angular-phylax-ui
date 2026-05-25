@@ -2,7 +2,7 @@
 import { RelyingPartyViewStandarActionsModule } from 'app/features/access/relying-party/components/relying-party-view-standar-actions/relying-party-view-standar-actions.module';
 import { RelyingPartyViewListComponent } from './relying-party-view-list.component';
 import { CommonModule } from '@angular/common';
-import { ListViewModule } from '@common/toolkit/list-view/list-view.module';
+import { ListViewModule } from '@shared/toolkit/list-view/list-view.module';
 import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { NgModule } from '@angular/core';
     RelyingPartyViewStandarActionsModule,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access.relying-party' })],
+  providers: [provideTranslocoScope({ scope: 'access/relying-party', alias: 'access/relying-party' })],
   bootstrap: [],
 })
 export class RelyingPartyViewListModule {}

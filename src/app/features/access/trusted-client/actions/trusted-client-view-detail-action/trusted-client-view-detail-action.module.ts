@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
   declarations: [TrustedClientViewDetailActionComponent],
   exports: [TrustedClientViewDetailActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TranslocoModule, TrustedClientViewDetailModule],
-  providers: [provideTranslocoScope({ scope: 'access/trusted-client', alias: 'access.trusted-client' })],
+  providers: [provideTranslocoScope({ scope: 'access/trusted-client', alias: 'access/trusted-client' })],
   bootstrap: [],
 })
 export class TrustedClientViewDetailActionModule {}

@@ -1,0 +1,121 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create consent purpose",
+      "title": "Creando nuevo consent purpose",
+      "tooltip": "Crea un nuevo registro de consent purpose"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete consent purpose",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un consent purpose"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar consent purpose",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail consent purpose",
+      "title": "Viendo los valores de un consent purpose",
+      "tooltip": "Ver los valores de un consent purpose"
+    },
+    "edit": {
+      "label": "Edit consent purpose",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un consent purpose"
+    }
+  },
+  "form-group": {
+    "activation-date": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "activationDate": {
+      "error": {
+        "required": "Fecha Activación es obligatorio"
+      }
+    },
+    "description": {
+      "error": {
+        "required": "descripción es obligatorio"
+      }
+    },
+    "key": {
+      "error": {
+        "required": "llave es obligatorio"
+      },
+      "options": {
+        "analytics": "analítica",
+        "marketing": "Marketing",
+        "personalization": "personalización/productos a medida ",
+        "third-party": "tercero oponente"
+      }
+    },
+    "required": {
+      "error": {
+        "required": "de ser necesario es obligatorio"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino es obligatorio"
+      }
+    },
+    "title": {
+      "error": {
+        "maxlength": "title tiene que tener menos de 250 caracteres",
+        "required": "title es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "activation-date": {
+        "title": "Fecha Activación",
+        "tooltip": "Fecha Activación"
+      },
+      "description": {
+        "title": "descripción",
+        "tooltip": "descripción"
+      },
+      "key": {
+        "title": "llave",
+        "tooltip": "llave"
+      },
+      "required": {
+        "title": "de ser necesario",
+        "tooltip": "de ser necesario"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "title": {
+        "title": "title",
+        "tooltip": "title"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

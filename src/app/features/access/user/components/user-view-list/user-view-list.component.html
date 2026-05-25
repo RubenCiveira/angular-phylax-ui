@@ -10,7 +10,11 @@
       <div style="display: flex; flex-direction: row; padding: 10px 10px 0 10px; align-items: center">
         <ng-container *ngTemplateOutlet="actions.theToolbarTemplate() || null"></ng-container>
         <div style="flex: 1"></div>
-        <button mat-raised-button (click)="panel.toggle()">
+        <button
+          mat-raised-button
+          aria-label="{{ panel.expanded ? hideSearchLabel() : showSearchLabel() }}"
+          (click)="panel.toggle()"
+        >
           @if (panel.expanded) {
             <mat-icon>keyboard_arrow_up</mat-icon>
           } @else {
@@ -18,12 +22,12 @@
           }
           {{ 'access.user.list.filter.button' | transloco }}
         </button>
-        <button mat-icon-button (click)="reload()">
+        <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>
     }
-    <mat-expansion-panel #panel style="margin: 10px">
+    <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
       <h2>{{ 'access.user.list.search.title' | transloco }}</h2>
       <user-view-search #searchForm [formControl]="search" />
@@ -39,6 +43,8 @@
       </div>
     } @else {
       <list-view
+        [mode]="'list'"
+        [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
@@ -92,11 +98,35 @@
           </ng-template>
           <ng-template
             listViewColumn
+            title="{{ 'access.user.list.column.wellcome-at.title' | transloco }}"
+            tooltip="{{ 'access.user.list.column.wellcome-at.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.wellcomeAt }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.user.list.column.email-verified.title' | transloco }}"
+            tooltip="{{ 'access.user.list.column.email-verified.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.emailVerified }}
+          </ng-template>
+          <ng-template
+            listViewColumn
             title="{{ 'access.user.list.column.enabled.title' | transloco }}"
             tooltip="{{ 'access.user.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.enabled }}
+          </ng-template>
+          <ng-template
+            listViewColumn
+            title="{{ 'access.user.list.column.approve.title' | transloco }}"
+            tooltip="{{ 'access.user.list.column.approve.tooltip' | transloco }}"
+            let-row="$implicit"
+          >
+            {{ row.approve }}
           </ng-template>
           <ng-template
             listViewColumn
@@ -121,14 +151,6 @@
             let-row="$implicit"
           >
             {{ row.blockedUntil }}
-          </ng-template>
-          <ng-template
-            listViewColumn
-            title="{{ 'access.user.list.column.language.title' | transloco }}"
-            tooltip="{{ 'access.user.list.column.language.tooltip' | transloco }}"
-            let-row="$implicit"
-          >
-            {{ row.language }}
           </ng-template>
           <ng-template
             listViewColumn
