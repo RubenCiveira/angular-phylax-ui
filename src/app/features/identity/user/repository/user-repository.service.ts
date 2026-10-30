@@ -81,7 +81,7 @@ export class UserRepository {
     return this.repo.partialByKey(
       key,
       {
-        approvalStatus: 'ACCEPTED',
+        approvalStatus: 'accepted',
       },
       'accept',
     );
@@ -90,13 +90,13 @@ export class UserRepository {
     return this.repo.canUsePartialsByKey();
   }
   acceptSelection(filter: UserFilter) {
-    return this.repo.partialBySelection(this.publicQueryFilter(filter), { approvalStatus: 'ACCEPTED' }, 'accept');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { approvalStatus: 'accepted' }, 'accept');
   }
   reject(key: string): Observable<User> {
     return this.repo.partialByKey(
       key,
       {
-        approvalStatus: 'REJECTED',
+        approvalStatus: 'rejected',
       },
       'reject',
     );
@@ -105,7 +105,7 @@ export class UserRepository {
     return this.repo.canUsePartialsByKey();
   }
   rejectSelection(filter: UserFilter) {
-    return this.repo.partialBySelection(this.publicQueryFilter(filter), { approvalStatus: 'REJECTED' }, 'reject');
+    return this.repo.partialBySelection(this.publicQueryFilter(filter), { approvalStatus: 'rejected' }, 'reject');
   }
   disable(key: string): Observable<User> {
     return this.repo.partialByKey(

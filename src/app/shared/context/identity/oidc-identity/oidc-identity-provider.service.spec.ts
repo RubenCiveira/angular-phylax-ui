@@ -117,9 +117,10 @@ describe('OidcIdentityHandlerService', () => {
     expect(oauthService.initCodeFlow).toHaveBeenCalled();
   });
 
-  it('logout() calls oauthService.revokeTokenAndLogout()', () => {
+  it('logout() goes to the end_session_endpoint without calling the revocation endpoint', () => {
     handler.logout();
-    expect(oauthService.revokeTokenAndLogout).toHaveBeenCalled();
+    expect(oauthService.logOut).toHaveBeenCalledWith();
+    expect(oauthService.revokeTokenAndLogout).not.toHaveBeenCalled();
   });
 
   // ── Event handling ─────────────────────────────────────────────────────────
@@ -359,6 +360,46 @@ describe('OidcIdentityHandlerService', () => {
 
       const arg = mocks.oauthService.configure.calls.mostRecent().args[0];
       expect(arg.customQueryParams).toBeUndefined();
+    }));
+
+    it('uses logout-redirect as postLogoutRedirectUri', fakeAsync(() => {
+      const mocks = buildMocks({
+        identitySetup: {
+          redirect: 'http://localhost/callback',
+          'logout-redirect': 'http://localhost/',
+          issuer: 'https://issuer.example.com',
+          'client-id': 'cid',
+          scope: 'openid',
+        },
+      });
+      const h = new OidcIdentityHandlerService(
+        'main',
+        mocks.oauthService,
+        mocks.appConfig,
+        mocks.appState,
+        mocks.errors,
+      );
+      h.configure();
+      tick();
+
+      const arg = mocks.oauthService.configure.calls.mostRecent().args[0];
+      expect(arg.postLogoutRedirectUri).toBe('http://localhost/');
+    }));
+
+    it('falls back to the origin root as postLogoutRedirectUri', fakeAsync(() => {
+      const mocks = buildMocks();
+      const h = new OidcIdentityHandlerService(
+        'main',
+        mocks.oauthService,
+        mocks.appConfig,
+        mocks.appState,
+        mocks.errors,
+      );
+      h.configure();
+      tick();
+
+      const arg = mocks.oauthService.configure.calls.mostRecent().args[0];
+      expect(arg.postLogoutRedirectUri).toBe(window.location.origin + '/');
     }));
 
     it('uses localStorage when persistent is true', fakeAsync(() => {

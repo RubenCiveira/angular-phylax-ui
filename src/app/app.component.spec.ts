@@ -10,7 +10,7 @@ import { LayoutStateService } from './bootstrap/layout/layout-state.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { IDENTITY_PROVIDER } from '@shared/context/identity/identity-provider.interface';
 import { IdentityService } from '@shared/context/identity/identity.service';
-import { TenantRepository } from '@features/access/tenant/repository/tenant-repository.service';
+import { TenantRepository } from '@features/identity/tenant/repository/tenant-repository.service';
 import { AppConfigService } from '@shared/context/config/app-config.service';
 import { RouteAccessService } from './bootstrap/layout/menu/route-accessible.service';
 import { selectorProvider } from '@shared/data/selector-provider';

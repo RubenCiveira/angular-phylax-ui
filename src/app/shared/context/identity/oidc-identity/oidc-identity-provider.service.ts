@@ -102,7 +102,9 @@ export class OidcIdentityHandlerService implements IdentityHandler {
   }
 
   logout(): void {
-    this.oauthService.revokeTokenAndLogout();
+    // RP-Initiated Logout: the end_session_endpoint revokes the session tokens. The RFC 7009
+    // revocation endpoint is only for confidential clients and rejects the SPA with 401.
+    this.oauthService.logOut();
   }
 
   autenticateInHttp(req: HttpRequest<any>): Observable<HttpRequest<any>> {
@@ -136,9 +138,11 @@ export class OidcIdentityHandlerService implements IdentityHandler {
     const config: AuthConfig = {
       responseType: 'code',
       redirectUri: setup['redirect'] ?? this.currentUrl(),
+      // Must be one of the client's allowed logout redirects (exact match at the auth-server)
+      postLogoutRedirectUri: setup['logout-redirect'] ?? window.location.origin + '/',
       issuer: this.forCurrent(setup['issuer'], tenant),
       requireHttps: !!setup['force-https'],
-      // The SPA's id. The SPA is registerd with this id at the auth-server
+      // The SPA's id. The SPA is registered with this id at the auth-server
       clientId: setup['client-id'],
       // this.oauthService.responseType = 'token';
       // set the scope for the permissions the client should request
