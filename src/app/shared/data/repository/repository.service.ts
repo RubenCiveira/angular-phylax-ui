@@ -278,12 +278,14 @@ export class RepositoryService<T, F> {
           .list(query)
           .pipe(take(1))
           .subscribe((data) => {
+            // Without next params the following request would repeat the same query.
+            const hasNext = !!data.hasNext && Object.keys(data.next ?? {}).length > 0;
             let result: Slide<T> = {
-              hasNext: data.content.length > 0, // data.hasNext,
+              hasNext: hasNext,
               next: data.next,
               content: [],
             };
-            hasNextValue = data.content.length > 0; // data.hasNext;
+            hasNextValue = hasNext;
             if (paged && data.content.length === 0) {
               delete this.listMap[listKey];
             }

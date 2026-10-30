@@ -12,7 +12,7 @@ import { IDENTITY_PROVIDER } from '@shared/context/identity/identity-provider.in
 import { IdentityService } from '@shared/context/identity/identity.service';
 import { TenantRepository } from '@features/access/tenant/repository/tenant-repository.service';
 import { AppConfigService } from '@shared/context/config/app-config.service';
-import { RouteAccessService } from './bootstrap/layout/menu/route-accesible.service';
+import { RouteAccessService } from './bootstrap/layout/menu/route-accessible.service';
 import { selectorProvider } from '@shared/data/selector-provider';
 
 @Component({ selector: 'router-outlet', template: '' })
