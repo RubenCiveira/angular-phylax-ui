@@ -16,7 +16,7 @@ export class RouteAccessService {
   checkRouteGuards(url: string): Observable<boolean | UrlTree> {
     const route = this.findMostSpecificRoute(url, this.router.config);
     if (!route) {
-      // Si no se encuentra ninguna ruta, no es accesible
+      // Si no se encuentra ninguna ruta, no es accessible
       return of(false);
     }
     // Evaluar los guards asociados a la ruta
@@ -25,7 +25,7 @@ export class RouteAccessService {
     // Ejecutar guards canActivate
     for (const guard of canActivateGuards) {
       const guardInstance = guard as CanActivateFn;
-      // Si el guard devuelve false o una UrlTree, la ruta no es accesible
+      // Si el guard devuelve false o una UrlTree, la ruta no es accessible
       const result = runInInjectionContext(this.injector, () =>
         guardInstance(new ActivatedRouteSnapshot(), this.router.routerState.snapshot),
       );
@@ -36,7 +36,7 @@ export class RouteAccessService {
         return result as Observable<boolean | UrlTree>;
       }
     }
-    // Si no se han encontrado problemas, la ruta es accesible
+    // Si no se han encontrado problemas, la ruta es accessible
     return of(true);
   }
 

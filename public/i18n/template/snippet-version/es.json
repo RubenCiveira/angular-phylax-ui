@@ -1,0 +1,94 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create snippet version",
+      "title": "Creando nuevo snippet version",
+      "tooltip": "Crea un nuevo registro de snippet version"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete snippet version",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un snippet version"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar snippet version",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail snippet version",
+      "title": "Viendo los valores de un snippet version",
+      "tooltip": "Ver los valores de un snippet version"
+    },
+    "edit": {
+      "label": "Edit snippet version",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un snippet version"
+    }
+  },
+  "form-group": {
+    "contentHtml": {
+      "error": {
+        "required": "Contenido HTML es obligatorio"
+      }
+    },
+    "locale": {
+      "error": {
+        "maxlength": "Local tiene que tener menos de 250 caracteres"
+      }
+    },
+    "snippet": {
+      "error": {
+        "required": "fragmento es obligatorio"
+      }
+    },
+    "subject": {
+      "error": {
+        "maxlength": "asunto tiene que tener menos de 250 caracteres"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "content-html": {
+        "title": "Contenido HTML",
+        "tooltip": "Contenido HTML"
+      },
+      "content-text": {
+        "title": "Texto de contenido",
+        "tooltip": "Texto de contenido"
+      },
+      "locale": {
+        "title": "Local",
+        "tooltip": "Local"
+      },
+      "snippet": {
+        "title": "fragmento",
+        "tooltip": "fragmento"
+      },
+      "subject": {
+        "title": "asunto",
+        "tooltip": "asunto"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create tenant terms of use",
+      "title": "Creating new tenant terms of use",
+      "tooltip": "Create a new tenant terms of use record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete tenant terms of use",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Clear tenant terms of use",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail tenant terms of use",
+      "title": "Viewing the values of a tenant terms of use",
+      "tooltip": "View the values of a tenant terms of use"
+    },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "disable tenant terms of use",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "disable tenant terms of use",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
+    "edit": {
+      "label": "Edit tenant terms of use",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable tenant terms of use",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify the values of a tenant terms of use"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable tenant terms of use",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
+    }
+  },
+  "form-group": {
+    "activation-date": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "enabled": {
+      "error": {
+        "required": "enabled is required"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "tenant is required"
+      }
+    },
+    "text": {
+      "error": {
+        "required": "Text is a required value"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "activation-date": {
+        "title": "activation date",
+        "tooltip": "activation date"
+      },
+      "attached": {
+        "title": "attached",
+        "tooltip": "attached"
+      },
+      "document": {
+        "title": "document",
+        "tooltip": "document"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "relying-party": {
+        "title": "relying party",
+        "tooltip": "relying party"
+      },
+      "resource-server": {
+        "title": "resource server",
+        "tooltip": "resource server"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "text": {
+        "title": "text",
+        "tooltip": "text"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  }
+}

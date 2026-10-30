@@ -1,0 +1,94 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create template version",
+      "title": "Creando nuevo template version",
+      "tooltip": "Crea un nuevo registro de template version"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete template version",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un template version"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar template version",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail template version",
+      "title": "Viendo los valores de un template version",
+      "tooltip": "Ver los valores de un template version"
+    },
+    "edit": {
+      "label": "Edit template version",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un template version"
+    }
+  },
+  "form-group": {
+    "contentHtml": {
+      "error": {
+        "required": "Contenido HTML es obligatorio"
+      }
+    },
+    "locale": {
+      "error": {
+        "maxlength": "Local tiene que tener menos de 250 caracteres"
+      }
+    },
+    "subject": {
+      "error": {
+        "maxlength": "asunto tiene que tener menos de 250 caracteres"
+      }
+    },
+    "template": {
+      "error": {
+        "required": "plantilla es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "content-html": {
+        "title": "Contenido HTML",
+        "tooltip": "Contenido HTML"
+      },
+      "content-text": {
+        "title": "Texto de contenido",
+        "tooltip": "Texto de contenido"
+      },
+      "locale": {
+        "title": "Local",
+        "tooltip": "Local"
+      },
+      "subject": {
+        "title": "asunto",
+        "tooltip": "asunto"
+      },
+      "template": {
+        "title": "plantilla",
+        "tooltip": "plantilla"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  }
+}

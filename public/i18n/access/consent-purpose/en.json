@@ -1,0 +1,121 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create consent purpose",
+      "title": "Creating new consent purpose",
+      "tooltip": "Create a new consent purpose record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete consent purpose",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a consent purpose"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Clear consent purpose",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail consent purpose",
+      "title": "Viewing the values of a consent purpose",
+      "tooltip": "View the values of a consent purpose"
+    },
+    "edit": {
+      "label": "Edit consent purpose",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a consent purpose"
+    }
+  },
+  "form-group": {
+    "activation-date": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "activationDate": {
+      "error": {
+        "required": "Activation Date is required"
+      }
+    },
+    "description": {
+      "error": {
+        "required": "description is required"
+      }
+    },
+    "key": {
+      "error": {
+        "required": "key is required"
+      },
+      "options": {
+        "analytics": "analytics",
+        "marketing": "marketing",
+        "personalization": "personalization",
+        "third-party": "third_party"
+      }
+    },
+    "required": {
+      "error": {
+        "required": "if necessary is mandatory"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "tenant is required"
+      }
+    },
+    "title": {
+      "error": {
+        "maxlength": "title must be less than 250 characters",
+        "required": "title is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "activation-date": {
+        "title": "activation date",
+        "tooltip": "activation date"
+      },
+      "description": {
+        "title": "description",
+        "tooltip": "description"
+      },
+      "key": {
+        "title": "key",
+        "tooltip": "key"
+      },
+      "required": {
+        "title": "required",
+        "tooltip": "required"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "title": {
+        "title": "title",
+        "tooltip": "title"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create tenant login provider",
+      "title": "Creando nuevo tenant login provider",
+      "tooltip": "Crea un nuevo registro de tenant login provider"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete tenant login provider",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar tenant login provider",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail tenant login provider",
+      "title": "Viendo los valores de un tenant login provider",
+      "tooltip": "Ver los valores de un tenant login provider"
+    },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable tenant login provider",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable tenant login provider",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
+    "edit": {
+      "label": "Edit tenant login provider",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable tenant login provider",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un tenant login provider"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable tenant login provider",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "account-link-policy": {
+      "options": {
+        "manual": "manual",
+        "none": "nada",
+        "verified-email": "E-mail verificado"
+      }
+    },
+    "accountLinkPolicy": {
+      "error": {
+        "required": "política de enlaces de cuenta es obligatorio"
+      }
+    },
+    "name": {
+      "error": {
+        "maxlength": "Nombre tiene que tener menos de 250 caracteres",
+        "required": "Nombre es obligatorio"
+      }
+    },
+    "oidcDiscoveryUrl": {
+      "error": {
+        "maxlength": "uRL de descubrimiento de oidc tiene que tener menos de 250 caracteres"
+      }
+    },
+    "oidcScopes": {
+      "error": {
+        "maxlength": "oidc scopes tiene que tener menos de 250 caracteres"
+      }
+    },
+    "privateKey": {
+      "error": {
+        "maxlength": "clave privada tiene que tener menos de 250 caracteres"
+      }
+    },
+    "provider-type": {
+      "options": {
+        "apple": "APPLE",
+        "github": "GitHub",
+        "google": "GOOGLE",
+        "microsoft": "MICROSOFT",
+        "oidc": "OIDC",
+        "saml": "SAML"
+      }
+    },
+    "providerType": {
+      "error": {
+        "required": "Tipo de proveedor es obligatorio"
+      }
+    },
+    "publicKey": {
+      "error": {
+        "maxlength": "clave pública tiene que tener menos de 250 caracteres"
+      }
+    },
+    "samlIdpEntityId": {
+      "error": {
+        "maxlength": "id de entidad saml idp tiene que tener menos de 250 caracteres"
+      }
+    },
+    "samlIdpMetadataUrl": {
+      "error": {
+        "maxlength": "URL de metadatos de IdP: tiene que tener menos de 250 caracteres"
+      }
+    },
+    "samlIdpSsoUrl": {
+      "error": {
+        "maxlength": "saml idp sso url tiene que tener menos de 250 caracteres"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino es obligatorio"
+      }
+    },
+    "usersEnabledByDefault": {
+      "error": {
+        "required": "usuarios habilitados de forma predeterminada es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "account-link-policy": {
+        "title": "política de enlaces de cuenta",
+        "tooltip": "política de enlaces de cuenta"
+      },
+      "certificate": {
+        "title": "certificado",
+        "tooltip": "certificado"
+      },
+      "direct-access": {
+        "title": "acceso directo",
+        "tooltip": "acceso directo"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "metadata": {
+        "title": "metadatos",
+        "tooltip": "metadatos"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "oidc-claim-mapping": {
+        "title": "asignación de notificaciones",
+        "tooltip": "asignación de notificaciones"
+      },
+      "oidc-discovery-url": {
+        "title": "uRL de descubrimiento de oidc",
+        "tooltip": "uRL de descubrimiento de oidc"
+      },
+      "oidc-scopes": {
+        "title": "oidc scopes",
+        "tooltip": "oidc scopes"
+      },
+      "private-key": {
+        "title": "clave privada",
+        "tooltip": "clave privada"
+      },
+      "provider-type": {
+        "title": "Tipo de proveedor",
+        "tooltip": "Tipo de proveedor"
+      },
+      "public-key": {
+        "title": "clave pública",
+        "tooltip": "clave pública"
+      },
+      "saml-idp-cert": {
+        "title": "saml idp cert",
+        "tooltip": "saml idp cert"
+      },
+      "saml-idp-entity-id": {
+        "title": "id de entidad saml idp",
+        "tooltip": "id de entidad saml idp"
+      },
+      "saml-idp-metadata-url": {
+        "title": "URL de metadatos de IdP:",
+        "tooltip": "URL de metadatos de IdP:"
+      },
+      "saml-idp-sso-url": {
+        "title": "saml idp sso url",
+        "tooltip": "saml idp sso url"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "users-enabled-by-default": {
+        "title": "usuarios habilitados de forma predeterminada",
+        "tooltip": "usuarios habilitados de forma predeterminada"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Predeterminado"
+      }
+    }
+  }
+}

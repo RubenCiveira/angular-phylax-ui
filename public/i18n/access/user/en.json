@@ -1,0 +1,310 @@
+{
+  "action": {
+    "accept": {
+      "cancelBtn": "Do not accept",
+      "content": "Confirm you want to accept",
+      "dismiss": "Accept",
+      "label": "accept user",
+      "okBtn": "accept registration",
+      "report": "Accepted",
+      "title": "accept",
+      "tooltip": "Modify a user's values"
+    },
+    "accept-selection": {
+      "cancelBtn": "Do not accept",
+      "content": "Confirm that you want to accept the selected records",
+      "dismiss": "Accept",
+      "label": "accept user",
+      "okBtn": "accept registrations",
+      "progress": "Accepting",
+      "report": "Records have been accepted",
+      "title": "accept selection",
+      "tooltip": "accept selected records"
+    },
+    "create": {
+      "createButton": "Create",
+      "label": "Create user",
+      "title": "Creating New",
+      "tooltip": "Create a new user record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete user",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify a user's values"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete user",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail user",
+      "title": "Viewing a user's values",
+      "tooltip": "View a user's values"
+    },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "disable user",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify a user's values"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "disable user",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
+    "edit": {
+      "label": "Editar Usuario",
+      "saveBtn": "Update",
+      "tooltip": "Modify a user's values"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable user",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify a user's values"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable user",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
+    },
+    "reject": {
+      "cancelBtn": "No, reject",
+      "content": "Confirm you want to reject",
+      "dismiss": "Accept",
+      "label": "reject user",
+      "okBtn": "reject registration",
+      "report": "It has been rejected",
+      "title": "reject",
+      "tooltip": "Modify a user's values"
+    },
+    "reject-selection": {
+      "cancelBtn": "No, reject",
+      "content": "Confirm that you want to reject the selected records",
+      "dismiss": "Accept",
+      "label": "reject user",
+      "okBtn": "reject registrations",
+      "progress": "Rejecting",
+      "report": "Records have been rejected",
+      "title": "reject selection",
+      "tooltip": "reject selected records"
+    },
+    "unlock": {
+      "cancelBtn": "No unlock",
+      "content": "Confirm you want to unlock",
+      "dismiss": "Accept",
+      "label": "unlock user",
+      "okBtn": "unlock register",
+      "report": "If you have unlock",
+      "title": "unlock",
+      "tooltip": "Modify a user's values"
+    },
+    "unlock-selection": {
+      "cancelBtn": "No unlock",
+      "content": "Confirm that you want to unlock the selected records",
+      "dismiss": "Accept",
+      "label": "unlock user",
+      "okBtn": "unlock registrations",
+      "progress": "You are unlocking",
+      "report": "Records have been unlocked",
+      "title": "unlock selection",
+      "tooltip": "unlock the selected records"
+    },
+    "user-group-memberships": {
+      "label": "userGroupMemberships",
+      "title": "userGroupMemberships",
+      "tooltip": "userGroupMemberships"
+    },
+    "user-role-assignaments": {
+      "label": "userRoleAssignments",
+      "title": "userRoleAssignments",
+      "tooltip": "userRoleAssignments"
+    },
+    "user-role-assignments": {
+      "label": "userRoleAssignments",
+      "title": "userRoleAssignments",
+      "tooltip": "userRoleAssignments"
+    }
+  },
+  "form-group": {
+    "approval-status": {
+      "options": {
+        "accepted": "ACCEPTED",
+        "pending": "PENDING",
+        "rejected": "REJECTED",
+        "unverified": "UNVERIFIED"
+      }
+    },
+    "approve": {
+      "options": {
+        "accepted": "ACCEPTED",
+        "pending": "PENDING",
+        "rejected": "REJECTED",
+        "unverified": "UNVERIFIED"
+      }
+    },
+    "blocked-until": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "email": {
+      "error": {
+        "email": "email must be an email",
+        "maxlength": "email must be less than 250 characters"
+      }
+    },
+    "federatedProvider": {
+      "error": {
+        "maxlength": "federated provider must be less than 250 characters"
+      }
+    },
+    "name": {
+      "error": {
+        "maxlength": "Name must be less than 250 characters",
+        "required": "Name obligatory"
+      }
+    },
+    "password": {
+      "error": {
+        "maxlength": "password must be less than 250 characters",
+        "required": "password is required"
+      }
+    },
+    "provider": {
+      "error": {
+        "maxlength": "provider must be less than 250 characters"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "tenant is required"
+      }
+    },
+    "welcome-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "wellcome-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "approval-status": {
+        "title": "approval status",
+        "tooltip": "approval status"
+      },
+      "approve": {
+        "title": "approve",
+        "tooltip": "approve"
+      },
+      "blocked-until": {
+        "title": "blocked until",
+        "tooltip": "blocked until"
+      },
+      "email": {
+        "title": "email",
+        "tooltip": "email"
+      },
+      "email-verified": {
+        "title": "email verified",
+        "tooltip": "email verified"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "federated-provider": {
+        "title": "federated provider",
+        "tooltip": "federated provider"
+      },
+      "name": {
+        "title": "name",
+        "tooltip": "name"
+      },
+      "password": {
+        "title": "password",
+        "tooltip": "password"
+      },
+      "provider": {
+        "title": "provider",
+        "tooltip": "provider"
+      },
+      "temporal-password": {
+        "title": "temporal password",
+        "tooltip": "temporal password"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "use-second-factors": {
+        "title": "use second factors",
+        "tooltip": "use second factors"
+      },
+      "welcome-at": {
+        "title": "welcome at",
+        "tooltip": "welcome at"
+      },
+      "wellcome-at": {
+        "title": "wellcome at",
+        "tooltip": "wellcome at"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "name-asc": "name-asc",
+        "name-desc": "name-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

@@ -26,7 +26,7 @@ export class RoleViewListComponent {
 
   constructor(repository: RoleRepository) {
     this.displayer = repository.displayProvider();
-    this.list = repository.projections(['relyingParty']);
+    this.list = repository.projections(['resourceServer']);
     effect(() => {
       setTimeout(() => this.makeSearch());
     });
@@ -41,11 +41,11 @@ export class RoleViewListComponent {
     if (external?.name) {
       result.name = external.name;
     }
-    if (external?.relyingParty) {
-      result.relyingParty = external.relyingParty;
+    if (external?.resourceServer) {
+      result.resourceServer = external.resourceServer;
     }
-    if (external?.relyingPartys) {
-      result.relyingPartys = external.relyingPartys;
+    if (external?.resourceServers) {
+      result.resourceServers = external.resourceServers;
     }
     if (filter?.search) {
       result.search = filter.search;
@@ -53,11 +53,11 @@ export class RoleViewListComponent {
     if (filter?.name) {
       result.name = filter.name;
     }
-    if (filter?.relyingParty?.$ref) {
-      result.relyingParty = filter.relyingParty.$ref;
+    if (filter?.resourceServer?.$ref) {
+      result.resourceServer = filter.resourceServer.$ref;
     }
-    if (filter?.relyingPartys?.$ref) {
-      result.relyingPartys = filter.relyingPartys.$ref;
+    if (filter?.resourceServers?.$ref) {
+      result.resourceServers = filter.resourceServers.$ref;
     }
     if (filter?.order) {
       result.order = filter.order;

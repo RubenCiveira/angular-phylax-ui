@@ -1,0 +1,274 @@
+{
+  "action": {
+    "accept": {
+      "cancelBtn": "No accept",
+      "content": "Confirme que quiere accept",
+      "dismiss": "Aceptar",
+      "label": "accept user",
+      "okBtn": "accept registro",
+      "report": "Se ha accept",
+      "title": "accept",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "accept-selection": {
+      "cancelBtn": "No accept",
+      "content": "Confirme que quiere accept los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "accept user",
+      "okBtn": "accept registros",
+      "progress": "Se está accept",
+      "report": "Se han accept los registros",
+      "title": "accept selección",
+      "tooltip": "accept los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Create",
+      "label": "Create user",
+      "title": "Creando nuevo user",
+      "tooltip": "Crea un nuevo registro de user"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete user",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar user",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail user",
+      "title": "Viendo los valores de un user",
+      "tooltip": "Ver los valores de un user"
+    },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable user",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable user",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
+    "edit": {
+      "label": "Edit user",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable user",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable user",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
+    },
+    "reject": {
+      "cancelBtn": "No reject",
+      "content": "Confirme que quiere reject",
+      "dismiss": "Aceptar",
+      "label": "reject user",
+      "okBtn": "reject registro",
+      "report": "Se ha reject",
+      "title": "reject",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "reject-selection": {
+      "cancelBtn": "No reject",
+      "content": "Confirme que quiere reject los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "reject user",
+      "okBtn": "reject registros",
+      "progress": "Se está reject",
+      "report": "Se han reject los registros",
+      "title": "reject selección",
+      "tooltip": "reject los registros seleccionados"
+    },
+    "unlock": {
+      "cancelBtn": "No unlock",
+      "content": "Confirme que quiere unlock",
+      "dismiss": "Aceptar",
+      "label": "unlock user",
+      "okBtn": "unlock registro",
+      "report": "Se ha unlock",
+      "title": "unlock",
+      "tooltip": "Modificar los valores de un user"
+    },
+    "unlock-selection": {
+      "cancelBtn": "No unlock",
+      "content": "Confirme que quiere unlock los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "unlock user",
+      "okBtn": "unlock registros",
+      "progress": "Se está unlock",
+      "report": "Se han unlock los registros",
+      "title": "unlock selección",
+      "tooltip": "unlock los registros seleccionados"
+    },
+    "user-group-memberships": {
+      "label": "userGroupMemberships",
+      "title": "userGroupMemberships",
+      "tooltip": "userGroupMemberships"
+    },
+    "user-role-assignments": {
+      "label": "userRoleAssignments",
+      "title": "userRoleAssignments",
+      "tooltip": "userRoleAssignments"
+    }
+  },
+  "form-group": {
+    "approval-status": {
+      "options": {
+        "accepted": "ACEPTADO",
+        "pending": "PREVIO",
+        "rejected": "RECHAZADA",
+        "unverified": "No verificado"
+      }
+    },
+    "blocked-until": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "email": {
+      "error": {
+        "email": "correo electrónico debe ser un email",
+        "maxlength": "correo electrónico tiene que tener menos de 250 caracteres"
+      }
+    },
+    "federatedProvider": {
+      "error": {
+        "maxlength": "proveedor federado tiene que tener menos de 250 caracteres"
+      }
+    },
+    "name": {
+      "error": {
+        "maxlength": "Nombre tiene que tener menos de 250 caracteres",
+        "required": "Nombre es obligatorio"
+      }
+    },
+    "password": {
+      "error": {
+        "maxlength": "contraseña tiene que tener menos de 250 caracteres",
+        "required": "contraseña es obligatorio"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "inquilino es obligatorio"
+      }
+    },
+    "welcome-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "approval-status": {
+        "title": "situación en el proceso de aprobación",
+        "tooltip": "situación en el proceso de aprobación"
+      },
+      "blocked-until": {
+        "title": "Bloqueado hasta",
+        "tooltip": "Bloqueado hasta"
+      },
+      "email": {
+        "title": "correo electrónico",
+        "tooltip": "correo electrónico"
+      },
+      "email-verified": {
+        "title": "Correo Electrónico Verificado",
+        "tooltip": "Correo Electrónico Verificado"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "federated-provider": {
+        "title": "proveedor federado",
+        "tooltip": "proveedor federado"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "password": {
+        "title": "contraseña",
+        "tooltip": "contraseña"
+      },
+      "temporal-password": {
+        "title": "contraseña temporal",
+        "tooltip": "contraseña temporal"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "use-second-factors": {
+        "title": "utilizar segundos factores",
+        "tooltip": "utilizar segundos factores"
+      },
+      "welcome-at": {
+        "title": "Bienvenido a",
+        "tooltip": "Bienvenido a"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Predeterminado"
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, CanActivateFn, Route, Router, UrlTree } from '@angular/router';
 import { provideRouter } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { RouteAccessService } from './route-accesible.service';
+import { RouteAccessService } from './route-accessible.service';
 
 function buildMockRouter(
   routes: Route[],

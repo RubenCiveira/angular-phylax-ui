@@ -74,19 +74,19 @@
           </ng-template>
           <ng-template
             listViewColumn
-            title="{{ 'access.user-group-membership.list.column.relying-party.title' | transloco }}"
-            tooltip="{{ 'access.user-group-membership.list.column.relying-party.tooltip' | transloco }}"
+            title="{{ 'access.user-group-membership.list.column.resource-server.title' | transloco }}"
+            tooltip="{{ 'access.user-group-membership.list.column.resource-server.tooltip' | transloco }}"
             let-row="$implicit"
           >
-            {{ row.relyingParty()?.code }}
+            {{ row.resourceServer()?.code }}
           </ng-template>
           <ng-template
             listViewColumn
-            title="{{ 'access.user-group-membership.list.column.trusted-client.title' | transloco }}"
-            tooltip="{{ 'access.user-group-membership.list.column.trusted-client.tooltip' | transloco }}"
+            title="{{ 'access.user-group-membership.list.column.oauth-client.title' | transloco }}"
+            tooltip="{{ 'access.user-group-membership.list.column.oauth-client.tooltip' | transloco }}"
             let-row="$implicit"
           >
-            {{ row.trustedClient()?.code }}
+            {{ row.oauthClient()?.code }}
           </ng-template>
           <ng-template
             listViewColumn

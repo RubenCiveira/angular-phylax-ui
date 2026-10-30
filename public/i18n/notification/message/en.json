@@ -1,0 +1,130 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create message",
+      "title": "Creating new message",
+      "tooltip": "Create a new message record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete message",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a message"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete message",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail message",
+      "title": "Viewing the values of a message",
+      "tooltip": "View the values of a message"
+    },
+    "edit": {
+      "label": "Edit message",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a message"
+    }
+  },
+  "form-group": {
+    "content": {
+      "error": {
+        "required": "The content is required"
+      }
+    },
+    "created-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "createdAt": {
+      "error": {
+        "required": "created in is required"
+      }
+    },
+    "lock-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "retries": {
+      "error": {
+        "required": "retries is required"
+      }
+    },
+    "send-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "target": {
+      "error": {
+        "maxlength": "Target must be less than 250 characters",
+        "required": "Objective is required"
+      }
+    },
+    "urgent": {
+      "error": {
+        "required": "urgent is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "content": {
+        "title": "content",
+        "tooltip": "content"
+      },
+      "created-at": {
+        "title": "created at",
+        "tooltip": "created at"
+      },
+      "lock-at": {
+        "title": "lock at",
+        "tooltip": "lock at"
+      },
+      "retries": {
+        "title": "retries",
+        "tooltip": "retries"
+      },
+      "send-at": {
+        "title": "send at",
+        "tooltip": "send at"
+      },
+      "target": {
+        "title": "target",
+        "tooltip": "target"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "urgent": {
+        "title": "urgent",
+        "tooltip": "urgent"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  }
+}

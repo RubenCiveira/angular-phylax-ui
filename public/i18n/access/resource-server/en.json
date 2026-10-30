@@ -1,0 +1,129 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create resource server",
+      "title": "Creating new resource server",
+      "tooltip": "Create a new resource server record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete resource server",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a resource server"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete resource server",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail resource server",
+      "title": "Viewing the values of a resource server",
+      "tooltip": "View the values of a resource server"
+    },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "disable resource server",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify the values of a resource server"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "disable resource server",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
+    "edit": {
+      "label": "Edit resource server",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a resource server"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable resource server",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify the values of a resource server"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable resource server",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
+    }
+  },
+  "form-group": {
+    "apiKey": {
+      "error": {
+        "maxlength": "API Key must be less than 250 characters",
+        "required": "API Key is required"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "code must be less than 250 characters",
+        "required": "code is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "api-key": {
+        "title": "api key",
+        "tooltip": "api key"
+      },
+      "code": {
+        "title": "code",
+        "tooltip": "code"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

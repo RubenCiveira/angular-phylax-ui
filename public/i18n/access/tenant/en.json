@@ -1,0 +1,175 @@
+{
+  "action": {
+    "conditions": {
+      "label": "conditions",
+      "title": "conditions",
+      "tooltip": "conditions"
+    },
+    "config": {
+      "label": "config",
+      "saveBtn": "Update",
+      "title": "config",
+      "tooltip": "config"
+    },
+    "create": {
+      "createButton": "Create",
+      "label": "Create tenant",
+      "title": "Creating new tenant",
+      "tooltip": "Create a new tenant record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete tenant",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify a tenant's values"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Clear tenant",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Tenant detail",
+      "title": "Viewing a tenant's values",
+      "tooltip": "View a tenant's values"
+    },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "disable tenant",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify a tenant's values"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "disable tenant",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
+    "edit": {
+      "label": "Edit Lieutenant",
+      "saveBtn": "Update",
+      "tooltip": "Modify a tenant's values"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable tenant",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify a tenant's values"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable tenant",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
+    },
+    "providers": {
+      "label": "Providers",
+      "title": "Providers",
+      "tooltip": "Providers"
+    }
+  },
+  "form-group": {
+    "domain": {
+      "error": {
+        "maxlength": "domain must be less than 250 characters",
+        "required": "Proficiency is required"
+      }
+    },
+    "enabled": {
+      "error": {
+        "required": "enabled is required"
+      }
+    },
+    "mark-for-delete-time": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "markForDelete": {
+      "error": {
+        "required": "Flag to delete is required"
+      }
+    },
+    "name": {
+      "error": {
+        "maxlength": "Name must be less than 250 characters",
+        "required": "Name obligatory"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "domain": {
+        "title": "domain",
+        "tooltip": "domain"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "mark-for-delete": {
+        "title": "mark for delete",
+        "tooltip": "mark for delete"
+      },
+      "mark-for-delete-time": {
+        "title": "mark for delete time",
+        "tooltip": "mark for delete time"
+      },
+      "name": {
+        "title": "name",
+        "tooltip": "name"
+      },
+      "root": {
+        "title": "root",
+        "tooltip": "root"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "domain-asc": "domain-asc",
+        "domain-desc": "domain-desc",
+        "name-asc": "name-asc",
+        "name-desc": "name-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

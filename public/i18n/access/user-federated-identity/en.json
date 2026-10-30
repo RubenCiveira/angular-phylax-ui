@@ -1,0 +1,101 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create user federated identity",
+      "title": "Creating new user federated identity",
+      "tooltip": "Create a new user federated identity record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete user federated identity",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a user federated identity"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete user federated identity",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail user federated identity",
+      "title": "Seeing the values of a user federated identity",
+      "tooltip": "View the values of a user federated identity"
+    },
+    "edit": {
+      "label": "Edit user federated identity",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a user federated identity"
+    }
+  },
+  "form-group": {
+    "created-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "loginProvider": {
+      "error": {
+        "required": "Supplier login is required"
+      }
+    },
+    "subject": {
+      "error": {
+        "maxlength": "subject must be less than 250 characters",
+        "required": "A subject is required"
+      }
+    },
+    "user": {
+      "error": {
+        "required": "Username is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "created-at": {
+        "title": "created at",
+        "tooltip": "created at"
+      },
+      "login-provider": {
+        "title": "login provider",
+        "tooltip": "login provider"
+      },
+      "subject": {
+        "title": "subject",
+        "tooltip": "subject"
+      },
+      "user": {
+        "title": "user",
+        "tooltip": "user"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "null": "Default",
+        "subject-asc": "subject-asc",
+        "subject-desc": "subject-desc"
+      }
+    }
+  }
+}

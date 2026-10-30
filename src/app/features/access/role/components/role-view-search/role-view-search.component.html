@@ -7,16 +7,16 @@
   <editable-text formControlName="search" [visible]="isVisible['search']" label="access.role.search.search" />
   <editable-text formControlName="name" [visible]="isVisible['name']" label="access.role.search.name" />
   <editable-selectone
-    formControlName="relyingPartys"
-    [visible]="isVisible['relyingPartys']"
-    label="access.role.search.relying-partys"
-    [provider]="relyingPartysProvider"
+    formControlName="resourceServer"
+    [visible]="isVisible['resourceServer']"
+    label="access.role.search.resource-server"
+    [provider]="resourceServerProvider"
   />
   <editable-selectone
-    formControlName="relyingParty"
-    [visible]="isVisible['relyingParty']"
-    label="access.role.search.relying-party"
-    [provider]="relyingPartyProvider"
+    formControlName="resourceServers"
+    [visible]="isVisible['resourceServers']"
+    label="access.role.search.resource-servers"
+    [provider]="resourceServersProvider"
   />
   <editable-choose
     formControlName="order"

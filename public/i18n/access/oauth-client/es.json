@@ -1,0 +1,490 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create oauth client",
+      "title": "Creando nuevo oauth client",
+      "tooltip": "Crea un nuevo registro de oauth client"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete oauth client",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un oauth client"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar oauth client",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail oauth client",
+      "title": "Viendo los valores de un oauth client",
+      "tooltip": "Ver los valores de un oauth client"
+    },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable oauth client",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un oauth client"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable oauth client",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
+    "edit": {
+      "label": "Edit oauth client",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un oauth client"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable oauth client",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un oauth client"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable oauth client",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "audience": {
+      "error": {
+        "maxlength": "audience tiene que tener menos de 250 caracteres",
+        "required": "audience es obligatorio"
+      }
+    },
+    "authorizationSignedResponseAlg": {
+      "error": {
+        "maxlength": "autorización firmada respuesta alg tiene que tener menos de 250 caracteres"
+      }
+    },
+    "backchannel-token-delivery-mode": {
+      "options": {
+        "ping": "ping",
+        "poll": "encuesta"
+      }
+    },
+    "backchannelClientNotificationEndpoint": {
+      "error": {
+        "maxlength": "punto final de notificación de cliente de backchannel tiene que tener menos de 250 caracteres"
+      }
+    },
+    "backchannelLogoutUri": {
+      "error": {
+        "maxlength": "uRI de cierre de sesión de backchannel tiene que tener menos de 250 caracteres"
+      }
+    },
+    "clientCredentialsTokenTtlSeconds": {
+      "error": {
+        "required": "token de credenciales de cliente ttl segundos es obligatorio"
+      }
+    },
+    "clientName": {
+      "error": {
+        "maxlength": "nombre del cliente tiene que tener menos de 250 caracteres"
+      }
+    },
+    "clientUri": {
+      "error": {
+        "maxlength": "uRI del cliente tiene que tener menos de 250 caracteres"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "código tiene que tener menos de 250 caracteres",
+        "required": "código es obligatorio"
+      }
+    },
+    "defaultAcrValues": {
+      "error": {
+        "maxlength": "valores acr predeterminados tiene que tener menos de 250 caracteres"
+      }
+    },
+    "dpopBoundAccessTokens": {
+      "error": {
+        "required": "tokens de acceso vinculados a dpop es obligatorio"
+      }
+    },
+    "enabled": {
+      "error": {
+        "required": "habilitado es obligatorio"
+      }
+    },
+    "frontchannelLogoutUri": {
+      "error": {
+        "maxlength": "uRI de cierre de sesión de frontchannel tiene que tener menos de 250 caracteres"
+      }
+    },
+    "id-token-signed-response-alg": {
+      "options": {
+        "eddsa": "EdDSA",
+        "es256": "ES256",
+        "rs256": "RS256"
+      }
+    },
+    "idTokenEncryptedResponseAlg": {
+      "error": {
+        "maxlength": "id token respuesta cifrada alg tiene que tener menos de 250 caracteres"
+      }
+    },
+    "idTokenEncryptedResponseEnc": {
+      "error": {
+        "maxlength": "id token respuesta cifrada enc tiene que tener menos de 250 caracteres"
+      }
+    },
+    "introspectionAllowed": {
+      "error": {
+        "required": "introspección permitida es obligatorio"
+      }
+    },
+    "logoUri": {
+      "error": {
+        "maxlength": "URI de logo tiene que tener menos de 250 caracteres"
+      }
+    },
+    "policyUri": {
+      "error": {
+        "maxlength": "uRI de la política tiene que tener menos de 250 caracteres"
+      }
+    },
+    "registered-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "registrationAccessToken": {
+      "error": {
+        "maxlength": "token de acceso de registro tiene que tener menos de 250 caracteres"
+      }
+    },
+    "requestObjectSigningAlg": {
+      "error": {
+        "maxlength": "solicitar objeto firmando alg tiene que tener menos de 250 caracteres"
+      }
+    },
+    "requirePkce": {
+      "error": {
+        "required": "Solicitar clave PKCE es obligatorio"
+      }
+    },
+    "requirePushedAuthorizationRequests": {
+      "error": {
+        "required": "requerir solicitudes de autorización push es obligatorio"
+      }
+    },
+    "secretOauth": {
+      "error": {
+        "maxlength": "oauth secreto tiene que tener menos de 250 caracteres"
+      }
+    },
+    "sectorIdentifierUri": {
+      "error": {
+        "maxlength": "identificador de sector URI tiene que tener menos de 250 caracteres"
+      }
+    },
+    "subject-type": {
+      "options": {
+        "pairwise": "Por pares",
+        "public": "público"
+      }
+    },
+    "subjectType": {
+      "error": {
+        "required": "Tipo Materias es obligatorio"
+      }
+    },
+    "tlsClientAuthSubjectDn": {
+      "error": {
+        "maxlength": "tls cliente auth asunto dn tiene que tener menos de 250 caracteres"
+      }
+    },
+    "tlsClientCertificateBoundAccessTokens": {
+      "error": {
+        "required": "tokens de acceso vinculados a certificados de cliente tls es obligatorio"
+      }
+    },
+    "token-endpoint-auth-method": {
+      "options": {
+        "client-secret-basic": "client_secret_basic",
+        "client-secret-post": "client_secret_post",
+        "none": "nada",
+        "private-key-jwt": "private_key_jwt"
+      }
+    },
+    "tokenEndpointAuthMethod": {
+      "error": {
+        "required": "método de autenticación de punto final de token es obligatorio"
+      }
+    },
+    "tokenEndpointAuthSigningAlg": {
+      "error": {
+        "maxlength": "token endpoint auth firma alg tiene que tener menos de 250 caracteres"
+      }
+    },
+    "tosUri": {
+      "error": {
+        "maxlength": "tos URI tiene que tener menos de 250 caracteres"
+      }
+    },
+    "url": {
+      "error": {
+        "maxlength": "url tiene que tener menos de 250 caracteres",
+        "required": "url es obligatorio"
+      }
+    },
+    "userinfoEncryptedResponseAlg": {
+      "error": {
+        "maxlength": "userinfo respuesta cifrada alg tiene que tener menos de 250 caracteres"
+      }
+    },
+    "userinfoEncryptedResponseEnc": {
+      "error": {
+        "maxlength": "userinfo respuesta cifrada enc tiene que tener menos de 250 caracteres"
+      }
+    },
+    "userinfoSignedResponseAlg": {
+      "error": {
+        "maxlength": "userinfo respuesta firmada alg tiene que tener menos de 250 caracteres"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "allow-all-scopes": {
+        "title": "permitir todos los ámbitos",
+        "tooltip": "permitir todos los ámbitos"
+      },
+      "authorization-details-types": {
+        "title": "tipos de detalles de autorización",
+        "tooltip": "tipos de detalles de autorización"
+      },
+      "authorization-signed-response-alg": {
+        "title": "autorización firmada respuesta alg",
+        "tooltip": "autorización firmada respuesta alg"
+      },
+      "backchannel-client-notification-endpoint": {
+        "title": "punto final de notificación de cliente de backchannel",
+        "tooltip": "punto final de notificación de cliente de backchannel"
+      },
+      "backchannel-logout-session-required": {
+        "title": "sesión de cierre de sesión de backchannel requerida",
+        "tooltip": "sesión de cierre de sesión de backchannel requerida"
+      },
+      "backchannel-logout-uri": {
+        "title": "uRI de cierre de sesión de backchannel",
+        "tooltip": "uRI de cierre de sesión de backchannel"
+      },
+      "backchannel-token-delivery-mode": {
+        "title": "modo de entrega de token de backchannel",
+        "tooltip": "modo de entrega de token de backchannel"
+      },
+      "client-credentials-scopes": {
+        "title": "ámbitos de credenciales de cliente",
+        "tooltip": "ámbitos de credenciales de cliente"
+      },
+      "client-credentials-token-ttl-seconds": {
+        "title": "token de credenciales de cliente ttl segundos",
+        "tooltip": "token de credenciales de cliente ttl segundos"
+      },
+      "client-name": {
+        "title": "nombre del cliente",
+        "tooltip": "nombre del cliente"
+      },
+      "client-uri": {
+        "title": "uRI del cliente",
+        "tooltip": "uRI del cliente"
+      },
+      "code": {
+        "title": "código",
+        "tooltip": "código"
+      },
+      "default-acr-values": {
+        "title": "valores acr predeterminados",
+        "tooltip": "valores acr predeterminados"
+      },
+      "default-max-age": {
+        "title": "edad máxima predeterminada",
+        "tooltip": "edad máxima predeterminada"
+      },
+      "dpop-bound-access-tokens": {
+        "title": "tokens de acceso vinculados a dpop",
+        "tooltip": "tokens de acceso vinculados a dpop"
+      },
+      "dynamically-registered": {
+        "title": "registrado dinámicamente",
+        "tooltip": "registrado dinámicamente"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "frontchannel-logout-session-required": {
+        "title": "sesión de cierre de sesión de frontchannel requerida",
+        "tooltip": "sesión de cierre de sesión de frontchannel requerida"
+      },
+      "frontchannel-logout-uri": {
+        "title": "uRI de cierre de sesión de frontchannel",
+        "tooltip": "uRI de cierre de sesión de frontchannel"
+      },
+      "grant-types-json": {
+        "title": "Tipos de concesión",
+        "tooltip": "Tipos de concesión"
+      },
+      "id-token-encrypted-response-alg": {
+        "title": "id token respuesta cifrada alg",
+        "tooltip": "id token respuesta cifrada alg"
+      },
+      "id-token-encrypted-response-enc": {
+        "title": "id token respuesta cifrada enc",
+        "tooltip": "id token respuesta cifrada enc"
+      },
+      "id-token-signed-response-alg": {
+        "title": "id token signed response alg",
+        "tooltip": "id token signed response alg"
+      },
+      "introspection-allowed": {
+        "title": "introspección permitida",
+        "tooltip": "introspección permitida"
+      },
+      "jwks-json": {
+        "title": "jwks json",
+        "tooltip": "jwks json"
+      },
+      "jwks-uri": {
+        "title": "uRI de jwks",
+        "tooltip": "uRI de jwks"
+      },
+      "logo-uri": {
+        "title": "URI de logo",
+        "tooltip": "URI de logo"
+      },
+      "policy-uri": {
+        "title": "uRI de la política",
+        "tooltip": "uRI de la política"
+      },
+      "registered-at": {
+        "title": "domiciliado de",
+        "tooltip": "domiciliado de"
+      },
+      "registration-access-token": {
+        "title": "token de acceso de registro",
+        "tooltip": "token de acceso de registro"
+      },
+      "request-object-signing-alg": {
+        "title": "solicitar objeto firmando alg",
+        "tooltip": "solicitar objeto firmando alg"
+      },
+      "require-pkce": {
+        "title": "Solicitar clave PKCE",
+        "tooltip": "Solicitar clave PKCE"
+      },
+      "require-pushed-authorization-requests": {
+        "title": "requerir solicitudes de autorización push",
+        "tooltip": "requerir solicitudes de autorización push"
+      },
+      "response-types-json": {
+        "title": "Tipos de respuesta",
+        "tooltip": "Tipos de respuesta"
+      },
+      "secret-oauth": {
+        "title": "oauth secreto",
+        "tooltip": "oauth secreto"
+      },
+      "sector-identifier-uri": {
+        "title": "identificador de sector URI",
+        "tooltip": "identificador de sector URI"
+      },
+      "subject-type": {
+        "title": "Tipo Materias",
+        "tooltip": "Tipo Materias"
+      },
+      "tenant": {
+        "title": "inquilino",
+        "tooltip": "inquilino"
+      },
+      "tls-client-auth-subject-dn": {
+        "title": "tls cliente auth asunto dn",
+        "tooltip": "tls cliente auth asunto dn"
+      },
+      "tls-client-certificate-bound-access-tokens": {
+        "title": "tokens de acceso vinculados a certificados de cliente tls",
+        "tooltip": "tokens de acceso vinculados a certificados de cliente tls"
+      },
+      "token-endpoint-auth-method": {
+        "title": "método de autenticación de punto final de token",
+        "tooltip": "método de autenticación de punto final de token"
+      },
+      "token-endpoint-auth-signing-alg": {
+        "title": "token endpoint auth firma alg",
+        "tooltip": "token endpoint auth firma alg"
+      },
+      "tos-uri": {
+        "title": "tos URI",
+        "tooltip": "tos URI"
+      },
+      "userinfo-encrypted-response-alg": {
+        "title": "userinfo respuesta cifrada alg",
+        "tooltip": "userinfo respuesta cifrada alg"
+      },
+      "userinfo-encrypted-response-enc": {
+        "title": "userinfo respuesta cifrada enc",
+        "tooltip": "userinfo respuesta cifrada enc"
+      },
+      "userinfo-signed-response-alg": {
+        "title": "userinfo respuesta firmada alg",
+        "tooltip": "userinfo respuesta firmada alg"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Predeterminado"
+      }
+    }
+  }
+}

@@ -11,16 +11,16 @@
     [provider]="userProvider"
   />
   <editable-selectone
-    formControlName="relyingParty"
-    [visible]="isVisible['relyingParty']"
-    label="access.user-group-membership.form-group.relying-party"
-    [provider]="relyingPartyProvider"
+    formControlName="resourceServer"
+    [visible]="isVisible['resourceServer']"
+    label="access.user-group-membership.form-group.resource-server"
+    [provider]="resourceServerProvider"
   />
   <editable-selectone
-    formControlName="trustedClient"
-    [visible]="isVisible['trustedClient']"
-    label="access.user-group-membership.form-group.trusted-client"
-    [provider]="trustedClientProvider"
+    formControlName="oauthClient"
+    [visible]="isVisible['oauthClient']"
+    label="access.user-group-membership.form-group.oauth-client"
+    [provider]="oauthClientProvider"
   />
   <editable-textarea
     formControlName="groups"

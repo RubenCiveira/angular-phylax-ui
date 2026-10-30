@@ -6,7 +6,7 @@ import { MenuComponent } from './menu.component';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { IdentityService } from '@shared/context/identity/identity.service';
 import { AppConfigService } from '@shared/context/config/app-config.service';
-import { RouteAccessService } from './route-accesible.service';
+import { RouteAccessService } from './route-accessible.service';
 import { MenuItem } from '../menu-item.model';
 
 describe('MenuComponent', () => {

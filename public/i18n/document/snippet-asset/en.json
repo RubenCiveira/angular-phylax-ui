@@ -1,0 +1,147 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create Asset Snippet",
+      "title": "Creating new asset snippet",
+      "tooltip": "Create a new snippet asset record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete snippet asset",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a snippet asset"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Clear Asset Snippet",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail snippet assets",
+      "title": "Viewing the values of a snippet asset",
+      "tooltip": "View the values of a snippet asset"
+    },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "disable snippet asset",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify the values of a snippet asset"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "disable snippet asset",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
+    "edit": {
+      "label": "Edit snippet asset",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a snippet asset"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable snippet asset",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify the values of a snippet asset"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable snippet asset",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
+    }
+  },
+  "form-group": {
+    "code": {
+      "error": {
+        "maxlength": "code must be less than 250 characters",
+        "required": "code is required"
+      }
+    },
+    "content": {
+      "error": {
+        "required": "The content is required"
+      }
+    },
+    "snippet": {
+      "error": {
+        "required": "snippet is required"
+      }
+    },
+    "type": {
+      "error": {
+        "maxlength": "type must be less than 250 characters",
+        "required": "Type is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "code": {
+        "title": "code",
+        "tooltip": "code"
+      },
+      "content": {
+        "title": "content",
+        "tooltip": "content"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "snippet": {
+        "title": "snippet",
+        "tooltip": "snippet"
+      },
+      "type": {
+        "title": "type",
+        "tooltip": "type"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

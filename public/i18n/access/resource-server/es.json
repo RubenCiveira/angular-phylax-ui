@@ -1,0 +1,129 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create resource server",
+      "title": "Creando nuevo resource server",
+      "tooltip": "Crea un nuevo registro de resource server"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete resource server",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un resource server"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar resource server",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail resource server",
+      "title": "Viendo los valores de un resource server",
+      "tooltip": "Ver los valores de un resource server"
+    },
+    "disable": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable",
+      "dismiss": "Aceptar",
+      "label": "disable resource server",
+      "okBtn": "disable registro",
+      "report": "Se ha disable",
+      "title": "disable",
+      "tooltip": "Modificar los valores de un resource server"
+    },
+    "disable-selection": {
+      "cancelBtn": "No disable",
+      "content": "Confirme que quiere disable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "disable resource server",
+      "okBtn": "disable registros",
+      "progress": "Se está disable",
+      "report": "Se han disable los registros",
+      "title": "disable selección",
+      "tooltip": "disable los registros seleccionados"
+    },
+    "edit": {
+      "label": "Edit resource server",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un resource server"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable",
+      "dismiss": "Aceptar",
+      "label": "enable resource server",
+      "okBtn": "enable registro",
+      "report": "Se ha enable",
+      "title": "enable",
+      "tooltip": "Modificar los valores de un resource server"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirme que quiere enable los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "enable resource server",
+      "okBtn": "enable registros",
+      "progress": "Se está enable",
+      "report": "Se han enable los registros",
+      "title": "enable selección",
+      "tooltip": "enable los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "apiKey": {
+      "error": {
+        "maxlength": "API Key tiene que tener menos de 250 caracteres",
+        "required": "API Key es obligatorio"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "código tiene que tener menos de 250 caracteres",
+        "required": "código es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "api-key": {
+        "title": "API Key",
+        "tooltip": "API Key"
+      },
+      "code": {
+        "title": "código",
+        "tooltip": "código"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Predeterminado"
+      }
+    }
+  }
+}

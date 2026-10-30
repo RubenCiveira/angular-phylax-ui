@@ -29,7 +29,7 @@ export class UserGroupMembershipViewListComponent {
 
   constructor(repository: UserGroupMembershipRepository) {
     this.displayer = repository.displayProvider();
-    this.list = repository.projections(['user', 'relyingParty', 'trustedClient']);
+    this.list = repository.projections(['user', 'resourceServer', 'oauthClient']);
     effect(() => {
       setTimeout(() => this.makeSearch());
     });
@@ -47,17 +47,17 @@ export class UserGroupMembershipViewListComponent {
     if (external?.users) {
       result.users = external.users;
     }
-    if (external?.relyingParty) {
-      result.relyingParty = external.relyingParty;
+    if (external?.resourceServer) {
+      result.resourceServer = external.resourceServer;
     }
-    if (external?.relyingPartys) {
-      result.relyingPartys = external.relyingPartys;
+    if (external?.resourceServers) {
+      result.resourceServers = external.resourceServers;
     }
-    if (external?.trustedClient) {
-      result.trustedClient = external.trustedClient;
+    if (external?.oauthClient) {
+      result.oauthClient = external.oauthClient;
     }
-    if (external?.trustedClients) {
-      result.trustedClients = external.trustedClients;
+    if (external?.oauthClients) {
+      result.oauthClients = external.oauthClients;
     }
     if (filter?.search) {
       result.search = filter.search;
@@ -68,17 +68,17 @@ export class UserGroupMembershipViewListComponent {
     if (filter?.users?.$ref) {
       result.users = filter.users.$ref;
     }
-    if (filter?.relyingParty?.$ref) {
-      result.relyingParty = filter.relyingParty.$ref;
+    if (filter?.resourceServer?.$ref) {
+      result.resourceServer = filter.resourceServer.$ref;
     }
-    if (filter?.relyingPartys?.$ref) {
-      result.relyingPartys = filter.relyingPartys.$ref;
+    if (filter?.resourceServers?.$ref) {
+      result.resourceServers = filter.resourceServers.$ref;
     }
-    if (filter?.trustedClient?.$ref) {
-      result.trustedClient = filter.trustedClient.$ref;
+    if (filter?.oauthClient?.$ref) {
+      result.oauthClient = filter.oauthClient.$ref;
     }
-    if (filter?.trustedClients?.$ref) {
-      result.trustedClients = filter.trustedClients.$ref;
+    if (filter?.oauthClients?.$ref) {
+      result.oauthClients = filter.oauthClients.$ref;
     }
     this.list.fetch(result);
   }

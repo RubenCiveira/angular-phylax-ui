@@ -1,0 +1,283 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create tenant config",
+      "title": "Creating new tenant config",
+      "tooltip": "Create a new tenant config record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete tenant config",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a tenant config"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Clear tenant config",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail tenant config",
+      "title": "Viewing the values of a tenant config",
+      "tooltip": "View the values of a tenant config"
+    },
+    "edit": {
+      "label": "Edit tenant config",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a tenant config"
+    }
+  },
+  "form-group": {
+    "allowPasswordGrant": {
+      "error": {
+        "required": "allow password grant is mandatory"
+      }
+    },
+    "displayName": {
+      "error": {
+        "maxlength": "display name must be less than 250 characters"
+      }
+    },
+    "dynamic-registration-policy": {
+      "options": {
+        "disabled": "disabled",
+        "open": "open",
+        "token-required": "token_required"
+      }
+    },
+    "forceMfa": {
+      "error": {
+        "required": "mfa force is required"
+      }
+    },
+    "innerLabel": {
+      "error": {
+        "maxlength": "inner tag must be less than 250 characters"
+      }
+    },
+    "invitationExpiryDays": {
+      "error": {
+        "required": "invitation expiration days is required"
+      }
+    },
+    "magicLinkExpiryMinutes": {
+      "error": {
+        "required": "magic link expiry minutes is required"
+      }
+    },
+    "refreshTokenMaxLifetimeSeconds": {
+      "error": {
+        "required": "update token maximum seconds of lifespan is mandatory"
+      }
+    },
+    "refreshTokenTtlSeconds": {
+      "error": {
+        "required": "update token ttl seconds is required"
+      }
+    },
+    "requireEmailVerification": {
+      "error": {
+        "required": "Require email verification"
+      }
+    },
+    "requirePushedAuthorizationRequests": {
+      "error": {
+        "required": "require push authorization requests is required"
+      }
+    },
+    "sessionSsoTtlSeconds": {
+      "error": {
+        "required": "sso ttl seconds session is required"
+      }
+    },
+    "tenant": {
+      "error": {
+        "required": "tenant is required"
+      }
+    },
+    "webauthnRpId": {
+      "error": {
+        "maxlength": "webauthn rp id must be less than 250 characters"
+      }
+    },
+    "webauthnRpName": {
+      "error": {
+        "maxlength": "webauthn rp name must be less than 250 characters"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "acr-values-supported": {
+        "title": "acr values supported",
+        "tooltip": "acr values supported"
+      },
+      "allow-password-grant": {
+        "title": "allow password grant",
+        "tooltip": "allow password grant"
+      },
+      "allow-recover-pass": {
+        "title": "allow recover pass",
+        "tooltip": "allow recover pass"
+      },
+      "allow-register": {
+        "title": "allow register",
+        "tooltip": "allow register"
+      },
+      "auto-approve-registered-users": {
+        "title": "auto approve registered users",
+        "tooltip": "auto approve registered users"
+      },
+      "dcr-allowed-auth-methods": {
+        "title": "dcr allowed auth methods",
+        "tooltip": "dcr allowed auth methods"
+      },
+      "dcr-allowed-grant-types": {
+        "title": "dcr allowed grant types",
+        "tooltip": "dcr allowed grant types"
+      },
+      "disabled-user-email": {
+        "title": "disabled user email",
+        "tooltip": "disabled user email"
+      },
+      "disabled-user-email-template": {
+        "title": "disabled user email template",
+        "tooltip": "disabled user email template"
+      },
+      "display-name": {
+        "title": "display name",
+        "tooltip": "display name"
+      },
+      "dynamic-registration-policy": {
+        "title": "dynamic registration policy",
+        "tooltip": "dynamic registration policy"
+      },
+      "enable-register-users": {
+        "title": "enable register users",
+        "tooltip": "enable register users"
+      },
+      "enabled-user-email": {
+        "title": "enabled user email",
+        "tooltip": "enabled user email"
+      },
+      "enabled-user-email-template": {
+        "title": "enabled user email template",
+        "tooltip": "enabled user email template"
+      },
+      "force-mfa": {
+        "title": "force mfa",
+        "tooltip": "force mfa"
+      },
+      "inner-label": {
+        "title": "inner label",
+        "tooltip": "inner label"
+      },
+      "invitation-expiry-days": {
+        "title": "invitation expiry days",
+        "tooltip": "invitation expiry days"
+      },
+      "magic-link-enabled": {
+        "title": "magic link enabled",
+        "tooltip": "magic link enabled"
+      },
+      "magic-link-expiry-minutes": {
+        "title": "magic link expiry minutes",
+        "tooltip": "magic link expiry minutes"
+      },
+      "password-recovery-enabled": {
+        "title": "password recovery enabled",
+        "tooltip": "password recovery enabled"
+      },
+      "recover-pass-email": {
+        "title": "recover pass email",
+        "tooltip": "recover pass email"
+      },
+      "recover-pass-email-template": {
+        "title": "recover pass email template",
+        "tooltip": "recover pass email template"
+      },
+      "refresh-token-max-lifetime-seconds": {
+        "title": "refresh token max lifetime seconds",
+        "tooltip": "refresh token max lifetime seconds"
+      },
+      "refresh-token-ttl-seconds": {
+        "title": "refresh token ttl seconds",
+        "tooltip": "refresh token ttl seconds"
+      },
+      "registerd-email": {
+        "title": "registerd email",
+        "tooltip": "registerd email"
+      },
+      "registered-email": {
+        "title": "registered email",
+        "tooltip": "registered email"
+      },
+      "registered-email-template": {
+        "title": "registered email template",
+        "tooltip": "registered email template"
+      },
+      "require-email-verification": {
+        "title": "require email verification",
+        "tooltip": "require email verification"
+      },
+      "require-pushed-authorization-requests": {
+        "title": "require pushed authorization requests",
+        "tooltip": "require pushed authorization requests"
+      },
+      "self-registration-enabled": {
+        "title": "self registration enabled",
+        "tooltip": "self registration enabled"
+      },
+      "session-sso-ttl-seconds": {
+        "title": "session sso ttl seconds",
+        "tooltip": "session sso ttl seconds"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "webauthn-enabled": {
+        "title": "webauthn enabled",
+        "tooltip": "webauthn enabled"
+      },
+      "webauthn-rp-id": {
+        "title": "webauthn rp id",
+        "tooltip": "webauthn rp id"
+      },
+      "webauthn-rp-name": {
+        "title": "webauthn rp name",
+        "tooltip": "webauthn rp name"
+      },
+      "welcome-email": {
+        "title": "welcome email",
+        "tooltip": "welcome email"
+      },
+      "welcome-email-template": {
+        "title": "welcome email template",
+        "tooltip": "welcome email template"
+      },
+      "wellcome-email": {
+        "title": "wellcome email",
+        "tooltip": "wellcome email"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  }
+}

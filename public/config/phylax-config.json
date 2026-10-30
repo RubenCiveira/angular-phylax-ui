@@ -16,6 +16,7 @@
       "type": "oidc",
       "force-https": false,
       "redirect": "http://localhost:4200/login-redirect",
+      "logout-redirect": "http://localhost:4200/",
       "url": "http://localhost:8090/oauth/openid//{{tenant}}/.well-known/openid-configuration",
       "issuer": "http://localhost:8090/oauth/openid/{{tenant}}",
       "profile": "http://localhost:8090/oauth/openid/{{tenant}}/me",

@@ -6,9 +6,9 @@
 >
   <editable-text formControlName="name" [visible]="isVisible['name']" label="access.role.form-group.name" />
   <editable-selectone
-    formControlName="relyingParty"
-    [visible]="isVisible['relyingParty']"
-    label="access.role.form-group.relying-party"
-    [provider]="relyingPartyProvider"
+    formControlName="resourceServer"
+    [visible]="isVisible['resourceServer']"
+    label="access.role.form-group.resource-server"
+    [provider]="resourceServerProvider"
   />
 </form-layout>

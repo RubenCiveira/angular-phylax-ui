@@ -11,7 +11,7 @@ export function menuRoutes(_appConfig: AppConfigService, _mfeConfig: MicroFrontC
       data: { label: 'Tenants', path: 'Access' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
-        import('@features/access/tenant/routes/tenant-view-list-route/tenant-view-list-route.module').then(
+        import('@features/identity/tenant/routes/tenant-view-list-route/tenant-view-list-route.module').then(
           (m) => m.TenantViewListRouteModule,
         ),
     },
@@ -20,7 +20,7 @@ export function menuRoutes(_appConfig: AppConfigService, _mfeConfig: MicroFrontC
       data: { label: 'Tenants', path: 'Access' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
-        import('@features/access/user/routes/user-view-list-route/user-view-list-route.module').then(
+        import('@features/identity/user/routes/user-view-list-route/user-view-list-route.module').then(
           (m) => m.UserViewListRouteModule,
         ),
     },

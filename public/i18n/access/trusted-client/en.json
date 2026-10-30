@@ -1,0 +1,500 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create trusted client",
+      "title": "Creating new trusted client",
+      "tooltip": "Create a new trusted client record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete trusted client",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Clear trusted client",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail trusted client",
+      "title": "Viewing the values of a trusted client",
+      "tooltip": "View the values of a trusted client"
+    },
+    "disable": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm you want to disable",
+      "dismiss": "Accept",
+      "label": "null",
+      "okBtn": "disable registration",
+      "report": "Has been disabled",
+      "title": "disable",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "disable-selection": {
+      "cancelBtn": "Do not disable",
+      "content": "Confirm that you want to disable the selected records",
+      "dismiss": "Accept",
+      "label": "null",
+      "okBtn": "disable logs",
+      "progress": "Disabling",
+      "report": "Records have been disabled",
+      "title": "disable selection",
+      "tooltip": "disable selected records"
+    },
+    "edit": {
+      "label": "Edit trusted client",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "enable": {
+      "cancelBtn": "No enable",
+      "content": "Confirm you want to enable",
+      "dismiss": "Accept",
+      "label": "enable trusted client",
+      "okBtn": "enable registration",
+      "report": "If you have enable",
+      "title": "enable",
+      "tooltip": "Modify the values of a trusted client"
+    },
+    "enable-selection": {
+      "cancelBtn": "No enable",
+      "content": "Confirm that you want to enable the selected records",
+      "dismiss": "Accept",
+      "label": "enable trusted client",
+      "okBtn": "enable registrations",
+      "progress": "Being enabled",
+      "report": "Records have been enabled",
+      "title": "enable selection",
+      "tooltip": "enable selected records"
+    }
+  },
+  "form-group": {
+    "audience": {
+      "error": {
+        "maxlength": "audience must be less than 250 characters",
+        "required": "audience is required"
+      }
+    },
+    "authorizationSignedResponseAlg": {
+      "error": {
+        "maxlength": "signed authorization ALG response must be less than 250 characters"
+      }
+    },
+    "backChannelLogoutUri": {
+      "error": {
+        "maxlength": "back channel logout uRI must be less than 250 characters"
+      }
+    },
+    "backchannel-token-delivery-mode": {
+      "options": {
+        "ping": "ping",
+        "poll": "poll"
+      }
+    },
+    "backchannelClientNotificationEndpoint": {
+      "error": {
+        "maxlength": "backchannel client notification endpoint must be less than 250 characters"
+      }
+    },
+    "clientName": {
+      "error": {
+        "maxlength": "customer name must be less than 250 characters"
+      }
+    },
+    "clientUri": {
+      "error": {
+        "maxlength": "customer uRI must be less than 250 characters"
+      }
+    },
+    "code": {
+      "error": {
+        "maxlength": "code must be less than 250 characters",
+        "required": "code is required"
+      }
+    },
+    "defaultAcrValues": {
+      "error": {
+        "maxlength": "acr defaults must be less than 250 characters"
+      }
+    },
+    "dpopBoundAccessTokens": {
+      "error": {
+        "required": "dpop-linked access tokens is required"
+      }
+    },
+    "enabled": {
+      "error": {
+        "required": "enabled is required"
+      }
+    },
+    "frontChannelLogoutUri": {
+      "error": {
+        "maxlength": "front channel logout uRI must be less than 250 characters"
+      }
+    },
+    "id-token-signed-response-alg": {
+      "options": {
+        "eddsa": "EdDSA",
+        "es256": "ES256",
+        "rs256": "RS256"
+      }
+    },
+    "idTokenEncryptedResponseAlg": {
+      "error": {
+        "maxlength": "aLG encrypted response token id must be less than 250 characters"
+      }
+    },
+    "idTokenEncryptedResponseEnc": {
+      "error": {
+        "maxlength": "enc encrypted response token id must be less than 250 characters"
+      }
+    },
+    "isResourceServer": {
+      "error": {
+        "required": "is a resource server is required"
+      }
+    },
+    "logoUri": {
+      "error": {
+        "maxlength": "Logo uri must be less than 250 characters"
+      }
+    },
+    "m2mTokenTtlSeconds": {
+      "error": {
+        "required": "m 2m token ttl seconds is required"
+      }
+    },
+    "policyUri": {
+      "error": {
+        "maxlength": "policy uRI must be less than 250 characters"
+      }
+    },
+    "publicAllow": {
+      "error": {
+        "required": "public permission is required"
+      }
+    },
+    "registered-at": {
+      "time": {
+        "label": "Time",
+        "placeholder": "Time"
+      }
+    },
+    "registrationAccess": {
+      "error": {
+        "maxlength": "High creation of has to be less than 250 characters"
+      }
+    },
+    "requestObjectSigningAlg": {
+      "error": {
+        "maxlength": "request object by signing ALG must be less than 250 characters"
+      }
+    },
+    "requirePkce": {
+      "error": {
+        "required": "Request PKCE key is required"
+      }
+    },
+    "requirePushedAuthorizationRequests": {
+      "error": {
+        "required": "require push authorization requests is required"
+      }
+    },
+    "secretOauth": {
+      "error": {
+        "maxlength": "oauth secret must be less than 250 characters"
+      }
+    },
+    "sectorIdentifierUri": {
+      "error": {
+        "maxlength": "uri sector identifier must be less than 250 characters"
+      }
+    },
+    "subject-type": {
+      "options": {
+        "pairwise": "pairwise",
+        "public": "public"
+      }
+    },
+    "subjectType": {
+      "error": {
+        "required": "Type Subjects is required"
+      }
+    },
+    "tlsClientAuthSubjectDn": {
+      "error": {
+        "maxlength": "tls client auth subject dn must be less than 250 characters"
+      }
+    },
+    "tlsClientCertificateBoundAccessTokens": {
+      "error": {
+        "required": "access tokens linked to tls client certificates is required"
+      }
+    },
+    "token-endpoint-auth-method": {
+      "options": {
+        "client-secret-basic": "client_secret_basic",
+        "client-secret-post": "client_secret_post",
+        "none": "none",
+        "private-key-jwt": "private_key_jwt"
+      }
+    },
+    "tokenEndpointAuthMethod": {
+      "error": {
+        "maxlength": "token endpoint authentication method must be less than 250 characters",
+        "required": "token endpoint authentication method is required"
+      }
+    },
+    "tokenEndpointAuthSigningAlg": {
+      "error": {
+        "maxlength": "token endpoint auth signature alg must be less than 250 characters"
+      }
+    },
+    "tosUri": {
+      "error": {
+        "maxlength": "tOS uri must be less than 250 characters"
+      }
+    },
+    "url": {
+      "error": {
+        "maxlength": "url must be less than 250 characters",
+        "required": "url is required"
+      }
+    },
+    "userinfoEncryptedResponseAlg": {
+      "error": {
+        "maxlength": "userinfo encrypted response ALG must be less than 250 characters"
+      }
+    },
+    "userinfoEncryptedResponseEnc": {
+      "error": {
+        "maxlength": "userinfo encrypted response enc must be less than 250 characters"
+      }
+    },
+    "userinfoSignedResponseAlg": {
+      "error": {
+        "maxlength": "userinfo signed response ALG must be less than 250 characters"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "allow-all-scopes": {
+        "title": "allow all scopes",
+        "tooltip": "allow all scopes"
+      },
+      "allowed-scopes-m-2m": {
+        "title": "allowed scopes m 2m",
+        "tooltip": "allowed scopes m 2m"
+      },
+      "authorization-details-types": {
+        "title": "authorization details types",
+        "tooltip": "authorization details types"
+      },
+      "authorization-signed-response-alg": {
+        "title": "authorization signed response alg",
+        "tooltip": "authorization signed response alg"
+      },
+      "back-channel-logout-session-required": {
+        "title": "back channel logout session required",
+        "tooltip": "back channel logout session required"
+      },
+      "back-channel-logout-uri": {
+        "title": "back channel logout uri",
+        "tooltip": "back channel logout uri"
+      },
+      "backchannel-client-notification-endpoint": {
+        "title": "backchannel client notification endpoint",
+        "tooltip": "backchannel client notification endpoint"
+      },
+      "backchannel-token-delivery-mode": {
+        "title": "backchannel token delivery mode",
+        "tooltip": "backchannel token delivery mode"
+      },
+      "client-name": {
+        "title": "client name",
+        "tooltip": "client name"
+      },
+      "client-uri": {
+        "title": "client uri",
+        "tooltip": "client uri"
+      },
+      "code": {
+        "title": "code",
+        "tooltip": "code"
+      },
+      "default-acr-values": {
+        "title": "default acr values",
+        "tooltip": "default acr values"
+      },
+      "default-max-age": {
+        "title": "default max age",
+        "tooltip": "default max age"
+      },
+      "dpop-bound-access-tokens": {
+        "title": "dpop bound access tokens",
+        "tooltip": "dpop bound access tokens"
+      },
+      "dynamically-registered": {
+        "title": "dynamically registered",
+        "tooltip": "dynamically registered"
+      },
+      "enabled": {
+        "title": "enabled",
+        "tooltip": "enabled"
+      },
+      "front-channel-logout-session-required": {
+        "title": "front channel logout session required",
+        "tooltip": "front channel logout session required"
+      },
+      "front-channel-logout-uri": {
+        "title": "front channel logout uri",
+        "tooltip": "front channel logout uri"
+      },
+      "grant-types-json": {
+        "title": "grant types json",
+        "tooltip": "grant types json"
+      },
+      "id-token-encrypted-response-alg": {
+        "title": "id token encrypted response alg",
+        "tooltip": "id token encrypted response alg"
+      },
+      "id-token-encrypted-response-enc": {
+        "title": "id token encrypted response enc",
+        "tooltip": "id token encrypted response enc"
+      },
+      "id-token-signed-response-alg": {
+        "title": "id token signed response alg",
+        "tooltip": "id token signed response alg"
+      },
+      "is-resource-server": {
+        "title": "is resource server",
+        "tooltip": "is resource server"
+      },
+      "jwks-json": {
+        "title": "jwks json",
+        "tooltip": "jwks json"
+      },
+      "jwks-uri": {
+        "title": "jwks uri",
+        "tooltip": "jwks uri"
+      },
+      "logo-uri": {
+        "title": "logo uri",
+        "tooltip": "logo uri"
+      },
+      "m-2m-token-ttl-seconds": {
+        "title": "m 2m token ttl seconds",
+        "tooltip": "m 2m token ttl seconds"
+      },
+      "policy-uri": {
+        "title": "policy uri",
+        "tooltip": "policy uri"
+      },
+      "public-allow": {
+        "title": "public allow",
+        "tooltip": "public allow"
+      },
+      "registered-at": {
+        "title": "registered at",
+        "tooltip": "registered at"
+      },
+      "registration-access": {
+        "title": "registration access",
+        "tooltip": "registration access"
+      },
+      "request-object-signing-alg": {
+        "title": "request object signing alg",
+        "tooltip": "request object signing alg"
+      },
+      "require-pkce": {
+        "title": "require pkce",
+        "tooltip": "require pkce"
+      },
+      "require-pushed-authorization-requests": {
+        "title": "require pushed authorization requests",
+        "tooltip": "require pushed authorization requests"
+      },
+      "response-types-json": {
+        "title": "response types json",
+        "tooltip": "response types json"
+      },
+      "secret-oauth": {
+        "title": "secret oauth",
+        "tooltip": "secret oauth"
+      },
+      "sector-identifier-uri": {
+        "title": "sector identifier uri",
+        "tooltip": "sector identifier uri"
+      },
+      "subject-type": {
+        "title": "subject type",
+        "tooltip": "subject type"
+      },
+      "tenant": {
+        "title": "tenant",
+        "tooltip": "tenant"
+      },
+      "tls-client-auth-subject-dn": {
+        "title": "tls client auth subject dn",
+        "tooltip": "tls client auth subject dn"
+      },
+      "tls-client-certificate-bound-access-tokens": {
+        "title": "tls client certificate bound access tokens",
+        "tooltip": "tls client certificate bound access tokens"
+      },
+      "token-endpoint-auth-method": {
+        "title": "token endpoint auth method",
+        "tooltip": "token endpoint auth method"
+      },
+      "token-endpoint-auth-signing-alg": {
+        "title": "token endpoint auth signing alg",
+        "tooltip": "token endpoint auth signing alg"
+      },
+      "tos-uri": {
+        "title": "tos uri",
+        "tooltip": "tos uri"
+      },
+      "userinfo-encrypted-response-alg": {
+        "title": "userinfo encrypted response alg",
+        "tooltip": "userinfo encrypted response alg"
+      },
+      "userinfo-encrypted-response-enc": {
+        "title": "userinfo encrypted response enc",
+        "tooltip": "userinfo encrypted response enc"
+      },
+      "userinfo-signed-response-alg": {
+        "title": "userinfo signed response alg",
+        "tooltip": "userinfo signed response alg"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Default"
+      }
+    }
+  }
+}

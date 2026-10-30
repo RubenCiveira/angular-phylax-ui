@@ -1,0 +1,101 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create user federated identity",
+      "title": "Creando nuevo user federated identity",
+      "tooltip": "Crea un nuevo registro de user federated identity"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Delete user federated identity",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Modificar los valores de un user federated identity"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Borrar user federated identity",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detail user federated identity",
+      "title": "Viendo los valores de un user federated identity",
+      "tooltip": "Ver los valores de un user federated identity"
+    },
+    "edit": {
+      "label": "Edit user federated identity",
+      "saveBtn": "Update",
+      "tooltip": "Modificar los valores de un user federated identity"
+    }
+  },
+  "form-group": {
+    "created-at": {
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "loginProvider": {
+      "error": {
+        "required": "Inicio de sesión del proveedor es obligatorio"
+      }
+    },
+    "subject": {
+      "error": {
+        "maxlength": "asunto tiene que tener menos de 250 caracteres",
+        "required": "asunto es obligatorio"
+      }
+    },
+    "user": {
+      "error": {
+        "required": "usuario es obligatorio"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "created-at": {
+        "title": "creado en",
+        "tooltip": "creado en"
+      },
+      "login-provider": {
+        "title": "Inicio de sesión del proveedor",
+        "tooltip": "Inicio de sesión del proveedor"
+      },
+      "subject": {
+        "title": "asunto",
+        "tooltip": "asunto"
+      },
+      "user": {
+        "title": "usuario",
+        "tooltip": "usuario"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "order": {
+      "options": {
+        "null": "Predeterminado",
+        "subject-asc": "subject-asc",
+        "subject-desc": "subject-desc"
+      }
+    }
+  }
+}

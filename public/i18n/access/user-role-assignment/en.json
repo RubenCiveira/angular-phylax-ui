@@ -1,0 +1,79 @@
+{
+  "action": {
+    "create": {
+      "createButton": "Create",
+      "label": "Create user role assignment",
+      "title": "Creating new user role assignment",
+      "tooltip": "Create a new user role assignment record"
+    },
+    "delete": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm you want to delete",
+      "dismiss": "Accept",
+      "label": "Delete user role assignment",
+      "okBtn": "Delete Record ",
+      "report": " has been cleared.",
+      "title": "Ticket passed",
+      "tooltip": "Modify the values of a user role assignment"
+    },
+    "delete-selection": {
+      "cancelBtn": "Do not delete",
+      "content": "Confirm that you want to delete the selected records",
+      "dismiss": "Accept",
+      "label": "Delete user role assignment",
+      "okBtn": "Delete Records",
+      "progress": "Deleting",
+      "report": "It can NOT be deleted",
+      "title": "Clear selection.",
+      "tooltip": "Clear selected logs"
+    },
+    "detail": {
+      "label": "Detail user role assignment",
+      "title": "Viewing the values of a user role assignment",
+      "tooltip": "View the values of a user role assignment"
+    },
+    "edit": {
+      "label": "Edit user role assignment",
+      "saveBtn": "Update",
+      "tooltip": "Modify the values of a user role assignment"
+    }
+  },
+  "form-group": {
+    "user": {
+      "error": {
+        "required": "Username is required"
+      }
+    }
+  },
+  "list": {
+    "column": {
+      "oauth-client": {
+        "title": "oauth client",
+        "tooltip": "oauth client"
+      },
+      "relying-party": {
+        "title": "relying party",
+        "tooltip": "relying party"
+      },
+      "resource-server": {
+        "title": "resource server",
+        "tooltip": "resource server"
+      },
+      "trusted-client": {
+        "title": "trusted client",
+        "tooltip": "trusted client"
+      },
+      "user": {
+        "title": "user",
+        "tooltip": "user"
+      }
+    },
+    "filter": {
+      "button": "Filter"
+    },
+    "search": {
+      "button": "Search",
+      "title": "Search"
+    }
+  }
+}

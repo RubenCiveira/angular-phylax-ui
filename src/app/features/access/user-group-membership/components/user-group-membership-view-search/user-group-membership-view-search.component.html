@@ -10,28 +10,22 @@
     label="access.user-group-membership.search.search"
   />
   <editable-selectone
-    formControlName="trustedClients"
-    [visible]="isVisible['trustedClients']"
-    label="access.user-group-membership.search.trusted-clients"
-    [provider]="trustedClientsProvider"
+    formControlName="oauthClient"
+    [visible]="isVisible['oauthClient']"
+    label="access.user-group-membership.search.oauth-client"
+    [provider]="oauthClientProvider"
   />
   <editable-selectone
-    formControlName="relyingPartys"
-    [visible]="isVisible['relyingPartys']"
-    label="access.user-group-membership.search.relying-partys"
-    [provider]="relyingPartysProvider"
+    formControlName="resourceServer"
+    [visible]="isVisible['resourceServer']"
+    label="access.user-group-membership.search.resource-server"
+    [provider]="resourceServerProvider"
   />
   <editable-selectone
-    formControlName="relyingParty"
-    [visible]="isVisible['relyingParty']"
-    label="access.user-group-membership.search.relying-party"
-    [provider]="relyingPartyProvider"
-  />
-  <editable-selectone
-    formControlName="trustedClient"
-    [visible]="isVisible['trustedClient']"
-    label="access.user-group-membership.search.trusted-client"
-    [provider]="trustedClientProvider"
+    formControlName="oauthClients"
+    [visible]="isVisible['oauthClients']"
+    label="access.user-group-membership.search.oauth-clients"
+    [provider]="oauthClientsProvider"
   />
   <editable-selectone
     formControlName="user"
@@ -44,5 +38,11 @@
     [visible]="isVisible['users']"
     label="access.user-group-membership.search.users"
     [provider]="usersProvider"
+  />
+  <editable-selectone
+    formControlName="resourceServers"
+    [visible]="isVisible['resourceServers']"
+    label="access.user-group-membership.search.resource-servers"
+    [provider]="resourceServersProvider"
   />
 </form-layout>

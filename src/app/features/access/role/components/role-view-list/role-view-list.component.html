@@ -74,11 +74,11 @@
           </ng-template>
           <ng-template
             listViewColumn
-            title="{{ 'access.role.list.column.relying-party.title' | transloco }}"
-            tooltip="{{ 'access.role.list.column.relying-party.tooltip' | transloco }}"
+            title="{{ 'access.role.list.column.resource-server.title' | transloco }}"
+            tooltip="{{ 'access.role.list.column.resource-server.tooltip' | transloco }}"
             let-row="$implicit"
           >
-            {{ row.relyingParty()?.code }}
+            {{ row.resourceServer()?.code }}
           </ng-template>
           <ng-template listViewColumn let-row="$implicit">
             <ng-container

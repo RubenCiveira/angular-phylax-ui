@@ -12,7 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { MenuItem } from 'app/bootstrap/layout/menu-item.model';
-import { RouteAccessService } from 'app/bootstrap/layout/menu/route-accesible.service';
+import { RouteAccessService } from 'app/bootstrap/layout/menu/route-accessible.service';
 
 @Component({
   selector: 'app-menu',
@@ -114,7 +114,7 @@ export class MenuComponent implements OnDestroy {
       (sub || this.subscriptions).add(
         this.checker
           .checkRouteGuards(this.currentLanguage() + '/' + this.currentTenant() + '/' + item.route)
-          .subscribe((res) => {
+          .subscribe((res: any) => {
             copy.hidden = res !== true;
             if (parent) {
               this.childsVisibility(parent);

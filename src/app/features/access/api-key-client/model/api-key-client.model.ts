@@ -23,16 +23,16 @@ export interface ApiKeyClientProjection {
   version?: number;
 }
 export function apiKeyClientProjectionToValue(
-  proyection: ApiKeyClient | ApiKeyClientProjection | null | undefined,
+  projection: ApiKeyClient | ApiKeyClientProjection | null | undefined,
 ): ApiKeyClient | null {
-  return proyection
+  return projection
     ? {
-        uid: proyection.uid,
-        code: proyection.code,
-        key: proyection.key,
-        enabled: proyection.enabled,
-        scopes: proyection.scopes,
-        version: proyection.version,
+        uid: projection.uid,
+        code: projection.code,
+        key: projection.key,
+        enabled: projection.enabled,
+        scopes: projection.scopes,
+        version: projection.version,
       }
     : null;
 }
