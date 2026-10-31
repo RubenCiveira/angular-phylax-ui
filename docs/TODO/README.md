@@ -29,7 +29,6 @@ docs/TODO/<nn>-<área>/<EP-ID>-<épica>/<ID>-<issue>.md    ← issue individual
 
 ## Épicas con issues críticos
 
-- [EP-CTX-1](01-contexto-compartido/EP-CTX-1-step-up-e-interceptores/README.md) — Step-up e interceptores HTTP (CTX-01)
 - [EP-CTX-2](01-contexto-compartido/EP-CTX-2-proveedor-oidc/README.md) — Proveedor OIDC (CTX-06)
 - [EP-CTX-4](01-contexto-compartido/EP-CTX-4-gestion-de-errores/README.md) — Gestión de errores (CTX-03, CTX-04)
 - [EP-CTX-7](01-contexto-compartido/EP-CTX-7-cargador-i18n/README.md) — Cargador de traducciones (CTX-19)

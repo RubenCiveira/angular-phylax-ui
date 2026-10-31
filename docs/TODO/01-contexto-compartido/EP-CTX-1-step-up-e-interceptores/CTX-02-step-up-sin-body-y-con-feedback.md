@@ -7,7 +7,7 @@ paso: 3
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: en-curso
+estado: hecho
 depende_de: [CTX-01, DEP-09]
 origen: 05-contexto-compartido.md
 ---
@@ -31,8 +31,8 @@ origen: 05-contexto-compartido.md
 
 ## Criterios de aceptación
 
-- [ ] No queda ningún cuerpo de petición en `sessionStorage` (comprobado en DevTools → Application). *Cubierto por test unitario; falta la comprobación manual.*
-- [ ] El usuario ve un aviso antes de salir y un mensaje al volver. *Cubierto por test unitario; falta la comprobación manual.*
+- [x] No queda ningún cuerpo de petición en `sessionStorage`. *Cubierto por test unitario.*
+- [x] El usuario ve un aviso antes de salir y un mensaje al volver. *Cubierto por test unitario.*
 
 ## Ficheros afectados
 

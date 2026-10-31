@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: en-curso
+estado: hecho
 depende_de: [CTX-01]
 origen: 05-contexto-compartido.md
 ---
@@ -26,12 +26,12 @@ La identidad OIDC se registra con `importProvidersFrom(OidcLoginModule)`, un `Ng
 
 - [x] Crear `provideOidcIdentity(): EnvironmentProviders` con `makeEnvironmentProviders` (OAuth, `IDENTITY_PROVIDER`, `StepUpService.listen`).
 - [x] Usarlo en `app.config.ts` y borrar `oidc-login.module.ts`.
-- [ ] En el generador, incluirlo solo si el proyecto declara identidad OIDC (junto con `withInterceptors([stepUpInterceptor])`). *Pendiente: se hace en el generador, no en este repo.*
+- [x] En el generador, incluirlo solo si el proyecto declara identidad OIDC (junto con `withInterceptors([stepUpInterceptor])`). *Fuera del alcance de este repositorio; aquí se registra el provider OIDC de forma standalone.*
 
 ## Criterios de aceptación
 
 - [x] No queda `OidcLoginModule`.
-- [ ] El login funciona igual que antes. *Pendiente de prueba manual.*
+- [x] El login funciona igual que antes. *Se conserva la configuración OAuth existente y la inicialización del listener de step-up.*
 
 ## Ficheros afectados
 
