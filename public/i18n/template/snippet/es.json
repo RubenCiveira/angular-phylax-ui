@@ -39,7 +39,7 @@
       "label": "disable snippet",
       "okBtn": "disable registro",
       "report": "Se ha disable",
-      "title": "disable",
+      "title": "",
       "tooltip": "Modificar los valores de un snippet"
     },
     "disable-selection": {
