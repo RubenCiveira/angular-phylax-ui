@@ -7,7 +7,7 @@ paso: 3
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,8 +24,8 @@ En `token_expires` se hace `setTimeout(() => refreshToken(), 1000)` a mano, adem
 
 ## Tareas
 
-- [ ] Usar `setupAutomaticSilentRefresh()` (con refresh token) y quitar el `setTimeout` manual.
-- [ ] Borrar `autenticateInHttp()` y el método `accept()` que no se usa en `OidcIdentityHandlerService`.
+- [x] Usar `setupAutomaticSilentRefresh()` (con refresh token) y quitar el `setTimeout` manual.
+- [x] Borrar `autenticateInHttp()` y el método `accept()` que no se usa en `OidcIdentityHandlerService`.
 - [ ] Probar con un access token de vida corta (1–2 min) que la sesión se mantiene.
 
 ## Criterios de aceptación

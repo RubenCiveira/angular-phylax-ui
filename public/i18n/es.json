@@ -18,6 +18,13 @@
       "cancel": "Cancelar",
       "verified": "Verificación completada.",
       "repeat": "Verificación completada. Repite la operación para aplicarla."
+    },
+    "errors": {
+      "title": "Problema de inicio de sesión",
+      "reset": "Borrar credenciales",
+      "profile": "No se ha podido cargar tu perfil de usuario. ¿Borrar las credenciales guardadas y empezar de nuevo?",
+      "discovery": "No se ha podido contactar con el proveedor de identidad. ¿Borrar las credenciales guardadas y empezar de nuevo?",
+      "code": "La respuesta del inicio de sesión no es válida. Vuelve a iniciar sesión."
     }
   }
 }

@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,12 +24,12 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] `showDebugInformation: isDevMode() && setup['debug'] === true`.
-- [ ] Quitar `console.log('EVENTO OIDC', e)` y `console.log('ERROR, token expires')` (o pasarlos a `logger.debug` cuando exista CTX-21).
+- [x] `showDebugInformation: isDevMode() && setup['debug'] === true`.
+- [x] Quitar `console.log('EVENTO OIDC', e)` y `console.log('ERROR, token expires')` (o pasarlos a `logger.debug` cuando exista CTX-21).
 
 ## Criterios de aceptación
 
-- [ ] En un build de producción, el flujo de login no escribe nada en la consola.
+- [x] En un build de producción, el flujo de login no escribe nada en la consola.
 
 ## Ficheros afectados
 

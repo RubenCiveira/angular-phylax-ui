@@ -18,6 +18,13 @@
       "cancel": "Cancel",
       "verified": "Verification completed.",
       "repeat": "Verification completed. Please repeat the operation to apply it."
+    },
+    "errors": {
+      "title": "Sign-in problem",
+      "reset": "Clear credentials",
+      "profile": "Your user profile could not be loaded. Clear the saved credentials and start again?",
+      "discovery": "The identity provider could not be reached. Clear the saved credentials and start again?",
+      "code": "The sign-in response is not valid. Please sign in again."
     }
   }
 }

@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: S
 ambito: ambos
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -27,15 +27,15 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Eliminar `pkce` de la configuración (PKCE siempre activo) y avisar por log si aparece.
-- [ ] Leer `scope` completo de la configuración y añadir `offline_access` al `phylax-config.json` de ejemplo.
-- [ ] Claim de roles configurable: `roles-claim` (por defecto `groups`).
-- [ ] Cambiar el valor por defecto de `persistent` a `false` y documentar el riesgo de `localStorage` frente a XSS.
+- [x] Eliminar `pkce` de la configuración (PKCE siempre activo) y avisar por log si aparece.
+- [x] Leer `scope` completo de la configuración y añadir `offline_access` al `phylax-config.json` de ejemplo.
+- [x] Claim de roles configurable: `roles-claim` (por defecto `groups`).
+- [x] Cambiar el valor por defecto de `persistent` a `false` y documentar el riesgo de `localStorage` frente a XSS.
 
 ## Criterios de aceptación
 
-- [ ] Cambiar `roles-claim` en la configuración cambia los roles del usuario sin recompilar.
-- [ ] Sin `persistent`, los tokens se guardan en `sessionStorage`.
+- [x] Cambiar `roles-claim` en la configuración cambia los roles del usuario sin recompilar.
+- [x] Sin `persistent`, los tokens se guardan en `sessionStorage`.
 
 ## Ficheros afectados
 

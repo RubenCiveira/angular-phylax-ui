@@ -13,3 +13,15 @@ export interface IdentityHandler {
   login(): void;
   logout(): void;
 }
+
+/** Por qué falla la identidad. Cada motivo tiene su texto en `identity.errors.<motivo>`. */
+export type IdentityErrorReason = 'profile' | 'discovery' | 'code';
+
+export const IDENTITY_UI = new InjectionToken<IdentityUiPort>('IdentityUiPort');
+
+/** Cómo se avisa al usuario de los fallos de identidad, sin que el proveedor dependa de la UI. */
+export interface IdentityUiPort {
+  /** Pregunta si se descartan las credenciales guardadas. Emite `true` si el usuario acepta. */
+  confirmResetCredentials(reason: IdentityErrorReason): Observable<boolean>;
+  notifyError(reason: IdentityErrorReason): void;
+}

@@ -7,7 +7,7 @@ paso: 4
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [DEP-09]
 origen: 05-contexto-compartido.md
 ---
@@ -24,14 +24,14 @@ Los errores de identidad se muestran con diálogos nativos bloqueantes y sin tra
 
 ## Tareas
 
-- [ ] Definir la interfaz `IdentityUiPort` (`confirmResetCredentials(reason)`, `notifyError(reason)`) con un `InjectionToken`.
-- [ ] Implementación por defecto con `ConfirmDialogService`/`NotifyService` y claves `identity.errors.profile`, `identity.errors.discovery`, `identity.errors.code`.
-- [ ] Sustituir los tres `alert`/`confirm`.
+- [x] Definir la interfaz `IdentityUiPort` (`confirmResetCredentials(reason)`, `notifyError(reason)`) con un `InjectionToken`.
+- [x] Implementación por defecto con `ConfirmDialogService`/`NotifyService` y claves `identity.errors.profile`, `identity.errors.discovery`, `identity.errors.code`.
+- [x] Sustituir los tres `alert`/`confirm`.
 
 ## Criterios de aceptación
 
-- [ ] No hay `alert(` ni `confirm(` en `src/app/shared/context`.
-- [ ] Los mensajes aparecen en el idioma activo.
+- [x] No hay `alert(` ni `confirm(` en `src/app/shared/context`.
+- [x] Los mensajes aparecen en el idioma activo.
 
 ## Ficheros afectados
 

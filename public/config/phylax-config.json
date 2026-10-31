@@ -21,11 +21,11 @@
       "issuer": "http://localhost:8090/oauth/openid/{{tenant}}",
       "profile": "http://localhost:8090/oauth/openid/{{tenant}}/me",
       "client-id": "phylax-ui",
-      "scope": "openid profile email",
+      "scope": "openid profile email offline_access",
+      "roles-claim": "groups",
       "audience": ["phylax-ui", "phylax-api"],
       "ph-audience": ["phylax-ui", "phylax-api"],
-      "persistent": true,
-      "pkce": false
+      "persistent": false
     }
   },
   "telemetry": {
