@@ -7,7 +7,7 @@ paso: 3
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: [CTX-01, DEP-09]
 origen: 05-contexto-compartido.md
 ---
@@ -24,15 +24,15 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Guardar solo `{ method, url, returnUrl }` (sin body).
-- [ ] Antes de redirigir, mostrar un diálogo traducido ("Esta operación requiere verificación adicional") con Continuar / Cancelar, vía `ConfirmDialogService`.
-- [ ] Al volver, navegar a `returnUrl` y notificar con `NotifyService` que debe repetir la acción (o, si se reanuda una petición sin body, mostrar el resultado).
-- [ ] Añadir claves `identity.stepUp.*` al i18n global.
+- [x] Guardar solo `{ method, url, returnUrl }` (sin body).
+- [x] Antes de redirigir, mostrar un diálogo traducido ("Esta operación requiere verificación adicional") con Continuar / Cancelar, vía `ConfirmDialogService`.
+- [x] Al volver, navegar a `returnUrl` y notificar con `NotifyService` que debe repetir la acción (o, si se reanuda una petición sin body, mostrar el resultado). *No se reanuda ninguna petición: las lecturas se repiten solas al recargar la página (aviso «verificación completada») y las escrituras piden repetir la acción.*
+- [x] Añadir claves `identity.stepUp.*` al i18n global.
 
 ## Criterios de aceptación
 
-- [ ] No queda ningún cuerpo de petición en `sessionStorage` (comprobado en DevTools → Application).
-- [ ] El usuario ve un aviso antes de salir y un mensaje al volver.
+- [ ] No queda ningún cuerpo de petición en `sessionStorage` (comprobado en DevTools → Application). *Cubierto por test unitario; falta la comprobación manual.*
+- [ ] El usuario ve un aviso antes de salir y un mensaje al volver. *Cubierto por test unitario; falta la comprobación manual.*
 
 ## Ficheros afectados
 

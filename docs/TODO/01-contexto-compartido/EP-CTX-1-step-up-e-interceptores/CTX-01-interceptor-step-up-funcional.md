@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,17 +24,17 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Convertir `StepUpInterceptor` en `stepUpInterceptor: HttpInterceptorFn` (usa `inject(StepUpService)`).
-- [ ] Registrarlo en `app.config.ts` con `provideHttpClient(withInterceptors([stepUpInterceptor]))`.
-- [ ] Quitar el registro `HTTP_INTERCEPTORS` de `oidc-login.module.ts`.
-- [ ] Comprobar si el interceptor por defecto de `angular-oauth2-oidc` hace falta (hoy tampoco se ejecuta); si no, documentarlo.
-- [ ] Test con `HttpTestingController`: respuesta 401 con la cabecera `WWW-Authenticate` → se llama a `StepUpService.start` con `acr_values` y `max_age`.
+- [x] Convertir `StepUpInterceptor` en `stepUpInterceptor: HttpInterceptorFn` (usa `inject(StepUpService)`).
+- [x] Registrarlo en `app.config.ts` con `provideHttpClient(withInterceptors([stepUpInterceptor]))`.
+- [x] Quitar el registro `HTTP_INTERCEPTORS` de `oidc-login.module.ts`.
+- [x] Comprobar si el interceptor por defecto de `angular-oauth2-oidc` hace falta (hoy tampoco se ejecuta); si no, documentarlo. *No hace falta: ClientService añade el Bearer desde UserInfo y no se configura `resourceServer`; documentado en `step-up.interceptor.ts`.*
+- [x] Test con `HttpTestingController`: respuesta 401 con la cabecera `WWW-Authenticate` → se llama a `StepUpService.start` con `acr_values` y `max_age`.
 
 ## Criterios de aceptación
 
-- [ ] Un 401 con `insufficient_user_authentication` inicia el flujo OIDC con `acr_values`.
-- [ ] Otros errores HTTP siguen llegando a quien hizo la petición.
-- [ ] El test de integración pasa.
+- [x] Un 401 con `insufficient_user_authentication` inicia el flujo OIDC con `acr_values`.
+- [x] Otros errores HTTP siguen llegando a quien hizo la petición.
+- [x] El test de integración pasa.
 
 ## Ficheros afectados
 

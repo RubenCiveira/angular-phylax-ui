@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 03-dependencias.md
 ---
@@ -24,14 +24,14 @@ Las ~230 acciones generadas inyectan `MatDialog` y `MatSnackBar` directamente y 
 
 ## Tareas
 
-- [ ] `ConfirmDialogService.confirm({ titleKey, messageKey, okKey, cancelKey, params }): Observable<boolean>`.
-- [ ] `NotifyService.success/info/error(key, params, action?)` sobre `MatSnackBar`.
-- [ ] Textos por defecto en `common.*` del i18n global.
-- [ ] Tests unitarios.
+- [x] `ConfirmDialogService.confirm({ titleKey, messageKey, okKey, cancelKey, params }): Observable<boolean>`.
+- [x] `NotifyService.success/info/error(key, params, action?)` sobre `MatSnackBar`.
+- [x] Textos por defecto en `common.*` del i18n global.
+- [x] Tests unitarios.
 
 ## Criterios de aceptación
 
-- [ ] Los servicios están disponibles en `shared/toolkit` y documentados con un ejemplo.
+- [x] Los servicios están disponibles en `shared/toolkit` y documentados con un ejemplo.
 
 ## Ficheros afectados
 

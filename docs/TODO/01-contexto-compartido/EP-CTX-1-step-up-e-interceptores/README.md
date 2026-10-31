@@ -3,7 +3,7 @@ id: EP-CTX-1
 titulo: "Step-up e interceptores HTTP"
 area: contexto-compartido
 prioridad: critica
-estado: pendiente
+estado: en-curso
 issues: [CTX-01, CTX-10, CTX-02]
 ---
 
@@ -60,6 +60,6 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] CTX-01 — Hacer que el interceptor de step-up se ejecute
+- [x] CTX-01 — Hacer que el interceptor de step-up se ejecute
 - [ ] CTX-10 — Sustituir OidcLoginModule por provideOidcIdentity()
 - [ ] CTX-02 — Step-up: no guardar el cuerpo de la petición y avisar al usuario

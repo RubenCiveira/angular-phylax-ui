@@ -1,3 +1,23 @@
 {
-  "info": "Modulo"
+  "info": "Modulo",
+  "common": {
+    "confirm": {
+      "title": "Confirmar",
+      "ok": "Aceptar",
+      "cancel": "Cancelar"
+    },
+    "notify": {
+      "close": "Cerrar"
+    }
+  },
+  "identity": {
+    "stepUp": {
+      "title": "Verificación adicional",
+      "message": "Esta operación requiere verificación adicional. Te llevaremos a la página de inicio de sesión y después volverás aquí.",
+      "continue": "Continuar",
+      "cancel": "Cancelar",
+      "verified": "Verificación completada.",
+      "repeat": "Verificación completada. Repite la operación para aplicarla."
+    }
+  }
 }

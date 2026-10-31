@@ -1,3 +1,23 @@
 {
-  "info": "Module"
+  "info": "Module",
+  "common": {
+    "confirm": {
+      "title": "Confirm",
+      "ok": "OK",
+      "cancel": "Cancel"
+    },
+    "notify": {
+      "close": "Close"
+    }
+  },
+  "identity": {
+    "stepUp": {
+      "title": "Additional verification",
+      "message": "This operation requires additional verification. You will be taken to the sign-in page and then brought back here.",
+      "continue": "Continue",
+      "cancel": "Cancel",
+      "verified": "Verification completed.",
+      "repeat": "Verification completed. Please repeat the operation to apply it."
+    }
+  }
 }
