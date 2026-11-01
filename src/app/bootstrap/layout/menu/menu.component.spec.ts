@@ -62,7 +62,7 @@ describe('MenuComponent', () => {
         { provide: AppStateService, useValue: appStateMock },
         {
           provide: RuntimeConfigService,
-          useValue: { value: (path: string) => signal(path === 'meta.title' ? 'Phylax' : undefined) },
+          useValue: { value: (path: string) => signal(path === 'meta.title' ? 'phylax' : undefined) },
         },
       ],
     }).compileComponents();

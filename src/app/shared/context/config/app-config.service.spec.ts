@@ -37,13 +37,13 @@ describe('provideConfiguration', () => {
   };
 
   it('loads config/<env>-config.json on startup', async () => {
-    fetchSpy.and.returnValue(Promise.resolve(jsonResponse({ meta: { title: 'Phylax' } })));
+    fetchSpy.and.returnValue(Promise.resolve(jsonResponse({ meta: { title: 'phylax' } })));
 
     await init();
 
     expect(fetchSpy).toHaveBeenCalledWith(shellConfigUrl());
-    expect(TestBed.inject(APP_CONFIG)().meta.title).toBe('Phylax');
-    expect(TestBed.inject(STATIC_CONF)).toEqual(jasmine.objectContaining({ meta: { title: 'Phylax' } }));
+    expect(TestBed.inject(APP_CONFIG)().meta.title).toBe('phylax');
+    expect(TestBed.inject(STATIC_CONF)).toEqual(jasmine.objectContaining({ meta: { title: 'phylax' } }));
   });
 
   it('does not mutate the imported environment', async () => {
@@ -154,9 +154,7 @@ describe('AppConfigService', () => {
   });
 
   it('emits the loaded value after the remote config loads', fakeAsync(() => {
-    (window.fetch as jasmine.Spy).and.returnValue(
-      Promise.resolve(jsonResponse({ feature: 'enabled' })),
-    );
+    (window.fetch as jasmine.Spy).and.returnValue(Promise.resolve(jsonResponse({ feature: 'enabled' })));
     TestBed.configureTestingModule({});
     const config = TestBed.inject(AppConfigService);
 
@@ -169,9 +167,7 @@ describe('AppConfigService', () => {
   }));
 
   it('traverses dot-notation keys once config has loaded', fakeAsync(() => {
-    (window.fetch as jasmine.Spy).and.returnValue(
-      Promise.resolve(jsonResponse({ a: { b: 'deep-value' } })),
-    );
+    (window.fetch as jasmine.Spy).and.returnValue(Promise.resolve(jsonResponse({ a: { b: 'deep-value' } })));
     TestBed.configureTestingModule({});
     const config = TestBed.inject(AppConfigService);
 
@@ -247,9 +243,7 @@ describe('AppConfigService — remote URL', () => {
 
   it('uses the remote URL registered by the host', fakeAsync(() => {
     (window as any)[MFE_REMOTES_GLOBAL] = { [environment.name]: ['https://remote.example.com/', 'config.json'] };
-    const fetchSpy = spyOn(window, 'fetch').and.returnValue(
-      Promise.resolve(jsonResponse({})),
-    );
+    const fetchSpy = spyOn(window, 'fetch').and.returnValue(Promise.resolve(jsonResponse({})));
     TestBed.configureTestingModule({});
     const config = TestBed.inject(AppConfigService);
 
@@ -265,7 +259,7 @@ describe('RuntimeConfigService', () => {
     (window as any)[MFE_REMOTES_GLOBAL] = { [environment.name]: ['https://remote.example.com/', 'config.json'] };
     spyOn(window, 'fetch').and.returnValue(
       Promise.resolve(
-        jsonResponse({ meta: { title: 'Phylax' }, identity: { main: { type: 'oidc', issuer: 'https://idp' } } }),
+        jsonResponse({ meta: { title: 'phylax' }, identity: { main: { type: 'oidc', issuer: 'https://idp' } } }),
       ),
     );
   });
@@ -284,7 +278,7 @@ describe('RuntimeConfigService', () => {
     flushMicrotasks();
 
     expect(config().identity['main'].issuer).toBe('https://idp');
-    expect(config().meta.title).toBe('Phylax');
+    expect(config().meta.title).toBe('phylax');
     expect(config().data).toEqual({});
   }));
 
@@ -306,6 +300,6 @@ describe('RuntimeConfigService', () => {
     expect(title()).toBeUndefined();
 
     flushMicrotasks();
-    expect(title()).toBe('Phylax');
+    expect(title()).toBe('phylax');
   }));
 });

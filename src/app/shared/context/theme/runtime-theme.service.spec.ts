@@ -83,10 +83,10 @@ describe('RuntimeThemeService', () => {
 
   it('uses theme.product-name or, if missing, meta.title', () => {
     const service = create();
-    config.set(withTheme({}, { title: 'Phylax' }));
-    expect(service.productName()).toBe('Phylax');
+    config.set(withTheme({}, { title: 'phylax' }));
+    expect(service.productName()).toBe('phylax');
 
-    config.set(withTheme({ 'product-name': 'Acme' }, { title: 'Phylax' }));
+    config.set(withTheme({ 'product-name': 'Acme' }, { title: 'phylax' }));
     expect(service.productName()).toBe('Acme');
   });
 

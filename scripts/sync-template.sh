@@ -18,7 +18,7 @@
 #
 # Variables de entorno:
 #   TEMPLATE_DIR      Destino (por defecto la plantilla container del civi-generator).
-#   NAME_PLACEHOLDER  Placeholder para "phylax" (por defecto "{{base}}").
+#   NAME_PLACEHOLDER  Placeholder para "phylax" (por defecto "@{{base}}").
 #   HOST_PLACEHOLDER  Placeholder para "net-civeira-phylax" (por defecto "@{api-host}").
 #
 set -euo pipefail
@@ -26,7 +26,7 @@ set -euo pipefail
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TEMPLATE_DIR="${TEMPLATE_DIR:-/Users/ruben.civeiraiglesia/Documents/Proyectos/Personal/civi-generator/repositorios/civi-generator/src/main/resources/template/angular/container}"
 NAME="phylax"
-DEFAULT_NAME_PLACEHOLDER='{{base}}'
+DEFAULT_NAME_PLACEHOLDER='@{base}'
 DEFAULT_HOST_PLACEHOLDER='@{api-host}'
 NAME_PLACEHOLDER="${NAME_PLACEHOLDER:-$DEFAULT_NAME_PLACEHOLDER}"
 HOST_PLACEHOLDER="${HOST_PLACEHOLDER:-$DEFAULT_HOST_PLACEHOLDER}"
