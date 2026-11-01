@@ -9,6 +9,11 @@
     "notify": {
       "close": "Cerrar"
     },
+    "selector": {
+      "open": "Mostrar opciones",
+      "noResults": "Sin resultados",
+      "error": "No se pudieron cargar las opciones. Inténtalo de nuevo."
+    },
     "hiddenField": "Campo oculto por permisos"
   },
   "validation": {

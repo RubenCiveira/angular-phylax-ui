@@ -90,6 +90,9 @@ function projectedFormField(): MatFormField {
       @for (error of field.visible() ? field.errorList() : []; track error.key) {
         <mat-error>{{ field.errorKey(error) | transloco: error.params }}</mat-error>
       }
+      @if (field.visible() && field.feedbackErrorKey(); as feedback) {
+        <mat-error>{{ feedback | transloco }}</mat-error>
+      }
     </mat-form-field>
     @if (!field.visible() && field.showHiddenMark()) {
       <editable-hidden-mark [label]="field.label()" />

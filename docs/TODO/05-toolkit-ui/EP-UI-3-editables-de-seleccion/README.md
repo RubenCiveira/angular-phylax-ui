@@ -3,7 +3,7 @@ id: EP-UI-3
 titulo: "Editables de selección"
 area: toolkit-ui
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [UI-07, UI-08]
 ---
 
@@ -40,5 +40,5 @@ Issues de otras épicas de los que depende:
 
 ## Checklist de la épica
 
-- [ ] UI-07 — editable-choose: separar valor y etiqueta, y elegir representación
-- [ ] UI-08 — editable-selectone accesible y con feedback
+- [x] UI-07 — editable-choose: separar valor y etiqueta, y elegir representación
+- [x] UI-08 — editable-selectone accesible y con feedback

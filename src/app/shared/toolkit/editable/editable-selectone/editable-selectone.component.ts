@@ -10,24 +10,35 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { SearchEditable } from '../search-editable';
 
 @Component({
   template: `
     <editable-field [editable]="this">
       <input
+        #searchInput
         matInput
         [required]="required()"
         placeholder="{{ label() + '.placeholder' | transloco }}"
         [matAutocomplete]="auto"
+        [errorStateMatcher]="errorMatcher"
         (blur)="blur()"
         [formControl]="search"
       />
-      <span matSuffix style="display: flex">
-        @if (!control.disabled) {
-          <mat-icon (click)="searchOptions(); $event.preventDefault()">keyboard_arrow_down</mat-icon>
-        }
-      </span>
+      @if (!control.disabled) {
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          [attr.aria-label]="'common.selector.open' | transloco"
+          (mousedown)="$event.preventDefault()"
+          (click)="openOptions(searchInput)"
+        >
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+      }
       <mat-autocomplete
         #auto="matAutocomplete"
         [displayWith]="displayItem()"
@@ -37,6 +48,9 @@ import { SearchEditable } from '../search-editable';
           <mat-option [value]="item">
             {{ provider().display(item) }}
           </mat-option>
+        }
+        @if (noResults()) {
+          <mat-option disabled>{{ 'common.selector.noResults' | transloco }}</mat-option>
         }
       </mat-autocomplete>
       @if (provider().searching()) {
@@ -51,6 +65,7 @@ import { SearchEditable } from '../search-editable';
     MatAutocompleteModule,
     MatInputModule,
     MatIconModule,
+    MatButtonModule,
     MatProgressBarModule,
     ReactiveFormsModule,
     CommonModule,
@@ -73,7 +88,15 @@ export class EditableSelectoneComponent<V, R> extends SearchEditable<V, R> {
     this.updateValue(value);
   }
 
-  override readyOptions() {
-    this.refresh();
+  /** El campo marca error si el control externo es inválido y se tocó, o si falló la carga de opciones. */
+  protected readonly errorMatcher: ErrorStateMatcher = {
+    isErrorState: () =>
+      !!this.provider().error() || (!!this.control?.invalid && (this.control.touched || this.control.dirty)),
+  };
+
+  openOptions(input: HTMLInputElement) {
+    input.focus();
+    this.searchOptions();
+    this.autoTrigger()?.openPanel();
   }
 }

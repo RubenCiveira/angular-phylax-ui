@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,14 +24,14 @@ Recibe `options: string[]` y usa el mismo string como valor y como sufijo de la 
 
 ## Tareas
 
-- [ ] Aceptar `ReadonlyArray<string | { value: string; labelKey?: string }>`.
-- [ ] Normalizar la clave i18n sin tocar el `value`.
-- [ ] Input `display: 'auto' | 'select' | 'radio' | 'toggle'` (auto: radio si hay ≤ 4 opciones).
+- [x] Aceptar `ReadonlyArray<string | { value: string; labelKey?: string }>`.
+- [x] Normalizar la clave i18n sin tocar el `value`.
+- [x] Input `display: 'auto' | 'select' | 'radio' | 'toggle'` (auto: radio si hay ≤ 4 opciones).
 
 ## Criterios de aceptación
 
-- [ ] El valor enviado no cambia aunque cambie la etiqueta.
-- [ ] Los enums de 2–4 valores se muestran como radio.
+- [x] El valor enviado no cambia aunque cambie la etiqueta.
+- [x] Los enums de 2–4 valores se muestran como radio.
 
 ## Ficheros afectados
 

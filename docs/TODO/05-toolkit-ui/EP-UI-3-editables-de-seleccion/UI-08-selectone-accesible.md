@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [DATA-16]
 origen: 07-toolkit-ui.md
 ---
@@ -24,15 +24,15 @@ El botón de desplegar es un `<mat-icon (click)>` (no se enfoca ni se activa con
 
 ## Tareas
 
-- [ ] `<button mat-icon-button matSuffix type="button" [attr.aria-label]=…>`.
-- [ ] `debounce = input(250)`.
-- [ ] Opción deshabilitada "Sin resultados" y `<mat-error>` cuando `provider.error()`.
-- [ ] Quitar el estilo inline del sufijo.
+- [x] `<button mat-icon-button matSuffix type="button" [attr.aria-label]=…>`.
+- [x] `debounce = input(250)`.
+- [x] Opción deshabilitada "Sin resultados" y `<mat-error>` cuando `provider.error()`.
+- [x] Quitar el estilo inline del sufijo.
 
 ## Criterios de aceptación
 
-- [ ] Se puede abrir el desplegable con teclado.
-- [ ] Se ve "Sin resultados" cuando la búsqueda no devuelve nada.
+- [x] Se puede abrir el desplegable con teclado.
+- [x] Se ve "Sin resultados" cuando la búsqueda no devuelve nada.
 
 ## Ficheros afectados
 

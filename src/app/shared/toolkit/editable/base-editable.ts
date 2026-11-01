@@ -175,6 +175,11 @@ export abstract class BaseEditable<T> implements ControlValueAccessor, Validator
     return this.hasTranslation(key) ? key : null;
   }
 
+  /** Clave de un error ajeno a la validación (p. ej. una carga fallida), o null si no hay. */
+  feedbackErrorKey(): string | null {
+    return null;
+  }
+
   private hasTranslation(key: string): boolean {
     return this.transloco.getTranslation(this.transloco.getActiveLang())[key] !== undefined;
   }

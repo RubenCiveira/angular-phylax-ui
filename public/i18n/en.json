@@ -9,6 +9,11 @@
     "notify": {
       "close": "Close"
     },
+    "selector": {
+      "open": "Show options",
+      "noResults": "No results",
+      "error": "The options could not be loaded. Please try again."
+    },
     "hiddenField": "Field hidden by permissions"
   },
   "validation": {

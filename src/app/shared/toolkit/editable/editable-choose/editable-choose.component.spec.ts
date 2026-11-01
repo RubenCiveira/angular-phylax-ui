@@ -2,7 +2,7 @@
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
 import { TranslocoService, TRANSLOCO_CONFIG } from '@jsverse/transloco';
-import { EditableChooseComponent } from './editable-choose.component';
+import { EditableChooseComponent, chooseOptionKey } from './editable-choose.component';
 
 class MockTranslocoService {
   config = { reRenderOnLangChange: false };
@@ -16,7 +16,7 @@ class MockTranslocoService {
 describe('EditableChooseComponent', () => {
   afterEach(() => TestBed.resetTestingModule());
 
-  it('creates component with options', () => {
+  function setup(options: unknown, display?: string) {
     TestBed.configureTestingModule({
       imports: [EditableChooseComponent],
       providers: [
@@ -34,9 +34,46 @@ describe('EditableChooseComponent', () => {
     });
 
     const fixture = TestBed.createComponent(EditableChooseComponent);
-    fixture.componentRef.setInput('options', ['one', 'two']);
+    fixture.componentRef.setInput('label', 'field');
+    fixture.componentRef.setInput('options', options);
+    if (display) {
+      fixture.componentRef.setInput('display', display);
+    }
     fixture.detectChanges();
+    return fixture;
+  }
+
+  it('creates component with options', () => {
+    const fixture = setup(['one', 'two']);
 
     expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('normalizes the i18n key without touching the value', () => {
+    const fixture = setup(['', 'TOKEN-REQUIRED', 'Open Source', { value: 'X', labelKey: 'custom.x' }]);
+    const items = (fixture.componentInstance as any).items();
+
+    expect(items.map((op: any) => op.value)).toEqual(['', 'TOKEN-REQUIRED', 'Open Source', 'X']);
+    expect(items.map((op: any) => op.labelKey)).toEqual([
+      'field.options.null',
+      'field.options.token-required',
+      'field.options.open-source',
+      'custom.x',
+    ]);
+    expect(chooseOptionKey(null)).toBe('null');
+  });
+
+  it('shows 2 to 4 options as radio and more as select', () => {
+    const radio = setup(['A', 'B', 'C', 'D']);
+    expect(radio.nativeElement.querySelector('mat-radio-group')).toBeTruthy();
+    expect(radio.nativeElement.querySelector('mat-select')).toBeNull();
+    TestBed.resetTestingModule();
+
+    const select = setup(['A', 'B', 'C', 'D', 'E']);
+    expect(select.nativeElement.querySelector('mat-select')).toBeTruthy();
+    TestBed.resetTestingModule();
+
+    const toggle = setup(['A', 'B'], 'toggle');
+    expect(toggle.nativeElement.querySelector('mat-button-toggle-group')).toBeTruthy();
   });
 });
