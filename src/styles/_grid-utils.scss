@@ -223,6 +223,8 @@ $grid-prefix: 'u' !default;
   }
   // ocultar en xs
   .#{$prefix}-hide {
+    // Utilidad de ocultación: debe ganar a cualquier display del componente
+    // stylelint-disable-next-line declaration-no-important
     display: none !important;
   }
 
@@ -255,17 +257,11 @@ $grid-prefix: 'u' !default;
         }
       }
       .#{$prefix}-hide-#{$bp} {
+        // stylelint-disable-next-line declaration-no-important
         display: none !important;
       }
     }
   }
 }
 
-// (No lo ejecutes aquí para evitar duplicados)
-// Actívalo 1 vez en styles.scss:
-// @use 'styles/grid-utils' as grid with (
-//   $grid-columns: 12,
-//   $grid-prefix: 'u',
-//   $grid-bps: (sm:600px, md:900px, lg:1200px, xl:1536px)
-// );
-// @include grid.generate-grid-utils();
+// (No lo ejecutes aquí para evitar duplicados: se genera una sola vez en _utilities.scss)

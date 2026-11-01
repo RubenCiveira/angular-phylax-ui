@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CTX-23]
 origen: 05-contexto-compartido.md
 ---
@@ -24,13 +24,13 @@ A nivel de módulo se hace `window.addEventListener('state-item', …)` (efecto 
 
 ## Tareas
 
-- [ ] Sustituir el evento `state-item` por `BroadcastChannel('app-state')` (sirve para MFE y pestañas).
-- [ ] Mover el listener al constructor del servicio y cerrarlo en `DestroyRef`.
-- [ ] Propagar `logout`, `language` y `tenant`.
+- [x] Sustituir el evento `state-item` por `BroadcastChannel('app-state')` (sirve para MFE y pestañas).
+- [x] Mover el listener al constructor del servicio y cerrarlo en `DestroyRef`.
+- [x] Propagar `logout`, `language` y `tenant`. *El login no se propaga (cada pestaña tiene sus tokens). Al recibir un `logout`, `OidcIdentityHandlerService` también descarta sus tokens con `logOut(true)`. Lo recibido no se vuelve a publicar.*
 
 ## Criterios de aceptación
 
-- [ ] Con dos pestañas abiertas, cerrar sesión en una muestra la otra como no autenticada.
+- [x] Con dos pestañas abiertas, cerrar sesión en una muestra la otra como no autenticada.
 
 ## Ficheros afectados
 

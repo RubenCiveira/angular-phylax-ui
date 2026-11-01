@@ -35,11 +35,10 @@ describe('ActionContainerComponent', () => {
   it('tracks selection state', () => {
     TestBed.configureTestingModule({
       imports: [ActionContainerComponent],
-      providers: [
-        { provide: BreakpointObserver, useClass: MockBreakpointObserver },
-        { provide: LocalRouteStateService, useClass: MockLocalRouteStateService },
-      ],
+      providers: [{ provide: BreakpointObserver, useClass: MockBreakpointObserver }],
     });
+    // El servicio se provee en el propio componente
+    TestBed.overrideProvider(LocalRouteStateService, { useValue: new MockLocalRouteStateService() });
 
     const fixture = TestBed.createComponent(ActionContainerComponent);
     const component = fixture.componentInstance;

@@ -7,7 +7,7 @@ paso: 1
 prioridad: media
 esfuerzo: L
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [SHELL-07]
 origen: 05-contexto-compartido.md
 ---
@@ -24,17 +24,17 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Crear `persistedSignal(key, default)` (signal + `localStorage`).
-- [ ] Migrar `language` y `tenant` (valores por defecto desde `DefaultsService`).
-- [ ] Migrar `userInfo` a `signal<Record<string, UserInfo>>`.
-- [ ] Migrar `context` a `signal<Record<ContextKey, ContextValue | null>>`.
-- [ ] Exponer `toObservable()` para los consumidores RxJS y mantener la API antigua `@deprecated` una versión.
-- [ ] Borrar `currentContext()`, que no se usa.
+- [x] Crear `persistedSignal(key, default)` (signal + `localStorage`). *Basado en `linkedSignal`: mientras no se escribe sigue al valor por defecto (que puede ser un signal); al escribirlo se guarda con el mismo formato `{ data }` de antes.*
+- [x] Migrar `language` y `tenant` (valores por defecto desde `DefaultsService`). *Son `WritableSignal<string>` que siguen a `DefaultsService` hasta que el usuario elige; ya no hace falta suscribirse a la configuración en el constructor.*
+- [x] Migrar `userInfo` a `signal<Record<string, UserInfo>>`. *`users`, `user(key)`, `user$(key)` y `setUser(key, user)`.*
+- [x] Migrar `context` a `signal<Record<ContextKey, ContextValue | null>>`. *`contexts`, `contextValue(key)`, `context$(key)`, `setContext(key, value)`, y `fixedValues`/`filterValues` como `computed`. Se persiste entero en `state-item-context` y se reconstruye con `ContextValue.restore`.*
+- [x] Exponer `toObservable()` para los consumidores RxJS y mantener la API antigua `@deprecated` una versión. *`language$`, `tenant$`, `user$()`, `context$()`, `fixedContext()` y `filterContext()`. `userInfo[key]` y `context[key]` se mantienen `@deprecated` (no crean estado al leer). `language` y `tenant` no pueden mantener la API antigua con el mismo nombre: pasan a signal y `.subscribe` se sustituye por `language$`/`tenant$`. Todos los consumidores del repo están migrados.*
+- [x] Borrar `currentContext()`, que no se usa.
 
 ## Criterios de aceptación
 
-- [ ] No queda `as any` en `app-state.service.ts`.
-- [ ] Leer una clave inexistente no crea estado nuevo.
+- [x] No queda `as any` en `app-state.service.ts`.
+- [x] Leer una clave inexistente no crea estado nuevo.
 
 ## Ficheros afectados
 

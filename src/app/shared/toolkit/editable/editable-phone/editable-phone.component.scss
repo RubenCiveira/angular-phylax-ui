@@ -38,7 +38,7 @@
 }
 
 .phone-separator {
-  color: rgba(0, 0, 0, 0.24);
+  color: var(--mat-sys-outline-variant);
   font-size: 18px;
   line-height: 1;
   user-select: none;
@@ -48,13 +48,13 @@
   padding: 8px 16px 4px;
   position: sticky;
   top: 0;
-  background: var(--mat-select-panel-background-color, white);
+  background: var(--mat-select-panel-background-color, var(--mat-sys-surface-container));
   z-index: 1;
 }
 
 .country-search-input {
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.24);
+  border: 1px solid var(--mat-sys-outline);
   border-radius: 4px;
   padding: 4px 8px;
   font-size: 14px;
@@ -63,7 +63,7 @@
   color: inherit;
 
   &:focus {
-    border-color: var(--mdc-outlined-text-field-focus-outline-color, #1976d2);
+    border-color: var(--mat-sys-primary);
   }
 }
 
@@ -75,7 +75,7 @@
 
 .option-dial {
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.54);
+  color: var(--mat-sys-on-surface-variant);
 }
 
 ::ng-deep .country-select-panel {

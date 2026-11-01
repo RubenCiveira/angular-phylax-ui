@@ -3,7 +3,7 @@ id: EP-STY-5
 titulo: "Formularios y componentes del toolkit"
 area: estilos-y-theming
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [STY-11, STY-15, STY-16]
 ---
 
@@ -45,6 +45,6 @@ Issues de otras épicas de los que depende:
 
 ## Checklist de la épica
 
-- [ ] STY-11 — Generar la rejilla una sola vez y simplificar form-layout
-- [ ] STY-15 — Editables: tokens M3 en lugar de --mdc-* y hex
-- [ ] STY-16 — Colores del modal de error con tokens y contraste AA
+- [x] STY-11 — Generar la rejilla una sola vez y simplificar form-layout
+- [x] STY-15 — Editables: tokens M3 en lugar de --mdc-* y hex
+- [x] STY-16 — Colores del modal de error con tokens y contraste AA

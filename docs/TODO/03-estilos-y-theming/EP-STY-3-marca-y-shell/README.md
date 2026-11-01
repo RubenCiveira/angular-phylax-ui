@@ -3,7 +3,7 @@ id: EP-STY-3
 titulo: "Marca configurable y estilos del shell"
 area: estilos-y-theming
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [STY-06, STY-10, STY-17, STY-18]
 ---
 
@@ -70,7 +70,7 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] STY-06 — Theming en runtime desde la configuración (por despliegue y tenant)
-- [ ] STY-10 — Layout raíz con tokens (corrige el nav móvil en modo oscuro)
-- [ ] STY-17 — Logo y nombre del producto configurables en el menú
-- [ ] STY-18 — Toolbar personalizable desde el tema
+- [x] STY-06 — Theming en runtime desde la configuración (por despliegue y tenant)
+- [x] STY-10 — Layout raíz con tokens (corrige el nav móvil en modo oscuro)
+- [x] STY-17 — Logo y nombre del producto configurables en el menú
+- [x] STY-18 — Toolbar personalizable desde el tema

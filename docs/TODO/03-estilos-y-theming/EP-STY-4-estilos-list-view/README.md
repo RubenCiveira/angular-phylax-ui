@@ -3,7 +3,7 @@ id: EP-STY-4
 titulo: "Estilos de list-view"
 area: estilos-y-theming
 prioridad: critica
-estado: pendiente
+estado: en-curso
 issues: [STY-12, STY-13, STY-14]
 ---
 
@@ -46,6 +46,6 @@ Issues de otras épicas de los que depende:
 
 ## Checklist de la épica
 
-- [ ] STY-12 — Lista móvil legible en modo oscuro
-- [ ] STY-13 — Tabla de list-view con variables de componente
-- [ ] STY-14 — Rejilla de tarjetas adaptable
+- [x] STY-12 — Lista móvil legible en modo oscuro
+- [x] STY-13 — Tabla de list-view con variables de componente
+- [x] STY-14 — Rejilla de tarjetas adaptable

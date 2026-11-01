@@ -45,7 +45,7 @@ export class InstrumentationService {
     }
     try {
       const { startTelemetry } = await import('./otel-bootstrap');
-      this.appState.tenant.subscribe((tenant) => (this.currentTenant = tenant));
+      this.appState.tenant$.subscribe((tenant) => (this.currentTenant = tenant));
       const { logSink } = startTelemetry(conf, {
         version: environment.version,
         sessionId: tabSessionId(),

@@ -181,7 +181,7 @@ import { MatDividerModule } from '@angular/material/divider';
       .password-dialog-description {
         margin-top: 0;
         margin-bottom: 20px;
-        color: rgba(0, 0, 0, 0.6);
+        color: var(--mat-sys-on-surface-variant);
       }
 
       .password-form {
@@ -203,11 +203,6 @@ import { MatDividerModule } from '@angular/material/divider';
         justify-content: flex-end;
         padding: 16px 24px;
         gap: 8px;
-      }
-
-      /* Estilos para modo oscuro si es necesario */
-      :host-context(.dark) .password-dialog-description {
-        color: rgba(255, 255, 255, 0.7);
       }
     `,
   ],

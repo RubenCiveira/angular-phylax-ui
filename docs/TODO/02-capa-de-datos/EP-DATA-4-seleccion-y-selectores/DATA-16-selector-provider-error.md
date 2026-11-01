@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,15 +24,15 @@ La interfaz declara `error: Signal<any>`, pero `selectorProvider()` nunca asigna
 
 ## Tareas
 
-- [ ] `result.error = errors.asReadonly()`.
-- [ ] Registrar el error y usar `catchError(() => EMPTY)`.
-- [ ] Comparar con `handler.equals(handler.value(a), handler.value(b))`.
-- [ ] Test: una búsqueda que falla deja `error()` con valor y `searching()` en `false`.
+- [x] `result.error = errors.asReadonly()`.
+- [x] Registrar el error y usar `catchError(() => EMPTY)`.
+- [x] Comparar con `handler.equals(handler.value(a), handler.value(b))`.
+- [x] Test: una búsqueda que falla deja `error()` con valor y `searching()` en `false`.
 
 ## Criterios de aceptación
 
-- [ ] `provider.error()` funciona.
-- [ ] No hay errores no capturados en consola al fallar la búsqueda.
+- [x] `provider.error()` funciona.
+- [x] No hay errores no capturados en consola al fallar la búsqueda.
 
 ## Ficheros afectados
 

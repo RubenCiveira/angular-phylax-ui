@@ -7,7 +7,7 @@ paso: 4
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-02]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,14 +24,14 @@ Variables de rejilla inline en la plantilla, `mat-toolbar { background-color: in
 
 ## Tareas
 
-- [ ] Pasar las variables inline a una clase `.toolbar-context`.
-- [ ] `mat.toolbar-overrides((container-background-color: var(--app-toolbar-bg, transparent)))`.
-- [ ] `<mat-divider>` en lugar de `<hr>`.
+- [x] Pasar las variables inline a una clase `.toolbar-context`.
+- [x] `mat.toolbar-overrides((container-background-color: var(--app-toolbar-bg, transparent)))`.
+- [x] `<mat-divider>` en lugar de `<hr>`.
 
 ## Criterios de aceptación
 
-- [ ] Sin `style=` en la toolbar.
-- [ ] El fondo se cambia con `--app-toolbar-bg`.
+- [x] Sin `style=` en la toolbar.
+- [x] El fondo se cambia con `--app-toolbar-bg`.
 
 ## Ficheros afectados
 

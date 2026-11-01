@@ -51,7 +51,7 @@ function technicalDetail(error: any, status: number | undefined): string | null 
   imports: [RouterLink, MatButtonModule, TranslocoPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './error-page.component.html',
-  styleUrls: ['./error-page.component.css'],
+  styleUrl: './error-page.component.scss',
 })
 export class ErrorPageComponent {
   private readonly state = inject(AppStateService);
@@ -67,7 +67,7 @@ export class ErrorPageComponent {
   readonly title = computed(() => this.titleKey() ?? 'errors.page.' + this.description().kind + '.title');
   readonly message = computed(() => this.messageKey() ?? 'errors.page.' + this.description().kind + '.message');
 
-  private readonly language = toSignal(this.state.language);
-  private readonly tenant = toSignal(this.state.tenant);
+  private readonly language = this.state.language;
+  private readonly tenant = this.state.tenant;
   readonly home = computed(() => ['/', this.language(), this.tenant()]);
 }

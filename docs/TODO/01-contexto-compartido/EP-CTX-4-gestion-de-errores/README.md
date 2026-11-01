@@ -3,7 +3,7 @@ id: EP-CTX-4
 titulo: "Gestión de errores"
 area: contexto-compartido
 prioridad: critica
-estado: pendiente
+estado: hecho
 issues: [CTX-03, CTX-04, CTX-05]
 ---
 
@@ -57,6 +57,6 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] CTX-03 — Registrar GlobalErrorHandler
-- [ ] CTX-04 — ErrorService: eliminar la suscripción que se acumula por error
-- [ ] CTX-05 — ErrorService: traducir mensajes y formalizar los errores gestionados
+- [x] CTX-03 — Registrar GlobalErrorHandler
+- [x] CTX-04 — ErrorService: eliminar la suscripción que se acumula por error
+- [x] CTX-05 — ErrorService: traducir mensajes y formalizar los errores gestionados

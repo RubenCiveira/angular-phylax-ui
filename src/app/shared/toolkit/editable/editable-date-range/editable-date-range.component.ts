@@ -72,7 +72,7 @@ export class EditableDateRangeComponent extends SubFormEditable<DateRange> imple
     );
     this.defaultValues = () => ({ from: null, to: null });
 
-    this.subs.add(appState.language.subscribe((lang) => this.dateAdapter.setLocale(lang)));
+    this.subs.add(appState.language$.subscribe((lang) => this.dateAdapter.setLocale(lang)));
   }
 
   override ngOnInit(): void {

@@ -92,6 +92,12 @@
         "title": "Something went wrong",
         "message": "An unexpected error occurred. Please try again."
       }
+    },
+    "422": "Some of the data sent is not valid. Review it and try again.",
+    "generic": "An unexpected error occurred. Please try again.",
+    "modal": {
+      "retrySuccess": "The operation was retried successfully. Reload to see the result.",
+      "retryError": "The retry failed too. Go back to home and try again."
     }
   }
 }

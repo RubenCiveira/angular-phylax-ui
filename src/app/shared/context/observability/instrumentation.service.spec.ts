@@ -18,7 +18,7 @@ function configOf(telemetry$: Subject<any>) {
 }
 
 function appStateOf(tenant$ = new BehaviorSubject<string>('main')) {
-  return { tenant: tenant$.asObservable() };
+  return { tenant$: tenant$.asObservable() };
 }
 
 describe('InstrumentationService — getTracer / startSpan', () => {

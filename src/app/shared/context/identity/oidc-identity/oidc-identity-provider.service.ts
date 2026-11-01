@@ -79,6 +79,15 @@ export class OidcIdentityHandlerService implements IdentityHandler {
         this.setUser(ANONYMOUS_USER, null);
       }
     });
+    // Sesión cerrada en otra pestaña o micro-frontend: se descartan también los tokens de esta
+    this.appState
+      .user$(this.name)
+      .pipe(filter((user) => !user.authenticated && this.currentUser.authenticated))
+      .subscribe(() => {
+        this.logged = false;
+        this.oauthService.logOut(true);
+        this.setUser(ANONYMOUS_USER, null);
+      });
   }
 
   bootstrap(): Observable<void> {
@@ -101,7 +110,7 @@ export class OidcIdentityHandlerService implements IdentityHandler {
 
   public configure() {
     const setup$ = this.config.value$(`identity.${this.name}`).pipe(filter((setup) => !!setup));
-    combineLatest([this.appState.tenant, setup$]).subscribe(([tenant, setup]) => {
+    combineLatest([this.appState.tenant$, setup$]).subscribe(([tenant, setup]) => {
       this.configureForTenant(tenant, setup as IdentityConfig);
     });
   }
@@ -174,7 +183,7 @@ export class OidcIdentityHandlerService implements IdentityHandler {
   private setUser(user: UserInfo, token: string | null) {
     this.currentUser = user;
     this.accessToken.next(token);
-    this.appState.userInfo[this.name].set(user);
+    this.appState.setUser(this.name, user);
   }
 
   private resetUser() {

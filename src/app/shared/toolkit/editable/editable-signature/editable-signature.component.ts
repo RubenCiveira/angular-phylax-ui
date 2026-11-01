@@ -22,7 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     `
       .signature-wrapper {
         position: relative;
-        border: 1px solid #ccc;
+        border: 1px solid var(--mat-sys-outline-variant);
         border-radius: 4px;
         display: block;
         width: 100%;
@@ -33,6 +33,7 @@ import { MatInputModule } from '@angular/material/input';
         display: block;
         width: 100%;
         height: 150px;
+        /* Blanco fijo a propósito: el trazo es negro y la firma se exporta en blanco y negro */
         background: white;
         cursor: crosshair;
         touch-action: none;
@@ -41,8 +42,9 @@ import { MatInputModule } from '@angular/material/input';
         position: absolute;
         bottom: 4px;
         right: 4px;
-        background: rgba(255, 255, 255, 0.8);
-        border: 1px solid #ccc;
+        background: color-mix(in srgb, var(--mat-sys-surface) 80%, transparent);
+        color: var(--mat-sys-on-surface);
+        border: 1px solid var(--mat-sys-outline-variant);
         border-radius: 4px;
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;

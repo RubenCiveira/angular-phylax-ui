@@ -2,7 +2,7 @@
 @if (retrySuccess) {
   <div class="success">
     <p>
-      {{ 'controls.errorhandler.retrySuccess' }}
+      {{ 'errors.modal.retrySuccess' | transloco }}
       <button mat-icon-button (click)="redirect('.')">
         <mat-icon>refresh</mat-icon>
       </button>
@@ -12,7 +12,7 @@
 @if (retryError) {
   <div class="error">
     <p>
-      {{ 'controls.errorhandler.retryError' }}
+      {{ 'errors.modal.retryError' | transloco }}
       <button mat-icon-button (click)="redirect('/')">
         <mat-icon>refresh</mat-icon>
       </button>

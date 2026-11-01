@@ -7,7 +7,7 @@ paso: 3
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-03]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,13 +24,13 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] Renombrar a `.scss`.
-- [ ] Usar `--mat-sys-error-container` / `--mat-sys-on-error-container` y `--app-color-success` / `--app-color-on-success`.
-- [ ] Hacer lo mismo con `error-page.component.css`.
+- [x] Renombrar a `.scss`.
+- [x] Usar `--mat-sys-error-container` / `--mat-sys-on-error-container` y `--app-color-success` / `--app-color-on-success`.
+- [x] Hacer lo mismo con `error-page.component.css`.
 
 ## Criterios de aceptación
 
-- [ ] Contraste ≥ 4,5:1 en ambos mensajes.
+- [x] Contraste ≥ 4,5:1 en ambos mensajes. *Con el tema compilado: éxito 5,13:1 (claro) y 6,32:1 (oscuro); error 7,24:1 en ambos modos.*
 
 ## Ficheros afectados
 

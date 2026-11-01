@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
 import { UserInfo } from '@shared/context/identity/user-info.model';
 import { SelectorProvider } from '@shared/data/selector-provider';
 import { EditableSelectoneComponent } from '@shared/toolkit/editable/editable-selectone/editable-selectone.component';
@@ -26,6 +27,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
+    MatDividerModule,
     FormLayoutComponent,
     ReactiveFormsModule,
     EditableSelectoneComponent,
@@ -56,8 +58,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   title: Signal<string | undefined>;
   accountUrl: Signal<string | undefined>;
 
-  currentLanguage: Signal<string | undefined>;
-  currentTenant: Signal<string | undefined>;
+  currentLanguage: Signal<string>;
+  currentTenant: Signal<string>;
 
   private init = false;
   private controlObservers = new Subscription();
@@ -70,8 +72,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   ) {
     this.form = new FormGroup({});
     this.title = configValue('meta.title');
-    this.currentLanguage = toSignal(appstate.language);
-    this.currentTenant = toSignal(appstate.tenant);
+    this.currentLanguage = appstate.language;
+    this.currentTenant = appstate.tenant;
     this.accountUrl = configValue('identity.main.profile');
 
     effect(() => {
@@ -84,7 +86,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       this.form.valueChanges.subscribe((value) => {
         Object.entries(value).forEach(([key, value]) => {
           if (value !== '') {
-            this.appstate.context[key].set(ContextValue.fixed(key, value));
+            this.appstate.setContext(key, ContextValue.fixed(key, value));
           }
         });
       }),
@@ -129,7 +131,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       Object.keys(providers).forEach((key) => {
         this.form.addControl(key, new FormControl<string>(''));
         this.controlObservers.add(
-          this.appstate.context[key].subscribe((ctxVal) => {
+          this.appstate.context$(key).subscribe((ctxVal) => {
             if (ctxVal) {
               this.form.controls[ctxVal?.label].setValue(ctxVal.value);
             }

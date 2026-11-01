@@ -119,6 +119,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const element = this.elRef.nativeElement;
+    // La altura de fila la define --list-view-row-height; el virtual scroll necesita conocerla en px
+    this.itemHeight = this.readRowHeight(element);
     // Configurar el ancho inicial
     this.updateAvailableWidth();
     // Crear el ResizeObserver
@@ -144,7 +146,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   check(row: any) {
-    this.selectionModel()?.toogle(row);
+    this.selectionModel()?.toggle(row);
   }
 
   isSelected(row: any) {
@@ -154,6 +156,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
   fallbackIcon(str: any): AvatarSpec | null {
     const displayer = this.display();
     return displayer ? computeAvatarSpec(displayer.display(str)) : null;
+  }
+
+  private readRowHeight(element: HTMLElement): number {
+    const value = parseFloat(getComputedStyle(element).getPropertyValue('--list-view-row-height'));
+    return Number.isFinite(value) && value > 0 ? value : this.itemHeight;
   }
 
   private updateAvailableWidth = (): void => {

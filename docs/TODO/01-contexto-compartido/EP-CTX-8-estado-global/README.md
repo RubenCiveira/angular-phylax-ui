@@ -3,7 +3,7 @@ id: EP-CTX-8
 titulo: "Estado global"
 area: contexto-compartido
 prioridad: media
-estado: pendiente
+estado: hecho
 issues: [CTX-23, CTX-24]
 ---
 
@@ -49,5 +49,5 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] CTX-23 — AppStateService con signals reales y claves tipadas
-- [ ] CTX-24 — Sincronizar sesión, idioma y tenant entre pestañas
+- [x] CTX-23 — AppStateService con signals reales y claves tipadas
+- [x] CTX-24 — Sincronizar sesión, idioma y tenant entre pestañas

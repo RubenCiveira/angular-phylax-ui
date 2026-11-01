@@ -2,13 +2,15 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BehaviorSubject, of, Subject } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuComponent } from './menu.component';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { IdentityService } from '@shared/context/identity/identity.service';
 import { RuntimeConfigService } from '@shared/context/config/app-config.service';
 import { RouteAccessService } from './route-accessible.service';
+import { RuntimeThemeService } from '@shared/context/theme/runtime-theme.service';
 import { MenuItem } from '../menu-item.model';
+import { ANONYMOUS_USER, UserInfo } from '@shared/context/identity/user-info.model';
 
 describe('MenuComponent', () => {
   let fixture: ComponentFixture<MenuComponent>;
@@ -18,12 +20,15 @@ describe('MenuComponent', () => {
   let checkerMock: any;
   let identityMock: any;
   let appStateMock: any;
+  let user: ReturnType<typeof signal<UserInfo>>;
 
   beforeEach(async () => {
     routerEvents$ = new Subject();
     routerMock = {
       events: routerEvents$.asObservable(),
       navigate: jasmine.createSpy('navigate'),
+      createUrlTree: () => ({}),
+      serializeUrl: () => '/es/main',
     };
 
     checkerMock = {
@@ -36,14 +41,11 @@ describe('MenuComponent', () => {
       logout: jasmine.createSpy('logout'),
     };
 
-    const lang$ = new BehaviorSubject<string>('es');
-    (lang$ as any).set = (value: string) => lang$.next(value);
-    const tenant$ = new BehaviorSubject<string>('main');
-    (tenant$ as any).set = (value: string) => tenant$.next(value);
-
+    user = signal<UserInfo>(ANONYMOUS_USER);
     appStateMock = {
-      language: lang$,
-      tenant: tenant$,
+      language: signal('es'),
+      tenant: signal('main'),
+      user: (key: string) => user,
     };
 
     await TestBed.configureTestingModule({
@@ -51,6 +53,11 @@ describe('MenuComponent', () => {
       providers: [
         { provide: Router, useValue: routerMock },
         { provide: RouteAccessService, useValue: checkerMock },
+        { provide: ActivatedRoute, useValue: {} },
+        {
+          provide: RuntimeThemeService,
+          useValue: { logo: signal('assets/img/logo.png'), productName: signal('Acme') },
+        },
         { provide: IdentityService, useValue: identityMock },
         { provide: AppStateService, useValue: appStateMock },
         {
@@ -63,6 +70,22 @@ describe('MenuComponent', () => {
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('renders the configured brand linking to home', () => {
+    const brand: HTMLAnchorElement = fixture.nativeElement.querySelector('a.brand');
+    expect(brand.getAttribute('href')).toBe('/es/main');
+    expect(brand.querySelector('img')!.getAttribute('src')).toBe('assets/img/logo.png');
+    expect(brand.querySelector('.brand-name')!.textContent).toContain('Acme');
+  });
+
+  it('shows only the logo in mini mode', () => {
+    fixture.componentRef.setInput('mode', 'mini');
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.classList).toContain('mini');
+    expect(fixture.nativeElement.querySelector('.brand-logo')).not.toBeNull();
+    expect(fixture.nativeElement.querySelector('.brand-name')).toBeNull();
   });
 
   it('builds computed menu from input items', () => {
@@ -95,8 +118,8 @@ describe('MenuComponent', () => {
     component.idioma('en');
     component.tenant('acme');
 
-    expect(appStateMock.language.value).toBe('en');
-    expect(appStateMock.tenant.value).toBe('acme');
+    expect(appStateMock.language()).toBe('en');
+    expect(appStateMock.tenant()).toBe('acme');
   });
 
   it('delegates login and logout to IdentityService', () => {
@@ -153,5 +176,18 @@ describe('MenuComponent', () => {
 
     expect(parent.active).toBeTruthy();
     expect(parent.childs[0].active).toBeTrue();
+  });
+
+  it('re-evaluates route guards when the user changes', () => {
+    checkerMock.checkRouteGuards.and.returnValue(of(false));
+    fixture.componentRef.setInput('items', [{ label: 'Users', route: 'users' }]);
+    fixture.detectChanges();
+    expect(component.menu()[0].hidden).toBeTrue();
+
+    checkerMock.checkRouteGuards.and.returnValue(of(true));
+    user.set({ authenticated: true });
+    fixture.detectChanges();
+
+    expect(component.menu()[0].hidden).toBeFalse();
   });
 });

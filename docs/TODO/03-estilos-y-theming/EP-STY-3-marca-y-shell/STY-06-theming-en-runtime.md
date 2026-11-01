@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-03, CTX-15]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,16 +24,16 @@ La configuración en runtime resuelve API, identidad, i18n y telemetría, pero n
 
 ## Tareas
 
-- [ ] Sección `theme` en `AppConfig`: `mode`, `tokens` (mapa variable → valor), `logo`, `logo-dark`, `product-name`.
-- [ ] Aplicar `tokens` con `document.documentElement.style.setProperty` en el inicializador.
-- [ ] Soporte `theme.tenants.<tenant>.tokens` aplicado al cambiar `AppStateService.tenant`.
-- [ ] Alternativa simple: `<link rel="stylesheet" href="config/theme.css" onerror="this.remove()">` en `index.html`.
-- [ ] Documentar en el README cómo generar la paleta M3 completa (`ng generate @angular/material:theme-color`).
+- [x] Sección `theme` en `AppConfig`: `mode`, `tokens` (mapa variable → valor), `logo`, `logo-dark`, `product-name`.
+- [x] Aplicar `tokens` con `document.documentElement.style.setProperty` en el inicializador.
+- [x] Soporte `theme.tenants.<tenant>.tokens` aplicado al cambiar `AppStateService.tenant`.
+- [x] Alternativa simple: `<link rel="stylesheet" href="config/theme.css" onerror="this.remove()">` en `index.html`.
+- [x] Documentar en el README cómo generar la paleta M3 completa (`ng generate @angular/material:theme-color`).
 
 ## Criterios de aceptación
 
-- [ ] Cambiar `theme.tokens["--mat-sys-primary"]` en el JSON montado en Docker cambia el color sin recompilar.
-- [ ] Dos tenants pueden tener colores distintos.
+- [x] Cambiar `theme.tokens["--mat-sys-primary"]` en el JSON montado en Docker cambia el color sin recompilar.
+- [x] Dos tenants pueden tener colores distintos.
 
 ## Ficheros afectados
 

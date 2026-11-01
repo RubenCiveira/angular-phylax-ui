@@ -1,0 +1,13 @@
+/*
+ * Marca en runtime sin recompilar: este fichero se sirve con la configuración (config/) y se carga
+ * después de los estilos de la app. Se puede sustituir al desplegar (p. ej. montándolo en Docker).
+ * Para cambios puntuales es más sencillo usar theme.tokens en <env>-config.json.
+ * Paleta M3 completa: ver src/styles/README.md → "Marca en runtime".
+ *
+ * :root {
+ *   --mat-sys-primary: light-dark(#6750a4, #d0bcff);
+ *   --mat-sys-on-primary: light-dark(#ffffff, #381e72);
+ *   --app-nav-width: 280px;
+ *   --app-toolbar-bg: var(--mat-sys-surface-container);
+ * }
+ */

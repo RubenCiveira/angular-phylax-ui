@@ -92,6 +92,12 @@
         "title": "Algo ha ido mal",
         "message": "Ha ocurrido un error inesperado. Inténtalo de nuevo."
       }
+    },
+    "422": "Algunos de los datos enviados no son válidos. Revísalos e inténtalo de nuevo.",
+    "generic": "Ha ocurrido un error inesperado. Inténtalo de nuevo.",
+    "modal": {
+      "retrySuccess": "El reintento se ha completado. Recarga para ver el resultado.",
+      "retryError": "El reintento también ha fallado. Vuelve al inicio e inténtalo de nuevo."
     }
   }
 }

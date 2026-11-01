@@ -6,11 +6,7 @@
     <span class="title"> {{ user()?.name }} </span>
   </div>
 
-  <form-layout
-    [formGroup]="form"
-    class="u-grid"
-    style="--form-layout-def-xs: 12; --form-layout-def-md: 6; --form-layout-def-lg: 4"
-  >
+  <form-layout [formGroup]="form" class="toolbar-context">
     @for (pr of providerList(); track pr.key) {
       <editable-selectone
         [formControlName]="pr.key"
@@ -36,7 +32,7 @@
   @if (user()?.authenticated) {
     @if (accountUrl()) {
       <button mat-menu-item (click)="account()">account</button>
-      <hr />
+      <mat-divider />
     }
     <button mat-menu-item (click)="logout()">logout</button>
   } @else {

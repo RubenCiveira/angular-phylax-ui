@@ -10,6 +10,7 @@ import { I18nLoaderService, provideI18nConfiguration, versionQuery } from './i18
 import { APP_CONFIG, AppConfig, RuntimeConfigService } from './app-config.service';
 import { I18nConfig } from './app-config.model';
 import { HumanizingMissingHandler } from './missing-handler';
+import { MFE_REMOTES_GLOBAL } from './mfe-config.adapter';
 
 const runtimeConfig = (i18n: I18nConfig) => ({ provide: APP_CONFIG, useValue: signal({ i18n } as AppConfig) });
 const testConfig = runtimeConfig({ 'default-lang': 'en', 'available-langs': ['en', 'es'] });
@@ -125,12 +126,12 @@ describe('I18nLoaderService', () => {
     http.expectOne('i18n/missing/en.json').flush('', { status: 404, statusText: 'Not Found' });
   });
 
-  it('uses remote base URL when _remove_mfa_config_url is set', (done) => {
-    (window as any)._remove_mfa_config_url = { [environment.name]: ['https://cdn.example.com/', 'config.json'] };
+  it('uses remote base URL when the host registered a remote', (done) => {
+    (window as any)[MFE_REMOTES_GLOBAL] = { [environment.name]: ['https://cdn.example.com/', 'config.json'] };
 
     service.getTranslation('en').subscribe((result) => {
       expect(result).toEqual({ remote: true });
-      (window as any)._remove_mfa_config_url = undefined;
+      delete (window as any)[MFE_REMOTES_GLOBAL];
       done();
     });
 

@@ -3,7 +3,7 @@ id: EP-STY-2
 titulo: "index.html, fuentes e iconos"
 area: estilos-y-theming
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [STY-08, STY-09, STY-07]
 ---
 
@@ -57,6 +57,6 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] STY-08 — Iconos autoalojados (Material Symbols o sprite SVG)
-- [ ] STY-09 — Tipografía autoalojada o pila del sistema
-- [ ] STY-07 — index.html: idioma dinámico, theme-color y splash
+- [x] STY-08 — Iconos autoalojados (Material Symbols o sprite SVG)
+- [x] STY-09 — Tipografía autoalojada o pila del sistema
+- [x] STY-07 — index.html: idioma dinámico, theme-color y splash

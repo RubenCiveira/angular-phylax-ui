@@ -7,7 +7,7 @@ paso: 3
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-08, STY-09]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,14 +24,14 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] Actualizar `document.documentElement.lang` al cambiar de idioma (en `AppComponent`, ver SHELL-10).
-- [ ] Quitar `mat-theme` y los `<link>` de fuentes (pasan a `main.scss`).
-- [ ] Añadir `<meta name="theme-color">` para claro y oscuro, `<noscript>` y un splash mínimo dentro de `<app-root>`.
+- [x] Actualizar `document.documentElement.lang` al cambiar de idioma (en `AppComponent`, ver SHELL-10). *El valor inicial es `es`, el idioma por defecto de la configuración.*
+- [x] Quitar `mat-theme` y los `<link>` de fuentes (pasan a `main.scss`).
+- [x] Añadir `<meta name="theme-color">` para claro y oscuro, `<noscript>` y un splash mínimo dentro de `<app-root>`. *El estilo del splash va inline en `index.html` para que se pinte antes que la hoja global.*
 
 ## Criterios de aceptación
 
-- [ ] `lang` cambia al cambiar de idioma.
-- [ ] No se ve pantalla en blanco al cargar.
+- [x] `lang` cambia al cambiar de idioma.
+- [x] No se ve pantalla en blanco al cargar.
 
 ## Ficheros afectados
 

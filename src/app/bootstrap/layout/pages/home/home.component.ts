@@ -12,7 +12,7 @@ import { combineLatest, take } from 'rxjs';
 export class HomeComponent {
   constructor(router: Router, state: AppStateService) {
     // El idioma y el tenant elegidos por el usuario o, si no ha elegido, los de DefaultsService
-    combineLatest([state.language, state.tenant])
+    combineLatest([state.language$, state.tenant$])
       .pipe(take(1))
       .subscribe(([language, tenant]) => router.navigate([language, tenant]));
   }

@@ -7,7 +7,7 @@ paso: 2
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,13 +24,13 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] `InjectionToken<LocalRouteContext>` en lugar de `as any`.
-- [ ] Inputs con `booleanAttribute`.
-- [ ] Mensaje de ayuda solo con `isDevMode()`.
+- [x] `InjectionToken<LocalRouteContext>` en lugar de `as any`.
+- [x] Inputs con `booleanAttribute`.
+- [x] Mensaje de ayuda solo con `isDevMode()`.
 
 ## Criterios de aceptación
 
-- [ ] Sin `as any` en `interaction/local-route`.
+- [x] Sin `as any` en `interaction/local-route`.
 
 ## Ficheros afectados
 

@@ -1,0 +1,42 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "ignoreFiles": ["src/styles/_tokens.scss", "public/**", "dist/**", "node_modules/**"],
+  "rules": {
+    "color-no-hex": [true, { "severity": "warning" }],
+    "declaration-no-important": [true, { "severity": "warning" }],
+    "declaration-property-value-disallowed-list": [
+      { "/.*/": ["/--mdc-/", "/--md-sys-/"] },
+      {
+        "severity": "warning",
+        "message": "Usa tokens --app-* o --mat-sys-*: Angular Material no emite --mdc-* ni --md-sys-*"
+      }
+    ],
+    "custom-property-pattern": [
+      "^(?!mdc-|md-sys-).+",
+      { "severity": "warning", "message": "No definas --mdc-* ni --md-sys-*: usa --app-* o --mat-sys-*" }
+    ],
+    "selector-disallowed-list": [
+      ["/\\.mat-mdc-/", "/\\.mdc-/"],
+      {
+        "severity": "warning",
+        "message": "No uses clases internas de Material: usa mat.<componente>-overrides o tokens"
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["ng-deep"] }],
+    "selector-class-pattern": null,
+    "rule-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "scss/double-slash-comment-empty-line-before": null,
+    "alpha-value-notation": null,
+    "color-function-notation": null,
+    "color-function-alias-notation": null,
+    "media-feature-range-notation": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "number-max-precision": null,
+    "length-zero-no-unit": [true, { "severity": "warning" }],
+    "shorthand-property-no-redundant-values": [true, { "severity": "warning" }],
+    "scss/operator-no-unspaced": [true, { "severity": "warning" }]
+  }
+}

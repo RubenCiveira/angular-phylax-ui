@@ -29,7 +29,7 @@ export class EditableDatetimeComponent extends BaseEditable<Date | null> {
   public constructor(dateAdapter: DateAdapter<any>, appState: AppStateService) {
     super();
     this.subscriptions.add(
-      appState.language.subscribe((lang) => {
+      appState.language$.subscribe((lang) => {
         dateAdapter.setLocale(lang);
       }),
     );

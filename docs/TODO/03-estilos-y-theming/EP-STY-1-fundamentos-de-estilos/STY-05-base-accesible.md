@@ -7,7 +7,7 @@ paso: 4
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-01]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,14 +24,14 @@ No hay estilos globales de foco visible ni respeto a `prefers-reduced-motion`.
 
 ## Tareas
 
-- [ ] `:focus-visible { outline: 2px solid var(--app-color-primary); outline-offset: 2px; }`.
-- [ ] Regla `@media (prefers-reduced-motion: reduce)` que anula transiciones y animaciones.
-- [ ] Clase utilitaria `.visually-hidden` y estilos de `.skip-link`.
+- [x] `:focus-visible { outline: 2px solid var(--app-color-primary); outline-offset: 2px; }`.
+- [x] Regla `@media (prefers-reduced-motion: reduce)` que anula transiciones y animaciones.
+- [x] Clase utilitaria `.visually-hidden` y estilos de `.skip-link`.
 
 ## Criterios de aceptación
 
-- [ ] Navegando con tabulador siempre se ve el foco.
-- [ ] Con movimiento reducido no hay transiciones.
+- [x] Navegando con tabulador siempre se ve el foco.
+- [x] Con movimiento reducido no hay transiciones.
 
 ## Ficheros afectados
 

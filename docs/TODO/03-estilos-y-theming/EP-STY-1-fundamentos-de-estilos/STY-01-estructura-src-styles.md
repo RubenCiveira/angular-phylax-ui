@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 02-estilos-y-theming.md
 ---
@@ -24,15 +24,15 @@ Todo el estilo global está en `src/styles.scss` y los parciales se importan con
 
 ## Tareas
 
-- [ ] Crear `src/styles/{main,_config,_tokens,_material-theme,_base,_layout,_utilities}.scss` y `src/styles/components/`.
-- [ ] Mover el contenido actual de `styles.scss` a los parciales correspondientes, sin cambiarlo.
-- [ ] `angular.json`: `styles: ["src/styles/main.scss"]` y `stylePreprocessorOptions.includePaths: ["src/styles"]` (build y test).
-- [ ] Mover `grid-utils.scss` a `src/styles/`.
+- [x] Crear `src/styles/{main,_config,_tokens,_material-theme,_base,_layout,_utilities}.scss` y `src/styles/components/`.
+- [x] Mover el contenido actual de `styles.scss` a los parciales correspondientes, sin cambiarlo.
+- [x] `angular.json`: `styles: ["src/styles/main.scss"]` y `stylePreprocessorOptions.includePaths: ["src/styles"]` (build y test).
+- [x] Mover `grid-utils.scss` a `src/styles/`.
 
 ## Criterios de aceptación
 
 - [ ] Capturas antes y después idénticas en 3 pantallas (lista, formulario, menú).
-- [ ] Un componente puede hacer `@use 'tokens'` sin ruta relativa.
+- [x] Un componente puede hacer `@use 'tokens'` sin ruta relativa.
 
 ## Ficheros afectados
 

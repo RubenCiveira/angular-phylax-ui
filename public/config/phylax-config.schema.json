@@ -1,0 +1,303 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "definitions": {
+    "ApiConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "headers": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "identity": {
+          "type": "string"
+        },
+        "inject-context": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DataConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "cache-ttl": {
+          "description": "Vida (ms) de la caché de los repositorios; `RepositoryMetadata.ttl` la sustituye por entidad. Por defecto 3000.",
+          "type": "number"
+        },
+        "convert-iso-dates": {
+          "description": "Convierte a `Date` cualquier string con forma de fecha ISO en todas las respuestas. Por defecto `false`: los repositorios convierten solo los campos que sus metadatos declaran como fecha.",
+          "type": "boolean"
+        },
+        "token-wait-ms": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "I18nConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "available-langs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "default-lang": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IdentityConfig": {
+      "additionalProperties": {},
+      "properties": {
+        "audience": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "client-id": {
+          "type": "string"
+        },
+        "debug": {
+          "type": "boolean"
+        },
+        "force-https": {
+          "type": "boolean"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "logout-redirect": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "boolean"
+        },
+        "pkce": {
+          "deprecated": "PKCE siempre está activo: se ignora con un aviso."
+        },
+        "profile": {
+          "type": "string"
+        },
+        "redirect": {
+          "type": "string"
+        },
+        "roles-claim": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
+    },
+    "LogLevel": {
+      "enum": ["debug", "info", "warn", "error"],
+      "type": "string"
+    },
+    "MetaConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TelemetryConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "environment": {
+          "description": "Entorno de despliegue (`deployment.environment.name`): dev, pre, pro…",
+          "type": "string"
+        },
+        "exporter": {
+          "additionalProperties": false,
+          "properties": {
+            "logger": {
+              "additionalProperties": false,
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": ["url"],
+              "type": "object"
+            },
+            "tracer": {
+              "additionalProperties": false,
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": ["url"],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "logger": {
+          "additionalProperties": false,
+          "properties": {
+            "capture-console": {
+              "description": "Reenvía también `console.*` al colector. Por defecto `false`.",
+              "type": "boolean"
+            },
+            "level": {
+              "$ref": "#/definitions/LogLevel",
+              "description": "Nivel mínimo que se registra. Por defecto `info`."
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "description": "Sin `name` no se arranca la telemetría.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TenantConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ThemeConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "logo": {
+          "description": "Logo del menú. Relativo a la raíz de la app (`assets/img/logo.png`) o URL absoluta.",
+          "type": "string"
+        },
+        "logo-dark": {
+          "description": "Logo para el modo oscuro; si falta, se usa `logo`.",
+          "type": "string"
+        },
+        "mode": {
+          "description": "Modo por defecto hasta que el usuario elige uno. Por defecto `auto` (sigue al sistema).",
+          "enum": ["auto", "light", "dark"],
+          "type": "string"
+        },
+        "product-name": {
+          "description": "Nombre junto al logo; si falta, se usa `meta.title`.",
+          "type": "string"
+        },
+        "tenants": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ThemeTenantConfig"
+          },
+          "description": "Overrides por tenant (`theme.tenants.<tenant>`).",
+          "type": "object"
+        },
+        "tokens": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Custom properties que se fijan en `<html>`: `{ \"--mat-sys-primary\": \"#6750a4\" }`.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ThemeTenantConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "logo": {
+          "description": "Logo del menú. Relativo a la raíz de la app (`assets/img/logo.png`) o URL absoluta.",
+          "type": "string"
+        },
+        "logo-dark": {
+          "description": "Logo para el modo oscuro; si falta, se usa `logo`.",
+          "type": "string"
+        },
+        "product-name": {
+          "description": "Nombre junto al logo; si falta, se usa `meta.title`.",
+          "type": "string"
+        },
+        "tokens": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Se aplican encima de `theme.tokens` cuando este tenant está activo.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Contenido de `config/<env>-config.json`: todas las secciones son opcionales y `name` viene del entorno. De aquí sale `public/config/phylax-config.schema.json` (`npm run config:schema`).",
+  "properties": {
+    "$schema": {
+      "description": "Ruta al JSON Schema, para que el IDE autocomplete y valide.",
+      "type": "string"
+    },
+    "api": {
+      "additionalProperties": {
+        "$ref": "#/definitions/ApiConfig"
+      },
+      "description": "Una entrada por host lógico de API.",
+      "type": "object"
+    },
+    "data": {
+      "$ref": "#/definitions/DataConfig"
+    },
+    "i18n": {
+      "$ref": "#/definitions/I18nConfig"
+    },
+    "identity": {
+      "additionalProperties": {
+        "$ref": "#/definitions/IdentityConfig"
+      },
+      "description": "Una entrada por identidad (`main`, …).",
+      "type": "object"
+    },
+    "layout": {
+      "additionalProperties": {},
+      "type": "object"
+    },
+    "meta": {
+      "$ref": "#/definitions/MetaConfig"
+    },
+    "telemetry": {
+      "$ref": "#/definitions/TelemetryConfig"
+    },
+    "tenant": {
+      "$ref": "#/definitions/TenantConfig"
+    },
+    "theme": {
+      "$ref": "#/definitions/ThemeConfig"
+    }
+  },
+  "type": "object"
+}

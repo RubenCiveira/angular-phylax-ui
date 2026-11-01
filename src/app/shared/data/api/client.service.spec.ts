@@ -19,7 +19,7 @@ describe('ClientService', () => {
     config = { 'data.token-wait-ms': of(undefined), 'data.convert-iso-dates': of(true) };
 
     const appState = {
-      language: of('es'),
+      language$: of('es'),
     } as unknown as AppStateService;
 
     const identity = {
@@ -29,7 +29,7 @@ describe('ClientService', () => {
     const appConfig = { value$: (path: string) => config[path] ?? of(undefined) };
 
     const errorService = {
-      initialiceError: jasmine.createSpy('initialiceError'),
+      initializeError: jasmine.createSpy('initializeError'),
     } as unknown as ErrorService;
 
     TestBed.configureTestingModule({
@@ -132,7 +132,7 @@ describe('ClientService', () => {
       tick(1);
       expect(error?.status).toBe(401);
       expect((error as any).identity).toBe('main');
-      expect(TestBed.inject(ErrorService).initialiceError).toHaveBeenCalledWith(error);
+      expect(TestBed.inject(ErrorService).initializeError).toHaveBeenCalledWith(error);
       httpMock.expectNone('/api/items');
     }));
 

@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-03]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,13 +24,13 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] Sustituir medidas y colores por `--app-nav-width`, `--app-nav-width-mini`, `--app-color-border`, `--mat-sys-surface-container`, `--mat-sys-scrim`, `--mat-sys-level3`.
-- [ ] Breakpoint en una constante compartida (Sass + `LAYOUT_MOBILE_QUERY` en TS).
+- [x] Sustituir medidas y colores por `--app-nav-width`, `--app-nav-width-mini`, `--app-color-border`, `--mat-sys-surface-container`, `--mat-sys-scrim`, `--mat-sys-level3`.
+- [x] Breakpoint en una constante compartida (Sass + `LAYOUT_MOBILE_QUERY` en TS).
 
 ## Criterios de aceptación
 
-- [ ] En móvil con modo oscuro, el nav tiene fondo oscuro.
-- [ ] La anchura del menú se cambia con una variable.
+- [x] En móvil con modo oscuro, el nav tiene fondo oscuro.
+- [x] La anchura del menú se cambia con una variable.
 
 ## Ficheros afectados
 

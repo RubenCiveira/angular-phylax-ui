@@ -3,7 +3,7 @@ id: EP-DATA-4
 titulo: "Selección y selectores"
 area: capa-de-datos
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [DATA-16, DATA-17]
 ---
 
@@ -41,5 +41,5 @@ No depende de issues de otras épicas: se puede empezar en cualquier momento.
 
 ## Checklist de la épica
 
-- [ ] DATA-16 — selectorProvider: exponer error y no relanzarlo
-- [ ] DATA-17 — SelectionModel: toggle inmutable
+- [x] DATA-16 — selectorProvider: exponer error y no relanzarlo
+- [x] DATA-17 — SelectionModel: toggle inmutable

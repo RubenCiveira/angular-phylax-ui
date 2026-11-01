@@ -19,6 +19,6 @@ export interface Action {
   run(): void;
 
   container: WritableSignal<ActionContainerComponent | undefined>;
-  selection: WritableSignal<any[]>;
+  selection: Signal<any[]>;
   render: Signal<TemplateRef<any> | undefined>;
 }

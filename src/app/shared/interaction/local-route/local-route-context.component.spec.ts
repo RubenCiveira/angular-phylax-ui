@@ -2,26 +2,25 @@
 import { QueryList, TemplateRef } from '@angular/core';
 import { LocalRouteContextComponent } from './local-route-context.component';
 import { LocalRouteDirective } from './local-route.directive';
-import { LocalRouterService } from './local-router.service';
 import { LocalRouteStateService } from '@shared/interaction/local-route-state/local-route-state.service';
 
 describe('LocalRouteContextComponent', () => {
   it('selects initial, matching, and fallback templates', () => {
     const routeState = {} as LocalRouteStateService;
-    const component = new LocalRouteContextComponent(routeState, new LocalRouterService());
+    const component = new LocalRouteContextComponent(routeState);
 
-    const initial = new LocalRouteDirective({} as TemplateRef<any>);
+    const initial = new LocalRouteDirective({} as TemplateRef<unknown>);
     initial.initial = true;
 
-    const match = new LocalRouteDirective({} as TemplateRef<any>);
+    const match = new LocalRouteDirective({} as TemplateRef<unknown>);
     match.on = 'detail';
 
-    const fallback = new LocalRouteDirective({} as TemplateRef<any>);
+    const fallback = new LocalRouteDirective({} as TemplateRef<unknown>);
     fallback.fallback = true;
 
     const list = new QueryList<LocalRouteDirective>();
     list.reset([initial, match, fallback]);
-    (component as any).templates = list;
+    component.templates = list;
 
     component.setTemplateForParam('detail');
     expect(component.currentTemplate).toBe(match.template);

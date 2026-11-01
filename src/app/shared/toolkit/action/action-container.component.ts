@@ -47,6 +47,8 @@ export interface ItemMapper<T> {
   imports: [MatMenuModule, MatButtonModule, MatIconModule, CommonModule],
   styleUrl: 'action-container.component.scss',
   providers: [
+    // Estado en la URL con el ciclo de vida de este contenedor
+    LocalRouteStateService,
     // Este contenedor se expone como referencia inyectable
     { provide: ACTION_CONTAINER_REF, useExisting: forwardRef(() => ActionContainerComponent) },
   ],

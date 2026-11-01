@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-02]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,13 +24,13 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] Usar `@fontsource-variable/roboto` (subset latin y latin-ext) o la pila del sistema como valor por defecto de `$font-family`.
-- [ ] Borrar `public/assets/roboto.css`.
+- [x] Usar `@fontsource-variable/roboto` (subset latin y latin-ext) o la pila del sistema como valor por defecto de `$font-family`. *Roboto Variable autoalojada (solo latin y latin-ext) con la pila del sistema como respaldo; `$font-self-hosted: false` desactiva la carga.*
+- [x] Borrar `public/assets/roboto.css`.
 
 ## Criterios de aceptación
 
-- [ ] No hay peticiones a dominios de Google al cargar.
-- [ ] La fuente se cambia desde `_config.scss`.
+- [x] No hay peticiones a dominios de Google al cargar.
+- [x] La fuente se cambia desde `_config.scss`.
 
 ## Ficheros afectados
 

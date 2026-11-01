@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: [STY-03]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,14 +24,21 @@ La tabla usa `solid black`/`silver`, toma la tipografía de tokens de **botón**
 
 ## Tareas
 
-- [ ] Declarar en `:host` `--list-view-radius`, `--list-view-row-height`, `--list-view-header-bg`, `--list-view-header-fg`, `--list-view-cell-padding`.
-- [ ] Usar `font: var(--mat-sys-label-large)` en cabecera y `--mat-sys-body-medium` en celdas.
-- [ ] Aplicar el mismo patrón a `list-view.component.scss` (skeleton).
+- [x] Declarar en `:host` `--list-view-radius`, `--list-view-row-height`, `--list-view-header-bg`, `--list-view-header-fg`, `--list-view-cell-padding`. *Declaradas una sola vez en el `:host` de `list-view.component.scss` (junto a `--list-view-border-color`, `--list-view-hover-bg`, `--list-view-transition` y `--list-view-card-min`), compartidas por tabla, lista, tarjetas y skeleton.* *Como STY-03 aún no está hecho, se usa `var(--app-…, <reserva>)` con la reserva en `--mat-sys-*`/valor anterior: adopta los tokens en cuanto existan.*
+- [x] Usar `font: var(--mat-sys-label-large)` en cabecera y `--mat-sys-body-medium` en celdas.
+- [x] Aplicar el mismo patrón a `list-view.component.scss` (skeleton).
 
 ## Criterios de aceptación
 
-- [ ] Cambiar `--list-view-row-height` cambia la altura de fila.
-- [ ] No hay `--mdc-` en los SCSS de list-view.
+- [x] Cambiar `--list-view-row-height` cambia la altura de fila. *Cubierto por test (`itemHeight` pasa a 40 con `--list-view-row-height: 40px`).* *Las celdas y el skeleton usan la variable en CSS (sin `height` inline) y `ListViewComponent` la lee en `ngOnInit` para el `itemSize` del virtual scroll.*
+- [x] No hay `--mdc-` en los SCSS de list-view. *Solo queda el selector de clase `.mat-mdc-card-actions`, que no es un token.*
+
+## Notas
+
+- Además de las cinco variables pedidas, `:host` declara `--list-view-border-color`, `--list-view-hover-bg`, `--list-view-transition` y `--list-view-card-min`.
+- Para que `--list-view-row-height` cambie realmente la altura: se quitó el `height` inline de `th`/`td` y del skeleton, y `ListViewComponent.ngOnInit` lee la variable con `getComputedStyle` para el `itemSize` del virtual scroll (si no es un valor en px usa 52).
+- Para poder ejecutar los tests, el builder de Karma pasa a `"builderMode": "application"` (esbuild, como el build): con webpack, `css-loader` no resolvía las `url('@fontsource-variable/…')` de `src/styles/_fonts.scss`.
+- Con encapsulación emulada, `:host` gana a un selector de elemento: para sobrescribir desde fuera hace falta más especificidad (`.compact list-view { --list-view-row-height: 40px; }`).
 
 ## Ficheros afectados
 

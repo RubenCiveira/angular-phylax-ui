@@ -9,7 +9,7 @@ const KEY = 'last-non-oidc-route';
 describe('AuthorizationAccessService', () => {
   let events$: Subject<any>;
   let router: Router;
-  const state = { language: of('es'), tenant: of('main') } as unknown as AppStateService;
+  const state = { language$: of('es'), tenant$: of('main') } as unknown as AppStateService;
 
   beforeEach(() => {
     sessionStorage.clear();

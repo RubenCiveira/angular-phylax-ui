@@ -1,4 +1,5 @@
 {
+  "$schema": "./phylax-config.schema.json",
   "meta": {
     "title": "config de phylax"
   },
@@ -10,13 +11,13 @@
   },
   "i18n": {
     "default-lang": "es",
-    "available-langs": [
-      "es",
-      "en",
-      "pt",
-      "fr",
-      "de"
-    ]
+    "available-langs": ["es", "en", "pt", "fr", "de"]
+  },
+  "theme": {
+    "mode": "auto",
+    "product-name": "Phylax",
+    "logo": "assets/img/logo-75x75.png",
+    "tokens": {}
   },
   "tenant": {
     "default": "main"
@@ -33,14 +34,8 @@
       "client-id": "phylax-ui",
       "scope": "openid profile email offline_access",
       "roles-claim": "groups",
-      "audience": [
-        "phylax-ui",
-        "phylax-api"
-      ],
-      "ph-audience": [
-        "phylax-ui",
-        "phylax-api"
-      ],
+      "audience": ["phylax-ui", "phylax-api"],
+      "ph-audience": ["phylax-ui", "phylax-api"],
       "persistent": false
     }
   },

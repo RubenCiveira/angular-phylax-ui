@@ -11,13 +11,46 @@ export interface AppConfig {
   /** Una entrada por identidad (`main`, …). */
   identity: Record<string, IdentityConfig>;
   telemetry: TelemetryConfig;
-  theme: Record<string, unknown>;
+  theme: ThemeConfig;
   layout: Record<string, unknown>;
   data: DataConfig;
 }
 
+/**
+ * Contenido de `config/<env>-config.json`: todas las secciones son opcionales y `name` viene del entorno.
+ * De aquí sale `public/config/phylax-config.schema.json` (`npm run config:schema`).
+ */
+export type AppConfigFile = Partial<Omit<AppConfig, 'name'>> & {
+  /** Ruta al JSON Schema, para que el IDE autocomplete y valide. */
+  $schema?: string;
+};
+
 export interface MetaConfig {
   title?: string;
+}
+
+/** Marca que se puede sustituir por tenant: logo y nombre del producto. */
+export interface BrandConfig {
+  /** Logo del menú. Relativo a la raíz de la app (`assets/img/logo.png`) o URL absoluta. */
+  logo?: string;
+  /** Logo para el modo oscuro; si falta, se usa `logo`. */
+  'logo-dark'?: string;
+  /** Nombre junto al logo; si falta, se usa `meta.title`. */
+  'product-name'?: string;
+}
+
+export interface ThemeTenantConfig extends BrandConfig {
+  /** Se aplican encima de `theme.tokens` cuando este tenant está activo. */
+  tokens?: Record<string, string>;
+}
+
+export interface ThemeConfig extends BrandConfig {
+  /** Modo por defecto hasta que el usuario elige uno. Por defecto `auto` (sigue al sistema). */
+  mode?: 'auto' | 'light' | 'dark';
+  /** Custom properties que se fijan en `<html>`: `{ "--mat-sys-primary": "#6750a4" }`. */
+  tokens?: Record<string, string>;
+  /** Overrides por tenant (`theme.tenants.<tenant>`). */
+  tenants?: Record<string, ThemeTenantConfig>;
 }
 
 export interface ApiConfig {

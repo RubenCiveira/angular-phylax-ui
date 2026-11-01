@@ -78,7 +78,7 @@ describe('ErrorPageComponent', () => {
       ],
       providers: [
         provideRouter([]),
-        { provide: AppStateService, useValue: { language: of('es'), tenant: of('main') } },
+        { provide: AppStateService, useValue: { language: signal('es'), tenant: signal('main') } },
       ],
     });
   });

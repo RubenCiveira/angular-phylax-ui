@@ -13,7 +13,7 @@ class MockTranslocoService {
 }
 
 class MockAppStateService {
-  language = new BehaviorSubject('en');
+  language$ = new BehaviorSubject('en');
 }
 
 describe('EditableDatetimeComponent', () => {

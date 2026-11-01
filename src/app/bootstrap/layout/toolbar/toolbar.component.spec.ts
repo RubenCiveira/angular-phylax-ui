@@ -21,18 +21,14 @@ describe('ToolbarComponent', () => {
       logout: jasmine.createSpy('logout'),
     };
 
-    const lang$ = new BehaviorSubject<string>('es');
-    const tenant$ = new BehaviorSubject<string>('main');
     tenantCtx$ = new BehaviorSubject<any>(null);
     tenantSetSpy = jasmine.createSpy('tenantContextSet');
-    (tenantCtx$ as any).set = tenantSetSpy;
 
     appStateMock = {
-      language: lang$,
-      tenant: tenant$,
-      context: {
-        tenant: tenantCtx$,
-      },
+      language: signal('es'),
+      tenant: signal('main'),
+      context$: (key: string) => (key === 'tenant' ? tenantCtx$ : of(null)),
+      setContext: (key: string, value: ContextValue) => key === 'tenant' && tenantSetSpy(value),
     };
 
     await TestBed.configureTestingModule({

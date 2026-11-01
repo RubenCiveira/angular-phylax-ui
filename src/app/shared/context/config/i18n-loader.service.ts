@@ -17,6 +17,7 @@ import { APP_CONFIG, RuntimeConfigService } from './app-config.service';
 import { I18nConfig } from './app-config.model';
 import { availableLanguages, defaultLanguage } from './defaults.service';
 import { HumanizingMissingHandler } from './missing-handler';
+import { MfeConfigAdapter } from './mfe-config.adapter';
 
 @Injectable({ providedIn: 'root' })
 export class I18nLoaderService implements TranslocoLoader {
@@ -24,6 +25,7 @@ export class I18nLoaderService implements TranslocoLoader {
   // Los idiomas se leen de la configuración actual: TRANSLOCO_CONFIG puede haberse creado antes de que llegue
   private config = inject(APP_CONFIG);
   private inj = inject(Injector);
+  private mfe = inject(MfeConfigAdapter);
   /** Ficheros que ya han fallado: se avisa una sola vez por fichero. */
   private readonly warned = new Set<string>();
 
@@ -57,12 +59,9 @@ export class I18nLoaderService implements TranslocoLoader {
   }
 
   private url(scope: string, path: string) {
-    let name = environment.name;
     // Los JSON de public/ no llevan hash: la versión evita servir traducciones de un despliegue anterior
     const target = (scope === '' ? '' : '/' + scope) + '/' + path + '.json' + versionQuery();
-    return (window as any)._remove_mfa_config_url && (window as any)._remove_mfa_config_url[name]
-      ? (window as any)._remove_mfa_config_url[name][0] + 'i18n' + target
-      : 'i18n' + target;
+    return this.mfe.i18nBase(environment.name) + target;
   }
 
   private deepMerge(target: any, source: any): any {

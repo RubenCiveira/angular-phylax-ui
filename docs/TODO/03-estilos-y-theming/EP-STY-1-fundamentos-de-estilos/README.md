@@ -3,7 +3,7 @@ id: EP-STY-1
 titulo: "Fundamentos: src/styles, tokens y tema"
 area: estilos-y-theming
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [STY-01, STY-03, STY-02, STY-05, STY-04, STY-20]
 ---
 
@@ -79,9 +79,9 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] STY-01 — Crear la estructura src/styles/ sin cambios visuales
-- [ ] STY-03 — Definir los design tokens --app-*
-- [ ] STY-02 — Tema de Material parametrizable y overrides sin !important
-- [ ] STY-05 — Estilos base de accesibilidad (foco y movimiento reducido)
-- [ ] STY-04 — Permitir forzar modo claro u oscuro
-- [ ] STY-20 — Añadir stylelint para proteger los tokens
+- [x] STY-01 — Crear la estructura src/styles/ sin cambios visuales
+- [x] STY-03 — Definir los design tokens --app-*
+- [x] STY-02 — Tema de Material parametrizable y overrides sin !important
+- [x] STY-05 — Estilos base de accesibilidad (foco y movimiento reducido)
+- [x] STY-04 — Permitir forzar modo claro u oscuro
+- [x] STY-20 — Añadir stylelint para proteger los tokens

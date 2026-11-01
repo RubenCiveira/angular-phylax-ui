@@ -18,7 +18,7 @@ export class PermissionService {
 
   /** Emite si el usuario de `identity` tiene `perm`, y vuelve a emitir solo cuando cambia. */
   has(perm: string, identity = 'main'): Observable<boolean> {
-    return this.state.userInfo[identity].pipe(
+    return this.state.user$(identity).pipe(
       map((user) => grants(user, perm)),
       distinctUntilChanged(),
     );

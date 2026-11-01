@@ -13,7 +13,7 @@ class MockTranslocoService {
 }
 
 class MockAppStateService {
-  language = of('en');
+  language$ = of('en');
   fixedContext = () => of({});
 }
 

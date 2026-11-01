@@ -7,7 +7,7 @@ paso: 3
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-01]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,15 +24,15 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] `_config.scss` con `$primary-palette`, `$tertiary-palette`, `$font-family`, `$density` como `!default`.
-- [ ] `_material-theme.scss`: `mat.theme(...)` con esos valores y `theme-type: color-scheme`.
-- [ ] Sustituir la regla del diálogo por `mat.dialog-overrides((container-color: …))`.
-- [ ] Exponer las variables como parámetros del generador.
+- [x] `_config.scss` con `$primary-palette`, `$tertiary-palette`, `$font-family`, `$density` como `!default`.
+- [x] `_material-theme.scss`: `mat.theme(...)` con esos valores y `theme-type: color-scheme`.
+- [x] Sustituir la regla del diálogo por `mat.dialog-overrides((container-color: …))`.
+- [ ] Exponer las variables como parámetros del generador (pendiente en el generador).
 
 ## Criterios de aceptación
 
-- [ ] Cambiar `$primary-palette` en un fichero recolorea toda la app.
-- [ ] No hay `!important` ni `.mat-mdc-*` en los estilos globales.
+- [x] Cambiar `$primary-palette` en un fichero recolorea toda la app.
+- [x] No hay `!important` ni `.mat-mdc-*` en los estilos globales.
 
 ## Ficheros afectados
 

@@ -5,3 +5,36 @@
   flex: 1;
   overflow: hidden;
 }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-3);
+  padding: var(--app-space-3);
+  color: inherit;
+  font: var(--mat-sys-title-large);
+  text-decoration: none;
+}
+
+.brand-logo {
+  flex: none;
+  width: var(--app-brand-logo-size);
+  height: var(--app-brand-logo-size);
+  object-fit: contain;
+}
+
+.brand-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// En modo mini solo cabe el logo: se centra y no supera el ancho del menú
+:host(.mini) .brand {
+  justify-content: center;
+  padding-inline: 0;
+}
+:host(.mini) .brand-logo {
+  width: min(var(--app-brand-logo-size), calc(var(--app-nav-width-mini) - 2 * var(--app-space-3)));
+  height: auto;
+}

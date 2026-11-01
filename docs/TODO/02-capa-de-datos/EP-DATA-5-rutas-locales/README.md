@@ -3,7 +3,7 @@ id: EP-DATA-5
 titulo: "Rutas locales"
 area: capa-de-datos
 prioridad: media
-estado: pendiente
+estado: hecho
 issues: [DATA-18, DATA-19]
 ---
 
@@ -32,6 +32,8 @@ Los issues están ordenados para respetar sus dependencias y tocar cada fichero 
 | `src/app/shared/interaction/local-route/local-route-context.component.ts` | DATA-19 |
 | `src/app/shared/interaction/local-route/local-router.service.ts` | DATA-19 |
 | `src/app/shared/interaction/local-route/local-route.directive.ts` | DATA-19 |
+| `src/app/shared/interaction/local-route/local-route-context.token.ts` *(nuevo)* | DATA-19 |
+| `src/app/shared/toolkit/action/action-container.component.ts` | DATA-18 |
 
 ## Antes de empezar
 
@@ -43,5 +45,5 @@ No depende de issues de otras épicas: se puede empezar en cualquier momento.
 
 ## Checklist de la épica
 
-- [ ] DATA-18 — LocalRouteState: ámbito de componente y sin navegaciones al destruir
-- [ ] DATA-19 — LocalRoute: tipado y mensajes solo en desarrollo
+- [x] DATA-18 — LocalRouteState: ámbito de componente y sin navegaciones al destruir
+- [x] DATA-19 — LocalRoute: tipado y mensajes solo en desarrollo

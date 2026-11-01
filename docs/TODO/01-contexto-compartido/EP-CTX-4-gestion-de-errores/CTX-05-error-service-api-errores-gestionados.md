@@ -7,7 +7,7 @@ paso: 3
 prioridad: media
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CTX-04]
 origen: 05-contexto-compartido.md
 ---
@@ -24,16 +24,16 @@ El mecanismo de "error diferido" (`initialiceError` con `setTimeout(2000)` + `ca
 
 ## Tareas
 
-- [ ] Guardar los timeouts en un `WeakMap<object, number>` en lugar de mutar el error.
-- [ ] Crear el operador `handledErrors(statuses: number[])` que marca el error como gestionado para esos estados.
-- [ ] Pasar los mensajes por transloco (`errors.422`, `errors.generic`).
-- [ ] Corregir la errata `initialiceError` → `initializeError` (con alias deprecado).
-- [ ] Documentar el patrón con JSDoc y un ejemplo en el README.
+- [x] Guardar los timeouts en un `WeakMap<object, number>` en lugar de mutar el error.
+- [x] Crear el operador `handledErrors(statuses: number[])` que marca el error como gestionado para esos estados. *Los errores gestionados viven en un `WeakSet` del módulo, así el operador no necesita contexto de inyección; también `markErrorHandled(error)`. Sustituye a `error.hidden`.*
+- [x] Pasar los mensajes por transloco (`errors.422`, `errors.generic`). *`errors.generic` es el mensaje por defecto de `notifyError()`; el botón usa `common.confirm.ok`.*
+- [x] Corregir la errata `initialiceError` → `initializeError` (con alias deprecado). *`isCanceled` (devolvía `true` si el aviso seguía pendiente) pasa a `isPending`, también con alias deprecado.*
+- [x] Documentar el patrón con JSDoc y un ejemplo en el README.
 
 ## Criterios de aceptación
 
-- [ ] Un componente puede usar `.pipe(handledErrors([422]))` y no aparece el snackbar global.
-- [ ] Los mensajes cambian con el idioma.
+- [x] Un componente puede usar `.pipe(handledErrors([422]))` y no aparece el snackbar global.
+- [x] Los mensajes cambian con el idioma.
 
 ## Ficheros afectados
 

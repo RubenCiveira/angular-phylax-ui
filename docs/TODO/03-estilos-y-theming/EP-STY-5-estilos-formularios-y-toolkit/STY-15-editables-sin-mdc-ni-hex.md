@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-03]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,13 +24,13 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] Foco → `--mat-sys-primary`; error → `--mat-sys-error`; texto → `--mat-sys-on-surface(-variant)`.
-- [ ] Degradado de `editable-credit-card` con `--mat-sys-primary` y `--mat-sys-tertiary`.
-- [ ] Solo en los editables que se mantengan (ver UI-01).
+- [x] Foco → `--mat-sys-primary`; error → `--mat-sys-error`; texto → `--mat-sys-on-surface(-variant)`.
+- [x] Degradado de `editable-credit-card` con `--mat-sys-primary` y `--mat-sys-tertiary`.
+- [x] Solo en los editables que se mantengan (ver UI-01). *UI-01 conserva todos los editables. Además de los `--mdc-*`, se sustituyen los `rgba(0, 0, 0, …)` y hex: bordes → `outline`/`outline-variant`, hover → `on-surface` al 8 %, deshabilitado → `on-surface` al 4/12/38 %. También en los estilos inline de `editable-password` (se elimina el `:host-context(.dark)`, que no se aplicaba nunca) y `editable-signature` (el lienzo sigue blanco a propósito: la firma se exporta en blanco y negro).*
 
 ## Criterios de aceptación
 
-- [ ] `grep -rn -- "--mdc-" src/app/shared/toolkit` no devuelve nada.
+- [x] `grep -rn -- "--mdc-" src/app/shared/toolkit` no devuelve nada.
 
 ## Ficheros afectados
 

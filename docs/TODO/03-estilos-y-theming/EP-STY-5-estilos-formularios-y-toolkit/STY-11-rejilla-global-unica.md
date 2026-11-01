@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-01]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,14 +24,14 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] Incluir `generate-grid-utils(...)` una vez en `_utilities.scss`, con `$max-row-start: 12`, `$order-min: -2`, `$order-max: 6`.
-- [ ] Dejar `form-layout.component.scss` con `:host { display: grid; margin: var(--form-layout-margin, 0); gap: var(--form-layout-gap, var(--app-space-4)); }`.
-- [ ] Quitar `class="u-grid"` de las plantillas del generador.
+- [x] Incluir `generate-grid-utils(...)` una vez en `_utilities.scss`, con `$max-row-start: 12`, `$order-min: -2`, `$order-max: 6`.
+- [x] Dejar `form-layout.component.scss` con `:host { display: grid; margin: var(--form-layout-margin, 0); gap: var(--form-layout-gap, var(--app-space-4)); }`. *El margen por defecto es `var(--app-space-8)` (32px = el `2rem` anterior) en lugar de `0`, para que los formularios se vean igual. El componente deja `ViewEncapsulation.None` y añade `form-layout-grid` con `host: { class }` en lugar de `Renderer2`.*
+- [x] Quitar `class="u-grid"` de las plantillas del generador. *50 plantillas de features y la del toolbar.*
 
 ## Criterios de aceptación
 
-- [ ] `ng build` no avisa del presupuesto `anyComponentStyle` en form-layout.
-- [ ] Los formularios se ven igual.
+- [x] `ng build` no avisa del presupuesto `anyComponentStyle` en form-layout.
+- [x] Los formularios se ven igual.
 
 ## Ficheros afectados
 

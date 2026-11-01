@@ -159,7 +159,7 @@ export class ClientService {
   }
 
   private prepare<T>(req: HttpRequest<T>, params: RequestTarget): Observable<HttpRequest<T>> {
-    return this.appState.language.pipe(
+    return this.appState.language$.pipe(
       mergeMap((lang) =>
         this.prepareWithConf(req, lang as string, params.withIdentity, params.headers, params.identity),
       ),
@@ -209,7 +209,7 @@ export class ClientService {
     if (error?.status === 401 && target.identity) {
       error.identity = target.identity;
     }
-    this.errorService.initialiceError(error);
+    this.errorService.initializeError(error);
     return throwError(() => error);
   }
 

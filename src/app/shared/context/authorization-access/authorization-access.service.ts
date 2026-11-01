@@ -40,7 +40,7 @@ export class AuthorizationAccessService {
     if (last) {
       this.router.navigateByUrl(last);
     } else {
-      combineLatest([this.state.language, this.state.tenant])
+      combineLatest([this.state.language$, this.state.tenant$])
         .pipe(take(1))
         .subscribe(([language, tenant]) => this.router.navigate([language, tenant]));
     }

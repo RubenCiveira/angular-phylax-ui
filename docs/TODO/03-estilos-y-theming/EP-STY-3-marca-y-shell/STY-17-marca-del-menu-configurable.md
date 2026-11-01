@@ -7,7 +7,7 @@ paso: 3
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-06]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,15 +24,15 @@ El menú pinta `<img src="./assets/img/logo-75x75.png" style="width: 75px; …">
 
 ## Tareas
 
-- [ ] Leer `theme.logo` y `theme.product-name` (o `meta.title`) de la configuración.
-- [ ] Clases `.brand`, `.brand-logo` (`--app-brand-logo-size`) y `.brand-name` sin estilos inline.
-- [ ] En modo mini, solo el logo.
-- [ ] Enlace al inicio con `routerLink`.
+- [x] Leer `theme.logo` y `theme.product-name` (o `meta.title`) de la configuración.
+- [x] Clases `.brand`, `.brand-logo` (`--app-brand-logo-size`) y `.brand-name` sin estilos inline.
+- [x] En modo mini, solo el logo.
+- [x] Enlace al inicio con `routerLink`.
 
 ## Criterios de aceptación
 
-- [ ] Cambiar `theme.logo` en la configuración cambia el logo.
-- [ ] El modo mini no desborda.
+- [x] Cambiar `theme.logo` en la configuración cambia el logo.
+- [x] El modo mini no desborda.
 
 ## Ficheros afectados
 

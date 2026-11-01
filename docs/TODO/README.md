@@ -22,10 +22,10 @@ docs/TODO/<nn>-<área>/<EP-ID>-<épica>/<ID>-<issue>.md    ← issue individual
 | Prioridad | Issues |
 |---|---|
 | 🔴 Crítica | 18 |
-| 🟠 Alta | 55 |
-| 🟡 Media | 63 |
+| 🟠 Alta | 58 |
+| 🟡 Media | 64 |
 | ⚪ Baja | 28 |
-| **Total** | **164** issues en **53** épicas |
+| **Total** | **168** issues en **54** épicas |
 
 ## Épicas con issues críticos
 
@@ -111,6 +111,7 @@ Origen: [07 · Toolkit de UI](../recomendaciones/07-toolkit-ui.md)
 | [EP-UI-5 · Acciones](05-toolkit-ui/EP-UI-5-acciones/README.md) | 🟠 | 3 | ~6 d | [UI-15](05-toolkit-ui/EP-UI-5-acciones/UI-15-base-action-y-confirm-action.md) → [UI-16](05-toolkit-ui/EP-UI-5-acciones/UI-16-action-container-tooltips-y-textos.md) → [UI-17](05-toolkit-ui/EP-UI-5-acciones/UI-17-partir-action-container.md) |
 | [EP-UI-6 · Páginas y modal de error](05-toolkit-ui/EP-UI-6-paginas-de-error/README.md) | 🔴 | 2 | ~1 d | [UI-19](05-toolkit-ui/EP-UI-6-paginas-de-error/UI-19-error-page-traducida.md) → [UI-20](05-toolkit-ui/EP-UI-6-paginas-de-error/UI-20-error-modal-acciones.md) |
 | [EP-UI-7 · Ajustes aislados](05-toolkit-ui/EP-UI-7-ajustes-aislados/README.md) | 🟡 | 3 | ~1.5 d | [UI-18](05-toolkit-ui/EP-UI-7-ajustes-aislados/UI-18-ui-defaults-apariencia.md) → [UI-21](05-toolkit-ui/EP-UI-7-ajustes-aislados/UI-21-long-task-view-accesible.md) → [UI-22](05-toolkit-ui/EP-UI-7-ajustes-aislados/UI-22-avatares-con-contraste.md) |
+| [EP-UI-8 · Resolución de conflictos de edición (412)](05-toolkit-ui/EP-UI-8-conflictos-de-edicion/README.md) | 🟠 | 4 | ~5 d | [UI-23](05-toolkit-ui/EP-UI-8-conflictos-de-edicion/UI-23-modelo-y-fusion-a-tres-bandas.md) → [UI-24](05-toolkit-ui/EP-UI-8-conflictos-de-edicion/UI-24-repositorio-detecta-conflicto-412.md) → [UI-25](05-toolkit-ui/EP-UI-8-conflictos-de-edicion/UI-25-dialogo-de-resolucion-de-conflictos.md) → [UI-26](05-toolkit-ui/EP-UI-8-conflictos-de-edicion/UI-26-edit-action-resuelve-conflictos.md) |
 
 ## 6. Configuración, build y tooling
 

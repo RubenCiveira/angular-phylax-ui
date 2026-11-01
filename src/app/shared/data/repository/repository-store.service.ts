@@ -33,14 +33,14 @@ export class RepositoryStore {
     const state = inject(AppStateService);
     this.configuredTtl = config.value('data.cache-ttl');
     // skip(1): el valor inicial no es un cambio de sesión
-    state.tenant.pipe(distinctUntilChanged(), skip(1)).subscribe(() => this.clear());
+    state.tenant$.pipe(distinctUntilChanged(), skip(1)).subscribe(() => this.clear());
     config
       .value$('identity')
       .pipe(
         switchMap((identities) =>
           merge(
             ...Object.keys(identities ?? {}).map((name) =>
-              state.userInfo[name].pipe(
+              state.user$(name).pipe(
                 map((user) => user.uid),
                 distinctUntilChanged(),
                 skip(1),

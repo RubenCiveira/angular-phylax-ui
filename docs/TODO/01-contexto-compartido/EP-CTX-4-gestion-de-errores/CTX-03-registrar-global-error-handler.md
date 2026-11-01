@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,13 +24,17 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Añadir `{ provide: ErrorHandler, useClass: GlobalErrorHandler }` en `app.config.ts`.
-- [ ] Que `GlobalErrorHandler.handleError` siga llamando a `console.error` (o al `Logger` de CTX-21) además de `storeError`.
-- [ ] Test: lanzar un error en un componente de prueba → `ErrorService.storeError` recibe la llamada.
+- [x] Añadir `{ provide: ErrorHandler, useClass: GlobalErrorHandler }` en `app.config.ts`.
+- [x] Que `GlobalErrorHandler.handleError` siga llamando a `console.error` (o al `Logger` de CTX-21) además de `storeError`. *`storeError` escribe con `Logger.error`; si no se puede registrar, el handler cae a `console.error`.*
+- [x] Test: lanzar un error en un componente de prueba → `ErrorService.storeError` recibe la llamada.
 
 ## Criterios de aceptación
 
-- [ ] Un `throw` no capturado en un componente genera un span de error en el colector (o una llamada a `storeError` en el test).
+- [x] Un `throw` no capturado en un componente genera un span de error en el colector (o una llamada a `storeError` en el test).
+
+## Notas
+
+- `storeError` es idempotente por error (`WeakSet`): un error HTTP que nadie captura llega a la vez al aviso diferido de `ClientService` y al `GlobalErrorHandler`, y solo genera un span.
 
 ## Ficheros afectados
 

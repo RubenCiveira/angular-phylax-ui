@@ -25,7 +25,7 @@ describe('RepositoryStore', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: RuntimeConfigService, useValue: config },
-        { provide: AppStateService, useValue: { tenant, userInfo: users } },
+        { provide: AppStateService, useValue: { tenant$: tenant, user$: (name: string) => users[name] } },
       ],
     });
   });

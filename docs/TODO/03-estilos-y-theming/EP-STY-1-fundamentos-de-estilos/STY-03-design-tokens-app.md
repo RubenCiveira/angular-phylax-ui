@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-01]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,13 +24,13 @@ No hay una capa de tokens propia: cada componente decide colores, radios y espac
 
 ## Tareas
 
-- [ ] En `_tokens.scss`, definir `--app-color-*` (primary, surface, border, text, text-muted, success, on-success), `--app-radius-*`, `--app-space-*`, `--app-nav-width(-mini)`, `--app-row-height`, `--app-transition-*`.
-- [ ] Valores por defecto apuntando a `--mat-sys-*`.
-- [ ] Documentar los tokens en `src/styles/README.md` (tabla nombre → uso → valor por defecto).
+- [x] En `_tokens.scss`, definir `--app-color-*` (primary, surface, border, text, text-muted, success, on-success), `--app-radius-*`, `--app-space-*`, `--app-nav-width(-mini)`, `--app-row-height`, `--app-transition-*`.
+- [x] Valores por defecto apuntando a `--mat-sys-*`.
+- [x] Documentar los tokens en `src/styles/README.md` (tabla nombre → uso → valor por defecto).
 
 ## Criterios de aceptación
 
-- [ ] Los tokens existen en `:root` y están documentados.
+- [x] Los tokens existen en `:root` y están documentados.
 
 ## Ficheros afectados
 

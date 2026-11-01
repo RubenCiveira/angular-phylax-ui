@@ -7,7 +7,7 @@ paso: 5
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [STY-02]
 origen: 02-estilos-y-theming.md
 ---
@@ -24,13 +24,13 @@ origen: 02-estilos-y-theming.md
 
 ## Tareas
 
-- [ ] Clases `html.theme-light { color-scheme: light }` y `html.theme-dark { color-scheme: dark }`.
-- [ ] `ThemeModeService` (`auto | light | dark`) persistido en `localStorage`, que aplica la clase.
-- [ ] El selector de UI va en SHELL-14.
+- [x] Clases `html.theme-light { color-scheme: light }` y `html.theme-dark { color-scheme: dark }`.
+- [x] `ThemeModeService` (`auto | light | dark`) persistido en `localStorage`, que aplica la clase.
+- [x] El selector de UI va en SHELL-14.
 
 ## Criterios de aceptación
 
-- [ ] Cambiar el modo en el servicio cambia la UI sin recargar.
+- [x] Cambiar el modo en el servicio cambia la UI sin recargar.
 
 ## Ficheros afectados
 

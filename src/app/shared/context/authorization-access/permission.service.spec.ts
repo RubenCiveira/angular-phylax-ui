@@ -17,7 +17,7 @@ describe('PermissionService', () => {
   it('has emits again only when the result changes', () => {
     const user$ = new BehaviorSubject<UserInfo>({ authenticated: false });
     TestBed.configureTestingModule({
-      providers: [{ provide: AppStateService, useValue: { userInfo: { main: user$ } } }],
+      providers: [{ provide: AppStateService, useValue: { user$: () => user$ } }],
     });
     const values: boolean[] = [];
 

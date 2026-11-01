@@ -13,7 +13,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
   standalone: true,
   imports: [CommonModule, MatDialogModule, MatIconModule, MatButtonModule, TranslocoPipe, ErrorPageComponent],
   templateUrl: './error-modal.component.html',
-  styleUrls: ['./error-modal.component.css'],
+  styleUrl: './error-modal.component.scss',
 })
 export class ErrorModalComponent {
   loading = false;

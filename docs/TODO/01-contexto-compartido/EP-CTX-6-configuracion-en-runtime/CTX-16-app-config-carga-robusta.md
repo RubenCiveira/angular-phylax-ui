@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,14 +24,14 @@ Se usa `APP_INITIALIZER` (deprecado). `$$_loadConfig` hace `fetch` sin control d
 
 ## Tareas
 
-- [ ] Migrar a `provideAppInitializer(async () => …)`.
-- [ ] Envolver la carga en `try/catch` y pintar una pantalla de error fatal legible ("No se pudo cargar config/phylax-config.json: <motivo>") directamente en el DOM (sin depender de Angular).
-- [ ] Usar `structuredClone(environment)` antes de mezclar.
-- [ ] Renombrar los internos `_$$_AppConfigService` y `$$_loadConfig`.
+- [x] Migrar a `provideAppInitializer(async () => …)`.
+- [x] Envolver la carga en `try/catch` y pintar una pantalla de error fatal legible ("No se pudo cargar config/phylax-config.json: <motivo>") directamente en el DOM (sin depender de Angular). *En `config-fatal-error.ts`. Cubre HTTP no 2xx, JSON mal formado (incluido el `index.html` que sirve `ng serve`), contenido que no es un objeto y fallo de red. Tras pintarlo, el initializer rechaza y la app no arranca a medias. En un microfront solo se registra en consola: no se pinta encima del host.*
+- [x] Usar `structuredClone(environment)` antes de mezclar.
+- [x] Renombrar los internos `_$$_AppConfigService` y `$$_loadConfig`. *Ahora `ConfigStore` y `loadShellConfig()`.*
 
 ## Criterios de aceptación
 
-- [ ] Con el JSON borrado o mal formado, se ve un mensaje claro en lugar de una pantalla en blanco.
+- [x] Con el JSON borrado o mal formado, se ve un mensaje claro en lugar de una pantalla en blanco.
 
 ## Ficheros afectados
 

@@ -7,7 +7,7 @@ paso: 3
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CTX-15]
 origen: 05-contexto-compartido.md
 ---
@@ -24,14 +24,14 @@ Quien despliega no tiene forma de saber qué claves admite `phylax-config.json` 
 
 ## Tareas
 
-- [ ] Generar `public/config/phylax-config.schema.json` (JSON Schema) a partir de `AppConfig`.
-- [ ] Añadir `"$schema": "./phylax-config.schema.json"` al JSON.
-- [ ] Validar el JSON en CI (`ajv-cli` o similar).
+- [x] Generar `public/config/phylax-config.schema.json` (JSON Schema) a partir de `AppConfig`. *Con `pnpm run config:schema` (`ts-json-schema-generator` sobre `AppConfigFile`: secciones opcionales, sin `name`, con `$schema`). Los JSDoc del modelo salen como descripciones.*
+- [x] Añadir `"$schema": "./phylax-config.schema.json"` al JSON.
+- [x] Validar el JSON en CI (`ajv-cli` o similar). *`pnpm run config:validate` y `.github/workflows/config.yml`, que además falla si el schema no está al día con el modelo.*
 
 ## Criterios de aceptación
 
-- [ ] El IDE autocompleta y valida `phylax-config.json`.
-- [ ] CI falla con una clave mal escrita.
+- [x] El IDE autocompleta y valida `phylax-config.json`.
+- [x] CI falla con una clave mal escrita. *Salvo dentro de `identity.<nombre>`, que admite claves extra por su índice `[extra: string]`.*
 
 ## Ficheros afectados
 

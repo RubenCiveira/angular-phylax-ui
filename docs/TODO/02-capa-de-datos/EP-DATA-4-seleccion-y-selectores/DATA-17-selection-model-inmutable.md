@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,14 +24,14 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] Implementar `toggle` con `update(items => …)` creando arrays nuevos.
-- [ ] Mantener `toogle` como alias `@deprecated`.
-- [ ] Comparar con el mapper de forma que funcione con objetos (`equals`).
-- [ ] Test con un `computed` sobre `selected()`.
+- [x] Implementar `toggle` con `update(items => …)` creando arrays nuevos.
+- [x] Mantener `toogle` como alias `@deprecated`.
+- [x] Comparar con el mapper de forma que funcione con objetos (`equals`).
+- [x] Test con un `computed` sobre `selected()`.
 
 ## Criterios de aceptación
 
-- [ ] La barra de selección múltiple aparece y desaparece al marcar y desmarcar.
+- [x] La barra de selección múltiple aparece y desaparece al marcar y desmarcar.
 
 ## Ficheros afectados
 

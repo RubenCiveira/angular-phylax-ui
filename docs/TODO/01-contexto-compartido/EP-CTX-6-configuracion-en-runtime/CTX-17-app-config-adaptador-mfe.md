@@ -7,7 +7,7 @@ paso: 4
 prioridad: media
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CFG-10]
 origen: 05-contexto-compartido.md
 ---
@@ -24,12 +24,12 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Mover la lógica a `mfe-config.adapter.ts` (configuración e i18n).
-- [ ] Si la decisión de CFG-10 es "sin MFE", eliminarla; si es "con MFE", mantenerla detrás del adaptador y corregir el nombre de la variable global.
+- [x] Mover la lógica a `mfe-config.adapter.ts` (configuración e i18n). *`MfeConfigAdapter`: `register()`, `configUrl()` e `i18nBase()`.*
+- [x] Si la decisión de CFG-10 es "sin MFE", eliminarla; si es "con MFE", mantenerla detrás del adaptador y corregir el nombre de la variable global. *CFG-10 sigue sin decidir: se mantiene detrás del adaptador y la variable pasa a `_remote_mfe_config_url`. Si CFG-10 decide "sin MFE", basta con borrar el adaptador, `MicroFrontConfigService` y la carga remota de `ConfigStore`.*
 
 ## Criterios de aceptación
 
-- [ ] `app-config.service.ts` e `i18n-loader.service.ts` no acceden a `window` directamente.
+- [x] `app-config.service.ts` e `i18n-loader.service.ts` no acceden a `window` directamente.
 
 ## Ficheros afectados
 

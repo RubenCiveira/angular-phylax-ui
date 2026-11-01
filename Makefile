@@ -16,6 +16,10 @@ lint:
 format:
 	npm run pretify
 
+# Mismas comprobaciones que el CI (ver .ci/run.sh)
+ci:
+	.ci/run.sh
+
 quality:
 	npx sonar-scanner -Dsonar.projectKey=$(PROJECT_NAME) -Dsonar.host.url=$(SONAR_HOST_URL) -Dsonar.token=$(SONAR_TOKEN) -Dsonar.sourceEncoding=UTF-8
 

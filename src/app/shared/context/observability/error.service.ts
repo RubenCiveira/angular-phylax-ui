@@ -2,19 +2,62 @@
 import { Injectable, Injector, ErrorHandler } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslocoService } from '@jsverse/transloco';
+import { MonoTypeOperatorFunction, catchError, throwError } from 'rxjs';
 import { ErrorModalComponent } from '@shared/toolkit/error-modal/error-modal.component';
 import { isSpanContextValid, SpanStatusCode } from '@opentelemetry/api';
 import { InstrumentationService } from './instrumentation.service';
 import { Logger } from './logger.service';
 import { IdentityService } from '../identity/identity.service';
 
-export interface HiddenError {
-  hidden: boolean;
+/** Margen que tiene quien hizo la petición para gestionar el error antes de que aparezca el aviso global. */
+const NOTIFY_DELAY_MS = 2000;
+
+/** Errores que ha gestionado quien los recibió: no muestran el aviso global. Fuera del servicio para no requerir DI. */
+const handled = new WeakSet<object>();
+
+const isObject = (error: unknown): error is object =>
+  error !== null && (typeof error === 'object' || typeof error === 'function');
+
+/** Marca el error como gestionado: si aún no se ha mostrado, no aparecerá el aviso global. */
+export function markErrorHandled(error: unknown): void {
+  if (isObject(error)) {
+    handled.add(error);
+  }
 }
 
+/**
+ * Marca como gestionados los errores con alguno de esos estados HTTP y los relanza: el componente los trata en su
+ * `catchError`/`error` y no aparece el aviso global. El resto de errores sigue su curso normal.
+ *
+ * @example
+ * this.repository.add(item).pipe(handledErrors([422])).subscribe({
+ *   next: () => this.close(),
+ *   error: (err) => this.showValidation(err.error),
+ * });
+ */
+export function handledErrors<T>(statuses: number[]): MonoTypeOperatorFunction<T> {
+  return catchError((error) => {
+    if (statuses.includes(error?.status)) {
+      markErrorHandled(error);
+    }
+    return throwError(() => error);
+  });
+}
+
+/**
+ * Registro en telemetría y aviso al usuario de los errores.
+ *
+ * Los errores HTTP se avisan de forma diferida: `ClientService` llama a `initializeError` y, si en
+ * {@link NOTIFY_DELAY_MS} nadie lo ha gestionado (`handledErrors`, `markErrorHandled` o `cancelError`), se registra
+ * y se muestra el diálogo (o un snackbar para los 422).
+ */
 @Injectable({ providedIn: 'root' })
 export class ErrorService {
-  private displayedError = true;
+  /** Avisos pendientes por error; sin mutar el error, que puede ser de solo lectura o compartido. */
+  private readonly timeouts = new WeakMap<object, ReturnType<typeof setTimeout>>();
+  /** Errores ya registrados: un error HTTP no capturado llega también al `GlobalErrorHandler`. */
+  private readonly stored = new WeakSet<object>();
 
   constructor(
     private dialog: MatDialog,
@@ -24,11 +67,20 @@ export class ErrorService {
     private injector: Injector,
   ) {}
 
-  /** Registra el error en un span y anota su `traceId` en el error para que la UI lo muestre a soporte. */
+  /**
+   * Registra el error en un span (una sola vez por error) y anota su `traceId` en el error para que la UI lo
+   * muestre a soporte.
+   */
   public storeError(error: any) {
+    if (isObject(error)) {
+      if (this.stored.has(error)) {
+        return;
+      }
+      this.stored.add(error);
+    }
     this.logger.error('Unhandled error', error);
     const msg = error?.message || 'Unspecified error';
-    const span = this.provider.getTracer(msg).startSpan(msg);
+    const span = this.provider.startSpan(msg);
     span.setStatus({
       code: SpanStatusCode.ERROR,
       message: msg,
@@ -36,35 +88,24 @@ export class ErrorService {
     span.recordException(error); // Esto registrará el stack trace y otros detalles del error
     span.end();
     const context = span.spanContext();
-    if (error && typeof error === 'object' && isSpanContextValid(context)) {
-      error.traceId = context.traceId;
+    if (isObject(error) && isSpanContextValid(context)) {
+      (error as any).traceId = context.traceId;
     }
   }
 
-  public notifyError(message: string) {
-    this.snackBar.open(message, 'OK', { duration: 5000 });
+  /** Muestra un aviso breve; sin mensaje usa el genérico traducido. */
+  public notifyError(message?: string) {
+    this.snackBar.open(message || this.translate('errors.generic'), this.translate('common.confirm.ok'), {
+      duration: 5000,
+    });
   }
 
   private debugError(error: any) {
     this.storeError(error);
-    if (error.status === 422) {
-      this.snackBar
-        .open('Ha ocurrido un error, la lista de datos enviados es incorrecta', undefined, { duration: 2000 })
-        .afterDismissed()
-        .subscribe({
-          next: () => {
-            this.displayedError = false;
-          },
-        });
+    if (error?.status === 422) {
+      this.snackBar.open(this.translate('errors.422'), undefined, { duration: 2000 });
     } else {
-      this.dialog
-        .open(ErrorModalComponent, { data: { error: error, login: this.loginAction(error) } })
-        .afterClosed()
-        .subscribe({
-          next: () => {
-            this.displayedError = false;
-          },
-        });
+      this.dialog.open(ErrorModalComponent, { data: { error: error, login: this.loginAction(error) } });
     }
   }
 
@@ -77,30 +118,64 @@ export class ErrorService {
     return () => this.injector.get(IdentityService).login(error.identity);
   }
 
+  /** Se resuelve al usarse, como IdentityService: ErrorService se inyecta antes de que transloco esté listo. */
+  private translate(key: string): string {
+    return this.injector.get(TranslocoService).translate(key);
+  }
+
+  /** Descarta el aviso pendiente del error: quien lo recibió se encarga de él. */
   public cancelError(error: any) {
-    clearTimeout(error.timeout);
-    delete error.timeout;
+    markErrorHandled(error);
+    if (isObject(error)) {
+      clearTimeout(this.timeouts.get(error));
+      this.timeouts.delete(error);
+    }
   }
 
-  public isCanceled(error: any) {
-    return !!error.timeout;
+  /** `true` si el aviso del error sigue pendiente de mostrarse. */
+  public isPending(error: any): boolean {
+    return isObject(error) && this.timeouts.has(error);
   }
 
-  public initialiceError(error: any) {
-    error.timeout = setTimeout(() => {
-      if (!error.hidden) {
-        this.debugError(error);
+  /** @deprecated El nombre es engañoso (devuelve `true` si el aviso sigue pendiente): usa `isPending`. */
+  public isCanceled(error: any): boolean {
+    return this.isPending(error);
+  }
+
+  /** Programa el aviso global del error; se descarta si antes se marca como gestionado. */
+  public initializeError(error: any) {
+    const timeout = setTimeout(() => {
+      if (isObject(error)) {
+        this.timeouts.delete(error);
+        if (handled.has(error)) {
+          return;
+        }
       }
-    }, 2000);
+      this.debugError(error);
+    }, NOTIFY_DELAY_MS);
+    if (isObject(error)) {
+      this.timeouts.set(error, timeout);
+    }
+  }
+
+  /** @deprecated Errata: usa `initializeError`. */
+  public initialiceError(error: any) {
+    this.initializeError(error);
   }
 }
 
+/** Lleva a la telemetría los errores no capturados (registrado como `ErrorHandler` en `app.config.ts`). */
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
   constructor(private injector: Injector) {}
 
   handleError(error: any) {
-    const service = this.injector.get(ErrorService);
-    service.storeError(error);
+    try {
+      // Se resuelve al usarse: el ErrorHandler se crea antes que buena parte de los servicios
+      this.injector.get(ErrorService).storeError(error);
+    } catch (failure) {
+      // Si falla el registro (p. ej. durante el arranque), el error al menos llega a la consola
+      console.error(error, failure);
+    }
   }
 }

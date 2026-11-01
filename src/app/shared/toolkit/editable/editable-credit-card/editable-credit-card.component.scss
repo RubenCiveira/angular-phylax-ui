@@ -24,9 +24,10 @@
   padding: 20px 24px;
   backface-visibility: hidden;
   transition: transform 0.5s ease;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 60%, #7986cb 100%);
-  color: white;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  // Degradado de marca: sigue la paleta y el modo claro/oscuro (on-primary contrasta con ambos extremos)
+  background: linear-gradient(135deg, var(--mat-sys-primary) 0%, var(--mat-sys-tertiary) 100%);
+  color: var(--mat-sys-on-primary);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--mat-sys-shadow) 25%, transparent);
   font-family: 'Courier New', monospace;
 }
 
@@ -93,7 +94,7 @@
 
 .card-stripe {
   height: 44px;
-  background: rgba(0, 0, 0, 0.7);
+  background: color-mix(in srgb, var(--mat-sys-shadow) 70%, transparent);
   margin-bottom: 24px;
 }
 
@@ -112,8 +113,8 @@
 
 .card-cvv-value {
   flex: 1;
-  background: white;
-  color: #333;
+  background: var(--mat-sys-surface-container-lowest);
+  color: var(--mat-sys-on-surface);
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 14px;

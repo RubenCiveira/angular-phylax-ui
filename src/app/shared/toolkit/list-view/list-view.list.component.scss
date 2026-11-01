@@ -8,8 +8,9 @@
   display: flex;
   flex-direction: column;
   background-color: var(--mat-sys-surface-container-lowest);
-  border: 1px solid var(--mat-sys-outline-variant);
-  border-radius: 12px;
+  color: var(--app-color-text);
+  border: 1px solid var(--list-view-border-color);
+  border-radius: var(--list-view-radius);
 }
 
 .material-list .lcontent {
@@ -20,9 +21,11 @@
 .material-list-item {
   display: flex;
   align-items: center;
-  padding: 16px;
-  border-bottom: 1px solid #e0e0e0;
-  transition: background-color 0.2s;
+  box-sizing: border-box;
+  min-height: var(--list-view-row-height);
+  padding: var(--app-space-4);
+  border-bottom: 1px solid var(--list-view-border-color);
+  transition: background-color var(--list-view-transition);
 }
 
 .material-list-item:last-child {
@@ -30,7 +33,7 @@
 }
 
 .material-list-item:hover {
-  background-color: #f5f5f5;
+  background-color: var(--list-view-hover-bg);
 }
 
 .material-list-item-content {
@@ -40,16 +43,17 @@
 }
 
 .material-list-item-title {
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
+  font: var(--mat-sys-title-medium);
+  letter-spacing: var(--mat-sys-title-medium-tracking);
+  color: var(--app-color-text);
   margin: 0;
 }
 
 .material-list-item-subtitle {
-  font-size: 14px;
-  color: #666;
-  margin-top: 4px;
+  font: var(--mat-sys-body-medium);
+  letter-spacing: var(--mat-sys-body-medium-tracking);
+  color: var(--app-color-text-muted);
+  margin: var(--app-space-1) 0 0;
 }
 
 /* Contextual action menu */
@@ -57,46 +61,47 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--app-space-2);
 }
 
 .material-list-item-actions .action-btn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: var(--app-space-2);
   border-radius: 50%;
-  transition: background-color 0.2s;
+  transition: background-color var(--list-view-transition);
 }
 
 .material-list-item-actions .action-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--list-view-hover-bg);
 }
 
 .material-list-item-actions .action-btn i {
   font-size: 18px;
-  color: #666;
+  color: var(--app-color-text-muted);
 }
 
 /* Sub-items or nested elements */
 .material-list-item-subcontent {
-  margin-top: 8px;
-  padding-left: 16px;
-  font-size: 14px;
-  color: #777;
+  margin-top: var(--app-space-2);
+  padding-left: var(--app-space-4);
+  font: var(--mat-sys-body-medium);
+  letter-spacing: var(--mat-sys-body-medium-tracking);
+  color: var(--app-color-text-muted);
 }
 
 /* Example styling for icons */
 .material-list-item-icon {
-  margin-right: 16px;
+  margin-right: var(--app-space-4);
   font-size: 24px;
-  color: #2196f3;
+  color: var(--app-color-primary);
 }
 
 .material-list-item-icon-container {
   height: 40px;
   width: 40px;
-  margin: 0 12px;
+  margin: 0 var(--app-space-3);
   border-radius: 50%;
   flex-shrink: 0;
   object-fit: cover;

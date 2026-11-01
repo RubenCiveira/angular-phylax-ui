@@ -7,7 +7,7 @@ paso: 1
 prioridad: media
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,15 +24,15 @@ El servicio es `providedIn: 'root'` e inyecta `ActivatedRoute` (la raíz). Su su
 
 ## Tareas
 
-- [ ] Proveer a nivel de componente o leer `router.routerState` de forma explícita.
-- [ ] Usar `takeUntilDestroyed`.
-- [ ] En `clear()`, no navegar si `router.getCurrentNavigation()` no es `null`.
-- [ ] Probar el caso "abrir detalle → pulsar otra entrada del menú".
+- [x] Proveer a nivel de componente o leer `router.routerState` de forma explícita.
+- [x] Usar `takeUntilDestroyed`.
+- [x] En `clear()`, no navegar si `router.getCurrentNavigation()` no es `null`.
+- [x] Probar el caso "abrir detalle → pulsar otra entrada del menú".
 
 ## Criterios de aceptación
 
-- [ ] No hay doble navegación al salir de una pantalla con estado local.
-- [ ] El botón atrás funciona de forma predecible.
+- [x] No hay doble navegación al salir de una pantalla con estado local.
+- [x] El botón atrás funciona de forma predecible.
 
 ## Ficheros afectados
 

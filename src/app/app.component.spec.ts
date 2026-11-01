@@ -27,30 +27,16 @@ class MockTranslocoService {
 }
 
 class MockAppStateService {
-  private languageSubject = new BehaviorSubject('lang');
-  private tenantSubject = new BehaviorSubject('main');
-  private contextSubject = new BehaviorSubject<any>(null);
-  language = Object.assign(this.languageSubject, {
-    set: jasmine.createSpy('set').and.callFake((value) => this.languageSubject.next(value)),
-  });
-  tenant = Object.assign(this.tenantSubject, {
-    set: jasmine.createSpy('set').and.callFake((value) => this.tenantSubject.next(value)),
-  });
-  context = {
-    tenant: Object.assign(this.contextSubject, {
-      set: jasmine.createSpy('set').and.callFake((value) => this.contextSubject.next(value)),
-    }),
-  };
-  userInfo = { main: of({ authenticated: false }) };
+  language = signal('lang');
+  language$ = of('lang');
+  tenant = signal('main');
+  user = () => signal({ authenticated: false });
 }
 class MockInstrumentationService {
   activate = jasmine.createSpy('activate').and.returnValue('');
 }
 class MockLayoutStateService {
-  private menuSubject = new BehaviorSubject([]);
-  menu = Object.assign(this.menuSubject, {
-    set: jasmine.createSpy('set').and.callFake((value) => this.menuSubject.next(value)),
-  });
+  menu = signal([]);
 }
 
 class MockIdentityService {
@@ -117,5 +103,10 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
+  });
+
+  it('should set the document language to the active language', () => {
+    TestBed.createComponent(AppComponent);
+    expect(document.documentElement.lang).toBe('lang');
   });
 });

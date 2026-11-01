@@ -7,7 +7,7 @@ paso: 2
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,15 +24,15 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Crear el span directamente con `this.provider.startSpan(msg)` sin suscribirse a la configuración (el nombre del servicio ya está en el `Resource`).
-- [ ] Quitar `console.log('HAS TRACER')`.
-- [ ] Quitar la propiedad `displayedError`, que no se usa.
-- [ ] Test: dos llamadas a `storeError` + una emisión nueva de configuración → solo 2 spans.
+- [x] Crear el span directamente con `this.provider.startSpan(msg)` sin suscribirse a la configuración (el nombre del servicio ya está en el `Resource`). *Antes usaba `getTracer(msg)`, que guardaba un tracer por cada mensaje distinto.*
+- [x] Quitar `console.log('HAS TRACER')`.
+- [x] Quitar la propiedad `displayedError`, que no se usa.
+- [x] Test: dos llamadas a `storeError` + una emisión nueva de configuración → solo 2 spans. *Ya no hay suscripción a la configuración: el test comprueba 2 llamadas → 2 spans, y el mismo error dos veces → 1.*
 
 ## Criterios de aceptación
 
-- [ ] Cada error genera exactamente un span.
-- [ ] No hay `console.log` en `error.service.ts`.
+- [x] Cada error genera exactamente un span.
+- [x] No hay `console.log` en `error.service.ts`.
 
 ## Ficheros afectados
 

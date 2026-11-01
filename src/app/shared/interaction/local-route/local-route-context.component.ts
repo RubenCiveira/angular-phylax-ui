@@ -9,7 +9,10 @@ import {
   OnDestroy,
   OnChanges,
   SimpleChanges,
+  forwardRef,
+  isDevMode,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   LocalRouteStateBind,
   LocalRouteStateService,
@@ -17,37 +20,40 @@ import {
 import { LocalRouteDirective } from './local-route.directive';
 import { Subscription } from 'rxjs';
 import { LocalRouterService } from './local-router.service';
+import { LOCAL_ROUTE_CONTEXT, LocalRouteContext } from './local-route-context.token';
 
 @Component({
   selector: 'local-route-context',
+  imports: [NgTemplateOutlet],
   template: `
     @if (currentTemplate) {
       <ng-container *ngTemplateOutlet="currentTemplate"></ng-container>
     }
-    @if (!templates || templates.length == 0) {
+    @if (devMode && !templates?.length) {
       <h1>To use a local route, provide each route as a template with [localRoute] directive</h1>
     }
   `,
-  providers: [LocalRouterService],
+  providers: [
+    LocalRouteStateService,
+    LocalRouterService,
+    { provide: LOCAL_ROUTE_CONTEXT, useExisting: forwardRef(() => LocalRouteContextComponent) },
+  ],
 })
-export class LocalRouteContextComponent implements AfterContentInit, OnDestroy, OnChanges {
+export class LocalRouteContextComponent implements LocalRouteContext, AfterContentInit, OnDestroy, OnChanges {
   @Input() param = 'view';
   @Input() bind?: LocalRouteStateBind;
 
   @ContentChildren(LocalRouteDirective)
-  templates!: QueryList<LocalRouteDirective>;
+  templates?: QueryList<LocalRouteDirective>;
 
-  currentTemplate: TemplateRef<any> | null = null;
+  readonly devMode = isDevMode();
+  currentTemplate: TemplateRef<unknown> | null = null;
   suscription?: Subscription;
 
-  constructor(
-    private readonly routeState: LocalRouteStateService,
-    register: LocalRouterService,
-  ) {
-    (register as any).context = this;
-  }
+  constructor(private readonly routeState: LocalRouteStateService) {}
 
   ngAfterContentInit() {
+    this.ensureBind();
     this.suscription?.unsubscribe();
     this.suscription = this.bind!.watch().subscribe((params) => {
       this.setTemplateForParam(params[this.param]);
@@ -55,12 +61,7 @@ export class LocalRouteContextComponent implements AfterContentInit, OnDestroy, 
   }
 
   ngOnChanges(_: SimpleChanges): void {
-    if (!this.param) {
-      this.param = 'view';
-    }
-    if (!this.bind) {
-      this.bind = this.routeState.bind([this.param]);
-    }
+    this.ensureBind();
   }
 
   ngOnDestroy(): void {
@@ -69,15 +70,25 @@ export class LocalRouteContextComponent implements AfterContentInit, OnDestroy, 
 
   // Seleccionar la plantilla adecuada según el valor del query param
   setTemplateForParam(value: string | undefined) {
+    const templates = this.templates?.toArray() ?? [];
     let matchingTemplate: LocalRouteDirective | undefined;
     if (!value) {
-      matchingTemplate = this.templates.find((tpl) => tpl.isInitial());
+      matchingTemplate = templates.find((tpl) => tpl.isInitial());
     } else {
-      matchingTemplate = this.templates.find((tpl) => tpl.on === value);
+      matchingTemplate = templates.find((tpl) => tpl.on === value);
       if (!matchingTemplate) {
-        matchingTemplate = this.templates.find((tpl) => tpl.isFallback());
+        matchingTemplate = templates.find((tpl) => tpl.isFallback());
       }
     }
     this.currentTemplate = matchingTemplate?.template || null;
+  }
+
+  private ensureBind(): void {
+    if (!this.param) {
+      this.param = 'view';
+    }
+    if (!this.bind) {
+      this.bind = this.routeState.bind([this.param]);
+    }
   }
 }

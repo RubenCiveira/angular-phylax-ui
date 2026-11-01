@@ -18,6 +18,26 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## Gestión de errores
+
+Los errores no capturados llegan a `GlobalErrorHandler`, que los registra en telemetría (un span por error).
+
+Los errores HTTP de `ClientService` se avisan con 2 s de retraso: un diálogo o, para los 422, un snackbar. En ese margen el componente puede tratarlos él mismo y evitar el aviso global con `handledErrors`:
+
+```ts
+import { handledErrors } from '@shared/context/observability/error.service';
+
+this.repository
+  .add(item)
+  .pipe(handledErrors([422]))
+  .subscribe({
+    next: () => this.close(),
+    error: (err) => this.showValidation(err.error), // un 422 no muestra el aviso global; el resto, sí
+  });
+```
+
+`markErrorHandled(error)` hace lo mismo sin operador. El error se relanza: hay que capturarlo (`error` o `catchError`), porque si no llega a `GlobalErrorHandler`. Los textos salen de `errors.422` y `errors.generic` en `public/i18n/*.json`.
+
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.

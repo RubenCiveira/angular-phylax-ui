@@ -15,8 +15,8 @@ import { Subscription } from 'rxjs';
   styleUrl: './container.component.scss',
 })
 export class ContainerComponent implements OnInit, OnDestroy {
-  currentLanguage: Signal<string | undefined>;
-  currentTenant: Signal<string | undefined>;
+  currentLanguage: Signal<string>;
+  currentTenant: Signal<string>;
 
   private susbcription = new Subscription();
 
@@ -26,8 +26,8 @@ export class ContainerComponent implements OnInit, OnDestroy {
     private readonly state: AppStateService,
     defaults: DefaultsService,
   ) {
-    this.currentLanguage = toSignal(this.state.language);
-    this.currentTenant = toSignal(this.state.tenant);
+    this.currentLanguage = this.state.language;
+    this.currentTenant = this.state.tenant;
     effect(() => {
       this.updateLanguageInUrl(this.currentLanguage() || defaults.language());
     });

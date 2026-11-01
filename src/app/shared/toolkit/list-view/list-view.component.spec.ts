@@ -21,6 +21,28 @@ class MockBreakpointObserver {
   }
 }
 
+class MobileBreakpointObserver {
+  observe() {
+    return of({ matches: true, breakpoints: { [Breakpoints.XSmall]: true } });
+  }
+}
+
+function luminance(color: string): number {
+  const [r, g, b] = color
+    .match(/[\d.]+/g)!
+    .slice(0, 3)
+    .map((c) => {
+      const v = Number(c) / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrast(fg: string, bg: string): number {
+  const [hi, lo] = [luminance(fg), luminance(bg)].sort((a, b) => b - a);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
 describe('ListViewComponent', () => {
   afterEach(() => TestBed.resetTestingModule());
 
@@ -61,5 +83,75 @@ describe('ListViewComponent', () => {
 
     const avatar = component.fallbackIcon({});
     expect(avatar?.initials).toBe('JD');
+  });
+
+  it('takes the row height from --list-view-row-height', () => {
+    TestBed.configureTestingModule({
+      imports: [ListViewComponent],
+      providers: [{ provide: BreakpointObserver, useClass: MockBreakpointObserver }],
+    });
+
+    const fixture = TestBed.createComponent(ListViewComponent);
+    fixture.nativeElement.style.setProperty('--list-view-row-height', '40px');
+    fixture.componentRef.setInput('data', []);
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.itemHeight).toBe(40);
+  });
+
+  [
+    { width: 700, columns: 2 },
+    { width: 1900, columns: 6 },
+  ].forEach(({ width, columns }) => {
+    it(`shows ${columns} card columns at ${width}px`, () => {
+      TestBed.configureTestingModule({
+        imports: [ListViewComponent],
+        providers: [{ provide: BreakpointObserver, useClass: MockBreakpointObserver }],
+      });
+
+      const fixture = TestBed.createComponent(ListViewComponent);
+      fixture.nativeElement.style.width = `${width}px`;
+      fixture.componentRef.setInput('mode', 'card');
+      fixture.componentRef.setInput('data', Array.from({ length: 12 }, (_, id) => ({ id })));
+      fixture.detectChanges();
+
+      const grid: HTMLElement = fixture.nativeElement.querySelector('.card-grid');
+      expect(getComputedStyle(grid).gridTemplateColumns.split(' ').length).toBe(columns);
+    });
+  });
+
+  ['light', 'dark'].forEach((scheme) => {
+    it(`mobile list text has AA contrast in ${scheme} mode`, async () => {
+      document.documentElement.style.colorScheme = scheme;
+      try {
+        TestBed.configureTestingModule({
+          imports: [ListViewComponent],
+          providers: [{ provide: BreakpointObserver, useClass: MobileBreakpointObserver }],
+        });
+        TestBed.overrideTemplate(
+          ListViewComponent,
+          `<ul class="material-list"><li class="material-list-item">
+            <div class="material-list-item-content">
+              <h3 class="material-list-item-title">Title</h3>
+              <p class="material-list-item-subtitle">Subtitle</p>
+              <div class="material-list-item-subcontent">Text</div>
+            </div>
+          </li></ul>`,
+        );
+
+        const fixture = TestBed.createComponent(ListViewComponent);
+        fixture.componentRef.setInput('data', []);
+        fixture.detectChanges();
+
+        const el: HTMLElement = fixture.nativeElement;
+        const bg = getComputedStyle(el.querySelector('.material-list')!).backgroundColor;
+        for (const selector of ['.material-list-item-title', '.material-list-item-subtitle', '.material-list-item-subcontent']) {
+          const fg = getComputedStyle(el.querySelector(selector)!).color;
+          expect(contrast(fg, bg)).withContext(`${selector}: ${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5);
+        }
+      } finally {
+        document.documentElement.style.colorScheme = '';
+      }
+    });
   });
 });

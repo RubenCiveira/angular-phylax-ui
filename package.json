@@ -7,9 +7,12 @@
     "build": "node scripts/ng-build-info.mjs build",
     "watch": "node scripts/ng-build-info.mjs build --watch --configuration development",
     "test": "ng test",
+    "config:schema": "ts-json-schema-generator -p src/app/shared/context/config/app-config.model.ts -t AppConfigFile -f tsconfig.app.json --no-type-check --no-top-ref -o public/config/phylax-config.schema.json && prettier --log-level error --write public/config/phylax-config.schema.json",
+    "config:validate": "ajv validate --spec=draft7 --strict=false --all-errors -s public/config/phylax-config.schema.json -d \"public/config/*-config.json\"",
     "analyze": "ng build --stats-json && webpack-bundle-analyzer dist/stats.json",
     "pretify": "npx prettier --log-level error --config ./.prettierrc --write \"{public,src/{app,shared,features}}/**/*{.html,.ts,.js,.json,.css,.scss}\"",
-    "process-sources": "npm run pretify"
+    "process-sources": "npm run pretify",
+    "lint:styles": "stylelint \"src/**/*.scss\""
   },
   "private": true,
   "dependencies": {
@@ -22,6 +25,7 @@
     "@angular/material": "^20.0.2",
     "@angular/platform-browser": "^20.0.2",
     "@angular/router": "^20.0.2",
+    "@fontsource-variable/roboto": "^5.3.0",
     "@jsverse/transloco": "^7.6.1",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/context-zone": "^2.12.0",
@@ -38,6 +42,7 @@
     "angular-oauth2-oidc": "^20.0.0",
     "cron-parser": "^4.9.0",
     "libphonenumber-js": "^1.13.15",
+    "material-symbols": "^0.48.2",
     "rrule": "^2.8.1",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1",
@@ -50,6 +55,7 @@
     "@angular/compiler-cli": "^20.0.2",
     "@types/jasmine": "~5.1.8",
     "@types/uuid": "^10.0.0",
+    "ajv-cli": "^5.0.0",
     "jasmine-core": "~5.8.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
@@ -57,6 +63,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.5.3",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "ts-json-schema-generator": "^2.9.0",
     "typescript": "~5.8.3"
   }
 }

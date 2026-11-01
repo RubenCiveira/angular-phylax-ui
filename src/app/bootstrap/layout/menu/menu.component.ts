@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { MenuItem } from 'app/bootstrap/layout/menu-item.model';
 import { RouteAccessService } from 'app/bootstrap/layout/menu/route-accessible.service';
+import { RuntimeThemeService } from '@shared/context/theme/runtime-theme.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,14 +21,17 @@ import { RouteAccessService } from 'app/bootstrap/layout/menu/route-accessible.s
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatListModule, MatMenuModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
+  host: { '[class.mini]': "mode() === 'mini'" },
 })
 export class MenuComponent implements OnDestroy {
   select = output<MenuItem>();
   mode = input<string>('full');
   items = input<MenuItem[] | undefined>();
   title: Signal<string | undefined>;
-  currentLanguage: Signal<string | undefined>;
-  currentTenant: Signal<string | undefined>;
+  logo: Signal<string>;
+  productName: Signal<string>;
+  currentLanguage: Signal<string>;
+  currentTenant: Signal<string>;
 
   private subscriptions = new Subscription();
   private menuItems = signal<any[]>([]);
@@ -39,13 +43,19 @@ export class MenuComponent implements OnDestroy {
     private readonly router: Router,
     private readonly identity: IdentityService,
     private readonly checker: RouteAccessService,
+    theme: RuntimeThemeService,
   ) {
     this.title = configValue('meta.title');
-    this.currentLanguage = toSignal(appstate.language);
-    this.currentTenant = toSignal(appstate.tenant);
+    this.logo = theme.logo;
+    this.productName = theme.productName;
+    this.currentLanguage = appstate.language;
+    this.currentTenant = appstate.tenant;
 
+    const user = appstate.user('main');
     effect((onCleanup) => {
       const items = this.items();
+      // Los guards dependen del usuario: al iniciar o cerrar sesión se vuelve a calcular la visibilidad
+      user();
       const result = [] as any[];
       const sub = new Subscription();
       if (items) {

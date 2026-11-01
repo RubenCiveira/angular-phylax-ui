@@ -11,7 +11,7 @@
 
 .range-label {
   font-size: 12px;
-  color: var(--mdc-outlined-text-field-label-text-color, rgba(0, 0, 0, 0.6));
+  color: var(--mat-sys-on-surface-variant);
   line-height: 16px;
   letter-spacing: 0.4px;
 }
@@ -23,7 +23,7 @@
 }
 
 .preset-chip {
-  border: 1px solid rgba(0, 0, 0, 0.24);
+  border: 1px solid var(--mat-sys-outline);
   background: transparent;
   border-radius: 16px;
   padding: 4px 12px;
@@ -35,8 +35,8 @@
     border-color 0.15s;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 0, 0, 0.4);
+    background: color-mix(in srgb, var(--mat-sys-on-surface) 8%, transparent);
+    border-color: var(--mat-sys-on-surface-variant);
   }
 }
 
@@ -52,7 +52,7 @@
 }
 
 .range-separator {
-  color: rgba(0, 0, 0, 0.38);
+  color: var(--mat-sys-on-surface-variant);
   font-size: 18px;
   line-height: 1;
   flex-shrink: 0;
@@ -62,7 +62,7 @@
 .range-error {
   display: block;
   font-size: 12px;
-  color: var(--mdc-outlined-text-field-error-label-text-color, #f44336);
+  color: var(--mat-sys-error);
   line-height: 16px;
   letter-spacing: 0.4px;
 }
