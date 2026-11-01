@@ -3,7 +3,7 @@
   <div class="main">
     <p>Panel con información a tener en cuenta.</p>
     <p>Usando a {{ currentDomain()?.name }}</p>
-    <mat-form-field [appearance]="'outline'">
+    <mat-form-field>
       <mat-label>Ver</mat-label>
       <mat-select (selectionChange)="lookup($event.value)">
         @for (client of allClients(); track client) {
@@ -15,7 +15,7 @@
       </mat-select>
     </mat-form-field>
     <form [formGroup]="form" style="width: 100%">
-      <mat-form-field [appearance]="'outline'" style="width: 100%">
+      <mat-form-field style="width: 100%">
         <mat-label>Search</mat-label>
         <input matInput formControlName="filter" />
         <button matSuffix mat-icon-button>

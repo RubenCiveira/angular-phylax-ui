@@ -5,7 +5,7 @@ import {
   SnippetAssetFilter,
 } from '@features/template/snippet-asset/model/snippet-asset.model';
 import { RepositoryMetadata, RepositoryService } from '@shared/data/repository/repository.service';
-import { Shift, Tick } from '@shared/data/repository/repository.model';
+import { Shift, Tick, UpdateOptions } from '@shared/data/repository/repository.model';
 import { RepositoryStore } from '@shared/data/repository/repository-store.service';
 import { Acl } from '@shared/data/acl/acl.model';
 import { ApiService } from '@shared/data/api/api.service';
@@ -60,8 +60,8 @@ export class SnippetAssetRepository {
     item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
-  update(item: SnippetAsset): Observable<SnippetAsset> {
-    return this.repo.update(item);
+  update(item: SnippetAsset, options?: UpdateOptions<SnippetAsset>): Observable<SnippetAsset> {
+    return this.repo.update(item, options);
   }
   deleteByKey(item: string): Observable<void> {
     return this.repo.deleteByKey(item);

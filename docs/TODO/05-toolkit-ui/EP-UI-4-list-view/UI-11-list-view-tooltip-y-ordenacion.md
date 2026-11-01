@@ -7,7 +7,7 @@ paso: 4
 prioridad: media
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,18 @@ origen: 07-toolkit-ui.md
 
 ## Tareas
 
-- [ ] `matTooltip` en la cabecera con `tooltip()`.
-- [ ] Input `sortable` en la columna, `aria-sort` y output `sortChange`.
+- [x] `matTooltip` en la cabecera con `tooltip()`.
+- [x] Input `sortable` en la columna, `aria-sort` y output `sortChange`.
 - [ ] Las features traducen `sortChange` a `order` (ver FEAT-07).
 
 ## Criterios de aceptación
 
-- [ ] Pulsar una cabecera ordenable cambia el orden y lo anuncia `aria-sort`.
+- [x] Pulsar una cabecera ordenable cambia el orden y lo anuncia `aria-sort`.
+
+## Notas
+
+- `sort = model<ListViewSort | null>()`: genera el output `sortChange` y admite `[(sort)]`. Al pulsar se pasa de sin orden a `asc`, a `desc` y otra vez a sin orden (`null`).
+- La cabecera ordenable es un `<button>` dentro del `columnheader`, así que funciona con teclado.
 
 ## Ficheros afectados
 

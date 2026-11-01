@@ -34,6 +34,16 @@
 
 .material-list-item:hover {
   background-color: var(--list-view-hover-bg);
+  cursor: pointer;
+}
+
+.material-list-item.selected {
+  background-color: var(--mat-sys-secondary-container);
+}
+
+.material-list-item:focus-visible {
+  outline: 2px solid var(--mat-sys-primary);
+  outline-offset: -2px;
 }
 
 .material-list-item-content {
@@ -96,6 +106,12 @@
   margin-right: var(--app-space-4);
   font-size: 24px;
   color: var(--app-color-primary);
+}
+
+.material-list-item-icon-container.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .material-list-item-icon-container {

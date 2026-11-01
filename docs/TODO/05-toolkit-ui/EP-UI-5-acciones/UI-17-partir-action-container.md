@@ -7,7 +7,7 @@ paso: 3
 prioridad: baja
 esfuerzo: L
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: [UI-15]
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,13 @@ origen: 07-toolkit-ui.md
 
 ## Tareas
 
-- [ ] Separar `ActionToolbar`, `ActionRowMenu`, `ActionSelectionBar` y `ActionHost`.
-- [ ] Mantener la API pública del contenedor.
+- [x] Separar `ActionToolbar`, `ActionRowMenu`, `ActionSelectionBar` y `ActionHost`.
+- [x] Mantener la API pública del contenedor.
 
 ## Criterios de aceptación
 
-- [ ] Ningún fichero del módulo de acciones supera ~200 líneas.
-- [ ] Las pantallas generadas funcionan sin cambios.
+- [x] Ningún fichero del módulo de acciones supera ~200 líneas. *(action-container.component.ts queda en 224)*
+- [ ] Las pantallas generadas funcionan sin cambios. *(pendiente de prueba manual en el navegador)*
 
 ## Ficheros afectados
 

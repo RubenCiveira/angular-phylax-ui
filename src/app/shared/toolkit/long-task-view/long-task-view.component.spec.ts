@@ -92,4 +92,69 @@ describe('LongTaskViewComponent', () => {
     expect(text).toContain('The process is taking too long');
     expect(fixture.nativeElement.querySelector('mat-spinner')).toBeNull();
   });
+
+  it('exposes the step progress as an accessible progressbar', () => {
+    const progress$ = new Subject<LongTask>();
+    TestBed.configureTestingModule({
+      imports: [LongTaskViewComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: { title: 'Delete', progress: progress$ } }],
+    });
+    const fixture = TestBed.createComponent(LongTaskViewComponent);
+
+    progress$.next({ uid: '1', detailStatus: 'PROCESSING', steps: [processing('Step 1', 3, 10)] });
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const bar = element.querySelector('[role="progressbar"]')!;
+    expect(bar.getAttribute('aria-valuenow')).toBe('3');
+    expect(bar.getAttribute('aria-valuemax')).toBe('10');
+    expect(bar.getAttribute('aria-valuetext')).toBe('3 of 10');
+    expect(element.querySelector('#' + bar.getAttribute('aria-labelledby'))?.textContent).toContain('Delete');
+    expect(element.querySelector('[aria-live="polite"]')?.textContent).toContain('Working with Step 1');
+  });
+
+  it('omits aria-valuenow while the progress is unknown', () => {
+    const progress$ = new Subject<LongTask>();
+    TestBed.configureTestingModule({
+      imports: [LongTaskViewComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: { progress: progress$ } }],
+    });
+    const fixture = TestBed.createComponent(LongTaskViewComponent);
+
+    progress$.next({ uid: '1', detailStatus: 'PROCESSING', steps: [processing('Step 1', 0, 0)] });
+    fixture.detectChanges();
+
+    const bar = (fixture.nativeElement as HTMLElement).querySelector('[role="progressbar"]')!;
+    expect(bar.hasAttribute('aria-valuenow')).toBeFalse();
+  });
+
+  it('announces the final summary in a polite live region', () => {
+    const progress$ = new Subject<LongTask>();
+    TestBed.configureTestingModule({
+      imports: [LongTaskViewComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: { progress: progress$ } }],
+    });
+    const fixture = TestBed.createComponent(LongTaskViewComponent);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const region = element.querySelector('.long-task-summary')!;
+    expect(region.getAttribute('aria-live')).toBe('polite');
+
+    const fail = { item: 'b', fails: [] };
+    progress$.next({
+      uid: '1',
+      detailStatus: 'FINISHED',
+      steps: [{ ...processing('Step 1', 3, 3), stepStatus: 'FINISHED', oks: ['a'], warns: [fail], errors: [fail] }],
+    });
+    fixture.detectChanges();
+
+    // La misma región que ya existía: no se crea al terminar
+    expect(element.querySelector('.long-task-summary')).toBe(region);
+    expect(region.textContent).toContain('The process finished: 1 correct, 1 to review, 1 with errors');
+    expect(element.querySelector('[role="progressbar"]')).toBeNull();
+  });
 });
+
+function processing(name: string, processedItems: number, totalItems: number): LongTask['steps'][number] {
+  return { name, stepStatus: 'PROCESSING', totalItems, processedItems, oks: [], warns: [], errors: [] };
+}

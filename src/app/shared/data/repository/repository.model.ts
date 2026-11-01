@@ -14,3 +14,11 @@ export interface Shift<T, F> extends Signal<T | undefined> {
   next(): Shift<T, F>;
   subscribe(callback: (value: T | undefined) => void): void;
 }
+
+export interface UpdateOptions<T> {
+  /**
+   * Valor que se cargó al empezar a editar. Con él, un 412 se emite como `EditConflictError` con las tres versiones
+   * (original, enviada y actual) en lugar de llegar al aviso global.
+   */
+  original?: T;
+}

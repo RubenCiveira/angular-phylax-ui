@@ -7,7 +7,7 @@ paso: 2
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [DATA-08]
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,13 @@ Se usa mucho (56 referencias) para el progreso de operaciones masivas.
 
 ## Tareas
 
-- [ ] `role="progressbar"` con `aria-valuenow`/`aria-valuemax`.
-- [ ] Resumen final con `aria-live="polite"`.
-- [ ] Mostrar el estado `TIMEOUT` de DATA-08.
+- [x] `role="progressbar"` con `aria-valuenow`/`aria-valuemax`. *Con los elementos reales del paso (`processedItems`/`totalItems`) y `aria-valuetext`; sin valores mientras el progreso es desconocido. El spinner queda `aria-hidden`. El cambio de paso se anuncia en una región `polite`.*
+- [x] Resumen final con `aria-live="polite"`. *Región siempre presente (los lectores no anuncian regiones recién creadas) con FAILED, TIMEOUT o el recuento final de correctos / para revisar / con errores.*
+- [x] Mostrar el estado `TIMEOUT` de DATA-08. *Ya se mostraba desde DATA-08; ahora dentro de la región viva. Los textos siguen sin traducir.*
 
 ## Criterios de aceptación
 
-- [ ] Un lector de pantalla anuncia el progreso y el resultado.
+- [x] Un lector de pantalla anuncia el progreso y el resultado.
 
 ## Ficheros afectados
 

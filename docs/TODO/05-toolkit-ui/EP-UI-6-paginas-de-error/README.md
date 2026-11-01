@@ -3,7 +3,7 @@ id: EP-UI-6
 titulo: "Páginas y modal de error"
 area: toolkit-ui
 prioridad: critica
-estado: en-curso
+estado: hecho
 issues: [UI-19, UI-20]
 ---
 
@@ -28,8 +28,8 @@ Los issues están ordenados para respetar sus dependencias y tocar cada fichero 
 
 | Fichero | Issues |
 |---|---|
-| `src/app/shared/toolkit/error-page/error-page.component.ts` | UI-19 |
-| `src/app/shared/toolkit/error-page/error-page.component.html` | UI-19 |
+| `src/app/shared/toolkit/error-page/error-page.component.ts` | UI-19, UI-20 |
+| `src/app/shared/toolkit/error-page/error-page.component.html` | UI-19, UI-20 |
 | `src/app/shared/toolkit/error-modal/error-modal.component.ts` | UI-20 |
 | `src/app/shared/toolkit/error-modal/error-modal.component.html` | UI-20 |
 
@@ -47,4 +47,4 @@ Issues de otras épicas de los que depende:
 ## Checklist de la épica
 
 - [x] UI-19 — Página de error traducida y útil
-- [ ] UI-20 — Modal de error con acciones y sin código muerto
+- [x] UI-20 — Modal de error con acciones y sin código muerto

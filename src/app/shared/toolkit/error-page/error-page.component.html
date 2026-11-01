@@ -2,7 +2,9 @@
 <div class="error-page" [class.as-column]="asColumn()">
   <img [src]="'./assets/img/error/' + description().image" alt="" />
   <div class="mat-typography">
-    <h2>{{ title() | transloco }}</h2>
+    @if (showTitle()) {
+      <h2>{{ title() | transloco }}</h2>
+    }
     <p>{{ message() | transloco }}</p>
     <div class="actions">
       <ng-content />

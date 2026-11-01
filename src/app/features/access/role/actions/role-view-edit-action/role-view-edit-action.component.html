@@ -10,7 +10,11 @@
       [defined]="definedProperties()"
     />
     <div class="buttons">
-      <button mat-raised-button [disabled]="createForm.form.invalid || !createForm.form.dirty" (click)="save()">
+      <button
+        mat-raised-button
+        [disabled]="saving() || createForm.form.invalid || !createForm.form.dirty"
+        (click)="save(createForm.conflictFields)"
+      >
         {{ 'access/role.action.edit.saveBtn' | transloco }}
       </button>
     </div>

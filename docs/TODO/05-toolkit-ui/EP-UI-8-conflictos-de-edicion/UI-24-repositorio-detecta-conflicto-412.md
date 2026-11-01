@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [UI-23, CTX-05]
 origen: peticion
 ---
@@ -24,20 +24,20 @@ origen: peticion
 
 ## Tareas
 
-- [ ] Añadir a `RepositoryService` un `update(item, { original })` (o un método `updateOrConflict`) que:
+- [x] Añadir a `RepositoryService` un `update(item, { original })` (o un método `updateOrConflict`) que:
   - Marque el 412 como gestionado con `handledErrors([412])` para que no aparezca el modal global.
   - Obtenga el estado **actual**: del cuerpo del error si el backend lo devuelve con la forma de la entidad; si no, con un `retrieve` que **salte la caché** e invalide la entrada antigua.
   - Emita un error tipado `EditConflictError<T>` que lleve el `EditConflict<T>` (`original`, `sent`, `current`), ya pasado por `mapItem`/`toWire` igual que el resto de valores.
-- [ ] Exportar un guard `isEditConflict(err): err is EditConflictError<T>` para que los consumidores distingan el conflicto del resto de errores.
-- [ ] Si la relectura falla (404 porque otro usuario lo borró, 403…), propagar ese error tal cual, sin envolverlo en conflicto.
-- [ ] Documentar en el JSDoc el contrato con el backend: `version` en el cuerpo y 412 cuando no coincide (y, opcionalmente, `If-Match`/`ETag` si se adopta más adelante).
+- [x] Exportar un guard `isEditConflict(err): err is EditConflictError<T>` para que los consumidores distingan el conflicto del resto de errores.
+- [x] Si la relectura falla (404 porque otro usuario lo borró, 403…), propagar ese error tal cual, sin envolverlo en conflicto.
+- [x] Documentar en el JSDoc el contrato con el backend: `version` en el cuerpo y 412 cuando no coincide (y, opcionalmente, `If-Match`/`ETag` si se adopta más adelante).
 
 ## Criterios de aceptación
 
-- [ ] Un 412 en `update` no abre el modal de error y llega al suscriptor como `EditConflictError` con las tres versiones.
-- [ ] Tras el conflicto, `retrieve(key)` devuelve el valor actual del servidor, no el cacheado.
-- [ ] Un 412 seguido de 404 en la relectura llega como 404.
-- [ ] Tests con `HttpTestingController` para los tres casos (cuerpo con entidad, cuerpo vacío, relectura fallida).
+- [x] Un 412 en `update` no abre el modal de error y llega al suscriptor como `EditConflictError` con las tres versiones.
+- [x] Tras el conflicto, `retrieve(key)` devuelve el valor actual del servidor, no el cacheado.
+- [x] Un 412 seguido de 404 en la relectura llega como 404.
+- [x] Tests con `HttpTestingController` para los tres casos (cuerpo con entidad, cuerpo vacío, relectura fallida).
 
 ## Ficheros afectados
 

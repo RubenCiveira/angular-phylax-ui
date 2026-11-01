@@ -14,6 +14,7 @@ import { GlobalErrorHandler } from '@shared/context/observability/error.service'
 import { provideThemeMode } from '@shared/context/theme/theme-mode.service';
 import { provideRuntimeTheme } from '@shared/context/theme/runtime-theme.service';
 import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
+import { provideUiDefaults } from '@shared/toolkit/ui-defaults.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -37,5 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideRuntimeTheme(),
     // Iconos de Material Symbols autoalojados (ver src/styles/_fonts.scss); debe coincidir con $icon-style
     { provide: MAT_ICON_DEFAULT_OPTIONS, useValue: { fontSet: 'material-symbols-outlined' } },
+    // Apariencia de los campos en toda la app; <form-layout appearance="..."> la cambia en un formulario concreto
+    provideUiDefaults({ formFieldAppearance: 'outline', subscriptSizing: 'fixed' }),
   ],
 };

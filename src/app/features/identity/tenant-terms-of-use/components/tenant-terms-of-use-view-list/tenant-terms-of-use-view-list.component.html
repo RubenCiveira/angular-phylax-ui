@@ -44,11 +44,11 @@
     } @else {
       <list-view
         [mode]="'card'"
+        storageKey="identity.tenant-terms-of-use"
         [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
-        (prev)="prev()"
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
@@ -66,6 +66,7 @@
         <list-view-table>
           <ng-template
             listViewColumn
+            key="tenant"
             title="{{ 'identity.tenant-terms-of-use.list.column.tenant.title' | transloco }}"
             tooltip="{{ 'identity.tenant-terms-of-use.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
@@ -74,6 +75,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="resource-server"
             title="{{ 'identity.tenant-terms-of-use.list.column.resource-server.title' | transloco }}"
             tooltip="{{ 'identity.tenant-terms-of-use.list.column.resource-server.tooltip' | transloco }}"
             let-row="$implicit"
@@ -82,6 +84,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="text"
             title="{{ 'identity.tenant-terms-of-use.list.column.text.title' | transloco }}"
             tooltip="{{ 'identity.tenant-terms-of-use.list.column.text.tooltip' | transloco }}"
             let-row="$implicit"
@@ -90,6 +93,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="enabled"
             title="{{ 'identity.tenant-terms-of-use.list.column.enabled.title' | transloco }}"
             tooltip="{{ 'identity.tenant-terms-of-use.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
@@ -98,6 +102,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="document"
             title="{{ 'identity.tenant-terms-of-use.list.column.document.title' | transloco }}"
             tooltip="{{ 'identity.tenant-terms-of-use.list.column.document.tooltip' | transloco }}"
             let-row="$implicit"
@@ -106,6 +111,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="activation-date"
             title="{{ 'identity.tenant-terms-of-use.list.column.activation-date.title' | transloco }}"
             tooltip="{{ 'identity.tenant-terms-of-use.list.column.activation-date.tooltip' | transloco }}"
             let-row="$implicit"

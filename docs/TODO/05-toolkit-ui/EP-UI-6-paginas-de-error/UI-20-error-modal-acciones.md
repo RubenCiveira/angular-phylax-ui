@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [UI-19]
 origen: 07-toolkit-ui.md
 ---
@@ -24,12 +24,12 @@ Textos sin traducir (`{{ 'controls.errorhandler.retrySuccess' }}`), `retryError`
 
 ## Tareas
 
-- [ ] Estructura `mat-dialog-title` / `content` / `actions` con "Cerrar" y, si es 401, "Iniciar sesión".
-- [ ] Quitar el código muerto.
+- [x] Estructura `mat-dialog-title` / `content` / `actions` con "Cerrar" y, si es 401, "Iniciar sesión". *El título del diálogo es el de la página de error (que se pinta con `showTitle=false`); "Inicio" pasa a las acciones para que cierre el diálogo al navegar.*
+- [x] Quitar el código muerto. *Bloque de reintento, `loading`/`isLogged`/`showBody`, `close()`/`redirect()`, sus estilos (`.css` y `.scss`) y las claves `errors.modal.*`.*
 
 ## Criterios de aceptación
 
-- [ ] El modal se puede cerrar con un botón visible.
+- [x] El modal se puede cerrar con un botón visible.
 
 ## Ficheros afectados
 

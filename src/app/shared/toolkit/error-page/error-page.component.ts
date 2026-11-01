@@ -62,6 +62,8 @@ export class ErrorPageComponent {
   readonly titleKey = input<string>();
   readonly messageKey = input<string>();
   readonly showHome = input(true);
+  /** El modal de error lo pinta como título del diálogo. */
+  readonly showTitle = input(true);
 
   readonly description = computed(() => describeError(this.error()));
   readonly title = computed(() => this.titleKey() ?? 'errors.page.' + this.description().kind + '.title');

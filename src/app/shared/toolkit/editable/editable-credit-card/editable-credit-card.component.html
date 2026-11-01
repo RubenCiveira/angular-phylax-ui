@@ -29,7 +29,7 @@
     </div>
 
     <div class="card-fields">
-      <mat-form-field appearance="outline">
+      <mat-form-field [appearance]="appearance()!">
         <mat-label>Número de tarjeta</mat-label>
         <input
           matInput
@@ -48,7 +48,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field [appearance]="appearance()!">
         <mat-label>Titular</mat-label>
         <input
           matInput
@@ -60,7 +60,7 @@
       </mat-form-field>
 
       <div class="card-row">
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance()!">
           <mat-label>Caducidad</mat-label>
           <input
             matInput
@@ -79,7 +79,7 @@
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance()!">
           <mat-label>CVV</mat-label>
           <input
             matInput

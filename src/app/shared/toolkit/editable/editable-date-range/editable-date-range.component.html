@@ -14,7 +14,7 @@
     }
 
     <div class="range-fields" [formGroup]="form">
-      <mat-form-field appearance="outline">
+      <mat-form-field [appearance]="appearance()!">
         <mat-label>{{ label() + '.from.label' | transloco }}</mat-label>
         <input
           matInput
@@ -30,7 +30,7 @@
 
       <span class="range-separator">—</span>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field [appearance]="appearance()!">
         <mat-label>{{ label() + '.to.label' | transloco }}</mat-label>
         <input
           matInput
@@ -47,12 +47,12 @@
 
     @if (showTime()) {
       <div class="range-times">
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance()!">
           <mat-label>{{ label() + '.from.time' | transloco }}</mat-label>
           <input matInput type="time" [formControl]="fromTime" />
         </mat-form-field>
         <span class="range-separator">—</span>
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance()!">
           <mat-label>{{ label() + '.to.time' | transloco }}</mat-label>
           <input matInput type="time" [formControl]="toTime" />
         </mat-form-field>

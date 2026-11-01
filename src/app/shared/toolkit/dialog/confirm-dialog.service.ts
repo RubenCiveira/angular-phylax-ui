@@ -2,7 +2,7 @@
 import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HashMap } from '@jsverse/transloco';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from './confirm-dialog.component';
 
 export interface ConfirmOptions {
@@ -23,17 +23,29 @@ export interface ConfirmOptions {
 export class ConfirmDialogService {
   private readonly dialog = inject(MatDialog);
 
+  /** Cancelar la suscripción antes de responder cierra el diálogo. */
   confirm(options: ConfirmOptions): Observable<boolean> {
     const data: Required<ConfirmOptions> = {
-      titleKey: 'common.confirm.title',
-      okKey: 'common.confirm.ok',
-      cancelKey: 'common.confirm.cancel',
-      params: {},
-      ...options,
+      messageKey: options.messageKey,
+      titleKey: options.titleKey ?? 'common.confirm.title',
+      okKey: options.okKey ?? 'common.confirm.ok',
+      cancelKey: options.cancelKey ?? 'common.confirm.cancel',
+      params: options.params ?? {},
     };
-    return this.dialog
-      .open(ConfirmDialogComponent, { data, disableClose: true })
-      .afterClosed()
-      .pipe(map((result) => result === true));
+    return new Observable<boolean>((subscriber) => {
+      const ref = this.dialog.open(ConfirmDialogComponent, { data, disableClose: true });
+      let answered = false;
+      const subscription = ref.afterClosed().subscribe((result) => {
+        answered = true;
+        subscriber.next(result === true);
+        subscriber.complete();
+      });
+      return () => {
+        subscription.unsubscribe();
+        if (!answered) {
+          ref.close();
+        }
+      };
+    });
   }
 }

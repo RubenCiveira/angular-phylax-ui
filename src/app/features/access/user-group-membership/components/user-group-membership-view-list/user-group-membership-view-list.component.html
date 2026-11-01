@@ -44,11 +44,11 @@
     } @else {
       <list-view
         [mode]="'card'"
+        storageKey="access.user-group-membership"
         [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
-        (prev)="prev()"
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
@@ -66,6 +66,7 @@
         <list-view-table>
           <ng-template
             listViewColumn
+            key="user"
             title="{{ 'access.user-group-membership.list.column.user.title' | transloco }}"
             tooltip="{{ 'access.user-group-membership.list.column.user.tooltip' | transloco }}"
             let-row="$implicit"
@@ -74,6 +75,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="resource-server"
             title="{{ 'access.user-group-membership.list.column.resource-server.title' | transloco }}"
             tooltip="{{ 'access.user-group-membership.list.column.resource-server.tooltip' | transloco }}"
             let-row="$implicit"
@@ -82,6 +84,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="oauth-client"
             title="{{ 'access.user-group-membership.list.column.oauth-client.title' | transloco }}"
             tooltip="{{ 'access.user-group-membership.list.column.oauth-client.tooltip' | transloco }}"
             let-row="$implicit"
@@ -90,6 +93,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="groups"
             title="{{ 'access.user-group-membership.list.column.groups.title' | transloco }}"
             tooltip="{{ 'access.user-group-membership.list.column.groups.tooltip' | transloco }}"
             let-row="$implicit"

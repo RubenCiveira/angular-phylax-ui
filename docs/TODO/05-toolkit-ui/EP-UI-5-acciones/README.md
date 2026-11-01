@@ -3,7 +3,7 @@ id: EP-UI-5
 titulo: "Acciones"
 area: toolkit-ui
 prioridad: alta
-estado: pendiente
+estado: en-curso
 issues: [UI-15, UI-16, UI-17]
 ---
 
@@ -47,6 +47,6 @@ Issues de otras épicas de los que depende:
 
 ## Checklist de la épica
 
-- [ ] UI-15 — Clases base BaseAction y ConfirmAction
-- [ ] UI-16 — action-container: tooltips visibles y textos traducidos
-- [ ] UI-17 — Partir action-container en subcomponentes
+- [x] UI-15 — Clases base BaseAction y ConfirmAction
+- [x] UI-16 — action-container: tooltips visibles y textos traducidos
+- [x] UI-17 — Partir action-container en subcomponentes

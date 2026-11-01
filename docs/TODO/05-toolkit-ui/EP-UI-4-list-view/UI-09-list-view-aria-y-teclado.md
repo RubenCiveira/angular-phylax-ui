@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,16 +24,24 @@ La tabla es un conjunto de `div`/`span` sin `role`; las filas solo se activan co
 
 ## Tareas
 
-- [ ] `role="table"`, `row`, `columnheader`, `cell` y `aria-rowcount`.
-- [ ] Filas con `tabindex="0"`, `aria-selected`, `(keydown.enter)` activa y `(keydown.space)` selecciona.
-- [ ] Navegación con flechas mediante `FocusKeyManager` de `@angular/cdk/a11y`.
-- [ ] Equivalente en lista móvil y tarjetas.
-- [ ] Verificar con axe DevTools y con VoiceOver/NVDA.
+- [x] `role="table"`, `row`, `columnheader`, `cell` y `aria-rowcount`.
+- [x] Filas con `tabindex="0"`, `aria-selected`, `(keydown.enter)` activa y `(keydown.space)` selecciona.
+- [x] Navegación con flechas mediante `FocusKeyManager` de `@angular/cdk/a11y`.
+- [x] Equivalente en lista móvil y tarjetas.
+- [ ] Verificar con axe DevTools y con VoiceOver/NVDA. *axe cubierto por test automático; falta la prueba manual con VoiceOver/NVDA.*
 
 ## Criterios de aceptación
 
-- [ ] Se puede recorrer y activar cualquier fila solo con teclado.
-- [ ] axe no reporta errores de roles en la lista.
+- [x] Se puede recorrer y activar cualquier fila solo con teclado.
+- [x] axe no reporta errores de roles en la lista. *Test `axe` en `list-view.component.spec.ts` sobre tabla, lista y tarjetas (con `axe-core` como devDependency; el contraste se comprueba en otro test).*
+
+## Notas
+
+- Tabla: `role="table"` en `.table-inner` (el botón "Columnas" queda fuera para que axe no lo vea como hijo no permitido), cabecera `role="row"` con `aria-rowindex="1"`, cuerpo `rowgroup` y filas con `aria-rowindex` absoluto (el virtual scroll solo pinta una ventana).
+- Lista móvil y tarjetas: `role="list"`/`listitem` (el `<ul>`/`<li>` no era válido con el `cdk-virtual-scroll-viewport` en medio); la lista usa `aria-setsize`/`aria-posinset`. `aria-selected` solo en filas de tabla, que es donde ARIA lo permite.
+- Enter activa, espacio selecciona (en selección múltiple alterna) y las flechas mueven el foco con `FocusKeyManager` (en tarjetas también las laterales). Las teclas dentro de controles de la fila no se interceptan.
+- axe encontró que el botón "Columnas" tenía un `aria-label` distinto de su texto visible (la ligadura del icono, WCAG 2.5.3): ahora el icono es `aria-hidden` y el nombre va como texto `cdk-visually-hidden`.
+- Pendiente: prueba manual con VoiceOver/NVDA.
 
 ## Ficheros afectados
 

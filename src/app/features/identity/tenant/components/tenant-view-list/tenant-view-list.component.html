@@ -44,11 +44,11 @@
     } @else {
       <list-view
         [mode]="'card'"
+        storageKey="identity.tenant"
         [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
-        (prev)="prev()"
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
@@ -66,6 +66,7 @@
         <list-view-table>
           <ng-template
             listViewColumn
+            key="name"
             title="{{ 'identity.tenant.list.column.name.title' | transloco }}"
             tooltip="{{ 'identity.tenant.list.column.name.tooltip' | transloco }}"
             let-row="$implicit"
@@ -74,6 +75,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="root"
             title="{{ 'identity.tenant.list.column.root.title' | transloco }}"
             tooltip="{{ 'identity.tenant.list.column.root.tooltip' | transloco }}"
             let-row="$implicit"
@@ -82,6 +84,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="domain"
             title="{{ 'identity.tenant.list.column.domain.title' | transloco }}"
             tooltip="{{ 'identity.tenant.list.column.domain.tooltip' | transloco }}"
             let-row="$implicit"
@@ -90,6 +93,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="enabled"
             title="{{ 'identity.tenant.list.column.enabled.title' | transloco }}"
             tooltip="{{ 'identity.tenant.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
@@ -98,6 +102,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="mark-for-delete"
             title="{{ 'identity.tenant.list.column.mark-for-delete.title' | transloco }}"
             tooltip="{{ 'identity.tenant.list.column.mark-for-delete.tooltip' | transloco }}"
             let-row="$implicit"
@@ -106,6 +111,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="mark-for-delete-time"
             title="{{ 'identity.tenant.list.column.mark-for-delete-time.title' | transloco }}"
             tooltip="{{ 'identity.tenant.list.column.mark-for-delete-time.tooltip' | transloco }}"
             let-row="$implicit"

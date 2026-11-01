@@ -7,7 +7,7 @@ paso: 6
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,17 @@ Las directivas son `standalone: false`, y `ListViewIconDirective` aparece dos ve
 
 ## Tareas
 
-- [ ] Hacer standalone las directivas.
-- [ ] Exportar `LIST_VIEW = [...] as const`.
-- [ ] Mantener `ListViewModule` como fachada y quitar duplicados.
+- [x] Hacer standalone las directivas.
+- [x] Exportar `LIST_VIEW = [...] as const`.
+- [x] Mantener `ListViewModule` como fachada y quitar duplicados.
 
 ## Criterios de aceptación
 
-- [ ] Un componente standalone puede importar `LIST_VIEW`.
+- [x] Un componente standalone puede importar `LIST_VIEW`.
+
+## Notas
+
+- `LIST_VIEW` se exporta desde `list-view.module.ts` y no desde `list-view.directives.ts`, para no crear una importación circular con el componente.
 
 ## Ficheros afectados
 

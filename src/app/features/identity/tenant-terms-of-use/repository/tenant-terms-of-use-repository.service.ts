@@ -6,7 +6,7 @@ import {
   TenantTermsOfUseFilter,
 } from '@features/identity/tenant-terms-of-use/model/tenant-terms-of-use.model';
 import { TenantRepository } from '@features/identity/tenant/repository/tenant-repository.service';
-import { Shift, Tick } from '@shared/data/repository/repository.model';
+import { Shift, Tick, UpdateOptions } from '@shared/data/repository/repository.model';
 import { RepositoryStore } from '@shared/data/repository/repository-store.service';
 import { Acl } from '@shared/data/acl/acl.model';
 import { ApiService } from '@shared/data/api/api.service';
@@ -65,8 +65,8 @@ export class TenantTermsOfUseRepository {
     item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
-  update(item: TenantTermsOfUse): Observable<TenantTermsOfUse> {
-    return this.repo.update(item);
+  update(item: TenantTermsOfUse, options?: UpdateOptions<TenantTermsOfUse>): Observable<TenantTermsOfUse> {
+    return this.repo.update(item, options);
   }
   deleteByKey(item: string): Observable<void> {
     return this.repo.deleteByKey(item);

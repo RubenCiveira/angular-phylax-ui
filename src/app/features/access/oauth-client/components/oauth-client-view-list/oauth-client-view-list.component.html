@@ -44,11 +44,11 @@
     } @else {
       <list-view
         [mode]="'card'"
+        storageKey="access.oauth-client"
         [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
-        (prev)="prev()"
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
@@ -66,6 +66,7 @@
         <list-view-table>
           <ng-template
             listViewColumn
+            key="code"
             title="{{ 'access.oauth-client.list.column.code.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.code.tooltip' | transloco }}"
             let-row="$implicit"
@@ -74,6 +75,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="tenant"
             title="{{ 'access.oauth-client.list.column.tenant.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
@@ -82,6 +84,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="allow-all-scopes"
             title="{{ 'access.oauth-client.list.column.allow-all-scopes.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.allow-all-scopes.tooltip' | transloco }}"
             let-row="$implicit"
@@ -90,6 +93,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="token-endpoint-auth-method"
             title="{{ 'access.oauth-client.list.column.token-endpoint-auth-method.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.token-endpoint-auth-method.tooltip' | transloco }}"
             let-row="$implicit"
@@ -98,6 +102,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="token-endpoint-auth-signing-alg"
             title="{{ 'access.oauth-client.list.column.token-endpoint-auth-signing-alg.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.token-endpoint-auth-signing-alg.tooltip' | transloco }}"
             let-row="$implicit"
@@ -106,6 +111,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="dpop-bound-access-tokens"
             title="{{ 'access.oauth-client.list.column.dpop-bound-access-tokens.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.dpop-bound-access-tokens.tooltip' | transloco }}"
             let-row="$implicit"
@@ -114,6 +120,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="id-token-signed-response-alg"
             title="{{ 'access.oauth-client.list.column.id-token-signed-response-alg.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.id-token-signed-response-alg.tooltip' | transloco }}"
             let-row="$implicit"
@@ -122,6 +129,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="tls-client-auth-subject-dn"
             title="{{ 'access.oauth-client.list.column.tls-client-auth-subject-dn.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.tls-client-auth-subject-dn.tooltip' | transloco }}"
             let-row="$implicit"
@@ -130,6 +138,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="tls-client-certificate-bound-access-tokens"
             title="{{ 'access.oauth-client.list.column.tls-client-certificate-bound-access-tokens.title' | transloco }}"
             tooltip="{{
               'access.oauth-client.list.column.tls-client-certificate-bound-access-tokens.tooltip' | transloco
@@ -140,6 +149,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="authorization-signed-response-alg"
             title="{{ 'access.oauth-client.list.column.authorization-signed-response-alg.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.authorization-signed-response-alg.tooltip' | transloco }}"
             let-row="$implicit"
@@ -148,6 +158,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="backchannel-token-delivery-mode"
             title="{{ 'access.oauth-client.list.column.backchannel-token-delivery-mode.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.backchannel-token-delivery-mode.tooltip' | transloco }}"
             let-row="$implicit"
@@ -156,6 +167,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="backchannel-client-notification-endpoint"
             title="{{ 'access.oauth-client.list.column.backchannel-client-notification-endpoint.title' | transloco }}"
             tooltip="{{
               'access.oauth-client.list.column.backchannel-client-notification-endpoint.tooltip' | transloco
@@ -166,6 +178,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="subject-type"
             title="{{ 'access.oauth-client.list.column.subject-type.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.subject-type.tooltip' | transloco }}"
             let-row="$implicit"
@@ -174,6 +187,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="id-token-encrypted-response-alg"
             title="{{ 'access.oauth-client.list.column.id-token-encrypted-response-alg.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.id-token-encrypted-response-alg.tooltip' | transloco }}"
             let-row="$implicit"
@@ -182,6 +196,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="id-token-encrypted-response-enc"
             title="{{ 'access.oauth-client.list.column.id-token-encrypted-response-enc.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.id-token-encrypted-response-enc.tooltip' | transloco }}"
             let-row="$implicit"
@@ -190,6 +205,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="userinfo-encrypted-response-alg"
             title="{{ 'access.oauth-client.list.column.userinfo-encrypted-response-alg.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.userinfo-encrypted-response-alg.tooltip' | transloco }}"
             let-row="$implicit"
@@ -198,6 +214,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="userinfo-encrypted-response-enc"
             title="{{ 'access.oauth-client.list.column.userinfo-encrypted-response-enc.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.userinfo-encrypted-response-enc.tooltip' | transloco }}"
             let-row="$implicit"
@@ -206,6 +223,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="authorization-details-types"
             title="{{ 'access.oauth-client.list.column.authorization-details-types.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.authorization-details-types.tooltip' | transloco }}"
             let-row="$implicit"
@@ -214,6 +232,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="userinfo-signed-response-alg"
             title="{{ 'access.oauth-client.list.column.userinfo-signed-response-alg.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.userinfo-signed-response-alg.tooltip' | transloco }}"
             let-row="$implicit"
@@ -222,6 +241,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="secret-oauth"
             title="{{ 'access.oauth-client.list.column.secret-oauth.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.secret-oauth.tooltip' | transloco }}"
             let-row="$implicit"
@@ -230,6 +250,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="registration-access-token"
             title="{{ 'access.oauth-client.list.column.registration-access-token.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.registration-access-token.tooltip' | transloco }}"
             let-row="$implicit"
@@ -238,6 +259,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="default-acr-values"
             title="{{ 'access.oauth-client.list.column.default-acr-values.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.default-acr-values.tooltip' | transloco }}"
             let-row="$implicit"
@@ -246,6 +268,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="default-max-age"
             title="{{ 'access.oauth-client.list.column.default-max-age.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.default-max-age.tooltip' | transloco }}"
             let-row="$implicit"
@@ -254,6 +277,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="sector-identifier-uri"
             title="{{ 'access.oauth-client.list.column.sector-identifier-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.sector-identifier-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -262,6 +286,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="grant-types-json"
             title="{{ 'access.oauth-client.list.column.grant-types-json.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.grant-types-json.tooltip' | transloco }}"
             let-row="$implicit"
@@ -270,6 +295,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="introspection-allowed"
             title="{{ 'access.oauth-client.list.column.introspection-allowed.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.introspection-allowed.tooltip' | transloco }}"
             let-row="$implicit"
@@ -278,6 +304,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="require-pushed-authorization-requests"
             title="{{ 'access.oauth-client.list.column.require-pushed-authorization-requests.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.require-pushed-authorization-requests.tooltip' | transloco }}"
             let-row="$implicit"
@@ -286,6 +313,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="require-pkce"
             title="{{ 'access.oauth-client.list.column.require-pkce.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.require-pkce.tooltip' | transloco }}"
             let-row="$implicit"
@@ -294,6 +322,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="backchannel-logout-uri"
             title="{{ 'access.oauth-client.list.column.backchannel-logout-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.backchannel-logout-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -302,6 +331,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="backchannel-logout-session-required"
             title="{{ 'access.oauth-client.list.column.backchannel-logout-session-required.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.backchannel-logout-session-required.tooltip' | transloco }}"
             let-row="$implicit"
@@ -310,6 +340,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="frontchannel-logout-uri"
             title="{{ 'access.oauth-client.list.column.frontchannel-logout-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.frontchannel-logout-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -318,6 +349,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="frontchannel-logout-session-required"
             title="{{ 'access.oauth-client.list.column.frontchannel-logout-session-required.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.frontchannel-logout-session-required.tooltip' | transloco }}"
             let-row="$implicit"
@@ -326,6 +358,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="enabled"
             title="{{ 'access.oauth-client.list.column.enabled.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
@@ -334,6 +367,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="client-name"
             title="{{ 'access.oauth-client.list.column.client-name.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.client-name.tooltip' | transloco }}"
             let-row="$implicit"
@@ -342,6 +376,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="logo-uri"
             title="{{ 'access.oauth-client.list.column.logo-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.logo-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -350,6 +385,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="client-uri"
             title="{{ 'access.oauth-client.list.column.client-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.client-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -358,6 +394,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="policy-uri"
             title="{{ 'access.oauth-client.list.column.policy-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.policy-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -366,6 +403,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="tos-uri"
             title="{{ 'access.oauth-client.list.column.tos-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.tos-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -374,6 +412,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="response-types-json"
             title="{{ 'access.oauth-client.list.column.response-types-json.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.response-types-json.tooltip' | transloco }}"
             let-row="$implicit"
@@ -382,6 +421,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="dynamically-registered"
             title="{{ 'access.oauth-client.list.column.dynamically-registered.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.dynamically-registered.tooltip' | transloco }}"
             let-row="$implicit"
@@ -390,6 +430,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="registered-at"
             title="{{ 'access.oauth-client.list.column.registered-at.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.registered-at.tooltip' | transloco }}"
             let-row="$implicit"
@@ -398,6 +439,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="client-credentials-scopes"
             title="{{ 'access.oauth-client.list.column.client-credentials-scopes.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.client-credentials-scopes.tooltip' | transloco }}"
             let-row="$implicit"
@@ -406,6 +448,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="client-credentials-token-ttl-seconds"
             title="{{ 'access.oauth-client.list.column.client-credentials-token-ttl-seconds.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.client-credentials-token-ttl-seconds.tooltip' | transloco }}"
             let-row="$implicit"
@@ -414,6 +457,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="request-object-signing-alg"
             title="{{ 'access.oauth-client.list.column.request-object-signing-alg.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.request-object-signing-alg.tooltip' | transloco }}"
             let-row="$implicit"
@@ -422,6 +466,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="jwks-uri"
             title="{{ 'access.oauth-client.list.column.jwks-uri.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.jwks-uri.tooltip' | transloco }}"
             let-row="$implicit"
@@ -430,6 +475,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="jwks-json"
             title="{{ 'access.oauth-client.list.column.jwks-json.title' | transloco }}"
             tooltip="{{ 'access.oauth-client.list.column.jwks-json.tooltip' | transloco }}"
             let-row="$implicit"

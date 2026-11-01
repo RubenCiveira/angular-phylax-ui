@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: peticion
 ---
@@ -24,24 +24,24 @@ Para resolver un 412 hay que comparar tres versiones de la misma entidad (origin
 
 ## Tareas
 
-- [ ] Crear `edit-conflict.model.ts` con:
+- [x] Crear `edit-conflict.model.ts` con:
   - `EditConflict<T> { original: T; sent: T; current: T }`.
   - `FieldMergeState = 'unchanged' | 'mine' | 'theirs' | 'same' | 'conflict'`.
   - `FieldMerge { field: string; original; sent; current; state; resolved }`, donde `resolved` es el valor elegido (por defecto: `sent` en `mine`, `current` en `theirs`/`same`/`unchanged`, sin valor en `conflict`).
-- [ ] Crear `threeWayMerge<T>(conflict, options?)` en `three-way-merge.ts` que devuelva `FieldMerge[]` para cada campo de primer nivel:
+- [x] Crear `threeWayMerge<T>(conflict, options?)` en `three-way-merge.ts` que devuelva `FieldMerge[]` para cada campo de primer nivel:
   - `sent == original && current == original` → `unchanged`
   - `sent != original && current == original` → `mine`
   - `sent == original && current != original` → `theirs`
   - `sent != original && current != original && sent == current` → `same`
   - resto → `conflict`
-- [ ] Igualdad estructural tolerante al formato del cable: referencias `{ $ref }` por su `$ref`, arrays por contenido, fechas por instante, `null`/`undefined`/`''` equivalentes.
-- [ ] `options.ignore` con `['version']` por defecto (la `version` siempre se toma de `current`) y campos técnicos (`uid`).
-- [ ] `applyMerge(conflict, merges)` que construya el valor final: `resolved` de cada campo + `version` de `current`. Lanza si queda algún `conflict` sin resolver.
+- [x] Igualdad estructural tolerante al formato del cable: referencias `{ $ref }` por su `$ref`, arrays por contenido, fechas por instante, `null`/`undefined`/`''` equivalentes.
+- [x] `options.ignore` con `['version']` por defecto (la `version` siempre se toma de `current`) y campos técnicos (`uid`).
+- [x] `applyMerge(conflict, merges)` que construya el valor final: `resolved` de cada campo + `version` de `current`. Lanza si queda algún `conflict` sin resolver.
 
 ## Criterios de aceptación
 
-- [ ] Tests unitarios para los cinco estados, para `$ref`, arrays y fechas, y para `applyMerge` con y sin conflictos pendientes.
-- [ ] Sin dependencias de Angular ni de Material en estos dos ficheros.
+- [x] Tests unitarios para los cinco estados, para `$ref`, arrays y fechas, y para `applyMerge` con y sin conflictos pendientes.
+- [x] Sin dependencias de Angular ni de Material en estos dos ficheros.
 
 ## Ficheros afectados
 

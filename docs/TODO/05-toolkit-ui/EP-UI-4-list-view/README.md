@@ -3,7 +3,7 @@ id: EP-UI-4
 titulo: "list-view"
 area: toolkit-ui
 prioridad: critica
-estado: pendiente
+estado: en-curso
 issues: [UI-09, UI-12, UI-10, UI-11, UI-13, UI-14]
 ---
 
@@ -53,8 +53,8 @@ Issues de otras épicas de los que depende:
 ## Checklist de la épica
 
 - [ ] UI-09 — list-view: semántica ARIA y uso con teclado
-- [ ] UI-12 — list-view: seleccionar todo y limpieza interna
-- [ ] UI-10 — list-view: selector de columnas y columnas visibles por defecto
-- [ ] UI-11 — list-view: tooltip en cabecera y ordenación
-- [ ] UI-13 — list-view: estados vacío y de error integrados
-- [ ] UI-14 — Directivas de list-view standalone
+- [x] UI-12 — list-view: seleccionar todo y limpieza interna
+- [x] UI-10 — list-view: selector de columnas y columnas visibles por defecto
+- [x] UI-11 — list-view: tooltip en cabecera y ordenación
+- [x] UI-13 — list-view: estados vacío y de error integrados
+- [x] UI-14 — Directivas de list-view standalone

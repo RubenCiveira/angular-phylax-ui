@@ -3,7 +3,7 @@ id: EP-UI-7
 titulo: "Ajustes aislados"
 area: toolkit-ui
 prioridad: media
-estado: pendiente
+estado: hecho
 issues: [UI-18, UI-21, UI-22]
 ---
 
@@ -53,6 +53,6 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] UI-18 — Apariencia de los campos desde provideUiDefaults
-- [ ] UI-21 — long-task-view: progreso accesible
-- [ ] UI-22 — Avatares de iniciales con contraste AA y colores del tema
+- [x] UI-18 — Apariencia de los campos desde provideUiDefaults
+- [x] UI-21 — long-task-view: progreso accesible
+- [x] UI-22 — Avatares de iniciales con contraste AA y colores del tema

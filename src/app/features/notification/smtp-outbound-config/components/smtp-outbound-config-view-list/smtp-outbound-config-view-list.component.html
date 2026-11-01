@@ -43,12 +43,12 @@
       </div>
     } @else {
       <list-view
-        [mode]="'list'"
+        [mode]="'auto'"
+        storageKey="notification.smtp-outbound-config"
         [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
-        (prev)="prev()"
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
@@ -66,6 +66,7 @@
         <list-view-table>
           <ng-template
             listViewColumn
+            key="tenant"
             title="{{ 'notification.smtp-outbound-config.list.column.tenant.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
@@ -74,6 +75,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="host"
             title="{{ 'notification.smtp-outbound-config.list.column.host.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.host.tooltip' | transloco }}"
             let-row="$implicit"
@@ -82,6 +84,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="port"
             title="{{ 'notification.smtp-outbound-config.list.column.port.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.port.tooltip' | transloco }}"
             let-row="$implicit"
@@ -90,6 +93,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="login"
             title="{{ 'notification.smtp-outbound-config.list.column.login.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.login.tooltip' | transloco }}"
             let-row="$implicit"
@@ -98,6 +102,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="password"
             title="{{ 'notification.smtp-outbound-config.list.column.password.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.password.tooltip' | transloco }}"
             let-row="$implicit"
@@ -106,6 +111,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="sender-name"
             title="{{ 'notification.smtp-outbound-config.list.column.sender-name.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.sender-name.tooltip' | transloco }}"
             let-row="$implicit"
@@ -114,6 +120,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="sender-email"
             title="{{ 'notification.smtp-outbound-config.list.column.sender-email.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.sender-email.tooltip' | transloco }}"
             let-row="$implicit"
@@ -122,6 +129,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="timeout"
             title="{{ 'notification.smtp-outbound-config.list.column.timeout.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.timeout.tooltip' | transloco }}"
             let-row="$implicit"
@@ -130,6 +138,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="use-tls"
             title="{{ 'notification.smtp-outbound-config.list.column.use-tls.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.use-tls.tooltip' | transloco }}"
             let-row="$implicit"
@@ -138,6 +147,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="max-retries"
             title="{{ 'notification.smtp-outbound-config.list.column.max-retries.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.max-retries.tooltip' | transloco }}"
             let-row="$implicit"
@@ -146,6 +156,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="retry-delay"
             title="{{ 'notification.smtp-outbound-config.list.column.retry-delay.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.retry-delay.tooltip' | transloco }}"
             let-row="$implicit"
@@ -154,6 +165,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="rate-limit"
             title="{{ 'notification.smtp-outbound-config.list.column.rate-limit.title' | transloco }}"
             tooltip="{{ 'notification.smtp-outbound-config.list.column.rate-limit.tooltip' | transloco }}"
             let-row="$implicit"

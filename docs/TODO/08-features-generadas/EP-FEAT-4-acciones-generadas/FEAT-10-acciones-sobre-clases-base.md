@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: L
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: [UI-15, FEAT-11]
 origen: 08-features-generadas.md
 ---
@@ -25,12 +25,13 @@ origen: 08-features-generadas.md
 ## Tareas
 
 - [ ] Cambiar las plantillas de acciones para heredar de `ConfirmAction` (`delete`, `enable`, `disable` y variantes de selección) o `BaseAction`.
+  - Avance (en el código ya generado, no en la plantilla del generador): las 56 acciones de un elemento (`delete`, `enable`, `disable`, `unlock`, `accept`, `reject`) heredan de `ConfirmAction`, las 56 variantes `*Selection` de `ConfirmSelectionAction` (progreso con `LongTaskService`) y las 25 `edit` de `BaseEditAction`; las de confirmación ya no tienen `.html`/`.scss`. Faltan `create`, `detail` y las acciones de relación.
 - [ ] Textos genéricos en `common.action.*` con interpolación `{{entity}}`.
 - [ ] Regenerar todas las entidades.
 
 ## Criterios de aceptación
 
-- [ ] Ninguna acción generada inyecta `MatDialog` ni `MatSnackBar`.
+- [x] Ninguna acción generada inyecta `MatDialog` ni `MatSnackBar`.
 - [ ] Las acciones funcionan igual en 3 entidades probadas.
 
 ## Ficheros afectados

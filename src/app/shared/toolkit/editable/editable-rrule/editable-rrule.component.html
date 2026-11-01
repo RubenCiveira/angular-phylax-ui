@@ -9,11 +9,11 @@
     <div class="rrule-section">
       <div class="rrule-row">
         <span class="rrule-hint">Cada</span>
-        <mat-form-field appearance="outline" class="rrule-field-xs">
+        <mat-form-field [appearance]="appearance()!" class="rrule-field-xs">
           <input matInput type="number" [formControl]="intervalControl" min="1" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="rrule-field-md">
+        <mat-form-field [appearance]="appearance()!" class="rrule-field-md">
           <mat-select [value]="state().freq" (selectionChange)="patchState({ freq: $event.value })">
             @for (freq of allowedFrequencies(); track freq) {
               <mat-option [value]="freq">{{ freqLabels[freq] }}</mat-option>
@@ -45,7 +45,7 @@
       @case ('MONTHLY') {
         <div class="rrule-section rrule-row">
           <span class="rrule-hint">El día</span>
-          <mat-form-field appearance="outline" class="rrule-field-xs">
+          <mat-form-field [appearance]="appearance()!" class="rrule-field-xs">
             <mat-select [value]="state().byMonthDay" (selectionChange)="patchState({ byMonthDay: $event.value })">
               @for (d of days; track d) {
                 <mat-option [value]="d">{{ d }}</mat-option>
@@ -59,7 +59,7 @@
       @case ('YEARLY') {
         <div class="rrule-section rrule-row">
           <span class="rrule-hint">El</span>
-          <mat-form-field appearance="outline" class="rrule-field-xs">
+          <mat-form-field [appearance]="appearance()!" class="rrule-field-xs">
             <mat-select [value]="state().byMonthDay" (selectionChange)="patchState({ byMonthDay: $event.value })">
               @for (d of days; track d) {
                 <mat-option [value]="d">{{ d }}</mat-option>
@@ -67,7 +67,7 @@
             </mat-select>
           </mat-form-field>
           <span class="rrule-hint">de</span>
-          <mat-form-field appearance="outline" class="rrule-field-md">
+          <mat-form-field [appearance]="appearance()!" class="rrule-field-md">
             <mat-select [value]="state().byMonth" (selectionChange)="patchState({ byMonth: $event.value })">
               @for (mo of months; track $index) {
                 <mat-option [value]="$index + 1">{{ mo }}</mat-option>
@@ -90,7 +90,7 @@
         <label class="rrule-radio">
           <input type="radio" [checked]="state().endMode === 'until'" (change)="patchState({ endMode: 'until' })" />
           El día
-          <mat-form-field appearance="outline" class="rrule-field-date">
+          <mat-form-field [appearance]="appearance()!" class="rrule-field-date">
             <input
               matInput
               [matDatepicker]="untilPicker"
@@ -108,7 +108,7 @@
         <label class="rrule-radio">
           <input type="radio" [checked]="state().endMode === 'count'" (change)="patchState({ endMode: 'count' })" />
           Después de
-          <mat-form-field appearance="outline" class="rrule-field-xs">
+          <mat-form-field [appearance]="appearance()!" class="rrule-field-xs">
             <input
               matInput
               type="number"

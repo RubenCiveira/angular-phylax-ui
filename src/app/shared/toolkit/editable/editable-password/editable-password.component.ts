@@ -52,7 +52,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
           <form [formGroup]="passwordForm" class="password-form">
             <!-- New Password Field -->
-            <mat-form-field appearance="outline" class="password-field">
+            <mat-form-field [appearance]="appearance()!" class="password-field">
               <mat-label>Nueva contraseña</mat-label>
               <input
                 matInput
@@ -80,7 +80,7 @@ import { MatDividerModule } from '@angular/material/divider';
             </mat-form-field>
 
             <!-- Confirm Password Field -->
-            <mat-form-field appearance="outline" class="password-field">
+            <mat-form-field [appearance]="appearance()!" class="password-field">
               <mat-label>Confirmar contraseña</mat-label>
               <input
                 matInput

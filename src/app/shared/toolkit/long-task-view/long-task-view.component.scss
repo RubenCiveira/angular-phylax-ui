@@ -3,3 +3,17 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.long-task-message {
+  font: var(--mat-sys-title-medium);
+}
+
+.long-task-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-4);
+}
+
+.long-task-count {
+  font-variant-numeric: tabular-nums;
+}

@@ -7,7 +7,7 @@ paso: 3
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,14 +24,21 @@ origen: 07-toolkit-ui.md
 
 ## Tareas
 
-- [ ] Input `defaultVisible` en `ListViewColumnDirective` y clave estable por columna.
-- [ ] Menú "Columnas" con checkboxes en la cabecera.
-- [ ] Persistir la elección por entidad en `localStorage`.
-- [ ] El algoritmo de anchura solo actúa sobre las columnas elegidas (con scroll horizontal si no caben).
+- [x] Input `defaultVisible` en `ListViewColumnDirective` y clave estable por columna.
+- [x] Menú "Columnas" con checkboxes en la cabecera.
+- [x] Persistir la elección por entidad en `localStorage`.
+- [x] El algoritmo de anchura solo actúa sobre las columnas elegidas (con scroll horizontal si no caben).
 
 ## Criterios de aceptación
 
-- [ ] El usuario elige qué columnas ver y la elección se mantiene al recargar.
+- [x] El usuario elige qué columnas ver y la elección se mantiene al recargar.
+
+## Notas
+
+- `key` en `ListViewColumnDirective` (si falta se usa la posición, `#n`) e input `storageKey` en `list-view`; la elección se guarda en `localStorage` con la clave `list-view-columns-<storageKey>`. Sin `storageKey` la elección solo vive en memoria.
+- Las 25 features pasan `storageKey="<módulo>.<entidad>"` y `key` sacado de la clave de traducción de cada columna.
+- Las columnas sin título (iconos o acciones) siempre se muestran. No se puede ocultar la última columna con título.
+- El hueco que sobra se reparte entre las columnas con título según `factor`; si no caben, mantienen su anchura y la tabla hace scroll horizontal.
 
 ## Ficheros afectados
 

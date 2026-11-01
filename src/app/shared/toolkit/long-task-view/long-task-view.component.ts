@@ -12,6 +12,8 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 import { LongTask, LongTaskStep } from 'app/shared/data/long-task.model';
 
+let nextId = 0;
+
 @Component({
   selector: 'long-task-view',
   templateUrl: './long-task-view.component.html',
@@ -32,11 +34,18 @@ import { LongTask, LongTaskStep } from 'app/shared/data/long-task.model';
 export class LongTaskViewComponent implements OnDestroy, OnInit {
   private subscription = new Subscription();
 
+  readonly titleId = `long-task-view-title-${nextId++}`;
+
   step = '';
   status = '';
   tasks = [] as LongTaskStep[];
   currentStepProgress = 1;
   globalStepsProgress = 0;
+  /** Elementos del paso en curso, para aria-valuenow/aria-valuemax de la barra de progreso. */
+  processedItems = 0;
+  totalItems = 0;
+  /** Resumen final que se anuncia en la región viva al terminar. */
+  summary = '';
   title = 'Delete file';
   known = false;
 
@@ -65,12 +74,14 @@ export class LongTaskViewComponent implements OnDestroy, OnInit {
             if (value.stepStatus == 'FINISHED' || value.stepStatus == 'FAILED') {
               ++completedSteps;
             } else if (value.stepStatus == 'PROCESSING') {
+              this.step = value.name;
               if (value.totalItems) {
                 this.known = true;
                 const total = value.totalItems || 100;
                 const processed = value.processedItems;
                 const part = processed / total;
-                this.step = value.name;
+                this.processedItems = Math.min(processed, total);
+                this.totalItems = total;
                 this.currentStepProgress = Math.min(95, Math.max(100 * part, 5));
               } else {
                 this.known = false;
@@ -78,6 +89,7 @@ export class LongTaskViewComponent implements OnDestroy, OnInit {
             }
           });
           this.globalStepsProgress = (100 * completedSteps) / this.tasks.length;
+          this.summary = item.detailStatus === 'FINISHED' ? summarize(this.tasks) : '';
         }),
       );
     }
@@ -98,4 +110,10 @@ export class LongTaskViewComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.currentStepProgress = 1;
   }
+}
+
+function summarize(steps: LongTaskStep[]): string {
+  const count = (pick: (step: LongTaskStep) => unknown[]) => steps.reduce((sum, step) => sum + pick(step).length, 0);
+  const [oks, warns, errors] = [count((s) => s.oks), count((s) => s.warns), count((s) => s.errors)];
+  return `The process finished: ${oks} correct, ${warns} to review, ${errors} with errors`;
 }

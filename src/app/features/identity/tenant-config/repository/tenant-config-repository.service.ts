@@ -6,7 +6,7 @@ import {
 } from '@features/identity/tenant-config/model/tenant-config.model';
 import { RepositoryMetadata, RepositoryService } from '@shared/data/repository/repository.service';
 import { TenantRepository } from '@features/identity/tenant/repository/tenant-repository.service';
-import { Shift, Tick } from '@shared/data/repository/repository.model';
+import { Shift, Tick, UpdateOptions } from '@shared/data/repository/repository.model';
 import { RepositoryStore } from '@shared/data/repository/repository-store.service';
 import { Acl } from '@shared/data/acl/acl.model';
 import { ApiService } from '@shared/data/api/api.service';
@@ -60,8 +60,8 @@ export class TenantConfigRepository {
     item['uid'] = this.generateComb();
     return this.repo.add(item);
   }
-  update(item: TenantConfig): Observable<TenantConfig> {
-    return this.repo.update(item);
+  update(item: TenantConfig, options?: UpdateOptions<TenantConfig>): Observable<TenantConfig> {
+    return this.repo.update(item, options);
   }
   deleteByKey(item: string): Observable<void> {
     return this.repo.deleteByKey(item);

@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # Los paquetes 0.x y 2.x de OpenTelemetry JS se publican juntos: actualizarlos por separado rompe tipos o runtime.
+      opentelemetry:
+        patterns:
+          - '@opentelemetry/*'

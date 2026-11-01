@@ -43,12 +43,12 @@
       </div>
     } @else {
       <list-view
-        [mode]="'list'"
+        [mode]="'auto'"
+        storageKey="identity.user-federated-identity"
         [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
-        (prev)="prev()"
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
@@ -66,6 +66,7 @@
         <list-view-table>
           <ng-template
             listViewColumn
+            key="user"
             title="{{ 'identity.user-federated-identity.list.column.user.title' | transloco }}"
             tooltip="{{ 'identity.user-federated-identity.list.column.user.tooltip' | transloco }}"
             let-row="$implicit"
@@ -74,6 +75,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="login-provider"
             title="{{ 'identity.user-federated-identity.list.column.login-provider.title' | transloco }}"
             tooltip="{{ 'identity.user-federated-identity.list.column.login-provider.tooltip' | transloco }}"
             let-row="$implicit"
@@ -82,6 +84,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="subject"
             title="{{ 'identity.user-federated-identity.list.column.subject.title' | transloco }}"
             tooltip="{{ 'identity.user-federated-identity.list.column.subject.tooltip' | transloco }}"
             let-row="$implicit"
@@ -90,6 +93,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="created-at"
             title="{{ 'identity.user-federated-identity.list.column.created-at.title' | transloco }}"
             tooltip="{{ 'identity.user-federated-identity.list.column.created-at.tooltip' | transloco }}"
             let-row="$implicit"

@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [DEP-09]
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,13 @@ La interfaz `Action` obliga a cada acción generada a implementar 12 miembros, p
 
 ## Tareas
 
-- [ ] `abstract class BaseAction<T> implements Action`: textos de `action.<name>.*` con fallback a `common.action.<name>.*`, ACL (`allowed(name)`), `visible`/`enabled` por defecto, limpieza con `DestroyRef`.
-- [ ] `abstract class ConfirmAction<T> extends BaseAction<T>`: diálogo con `ConfirmDialogService`, ejecución de `execute(items)`, aviso con `NotifyService`, cierre del contenedor.
-- [ ] Migrar una entidad de prueba (delete de oauth-client) para validar.
+- [x] `abstract class BaseAction<T> implements Action`: textos de `action.<name>.*` con fallback a `common.action.<name>.*`, ACL (`allowed(name)`), `visible`/`enabled` por defecto, limpieza con `DestroyRef`.
+- [x] `abstract class ConfirmAction<T> extends BaseAction<T>`: diálogo con `ConfirmDialogService`, ejecución de `execute(items)`, aviso con `NotifyService`, cierre del contenedor.
+- [x] Migrar una entidad de prueba (delete de oauth-client) para validar.
 
 ## Criterios de aceptación
 
-- [ ] La acción delete de prueba tiene ≤ 20 líneas y se comporta igual.
+- [x] La acción delete de prueba tiene ≤ 20 líneas (16) y se comporta igual (cubierto por confirm-action.spec.ts; falta prueba manual).
 
 ## Ficheros afectados
 

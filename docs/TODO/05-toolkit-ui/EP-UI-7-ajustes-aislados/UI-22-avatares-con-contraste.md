@@ -7,7 +7,7 @@ paso: 3
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,12 +24,12 @@ origen: 07-toolkit-ui.md
 
 ## Tareas
 
-- [ ] Verificar contraste ≥ 4,5:1 entre `fg` y `bg`.
-- [ ] Generar los colores a partir del tema (por ejemplo `color-mix(in oklch, var(--mat-sys-primary) …)` con tono por hash).
+- [x] Verificar contraste ≥ 4,5:1 entre `fg` y `bg`. *El spec replica `color-mix(in oklch)` y el gamut mapping y comprueba los 360 tonos en claro y oscuro con cinco paletas M3 (mínimo ≈ 7,3:1).*
+- [x] Generar los colores a partir del tema (por ejemplo `color-mix(in oklch, var(--mat-sys-primary) …)` con tono por hash). *`bg`/`fg` = 30 % de `--mat-sys-primary-container` / `--mat-sys-on-primary-container` mezclado con `light-dark(oklch(L C <hash>), …)`; la API de `AvatarSpec` no cambia para `list-view` (añade `hue`; se quitan las opciones `saturation`/`lightness`).*
 
 ## Criterios de aceptación
 
-- [ ] Todos los avatares cumplen contraste AA.
+- [x] Todos los avatares cumplen contraste AA.
 
 ## Ficheros afectados
 

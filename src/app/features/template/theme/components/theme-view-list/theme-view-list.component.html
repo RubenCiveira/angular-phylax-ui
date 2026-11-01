@@ -43,12 +43,12 @@
       </div>
     } @else {
       <list-view
-        [mode]="'list'"
+        [mode]="'auto'"
+        storageKey="template.theme"
         [display]="displayer"
         [searching]="list.searching()"
         [data]="list()"
         (next)="next()"
-        (prev)="prev()"
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
@@ -66,6 +66,7 @@
         <list-view-table>
           <ng-template
             listViewColumn
+            key="tenant"
             title="{{ 'template.theme.list.column.tenant.title' | transloco }}"
             tooltip="{{ 'template.theme.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
@@ -74,6 +75,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="name"
             title="{{ 'template.theme.list.column.name.title' | transloco }}"
             tooltip="{{ 'template.theme.list.column.name.tooltip' | transloco }}"
             let-row="$implicit"
@@ -82,6 +84,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="is-default"
             title="{{ 'template.theme.list.column.is-default.title' | transloco }}"
             tooltip="{{ 'template.theme.list.column.is-default.tooltip' | transloco }}"
             let-row="$implicit"
@@ -90,6 +93,7 @@
           </ng-template>
           <ng-template
             listViewColumn
+            key="enabled"
             title="{{ 'template.theme.list.column.enabled.title' | transloco }}"
             tooltip="{{ 'template.theme.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"

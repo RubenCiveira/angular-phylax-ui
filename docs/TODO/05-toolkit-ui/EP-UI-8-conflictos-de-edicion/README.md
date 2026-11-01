@@ -3,7 +3,7 @@ id: EP-UI-8
 titulo: "Resolución de conflictos de edición (412)"
 area: toolkit-ui
 prioridad: alta
-estado: pendiente
+estado: en-curso
 issues: [UI-23, UI-24, UI-25, UI-26]
 ---
 
@@ -72,7 +72,7 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] UI-23 — Modelo de conflicto y fusión a tres bandas
-- [ ] UI-24 — El repositorio convierte el 412 en un conflicto tipado
-- [ ] UI-25 — Diálogo de resolución de conflictos
+- [x] UI-23 — Modelo de conflicto y fusión a tres bandas
+- [x] UI-24 — El repositorio convierte el 412 en un conflicto tipado
+- [x] UI-25 — Diálogo de resolución de conflictos
 - [ ] UI-26 — La acción de edición generada resuelve conflictos

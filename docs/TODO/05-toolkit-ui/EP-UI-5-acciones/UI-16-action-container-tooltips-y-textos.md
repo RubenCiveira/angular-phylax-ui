@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,13 @@ origen: 07-toolkit-ui.md
 
 ## Tareas
 
-- [ ] `matTooltip` con `action.tooltip()`.
-- [ ] Etiqueta "Más acciones" desde `common.moreActions`.
-- [ ] `maxIcons` como `input()`.
+- [x] `matTooltip` con `action.tooltip()`.
+- [x] Etiqueta "Más acciones" desde `common.moreActions`.
+- [x] `maxIcons` como `input()`.
 
 ## Criterios de aceptación
 
-- [ ] Al pasar el ratón por un botón de acción se ve su tooltip.
+- [ ] Al pasar el ratón por un botón de acción se ve su tooltip. *(pendiente de prueba manual)*
 
 ## Ficheros afectados
 

@@ -2,27 +2,67 @@
 import {
   Component,
   computed,
+  contentChild,
   contentChildren,
+  DestroyRef,
   effect,
   ElementRef,
+  inject,
+  Injector,
   input,
+  linkedSignal,
+  model,
   OnDestroy,
   OnInit,
   output,
   signal,
   viewChild,
+  viewChildren,
 } from '@angular/core';
-import { ListViewRowTemplate, ListViewTableTemplate } from './list-view.directives';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  ListViewColumnDirective,
+  ListViewEmptyDirective,
+  ListViewErrorDirective,
+  ListViewFocusableDirective,
+  ListViewRowTemplate,
+  ListViewSort,
+  ListViewTableTemplate,
+} from './list-view.directives';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
 import { filter, map, pairwise, Subscription, throttleTime } from 'rxjs';
 import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { SelectionModel } from '@shared/data/selection-model';
 import { MatCardModule } from '@angular/material/card';
 import { computeAvatarSpec, AvatarSpec } from '../avatar-text.service';
 import { DisplayProvider } from '@shared/data/display-provider';
+
+/** `auto`: lista en móvil y tabla en el resto; los demás fuerzan esa vista en cualquier anchura. */
+export type ListViewMode = 'auto' | 'table' | 'card' | 'list';
+
+/** Columna mostrada en la tabla con su anchura calculada. */
+export interface ListViewTableColumn {
+  column: ListViewColumnDirective;
+  key: string;
+  width: number;
+}
+
+/** Reserva si `--list-view-row-height` no se puede leer en px; debe coincidir con `--app-row-height`. */
+const DEFAULT_ROW_HEIGHT = 52;
+const CHECK_WIDTH = 52;
+const ICON_WIDTH = 42;
+const SKELETON_ROWS = 20;
+const COLUMNS_STORAGE_PREFIX = 'list-view-columns-';
 
 @Component({
   templateUrl: 'list-view.component.html',
@@ -34,21 +74,52 @@ import { DisplayProvider } from '@shared/data/display-provider';
   ],
   selector: 'list-view',
   standalone: true,
-  imports: [CommonModule, LayoutModule, ScrollingModule, MatCheckboxModule, MatProgressBarModule, MatCardModule],
+  imports: [
+    CommonModule,
+    LayoutModule,
+    ScrollingModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatTooltipModule,
+    TranslocoPipe,
+    ListViewFocusableDirective,
+  ],
+  host: {
+    '[style.--list-view-row-height]': 'rowHeight() ? rowHeight() + "px" : null',
+  },
 })
 export class ListViewComponent implements OnInit, OnDestroy {
   next = output<void>();
-  prev = output<void>();
   activate = output<any>();
-  // checked = output<any[]>();
+  /** Se emite al pulsar "Reintentar" en el estado de error. */
+  retry = output<void>();
   mobile = signal<boolean>(false);
-  rowIcons = signal<number>(3);
+  rowIcons = signal<number>(1);
   data = input.required<any[] | undefined>();
-  mode = input<string>('list');
+  mode = input<ListViewMode>('auto');
   display = input<DisplayProvider<any>>();
   selectionMultiple = input<boolean>(false);
   searching = input<boolean>();
   selectionModel = input<SelectionModel<any> | undefined>();
+  /** Error de la última carga: si tiene valor se muestra el estado de error en lugar de los datos. */
+  error = input<unknown>();
+  /** Nombre accesible de la tabla o lista. */
+  label = input<string>();
+  /** Clave (p. ej. la entidad) con la que se guardan en `localStorage` las columnas elegidas; sin ella no se guardan. */
+  storageKey = input<string>();
+  /** Altura de fila en px; si no se indica manda `--list-view-row-height`. */
+  rowHeight = input<number>();
+  /** Orden actual; su output `sortChange` se emite al pulsar una cabecera ordenable. */
+  sort = model<ListViewSort | null>(null);
+
+  view = computed(() => {
+    const mode = this.mode();
+    return mode === 'auto' ? (this.mobile() ? 'list' : 'table') : mode;
+  });
 
   tableTemplate = contentChildren(ListViewTableTemplate);
   theTableScroll = viewChild<CdkVirtualScrollViewport>('tableScroll');
@@ -65,79 +136,112 @@ export class ListViewComponent implements OnInit, OnDestroy {
     return theRows.length > 0 ? theRows[0] : new ListViewRowTemplate();
   });
 
-  itemHeight = 52;
+  emptyTemplate = contentChild(ListViewEmptyDirective);
+  errorTemplate = contentChild(ListViewErrorDirective);
 
-  private subs: Subscription;
+  readonly skeleton = Array.from({ length: SKELETON_ROWS }, (_, index) => index);
+  readonly checkWidth = CHECK_WIDTH;
+  readonly retryFn = () => this.retry.emit();
+
+  /** Altura de fila usada por el virtual scroll. */
+  itemHeight = computed(() => this.rowHeight() ?? this.cssRowHeight());
+
+  /** Columnas con título que el usuario puede mostrar u ocultar, con su clave estable. */
+  choosableColumns = computed(() => this.keyedColumns().filter(({ column }) => !!column.title()));
+
+  /** Elección del usuario por clave de columna; se relee al cambiar `storageKey`. */
+  private columnChoice = linkedSignal<Record<string, boolean>>(() => readColumnChoice(this.storageKey()));
+
+  tableLayout = computed(() => {
+    const icons = this.rowIcons();
+    const checks = this.selectionMultiple() ? CHECK_WIDTH : 0;
+    const shown = this.keyedColumns().filter(({ column, key }) => this.isShown(column, key));
+    const base = shown.map(({ column }) => (column.title() ? column.width() : ICON_WIDTH * icons));
+    const used = checks + base.reduce((total, width) => total + width, 0);
+    const available = this.availableWidth();
+    // Si no caben, se mantiene su anchura y la tabla hace scroll horizontal
+    const spare = Math.max(0, available - used);
+    const titled = shown.filter(({ column }) => !!column.title());
+    const factors = titled.reduce((total, { column }) => total + Math.max(0, column.factor()), 0);
+    const columns: ListViewTableColumn[] = shown.map(({ column, key }, index) => {
+      let share: number;
+      if (!titled.length) {
+        share = 1 / shown.length;
+      } else if (!column.title()) {
+        share = 0;
+      } else {
+        share = factors > 0 ? Math.max(0, column.factor()) / factors : 1 / titled.length;
+      }
+      return { column, key, width: base[index] + Math.floor(spare * share) };
+    });
+    return { columns, width: Math.max(used, available) };
+  });
+
+  allSelected = computed(() => {
+    const rows = this.data() ?? [];
+    const selection = this.selectionModel();
+    return !!selection && rows.length > 0 && rows.every((row) => selection.isSelected(row));
+  });
+
+  someSelected = computed(() => {
+    const selection = this.selectionModel();
+    return !!selection && !this.allSelected() && (this.data() ?? []).some((row) => selection.isSelected(row));
+  });
+
+  private keyedColumns = computed(() =>
+    this.table()
+      .columns()
+      .map((column, index) => ({ column, key: column.key() ?? `#${index}` })),
+  );
+
+  private readonly elRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly direction = inject(Directionality, { optional: true });
+  private readonly focusables = viewChildren(ListViewFocusableDirective);
+  private readonly keyManager = new FocusKeyManager(this.focusables, inject(Injector)).withVerticalOrientation();
+  private cssRowHeight = signal<number>(DEFAULT_ROW_HEIGHT);
   private scrollSubs = new Subscription();
   private availableWidth = signal<number>(0);
   private resizeObserver?: ResizeObserver;
 
-  public constructor(
-    observer: BreakpointObserver,
-    private elRef: ElementRef,
-  ) {
-    this.subs = new Subscription();
+  public constructor() {
+    inject(BreakpointObserver)
+      .observe([
+        Breakpoints.XLarge, // >=1920
+        Breakpoints.Large, // 1280–1919.98
+        Breakpoints.Medium, // 960–1279.98
+        Breakpoints.Small, // 600–959.98
+        Breakpoints.XSmall, // <600
+      ])
+      .pipe(takeUntilDestroyed())
+      .subscribe(({ breakpoints: bp }) => {
+        this.mobile.set(!!bp[Breakpoints.XSmall]);
+        this.rowIcons.set(bp[Breakpoints.XLarge] ? 6 : bp[Breakpoints.Large] ? 5 : bp[Breakpoints.Medium] ? 4 : 1);
+      });
+    inject(DestroyRef).onDestroy(() => this.keyManager.destroy());
 
-    this.subs.add(
-      observer.observe([Breakpoints.XSmall]).subscribe((result) => {
-        this.mobile.set(result.matches);
-        this.rowIcons.set(1);
-      }),
-    );
-    this.subs.add(
-      observer
-        .observe([
-          Breakpoints.XLarge, // >=1920
-          Breakpoints.Large, // 1280–1919.98
-          Breakpoints.Medium, // 960–1279.98
-          Breakpoints.Small, // 600–959.98
-          Breakpoints.XSmall, // <600
-        ])
-        .pipe(
-          map(({ breakpoints: bp }) => {
-            if (bp[Breakpoints.XLarge]) return 5;
-            if (bp[Breakpoints.Large]) return 4;
-            if (bp[Breakpoints.Medium]) return 3;
-            if (bp[Breakpoints.Small]) return 0;
-            return 0;
-          }),
-        )
-        .subscribe((result) => {
-          this.rowIcons.set(result + 1);
-        }),
-    );
-
+    effect(() => {
+      // En tarjetas también se navega con las flechas laterales
+      this.keyManager.withHorizontalOrientation(this.view() === 'card' ? (this.direction?.value ?? 'ltr') : null);
+    });
     effect(() => {
       // we need to check effect on data changes
       this.data();
       this.refreshView();
-      if (!this.mobile()) {
-        this.calculateTableColumns();
-      }
     });
   }
 
   ngOnInit(): void {
     const element = this.elRef.nativeElement;
     // La altura de fila la define --list-view-row-height; el virtual scroll necesita conocerla en px
-    this.itemHeight = this.readRowHeight(element);
-    // Configurar el ancho inicial
+    this.cssRowHeight.set(this.readRowHeight(element));
     this.updateAvailableWidth();
-    // Crear el ResizeObserver
-    this.resizeObserver = new ResizeObserver(() => {
-      this.updateAvailableWidth(); // Actualiza el ancho disponible
-    });
-    // Observar el elemento actual
+    this.resizeObserver = new ResizeObserver(() => this.updateAvailableWidth());
     this.resizeObserver.observe(element);
-    // Escuchar el evento de cambio de tamaño de la ventana
-    window.addEventListener('resize', this.updateAvailableWidth);
   }
 
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
-    this.scrollSubs?.unsubscribe();
+    this.scrollSubs.unsubscribe();
     this.resizeObserver?.disconnect();
-    window.removeEventListener('resize', this.updateAvailableWidth);
   }
 
   selectAndActivate(row: any) {
@@ -150,7 +254,80 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   isSelected(row: any) {
-    return this.selectionModel()?.isSelected(row);
+    return !!this.selectionModel()?.isSelected(row);
+  }
+
+  toggleAll() {
+    const selection = this.selectionModel();
+    if (!selection) {
+      return;
+    }
+    if (this.allSelected()) {
+      selection.clearSelection();
+    } else {
+      selection.select(this.data() ?? []);
+    }
+  }
+
+  /** Enter activa, espacio selecciona y las flechas mueven el foco entre filas. */
+  onItemKeydown(event: KeyboardEvent, row: any, item: ListViewFocusableDirective) {
+    // Las teclas en los controles de dentro de la fila (menú de acciones, checkbox) son suyas
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.selectAndActivate(row);
+    } else if (event.key === ' ') {
+      event.preventDefault();
+      if (this.selectionMultiple()) {
+        this.check(row);
+      } else {
+        this.selectionModel()?.select([row]);
+      }
+    } else {
+      this.keyManager.updateActiveItem(item);
+      this.keyManager.onKeydown(event);
+    }
+  }
+
+  isColumnShown(key: string): boolean {
+    const entry = this.keyedColumns().find((column) => column.key === key);
+    return !!entry && this.isShown(entry.column, key);
+  }
+
+  /** Impide ocultar la última columna con título visible. */
+  isLastShown(key: string): boolean {
+    const shown = this.choosableColumns().filter((entry) => this.isShown(entry.column, entry.key));
+    return shown.length === 1 && shown[0].key === key;
+  }
+
+  toggleColumn(key: string) {
+    if (this.isLastShown(key)) {
+      return;
+    }
+    const choice = { ...this.columnChoice(), [key]: !this.isColumnShown(key) };
+    this.columnChoice.set(choice);
+    writeColumnChoice(this.storageKey(), choice);
+  }
+
+  toggleSort(key: string) {
+    const current = this.sort();
+    if (current?.key !== key) {
+      this.sort.set({ key, direction: 'asc' });
+    } else if (current.direction === 'asc') {
+      this.sort.set({ key, direction: 'desc' });
+    } else {
+      this.sort.set(null);
+    }
+  }
+
+  ariaSort(column: ListViewColumnDirective, key: string): string | null {
+    if (!column.sortable()) {
+      return null;
+    }
+    const current = this.sort();
+    return current?.key !== key ? 'none' : current.direction === 'asc' ? 'ascending' : 'descending';
   }
 
   fallbackIcon(str: any): AvatarSpec | null {
@@ -158,15 +335,18 @@ export class ListViewComponent implements OnInit, OnDestroy {
     return displayer ? computeAvatarSpec(displayer.display(str)) : null;
   }
 
-  private readRowHeight(element: HTMLElement): number {
-    const value = parseFloat(getComputedStyle(element).getPropertyValue('--list-view-row-height'));
-    return Number.isFinite(value) && value > 0 ? value : this.itemHeight;
+  private isShown(column: ListViewColumnDirective, key: string): boolean {
+    return !column.title() || (this.columnChoice()[key] ?? column.defaultVisible());
   }
 
-  private updateAvailableWidth = (): void => {
-    const elementRect = this.elRef.nativeElement.getBoundingClientRect();
-    this.availableWidth.set(elementRect.width); // Establece el ancho actual del elemento
-  };
+  private readRowHeight(element: HTMLElement): number {
+    const value = parseFloat(getComputedStyle(element).getPropertyValue('--list-view-row-height'));
+    return Number.isFinite(value) && value > 0 ? value : DEFAULT_ROW_HEIGHT;
+  }
+
+  private updateAvailableWidth(): void {
+    this.availableWidth.set(this.elRef.nativeElement.getBoundingClientRect().width);
+  }
 
   private refreshView() {
     const tableScroll = this.theTableScroll();
@@ -189,7 +369,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
       ) {
         this.next.emit();
       }
-      this.scrollSubs?.unsubscribe();
+      this.scrollSubs.unsubscribe();
       this.scrollSubs = scroller
         .elementScrolled()
         .pipe(
@@ -207,64 +387,27 @@ export class ListViewComponent implements OnInit, OnDestroy {
         });
     });
   }
+}
 
-  private calculateTableColumns() {
-    let defWidth = 42;
-    let checks = this.selectionMultiple() ? 52 : 0;
-    const table = this.table();
-    const columns = table.columns();
-    const width = this.availableWidth() - checks;
-    let managedWith = 0;
-    let expandableColumns = 0;
-    columns.forEach((column) => {
-      const factor = column.factor();
-      if (factor > 0) {
-        expandableColumns += factor;
-      }
-      if (column.title()) {
-        managedWith += column.width();
-      } else {
-        managedWith += defWidth * this.rowIcons();
-      }
-    });
-    let excesive = width - managedWith;
-    const toRemove = [...columns];
-    toRemove.forEach((item, index) => {
-      (item as any).originalIndex = index;
-    });
-    toRemove.sort((a, b) => {
-      if (b.factor() !== a.factor()) {
-        return b.factor() - a.factor();
-      }
-      if (b.width() !== a.width()) {
-        return b.width() - a.width();
-      }
-      return (b as any).originalIndex - (a as any).originalIndex;
-    });
-    expandableColumns = 0;
-    toRemove.forEach((column) => {
-      if (excesive < 0 && column.title()) {
-        column.visible = false;
-        excesive += column.width();
-      } else {
-        if (column.title()) {
-          ++expandableColumns;
-        }
-        column.visible = true;
-      }
-    });
-    let each = Math.floor(excesive / (expandableColumns || columns.length));
-    columns.forEach((column) => {
-      const factor = column.factor();
-      const width = column.title() ? column.width() : defWidth * this.rowIcons();
-      column.displayHeight = this.itemHeight;
-      if (!expandableColumns) {
-        column.displayWidth = width + each;
-      } else if (column.title()) {
-        column.displayWidth = width + factor * each;
-      } else {
-        column.displayWidth = width;
-      }
-    });
+function readColumnChoice(storageKey: string | undefined): Record<string, boolean> {
+  if (!storageKey) {
+    return {};
+  }
+  try {
+    const stored = JSON.parse(localStorage.getItem(COLUMNS_STORAGE_PREFIX + storageKey) ?? '{}');
+    return typeof stored === 'object' && stored !== null ? stored : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeColumnChoice(storageKey: string | undefined, choice: Record<string, boolean>): void {
+  if (!storageKey) {
+    return;
+  }
+  try {
+    localStorage.setItem(COLUMNS_STORAGE_PREFIX + storageKey, JSON.stringify(choice));
+  } catch {
+    // Sin cuota o en modo privado: la elección sigue en memoria
   }
 }

@@ -14,7 +14,110 @@
       "noResults": "No results",
       "error": "The options could not be loaded. Please try again."
     },
-    "hiddenField": "Field hidden by permissions"
+    "empty": "There are no items to show.",
+    "hiddenField": "Field hidden by permissions",
+    "list": {
+      "columns": "Columns",
+      "selectAll": "Select all",
+      "selectRow": "Select row"
+    },
+    "loadError": "The data could not be loaded.",
+    "retry": "Retry",
+    "moreActions": "More actions",
+    "action": {
+      "content": "Do you want to continue?",
+      "report": "Done",
+      "create": {
+        "label": "Create",
+        "icon": "add",
+        "tooltip": "Create a new item",
+        "title": "New item"
+      },
+      "edit": {
+        "label": "Edit",
+        "icon": "edit_note",
+        "tooltip": "Edit the item",
+        "title": "Edit item"
+      },
+      "detail": {
+        "label": "View",
+        "icon": "visibility",
+        "tooltip": "View the item details",
+        "title": "Details"
+      },
+      "delete": {
+        "label": "Delete",
+        "icon": "delete",
+        "tooltip": "Delete the item",
+        "title": "Delete",
+        "content": "Are you sure you want to delete the item?",
+        "okBtn": "Delete",
+        "report": "Item deleted"
+      },
+      "delete-selection": {
+        "label": "Delete",
+        "icon": "delete",
+        "tooltip": "Delete the selected items",
+        "title": "Delete selection",
+        "content": "Are you sure you want to delete the selected items?",
+        "okBtn": "Delete",
+        "report": "Items deleted"
+      },
+      "enable": {
+        "label": "Enable",
+        "icon": "visibility",
+        "tooltip": "Enable the item",
+        "title": "Enable",
+        "content": "Do you want to enable the item?",
+        "okBtn": "Enable",
+        "report": "Item enabled"
+      },
+      "enable-selection": {
+        "label": "Enable",
+        "icon": "visibility",
+        "tooltip": "Enable the selected items",
+        "title": "Enable selection",
+        "content": "Do you want to enable the selected items?",
+        "okBtn": "Enable",
+        "report": "Items enabled"
+      },
+      "disable": {
+        "label": "Disable",
+        "icon": "visibility_off",
+        "tooltip": "Disable the item",
+        "title": "Disable",
+        "content": "Do you want to disable the item?",
+        "okBtn": "Disable",
+        "report": "Item disabled"
+      },
+      "disable-selection": {
+        "label": "Disable",
+        "icon": "visibility_off",
+        "tooltip": "Disable the selected items",
+        "title": "Disable selection",
+        "content": "Do you want to disable the selected items?",
+        "okBtn": "Disable",
+        "report": "Items disabled"
+      },
+      "unlock": {
+        "icon": "lock"
+      },
+      "accept": {
+        "icon": "visibility_off"
+      },
+      "reject": {
+        "icon": "visibility_off"
+      },
+      "unlock-selection": {
+        "icon": "lock"
+      },
+      "accept-selection": {
+        "icon": "visibility_off"
+      },
+      "reject-selection": {
+        "icon": "visibility_off"
+      }
+    }
   },
   "validation": {
     "required": "This field is required",
@@ -110,10 +213,31 @@
       }
     },
     "422": "Some of the data sent is not valid. Review it and try again.",
-    "generic": "An unexpected error occurred. Please try again.",
-    "modal": {
-      "retrySuccess": "The operation was retried successfully. Reload to see the result.",
-      "retryError": "The retry failed too. Go back to home and try again."
+    "generic": "An unexpected error occurred. Please try again."
+  },
+  "editConflict": {
+    "title": "The item changed while you were editing it",
+    "summary": "{{conflicts}} conflicting fields and {{merged}} merged automatically. Choose which value to keep for each conflict.",
+    "keepMine": "Keep all my changes",
+    "useServer": "Use everything from the server",
+    "showUnchanged": "Show unchanged fields ({{count}})",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "empty": "(empty)",
+    "yes": "Yes",
+    "no": "No",
+    "column": {
+      "field": "Field",
+      "original": "Original",
+      "sent": "Sent",
+      "current": "Current"
+    },
+    "state": {
+      "conflict": "Conflict",
+      "mine": "Your change",
+      "theirs": "Server change",
+      "same": "Same change",
+      "unchanged": "Unchanged"
     }
   }
 }
