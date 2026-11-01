@@ -232,6 +232,20 @@ describe('ListViewComponent', () => {
       expect(host.activated).toEqual([host.data()![1]]);
     });
 
+    it('clicking a cell activates without selecting when selection is multiple', async () => {
+      const fixture = createHost();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      const host = fixture.componentInstance;
+      const cell: HTMLElement = fixture.nativeElement.querySelector('.tbody [role="row"] .td:not(.check)');
+
+      cell.click();
+      fixture.detectChanges();
+
+      expect(host.activated).toEqual([host.data()![0]]);
+      expect(host.selection.selected().length).toBe(0);
+    });
+
     it('select all marks the loaded rows', async () => {
       const fixture = createHost();
       await fixture.whenStable();

@@ -244,8 +244,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.resizeObserver?.disconnect();
   }
 
+  /**
+   * Activar una fila (clic o Enter) aplica la acción por defecto. Con selección múltiple no toca la selección:
+   * esa la llevan los checkboxes, y el contenedor de acciones ya selecciona el elemento al ejecutar la acción.
+   */
   selectAndActivate(row: any) {
-    this.selectionModel()?.select([row]);
+    if (!this.selectionMultiple()) {
+      this.selectionModel()?.select([row]);
+    }
     this.activate.emit(row);
   }
 
