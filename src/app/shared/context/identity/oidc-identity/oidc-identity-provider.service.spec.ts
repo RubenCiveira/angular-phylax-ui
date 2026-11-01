@@ -548,7 +548,7 @@ describe('OidcIdentityHandlerService', () => {
     it('refreshes with the refresh token through the automatic refresh only', fakeAsync(() => {
       const { mocks, config } = configureWith({});
       expect(config.useSilentRefresh).toBeFalse();
-      expect(mocks.oauthService.setupAutomaticSilentRefresh).toHaveBeenCalled();
+      expect(mocks.oauthService.setupAutomaticSilentRefresh).toHaveBeenCalledWith({}, 'access_token');
     }));
 
     it('reads the roles from the configured roles-claim', fakeAsync(() => {

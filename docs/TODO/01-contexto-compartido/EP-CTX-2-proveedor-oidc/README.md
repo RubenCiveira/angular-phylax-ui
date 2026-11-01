@@ -3,7 +3,7 @@ id: EP-CTX-2
 titulo: "Proveedor OIDC"
 area: contexto-compartido
 prioridad: critica
-estado: en-curso
+estado: hecho
 issues: [CTX-06, CTX-08, CTX-09, CTX-07]
 ---
 
@@ -58,5 +58,5 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 - [x] CTX-06 — OIDC: no volcar información de depuración ni eventos a los logs
 - [x] CTX-08 — OIDC: configuración coherente (pkce, scope, roles, persistencia)
-- [ ] CTX-09 — OIDC: un único mecanismo de refresco de token
+- [x] CTX-09 — OIDC: un único mecanismo de refresco de token
 - [x] CTX-07 — OIDC: sustituir alert/confirm por diálogos traducidos

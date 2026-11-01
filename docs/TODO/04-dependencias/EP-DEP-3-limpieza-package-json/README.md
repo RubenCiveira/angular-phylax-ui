@@ -58,4 +58,4 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 - [ ] DEP-05 — Sustituir uuid por crypto.randomUUID()
 - [ ] DEP-06 — provideAnimationsAsync y evaluar retirar @angular/animations
-- [ ] DEP-07 — Quitar @angular/platform-browser-dynamic
+- [x] DEP-07 — Quitar @angular/platform-browser-dynamic

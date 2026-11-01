@@ -7,7 +7,7 @@ paso: 3
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 03-dependencias.md
 ---
@@ -24,7 +24,7 @@ Está en las dependencias, pero el arranque usa `bootstrapApplication` de `@angu
 
 ## Tareas
 
-- [ ] Quitarlo de `package.json` y comprobar `ng build` y `ng test`.
+- [x] Quitarlo de `package.json` y comprobar `ng build` y `ng test`. *Hecho; los fallos de build de producción (presupuesto de `form-layout.component.scss`) y de tests ya existían y no dependen de esto.*
 
 ## Criterios de aceptación
 

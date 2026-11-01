@@ -134,8 +134,9 @@ export class OidcIdentityHandlerService implements IdentityHandler {
       this.oauthService.setStorage(sessionStorage);
     }
     this.oauthService.configure(config);
-    // The only refresh mechanism: refreshes on token_expires (timeoutFactor). Calling it again replaces the previous one
-    this.oauthService.setupAutomaticSilentRefresh();
+    // The only refresh mechanism: refreshes on token_expires (timeoutFactor). Calling it again replaces the previous one.
+    // Only the access token timer: listening to the id_token one too could refresh twice per expiry
+    this.oauthService.setupAutomaticSilentRefresh({}, 'access_token');
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       this.incomingLogin();
     });
