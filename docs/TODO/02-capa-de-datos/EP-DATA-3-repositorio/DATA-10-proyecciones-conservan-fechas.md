@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,12 +24,12 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] Sustituir por `structuredClone(item)` (o `{ ...item }`, ya que solo se reemplazan las propiedades `include`).
-- [ ] Test: un ítem con `Date` sigue teniendo `Date` tras la proyección.
+- [x] Sustituir por `structuredClone(item)` (o `{ ...item }`, ya que solo se reemplazan las propiedades `include`). *Copia superficial `{ ...item }`; las referencias se sustituyen por un `Signal` que se carga una sola vez por `$ref`.*
+- [x] Test: un ítem con `Date` sigue teniendo `Date` tras la proyección. *También para `projection()`.*
 
 ## Criterios de aceptación
 
-- [ ] `row.registeredAt instanceof Date` en la lista de oauth-client.
+- [x] `row.registeredAt instanceof Date` en la lista de oauth-client.
 
 ## Ficheros afectados
 

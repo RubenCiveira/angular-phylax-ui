@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 03-dependencias.md
 ---
@@ -24,16 +24,16 @@ origen: 03-dependencias.md
 
 ## Tareas
 
-- [ ] Mover los imports de `sdk-*`, `exporter-*`, `instrumentation*` y `context-zone` a `otel-bootstrap.ts`.
-- [ ] `activate()` hace `await import('./otel-bootstrap')` solo si hay `telemetry.name`.
-- [ ] Mantener solo `@opentelemetry/api` en el bundle principal.
-- [ ] Sustituir `getWebAutoInstrumentations` por `instrumentation-fetch`, `-xml-http-request` y `-document-load`.
-- [ ] Medir el bundle inicial antes y después (`ng build --stats-json`).
+- [x] Mover los imports de `sdk-*`, `exporter-*`, `instrumentation*` y `context-zone` a `otel-bootstrap.ts`. *También `resources` y `semantic-conventions`, y el parcheo de `console` del logger.*
+- [x] `activate()` hace `await import('./otel-bootstrap')` solo si hay `telemetry.name`. *`activate()` pasa a devolver `Promise<void>`; si el chunk no carga, se registra el error y la app sigue.*
+- [x] Mantener solo `@opentelemetry/api` en el bundle principal.
+- [x] Sustituir `getWebAutoInstrumentations` por `instrumentation-fetch`, `-xml-http-request` y `-document-load`. *Se deja de instrumentar `user-interaction`.*
+- [x] Medir el bundle inicial antes y después (`ng build --stats-json`). *Inicial (main + polyfills + chunks de arranque): 1.193.414 B → 990.486 B (−203 KB). OpenTelemetry en el inicial: 191.020 B → 25.329 B (solo `@opentelemetry/api`). Chunk diferido `otel-bootstrap`: 200 KB (≈50 KB comprimido).*
 
 ## Criterios de aceptación
 
-- [ ] Sin `telemetry` en la configuración, el chunk de OpenTelemetry no se descarga.
-- [ ] El bundle inicial baja al menos 100 KB.
+- [x] Sin `telemetry` en la configuración, el chunk de OpenTelemetry no se descarga.
+- [x] El bundle inicial baja al menos 100 KB.
 
 ## Ficheros afectados
 

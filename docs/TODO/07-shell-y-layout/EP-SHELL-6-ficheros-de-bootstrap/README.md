@@ -3,7 +3,7 @@ id: EP-SHELL-6
 titulo: "Ficheros de bootstrap"
 area: shell-y-layout
 prioridad: baja
-estado: pendiente
+estado: en-curso
 issues: [SHELL-23, SHELL-22]
 ---
 
@@ -54,5 +54,5 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] SHELL-23 — Renombrar enviroment y añadir versión de build
+- [x] SHELL-23 — Renombrar enviroment y añadir versión de build
 - [ ] SHELL-22 — Documentar context.config.ts como punto de extensión

@@ -5,6 +5,7 @@ import {
   SnippetAssetFilter,
 } from '@features/template/snippet-asset/model/snippet-asset.model';
 import { RepositoryMetadata, RepositoryService } from '@shared/data/repository/repository.service';
+import { RepositoryStore } from '@shared/data/repository/repository-store.service';
 import { ApiProvider } from '@shared/data/repository/provider/impl/api.provider';
 import { Shift, Tick } from '@shared/data/repository/repository.model';
 import { SnippetRepository } from '@features/template/snippet/repository/snippet-repository.service';
@@ -23,22 +24,27 @@ export class SnippetAssetRepository {
     return {
       key: 'uid',
       name: 'snippet-asset',
+      entity: {
+        id: 'uid',
+        name: 'snippet-asset',
+        display: 'code',
+      },
       provider: new ApiProvider(
         'uid',
         api,
         'http://net-civeira-phylax/document/snippet-asset',
         'http://net-civeira-phylax/me/acl/document/snippet-asset',
       ),
-      reference: (name: string): RepositoryService<any, any> | null => {
+      reference: (name: string): RepositoryMetadata<any, any> | null => {
         if ('snippet' == name) {
-          return new RepositoryService(SnippetRepository.metadata(api));
+          return SnippetRepository.metadata(api);
         }
         return null;
       },
     };
   }
-  constructor(api: ApiService) {
-    this.repo = new RepositoryService(SnippetAssetRepository.metadata(api));
+  constructor(api: ApiService, store: RepositoryStore) {
+    this.repo = new RepositoryService(SnippetAssetRepository.metadata(api), store);
   }
   acl(): Tick<{ generic: Acl; specific: Acl }, string | null> {
     return this.repo.acl();

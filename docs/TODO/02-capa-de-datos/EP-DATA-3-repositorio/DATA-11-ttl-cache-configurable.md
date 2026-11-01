@@ -7,7 +7,7 @@ paso: 3
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CTX-15]
 origen: 06-capa-de-datos.md
 ---
@@ -24,12 +24,12 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] `RepositoryMetadata.ttl` opcional por entidad.
-- [ ] Valor global `data.cache-ttl` en la configuración.
+- [x] `RepositoryMetadata.ttl` opcional por entidad.
+- [x] Valor global `data.cache-ttl` en la configuración. *Prioridad: `RepositoryMetadata.ttl` → `data.cache-ttl` → 3000 ms. Se lee en cada uso, así que también cambia si la configuración se recarga.*
 
 ## Criterios de aceptación
 
-- [ ] Cambiar `data.cache-ttl` modifica la caducidad sin recompilar.
+- [x] Cambiar `data.cache-ttl` modifica la caducidad sin recompilar.
 
 ## Ficheros afectados
 

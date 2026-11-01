@@ -3,7 +3,7 @@ id: EP-CTX-5
 titulo: "Logger y telemetría"
 area: contexto-compartido
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [CTX-21, CTX-22]
 ---
 
@@ -45,5 +45,5 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] CTX-21 — Logger propio con niveles y redacción; no interceptar console por defecto
-- [ ] CTX-22 — Telemetría: atributos útiles y nombres correctos
+- [x] CTX-21 — Logger propio con niveles y redacción; no interceptar console por defecto
+- [x] CTX-22 — Telemetría: atributos útiles y nombres correctos

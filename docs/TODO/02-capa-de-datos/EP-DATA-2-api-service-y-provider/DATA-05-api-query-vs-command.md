@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,14 +24,14 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] Separar `query(endpoint, params)` (reactiva al contexto, comportamiento actual) de `command(method, endpoint, body, params)` (una sola emisión, contexto con `first()`).
-- [ ] Hacer que `post/put/patch/delete` de `ApiService` usen `command`.
-- [ ] Revisar `ApiProvider` para que las operaciones masivas usen `command`.
-- [ ] Test: cambiar el contexto durante un `deleteAllForQuery` → una sola petición DELETE.
+- [x] Separar `query(endpoint, params)` (reactiva al contexto, comportamiento actual) de `command(method, endpoint, body, params)` (una sola emisión, contexto con `first()`). *`command` recibe la función del `ClientService` en lugar de `method`.*
+- [x] Hacer que `post/put/patch/delete` de `ApiService` usen `command`. *También `upload` (es un POST); `get` y `download` siguen como `query`.*
+- [x] Revisar `ApiProvider` para que las operaciones masivas usen `command`. *Lo hacen vía `api.delete`/`api.patch`; cada consulta de estado del sondeo toma una sola respuesta (`take(1)`).*
+- [x] Test: cambiar el contexto durante un `deleteAllForQuery` → una sola petición DELETE.
 
 ## Criterios de aceptación
 
-- [ ] Ninguna petición de mutación se emite dos veces por cambios de contexto.
+- [x] Ninguna petición de mutación se emite dos veces por cambios de contexto.
 
 ## Ficheros afectados
 

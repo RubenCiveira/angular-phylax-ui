@@ -7,7 +7,7 @@ paso: 3
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CTX-12, UI-19]
 origen: 05-contexto-compartido.md
 ---
@@ -24,14 +24,14 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Usar `ErrorPageComponent` con la imagen `error-401.png` / `error-403.png`.
-- [ ] Con `reason=401`: botón "Iniciar sesión" (`identity.login('main')`).
-- [ ] Con `reason=403`: botones "Volver al inicio" y "Cambiar de cuenta".
-- [ ] Textos `auth.unauthorized.*` en el i18n global.
+- [x] Usar `ErrorPageComponent` con la imagen `error-401.png` / `error-403.png`. *Con `titleKey`/`messageKey` propios y los botones proyectados; "Volver al inicio" es el enlace de la propia página de error.*
+- [x] Con `reason=401`: botón "Iniciar sesión" (`identity.login('main')`).
+- [x] Con `reason=403`: botones "Volver al inicio" y "Cambiar de cuenta". *Con 403 ya no redirige sola a `returnUrl` (sería un bucle con el guard). "Cambiar de cuenta" cierra la sesión.*
+- [x] Textos `auth.unauthorized.*` en el i18n global.
 
 ## Criterios de aceptación
 
-- [ ] Desde `/unauthorized` el usuario puede iniciar sesión o volver al inicio con un clic.
+- [x] Desde `/unauthorized` el usuario puede iniciar sesión o volver al inicio con un clic.
 
 ## Ficheros afectados
 

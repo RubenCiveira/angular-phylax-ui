@@ -31,8 +31,6 @@ Los issues están ordenados para respetar sus dependencias y tocar cada fichero 
 | `src/app/shared/toolkit/gantt-view/**` | UI-01 |
 | `src/app/shared/toolkit/kanban-view/**` | UI-01 |
 | `src/app/shared/toolkit/map-view/**` | UI-01 |
-| `src/app/shared/toolkit/speed-dial/**` | UI-01 |
-| `src/app/shared/toolkit/editable/editable-*/**` | UI-01 |
 
 ## Antes de empezar
 

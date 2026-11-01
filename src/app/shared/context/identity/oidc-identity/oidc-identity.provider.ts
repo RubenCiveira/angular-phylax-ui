@@ -3,7 +3,8 @@ import { EnvironmentProviders, inject, makeEnvironmentProviders, provideAppIniti
 import { OAuthService, provideOAuthClient } from 'angular-oauth2-oidc';
 import { IDENTITY_PROVIDER, IDENTITY_UI } from '../identity-provider.interface';
 import { IdentityUiService } from '../identity-ui.service';
-import { AppConfigService } from '@shared/context/config/app-config.service';
+import { RuntimeConfigService } from '@shared/context/config/app-config.service';
+import { Logger } from '@shared/context/observability/logger.service';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { ErrorService } from '@shared/context/observability/error.service';
 import { OidcIdentityProviderService } from './oidc-identity-provider.service';
@@ -21,7 +22,7 @@ export function provideOidcIdentity(): EnvironmentProviders {
       provide: IDENTITY_PROVIDER,
       useClass: OidcIdentityProviderService,
       multi: true,
-      deps: [OAuthService, AppConfigService, AppStateService, ErrorService, IDENTITY_UI],
+      deps: [OAuthService, RuntimeConfigService, AppStateService, ErrorService, IDENTITY_UI, Logger],
     },
     // Arranca la escucha de la vuelta del step-up sin que nadie tenga que inyectar el servicio
     provideAppInitializer(() => inject(StepUpService).listen()),

@@ -7,7 +7,7 @@ paso: 5
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [DATA-01]
 origen: 05-contexto-compartido.md
 ---
@@ -24,12 +24,12 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Convertir en `interface UserInfo` con `authenticated: boolean` obligatorio, `roles: string[]` y `permissions?: string[]`.
-- [ ] Sacar `token`: `ClientService` pide el token al `IdentityHandler` (`token$()`).
+- [x] Convertir en `interface UserInfo` con `authenticated: boolean` obligatorio, `roles: string[]` y `permissions?: string[]`. *`roles` sigue opcional (el proveedor pone `['guest']` por defecto); se quita `stored`, que no se usaba. `ANONYMOUS_USER` es el valor sin sesión.*
+- [x] Sacar `token`: `ClientService` pide el token al `IdentityHandler` (`token$()`). *A través de `IdentityService.token(name)`.*
 
 ## Criterios de aceptación
 
-- [ ] `grep -rn "\.token" src/app` solo encuentra usos dentro de `identity/` y `client.service.ts`.
+- [x] `grep -rn "\.token" src/app` solo encuentra usos dentro de `identity/` y `client.service.ts`.
 
 ## Ficheros afectados
 

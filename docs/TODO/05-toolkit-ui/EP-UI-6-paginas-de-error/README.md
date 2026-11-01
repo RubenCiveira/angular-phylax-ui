@@ -3,7 +3,7 @@ id: EP-UI-6
 titulo: "Páginas y modal de error"
 area: toolkit-ui
 prioridad: critica
-estado: pendiente
+estado: en-curso
 issues: [UI-19, UI-20]
 ---
 
@@ -46,5 +46,5 @@ Issues de otras épicas de los que depende:
 
 ## Checklist de la épica
 
-- [ ] UI-19 — Página de error traducida y útil
+- [x] UI-19 — Página de error traducida y útil
 - [ ] UI-20 — Modal de error con acciones y sin código muerto

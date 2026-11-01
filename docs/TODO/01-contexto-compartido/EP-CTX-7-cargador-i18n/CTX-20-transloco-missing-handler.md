@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CTX-19]
 origen: 05-contexto-compartido.md
 ---
@@ -24,14 +24,14 @@ Si falta una clave, Transloco devuelve la clave literal (`access.oauth-client.li
 
 ## Tareas
 
-- [ ] Implementar `TranslocoMissingHandler`: en producción humaniza el último segmento significativo (`allow-all-scopes.title` → "Allow all scopes"); en desarrollo devuelve `⟦clave⟧` y registra la clave una sola vez.
-- [ ] Registrarlo con `provideTranslocoMissingHandler`.
-- [ ] Test unitario de la humanización.
+- [x] Implementar `TranslocoMissingHandler`: en producción humaniza el último segmento significativo (`allow-all-scopes.title` → "Allow all scopes"); en desarrollo devuelve `⟦clave⟧` y registra la clave una sola vez.
+- [x] Registrarlo con `provideTranslocoMissingHandler`. *Dentro de `provideI18nConfiguration()`; la clase es `HumanizingMissingHandler`. Los segmentos genéricos (`title`, `button`, `label`…) se saltan.*
+- [x] Test unitario de la humanización.
 
 ## Criterios de aceptación
 
-- [ ] Ninguna pantalla muestra una clave con puntos en producción.
-- [ ] En desarrollo las claves que faltan se ven marcadas.
+- [x] Ninguna pantalla muestra una clave con puntos en producción.
+- [x] En desarrollo las claves que faltan se ven marcadas.
 
 ## Ficheros afectados
 

@@ -7,7 +7,7 @@ paso: 3
 prioridad: baja
 esfuerzo: S
 ambito: ambos
-estado: pendiente
+estado: hecho
 depende_de: [CTX-15]
 origen: 06-capa-de-datos.md
 ---
@@ -24,12 +24,12 @@ El body de cada mutación se mezcla con `fixedContext`, lo que puede añadir pro
 
 ## Tareas
 
-- [ ] Nueva clave de configuración `api.<key>.inject-context: string[]` (por defecto, la lista actual de contextos).
-- [ ] Aplicar solo las claves listadas.
+- [x] Nueva clave de configuración `api.<key>.inject-context: string[]` (por defecto, la lista actual de contextos). *Ausente = todas las claves del contexto fijo (comportamiento previo); no se añade a `phylax-config.json` porque las claves de contexto son dinámicas. Se lee del `AppConfigService` actual, sin esperar a CTX-15.*
+- [x] Aplicar solo las claves listadas.
 
 ## Criterios de aceptación
 
-- [ ] Con `inject-context: []`, el body se envía tal cual.
+- [x] Con `inject-context: []`, el body se envía tal cual.
 
 ## Ficheros afectados
 

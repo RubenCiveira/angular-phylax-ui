@@ -7,7 +7,7 @@ paso: 1
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,14 +24,14 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Usar `Map<string, IdentityHandler>`.
-- [ ] `bootstrap()` devuelve `throwError(() => new IdentityNotConfiguredError(name))` si no hay handler.
-- [ ] Leer la configuración con `take(1)` o reconfigurar solo si cambia.
-- [ ] Mensajes técnicos en inglés y a través del logger.
+- [x] Usar `Map<string, IdentityHandler>`.
+- [x] `bootstrap()` devuelve `throwError(() => new IdentityNotConfiguredError(name))` si no hay handler.
+- [x] Leer la configuración con `take(1)` o reconfigurar solo si cambia. *Se ignora el `null` inicial (microfront) y se reconfigura solo si cambia (`distinctUntilChanged`); `bootstrap()` espera a la primera configuración.*
+- [x] Mensajes técnicos en inglés y a través del logger.
 
 ## Criterios de aceptación
 
-- [ ] Con un `type` inválido en la configuración, la app muestra un error claro en lugar de quedarse cargando.
+- [x] Con un `type` inválido en la configuración, la app muestra un error claro en lugar de quedarse cargando. *`AppComponent` captura el error y `BootstrapComponent` muestra `identity.errors.notConfigured`; el timeout y el reintento son de SHELL-11.*
 
 ## Ficheros afectados
 

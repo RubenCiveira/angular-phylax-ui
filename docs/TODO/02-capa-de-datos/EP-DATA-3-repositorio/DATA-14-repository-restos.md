@@ -7,7 +7,7 @@ paso: 2
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,13 +24,13 @@ Quedan `console.log('REMOVE UNSUSCRIBES OF THE PROYECTION')`, varios `FIXME`/`TO
 
 ## Tareas
 
-- [ ] Quitar el `console.log`.
-- [ ] Quitar `next()`/`hasNext()` añadidos a `list()` o implementarlos.
-- [ ] Convertir los `FIXME` en issues o resolverlos (el de `finalize` en operaciones masivas queda cubierto por DATA-08).
+- [x] Quitar el `console.log`.
+- [x] Quitar `next()`/`hasNext()` añadidos a `list()` o implementarlos. *Eliminados; la paginación vive en `projections()`.*
+- [x] Convertir los `FIXME` en issues o resolverlos (el de `finalize` en operaciones masivas queda cubierto por DATA-08). *Los de `finalize` quedan explicados (el sondeo completa al terminar); el de `next()` se resuelve ignorando `next()` mientras carga la última página. `partialBySelection` ya no lanza el mensaje de `deleteSelection`.*
 
 ## Criterios de aceptación
 
-- [ ] Sin `console.log` ni `FIXME` en el fichero.
+- [x] Sin `console.log` ni `FIXME` en el fichero.
 
 ## Ficheros afectados
 

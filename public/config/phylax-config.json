@@ -9,7 +9,17 @@
     }
   },
   "i18n": {
-    "available-langs": ["es", "pt", "fr", "de"]
+    "default-lang": "es",
+    "available-langs": [
+      "es",
+      "en",
+      "pt",
+      "fr",
+      "de"
+    ]
+  },
+  "tenant": {
+    "default": "main"
   },
   "identity": {
     "main": {
@@ -23,13 +33,20 @@
       "client-id": "phylax-ui",
       "scope": "openid profile email offline_access",
       "roles-claim": "groups",
-      "audience": ["phylax-ui", "phylax-api"],
-      "ph-audience": ["phylax-ui", "phylax-api"],
+      "audience": [
+        "phylax-ui",
+        "phylax-api"
+      ],
+      "ph-audience": [
+        "phylax-ui",
+        "phylax-api"
+      ],
       "persistent": false
     }
   },
   "telemetry": {
     "name": "phylax-ui",
+    "environment": "local",
     "exporter": {
       "tracer": {
         "url": "http://localhost:8090/v1/traces"

@@ -3,7 +3,7 @@ id: EP-DATA-1
 titulo: "Cliente HTTP (ClientService)"
 area: capa-de-datos
 prioridad: critica
-estado: pendiente
+estado: hecho
 issues: [DATA-02, DATA-01, DATA-04]
 ---
 
@@ -50,6 +50,6 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] DATA-02 — Convertir fechas con offset ±hh:mm
-- [ ] DATA-01 — Peticiones sin sesión: error 401 en lugar de esperar para siempre
-- [ ] DATA-04 — ClientService: tipo RequestTarget y trazas homogéneas
+- [x] DATA-02 — Convertir fechas con offset ±hh:mm
+- [x] DATA-01 — Peticiones sin sesión: error 401 en lugar de esperar para siempre
+- [x] DATA-04 — ClientService: tipo RequestTarget y trazas homogéneas

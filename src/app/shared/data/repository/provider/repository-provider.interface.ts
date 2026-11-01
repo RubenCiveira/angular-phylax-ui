@@ -2,26 +2,20 @@
 import { Observable } from 'rxjs';
 import { Acl } from '../../acl/acl.model';
 
-export interface EntityMetadataReferenceInfo {
-  type: string;
-}
-
-export interface EntityMetadataChildInfo {
-  type: string;
-  url: string;
-}
-
+/** Metadatos de la entidad que emite el generador a partir del modelo. */
 export interface EntityMetadata {
+  /** Campo identificador. */
   id: string;
   path?: string;
   name?: string;
+  /** Campos `date` (sin hora): viajan como `YYYY-MM-DD` y se exponen como `Date` a medianoche local. */
   dates?: string[];
+  /** Campos `datetime`: viajan como ISO-8601 y se exponen como `Date`. */
   datetimes?: string[];
-  // acl?: string,
-  // group?: string,
-  // discriminators?: { [key: string]: string };
-  // childs?: { [key: string]: EntityMetadataChildInfo };
-  // references?: { [key: string]: EntityMetadataReferenceInfo };
+  /** Campos sensibles: no se muestran ni se registran en claro. */
+  sensitive?: string[];
+  /** Campo con el que se muestra un elemento (selectores, migas, títulos). */
+  display?: string;
 }
 
 /**
@@ -37,49 +31,18 @@ export interface EntityMetadata {
  * consultas.
  */
 export interface RepositoryProvider<T, F> {
-  // EntityMetadata como método.
   acl?: (key: string | null) => Observable<Acl>;
-  // id(item: T): string;
   list(query: F): Observable<Slide<T>>;
   retrieve(key: string): Observable<T>;
   add(item: any): Observable<T>;
   update(key: string, item: any): Observable<T>;
-  patch(key: string, data: any): Observable<T>;
+  patch(key: string, data: any, path?: string): Observable<T>;
   delete(key: string): Observable<void>;
   downloadFile(endpoint: string): Observable<DownloadBlob>;
   storeFile(endpoint: string, name: string, file: File): Observable<UploadProgress>;
 
   patchAllForQuery?: (of: string, query: F, data: any) => Observable<any>;
   deleteAllForQuery?: (query: F) => Observable<any>;
-  /*
-  resourceAcl?: () => Observable<Acl>;
-  // wrong Name
-  // specificAcl?: (id: string) => Observable<Acl>;
-
-  count(query: any): Observable<number>;
-  canAskForStatistical(): Observable<boolean>;
-  statistical(aggregation: StatisticalQuery, filter: any): Observable<StatisticalResult>;
-
-  list(query: any): Observable<Cursor<any>>;
-  add(item: any): Observable<any>;
-  delete(key: string): Observable<string>;
-  update(key: string, item: any): Observable<any>;
-  patch(key: string, data: any): Observable<any>;
-  deleteAllForQuery(query: any): Observable<any>;
-  patchAllForQuery(path: string, query: any, data: any): Observable<any>;
-  childsOf(key: string, path: string): Observable<any[]>;
-
-  storeFile(name: string, file: File): Observable<UploadProgress>;
-
-  canImportContent(): Observable<boolean>;
-  importContent(data: any): Observable<any>;
-  storeToImportContent(file: File): Observable<UploadProgress>;
-
-  canExportListAsFile(): Observable<boolean>;
-  exportListAsFile(query: any, exportInfo: ListExport): Observable<any>;
-  canExportRecordAsFile(): Observable<boolean>;
-  exportRecordAsFile(key: string, exportInfo: RecordExport): Observable<any>;
-  */
 }
 
 export interface Slide<T> {
@@ -87,23 +50,6 @@ export interface Slide<T> {
   hasNext: boolean;
   content: T[];
 }
-/*
-export interface ListColumn {
-  title: string;
-  property: string;
-  visible: boolean;
-}
-
-export interface ListExport {
-  name: string;
-  format: 'xls';
-  columns?: ListColumn[];
-}
-
-export interface RecordExport {
-  name: string;
-}
-*/
 
 export class DownloadBlob {
   public constructor(

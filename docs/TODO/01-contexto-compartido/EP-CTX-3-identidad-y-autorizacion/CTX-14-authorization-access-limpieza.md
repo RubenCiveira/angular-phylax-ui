@@ -7,7 +7,7 @@ paso: 4
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [SHELL-07]
 origen: 05-contexto-compartido.md
 ---
@@ -26,15 +26,15 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Guardar solo en `NavigationEnd` y usar `sessionStorage` (la última ruta es por pestaña).
-- [ ] Leer la ruta por defecto de `DefaultsService`.
-- [ ] Plantilla con spinner y texto `auth.redirecting`; usar `takeUntilDestroyed()`.
-- [ ] Registrar `login-redirect` y `unauthorized` con el mismo mecanismo `ROUTES` que el resto de rutas.
+- [x] Guardar solo en `NavigationEnd` y usar `sessionStorage` (la última ruta es por pestaña).
+- [x] Leer la ruta por defecto de `DefaultsService`. *A través de `AppStateService`, que toma sus valores iniciales de `DefaultsService`: sin elección del usuario es la ruta por defecto, y si eligió otro idioma o tenant se respeta.*
+- [x] Plantilla con spinner y texto `auth.redirecting`; usar `takeUntilDestroyed()`.
+- [x] Registrar `login-redirect` y `unauthorized` con el mismo mecanismo `ROUTES` que el resto de rutas.
 
 ## Criterios de aceptación
 
-- [ ] Una navegación produce una única escritura.
-- [ ] Dos pestañas no comparten la "última ruta".
+- [x] Una navegación produce una única escritura.
+- [x] Dos pestañas no comparten la "última ruta".
 
 ## Ficheros afectados
 

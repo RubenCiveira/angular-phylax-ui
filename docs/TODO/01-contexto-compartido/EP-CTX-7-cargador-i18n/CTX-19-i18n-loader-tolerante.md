@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,15 +24,17 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Cada petición con `catchError(() => of({}))` (y log de aviso una vez por fichero).
-- [ ] `prodMode: !isDevMode()`.
-- [ ] No mutar la configuración: `const availables = [...(conf['available-langs'] ?? ['en', 'es'])]`.
-- [ ] Test: scope con solo `es.json` carga correctamente en `es`.
+- [x] Cada petición con `catchError(() => of({}))` (y log de aviso una vez por fichero). *Aviso con `rootLogger.warn`.*
+- [x] `prodMode: !isDevMode()`.
+- [x] No mutar la configuración: `const availables = [...(conf['available-langs'] ?? ['en', 'es'])]`. *Ya lo hacía `availableLanguages()` en `defaults.service.ts` (CTX-15); se añade un test que lo fija.*
+- [x] Test: scope con solo `es.json` carga correctamente en `es`.
+- [x] *(Añadido)* `TRANSLOCO_CONFIG` no depende de `STATIC_CONF`: se construye desde `APP_CONFIG` (con los idiomas por defecto si aún no ha llegado) y un `APP_INITIALIZER` actualiza idiomas disponibles e idioma por defecto de Transloco al llegar la configuración. *Motivo: `StepUpService` → `NotifyService` → `TranslocoService` se crea desde otro `APP_INITIALIZER` antes de que termine el `fetch` de la configuración, y `STATIC_CONF` valía `null`.*
+- [x] Tras SHELL-23: importa `environment/environment` y añade `?v=<versión>` a los JSON en builds, para no servir traducciones cacheadas de un despliegue anterior (los ficheros de `public/` no llevan hash).
 
 ## Criterios de aceptación
 
-- [ ] Con `en.json` ausente, las pantallas en `es` se traducen.
-- [ ] En producción no hay warnings de Transloco.
+- [x] Con `en.json` ausente, las pantallas en `es` se traducen.
+- [x] En producción no hay warnings de Transloco.
 
 ## Ficheros afectados
 

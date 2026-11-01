@@ -6,7 +6,6 @@ import { provideConfiguration } from '@shared/context/config/app-config.service'
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideI18nConfiguration, I18nLoaderService } from '@shared/context/config/i18n-loader.service';
-import { provideInstrumentation } from '@shared/context/observability/instrumentation.service';
 import { provideAuthorizationAccess } from '@shared/context/authorization-access/authorization-access.provider';
 import { provideConfiguredRoutes } from './bootstrap/app.routes';
 import { provideOidcIdentity } from '@shared/context/identity/oidc-identity/oidc-identity.provider';
@@ -21,15 +20,9 @@ export const appConfig: ApplicationConfig = {
     provideAuthorizationAccess(),
     provideConfiguredRoutes(),
     provideHttpClient(withInterceptors([stepUpInterceptor])),
-    provideInstrumentation(),
+    // Idiomas e idioma por defecto: provideI18nConfiguration() sustituye esta configuración con la de runtime
     provideTransloco({
-      config: {
-        availableLangs: ['en', 'es'],
-        defaultLang: 'en',
-        // Remove this option if your application doesn't support changing language in runtime.
-        reRenderOnLangChange: true,
-        prodMode: false,
-      },
+      config: { reRenderOnLangChange: true, prodMode: false },
       loader: I18nLoaderService,
     }),
     provideI18nConfiguration(),

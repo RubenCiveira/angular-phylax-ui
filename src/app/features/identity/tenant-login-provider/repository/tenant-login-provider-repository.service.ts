@@ -5,6 +5,7 @@ import {
   TenantLoginProviderProjection,
 } from '@features/identity/tenant-login-provider/model/tenant-login-provider.model';
 import { RepositoryMetadata, RepositoryService } from '@shared/data/repository/repository.service';
+import { RepositoryStore } from '@shared/data/repository/repository-store.service';
 import { ApiProvider } from '@shared/data/repository/provider/impl/api.provider';
 import { TenantRepository } from '@features/identity/tenant/repository/tenant-repository.service';
 import { Shift, Tick } from '@shared/data/repository/repository.model';
@@ -23,22 +24,27 @@ export class TenantLoginProviderRepository {
     return {
       key: 'uid',
       name: 'tenant-login-provider',
+      entity: {
+        id: 'uid',
+        name: 'tenant-login-provider',
+        display: 'name',
+      },
       provider: new ApiProvider(
         'uid',
         api,
         'http://net-civeira-phylax/identity/login-providers',
         'http://net-civeira-phylax/me/acl/identity/login-providers',
       ),
-      reference: (name: string): RepositoryService<any, any> | null => {
+      reference: (name: string): RepositoryMetadata<any, any> | null => {
         if ('tenant' == name) {
-          return new RepositoryService(TenantRepository.metadata(api));
+          return TenantRepository.metadata(api);
         }
         return null;
       },
     };
   }
-  constructor(api: ApiService) {
-    this.repo = new RepositoryService(TenantLoginProviderRepository.metadata(api));
+  constructor(api: ApiService, store: RepositoryStore) {
+    this.repo = new RepositoryService(TenantLoginProviderRepository.metadata(api), store);
   }
   acl(): Tick<{ generic: Acl; specific: Acl }, string | null> {
     return this.repo.acl();

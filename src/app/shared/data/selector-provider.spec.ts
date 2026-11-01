@@ -144,7 +144,7 @@ describe('selectorProvider', () => {
       config.onUnhandledError = original;
     }
 
-    expect(console.error).toHaveBeenCalledWith('There is an error', jasmine.any(Error));
+    expect(console.error).toHaveBeenCalledWith('Selector search failed', jasmine.any(Error));
     expect(provider.searching()).toBeFalse(); // finalize ran
   }));
 
@@ -169,7 +169,7 @@ describe('selectorProvider', () => {
       config.onUnhandledError = original;
     }
 
-    expect(console.error).toHaveBeenCalledWith('There is an error', jasmine.any(Error));
+    expect(console.error).toHaveBeenCalledWith('Selector selection failed', jasmine.any(Error));
     expect(provider.searching()).toBeFalse();
   }));
 });

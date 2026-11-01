@@ -7,7 +7,7 @@ paso: 5
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,13 +24,13 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] Borrar los bloques comentados (llevar las ideas a un ADR o issue).
-- [ ] Ampliar `EntityMetadata` con `dates`, `datetimes`, `sensitive`, `display` y añadirla a `RepositoryMetadata`.
-- [ ] Crear `type TaskStatus` y reutilizarlo en `long-task.model.ts`.
+- [x] Borrar los bloques comentados (llevar las ideas a un ADR o issue). *Ideas retiradas: `count`, `statistical`/`canAskForStatistical`, `childsOf`, importación (`importContent`, `storeToImportContent`) y exportación de listas y registros (`ListExport`, `RecordExport`, `ListColumn`), `acl`/`group`/`discriminators`/`childs`/`references` en `EntityMetadata`.*
+- [x] Ampliar `EntityMetadata` con `dates`, `datetimes`, `sensitive`, `display` y añadirla a `RepositoryMetadata`. *`display` es un único campo. `sensitive` queda vacío hasta FEAT-03.*
+- [x] Crear `type TaskStatus` y reutilizarlo en `long-task.model.ts`.
 
 ## Criterios de aceptación
 
-- [ ] `RepositoryMetadata.entity` disponible para DATA-03 y FEAT-03.
+- [x] `RepositoryMetadata.entity` disponible para DATA-03 y FEAT-03.
 
 ## Ficheros afectados
 

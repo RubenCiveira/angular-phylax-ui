@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,12 +24,12 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] Cambiar la regex a `/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?$/`.
-- [ ] Tests con `Z`, `+0200`, `+02:00`, sin offset y con milisegundos.
+- [x] Cambiar la regex a `/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?$/`.
+- [x] Tests con `Z`, `+0200`, `+02:00`, sin offset y con milisegundos.
 
 ## Criterios de aceptación
 
-- [ ] Los cinco formatos se convierten a `Date`.
+- [x] Los cinco formatos se convierten a `Date`.
 
 ## Ficheros afectados
 

@@ -2,7 +2,8 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { Subject, of } from 'rxjs';
 import { OidcIdentityHandlerService, OidcIdentityProviderService } from './oidc-identity-provider.service';
-import { AppConfigService } from '@shared/context/config/app-config.service';
+import { RuntimeConfigService } from '@shared/context/config/app-config.service';
+import { Logger } from '@shared/context/observability/logger.service';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { ErrorService } from '@shared/context/observability/error.service';
 import { IdentityUiPort } from '../identity-provider.interface';
@@ -53,20 +54,23 @@ function buildMocks(
     'client-id': 'test-client',
     scope: 'openid',
   };
-  const appConfig = { 'identity.main': of(identitySetup) } as unknown as AppConfigService;
+  const appConfig = {
+    value$: (path: string) => of(path === 'identity.main' ? identitySetup : undefined),
+  } as unknown as RuntimeConfigService;
+  const logger = jasmine.createSpyObj<Logger>('Logger', ['debug', 'info', 'warn', 'error']);
 
   const errors = { notifyError: jasmine.createSpy('notifyError') } as unknown as ErrorService;
 
   const ui = jasmine.createSpyObj<IdentityUiPort>('IdentityUiPort', ['confirmResetCredentials', 'notifyError']);
   ui.confirmResetCredentials.and.returnValue(of(true));
 
-  return { eventSubject, oauthService, appState, appConfig, errors, ui, userInfoSpy };
+  return { eventSubject, oauthService, appState, appConfig, errors, ui, userInfoSpy, logger };
 }
 
 describe('OidcIdentityProviderService', () => {
   it('accept("oidc", ...) creates and returns an OidcIdentityHandlerService', fakeAsync(() => {
-    const { oauthService, appState, appConfig, errors, ui } = buildMocks();
-    const provider = new OidcIdentityProviderService(oauthService as any, appConfig, appState, errors, ui);
+    const { oauthService, appState, appConfig, errors, ui, logger } = buildMocks();
+    const provider = new OidcIdentityProviderService(oauthService as any, appConfig, appState, errors, ui, logger);
 
     const result = provider.accept('oidc', 'main');
     tick(); // resolve loadDiscoveryDocumentAndTryLogin promise
@@ -76,8 +80,8 @@ describe('OidcIdentityProviderService', () => {
   }));
 
   it('accept with non-oidc type returns null', () => {
-    const { oauthService, appState, appConfig, errors, ui } = buildMocks();
-    const provider = new OidcIdentityProviderService(oauthService as any, appConfig, appState, errors, ui);
+    const { oauthService, appState, appConfig, errors, ui, logger } = buildMocks();
+    const provider = new OidcIdentityProviderService(oauthService as any, appConfig, appState, errors, ui, logger);
 
     expect(provider.accept('saml', 'main')).toBeNull();
   });
@@ -103,6 +107,7 @@ describe('OidcIdentityHandlerService', () => {
       mocks.appState,
       mocks.errors,
       mocks.ui,
+      mocks.logger,
     );
   });
 
@@ -139,12 +144,12 @@ describe('OidcIdentityHandlerService', () => {
       expect(() => eventSubject.next({ type: 'discovery_document_loaded' })).not.toThrow();
     });
 
-    it('token_received when currentUser.authenticated is falsy calls incomingLogin → sets userInfo to {}', () => {
+    it('token_received when currentUser.authenticated is falsy calls incomingLogin → sets userInfo to anonymous', () => {
       // currentUser = {} (initial) → authenticated undefined → falsy → incomingLogin()
       // incomingLogin: valid=false, logged=undefined → valid != logged → valid=false → sets {}
       oauthService.hasValidAccessToken.and.returnValue(false);
       eventSubject.next({ type: 'token_received' });
-      expect(userInfoSpy.set).toHaveBeenCalledWith({});
+      expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
     });
 
     it('token_received when currentUser.authenticated is true updates token without re-fetching profile', fakeAsync(() => {
@@ -155,17 +160,35 @@ describe('OidcIdentityHandlerService', () => {
       userInfoSpy.set.calls.reset();
       oauthService.getAccessToken.and.returnValue('new-token');
 
+      const tokens: (string | null)[] = [];
+      handler.token$().subscribe((t) => tokens.push(t));
+
       eventSubject.next({ type: 'token_received' });
 
-      expect(userInfoSpy.set).toHaveBeenCalledWith(
-        jasmine.objectContaining({ token: 'new-token', authenticated: true }),
-      );
+      expect(tokens).toEqual(['test-access-token', 'new-token']);
+      expect(userInfoSpy.set).not.toHaveBeenCalled(); // the token is not part of the UI state
       expect(oauthService.loadUserProfile).toHaveBeenCalledTimes(1); // only from silently_refreshed
     }));
 
-    it('logout event sets userInfo to {}', () => {
+    it('keeps the access token out of userInfo and clears it on logout', fakeAsync(() => {
+      oauthService.hasValidAccessToken.and.returnValue(true);
+      eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+      let token: string | null = null;
+      handler.token$().subscribe((t) => (token = t));
+
+      expect(token as string | null).toBe('test-access-token');
+      expect(userInfoSpy.set.calls.mostRecent().args[0]).not.toEqual(
+        jasmine.objectContaining({ token: jasmine.anything() }),
+      );
+
       eventSubject.next({ type: 'logout' });
-      expect(userInfoSpy.set).toHaveBeenCalledWith({});
+      expect(token as string | null).toBeNull();
+    }));
+
+    it('logout event sets userInfo to anonymous', () => {
+      eventSubject.next({ type: 'logout' });
+      expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
     });
 
     it('invalid_nonce_in_state calls initCodeFlow()', () => {
@@ -173,10 +196,10 @@ describe('OidcIdentityHandlerService', () => {
       expect(oauthService.initCodeFlow).toHaveBeenCalled();
     });
 
-    it('silently_refreshed with invalid token → incomingLogin sets userInfo to {} and emits bootstrap', (done) => {
+    it('silently_refreshed with invalid token → incomingLogin sets userInfo to anonymous and emits bootstrap', (done) => {
       oauthService.hasValidAccessToken.and.returnValue(false);
       handler.bootstrap().subscribe(() => {
-        expect(userInfoSpy.set).toHaveBeenCalledWith({});
+        expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
         done();
       });
       eventSubject.next({ type: 'silently_refreshed' });
@@ -202,6 +225,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       mocks.eventSubject.next({ type: 'silently_refreshed' });
       tick();
@@ -222,7 +246,7 @@ describe('OidcIdentityHandlerService', () => {
 
     it('token_refresh_error resets currentUser and emits bootstrap', (done) => {
       handler.bootstrap().subscribe(() => {
-        expect(userInfoSpy.set).toHaveBeenCalledWith({});
+        expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
         done();
       });
       eventSubject.next({ type: 'token_refresh_error' });
@@ -237,14 +261,14 @@ describe('OidcIdentityHandlerService', () => {
       expect(ui.confirmResetCredentials).toHaveBeenCalledWith('discovery');
       expect(oauthService.logOut).toHaveBeenCalledWith(true);
       expect(bootstrapEmitted).toBeTrue();
-      expect(userInfoSpy.set).toHaveBeenCalledWith({});
+      expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
     });
 
     it('user_profile_load_error asks through the UI port with the profile reason', () => {
       eventSubject.next({ type: 'user_profile_load_error' });
       expect(ui.confirmResetCredentials).toHaveBeenCalledWith('profile');
       expect(oauthService.logOut).toHaveBeenCalledWith(true);
-      expect(userInfoSpy.set).toHaveBeenCalledWith({});
+      expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
     });
 
     it('keeps the credentials when the reset is cancelled', () => {
@@ -274,10 +298,10 @@ describe('OidcIdentityHandlerService', () => {
       expect(window.confirm).not.toHaveBeenCalled();
     });
 
-    it('silent_refresh_error calls logOut(true) and sets userInfo to {}', () => {
+    it('silent_refresh_error calls logOut(true) and sets userInfo to anonymous', () => {
       eventSubject.next({ type: 'silent_refresh_error' });
       expect(oauthService.logOut).toHaveBeenCalledWith(true);
-      expect(userInfoSpy.set).toHaveBeenCalledWith({});
+      expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
     });
 
     it('ignores unknown events without logging them', () => {
@@ -310,6 +334,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -328,6 +353,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -353,6 +379,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -370,6 +397,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -396,6 +424,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -412,6 +441,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -428,6 +458,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -455,6 +486,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -480,6 +512,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -498,12 +531,13 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
 
-      // incomingLogin: valid=false, logged=undefined → enters if → sets userInfo to {}
-      expect(mocks.userInfoSpy.set).toHaveBeenCalledWith({});
+      // incomingLogin: valid=false, logged=undefined → enters if → sets userInfo to anonymous
+      expect(mocks.userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
     }));
 
     function configureWith(setup: any, hasValidToken = false) {
@@ -518,6 +552,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();
@@ -530,10 +565,9 @@ describe('OidcIdentityHandlerService', () => {
     }));
 
     it('always enables PKCE and warns when the pkce option is present', fakeAsync(() => {
-      spyOn(console, 'warn');
-      const { config } = configureWith({ pkce: false });
+      const { mocks, config } = configureWith({ pkce: false });
       expect(config.disablePKCE).toBeFalse();
-      expect(console.warn).toHaveBeenCalled();
+      expect(mocks.logger.warn).toHaveBeenCalled();
     }));
 
     it('does not show debug information unless debug is true', fakeAsync(() => {
@@ -564,6 +598,7 @@ describe('OidcIdentityHandlerService', () => {
         mocks.appState,
         mocks.errors,
         mocks.ui,
+        mocks.logger,
       );
       h.configure();
       tick();

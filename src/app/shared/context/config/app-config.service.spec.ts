@@ -2,7 +2,16 @@
 import { APP_INITIALIZER } from '@angular/core';
 import { TestBed, fakeAsync, flushMicrotasks } from '@angular/core/testing';
 import { take } from 'rxjs';
-import { AppConfigService, MicroFrontConfigService, provideConfiguration, STATIC_CONF } from './app-config.service';
+import { environment } from 'app/bootstrap/environment/environment';
+import {
+  APP_CONFIG,
+  AppConfigService,
+  configValue,
+  MicroFrontConfigService,
+  provideConfiguration,
+  RuntimeConfigService,
+  STATIC_CONF,
+} from './app-config.service';
 
 describe('provideConfiguration', () => {
   it('returns providers for APP_INITIALIZER and STATIC_CONF', () => {
@@ -78,9 +87,14 @@ describe('MicroFrontConfigService', () => {
 });
 
 describe('AppConfigService', () => {
-  afterEach(() => TestBed.resetTestingModule());
+  afterEach(() => {
+    delete (window as any)._remove_mfa_config_url;
+    TestBed.resetTestingModule();
+  });
 
   beforeEach(() => {
+    // Microfront: la configuración se pide al remoto registrado en el primer uso
+    (window as any)._remove_mfa_config_url = { [environment.name]: ['https://remote.example.com/', 'config.json'] };
     spyOn(window, 'fetch').and.returnValue(Promise.resolve({ json: () => Promise.resolve({}) } as Response));
   });
 
@@ -144,7 +158,7 @@ describe('AppConfigService', () => {
     expect(itemsValues).toContain([1, 2, 3]);
   }));
 
-  it('deepMerge: source is a primitive → returns source (typeof source !== "object")', fakeAsync(() => {
+  it('ignores a config file that is not an object and keeps the environment', fakeAsync(() => {
     (window.fetch as jasmine.Spy).and.returnValue(
       Promise.resolve({ json: () => Promise.resolve('primitive') } as Response),
     );
@@ -152,15 +166,13 @@ describe('AppConfigService', () => {
     const config = TestBed.inject(AppConfigService);
 
     const results: any[] = [];
-    // After deepMerge(env, 'primitive') returns 'primitive', values holds 'primitive'.
-    // 'primitive'['length'] === 9
-    config['length'].subscribe((v: any) => results.push(v));
+    config['name'].subscribe((v: any) => results.push(v));
     flushMicrotasks();
 
-    expect(results).toContain(9);
+    expect(results).toContain(environment.name);
   }));
 
-  it('deepMerge: source is undefined → returns target (source !== undefined branch false)', fakeAsync(() => {
+  it('keeps the environment values when the config file is empty', fakeAsync(() => {
     (window.fetch as jasmine.Spy).and.returnValue(
       Promise.resolve({ json: () => Promise.resolve(undefined) } as Response),
     );
@@ -168,12 +180,10 @@ describe('AppConfigService', () => {
     const config = TestBed.inject(AppConfigService);
 
     const results: any[] = [];
-    // deepMerge(env, undefined): typeof undefined !== 'object' → true
-    // source !== undefined ? source : target → returns target (env = { name: 'lughauth' })
     config['name'].subscribe((v: any) => results.push(v));
     flushMicrotasks();
 
-    expect(results).toContain('lughauth');
+    expect(results).toContain(environment.name);
   }));
 
   it('calls mfeLoad only once even when value() is called multiple times', fakeAsync(() => {
@@ -229,7 +239,7 @@ describe('AppConfigService — mfeLoad remote URL', () => {
   });
 
   it('uses the remote URL from _remove_mfa_config_url when set', fakeAsync(() => {
-    (window as any)._remove_mfa_config_url = { lughauth: ['https://remote.example.com/', 'config.json'] };
+    (window as any)._remove_mfa_config_url = { [environment.name]: ['https://remote.example.com/', 'config.json'] };
     const fetchSpy = spyOn(window, 'fetch').and.returnValue(
       Promise.resolve({ json: () => Promise.resolve({}) } as Response),
     );
@@ -240,5 +250,56 @@ describe('AppConfigService — mfeLoad remote URL', () => {
     flushMicrotasks();
 
     expect(fetchSpy).toHaveBeenCalledWith('https://remote.example.com/config.json');
+  }));
+});
+
+describe('RuntimeConfigService', () => {
+  beforeEach(() => {
+    (window as any)._remove_mfa_config_url = { [environment.name]: ['https://remote.example.com/', 'config.json'] };
+    spyOn(window, 'fetch').and.returnValue(
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({ meta: { title: 'Phylax' }, identity: { main: { type: 'oidc', issuer: 'https://idp' } } }),
+      } as Response),
+    );
+  });
+
+  afterEach(() => {
+    delete (window as any)._remove_mfa_config_url;
+    TestBed.resetTestingModule();
+  });
+
+  it('exposes every section empty before loading and typed values after', fakeAsync(() => {
+    TestBed.configureTestingModule({});
+    const config = TestBed.inject(APP_CONFIG);
+    expect(config().identity).toEqual({});
+    expect(config().i18n).toEqual({});
+
+    flushMicrotasks();
+
+    expect(config().identity['main'].issuer).toBe('https://idp');
+    expect(config().meta.title).toBe('Phylax');
+    expect(config().data).toEqual({});
+  }));
+
+  it('value$ only emits once the configuration has loaded', fakeAsync(() => {
+    TestBed.configureTestingModule({});
+    const service = TestBed.inject(RuntimeConfigService);
+    const values: unknown[] = [];
+
+    service.value$('identity.main.issuer').subscribe((v) => values.push(v));
+    expect(values).toEqual([]);
+
+    flushMicrotasks();
+    expect(values).toEqual(['https://idp']);
+  }));
+
+  it('configValue returns a signal for the path', fakeAsync(() => {
+    TestBed.configureTestingModule({});
+    const title = TestBed.runInInjectionContext(() => configValue('meta.title'));
+    expect(title()).toBeUndefined();
+
+    flushMicrotasks();
+    expect(title()).toBe('Phylax');
   }));
 });

@@ -7,7 +7,7 @@ paso: 3
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,13 +24,13 @@ Los parámetros `{ url; params?; headers?; identity?; withIdentity? }` se repite
 
 ## Tareas
 
-- [ ] Definir `type RequestTarget` y usarlo en todos los métodos.
-- [ ] Quitar el `console.error`.
-- [ ] Trazar `download` y `upload` igual que `send`.
+- [x] Definir `type RequestTarget` y usarlo en todos los métodos. *Exportado como `interface RequestTarget`; `post`/`put`/`patch` usan `RequestTarget & { body?: any }` y `upload` `RequestTarget & { name; file }`.*
+- [x] Quitar el `console.error`.
+- [x] Trazar `download` y `upload` igual que `send`.
 
 ## Criterios de aceptación
 
-- [ ] Sin cambios funcionales; los tests existentes pasan.
+- [x] Sin cambios funcionales; los tests existentes pasan.
 
 ## Ficheros afectados
 

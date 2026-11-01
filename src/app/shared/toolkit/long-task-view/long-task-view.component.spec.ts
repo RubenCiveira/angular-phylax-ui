@@ -76,4 +76,20 @@ describe('LongTaskViewComponent', () => {
       }),
     ).toBeTrue();
   });
+
+  it('shows a visible message when polling timed out', () => {
+    const progress$ = new Subject<LongTask>();
+    TestBed.configureTestingModule({
+      imports: [LongTaskViewComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: { progress: progress$ } }],
+    });
+    const fixture = TestBed.createComponent(LongTaskViewComponent);
+
+    progress$.next({ uid: '1', detailStatus: 'TIMEOUT', steps: [] });
+    fixture.detectChanges();
+
+    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
+    expect(text).toContain('The process is taking too long');
+    expect(fixture.nativeElement.querySelector('mat-spinner')).toBeNull();
+  });
 });

@@ -3,7 +3,7 @@ id: EP-CTX-7
 titulo: "Cargador de traducciones"
 area: contexto-compartido
 prioridad: critica
-estado: pendiente
+estado: hecho
 issues: [CTX-19, CTX-20]
 ---
 
@@ -50,5 +50,5 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] CTX-19 — i18n loader: tolerar ficheros ausentes y prodMode real
-- [ ] CTX-20 — Missing handler que humaniza claves sin traducción
+- [x] CTX-19 — i18n loader: tolerar ficheros ausentes y prodMode real
+- [x] CTX-20 — Missing handler que humaniza claves sin traducción

@@ -3,7 +3,7 @@ id: EP-DATA-3
 titulo: "RepositoryService y metadatos"
 area: capa-de-datos
 prioridad: critica
-estado: pendiente
+estado: hecho
 issues: [DATA-10, DATA-14, DATA-11, DATA-12, DATA-15, DATA-03, DATA-13]
 ---
 
@@ -64,10 +64,10 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] DATA-10 — Las proyecciones no deben convertir las fechas en strings
-- [ ] DATA-14 — RepositoryService: limpiar restos de depuración
-- [ ] DATA-11 — TTL de caché configurable
-- [ ] DATA-12 — Store de repositorios inyectable y vaciado al cerrar sesión
-- [ ] DATA-15 — Activar EntityMetadata y borrar APIs comentadas
-- [ ] DATA-03 — Convertir fechas según los metadatos de la entidad
-- [ ] DATA-13 — Reimplementar Tick/Shift sobre resource()/rxResource()
+- [x] DATA-10 — Las proyecciones no deben convertir las fechas en strings
+- [x] DATA-14 — RepositoryService: limpiar restos de depuración
+- [x] DATA-11 — TTL de caché configurable
+- [x] DATA-12 — Store de repositorios inyectable y vaciado al cerrar sesión
+- [x] DATA-15 — Activar EntityMetadata y borrar APIs comentadas
+- [x] DATA-03 — Convertir fechas según los metadatos de la entidad
+- [x] DATA-13 — Reimplementar Tick/Shift sobre resource()/rxResource()

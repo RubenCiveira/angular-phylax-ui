@@ -7,7 +7,7 @@ paso: 1
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 04-shell-y-layout.md
 ---
@@ -24,18 +24,21 @@ La carpeta y el fichero tienen errata (`enviroment`) y solo contienen `{ name: '
 
 ## Tareas
 
-- [ ] Renombrar a `environment/environment.ts` y actualizar imports.
-- [ ] Inyectar `version` y `buildDate` en el build.
+- [x] Renombrar a `environment/environment.ts` y actualizar imports.
+- [x] Inyectar `version` y `buildDate` en el build. *`npm run build`/`watch` pasan por `scripts/ng-build-info.mjs`, que añade `--define`: versión = `APP_VERSION` (CI) o la de `package.json` + commit corto. Sin `define` (`ng serve`, tests) queda `version: 'dev'` y sin `buildDate`.*
 
 ## Criterios de aceptación
 
-- [ ] La versión está disponible para pie y telemetría.
+- [x] La versión está disponible para pie y telemetría. *Telemetría (`service.version`) e i18n (`?v=` en los JSON) ya la usan; el pie aún no existe.*
 
 ## Ficheros afectados
 
 - `src/app/bootstrap/enviroment/enviroment.ts`
 - `src/app/shared/context/config/app-config.service.ts`
 - `src/app/shared/context/config/i18n-loader.service.ts`
+- `src/app/shared/context/observability/instrumentation.service.ts`
+- `scripts/ng-build-info.mjs`
+- `package.json`
 
 ## Relacionado
 

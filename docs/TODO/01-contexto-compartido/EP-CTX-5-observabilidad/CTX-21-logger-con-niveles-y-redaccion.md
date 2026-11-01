@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,16 +24,16 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Crear `Logger` inyectable (`debug/info/warn/error`) con nivel mínimo `telemetry.logger.level`.
-- [ ] Redactar campos sensibles (`token`, `password`, `secret`, `authorization`, `apiKey`).
-- [ ] Interceptar `console` solo si `telemetry.logger.capture-console: true` (por defecto `false`).
-- [ ] Implementación de consola cuando la telemetría está desactivada.
-- [ ] Sustituir los `console.log` del código compartido por el logger (las features, en FEAT).
+- [x] Crear `Logger` inyectable (`debug/info/warn/error`) con nivel mínimo `telemetry.logger.level`. *Por defecto `info`. `rootLogger` comparte nivel y destino para funciones sin contexto de inyección.*
+- [x] Redactar campos sensibles (`token`, `password`, `secret`, `authorization`, `apiKey`). *También `Bearer …` dentro de textos. Se redacta lo que va al colector; la consola local recibe los objetos originales para no perder trazas navegables.*
+- [x] Interceptar `console` solo si `telemetry.logger.capture-console: true` (por defecto `false`).
+- [x] Implementación de consola cuando la telemetría está desactivada.
+- [x] Sustituir los `console.log` del código compartido por el logger (las features, en FEAT). *Y del shell. Se quitan los logs de depuración sueltos (`BLURR`, `HAS TRACER`, `EL TENANT`…).*
 
 ## Criterios de aceptación
 
-- [ ] Con la configuración por defecto, `console.log` no se envía al colector.
-- [ ] Un log con `{ password: "x" }` llega como `[REDACTED]`.
+- [x] Con la configuración por defecto, `console.log` no se envía al colector.
+- [x] Un log con `{ password: "x" }` llega como `[REDACTED]`.
 
 ## Ficheros afectados
 

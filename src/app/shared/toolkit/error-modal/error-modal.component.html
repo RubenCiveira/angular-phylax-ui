@@ -21,6 +21,10 @@
 }
 @if (showBody) {
   <div class="mat-typography">
-    <app-page-error [asColumn]="true" [error]="data.error"></app-page-error>
+    <app-page-error [asColumn]="true" [error]="data.error">
+      @if (data.login) {
+        <button mat-flat-button (click)="login()">{{ 'auth.unauthorized.login' | transloco }}</button>
+      }
+    </app-page-error>
   </div>
 }

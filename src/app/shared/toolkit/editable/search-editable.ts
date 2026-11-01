@@ -74,7 +74,6 @@ export abstract class SearchEditable<V, R> extends BaseEditable<R> {
 
   blur() {
     const text = this.search.value;
-    console.log('BLURR', text);
     if (!text) {
       this.search.patchValue(null);
       this.select(null);

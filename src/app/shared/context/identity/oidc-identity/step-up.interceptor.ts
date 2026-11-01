@@ -7,7 +7,7 @@ import { StepUpService } from './step-up.service';
 /**
  * Detecta el 401 de autenticación reforzada (RFC 9470) y delega en StepUpService.
  *
- * El token Bearer lo añade ClientService a partir del UserInfo, así que el interceptor por defecto de
+ * El token Bearer lo añade ClientService a partir de IdentityService.token(), así que el interceptor por defecto de
  * angular-oauth2-oidc (DefaultOAuthInterceptor) no es necesario: no se registra resourceServer y,
  * con withInterceptors(), tampoco se ejecutaría al ser un interceptor de clase.
  */

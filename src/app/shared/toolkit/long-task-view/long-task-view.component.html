@@ -2,7 +2,7 @@
 <h2 mat-dialog-title>{{ title }}</h2>
 <mat-dialog-content>
   <div style="min-width: 600px"></div>
-  @if (status !== 'FINISHED' && status !== 'FAILED') {
+  @if (status !== 'FINISHED' && status !== 'FAILED' && status !== 'TIMEOUT') {
     <h1>Working with {{ step }} {{ currentStepProgress }}</h1>
     @if (known) {
       <mat-spinner [mode]="'determinate'" value="{{ currentStepProgress }}"></mat-spinner>
@@ -12,6 +12,10 @@
   }
   @if (status === 'FAILED') {
     <h1>The process failed</h1>
+  }
+  @if (status === 'TIMEOUT') {
+    <h1>The process is taking too long</h1>
+    <p>It may still be running on the server. Refresh the list later to check the result.</p>
   }
   @if (status === 'FINISHED') {
     <mat-accordion class="headers-align" multi>

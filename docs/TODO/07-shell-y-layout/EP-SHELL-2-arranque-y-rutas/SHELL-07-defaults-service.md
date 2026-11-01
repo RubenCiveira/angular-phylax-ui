@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [CTX-15]
 origen: 04-shell-y-layout.md
 ---
@@ -24,16 +24,16 @@ Hay cuatro idiomas por defecto distintos: `'en-EN'` en `HomeComponent` y `Author
 
 ## Tareas
 
-- [ ] Crear `DefaultsService` con `language` y `tenant` leídos de `i18n.default-lang` y `tenant.default`.
-- [ ] Usarlo en Home, Container, AuthorizationAccess y AppState.
+- [x] Crear `DefaultsService` con `language` y `tenant` leídos de `i18n.default-lang` y `tenant.default`. *En `src/app/shared/context/config/defaults.service.ts`, no en `bootstrap/`: lo usan `AppStateService` y `AuthorizationAccessService`, y `shared` no debe depender de `bootstrap`. Lo usa también `I18nLoaderService` para el idioma base de Transloco. `phylax-config.json` declara `default-lang: es`, `tenant.default: main` y añade `en` a `available-langs`.*
+- [x] Usarlo en Home, Container, AuthorizationAccess y AppState. *`AppStateService` toma de él sus valores iniciales y los adopta si la configuración llega después, mientras el usuario no haya elegido. Home y AuthorizationAccess navegan al idioma y tenant del estado, que vienen de `DefaultsService` salvo que el usuario haya elegido otros.*
 
 ## Criterios de aceptación
 
-- [ ] `grep -rn "'en-EN'\|'es'" src/app` solo encuentra la configuración por defecto del servicio.
+- [x] `grep -rn "'en-EN'\|'es'" src/app` solo encuentra la configuración por defecto del servicio.
 
 ## Ficheros afectados
 
-- `src/app/bootstrap/defaults.service.ts`
+- `src/app/shared/context/config/defaults.service.ts`
 - `src/app/bootstrap/layout/pages/home/home.component.ts`
 - `src/app/bootstrap/layout/pages/container/container.component.ts`
 

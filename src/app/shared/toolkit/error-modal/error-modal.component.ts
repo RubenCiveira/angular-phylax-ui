@@ -4,12 +4,14 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { Router } from '@angular/router';
 import { ErrorPageComponent } from '../error-page/error-page.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'error-modal',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatIconModule, ErrorPageComponent],
+  imports: [CommonModule, MatDialogModule, MatIconModule, MatButtonModule, TranslocoPipe, ErrorPageComponent],
   templateUrl: './error-modal.component.html',
   styleUrls: ['./error-modal.component.css'],
 })
@@ -29,6 +31,11 @@ export class ErrorModalComponent {
   public close() {
     this.data.notify = true;
     this.dialogRef.close(this.data);
+  }
+  /** Cierra el aviso e inicia sesión; la ruta actual ya está guardada para volver a ella tras el login. */
+  public login() {
+    this.dialogRef.close();
+    this.data.login();
   }
   public redirect(path: string) {
     this.dialogRef.close();

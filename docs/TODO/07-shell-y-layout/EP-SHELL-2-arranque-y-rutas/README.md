@@ -3,7 +3,7 @@ id: EP-SHELL-2
 titulo: "Arranque, rutas raíz y valores por defecto"
 area: shell-y-layout
 prioridad: alta
-estado: pendiente
+estado: en-curso
 issues: [SHELL-07, SHELL-08, SHELL-09, SHELL-20, SHELL-19]
 ---
 
@@ -31,7 +31,7 @@ Los issues están ordenados para respetar sus dependencias y tocar cada fichero 
 
 | Fichero | Issues |
 |---|---|
-| `src/app/bootstrap/defaults.service.ts` | SHELL-07 |
+| `src/app/shared/context/config/defaults.service.ts` | SHELL-07 |
 | `src/app/bootstrap/layout/pages/home/home.component.ts` | SHELL-07, SHELL-19 |
 | `src/app/bootstrap/layout/pages/container/container.component.ts` | SHELL-07, SHELL-20 |
 | `src/app/bootstrap/app.routes.ts` | SHELL-08 |
@@ -73,7 +73,7 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] SHELL-07 — Idioma y tenant por defecto en un único sitio
+- [x] SHELL-07 — Idioma y tenant por defecto en un único sitio
 - [ ] SHELL-08 — Redirección inicial, títulos de pestaña y opciones del router
 - [ ] SHELL-09 — Ordenar app.config.ts: una sola configuración de i18n
 - [ ] SHELL-20 — ContainerComponent: inputs de ruta y valores por defecto

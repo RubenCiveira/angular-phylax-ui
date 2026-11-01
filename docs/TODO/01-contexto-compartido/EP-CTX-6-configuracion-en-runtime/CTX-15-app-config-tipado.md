@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,15 +24,15 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Definir `interface AppConfig` (meta, api, i18n, identity, telemetry, theme, layout, data).
-- [ ] Exponer `APP_CONFIG: InjectionToken<Signal<AppConfig>>` y un helper `configValue(path)` con tipos de ruta.
-- [ ] Mantener el `Proxy` como fachada `@deprecated` sobre el nuevo servicio.
-- [ ] Migrar los usos del shell (`toolbar`, `menu`, `identity`, `instrumentation`, `api`).
+- [x] Definir `interface AppConfig` (meta, api, i18n, identity, telemetry, theme, layout, data). *En `app-config.model.ts`, con `tenant` y `name` además. Antes de cargarse, cada sección existe vacía.*
+- [x] Exponer `APP_CONFIG: InjectionToken<Signal<AppConfig>>` y un helper `configValue(path)` con tipos de ruta. *Más `RuntimeConfigService` con `value(path)` (signal) y `value$(path)` (observable que solo emite con la configuración cargada), para servicios y tests.*
+- [x] Mantener el `Proxy` como fachada `@deprecated` sobre el nuevo servicio.
+- [x] Migrar los usos del shell (`toolbar`, `menu`, `identity`, `instrumentation`, `api`). *También `client`, `error`, el proveedor OIDC y las rutas (`app.routes`, `menu.config`). Se elimina `APP_INSTRUMETATION`/`provideInstrumentation()`. Un microfront sin remoto registrado ya no hace `fetch('')`.*
 
 ## Criterios de aceptación
 
-- [ ] `config().identity['main'].issuer` compila con autocompletado.
-- [ ] Los usos migrados no usan el `Proxy`.
+- [x] `config().identity['main'].issuer` compila con autocompletado. *Una ruta con errata (`'meta.titel'`) no compila.*
+- [x] Los usos migrados no usan el `Proxy`.
 
 ## Ficheros afectados
 

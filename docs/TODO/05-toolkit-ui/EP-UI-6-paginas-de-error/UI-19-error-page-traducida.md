@@ -7,7 +7,7 @@ paso: 1
 prioridad: critica
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [I18N-05]
 origen: 07-toolkit-ui.md
 ---
@@ -24,16 +24,16 @@ La plantilla no usa el pipe `transloco`: pinta literalmente `{{ 'app.layout.erro
 
 ## Tareas
 
-- [ ] Importar `TranslocoModule` y usar `| transloco` en todos los textos.
-- [ ] Caso propio para 5xx ("el servicio no responde, inténtalo en unos minutos").
-- [ ] Detalle técnico solo en `<details>` plegado (o en `isDevMode()`), con el `traceId` del span para soporte.
-- [ ] `routerLink` al inicio con idioma y tenant.
-- [ ] `smallScreen` desde `BreakpointObserver` o quitarlo.
+- [x] Importar `TranslocoModule` y usar `| transloco` en todos los textos. *Claves en `errors.page.*` (en/es), la sección `errors` de I18N-05.*
+- [x] Caso propio para 5xx ("el servicio no responde, inténtalo en unos minutos").
+- [x] Detalle técnico solo en `<details>` plegado (o en `isDevMode()`), con el `traceId` del span para soporte. *`ErrorService.storeError` anota `error.traceId`.*
+- [x] `routerLink` al inicio con idioma y tenant. *Además admite `titleKey`/`messageKey`, `showHome` y acciones proyectadas, que usa la página de acceso denegado (CTX-13).*
+- [x] `smallScreen` desde `BreakpointObserver` o quitarlo. *Quitado: lo resuelve el CSS (`flex-wrap` y media query).*
 
 ## Criterios de aceptación
 
-- [ ] Un 404 y un 503 muestran textos traducidos distintos.
-- [ ] Ningún error muestra JSON crudo por defecto.
+- [x] Un 404 y un 503 muestran textos traducidos distintos.
+- [x] Ningún error muestra JSON crudo por defecto.
 
 ## Ficheros afectados
 

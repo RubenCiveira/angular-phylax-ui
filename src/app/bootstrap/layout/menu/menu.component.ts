@@ -2,7 +2,7 @@
 import { Component, computed, effect, input, OnDestroy, output, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
-import { AppConfigService } from '@shared/context/config/app-config.service';
+import { configValue } from '@shared/context/config/app-config.service';
 import { IdentityService } from '@shared/context/identity/identity.service';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,9 +39,8 @@ export class MenuComponent implements OnDestroy {
     private readonly router: Router,
     private readonly identity: IdentityService,
     private readonly checker: RouteAccessService,
-    appconfig: AppConfigService,
   ) {
-    this.title = toSignal(appconfig['meta.title']);
+    this.title = configValue('meta.title');
     this.currentLanguage = toSignal(appstate.language);
     this.currentTenant = toSignal(appstate.tenant);
 

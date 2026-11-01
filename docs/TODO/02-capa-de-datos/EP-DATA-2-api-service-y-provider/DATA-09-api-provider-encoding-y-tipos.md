@@ -7,7 +7,7 @@ paso: 5
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,13 +24,13 @@ Las URLs se construyen con `bodyUrl + '/' + key` sin `encodeURIComponent`, y `fo
 
 ## Tareas
 
-- [ ] `encodeURIComponent(key)` en `retrieve`, `update`, `patch`, `delete` y `acl`.
-- [ ] Tipar la respuesta (`AclResponse`).
+- [x] `encodeURIComponent(key)` en `retrieve`, `update`, `patch`, `delete` y `acl`. *`RepositoryProvider.patch` recibe ahora `path` aparte (antes `RepositoryService.partialByKey` lo concatenaba a la clave), para no codificar la `/` del subrecurso.*
+- [x] Tipar la respuesta (`AclResponse`).
 
 ## Criterios de aceptación
 
-- [ ] Una clave con `/` o espacios funciona.
-- [ ] Sin `any` en `formatAcl`.
+- [x] Una clave con `/` o espacios funciona.
+- [x] Sin `any` en `formatAcl`.
 
 ## Ficheros afectados
 

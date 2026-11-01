@@ -7,7 +7,7 @@ paso: 2
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 05-contexto-compartido.md
 ---
@@ -24,16 +24,16 @@ origen: 05-contexto-compartido.md
 
 ## Tareas
 
-- [ ] Tipar como `CanActivateFn` y quitar `parentUrl`.
-- [ ] Redirigir con `router.createUrlTree(['/unauthorized'], { queryParams: { returnUrl: state.url, reason: '401' } })`.
-- [ ] Crear `PermissionService.has(perm)` a partir de `UserInfo.roles`/permisos.
-- [ ] Crear la factoría `hasPermission(perm): CanActivateFn` (redirige con `reason=403`).
-- [ ] Tests de ambos guards.
+- [x] Tipar como `CanActivateFn` y quitar `parentUrl`.
+- [x] Redirigir con `router.createUrlTree(['/unauthorized'], { queryParams: { returnUrl: state.url, reason: '401' } })`.
+- [x] Crear `PermissionService.has(perm)` a partir de `UserInfo.roles`/permisos. *En `authorization-access/permission.service.ts`; `has()` devuelve `Observable<boolean>` y la regla pura `grants(user, perm)` la comparte con el guard.*
+- [x] Crear la factoría `hasPermission(perm): CanActivateFn` (redirige con `reason=403`). *Sin sesión redirige con `reason=401`.*
+- [x] Tests de ambos guards.
 
 ## Criterios de aceptación
 
-- [ ] Tras iniciar sesión desde `/unauthorized`, el usuario vuelve a la página que pidió.
-- [ ] `hasPermission` bloquea y redirige con `reason=403`.
+- [x] Tras iniciar sesión desde `/unauthorized`, el usuario vuelve a la página que pidió. *El botón guarda `returnUrl` como última ruta antes de `login()`, porque el guard cancela la navegación y no llega a guardarse.*
+- [x] `hasPermission` bloquea y redirige con `reason=403`.
 
 ## Ficheros afectados
 

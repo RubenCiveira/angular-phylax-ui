@@ -7,7 +7,7 @@ paso: 4
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,14 +24,14 @@ La caché es un `Map` a nivel de módulo (`repositoryStore`), invisible para DI 
 
 ## Tareas
 
-- [ ] Crear `@Injectable({ providedIn: 'root' }) RepositoryStore` con `clear()`.
-- [ ] Inyectarlo en `RepositoryService` (el constructor recibe el store).
-- [ ] Llamar a `clear()` en el evento de logout y al cambiar de tenant.
-- [ ] Tests aislados que reinician el store.
+- [x] Crear `@Injectable({ providedIn: 'root' }) RepositoryStore` con `clear()`.
+- [x] Inyectarlo en `RepositoryService` (el constructor recibe el store). *`reference` devuelve ahora metadatos y no un `RepositoryService`, para que la referencia comparta el store.*
+- [x] Llamar a `clear()` en el evento de logout y al cambiar de tenant. *El propio store se suscribe a `AppStateService.tenant` y al `uid` de `userInfo` de cada identidad configurada (login y logout). Vacía los mapas en sitio y `CacheResource` ya no borra una entrada ajena con la misma clave.*
+- [x] Tests aislados que reinician el store.
 
 ## Criterios de aceptación
 
-- [ ] Tras cerrar sesión e iniciar con otro usuario, no se ven datos del anterior.
+- [x] Tras cerrar sesión e iniciar con otro usuario, no se ven datos del anterior.
 
 ## Ficheros afectados
 

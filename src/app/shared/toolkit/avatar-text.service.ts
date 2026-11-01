@@ -13,10 +13,10 @@ export function computeAvatarSpec(
     saturation?: number; // 0..100, por defecto 60
     lightness?: number; // 0..100, por defecto 46
     hueRange?: [number, number]; // por defecto [0, 360)
-    locale?: string; // por defecto 'es'
+    locale?: string; // por defecto, el del navegador
   },
 ): AvatarSpec {
-  const { maxLetters = 2, saturation = 60, lightness = 46, hueRange = [0, 360], locale = 'es' } = opts || {};
+  const { maxLetters = 2, saturation = 60, lightness = 46, hueRange = [0, 360], locale } = opts || {};
 
   const safe = (text ?? '').trim();
   const initials = getInitials(safe, maxLetters, locale) || '•';
@@ -41,7 +41,7 @@ export function computeAvatarSpec(
   };
 }
 
-function getInitials(text: string, maxLetters: number, locale: string): string {
+function getInitials(text: string, maxLetters: number, locale: string | undefined): string {
   if (!text) return '';
   // Normalizar, quitar espacios múltiples y signos raros al inicio/fin
   const cleaned = text

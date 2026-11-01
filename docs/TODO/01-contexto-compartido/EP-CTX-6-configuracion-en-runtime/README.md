@@ -3,7 +3,7 @@ id: EP-CTX-6
 titulo: "Configuración en runtime"
 area: contexto-compartido
 prioridad: alta
-estado: pendiente
+estado: en-curso
 issues: [CTX-15, CTX-16, CTX-18, CTX-17]
 ---
 
@@ -65,7 +65,7 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] CTX-15 — Configuración en runtime tipada (APP_CONFIG)
+- [x] CTX-15 — Configuración en runtime tipada (APP_CONFIG)
 - [ ] CTX-16 — Carga de configuración con error visible
 - [ ] CTX-18 — Publicar phylax-config.schema.json
 - [ ] CTX-17 — Aislar la lógica de micro-frontend de configuración e i18n

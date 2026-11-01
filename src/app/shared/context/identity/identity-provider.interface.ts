@@ -10,6 +10,8 @@ export interface IdentityProvider {
 
 export interface IdentityHandler {
   bootstrap(): Observable<void>;
+  /** Access token vigente, o `null` sin sesión. Emite cada vez que cambia. */
+  token$(): Observable<string | null>;
   login(): void;
   logout(): void;
 }

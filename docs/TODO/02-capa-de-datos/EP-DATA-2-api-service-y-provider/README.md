@@ -3,7 +3,7 @@ id: EP-DATA-2
 titulo: "ApiService y ApiProvider"
 area: capa-de-datos
 prioridad: critica
-estado: pendiente
+estado: hecho
 issues: [DATA-05, DATA-06, DATA-07, DATA-08, DATA-09]
 ---
 
@@ -57,8 +57,8 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] DATA-05 — Las mutaciones no deben repetirse al cambiar el contexto
-- [ ] DATA-06 — Resolver hosts lógicos por coincidencia exacta
-- [ ] DATA-07 — Inyección de contexto fijo en el body, opcional por API
-- [ ] DATA-08 — Sondeo de operaciones masivas con backoff y límite
-- [ ] DATA-09 — ApiProvider: codificar claves en la URL y tipar el ACL
+- [x] DATA-05 — Las mutaciones no deben repetirse al cambiar el contexto
+- [x] DATA-06 — Resolver hosts lógicos por coincidencia exacta
+- [x] DATA-07 — Inyección de contexto fijo en el body, opcional por API
+- [x] DATA-08 — Sondeo de operaciones masivas con backoff y límite
+- [x] DATA-09 — ApiProvider: codificar claves en la URL y tipar el ACL

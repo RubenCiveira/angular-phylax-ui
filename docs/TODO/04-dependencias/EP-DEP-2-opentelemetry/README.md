@@ -3,7 +3,7 @@ id: EP-DEP-2
 titulo: "OpenTelemetry"
 area: dependencias
 prioridad: alta
-estado: pendiente
+estado: en-curso
 issues: [DEP-03, DEP-04]
 ---
 
@@ -51,5 +51,5 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] DEP-03 — Cargar OpenTelemetry bajo demanda
+- [x] DEP-03 — Cargar OpenTelemetry bajo demanda
 - [ ] DEP-04 — Alinear versiones de los paquetes de OpenTelemetry

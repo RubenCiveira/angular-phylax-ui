@@ -7,7 +7,7 @@ paso: 6
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [DATA-15]
 origen: 06-capa-de-datos.md
 ---
@@ -24,14 +24,14 @@ Hoy se convierte a `Date` **cualquier** string con forma de fecha (también text
 
 ## Tareas
 
-- [ ] Que el generador emita `dates`/`datetimes` en los metadatos del repositorio de cada entidad.
-- [ ] Convertir en `RepositoryService.mapItem` usando esa lista (y en sentido inverso al enviar, si el backend lo necesita).
-- [ ] Desactivar la conversión global por regex en `ClientService` (dejarla opcional).
+- [x] Que el generador emita `dates`/`datetimes` en los metadatos del repositorio de cada entidad. *Aplicado a mano en los 25 repositorios (hay que llevarlo a la plantilla). En el backend todas las fechas son `OffsetDateTime`, así que solo hay `datetimes`.*
+- [x] Convertir en `RepositoryService.mapItem` usando esa lista (y en sentido inverso al enviar, si el backend lo necesita). *También en las respuestas de `add`/`update`/`patch`; al enviar, los campos `date` viajan como `YYYY-MM-DD`.*
+- [x] Desactivar la conversión global por regex en `ClientService` (dejarla opcional). *Opcional con `data.convert-iso-dates: true`. `ApiProvider` convierte las fechas de `LongTask`.*
 
 ## Criterios de aceptación
 
-- [ ] Un campo de texto con forma de fecha sigue siendo `string`.
-- [ ] Los campos `date` llegan como `Date`.
+- [x] Un campo de texto con forma de fecha sigue siendo `string`.
+- [x] Los campos `date` llegan como `Date`.
 
 ## Ficheros afectados
 

@@ -4,6 +4,7 @@ import { Component, effect, OnDestroy, OnInit, signal, Signal } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { AppStateService } from '@shared/context/state/app-state.service';
+import { DefaultsService } from '@shared/context/config/defaults.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -23,14 +24,15 @@ export class ContainerComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly state: AppStateService,
+    defaults: DefaultsService,
   ) {
     this.currentLanguage = toSignal(this.state.language);
     this.currentTenant = toSignal(this.state.tenant);
     effect(() => {
-      this.updateLanguageInUrl(this.currentLanguage() || 'es');
+      this.updateLanguageInUrl(this.currentLanguage() || defaults.language());
     });
     effect(() => {
-      this.updateTenantInUrl(this.currentTenant() || 'main');
+      this.updateTenantInUrl(this.currentTenant() || defaults.tenant());
     });
   }
 

@@ -24,7 +24,74 @@
       "reset": "Borrar credenciales",
       "profile": "No se ha podido cargar tu perfil de usuario. ¿Borrar las credenciales guardadas y empezar de nuevo?",
       "discovery": "No se ha podido contactar con el proveedor de identidad. ¿Borrar las credenciales guardadas y empezar de nuevo?",
-      "code": "La respuesta del inicio de sesión no es válida. Vuelve a iniciar sesión."
+      "code": "La respuesta del inicio de sesión no es válida. Vuelve a iniciar sesión.",
+      "notConfigured": "El servicio de inicio de sesión no está bien configurado. Contacta con el administrador."
+    }
+  },
+  "auth": {
+    "redirecting": "Iniciando sesión…",
+    "unauthorized": {
+      "401": {
+        "title": "Necesitas iniciar sesión",
+        "message": "Inicia sesión para ver esta página."
+      },
+      "403": {
+        "title": "Acceso denegado",
+        "message": "Tu cuenta no tiene permiso para ver esta página."
+      },
+      "login": "Iniciar sesión",
+      "switchAccount": "Cambiar de cuenta"
+    }
+  },
+  "errors": {
+    "page": {
+      "home": "Volver al inicio",
+      "details": "Detalles técnicos",
+      "traceId": "Referencia para soporte",
+      "no_content": {
+        "title": "Aquí no hay nada",
+        "message": "Esta sección no tiene contenido."
+      },
+      "error_0": {
+        "title": "Sin conexión",
+        "message": "No se ha podido contactar con el servidor. Comprueba tu conexión e inténtalo de nuevo."
+      },
+      "error_401": {
+        "title": "Necesitas iniciar sesión",
+        "message": "Inicia sesión para continuar."
+      },
+      "error_402": {
+        "title": "Pago necesario",
+        "message": "Esta funcionalidad no está incluida en tu plan."
+      },
+      "error_403": {
+        "title": "Acceso denegado",
+        "message": "No tienes permiso para hacer esto."
+      },
+      "error_404": {
+        "title": "No encontrado",
+        "message": "Lo que buscas no existe o se ha eliminado."
+      },
+      "error_409": {
+        "title": "Conflicto",
+        "message": "Otra persona ha cambiado estos datos. Recarga e inténtalo de nuevo."
+      },
+      "error_422": {
+        "title": "Datos no válidos",
+        "message": "Algunos de los datos enviados no son válidos. Revísalos e inténtalo de nuevo."
+      },
+      "no_empty_error_422": {
+        "title": "Faltan datos obligatorios",
+        "message": "Rellena los campos obligatorios e inténtalo de nuevo."
+      },
+      "error_5xx": {
+        "title": "Servicio no disponible",
+        "message": "El servicio no responde. Inténtalo de nuevo en unos minutos."
+      },
+      "error_unknown": {
+        "title": "Algo ha ido mal",
+        "message": "Ha ocurrido un error inesperado. Inténtalo de nuevo."
+      }
     }
   }
 }

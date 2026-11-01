@@ -3,7 +3,7 @@ id: EP-CTX-3
 titulo: "Identidad y autorización"
 area: contexto-compartido
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [CTX-11, CTX-12, CTX-13, CTX-14, CTX-25]
 ---
 
@@ -63,8 +63,8 @@ Estas épicas modifican alguno de los mismos ficheros. Conviene no trabajarlas e
 
 ## Checklist de la épica
 
-- [ ] CTX-11 — IdentityService: tipado y error explícito si falta el handler
-- [ ] CTX-12 — Guards: returnUrl y guard por permiso
-- [ ] CTX-13 — Página de acceso denegado con acciones (401/403)
-- [ ] CTX-14 — AuthorizationAccess: menos escrituras y pantalla de redirección
-- [ ] CTX-25 — UserInfo como interfaz y sin token en el estado de UI
+- [x] CTX-11 — IdentityService: tipado y error explícito si falta el handler
+- [x] CTX-12 — Guards: returnUrl y guard por permiso
+- [x] CTX-13 — Página de acceso denegado con acciones (401/403)
+- [x] CTX-14 — AuthorizationAccess: menos escrituras y pantalla de redirección
+- [x] CTX-25 — UserInfo como interfaz y sin token en el estado de UI

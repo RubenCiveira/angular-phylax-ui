@@ -5,8 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { SpanStatusCode } from '@opentelemetry/api';
 import { ErrorService, GlobalErrorHandler } from './error.service';
-import { AppConfigService } from '../config/app-config.service';
+import { Logger } from './logger.service';
 import { InstrumentationService } from './instrumentation.service';
+import { IdentityService } from '../identity/identity.service';
 
 describe('ErrorService', () => {
   let service: ErrorService;
@@ -15,14 +16,17 @@ describe('ErrorService', () => {
   let mockSpan: any;
   let mockTracer: any;
   let provider: any;
+  let logger: jasmine.SpyObj<Logger>;
+  let identity: jasmine.SpyObj<IdentityService>;
 
   beforeEach(() => {
-    spyOn(console, 'log');
-    spyOn(console, 'error');
+    logger = jasmine.createSpyObj<Logger>('Logger', ['error']);
+    identity = jasmine.createSpyObj<IdentityService>('IdentityService', ['login']);
     mockSpan = {
       setStatus: jasmine.createSpy('setStatus'),
       recordException: jasmine.createSpy('recordException'),
       end: jasmine.createSpy('end'),
+      spanContext: () => ({ traceId: '0af7651916cd43dd8448eb211c80319c', spanId: 'b7ad6b7169203331', traceFlags: 1 }),
     };
     mockTracer = { startSpan: jasmine.createSpy('startSpan').and.returnValue(mockSpan) };
     snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
@@ -36,8 +40,9 @@ describe('ErrorService', () => {
         ErrorService,
         { provide: MatDialog, useValue: dialog },
         { provide: MatSnackBar, useValue: snackBar },
-        { provide: AppConfigService, useValue: { name: of('lughauth') } },
+        { provide: Logger, useValue: logger },
         { provide: InstrumentationService, useValue: provider },
+        { provide: IdentityService, useValue: identity },
       ],
     });
     service = TestBed.inject(ErrorService);
@@ -78,7 +83,24 @@ describe('ErrorService', () => {
     service.initialiceError(error);
     tick(2000);
     expect(dialog.open).toHaveBeenCalled();
-    expect(dialog.open.calls.mostRecent().args[1]).toEqual({ data: { error } });
+    expect(dialog.open.calls.mostRecent().args[1]).toEqual({ data: { error, login: undefined } });
+  }));
+
+  it('initialiceError offers to sign in with the identity of a 401', fakeAsync(() => {
+    const error: any = { hidden: false, status: 401, identity: 'main' };
+    service.initialiceError(error);
+    tick(2000);
+    const data = dialog.open.calls.mostRecent().args[1]!.data as any;
+    expect(data.error).toBe(error);
+    expect(identity.login).not.toHaveBeenCalled();
+    data.login();
+    expect(identity.login).toHaveBeenCalledWith('main');
+  }));
+
+  it('initialiceError does not offer to sign in for a 401 without identity', fakeAsync(() => {
+    service.initialiceError({ hidden: false, status: 401 });
+    tick(2000);
+    expect((dialog.open.calls.mostRecent().args[1]!.data as any).login).toBeUndefined();
   }));
 
   it('initialiceError shows a snackbar for 422 errors', fakeAsync(() => {
@@ -108,11 +130,29 @@ describe('ErrorService', () => {
     expect(mockSpan.setStatus).toHaveBeenCalledWith({ code: SpanStatusCode.ERROR, message: 'oops' });
     expect(mockSpan.recordException).toHaveBeenCalledWith(error);
     expect(mockSpan.end).toHaveBeenCalled();
+    expect(logger.error).toHaveBeenCalledWith('Unhandled error', error);
   });
 
   it('storeError uses a fallback message when error has no message', () => {
     service.storeError({});
-    expect(provider.getTracer).toHaveBeenCalledWith('Error no especificado');
+    expect(provider.getTracer).toHaveBeenCalledWith('Unspecified error');
+  });
+
+  it('storeError annotates the error with the traceId for support', () => {
+    const error: any = { message: 'oops' };
+    service.storeError(error);
+    expect(error.traceId).toBe('0af7651916cd43dd8448eb211c80319c');
+  });
+
+  it('storeError does not annotate an invalid (no-op) trace', () => {
+    mockSpan.spanContext = () => ({
+      traceId: '00000000000000000000000000000000',
+      spanId: '0000000000000000',
+      traceFlags: 0,
+    });
+    const error: any = { message: 'oops' };
+    service.storeError(error);
+    expect(error.traceId).toBeUndefined();
   });
 });
 

@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: en-curso
 depende_de: []
 origen: 03-dependencias.md
 ---
@@ -24,19 +24,20 @@ Hay versiones mezcladas: `sdk-logs@0.208` con `exporter-logs-otlp-http@0.202`, `
 
 ## Tareas
 
-- [ ] Actualizar todos los `0.x` a la misma versión y todos los `2.x` a la misma versión.
-- [ ] Agruparlos en Renovate/Dependabot (`groupName: opentelemetry`).
-- [ ] Quitar los paquetes que dejen de usarse tras DEP-03.
+- [x] Actualizar todos los `0.x` a la misma versión y todos los `2.x` a la misma versión. *`0.223.0` y `2.12.0` (última línea 2.x; `instrumentation-document-load@0.68.0` es la que casa con ella). El salto a 3.x / 0.300 queda pendiente: `sdk-trace-web` está deprecado en favor de `sdk-trace`, pero las instrumentaciones 0.223 aún dependen de él.*
+- [x] Agruparlos en Renovate/Dependabot (`groupName: opentelemetry`). *Grupo `opentelemetry` en `.github/dependabot.yml`.*
+- [x] Quitar los paquetes que dejen de usarse tras DEP-03. *Fuera `auto-instrumentations-web`.*
 
 ## Criterios de aceptación
 
-- [ ] `pnpm ls @opentelemetry/*` muestra versiones coherentes.
-- [ ] La telemetría sigue exportando trazas y logs.
+- [x] `pnpm ls @opentelemetry/*` muestra versiones coherentes.
+- [ ] La telemetría sigue exportando trazas y logs. *Pendiente de comprobar contra un colector OTLP real.*
 
 ## Ficheros afectados
 
 - `package.json`
 - `pnpm-lock.yaml`
+- `.github/dependabot.yml`
 
 ## Relacionado
 

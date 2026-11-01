@@ -7,7 +7,7 @@ paso: 2
 prioridad: baja
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [SHELL-23]
 origen: 05-contexto-compartido.md
 ---
@@ -24,17 +24,20 @@ El `Resource` solo lleva `service.name` (hay un `TODO: ¿podemos añadir usuario
 
 ## Tareas
 
-- [ ] Añadir `service.version`, `deployment.environment` y `session.id` (aleatorio por pestaña).
-- [ ] Añadir `app.tenant` como atributo de span dinámico. Nunca email ni nombre.
-- [ ] Renombrar `APP_INSTRUMETATION` y eliminar `buildInstrumentation`.
+- [x] Añadir `service.version`, `deployment.environment` y `session.id` (aleatorio por pestaña). *Se usa el nombre actual de la convención, `deployment.environment.name`, leído de `telemetry.environment` (cambia por despliegue, no por build). `service.version` sale de `environment.version` (inyectada en el build por SHELL-23; `dev` en `ng serve`). `session.id` vive en `sessionStorage`: sobrevive a recargas, no se comparte entre pestañas.*
+- [x] Añadir `app.tenant` como atributo de span dinámico. Nunca email ni nombre. *Un `SpanProcessor` lo pone en `onStart` con el tenant activo de `AppStateService`.*
+- [x] Renombrar `APP_INSTRUMETATION` y eliminar `buildInstrumentation`. *Ya resuelto con DEP-03: el servicio usa `inject()` y no hay token.*
 
 ## Criterios de aceptación
 
-- [ ] Los spans en el colector muestran versión, entorno, sesión y tenant.
+- [x] Los spans en el colector muestran versión, entorno, sesión y tenant.
 
 ## Ficheros afectados
 
 - `src/app/shared/context/observability/instrumentation.service.ts`
+- `src/app/shared/context/observability/otel-bootstrap.ts`
+- `src/app/shared/context/config/app-config.model.ts`
+- `src/app/bootstrap/environment/environment.ts`
 
 ## Relacionado
 

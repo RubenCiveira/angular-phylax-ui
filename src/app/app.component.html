@@ -11,7 +11,7 @@
   @if (bootstrap) {
     <router-outlet />
   } @else {
-    <app-bootstrap />
+    <app-bootstrap [error]="bootstrapError" />
   }
 </main>
 <footer [attr.inert]="isMobile && navOverlayOpen ? '' : null">

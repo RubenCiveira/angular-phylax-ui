@@ -3,9 +3,10 @@ import { Injectable, Injector, ErrorHandler } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorModalComponent } from '@shared/toolkit/error-modal/error-modal.component';
-import { SpanStatusCode } from '@opentelemetry/api';
-import { AppConfigService } from '../config/app-config.service';
+import { isSpanContextValid, SpanStatusCode } from '@opentelemetry/api';
 import { InstrumentationService } from './instrumentation.service';
+import { Logger } from './logger.service';
+import { IdentityService } from '../identity/identity.service';
 
 export interface HiddenError {
   hidden: boolean;
@@ -18,24 +19,26 @@ export class ErrorService {
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private appConfig: AppConfigService,
+    private logger: Logger,
     private provider: InstrumentationService,
+    private injector: Injector,
   ) {}
 
+  /** Registra el error en un span y anota su `traceId` en el error para que la UI lo muestre a soporte. */
   public storeError(error: any) {
-    console.error('Store error', error);
-    const msg = error.message || 'Error no especificado';
-    this.appConfig['name'].subscribe((name) => {
-      console.log('HAS TRACER');
-      const tracer = this.provider.getTracer(msg);
-      const span = tracer.startSpan(msg);
-      span.setStatus({
-        code: SpanStatusCode.ERROR,
-        message: msg,
-      });
-      span.recordException(error); // Esto registrará el stack trace y otros detalles del error
-      span.end();
+    this.logger.error('Unhandled error', error);
+    const msg = error?.message || 'Unspecified error';
+    const span = this.provider.getTracer(msg).startSpan(msg);
+    span.setStatus({
+      code: SpanStatusCode.ERROR,
+      message: msg,
     });
+    span.recordException(error); // Esto registrará el stack trace y otros detalles del error
+    span.end();
+    const context = span.spanContext();
+    if (error && typeof error === 'object' && isSpanContextValid(context)) {
+      error.traceId = context.traceId;
+    }
   }
 
   public notifyError(message: string) {
@@ -44,8 +47,6 @@ export class ErrorService {
 
   private debugError(error: any) {
     this.storeError(error);
-    // this.displayedError = true;
-    console.error('Error ', error);
     if (error.status === 422) {
       this.snackBar
         .open('Ha ocurrido un error, la lista de datos enviados es incorrecta', undefined, { duration: 2000 })
@@ -57,7 +58,7 @@ export class ErrorService {
         });
     } else {
       this.dialog
-        .open(ErrorModalComponent, { data: { error: error } })
+        .open(ErrorModalComponent, { data: { error: error, login: this.loginAction(error) } })
         .afterClosed()
         .subscribe({
           next: () => {
@@ -65,6 +66,15 @@ export class ErrorService {
           },
         });
     }
+  }
+
+  /** Un 401 de una petición con identidad (`ClientService` la anota) se resuelve iniciando sesión con ella. */
+  private loginAction(error: any): (() => void) | undefined {
+    if (error?.status !== 401 || !error.identity) {
+      return undefined;
+    }
+    // Se resuelve al usarse: IdentityService depende de la configuración y del logger, que no deben cargarse aquí
+    return () => this.injector.get(IdentityService).login(error.identity);
   }
 
   public cancelError(error: any) {

@@ -24,7 +24,74 @@
       "reset": "Clear credentials",
       "profile": "Your user profile could not be loaded. Clear the saved credentials and start again?",
       "discovery": "The identity provider could not be reached. Clear the saved credentials and start again?",
-      "code": "The sign-in response is not valid. Please sign in again."
+      "code": "The sign-in response is not valid. Please sign in again.",
+      "notConfigured": "The sign-in service is not configured correctly. Contact the administrator."
+    }
+  },
+  "auth": {
+    "redirecting": "Signing you in…",
+    "unauthorized": {
+      "401": {
+        "title": "Sign-in required",
+        "message": "You need to sign in to see this page."
+      },
+      "403": {
+        "title": "Access denied",
+        "message": "Your account does not have permission to see this page."
+      },
+      "login": "Sign in",
+      "switchAccount": "Switch account"
+    }
+  },
+  "errors": {
+    "page": {
+      "home": "Go to home",
+      "details": "Technical details",
+      "traceId": "Reference for support",
+      "no_content": {
+        "title": "Nothing to show here",
+        "message": "This section has no content."
+      },
+      "error_0": {
+        "title": "No connection",
+        "message": "The server could not be reached. Check your connection and try again."
+      },
+      "error_401": {
+        "title": "Sign-in required",
+        "message": "You need to sign in to continue."
+      },
+      "error_402": {
+        "title": "Payment required",
+        "message": "This feature is not included in your plan."
+      },
+      "error_403": {
+        "title": "Access denied",
+        "message": "You do not have permission to do this."
+      },
+      "error_404": {
+        "title": "Not found",
+        "message": "What you are looking for does not exist or has been removed."
+      },
+      "error_409": {
+        "title": "Conflict",
+        "message": "Someone else changed this data. Reload and try again."
+      },
+      "error_422": {
+        "title": "Invalid data",
+        "message": "Some of the data sent is not valid. Review it and try again."
+      },
+      "no_empty_error_422": {
+        "title": "Required data missing",
+        "message": "Fill in the required fields and try again."
+      },
+      "error_5xx": {
+        "title": "Service unavailable",
+        "message": "The service is not responding. Please try again in a few minutes."
+      },
+      "error_unknown": {
+        "title": "Something went wrong",
+        "message": "An unexpected error occurred. Please try again."
+      }
     }
   }
 }

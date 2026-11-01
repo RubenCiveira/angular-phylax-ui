@@ -3,13 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { IdentityService } from '@shared/context/identity/identity.service';
+import { UserInfo } from '@shared/context/identity/user-info.model';
 import { AppStateService } from '@shared/context/state/app-state.service';
-import { isAuthenticated } from './is-authenticated.guards';
+import { hasPermission, isAuthenticated } from './is-authenticated.guards';
 
-describe('isAuthenticated guard', () => {
+describe('authorization guards', () => {
   afterEach(() => TestBed.resetTestingModule());
 
-  function setup(authenticated: boolean) {
+  const state = { url: '/es/main/tenant?page=2' } as RouterStateSnapshot;
+
+  function setup(user: UserInfo) {
     const urlTree = {};
     const router = {
       createUrlTree: jasmine.createSpy('createUrlTree').and.returnValue(urlTree),
@@ -17,7 +20,7 @@ describe('isAuthenticated guard', () => {
     const identityService = {
       bootstrap: jasmine.createSpy('bootstrap').and.returnValue(of(undefined)),
     };
-    const appState = { userInfo: { main: of({ authenticated }) } };
+    const appState = { userInfo: { main: of(user) } };
 
     TestBed.configureTestingModule({
       providers: [
@@ -27,41 +30,70 @@ describe('isAuthenticated guard', () => {
       ],
     });
 
-    return { router, identityService };
+    return { router, identityService, urlTree };
   }
 
-  it('allows navigation when user is authenticated', (done) => {
-    setup(true);
-    const state = { url: '/app/home' } as RouterStateSnapshot;
-
+  function run(guard: (r: ActivatedRouteSnapshot, s: RouterStateSnapshot) => unknown, done: (result: any) => void) {
     TestBed.runInInjectionContext(() => {
-      (isAuthenticated({} as ActivatedRouteSnapshot, state) as Observable<any>).subscribe((result) => {
+      (guard({} as ActivatedRouteSnapshot, state) as Observable<any>).subscribe(done);
+    });
+  }
+
+  describe('isAuthenticated', () => {
+    it('allows navigation when user is authenticated', (done) => {
+      setup({ authenticated: true });
+      run(isAuthenticated, (result) => {
         expect(result).toBeTrue();
         done();
       });
     });
-  });
 
-  it('redirects to /unauthorized when user is not authenticated', (done) => {
-    const { router } = setup(false);
-    const state = { url: '/app/home' } as RouterStateSnapshot;
+    it('redirects to /unauthorized with returnUrl and reason=401', (done) => {
+      const { router, urlTree } = setup({ authenticated: false });
+      run(isAuthenticated, (result) => {
+        expect(router.createUrlTree).toHaveBeenCalledWith(['/unauthorized'], {
+          queryParams: { returnUrl: '/es/main/tenant?page=2', reason: '401' },
+        });
+        expect(result).toBe(urlTree);
+        done();
+      });
+    });
 
-    TestBed.runInInjectionContext(() => {
-      (isAuthenticated({} as ActivatedRouteSnapshot, state) as Observable<any>).subscribe((result) => {
-        expect(router.createUrlTree).toHaveBeenCalledWith(['/unauthorized']);
-        expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue);
+    it('calls identityService.bootstrap with "main"', (done) => {
+      const { identityService } = setup({ authenticated: true });
+      run(isAuthenticated, () => {
+        expect(identityService.bootstrap).toHaveBeenCalledWith('main');
         done();
       });
     });
   });
 
-  it('calls identityService.bootstrap with "main"', (done) => {
-    const { identityService } = setup(true);
-    const state = { url: '/app' } as RouterStateSnapshot;
+  describe('hasPermission', () => {
+    it('allows navigation when the user has the permission', (done) => {
+      setup({ authenticated: true, roles: ['admin'] });
+      run(hasPermission('admin'), (result) => {
+        expect(result).toBeTrue();
+        done();
+      });
+    });
 
-    TestBed.runInInjectionContext(() => {
-      (isAuthenticated({} as ActivatedRouteSnapshot, state) as Observable<any>).subscribe(() => {
-        expect(identityService.bootstrap).toHaveBeenCalledWith('main');
+    it('redirects with reason=403 when the user lacks the permission', (done) => {
+      const { router, urlTree } = setup({ authenticated: true, roles: ['guest'] });
+      run(hasPermission('admin'), (result) => {
+        expect(router.createUrlTree).toHaveBeenCalledWith(['/unauthorized'], {
+          queryParams: { returnUrl: '/es/main/tenant?page=2', reason: '403' },
+        });
+        expect(result).toBe(urlTree);
+        done();
+      });
+    });
+
+    it('redirects with reason=401 when the user is not authenticated', (done) => {
+      const { router } = setup({ authenticated: false });
+      run(hasPermission('admin'), () => {
+        expect(router.createUrlTree).toHaveBeenCalledWith(['/unauthorized'], {
+          queryParams: { returnUrl: '/es/main/tenant?page=2', reason: '401' },
+        });
         done();
       });
     });

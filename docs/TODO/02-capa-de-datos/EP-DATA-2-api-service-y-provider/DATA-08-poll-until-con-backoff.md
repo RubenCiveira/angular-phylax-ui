@@ -7,7 +7,7 @@ paso: 4
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [DATA-05]
 origen: 06-capa-de-datos.md
 ---
@@ -24,13 +24,13 @@ Las operaciones masivas sondean con `timer(1000, 4000)` (el comentario dice "cad
 
 ## Tareas
 
-- [ ] Crear `pollUntil(request$, isDone, { initial: 1000, max: 10_000, factor: 1.5, timeout: 5 * 60_000 })` en `shared/data`.
-- [ ] Usarlo en `deleteAllForQuery` y `patchAllForQuery`.
-- [ ] Al vencer el timeout, emitir un estado `TIMEOUT` que `long-task-view` muestre.
+- [x] Crear `pollUntil(request$, isDone, { initial: 1000, max: 10_000, factor: 1.5, timeout: 5 * 60_000 })` en `shared/data`. *Opción `onTimeout(last)` para emitir un valor final; sin ella, termina con `PollTimeoutError`.*
+- [x] Usarlo en `deleteAllForQuery` y `patchAllForQuery`.
+- [x] Al vencer el timeout, emitir un estado `TIMEOUT` que `long-task-view` muestre. *`LongTask.detailStatus` admite `'TIMEOUT'`; el texto está sin traducir, como el resto de la vista (UI-21).*
 
 ## Criterios de aceptación
 
-- [ ] El sondeo se detiene tras el timeout con un mensaje visible.
+- [x] El sondeo se detiene tras el timeout con un mensaje visible.
 
 ## Ficheros afectados
 

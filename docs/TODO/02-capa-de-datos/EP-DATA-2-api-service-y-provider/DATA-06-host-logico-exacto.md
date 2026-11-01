@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 06-capa-de-datos.md
 ---
@@ -24,13 +24,13 @@ origen: 06-capa-de-datos.md
 
 ## Tareas
 
-- [ ] Resolver con `new URL(url).host === key` cuando la URL sea `http(s)://<key>/…`.
-- [ ] Mantener el prefijo como alternativa documentada y quedarse con la coincidencia más larga.
-- [ ] Tests con claves que comparten prefijo.
+- [x] Resolver con `new URL(url).host === key` cuando la URL sea `http(s)://<key>/…`.
+- [x] Mantener el prefijo como alternativa documentada y quedarse con la coincidencia más larga. *El prefijo además debe terminar en límite de segmento (`/`, `?`, `#` o fin). Ya no se aplican varias entradas en cascada: gana una.*
+- [x] Tests con claves que comparten prefijo.
 
 ## Criterios de aceptación
 
-- [ ] `api` y `api-v2` se resuelven a sus URLs respectivas.
+- [x] `api` y `api-v2` se resuelven a sus URLs respectivas.
 
 ## Ficheros afectados
 
