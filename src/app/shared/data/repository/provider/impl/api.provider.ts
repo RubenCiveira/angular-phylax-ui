@@ -20,7 +20,11 @@ const withTaskDates = (task: LongTask): LongTask => ({
   ...task,
   startTime: toDate(task.startTime),
   endTime: toDate(task.endTime),
-  steps: (task.steps ?? []).map((step) => ({ ...step, startTime: toDate(step.startTime), endTime: toDate(step.endTime) })),
+  steps: (task.steps ?? []).map((step) => ({
+    ...step,
+    startTime: toDate(step.startTime),
+    endTime: toDate(step.endTime),
+  })),
 });
 
 const isLongTaskDone = (task: LongTask) => task.detailStatus === 'FAILED' || task.detailStatus === 'FINISHED';

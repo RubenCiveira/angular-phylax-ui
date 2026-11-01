@@ -147460,20 +147460,18 @@ Project '${d.projectName}' (${yP[d.projectKind]}) ${s}
                   let { file: i, project: o } = this.getFileAndProject(t),
                     s = this.projectService.getScriptInfoForNormalizedPath(i),
                     l = this.getPosition(t, s),
-                    d = o
-                      .getLanguageService()
-                      .getCompletionsAtPosition(
-                        i,
-                        l,
-                        {
-                          ...Zfe(this.getPreferences(i)),
-                          triggerCharacter: t.triggerCharacter,
-                          triggerKind: t.triggerKind,
-                          includeExternalModuleExports: t.includeExternalModuleExports,
-                          includeInsertTextCompletions: t.includeInsertTextCompletions,
-                        },
-                        o.projectService.getFormatCodeOptions(i),
-                      );
+                    d = o.getLanguageService().getCompletionsAtPosition(
+                      i,
+                      l,
+                      {
+                        ...Zfe(this.getPreferences(i)),
+                        triggerCharacter: t.triggerCharacter,
+                        triggerKind: t.triggerKind,
+                        includeExternalModuleExports: t.includeExternalModuleExports,
+                        includeInsertTextCompletions: t.includeInsertTextCompletions,
+                      },
+                      o.projectService.getFormatCodeOptions(i),
+                    );
                   if (d === void 0) return;
                   if (r === 'completions-full') return d;
                   let p = t.prefix || '',
@@ -147843,17 +147841,15 @@ Project '${d.projectName}' (${yP[d.projectKind]}) ${s}
                 organizeImports(t, r) {
                   x.assert(t.scope.type === 'file');
                   let { file: i, project: o } = this.getFileAndProject(t.scope.args),
-                    s = o
-                      .getLanguageService()
-                      .organizeImports(
-                        {
-                          fileName: i,
-                          mode: t.mode ?? (t.skipDestructiveCodeActions ? 'SortAndCombine' : void 0),
-                          type: 'file',
-                        },
-                        this.getFormatOptions(i),
-                        this.getPreferences(i),
-                      );
+                    s = o.getLanguageService().organizeImports(
+                      {
+                        fileName: i,
+                        mode: t.mode ?? (t.skipDestructiveCodeActions ? 'SortAndCombine' : void 0),
+                        type: 'file',
+                      },
+                      this.getFormatOptions(i),
+                      this.getPreferences(i),
+                    );
                   return r ? this.mapTextChangesToCodeEdits(s) : s;
                 }
                 getEditsForFileRename(t, r) {

@@ -51,11 +51,14 @@ export class UnauthorizedComponent {
 
     // Con 403 el usuario ya está autenticado: volver a returnUrl lo devolvería aquí en bucle
     if (this.reason === '401') {
-      this.state.user$('main').pipe(takeUntilDestroyed()).subscribe((user) => {
-        if (user.authenticated) {
-          this.returnUrl ? this.router.navigateByUrl(this.returnUrl) : this.home();
-        }
-      });
+      this.state
+        .user$('main')
+        .pipe(takeUntilDestroyed())
+        .subscribe((user) => {
+          if (user.authenticated) {
+            this.returnUrl ? this.router.navigateByUrl(this.returnUrl) : this.home();
+          }
+        });
     }
   }
 

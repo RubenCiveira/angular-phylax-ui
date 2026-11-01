@@ -1,119 +1,119 @@
 {
-  "info": "Modulo",
-  "common": {
-    "confirm": {
-      "title": "Confirmar",
-      "ok": "Aceptar",
-      "cancel": "Cancelar"
-    },
-    "notify": {
-      "close": "Cerrar"
-    },
-    "selector": {
-      "open": "Mostrar opciones",
-      "noResults": "Sin resultados",
-      "error": "No se pudieron cargar las opciones. Inténtalo de nuevo."
-    },
-    "hiddenField": "Campo oculto por permisos"
-  },
-  "validation": {
-    "required": "Este campo es obligatorio",
-    "minlength": "Mínimo {{requiredLength}} caracteres",
-    "maxlength": "Máximo {{requiredLength}} caracteres",
-    "min": "El valor mínimo es {{min}}",
-    "max": "El valor máximo es {{max}}",
-    "email": "Introduce un correo electrónico válido",
-    "pattern": "El formato no es válido",
-    "invalid": "El valor no es válido"
-  },
-  "identity": {
-    "stepUp": {
-      "title": "Verificación adicional",
-      "message": "Esta operación requiere verificación adicional. Te llevaremos a la página de inicio de sesión y después volverás aquí.",
-      "continue": "Continuar",
-      "cancel": "Cancelar",
-      "verified": "Verificación completada.",
-      "repeat": "Verificación completada. Repite la operación para aplicarla."
-    },
-    "errors": {
-      "title": "Problema de inicio de sesión",
-      "reset": "Borrar credenciales",
-      "profile": "No se ha podido cargar tu perfil de usuario. ¿Borrar las credenciales guardadas y empezar de nuevo?",
-      "discovery": "No se ha podido contactar con el proveedor de identidad. ¿Borrar las credenciales guardadas y empezar de nuevo?",
-      "code": "La respuesta del inicio de sesión no es válida. Vuelve a iniciar sesión.",
-      "notConfigured": "El servicio de inicio de sesión no está bien configurado. Contacta con el administrador."
-    }
-  },
   "auth": {
     "redirecting": "Iniciando sesión…",
     "unauthorized": {
       "401": {
-        "title": "Necesitas iniciar sesión",
-        "message": "Inicia sesión para ver esta página."
+        "message": "Inicia sesión para ver esta página.",
+        "title": "Necesitas iniciar sesión"
       },
       "403": {
-        "title": "Acceso denegado",
-        "message": "Tu cuenta no tiene permiso para ver esta página."
+        "message": "Tu cuenta no tiene permiso para ver esta página.",
+        "title": "Acceso denegado"
       },
       "login": "Iniciar sesión",
       "switchAccount": "Cambiar de cuenta"
     }
   },
-  "errors": {
-    "page": {
-      "home": "Volver al inicio",
-      "details": "Detalles técnicos",
-      "traceId": "Referencia para soporte",
-      "no_content": {
-        "title": "Aquí no hay nada",
-        "message": "Esta sección no tiene contenido."
-      },
-      "error_0": {
-        "title": "Sin conexión",
-        "message": "No se ha podido contactar con el servidor. Comprueba tu conexión e inténtalo de nuevo."
-      },
-      "error_401": {
-        "title": "Necesitas iniciar sesión",
-        "message": "Inicia sesión para continuar."
-      },
-      "error_402": {
-        "title": "Pago necesario",
-        "message": "Esta funcionalidad no está incluida en tu plan."
-      },
-      "error_403": {
-        "title": "Acceso denegado",
-        "message": "No tienes permiso para hacer esto."
-      },
-      "error_404": {
-        "title": "No encontrado",
-        "message": "Lo que buscas no existe o se ha eliminado."
-      },
-      "error_409": {
-        "title": "Conflicto",
-        "message": "Otra persona ha cambiado estos datos. Recarga e inténtalo de nuevo."
-      },
-      "error_422": {
-        "title": "Datos no válidos",
-        "message": "Algunos de los datos enviados no son válidos. Revísalos e inténtalo de nuevo."
-      },
-      "no_empty_error_422": {
-        "title": "Faltan datos obligatorios",
-        "message": "Rellena los campos obligatorios e inténtalo de nuevo."
-      },
-      "error_5xx": {
-        "title": "Servicio no disponible",
-        "message": "El servicio no responde. Inténtalo de nuevo en unos minutos."
-      },
-      "error_unknown": {
-        "title": "Algo ha ido mal",
-        "message": "Ha ocurrido un error inesperado. Inténtalo de nuevo."
-      }
+  "common": {
+    "confirm": {
+      "cancel": "Cancelar",
+      "ok": "Aceptar",
+      "title": "Confirmar"
     },
+    "hiddenField": "Campo oculto por permisos",
+    "notify": {
+      "close": "Cerrar"
+    },
+    "selector": {
+      "error": "No se pudieron cargar las opciones. Inténtalo de nuevo.",
+      "noResults": "Sin resultados",
+      "open": "Mostrar opciones"
+    }
+  },
+  "errors": {
     "422": "Algunos de los datos enviados no son válidos. Revísalos e inténtalo de nuevo.",
     "generic": "Ha ocurrido un error inesperado. Inténtalo de nuevo.",
     "modal": {
-      "retrySuccess": "El reintento se ha completado. Recarga para ver el resultado.",
-      "retryError": "El reintento también ha fallado. Vuelve al inicio e inténtalo de nuevo."
+      "retryError": "El reintento también ha fallado. Vuelve al inicio e inténtalo de nuevo.",
+      "retrySuccess": "El reintento se ha completado. Recarga para ver el resultado."
+    },
+    "page": {
+      "details": "Detalles técnicos",
+      "error_0": {
+        "message": "No se ha podido contactar con el servidor. Comprueba tu conexión e inténtalo de nuevo.",
+        "title": "Sin conexión"
+      },
+      "error_401": {
+        "message": "Inicia sesión para continuar.",
+        "title": "Necesitas iniciar sesión"
+      },
+      "error_402": {
+        "message": "Esta funcionalidad no está incluida en tu plan.",
+        "title": "Pago necesario"
+      },
+      "error_403": {
+        "message": "No tienes permiso para hacer esto.",
+        "title": "Acceso denegado"
+      },
+      "error_404": {
+        "message": "Lo que buscas no existe o se ha eliminado.",
+        "title": "No encontrado"
+      },
+      "error_409": {
+        "message": "Otra persona ha cambiado estos datos. Recarga e inténtalo de nuevo.",
+        "title": "Conflicto"
+      },
+      "error_422": {
+        "message": "Algunos de los datos enviados no son válidos. Revísalos e inténtalo de nuevo.",
+        "title": "Datos no válidos"
+      },
+      "error_5xx": {
+        "message": "El servicio no responde. Inténtalo de nuevo en unos minutos.",
+        "title": "Servicio no disponible"
+      },
+      "error_unknown": {
+        "message": "Ha ocurrido un error inesperado. Inténtalo de nuevo.",
+        "title": "Algo ha ido mal"
+      },
+      "home": "Volver al inicio",
+      "no_content": {
+        "message": "Esta sección no tiene contenido.",
+        "title": "Aquí no hay nada"
+      },
+      "no_empty_error_422": {
+        "message": "Rellena los campos obligatorios e inténtalo de nuevo.",
+        "title": "Faltan datos obligatorios"
+      },
+      "traceId": "Referencia para soporte"
     }
+  },
+  "identity": {
+    "errors": {
+      "code": "La respuesta del inicio de sesión no es válida. Vuelve a iniciar sesión.",
+      "discovery": "No se ha podido contactar con el proveedor de identidad. ¿Borrar las credenciales guardadas y empezar de nuevo?",
+      "notConfigured": "El servicio de inicio de sesión no está bien configurado. Contacta con el administrador.",
+      "profile": "No se ha podido cargar tu perfil de usuario. ¿Borrar las credenciales guardadas y empezar de nuevo?",
+      "reset": "Borrar credenciales",
+      "title": "Problema de inicio de sesión"
+    },
+    "stepUp": {
+      "cancel": "Cancelar",
+      "continue": "Continuar",
+      "message": "Esta operación requiere verificación adicional. Te llevaremos a la página de inicio de sesión y después volverás aquí.",
+      "repeat": "Verificación completada. Repite la operación para aplicarla.",
+      "title": "Verificación adicional",
+      "verified": "Verificación completada."
+    }
+  },
+  "info": "Modulo",
+  "validation": {
+    "email": "Introduce un correo electrónico válido",
+    "invalid": "El valor no es válido",
+    "max": "El valor máximo es {{max}}",
+    "maxlength": "Máximo {{requiredLength}} caracteres",
+    "min": "El valor mínimo es {{min}}",
+    "minlength": "Mínimo {{requiredLength}} caracteres",
+    "pattern": "El formato no es válido",
+    "required": "Este campo es obligatorio"
   }
 }

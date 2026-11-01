@@ -30347,15 +30347,13 @@ Please report this to https://github.com/markedjs/marked.`),
           }
           let v;
           C
-            ? (v = i.tokenization
-                .getLineTokens(s)
-                .withInserted(
-                  C.map((w, S) => ({
-                    offset: w,
-                    text: f[S].content,
-                    tokenMetadata: d.LineTokens.defaultTokenMetadata,
-                  })),
-                ))
+            ? (v = i.tokenization.getLineTokens(s).withInserted(
+                C.map((w, S) => ({
+                  offset: w,
+                  text: f[S].content,
+                  tokenMetadata: d.LineTokens.defaultTokenMetadata,
+                })),
+              ))
             : (v = i.tokenization.getLineTokens(s));
           for (let w = g; w < g + c; w++) {
             const S = l + w - g;
@@ -110995,16 +110993,14 @@ ${this._themeCSS}`),
               ),
               this._register(
                 (0, p.autorun)((R) => {
-                  const ie = this._extraCommands
-                    .read(R)
-                    .map((ue) => ({
-                      class: void 0,
-                      id: ue.id,
-                      enabled: !0,
-                      tooltip: ue.tooltip || '',
-                      label: ue.title,
-                      run: (he) => this._commandService.executeCommand(ue.id),
-                    }));
+                  const ie = this._extraCommands.read(R).map((ue) => ({
+                    class: void 0,
+                    id: ue.id,
+                    enabled: !0,
+                    tooltip: ue.tooltip || '',
+                    label: ue.title,
+                    run: (he) => this._commandService.executeCommand(ue.id),
+                  }));
                   for (const [ue, he] of this.inlineCompletionsActionsMenus.getActions())
                     for (const pe of he) pe instanceof r.MenuItemAction && ie.push(pe);
                   (ie.length > 0 && ie.unshift(new E.Separator()), this.toolBar.setAdditionalSecondaryActions(ie));
@@ -129396,18 +129392,16 @@ ${this._themeCSS}`),
           }
           getLinkOccurrence(L) {
             if (!this.editor.hasModel() || !L) return null;
-            const D = this.editor
-              .getModel()
-              .getDecorationsInRange(
-                {
-                  startLineNumber: L.lineNumber,
-                  startColumn: L.column,
-                  endLineNumber: L.lineNumber,
-                  endColumn: L.column,
-                },
-                0,
-                !0,
-              );
+            const D = this.editor.getModel().getDecorationsInRange(
+              {
+                startLineNumber: L.lineNumber,
+                startColumn: L.column,
+                endLineNumber: L.lineNumber,
+                endColumn: L.column,
+              },
+              0,
+              !0,
+            );
             for (const T of D) {
               const M = this.currentOccurrences[T.id];
               if (M) return M;
@@ -141888,14 +141882,12 @@ ${this._themeCSS}`),
                           !(Z.completion.insertTextRules & 4) &&
                           le - re === Z.completion.insertText.length &&
                           (me =
-                            this.editor
-                              .getModel()
-                              .getValueInRange({
-                                startLineNumber: te.lineNumber,
-                                startColumn: re,
-                                endLineNumber: te.lineNumber,
-                                endColumn: le,
-                              }) !== Z.completion.insertText),
+                            this.editor.getModel().getValueInRange({
+                              startLineNumber: te.lineNumber,
+                              startColumn: re,
+                              endLineNumber: te.lineNumber,
+                              endColumn: le,
+                            }) !== Z.completion.insertText),
                           B.set(me),
                           $.set(!s.Position.equals(Z.editInsertEnd, Z.editReplaceEnd)),
                           Q.set(
@@ -142192,14 +142184,12 @@ ${this._themeCSS}`),
                   ae = he.column;
                 return ae - pe !== ue.completion.insertText.length
                   ? !0
-                  : this.editor
-                      .getModel()
-                      .getValueInRange({
-                        startLineNumber: he.lineNumber,
-                        startColumn: pe,
-                        endLineNumber: he.lineNumber,
-                        endColumn: ae,
-                      }) !== ue.completion.insertText;
+                  : this.editor.getModel().getValueInRange({
+                      startLineNumber: he.lineNumber,
+                      startColumn: pe,
+                      endLineNumber: he.lineNumber,
+                      endColumn: ae,
+                    }) !== ue.completion.insertText;
               };
             (y.Event.once(this.model.onDidTrigger)((ue) => {
               const he = [];

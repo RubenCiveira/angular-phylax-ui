@@ -112,7 +112,10 @@ describe('ListViewComponent', () => {
       const fixture = TestBed.createComponent(ListViewComponent);
       fixture.nativeElement.style.width = `${width}px`;
       fixture.componentRef.setInput('mode', 'card');
-      fixture.componentRef.setInput('data', Array.from({ length: 12 }, (_, id) => ({ id })));
+      fixture.componentRef.setInput(
+        'data',
+        Array.from({ length: 12 }, (_, id) => ({ id })),
+      );
       fixture.detectChanges();
 
       const grid: HTMLElement = fixture.nativeElement.querySelector('.card-grid');
@@ -145,7 +148,11 @@ describe('ListViewComponent', () => {
 
         const el: HTMLElement = fixture.nativeElement;
         const bg = getComputedStyle(el.querySelector('.material-list')!).backgroundColor;
-        for (const selector of ['.material-list-item-title', '.material-list-item-subtitle', '.material-list-item-subcontent']) {
+        for (const selector of [
+          '.material-list-item-title',
+          '.material-list-item-subtitle',
+          '.material-list-item-subcontent',
+        ]) {
           const fg = getComputedStyle(el.querySelector(selector)!).color;
           expect(contrast(fg, bg)).withContext(`${selector}: ${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5);
         }

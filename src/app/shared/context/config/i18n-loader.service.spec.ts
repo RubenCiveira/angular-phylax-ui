@@ -148,10 +148,7 @@ describe('I18nLoaderService — unknown lang', () => {
     setAvailableLangsSpy = jasmine.createSpy('setAvailableLangs');
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        testConfig,
-        { provide: TranslocoService, useValue: { setAvailableLangs: setAvailableLangsSpy } },
-      ],
+      providers: [testConfig, { provide: TranslocoService, useValue: { setAvailableLangs: setAvailableLangsSpy } }],
     });
     service = TestBed.inject(I18nLoaderService);
     http = TestBed.inject(HttpTestingController);
@@ -236,10 +233,7 @@ describe('provideI18nConfiguration', () => {
   it('updates Transloco languages when the runtime config arrives', () => {
     const config$ = new Subject<AppConfig>();
     TestBed.configureTestingModule({
-      providers: [
-        { provide: RuntimeConfigService, useValue: { config$: config$.asObservable() } },
-        ...i18nProviders(),
-      ],
+      providers: [{ provide: RuntimeConfigService, useValue: { config$: config$.asObservable() } }, ...i18nProviders()],
     });
     const transloco = TestBed.inject(TranslocoService);
     expect(transloco.getDefaultLang()).toBe('en');
@@ -252,10 +246,7 @@ describe('provideI18nConfiguration', () => {
 
   it('provides TRANSLOCO_CONFIG with defaultLang from runtime conf', () => {
     TestBed.configureTestingModule({
-      providers: [
-        runtimeConfig({ 'default-lang': 'fr', 'available-langs': ['fr', 'en'] }),
-        ...i18nProviders(),
-      ],
+      providers: [runtimeConfig({ 'default-lang': 'fr', 'available-langs': ['fr', 'en'] }), ...i18nProviders()],
     });
 
     const config = TestBed.inject(TRANSLOCO_CONFIG);
@@ -264,10 +255,7 @@ describe('provideI18nConfiguration', () => {
 
   it('provides TRANSLOCO_CONFIG with available languages', () => {
     TestBed.configureTestingModule({
-      providers: [
-        runtimeConfig({ 'default-lang': 'en', 'available-langs': ['en', 'es', 'de'] }),
-        ...i18nProviders(),
-      ],
+      providers: [runtimeConfig({ 'default-lang': 'en', 'available-langs': ['en', 'es', 'de'] }), ...i18nProviders()],
     });
 
     const config = TestBed.inject(TRANSLOCO_CONFIG);
@@ -276,10 +264,7 @@ describe('provideI18nConfiguration', () => {
 
   it('adds defaultLang to availableLangs when not present', () => {
     TestBed.configureTestingModule({
-      providers: [
-        runtimeConfig({ 'default-lang': 'pt', 'available-langs': ['en', 'es'] }),
-        ...i18nProviders(),
-      ],
+      providers: [runtimeConfig({ 'default-lang': 'pt', 'available-langs': ['en', 'es'] }), ...i18nProviders()],
     });
 
     const config = TestBed.inject(TRANSLOCO_CONFIG);

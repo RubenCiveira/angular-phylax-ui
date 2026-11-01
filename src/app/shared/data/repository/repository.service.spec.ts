@@ -728,7 +728,9 @@ describe('RepositoryService', () => {
         .pipe(take(1))
         .subscribe(([item]: any[]) => {
           expect(item.birthday instanceof Date).toBeTrue();
-          expect([item.birthday.getFullYear(), item.birthday.getMonth(), item.birthday.getDate()]).toEqual([2025, 9, 30]);
+          expect([item.birthday.getFullYear(), item.birthday.getMonth(), item.birthday.getDate()]).toEqual([
+            2025, 9, 30,
+          ]);
           expect(item.birthday.getHours()).toBe(0);
           done();
         });

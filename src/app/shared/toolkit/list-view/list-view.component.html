@@ -121,11 +121,7 @@
         }
         @for (column of table().columns(); track $index) {
           @if (column.visible) {
-            <span
-              class="th"
-              [ngClass]="{ small: !column.title() }"
-              [ngStyle]="{ width: column.displayWidth + 'px' }"
-            >
+            <span class="th" [ngClass]="{ small: !column.title() }" [ngStyle]="{ width: column.displayWidth + 'px' }">
               {{ column.title() }}
             </span>
           }
