@@ -15,6 +15,7 @@ import {
 } from 'libphonenumber-js/min';
 import { Subscription } from 'rxjs';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 
 export interface PhoneCountry {
   code: CountryCode;
@@ -79,6 +80,7 @@ const ALL_COUNTRIES: PhoneCountry[] = getCountries()
     MatInputModule,
     MatSelectModule,
     TranslocoModule,
+    EditableHiddenMarkComponent,
   ],
   providers: BaseEditable.getValidableAccessorProvider(EditablePhoneComponent),
   templateUrl: './editable-phone.component.html',

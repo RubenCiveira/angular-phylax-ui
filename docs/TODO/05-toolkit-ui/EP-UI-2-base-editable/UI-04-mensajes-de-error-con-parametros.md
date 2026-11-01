@@ -7,7 +7,7 @@ paso: 4
 prioridad: alta
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [I18N-05]
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,17 @@ origen: 07-toolkit-ui.md
 
 ## Tareas
 
-- [ ] `errorList = computed(() => Object.entries(errors).map(([key, params]) => ({ key, params })))`.
-- [ ] Traducir con parámetros y, si no existe la clave del campo, usar `validation.<key>` del i18n global.
-- [ ] Actualizar las plantillas de todos los editables (o del envoltorio de UI-06).
+- [x] `errorList = computed(() => Object.entries(errors).map(([key, params]) => ({ key, params })))`.
+- [x] Traducir con parámetros y, si no existe la clave del campo, usar `validation.<key>` del i18n global.
+- [x] Actualizar las plantillas de todos los editables (o del envoltorio de UI-06).
 
 ## Criterios de aceptación
 
-- [ ] Un `minlength(8)` muestra "Mínimo 8 caracteres" sin traducción específica del campo.
+- [x] Un `minlength(8)` muestra "Mínimo 8 caracteres" sin traducción específica del campo.
+
+## Notas de implementación
+
+Orden de resolución: `<label>.error.<error>` → `validation.<error>` → `validation.invalid` (en subformularios se usa el último segmento de `campo.error`). Se han añadido a `public/i18n/{es,en}.json` solo las secciones `validation` y `common.hiddenField`; el resto de I18N-05 sigue pendiente.
 
 ## Ficheros afectados
 

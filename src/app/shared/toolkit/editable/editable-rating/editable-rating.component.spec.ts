@@ -9,6 +9,8 @@ class MockTranslocoService {
   langChanges$ = new BehaviorSubject('en');
   translate = jasmine.createSpy('translate').and.callFake((v: string) => v);
   setActiveLang = jasmine.createSpy('setActiveLang');
+  getActiveLang = () => 'en';
+  getTranslation = () => ({});
 }
 
 const PROVIDERS = [

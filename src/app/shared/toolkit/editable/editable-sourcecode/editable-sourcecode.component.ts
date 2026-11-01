@@ -5,6 +5,7 @@ import { AfterViewInit, Component, effect, ElementRef, input, viewChild } from '
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -14,11 +15,18 @@ import { MatInputModule } from '@angular/material/input';
       <p>{{ label() + '.label' | transloco }}</p>
       <div #editorContainer style="width:100%; height:500px;"></div>
     } @else if (showHiddenMark()) {
-      ----
+      <editable-hidden-mark [label]="label()" />
     }
   `,
   selector: 'editable-sourcecode',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, TranslocoModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    TranslocoModule,
+    EditableHiddenMarkComponent,
+  ],
   providers: BaseEditable.getAccessorProvider(EditableSourcecodeComponent),
   standalone: true,
 })

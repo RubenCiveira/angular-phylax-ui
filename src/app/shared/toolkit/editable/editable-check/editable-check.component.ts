@@ -4,20 +4,19 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableBareFieldComponent } from '../editable-field/editable-field.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   template: `
-    @if (visible()) {
+    <editable-bare-field [editable]="this">
       <mat-checkbox [formControl]="control">
         {{ label() + '.label' | transloco }}
       </mat-checkbox>
-    } @else if (showHiddenMark()) {
-      ----
-    }
+    </editable-bare-field>
   `,
   selector: 'editable-check',
-  imports: [MatCheckboxModule, ReactiveFormsModule, CommonModule, TranslocoModule],
+  imports: [MatCheckboxModule, ReactiveFormsModule, CommonModule, TranslocoModule, EditableBareFieldComponent],
   providers: BaseEditable.getAccessorProvider(EditableCheckComponent),
   standalone: true,
 })

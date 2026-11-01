@@ -7,7 +7,7 @@ paso: 5
 prioridad: media
 esfuerzo: M
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: [UI-04, UI-05]
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,17 @@ Los 25 editables repiten la misma estructura (`mat-form-field` + label + errores
 
 ## Tareas
 
-- [ ] Crear `<editable-field [editable]="this">` que pinte label, hint, errores y marca de oculto, y proyecte el control.
-- [ ] Migrar primero los editables núcleo (`text`, `textarea`, `integer`, `password`, `check`, `choose`, `selectone`, `datetime`, `upload`, `repeat`).
+- [x] Crear `<editable-field [editable]="this">` que pinte label, hint, errores y marca de oculto, y proyecte el control.
+- [x] Migrar primero los editables núcleo (`text`, `textarea`, `integer`, `password`, `check`, `choose`, `selectone`, `datetime`, `upload`, `repeat`).
 
 ## Criterios de aceptación
 
-- [ ] Los editables núcleo usan el envoltorio.
-- [ ] Un cambio visual en el envoltorio afecta a todos.
+- [x] Los editables núcleo usan el envoltorio.
+- [x] Un cambio visual en el envoltorio afecta a todos.
+
+## Notas de implementación
+
+Dos componentes en `editable-field/`: `<editable-field>` (con mat-form-field) y `<editable-bare-field>` (sin él: check, datetime, repeat). mat-form-field no detecta un control proyectado a través de otro componente, así que el envoltorio se lo asigna (`_control`) y da a los controles un `MAT_FORM_FIELD` que delega en su mat-form-field. Ese mat-form-field no puede ir dentro de un `@if` (mat-select lo consulta en su primer `ngDoCheck`): si el campo no es visible se oculta y se le retira el control del DOM.
 
 ## Ficheros afectados
 

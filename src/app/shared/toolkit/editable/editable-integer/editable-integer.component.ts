@@ -4,36 +4,34 @@ import { Component, input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableFieldComponent } from '../editable-field/editable-field.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   template: `
-    @if (visible()) {
-      <mat-form-field>
-        <mat-label>{{ label() + '.label' | transloco }}</mat-label>
-        <input
-          matInput
-          [required]="required()"
-          type="number"
-          placeholder="{{ label() + '.placeholder' | transloco }}"
-          [attr.min]="minValue()"
-          [attr.max]="maxValue()"
-          [formControl]="control"
-          onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
-        />
-        @for (error of errorMessages(); track $index) {
-          <mat-error>
-            {{ label() + '.error.' + error | transloco }}
-          </mat-error>
-        }
-      </mat-form-field>
-    } @else if (showHiddenMark()) {
-      ----
-    }
+    <editable-field [editable]="this">
+      <input
+        matInput
+        [required]="required()"
+        type="number"
+        placeholder="{{ label() + '.placeholder' | transloco }}"
+        [attr.min]="minValue()"
+        [attr.max]="maxValue()"
+        [formControl]="control"
+        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+      />
+    </editable-field>
   `,
   selector: 'editable-integer',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, TranslocoModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    TranslocoModule,
+    EditableFieldComponent,
+  ],
   providers: BaseEditable.getAccessorProvider(EditableIntegerComponent),
   standalone: true,
 })

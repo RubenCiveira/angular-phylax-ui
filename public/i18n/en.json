@@ -8,7 +8,18 @@
     },
     "notify": {
       "close": "Close"
-    }
+    },
+    "hiddenField": "Field hidden by permissions"
+  },
+  "validation": {
+    "required": "This field is required",
+    "minlength": "Minimum {{requiredLength}} characters",
+    "maxlength": "Maximum {{requiredLength}} characters",
+    "min": "The minimum value is {{min}}",
+    "max": "The maximum value is {{max}}",
+    "email": "Enter a valid email address",
+    "pattern": "The format is not valid",
+    "invalid": "The value is not valid"
   },
   "identity": {
     "stepUp": {

@@ -48,10 +48,10 @@
       [placeholder]="label() + '.placeholder' | transloco"
     />
 
-    @for (error of errorMessages(); track $index) {
-      <mat-error>{{ label() + '.error.' + error | transloco }}</mat-error>
+    @for (error of errorList(); track error.key) {
+      <mat-error>{{ errorKey(error) | transloco: error.params }}</mat-error>
     }
   </mat-form-field>
 } @else if (showHiddenMark()) {
-  ----
+  <editable-hidden-mark [label]="label()" />
 }

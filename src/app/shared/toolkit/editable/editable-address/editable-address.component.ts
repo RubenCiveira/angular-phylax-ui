@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 import { SubFormEditable } from '../subform-editable';
 
 export interface Address {
@@ -68,7 +69,15 @@ export const COMMON_COUNTRIES: { code: string; name: string }[] = [
 @Component({
   selector: 'editable-address',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, TranslocoModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    TranslocoModule,
+    EditableHiddenMarkComponent,
+  ],
   providers: BaseEditable.getValidableAccessorProvider(EditableAddressComponent),
   templateUrl: './editable-address.component.html',
   styleUrls: ['./editable-address.component.scss'],

@@ -5,11 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 
 @Component({
   selector: 'editable-rating',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatIconModule, TranslocoModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule, TranslocoModule, EditableHiddenMarkComponent],
   providers: BaseEditable.getValidableAccessorProvider(EditableRatingComponent),
   templateUrl: './editable-rating.component.html',
   styleUrls: ['./editable-rating.component.scss'],

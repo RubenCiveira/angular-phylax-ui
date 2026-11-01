@@ -21,10 +21,10 @@
         />
       }
     </div>
-    @for (error of errorMessages(); track $index) {
-      <span class="pin-error">{{ label() + '.error.' + error | transloco }}</span>
+    @for (error of errorList(); track error.key) {
+      <span class="pin-error">{{ errorKey(error) | transloco: error.params }}</span>
     }
   </div>
 } @else if (showHiddenMark()) {
-  ----
+  <editable-hidden-mark [label]="label()" />
 }

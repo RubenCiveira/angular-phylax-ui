@@ -41,9 +41,9 @@
           (keydown)="onNumberKeydown($event)"
         />
         <mat-icon matSuffix>{{ networkIcon() }}</mat-icon>
-        @for (error of errorMessages(); track error) {
+        @for (error of errorList(); track error.key) {
           @if (error.startsWith('card')) {
-            <mat-error>{{ label() + '.error.' + error | transloco }}</mat-error>
+            <mat-error>{{ errorKey(error) | transloco: error.params }}</mat-error>
           }
         }
       </mat-form-field>
@@ -99,5 +99,5 @@
     </div>
   </div>
 } @else if (showHiddenMark()) {
-  ----
+  <editable-hidden-mark [label]="label()" />
 }

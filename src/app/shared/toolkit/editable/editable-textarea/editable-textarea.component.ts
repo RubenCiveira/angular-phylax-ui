@@ -4,32 +4,30 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableFieldComponent } from '../editable-field/editable-field.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   template: `
-    @if (visible()) {
-      <mat-form-field>
-        <mat-label>{{ label() + '.label' | transloco }}</mat-label>
-        <textarea
-          matInput
-          [required]="required()"
-          placeholder="{{ label() + '.placeholder' | transloco }}"
-          [formControl]="control"
-        ></textarea>
-        @for (error of errorMessages(); track $index) {
-          <mat-error>
-            {{ label() + '.error.' + error | transloco }}
-          </mat-error>
-        }
-      </mat-form-field>
-    } @else if (showHiddenMark()) {
-      ----
-    }
+    <editable-field [editable]="this">
+      <textarea
+        matInput
+        [required]="required()"
+        placeholder="{{ label() + '.placeholder' | transloco }}"
+        [formControl]="control"
+      ></textarea>
+    </editable-field>
   `,
   selector: 'editable-textarea',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, TranslocoModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    TranslocoModule,
+    EditableFieldComponent,
+  ],
   providers: BaseEditable.getAccessorProvider(EditableTextareaComponent),
   standalone: true,
 })

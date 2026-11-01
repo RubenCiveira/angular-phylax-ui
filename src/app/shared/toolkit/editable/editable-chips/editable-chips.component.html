@@ -29,9 +29,9 @@
     @if (!control.disabled) {
       <mat-icon matSuffix (click)="searchOptions()">keyboard_arrow_down</mat-icon>
     }
-    @for (error of errorMessages(); track $index) {
+    @for (error of errorList(); track error.key) {
       <mat-error>
-        {{ label() + '.error.' + error | transloco }}
+        {{ errorKey(error) | transloco: error.params }}
       </mat-error>
     }
   </mat-form-field>

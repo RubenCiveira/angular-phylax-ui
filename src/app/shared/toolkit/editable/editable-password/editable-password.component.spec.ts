@@ -9,6 +9,8 @@ class MockTranslocoService {
   langChanges$ = new BehaviorSubject('en');
   translate = jasmine.createSpy('translate').and.callFake((value: string) => value);
   setActiveLang = jasmine.createSpy('setActiveLang');
+  getActiveLang = () => 'en';
+  getTranslation = () => ({});
 }
 
 describe('EditablePasswordComponent', () => {
@@ -35,5 +37,9 @@ describe('EditablePasswordComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.componentInstance).toBeTruthy();
+    // El botón "Cambiar" va en el sufijo, en la misma línea que el input
+    const element: HTMLElement = fixture.nativeElement;
+    expect(element.querySelector('.mat-mdc-form-field-icon-suffix button')).not.toBeNull();
+    expect(element.querySelector('.mat-mdc-form-field-infix button')).toBeNull();
   });
 });

@@ -11,6 +11,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 import { SubFormEditable } from '../subform-editable';
 
 export interface DateRange {
@@ -43,6 +44,7 @@ function diffDays(a: Date, b: Date): number {
     MatNativeDateModule,
     MatChipsModule,
     TranslocoModule,
+    EditableHiddenMarkComponent,
   ],
   providers: [provideNativeDateAdapter(), BaseEditable.getValidableAccessorProvider(EditableDateRangeComponent)],
   templateUrl: './editable-date-range.component.html',

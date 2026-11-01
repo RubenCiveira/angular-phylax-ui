@@ -8,7 +8,18 @@
     },
     "notify": {
       "close": "Cerrar"
-    }
+    },
+    "hiddenField": "Campo oculto por permisos"
+  },
+  "validation": {
+    "required": "Este campo es obligatorio",
+    "minlength": "Mínimo {{requiredLength}} caracteres",
+    "maxlength": "Máximo {{requiredLength}} caracteres",
+    "min": "El valor mínimo es {{min}}",
+    "max": "El valor máximo es {{max}}",
+    "email": "Introduce un correo electrónico válido",
+    "pattern": "El formato no es válido",
+    "invalid": "El valor no es válido"
   },
   "identity": {
     "stepUp": {

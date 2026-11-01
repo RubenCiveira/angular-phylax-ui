@@ -30,10 +30,10 @@
         </button>
       }
     </div>
-    @for (error of errorMessages(); track $index) {
-      <span class="rating-error">{{ label() + '.error.' + error | transloco }}</span>
+    @for (error of errorList(); track error.key) {
+      <span class="rating-error">{{ errorKey(error) | transloco: error.params }}</span>
     }
   </div>
 } @else if (showHiddenMark()) {
-  ----
+  <editable-hidden-mark [label]="label()" />
 }

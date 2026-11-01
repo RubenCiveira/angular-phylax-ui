@@ -4,6 +4,7 @@ import { ChangeDetectorRef, Component, viewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableFieldComponent } from '../editable-field/editable-field.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteTrigger } from '@angular/material/autocomplete';
@@ -13,45 +14,35 @@ import { SearchEditable } from '../search-editable';
 
 @Component({
   template: `
-    @if (visible()) {
-      <mat-form-field>
-        <mat-label>{{ label() + '.label' | transloco }}</mat-label>
-        <input
-          matInput
-          [required]="required()"
-          placeholder="{{ label() + '.placeholder' | transloco }}"
-          [matAutocomplete]="auto"
-          (blur)="blur()"
-          [formControl]="search"
-        />
-        <span matSuffix style="display: flex">
-          @if (!control.disabled) {
-            <mat-icon (click)="searchOptions(); $event.preventDefault()">keyboard_arrow_down</mat-icon>
-          }
-        </span>
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          [displayWith]="displayItem()"
-          (optionSelected)="optionSelected($event.option.value)"
-        >
-          @for (item of options() || []; track $index) {
-            <mat-option [value]="item">
-              {{ provider().display(item) }}
-            </mat-option>
-          }
-        </mat-autocomplete>
-        @if (provider().searching()) {
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <editable-field [editable]="this">
+      <input
+        matInput
+        [required]="required()"
+        placeholder="{{ label() + '.placeholder' | transloco }}"
+        [matAutocomplete]="auto"
+        (blur)="blur()"
+        [formControl]="search"
+      />
+      <span matSuffix style="display: flex">
+        @if (!control.disabled) {
+          <mat-icon (click)="searchOptions(); $event.preventDefault()">keyboard_arrow_down</mat-icon>
         }
-        @for (error of errorMessages(); track $index) {
-          <mat-error>
-            {{ label() + '.error.' + error | transloco }}
-          </mat-error>
+      </span>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayItem()"
+        (optionSelected)="optionSelected($event.option.value)"
+      >
+        @for (item of options() || []; track $index) {
+          <mat-option [value]="item">
+            {{ provider().display(item) }}
+          </mat-option>
         }
-      </mat-form-field>
-    } @else if (showHiddenMark()) {
-      ----
-    }
+      </mat-autocomplete>
+      @if (provider().searching()) {
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      }
+    </editable-field>
   `,
   selector: 'editable-selectone',
   imports: [
@@ -64,6 +55,7 @@ import { SearchEditable } from '../search-editable';
     ReactiveFormsModule,
     CommonModule,
     TranslocoModule,
+    EditableFieldComponent,
   ],
   providers: BaseEditable.getAccessorProvider(EditableSelectoneComponent),
   standalone: true,

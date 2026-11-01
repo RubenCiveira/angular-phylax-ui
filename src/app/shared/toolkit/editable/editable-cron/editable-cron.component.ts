@@ -12,6 +12,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { parseExpression } from 'cron-parser';
 import { Subscription } from 'rxjs';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 
 export type CronFrequency = 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year' | 'custom';
 
@@ -68,6 +69,7 @@ const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
     MatChipsModule,
     MatButtonToggleModule,
     TranslocoModule,
+    EditableHiddenMarkComponent,
   ],
   providers: BaseEditable.getValidableAccessorProvider(EditableCronComponent),
   templateUrl: './editable-cron.component.html',

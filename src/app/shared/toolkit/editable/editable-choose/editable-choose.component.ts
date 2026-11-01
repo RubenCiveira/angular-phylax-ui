@@ -4,36 +4,35 @@ import { Component, input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableFieldComponent } from '../editable-field/editable-field.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   template: `
-    @if (visible()) {
-      <mat-form-field>
-        <mat-label>{{ label() + '.label' | transloco }}</mat-label>
-        <mat-select
-          [required]="required()"
-          placeholder="{{ label() + '.placeholder' | transloco }}"
-          [formControl]="control"
-        >
-          @for (op of options(); track $index) {
-            <mat-option [value]="op">{{ label() + '.options.' + (!!op ? op : 'null') | transloco }}</mat-option>
-          }
-        </mat-select>
-        @for (error of errorMessages(); track $index) {
-          <mat-error>
-            {{ label() + '.error.' + error | transloco }}
-          </mat-error>
+    <editable-field [editable]="this">
+      <mat-select
+        [required]="required()"
+        placeholder="{{ label() + '.placeholder' | transloco }}"
+        [formControl]="control"
+      >
+        @for (op of options(); track $index) {
+          <mat-option [value]="op">{{ label() + '.options.' + (!!op ? op : 'null') | transloco }}</mat-option>
         }
-      </mat-form-field>
-    } @else if (showHiddenMark()) {
-      ---
-    }
+      </mat-select>
+    </editable-field>
   `,
   selector: 'editable-choose',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, CommonModule, TranslocoModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    CommonModule,
+    TranslocoModule,
+    EditableFieldComponent,
+  ],
   providers: BaseEditable.getAccessorProvider(EditableChooseComponent),
   standalone: true,
 })

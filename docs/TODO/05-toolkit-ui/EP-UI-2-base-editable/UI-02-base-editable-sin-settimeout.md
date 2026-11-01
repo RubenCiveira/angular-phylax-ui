@@ -7,7 +7,7 @@ paso: 1
 prioridad: alta
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,13 +24,17 @@ origen: 07-toolkit-ui.md
 
 ## Tareas
 
-- [ ] Asignar directamente `this.value.set(v)` y `this.disabled.set(d)`.
-- [ ] Si aparece `ExpressionChangedAfterItHasBeenChecked`, localizar y corregir su origen en lugar de volver al `setTimeout`.
-- [ ] Test: `patchValue` seguido de lectura inmediata.
+- [x] Asignar directamente `this.value.set(v)` y `this.disabled.set(d)`.
+- [x] Si aparece `ExpressionChangedAfterItHasBeenChecked`, localizar y corregir su origen en lugar de volver al `setTimeout`.
+- [x] Test: `patchValue` seguido de lectura inmediata.
 
 ## Criterios de aceptación
 
-- [ ] Abrir un formulario de edición no muestra campos vacíos que luego se rellenan.
+- [x] Abrir un formulario de edición no muestra campos vacíos que luego se rellenan.
+
+## Notas de implementación
+
+No ha aparecido `ExpressionChangedAfterItHasBeenChecked`. Test en `base-editable.spec.ts`. `refresh()` conserva su `setTimeout` (fuera del alcance de este issue).
 
 ## Ficheros afectados
 

@@ -59,10 +59,10 @@
       </div>
     }
 
-    @for (error of errorMessages(); track $index) {
-      <span class="range-error">{{ label() + '.error.' + error | transloco }}</span>
+    @for (error of errorList(); track error.key) {
+      <span class="range-error">{{ errorKey(error) | transloco: error.params }}</span>
     }
   </div>
 } @else if (showHiddenMark()) {
-  ----
+  <editable-hidden-mark [label]="label()" />
 }

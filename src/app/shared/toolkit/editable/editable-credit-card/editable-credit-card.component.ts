@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslocoModule } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 import { SubFormEditable } from '../subform-editable';
 
 export interface CreditCard {
@@ -62,7 +63,15 @@ const NETWORK_ICONS: Record<CardNetwork, string> = {
 @Component({
   selector: 'editable-credit-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule, TranslocoModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    TranslocoModule,
+    EditableHiddenMarkComponent,
+  ],
   providers: BaseEditable.getValidableAccessorProvider(EditableCreditCardComponent),
   templateUrl: './editable-credit-card.component.html',
   styleUrls: ['./editable-credit-card.component.scss'],

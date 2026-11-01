@@ -9,6 +9,8 @@ class MockTranslocoService {
   langChanges$ = new BehaviorSubject('en');
   translate = jasmine.createSpy('translate').and.callFake((value: string) => value);
   setActiveLang = jasmine.createSpy('setActiveLang');
+  getActiveLang = () => 'en';
+  getTranslation = () => ({});
 }
 
 describe('EditableTextareaComponent', () => {

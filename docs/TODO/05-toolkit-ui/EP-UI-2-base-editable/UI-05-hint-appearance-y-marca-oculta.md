@@ -7,7 +7,7 @@ paso: 3
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,15 +24,19 @@ No hay soporte para texto de ayuda ni `aria-describedby`. Si un campo está ocul
 
 ## Tareas
 
-- [ ] Inputs `hint` y `appearance`.
-- [ ] `<mat-hint>` con `label + '.hint'` si existe.
-- [ ] Sustituir `----` por `<editable-hidden-mark>` con `aria-label` traducido ("Campo oculto por permisos").
-- [ ] `host: { class: 'editable' }` en lugar de `Renderer2`.
+- [x] Inputs `hint` y `appearance`.
+- [x] `<mat-hint>` con `label + '.hint'` si existe.
+- [x] Sustituir `----` por `<editable-hidden-mark>` con `aria-label` traducido ("Campo oculto por permisos").
+- [x] `host: { class: 'editable' }` en lugar de `Renderer2`.
 
 ## Criterios de aceptación
 
-- [ ] Un campo puede mostrar ayuda.
-- [ ] Un lector de pantalla anuncia los campos ocultos.
+- [x] Un campo puede mostrar ayuda.
+- [x] Un lector de pantalla anuncia los campos ocultos.
+
+## Notas de implementación
+
+`hint` es una clave de traducción explícita; sin ella se usa `<label>.hint` si existe. La marca es `<editable-hidden-mark>` (`role="img"` + `aria-label` "<label>: Campo oculto por permisos", clave `common.hiddenField`) y sustituye a `----` en todos los editables. Hint y apariencia se pintan a través del envoltorio de UI-06.
 
 ## Ficheros afectados
 

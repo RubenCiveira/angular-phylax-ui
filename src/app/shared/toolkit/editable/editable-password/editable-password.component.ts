@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableFieldComponent } from '../editable-field/editable-field.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,29 +22,19 @@ import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   template: `
-    @if (visible()) {
-      <mat-form-field>
-        <mat-label>{{ label() + '.label' | transloco }}</mat-label>
-        <input
-          matInput
-          [value]="'*****'"
-          [required]="required()"
-          [readonly]="true"
-          type="password"
-          placeholder="{{ label() + '.placeholder' | transloco }}"
-        />
-        @if (!control.disabled) {
-          <button mat-button matSuffix (click)="chPass()">Cambiar</button>
-        }
-        @for (error of errorMessages(); track $index) {
-          <mat-error>
-            {{ label() + '.error.' + error | transloco }}
-          </mat-error>
-        }
-      </mat-form-field>
-    } @else if (showHiddenMark()) {
-      ----
-    }
+    <editable-field [editable]="this">
+      <input
+        matInput
+        [value]="'*****'"
+        [required]="required()"
+        [readonly]="true"
+        type="password"
+        placeholder="{{ label() + '.placeholder' | transloco }}"
+      />
+      @if (!control.disabled) {
+        <button mat-button matSuffix (click)="chPass()">Cambiar</button>
+      }
+    </editable-field>
 
     <ng-template #changeDialog>
       <div class="password-dialog-container">
@@ -149,6 +140,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
     CommonModule,
     TranslocoModule,
+    EditableFieldComponent,
   ],
   providers: BaseEditable.getAccessorProvider(EditablePasswordComponent),
   standalone: true,

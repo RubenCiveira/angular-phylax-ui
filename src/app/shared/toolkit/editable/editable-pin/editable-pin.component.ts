@@ -4,11 +4,12 @@ import { Component, effect, ElementRef, input, OnInit, output, viewChildren } fr
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 
 @Component({
   selector: 'editable-pin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslocoModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoModule, EditableHiddenMarkComponent],
   providers: BaseEditable.getValidableAccessorProvider(EditablePinComponent),
   templateUrl: './editable-pin.component.html',
   styleUrls: ['./editable-pin.component.scss'],

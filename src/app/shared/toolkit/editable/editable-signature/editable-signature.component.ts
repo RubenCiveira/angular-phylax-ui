@@ -4,6 +4,7 @@ import { AfterViewInit, Component, effect, ElementRef, OnDestroy, viewChild } fr
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -15,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
         <button type="button" class="signature-clear" (click)="clear()">🗑 Limpiar</button>
       </div>
     } @else if (showHiddenMark()) {
-      ----
+      <editable-hidden-mark [label]="label()" />
     }
   `,
   styles: [
@@ -52,7 +53,14 @@ import { MatInputModule } from '@angular/material/input';
     `,
   ],
   selector: 'editable-signature',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, TranslocoModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    TranslocoModule,
+    EditableHiddenMarkComponent,
+  ],
   providers: BaseEditable.getAccessorProvider(EditableSignatureComponent),
   standalone: true,
 })

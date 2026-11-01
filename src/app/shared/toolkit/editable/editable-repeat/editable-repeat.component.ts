@@ -4,6 +4,7 @@ import { Component, contentChild, effect, input, signal, Signal, TemplateRef, Wr
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableBareFieldComponent } from '../editable-field/editable-field.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription } from 'rxjs';
@@ -20,15 +21,9 @@ export interface RepeatBuilder<T> {
 
 @Component({
   template: `
-    @if (visible()) {
+    <editable-bare-field [editable]="this">
       <mat-card>
         <mat-card-content>
-          @for (error of errorMessages(); track $index) {
-            <mat-error>
-              {{ label() + 'error.' + error | transloco }}
-            </mat-error>
-          }
-
           @for (row of ids(); track row) {
             <div [ngClass]="{ small: !big(), big: big() }">
               <div class="form">
@@ -50,9 +45,7 @@ export interface RepeatBuilder<T> {
           </button>
         </mat-card-actions>
       </mat-card>
-    } @else if (showHiddenMark()) {
-      ----
-    }
+    </editable-bare-field>
   `,
   styles: [
     `
@@ -99,6 +92,7 @@ export interface RepeatBuilder<T> {
     CommonModule,
     TranslocoModule,
     MatCardModule,
+    EditableBareFieldComponent,
   ],
   providers: BaseEditable.getAccessorProvider(EditableRepeatComponent),
   standalone: true,

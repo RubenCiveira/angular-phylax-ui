@@ -6,6 +6,7 @@ import { DownloadBlob, UploadProgress } from '@shared/data/repository/provider/r
 import { Observable, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BaseEditable } from '../base-editable';
+import { EditableFieldComponent } from '../editable-field/editable-field.component';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +36,7 @@ type UploadState = 'select' | 'uploading' | 'complete';
     MatIconModule,
     MatProgressBarModule,
     MatFormFieldModule,
+    EditableFieldComponent,
   ],
   styles: [':host { display: flex; flex-direction:row; }'],
   styleUrls: ['./editable-upload.component.scss'],

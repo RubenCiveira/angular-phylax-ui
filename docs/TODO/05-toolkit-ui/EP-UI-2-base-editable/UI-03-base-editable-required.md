@@ -7,7 +7,7 @@ paso: 2
 prioridad: media
 esfuerzo: S
 ambito: plantilla
-estado: pendiente
+estado: hecho
 depende_de: []
 origen: 07-toolkit-ui.md
 ---
@@ -24,12 +24,16 @@ El "required" se detecta llamando al validador con un control falso (`validators
 
 ## Tareas
 
-- [ ] Usar `this.control.hasValidator(Validators.required)`.
-- [ ] Recalcular si cambian los validadores (`registerOnValidatorChange`).
+- [x] Usar `this.control.hasValidator(Validators.required)`.
+- [x] Recalcular si cambian los validadores (`registerOnValidatorChange`).
 
 ## Criterios de aceptación
 
-- [ ] El asterisco de obligatorio aparece en todos los campos con `Validators.required`.
+- [x] El asterisco de obligatorio aparece en todos los campos con `Validators.required`.
+
+## Notas de implementación
+
+`registerOnValidatorChange` notifica cambios de *nuestro* validador, no de los del control, y Angular no emite nada en `setValidators`: `required` se recalcula en cada `statusChanges` (el `updateValueAndValidity` que acompaña a `setValidators`).
 
 ## Ficheros afectados
 

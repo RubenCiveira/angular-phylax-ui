@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -19,18 +20,25 @@ import { MatInputModule } from '@angular/material/input';
           placeholder="{{ label() + '.placeholder' | transloco }}"
           [formControl]="control"
         />
-        @for (error of errorMessages(); track $index) {
+        @for (error of errorList(); track error.key) {
           <mat-error>
-            {{ label() + '.error.' + error | transloco }}
+            {{ errorKey(error) | transloco: error.params }}
           </mat-error>
         }
       </mat-form-field>
     } @else if (showHiddenMark()) {
-      ----
+      <editable-hidden-mark [label]="label()" />
     }
   `,
   selector: 'editable-color',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, TranslocoModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    TranslocoModule,
+    EditableHiddenMarkComponent,
+  ],
   providers: BaseEditable.getAccessorProvider(EditableColorComponent),
   standalone: true,
 })

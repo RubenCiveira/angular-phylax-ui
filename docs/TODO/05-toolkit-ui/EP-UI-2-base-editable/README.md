@@ -3,7 +3,7 @@ id: EP-UI-2
 titulo: "BaseEditable y envoltorio de campo"
 area: toolkit-ui
 prioridad: alta
-estado: pendiente
+estado: hecho
 issues: [UI-02, UI-03, UI-05, UI-04, UI-06]
 ---
 
@@ -43,8 +43,8 @@ Issues de otras épicas de los que depende:
 
 ## Checklist de la épica
 
-- [ ] UI-02 — BaseEditable: aplicar valor y estado sin setTimeout
-- [ ] UI-03 — BaseEditable: detectar required con hasValidator
-- [ ] UI-05 — BaseEditable: hint, apariencia por campo y marca de oculto accesible
-- [ ] UI-04 — Mensajes de validación con parámetros y fallback común
-- [ ] UI-06 — Componente envoltorio <editable-field>
+- [x] UI-02 — BaseEditable: aplicar valor y estado sin setTimeout
+- [x] UI-03 — BaseEditable: detectar required con hasValidator
+- [x] UI-05 — BaseEditable: hint, apariencia por campo y marca de oculto accesible
+- [x] UI-04 — Mensajes de validación con parámetros y fallback común
+- [x] UI-06 — Componente envoltorio <editable-field>

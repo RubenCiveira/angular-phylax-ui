@@ -13,6 +13,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { RRule, Frequency, Weekday } from 'rrule';
 import { Subscription } from 'rxjs';
 import { BaseEditable } from '../base-editable';
+import { EditableHiddenMarkComponent } from '../editable-hidden-mark/editable-hidden-mark.component';
 
 export type RRuleFreq = 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
 
@@ -68,6 +69,7 @@ interface RRuleState {
     MatRadioModule,
     MatButtonToggleModule,
     TranslocoModule,
+    EditableHiddenMarkComponent,
   ],
   providers: [provideNativeDateAdapter(), BaseEditable.getValidableAccessorProvider(EditableRruleComponent)],
   templateUrl: './editable-rrule.component.html',

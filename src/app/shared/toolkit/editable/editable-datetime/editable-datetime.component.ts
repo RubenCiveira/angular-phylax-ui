@@ -6,6 +6,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { MatInputModule } from '@angular/material/input';
 import { BaseEditable } from '../base-editable';
+import { EditableBareFieldComponent } from '../editable-field/editable-field.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -15,7 +16,15 @@ import { DateAdapter } from '@angular/material/core';
 @Component({
   selector: 'editable-datetime',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, TranslocoModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    TranslocoModule,
+    EditableBareFieldComponent,
+  ],
   providers: [provideNativeDateAdapter(), ...BaseEditable.getAccessorProvider(EditableDatetimeComponent)],
   styleUrls: ['./editable-datetime.component.scss'],
   templateUrl: './editable-datetime.component.html',
