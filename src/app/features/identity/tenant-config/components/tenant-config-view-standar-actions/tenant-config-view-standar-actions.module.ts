@@ -21,6 +21,5 @@ import { NgModule } from '@angular/core';
     TenantConfigViewEditActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/tenant-config', alias: 'identity/tenant-config' })],
-  bootstrap: [],
 })
 export class TenantConfigViewStandarActionsModule {}

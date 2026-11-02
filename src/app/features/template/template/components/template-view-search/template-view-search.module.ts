@@ -24,6 +24,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/template', alias: 'template/template' })],
-  bootstrap: [],
 })
 export class TemplateViewSearchModule {}

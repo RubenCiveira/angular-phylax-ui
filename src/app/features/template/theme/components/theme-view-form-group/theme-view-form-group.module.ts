@@ -24,6 +24,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/theme', alias: 'template/theme' })],
-  bootstrap: [],
 })
 export class ThemeViewFormGroupModule {}

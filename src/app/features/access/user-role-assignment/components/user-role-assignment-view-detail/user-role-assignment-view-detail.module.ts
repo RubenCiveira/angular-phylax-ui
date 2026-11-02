@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [UserRoleAssignmentViewDetailComponent],
   imports: [ReactiveFormsModule, UserRoleAssignmentViewFormGroupModule],
   providers: [provideTranslocoScope({ scope: 'access/user-role-assignment', alias: 'access/user-role-assignment' })],
-  bootstrap: [],
 })
 export class UserRoleAssignmentViewDetailModule {}

@@ -23,6 +23,5 @@ import { NgModule } from '@angular/core';
   providers: [
     provideTranslocoScope({ scope: 'identity/user-federated-identity', alias: 'identity/user-federated-identity' }),
   ],
-  bootstrap: [],
 })
 export class UserFederatedIdentityViewStandarActionsModule {}

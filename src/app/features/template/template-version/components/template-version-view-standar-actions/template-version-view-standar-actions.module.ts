@@ -21,6 +21,5 @@ import { NgModule } from '@angular/core';
     TemplateVersionViewEditActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/template-version', alias: 'template/template-version' })],
-  bootstrap: [],
 })
 export class TemplateVersionViewStandarActionsModule {}

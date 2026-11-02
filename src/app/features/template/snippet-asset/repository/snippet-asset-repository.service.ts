@@ -5,7 +5,7 @@ import {
   SnippetAssetFilter,
 } from '@features/template/snippet-asset/model/snippet-asset.model';
 import { RepositoryMetadata, RepositoryService } from '@shared/data/repository/repository.service';
-import { Shift, Tick, UpdateOptions } from '@shared/data/repository/repository.model';
+import { Shift, UpdateOptions, Tick } from '@shared/data/repository/repository.model';
 import { RepositoryStore } from '@shared/data/repository/repository-store.service';
 import { Acl } from '@shared/data/acl/acl.model';
 import { ApiService } from '@shared/data/api/api.service';

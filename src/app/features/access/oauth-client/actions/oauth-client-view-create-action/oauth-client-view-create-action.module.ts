@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [OauthClientViewCreateActionComponent],
   imports: [CommonModule, MatButtonModule, OauthClientViewFormGroupModule, ReactiveFormsModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'access/oauth-client', alias: 'access/oauth-client' })],
-  bootstrap: [],
 })
 export class OauthClientViewCreateActionModule {}

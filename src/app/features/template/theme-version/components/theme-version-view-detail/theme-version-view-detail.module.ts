@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [ThemeVersionViewDetailComponent],
   imports: [ReactiveFormsModule, ThemeVersionViewFormGroupModule],
   providers: [provideTranslocoScope({ scope: 'template/theme-version', alias: 'template/theme-version' })],
-  bootstrap: [],
 })
 export class ThemeVersionViewDetailModule {}

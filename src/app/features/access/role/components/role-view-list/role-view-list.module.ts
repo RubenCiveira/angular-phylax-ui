@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/role', alias: 'access/role' })],
-  bootstrap: [],
 })
 export class RoleViewListModule {}

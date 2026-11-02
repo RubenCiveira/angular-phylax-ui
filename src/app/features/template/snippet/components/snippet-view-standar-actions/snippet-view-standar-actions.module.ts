@@ -29,6 +29,5 @@ import { NgModule } from '@angular/core';
     SnippetViewEnableSelectionActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/snippet', alias: 'template/snippet' })],
-  bootstrap: [],
 })
 export class SnippetViewStandarActionsModule {}

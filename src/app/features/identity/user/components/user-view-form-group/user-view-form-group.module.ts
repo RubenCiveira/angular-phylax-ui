@@ -33,6 +33,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/user', alias: 'identity/user' })],
-  bootstrap: [],
 })
 export class UserViewFormGroupModule {}

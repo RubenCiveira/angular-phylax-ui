@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/tenant-config', alias: 'identity/tenant-config' })],
-  bootstrap: [],
 })
 export class TenantConfigViewListModule {}

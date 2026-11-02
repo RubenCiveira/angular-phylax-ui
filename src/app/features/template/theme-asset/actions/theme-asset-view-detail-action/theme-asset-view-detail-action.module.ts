@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [ThemeAssetViewDetailActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, ThemeAssetViewDetailModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'template/theme-asset', alias: 'template/theme-asset' })],
-  bootstrap: [],
 })
 export class ThemeAssetViewDetailActionModule {}

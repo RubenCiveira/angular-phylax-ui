@@ -35,6 +35,5 @@ import { NgModule } from '@angular/core';
     TenantViewProvidersModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/tenant', alias: 'identity/tenant' })],
-  bootstrap: [],
 })
 export class TenantViewStandarActionsModule {}

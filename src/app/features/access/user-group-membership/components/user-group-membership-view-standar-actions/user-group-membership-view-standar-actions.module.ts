@@ -21,6 +21,5 @@ import { NgModule } from '@angular/core';
     UserGroupMembershipViewEditActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/user-group-membership', alias: 'access/user-group-membership' })],
-  bootstrap: [],
 })
 export class UserGroupMembershipViewStandarActionsModule {}

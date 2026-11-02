@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [MessageViewDetailActionComponent],
   imports: [CommonModule, MatButtonModule, MessageViewDetailModule, ReactiveFormsModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'notification/message', alias: 'notification/message' })],
-  bootstrap: [],
 })
 export class MessageViewDetailActionModule {}

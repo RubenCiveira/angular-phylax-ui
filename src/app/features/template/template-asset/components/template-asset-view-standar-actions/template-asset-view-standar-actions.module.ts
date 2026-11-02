@@ -29,6 +29,5 @@ import { NgModule } from '@angular/core';
     TemplateAssetViewEnableSelectionActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/template-asset', alias: 'template/template-asset' })],
-  bootstrap: [],
 })
 export class TemplateAssetViewStandarActionsModule {}

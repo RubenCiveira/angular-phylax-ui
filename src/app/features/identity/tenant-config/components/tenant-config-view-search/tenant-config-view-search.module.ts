@@ -22,6 +22,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/tenant-config', alias: 'identity/tenant-config' })],
-  bootstrap: [],
 })
 export class TenantConfigViewSearchModule {}

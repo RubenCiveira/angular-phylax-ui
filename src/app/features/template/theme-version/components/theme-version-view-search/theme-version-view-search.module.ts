@@ -22,6 +22,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/theme-version', alias: 'template/theme-version' })],
-  bootstrap: [],
 })
 export class ThemeVersionViewSearchModule {}

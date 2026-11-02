@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/snippet', alias: 'template/snippet' })],
-  bootstrap: [],
 })
 export class SnippetViewListModule {}

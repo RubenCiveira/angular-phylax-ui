@@ -6,7 +6,7 @@ import {
   TemplateAssetProjection,
 } from '@features/template/template-asset/model/template-asset.model';
 import { TenantRepository } from '@features/identity/tenant/repository/tenant-repository.service';
-import { Shift, Tick, UpdateOptions } from '@shared/data/repository/repository.model';
+import { Shift, UpdateOptions, Tick } from '@shared/data/repository/repository.model';
 import { RepositoryStore } from '@shared/data/repository/repository-store.service';
 import { Acl } from '@shared/data/acl/acl.model';
 import { ApiService } from '@shared/data/api/api.service';

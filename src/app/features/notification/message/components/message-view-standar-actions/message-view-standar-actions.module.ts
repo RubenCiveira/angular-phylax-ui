@@ -21,6 +21,5 @@ import { NgModule } from '@angular/core';
     MessageViewEditActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'notification/message', alias: 'notification/message' })],
-  bootstrap: [],
 })
 export class MessageViewStandarActionsModule {}

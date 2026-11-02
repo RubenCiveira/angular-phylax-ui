@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [ResourceServerViewEditActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, ResourceServerViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'access/resource-server', alias: 'access/resource-server' })],
-  bootstrap: [],
 })
 export class ResourceServerViewEditActionModule {}

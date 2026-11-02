@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
   providers: [
     provideTranslocoScope({ scope: 'identity/tenant-login-provider', alias: 'identity/tenant-login-provider' }),
   ],
-  bootstrap: [],
 })
 export class TenantLoginProviderViewSearchModule {}

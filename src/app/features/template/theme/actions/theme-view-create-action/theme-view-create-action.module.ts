@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [ThemeViewCreateActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, ThemeViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'template/theme', alias: 'template/theme' })],
-  bootstrap: [],
 })
 export class ThemeViewCreateActionModule {}

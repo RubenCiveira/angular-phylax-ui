@@ -22,6 +22,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'notification/message', alias: 'notification/message' })],
-  bootstrap: [],
 })
 export class MessageViewSearchModule {}

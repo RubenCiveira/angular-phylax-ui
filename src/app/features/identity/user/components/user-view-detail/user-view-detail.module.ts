@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [UserViewDetailComponent],
   imports: [ReactiveFormsModule, UserViewFormGroupModule],
   providers: [provideTranslocoScope({ scope: 'identity/user', alias: 'identity/user' })],
-  bootstrap: [],
 })
 export class UserViewDetailModule {}

@@ -22,6 +22,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/tenant', alias: 'identity/tenant' })],
-  bootstrap: [],
 })
 export class TenantViewSearchModule {}

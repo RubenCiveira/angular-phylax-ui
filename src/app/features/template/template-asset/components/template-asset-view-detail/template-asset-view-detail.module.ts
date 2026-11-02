@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [TemplateAssetViewDetailComponent],
   imports: [ReactiveFormsModule, TemplateAssetViewFormGroupModule],
   providers: [provideTranslocoScope({ scope: 'template/template-asset', alias: 'template/template-asset' })],
-  bootstrap: [],
 })
 export class TemplateAssetViewDetailModule {}

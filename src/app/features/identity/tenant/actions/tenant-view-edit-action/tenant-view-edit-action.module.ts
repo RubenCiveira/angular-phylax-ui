@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [TenantViewEditActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TenantViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'identity/tenant', alias: 'identity/tenant' })],
-  bootstrap: [],
 })
 export class TenantViewEditActionModule {}

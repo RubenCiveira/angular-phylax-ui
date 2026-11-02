@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [TenantViewConditionsComponent],
   imports: [CommonModule, TenantTermsOfUseViewListModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'identity/tenant', alias: 'identity/tenant' })],
-  bootstrap: [],
 })
 export class TenantViewConditionsModule {}

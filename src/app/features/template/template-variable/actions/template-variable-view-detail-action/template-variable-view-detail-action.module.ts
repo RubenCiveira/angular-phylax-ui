@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [TemplateVariableViewDetailActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TemplateVariableViewDetailModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'template/template-variable', alias: 'template/template-variable' })],
-  bootstrap: [],
 })
 export class TemplateVariableViewDetailActionModule {}

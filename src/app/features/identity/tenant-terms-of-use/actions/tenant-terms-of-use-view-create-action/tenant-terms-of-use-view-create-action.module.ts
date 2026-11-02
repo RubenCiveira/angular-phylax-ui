@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [TenantTermsOfUseViewCreateActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TenantTermsOfUseViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'identity/tenant-terms-of-use', alias: 'identity/tenant-terms-of-use' })],
-  bootstrap: [],
 })
 export class TenantTermsOfUseViewCreateActionModule {}

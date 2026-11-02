@@ -24,6 +24,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/snippet-version', alias: 'template/snippet-version' })],
-  bootstrap: [],
 })
 export class SnippetVersionViewFormGroupModule {}

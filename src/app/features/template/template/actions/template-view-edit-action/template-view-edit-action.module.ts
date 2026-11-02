@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [TemplateViewEditActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TemplateViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'template/template', alias: 'template/template' })],
-  bootstrap: [],
 })
 export class TemplateViewEditActionModule {}

@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [UserGroupMembershipViewDetailActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TranslocoModule, UserGroupMembershipViewDetailModule],
   providers: [provideTranslocoScope({ scope: 'access/user-group-membership', alias: 'access/user-group-membership' })],
-  bootstrap: [],
 })
 export class UserGroupMembershipViewDetailActionModule {}

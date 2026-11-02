@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/tenant-terms-of-use', alias: 'identity/tenant-terms-of-use' })],
-  bootstrap: [],
 })
 export class TenantTermsOfUseViewListModule {}

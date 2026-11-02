@@ -29,6 +29,5 @@ import { NgModule } from '@angular/core';
     OauthClientViewEnableSelectionActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/oauth-client', alias: 'access/oauth-client' })],
-  bootstrap: [],
 })
 export class OauthClientViewStandarActionsModule {}

@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/oauth-client', alias: 'access/oauth-client' })],
-  bootstrap: [],
 })
 export class OauthClientViewListModule {}

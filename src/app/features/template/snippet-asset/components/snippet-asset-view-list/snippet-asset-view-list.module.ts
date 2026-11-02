@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/snippet-asset', alias: 'template/snippet-asset' })],
-  bootstrap: [],
 })
 export class SnippetAssetViewListModule {}

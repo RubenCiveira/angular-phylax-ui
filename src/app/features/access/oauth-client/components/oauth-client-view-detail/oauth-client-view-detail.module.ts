@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [OauthClientViewDetailComponent],
   imports: [OauthClientViewFormGroupModule, ReactiveFormsModule],
   providers: [provideTranslocoScope({ scope: 'access/oauth-client', alias: 'access/oauth-client' })],
-  bootstrap: [],
 })
 export class OauthClientViewDetailModule {}

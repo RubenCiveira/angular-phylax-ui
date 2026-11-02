@@ -38,6 +38,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/oauth-client', alias: 'access/oauth-client' })],
-  bootstrap: [],
 })
 export class OauthClientViewFormGroupModule {}

@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'notification/message', alias: 'notification/message' })],
-  bootstrap: [],
 })
 export class MessageViewListModule {}

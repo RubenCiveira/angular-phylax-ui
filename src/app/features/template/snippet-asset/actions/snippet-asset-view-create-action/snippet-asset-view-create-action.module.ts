@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [SnippetAssetViewCreateActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, SnippetAssetViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'template/snippet-asset', alias: 'template/snippet-asset' })],
-  bootstrap: [],
 })
 export class SnippetAssetViewCreateActionModule {}

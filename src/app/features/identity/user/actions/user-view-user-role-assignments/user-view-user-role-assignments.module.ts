@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [UserViewUserRoleAssignmentsComponent],
   imports: [CommonModule, TranslocoModule, UserRoleAssignmentViewListModule],
   providers: [provideTranslocoScope({ scope: 'identity/user', alias: 'identity/user' })],
-  bootstrap: [],
 })
 export class UserViewUserRoleAssignmentsModule {}

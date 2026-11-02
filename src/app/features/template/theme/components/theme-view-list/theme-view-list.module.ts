@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/theme', alias: 'template/theme' })],
-  bootstrap: [],
 })
 export class ThemeViewListModule {}

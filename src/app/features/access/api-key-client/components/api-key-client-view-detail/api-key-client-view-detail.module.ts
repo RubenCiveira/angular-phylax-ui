@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [ApiKeyClientViewDetailComponent],
   imports: [ApiKeyClientViewFormGroupModule, ReactiveFormsModule],
   providers: [provideTranslocoScope({ scope: 'access/api-key-client', alias: 'access/api-key-client' })],
-  bootstrap: [],
 })
 export class ApiKeyClientViewDetailModule {}

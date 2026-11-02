@@ -26,6 +26,5 @@ import { NgModule } from '@angular/core';
     TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/resource-server', alias: 'access/resource-server' })],
-  bootstrap: [],
 })
 export class ResourceServerViewListModule {}

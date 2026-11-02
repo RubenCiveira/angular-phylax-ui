@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [UserViewUserGroupMembershipsComponent],
   imports: [CommonModule, TranslocoModule, UserGroupMembershipViewListModule],
   providers: [provideTranslocoScope({ scope: 'identity/user', alias: 'identity/user' })],
-  bootstrap: [],
 })
 export class UserViewUserGroupMembershipsModule {}

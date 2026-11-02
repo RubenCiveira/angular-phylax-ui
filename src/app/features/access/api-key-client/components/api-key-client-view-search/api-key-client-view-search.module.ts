@@ -13,6 +13,5 @@ import { NgModule } from '@angular/core';
   exports: [ApiKeyClientViewSearchComponent],
   imports: [CommonModule, EditableTextComponent, FormLayoutComponent, FormsModule, MatInputModule, ReactiveFormsModule],
   providers: [provideTranslocoScope({ scope: 'access/api-key-client', alias: 'access/api-key-client' })],
-  bootstrap: [],
 })
 export class ApiKeyClientViewSearchModule {}

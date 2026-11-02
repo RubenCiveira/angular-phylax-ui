@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [TemplateVersionViewCreateActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, TemplateVersionViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'template/template-version', alias: 'template/template-version' })],
-  bootstrap: [],
 })
 export class TemplateVersionViewCreateActionModule {}

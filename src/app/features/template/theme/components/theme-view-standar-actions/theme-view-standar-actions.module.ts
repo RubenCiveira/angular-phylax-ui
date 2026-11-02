@@ -29,6 +29,5 @@ import { NgModule } from '@angular/core';
     ThemeViewEnableSelectionActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/theme', alias: 'template/theme' })],
-  bootstrap: [],
 })
 export class ThemeViewStandarActionsModule {}

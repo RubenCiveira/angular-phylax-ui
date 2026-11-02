@@ -30,6 +30,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/consent-purpose', alias: 'identity/consent-purpose' })],
-  bootstrap: [],
 })
 export class ConsentPurposeViewFormGroupModule {}

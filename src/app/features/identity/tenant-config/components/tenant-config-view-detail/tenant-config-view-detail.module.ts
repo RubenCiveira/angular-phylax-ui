@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [TenantConfigViewDetailComponent],
   imports: [ReactiveFormsModule, TenantConfigViewFormGroupModule],
   providers: [provideTranslocoScope({ scope: 'identity/tenant-config', alias: 'identity/tenant-config' })],
-  bootstrap: [],
 })
 export class TenantConfigViewDetailModule {}

@@ -24,6 +24,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'template/template-variable', alias: 'template/template-variable' })],
-  bootstrap: [],
 })
 export class TemplateVariableViewFormGroupModule {}

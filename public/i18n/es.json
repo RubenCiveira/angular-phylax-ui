@@ -15,6 +15,100 @@
     }
   },
   "common": {
+    "action": {
+      "accept": {
+        "icon": "visibility_off"
+      },
+      "accept-selection": {
+        "icon": "visibility_off"
+      },
+      "content": "¿Confirmas la operación?",
+      "create": {
+        "icon": "add",
+        "label": "Crear",
+        "title": "Nuevo elemento",
+        "tooltip": "Crear un elemento nuevo"
+      },
+      "delete": {
+        "content": "¿Seguro que quieres borrar el elemento?",
+        "icon": "delete",
+        "label": "Borrar",
+        "okBtn": "Borrar",
+        "report": "Elemento borrado",
+        "title": "Borrar",
+        "tooltip": "Borrar el elemento"
+      },
+      "delete-selection": {
+        "content": "¿Seguro que quieres borrar los elementos seleccionados?",
+        "icon": "delete",
+        "label": "Borrar",
+        "okBtn": "Borrar",
+        "report": "Elementos borrados",
+        "title": "Borrar selección",
+        "tooltip": "Borrar los elementos seleccionados"
+      },
+      "detail": {
+        "icon": "visibility",
+        "label": "Ver",
+        "title": "Detalle",
+        "tooltip": "Ver el detalle del elemento"
+      },
+      "disable": {
+        "content": "¿Quieres deshabilitar el elemento?",
+        "icon": "visibility_off",
+        "label": "Deshabilitar",
+        "okBtn": "Deshabilitar",
+        "report": "Elemento deshabilitado",
+        "title": "Deshabilitar",
+        "tooltip": "Deshabilitar el elemento"
+      },
+      "disable-selection": {
+        "content": "¿Quieres deshabilitar los elementos seleccionados?",
+        "icon": "visibility_off",
+        "label": "Deshabilitar",
+        "okBtn": "Deshabilitar",
+        "report": "Elementos deshabilitados",
+        "title": "Deshabilitar selección",
+        "tooltip": "Deshabilitar los elementos seleccionados"
+      },
+      "edit": {
+        "icon": "edit_note",
+        "label": "Editar",
+        "title": "Editar elemento",
+        "tooltip": "Modificar el elemento"
+      },
+      "enable": {
+        "content": "¿Quieres habilitar el elemento?",
+        "icon": "visibility",
+        "label": "Habilitar",
+        "okBtn": "Habilitar",
+        "report": "Elemento habilitado",
+        "title": "Habilitar",
+        "tooltip": "Habilitar el elemento"
+      },
+      "enable-selection": {
+        "content": "¿Quieres habilitar los elementos seleccionados?",
+        "icon": "visibility",
+        "label": "Habilitar",
+        "okBtn": "Habilitar",
+        "report": "Elementos habilitados",
+        "title": "Habilitar selección",
+        "tooltip": "Habilitar los elementos seleccionados"
+      },
+      "reject": {
+        "icon": "visibility_off"
+      },
+      "reject-selection": {
+        "icon": "visibility_off"
+      },
+      "report": "Operación realizada",
+      "unlock": {
+        "icon": "lock"
+      },
+      "unlock-selection": {
+        "icon": "lock"
+      }
+    },
     "confirm": {
       "cancel": "Cancelar",
       "ok": "Aceptar",
@@ -28,110 +122,41 @@
       "selectRow": "Seleccionar fila"
     },
     "loadError": "No se han podido cargar los datos.",
-    "retry": "Reintentar",
+    "moreActions": "Más acciones",
     "notify": {
       "close": "Cerrar"
     },
+    "retry": "Reintentar",
     "selector": {
       "error": "No se pudieron cargar las opciones. Inténtalo de nuevo.",
       "noResults": "Sin resultados",
       "open": "Mostrar opciones"
-    },
-    "moreActions": "Más acciones",
-    "action": {
-      "content": "¿Confirmas la operación?",
-      "report": "Operación realizada",
-      "create": {
-        "label": "Crear",
-        "icon": "add",
-        "tooltip": "Crear un elemento nuevo",
-        "title": "Nuevo elemento"
-      },
-      "edit": {
-        "label": "Editar",
-        "icon": "edit_note",
-        "tooltip": "Modificar el elemento",
-        "title": "Editar elemento"
-      },
-      "detail": {
-        "label": "Ver",
-        "icon": "visibility",
-        "tooltip": "Ver el detalle del elemento",
-        "title": "Detalle"
-      },
-      "delete": {
-        "label": "Borrar",
-        "icon": "delete",
-        "tooltip": "Borrar el elemento",
-        "title": "Borrar",
-        "content": "¿Seguro que quieres borrar el elemento?",
-        "okBtn": "Borrar",
-        "report": "Elemento borrado"
-      },
-      "delete-selection": {
-        "label": "Borrar",
-        "icon": "delete",
-        "tooltip": "Borrar los elementos seleccionados",
-        "title": "Borrar selección",
-        "content": "¿Seguro que quieres borrar los elementos seleccionados?",
-        "okBtn": "Borrar",
-        "report": "Elementos borrados"
-      },
-      "enable": {
-        "label": "Habilitar",
-        "icon": "visibility",
-        "tooltip": "Habilitar el elemento",
-        "title": "Habilitar",
-        "content": "¿Quieres habilitar el elemento?",
-        "okBtn": "Habilitar",
-        "report": "Elemento habilitado"
-      },
-      "enable-selection": {
-        "label": "Habilitar",
-        "icon": "visibility",
-        "tooltip": "Habilitar los elementos seleccionados",
-        "title": "Habilitar selección",
-        "content": "¿Quieres habilitar los elementos seleccionados?",
-        "okBtn": "Habilitar",
-        "report": "Elementos habilitados"
-      },
-      "disable": {
-        "label": "Deshabilitar",
-        "icon": "visibility_off",
-        "tooltip": "Deshabilitar el elemento",
-        "title": "Deshabilitar",
-        "content": "¿Quieres deshabilitar el elemento?",
-        "okBtn": "Deshabilitar",
-        "report": "Elemento deshabilitado"
-      },
-      "disable-selection": {
-        "label": "Deshabilitar",
-        "icon": "visibility_off",
-        "tooltip": "Deshabilitar los elementos seleccionados",
-        "title": "Deshabilitar selección",
-        "content": "¿Quieres deshabilitar los elementos seleccionados?",
-        "okBtn": "Deshabilitar",
-        "report": "Elementos deshabilitados"
-      },
-      "unlock": {
-        "icon": "lock"
-      },
-      "accept": {
-        "icon": "visibility_off"
-      },
-      "reject": {
-        "icon": "visibility_off"
-      },
-      "unlock-selection": {
-        "icon": "lock"
-      },
-      "accept-selection": {
-        "icon": "visibility_off"
-      },
-      "reject-selection": {
-        "icon": "visibility_off"
-      }
     }
+  },
+  "editConflict": {
+    "apply": "Aplicar",
+    "cancel": "Cancelar",
+    "column": {
+      "current": "Actual",
+      "field": "Campo",
+      "original": "Original",
+      "sent": "Enviado"
+    },
+    "empty": "(vacío)",
+    "keepMine": "Quedarme con todos mis cambios",
+    "no": "No",
+    "showUnchanged": "Mostrar campos sin cambios ({{count}})",
+    "state": {
+      "conflict": "En conflicto",
+      "mine": "Cambio tuyo",
+      "same": "Mismo cambio",
+      "theirs": "Cambio del servidor",
+      "unchanged": "Sin cambios"
+    },
+    "summary": "{{conflicts}} campos en conflicto y {{merged}} fusionados automáticamente. Elige qué valor conservar en cada conflicto.",
+    "title": "El elemento ha cambiado mientras lo editabas",
+    "useServer": "Usar todo lo del servidor",
+    "yes": "Sí"
   },
   "errors": {
     "422": "Algunos de los datos enviados no son válidos. Revísalos e inténtalo de nuevo.",
@@ -214,30 +239,5 @@
     "minlength": "Mínimo {{requiredLength}} caracteres",
     "pattern": "El formato no es válido",
     "required": "Este campo es obligatorio"
-  },
-  "editConflict": {
-    "title": "El elemento ha cambiado mientras lo editabas",
-    "summary": "{{conflicts}} campos en conflicto y {{merged}} fusionados automáticamente. Elige qué valor conservar en cada conflicto.",
-    "keepMine": "Quedarme con todos mis cambios",
-    "useServer": "Usar todo lo del servidor",
-    "showUnchanged": "Mostrar campos sin cambios ({{count}})",
-    "cancel": "Cancelar",
-    "apply": "Aplicar",
-    "empty": "(vacío)",
-    "yes": "Sí",
-    "no": "No",
-    "column": {
-      "field": "Campo",
-      "original": "Original",
-      "sent": "Enviado",
-      "current": "Actual"
-    },
-    "state": {
-      "conflict": "En conflicto",
-      "mine": "Cambio tuyo",
-      "theirs": "Cambio del servidor",
-      "same": "Mismo cambio",
-      "unchanged": "Sin cambios"
-    }
   }
 }

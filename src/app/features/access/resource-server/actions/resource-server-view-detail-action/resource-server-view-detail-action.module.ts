@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [ResourceServerViewDetailActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, ResourceServerViewDetailModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'access/resource-server', alias: 'access/resource-server' })],
-  bootstrap: [],
 })
 export class ResourceServerViewDetailActionModule {}

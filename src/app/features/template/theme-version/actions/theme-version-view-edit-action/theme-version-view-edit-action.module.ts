@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [ThemeVersionViewEditActionComponent],
   imports: [CommonModule, MatButtonModule, ReactiveFormsModule, ThemeVersionViewFormGroupModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'template/theme-version', alias: 'template/theme-version' })],
-  bootstrap: [],
 })
 export class ThemeVersionViewEditActionModule {}

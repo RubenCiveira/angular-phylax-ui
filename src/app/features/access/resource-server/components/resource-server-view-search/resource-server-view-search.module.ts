@@ -22,6 +22,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/resource-server', alias: 'access/resource-server' })],
-  bootstrap: [],
 })
 export class ResourceServerViewSearchModule {}

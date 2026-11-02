@@ -29,6 +29,5 @@ import { NgModule } from '@angular/core';
     ResourceServerViewEnableSelectionActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/resource-server', alias: 'access/resource-server' })],
-  bootstrap: [],
 })
 export class ResourceServerViewStandarActionsModule {}

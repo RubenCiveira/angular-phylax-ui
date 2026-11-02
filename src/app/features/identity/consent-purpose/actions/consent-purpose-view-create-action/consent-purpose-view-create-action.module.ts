@@ -12,6 +12,5 @@ import { NgModule } from '@angular/core';
   exports: [ConsentPurposeViewCreateActionComponent],
   imports: [CommonModule, ConsentPurposeViewFormGroupModule, MatButtonModule, ReactiveFormsModule, TranslocoModule],
   providers: [provideTranslocoScope({ scope: 'identity/consent-purpose', alias: 'identity/consent-purpose' })],
-  bootstrap: [],
 })
 export class ConsentPurposeViewCreateActionModule {}

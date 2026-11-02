@@ -21,6 +21,5 @@ import { NgModule } from '@angular/core';
     RoleViewEditActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/role', alias: 'access/role' })],
-  bootstrap: [],
 })
 export class RoleViewStandarActionsModule {}

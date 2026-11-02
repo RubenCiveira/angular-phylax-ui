@@ -28,6 +28,5 @@ import { NgModule } from '@angular/core';
   providers: [
     provideTranslocoScope({ scope: 'notification/smtp-outbound-config', alias: 'notification/smtp-outbound-config' }),
   ],
-  bootstrap: [],
 })
 export class SmtpOutboundConfigViewListModule {}

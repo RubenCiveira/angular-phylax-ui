@@ -24,6 +24,5 @@ import { NgModule } from '@angular/core';
     ReactiveFormsModule,
   ],
   providers: [provideTranslocoScope({ scope: 'access/role', alias: 'access/role' })],
-  bootstrap: [],
 })
 export class RoleViewSearchModule {}

@@ -21,6 +21,5 @@ import { NgModule } from '@angular/core';
     ConsentPurposeViewEditActionModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/consent-purpose', alias: 'identity/consent-purpose' })],
-  bootstrap: [],
 })
 export class ConsentPurposeViewStandarActionsModule {}

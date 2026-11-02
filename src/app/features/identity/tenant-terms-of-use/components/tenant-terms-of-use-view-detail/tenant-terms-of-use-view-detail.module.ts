@@ -10,6 +10,5 @@ import { NgModule } from '@angular/core';
   exports: [TenantTermsOfUseViewDetailComponent],
   imports: [ReactiveFormsModule, TenantTermsOfUseViewFormGroupModule],
   providers: [provideTranslocoScope({ scope: 'identity/tenant-terms-of-use', alias: 'identity/tenant-terms-of-use' })],
-  bootstrap: [],
 })
 export class TenantTermsOfUseViewDetailModule {}
