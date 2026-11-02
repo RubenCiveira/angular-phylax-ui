@@ -28,6 +28,8 @@ import { ToolbarComponent } from './bootstrap/layout/toolbar/toolbar.component';
 import { FooterComponent } from './bootstrap/layout/footer/footer.component';
 import { BootstrapComponent } from './bootstrap/layout/pages/bootstrap/bootstrap.component';
 import { SelectorProvider } from '@shared/data/selector-provider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { contextProviders } from './bootstrap/context.config';
 import { LAYOUT_MOBILE_QUERY } from './bootstrap/layout/layout.constants';
 
@@ -42,6 +44,8 @@ import { LAYOUT_MOBILE_QUERY } from './bootstrap/layout/layout.constants';
     ToolbarComponent,
     FooterComponent,
     BootstrapComponent,
+    MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -101,18 +105,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   toggleNav() {
+    // En escritorio solo se alterna completo/mini: el botón vive en la propia nav y no puede ocultarse
     if (this.isMobile) this.navOverlayOpen = !this.navOverlayOpen;
-    else if (this.navFull) {
-      this.navFull = false;
-      this.navMini = true;
-      this.navHide = false;
-    } else if (this.navMini) {
-      this.navFull = false;
-      this.navMini = false;
-      this.navHide = true;
-    } else {
-      this.navFull = true;
-      this.navMini = false;
+    else {
+      this.navFull = !this.navFull;
+      this.navMini = !this.navFull;
       this.navHide = false;
     }
   }

@@ -4,7 +4,25 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 2em;
+  gap: var(--app-space-8);
+  // centrado óptico: algo por encima de la mitad del panel
+  padding-block: 12vh 16vh;
+}
+.error-page h2 {
+  margin-block: 0 var(--app-space-2);
+  font: var(--mat-sys-headline-small);
+}
+.error-page p {
+  margin-block: 0 var(--app-space-4);
+  color: var(--app-color-text-muted);
+}
+.error-page details {
+  margin-top: var(--app-space-4);
+  font: var(--mat-sys-body-small);
+  color: var(--app-color-text-muted);
+}
+.error-page summary {
+  cursor: pointer;
 }
 .error-page img {
   max-width: 20em;

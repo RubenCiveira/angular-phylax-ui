@@ -4,32 +4,62 @@
 
 :host {
   margin: 0;
+  flex: 1;
+  min-height: 0;
   display: grid;
+  /* escritorio: sin barra superior; las opciones de usuario van al pie de la nav y el panel llega arriba */
   grid-template-columns: var(--app-nav-width) 1fr; /* ancho nav + contenido */
-  grid-template-rows: auto 1fr auto; /* header, main, footer */
+  grid-template-rows: 1fr auto; /* main, footer */
   grid-template-areas:
-    'nav header'
     'nav main'
     'nav footer';
-  min-height: 100vh;
+  /* nav y cuenta forman un único marco; el contenido es un panel apoyado sobre él */
+  background: var(--app-shell-bg);
+  transition: grid-template-columns var(--app-transition-medium);
 }
 
+/* la cuenta se apoya en el pie de la nav (misma celda), sin condicionar la altura del footer */
 header {
-  grid-area: header;
-  border-bottom: 1px solid var(--app-color-border);
+  grid-area: nav;
+  align-self: end;
+  z-index: 1;
+  min-width: 0;
+  background: var(--app-shell-bg);
+  /* mismo sangrado que los items de la nav */
+  padding: var(--app-space-2) var(--app-space-3) var(--app-space-3);
+  --app-toolbar-bg: transparent;
 }
 nav {
   grid-area: nav;
-  border-right: 1px solid var(--app-color-border);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* hueco para la fila de cuenta superpuesta */
+  padding-bottom: 72px;
 }
 main {
+  min-width: 0;
   min-height: 0;
   grid-area: main;
-  background: var(--mat-container-background-color, var(--mat-sys-surface));
+  display: flex;
+  flex-direction: column;
+  margin: var(--app-content-gutter) var(--app-content-gutter) 0 0;
+  padding: var(--app-space-4) var(--app-space-6);
+  border-radius: var(--app-content-radius);
+  background: var(--app-content-bg);
+  overflow: auto;
+}
+/* la página enrutada ocupa todo el panel para que las listas puedan hacer scroll interno */
+main > :not(router-outlet) {
+  flex: 1;
+  min-height: 0;
 }
 footer {
   grid-area: footer;
-  background: var(--mat-container-background-color, var(--mat-sys-surface));
+  align-self: center;
+  padding: var(--app-space-2) var(--app-space-4);
+  font: var(--mat-sys-label-small);
+  color: var(--app-color-text-muted);
 }
 
 :host(.nav-mini) {
@@ -38,12 +68,18 @@ footer {
 :host(.nav-hide) {
   grid-template-columns: 1fr;
   grid-template-areas:
-    'header'
     'main'
     'footer';
 }
-:host(.nav-hide) nav {
+:host(.nav-hide) nav,
+:host(.nav-hide) header {
   display: none;
+}
+:host(.nav-mini) header {
+  padding-inline: var(--app-space-2);
+}
+:host(.nav-hide) main {
+  margin-left: var(--app-content-gutter);
 }
 :host(.header-hide) header {
   display: none;
@@ -53,15 +89,27 @@ footer {
 @include bp.mobile {
   :host {
     grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
       'header'
       'main'
       'footer';
   }
+  header {
+    grid-area: header;
+    align-self: auto;
+    padding: 0;
+  }
+  main {
+    margin: 0;
+    padding: var(--app-space-4);
+    border-radius: var(--app-content-radius) var(--app-content-radius) 0 0;
+  }
   nav {
     position: fixed;
     inset: 0 auto 0 0;
     width: min(85vw, 320px);
+    padding-bottom: 0;
     transform: translateX(-100%);
     transition: transform var(--app-transition-medium);
     z-index: 1001;

@@ -4,11 +4,8 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
-  margin: 20px 0;
-
-  background-color: var(--mat-sys-surface-container-lowest);
-  border: 1px solid var(--mat-sys-outline-variant);
-  border-radius: 12px;
+  /* el panel del shell ya es la tarjeta: el formulario va directamente sobre él */
+  margin-top: var(--app-space-4);
 }
 .main {
   flex: 1;

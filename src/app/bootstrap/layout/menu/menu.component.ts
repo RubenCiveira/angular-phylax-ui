@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { MenuItem } from 'app/bootstrap/layout/menu-item.model';
@@ -18,7 +19,7 @@ import { RuntimeThemeService } from '@shared/context/theme/runtime-theme.service
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatListModule, MatMenuModule],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatMenuModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
   host: { '[class.mini]': "mode() === 'mini'" },

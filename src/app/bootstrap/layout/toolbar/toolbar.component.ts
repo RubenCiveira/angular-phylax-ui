@@ -38,6 +38,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class ToolbarComponent implements OnInit, OnDestroy {
   menuClicked = output<void>();
   user = input<UserInfo | null>();
+  /** Inicial del nombre para el avatar. */
+  initial = computed(() => (this.user()?.name ?? '').trim().charAt(0).toUpperCase());
   providers = input<{ [key: string]: SelectorProvider<any, any> }>();
 
   providerList = computed(() => {

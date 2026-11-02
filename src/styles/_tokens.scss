@@ -36,6 +36,11 @@
   --app-row-height: 52px;
   --app-brand-logo-size: 48px;
   --app-toolbar-bg: transparent;
+  // Marco (nav + cabecera) y panel de contenido: se separan por tono, no por bordes
+  --app-shell-bg: var(--mat-sys-surface-container);
+  --app-content-bg: var(--mat-sys-surface);
+  --app-content-radius: 16px;
+  --app-content-gutter: var(--app-space-2);
 
   // ---------- Movimiento ----------
   --app-transition-fast: 150ms ease;

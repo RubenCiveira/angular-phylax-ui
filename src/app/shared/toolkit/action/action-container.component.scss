@@ -14,7 +14,6 @@
 }
 
 .title {
-  margin-left: 20px;
-  font-family: var(--mat-sys-title-large-font);
-  font-size: var(--mat-sys-title-large-size);
+  margin-top: var(--app-space-1);
+  font: var(--mat-sys-headline-small);
 }

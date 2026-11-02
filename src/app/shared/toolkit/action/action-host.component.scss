@@ -2,8 +2,8 @@
 :host {
   display: flex;
   align-items: center;
-  padding: 10px 5px;
-  gap: 4px;
+  min-height: 40px;
+  gap: var(--app-space-1);
 }
 
 :host > button,
@@ -16,8 +16,9 @@
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-left: 15px;
+  gap: var(--app-space-2);
+  /* el chevron de "volver" sobresale ópticamente: se alinea su trazo con el borde del contenido */
+  margin-left: calc(-1 * var(--app-space-2));
   font-family: var(--mat-sys-title-large-font);
   overflow: hidden;
 }
@@ -34,6 +35,7 @@
   align-items: center;
   gap: 4px;
   font-size: var(--mat-sys-title-medium-size);
+  color: var(--app-color-text-muted);
   cursor: pointer;
   white-space: nowrap;
 }

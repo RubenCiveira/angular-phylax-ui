@@ -17,6 +17,31 @@ body {
   }
 }
 
+// ---------- Tipografía base ----------
+// Material solo tipa sus componentes: sin esto el texto suelto y los títulos caen en la serif del navegador
+body {
+  font: var(--mat-sys-body-medium);
+  color: var(--app-color-text);
+  background: var(--app-shell-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font: var(--mat-sys-headline-small);
+}
+h2 {
+  font: var(--mat-sys-title-large);
+}
+h3 {
+  font: var(--mat-sys-title-medium);
+}
+h4,
+h5,
+h6 {
+  font: var(--mat-sys-title-small);
+}
+
 // ---------- Foco visible ----------
 // Especificidad 0 (:where) para que un componente pueda sustituirlo. Se excluyen los controles de texto
 // y los combobox: los form-field de Material ya marcan el foco y el navegador da el suyo a los nativos.

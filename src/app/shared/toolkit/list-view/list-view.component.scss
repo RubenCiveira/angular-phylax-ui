@@ -3,8 +3,8 @@
   /* Variables de componente: sobrescribibles desde fuera con un selector más específico que :host, p. ej. `.compact list-view { --list-view-row-height: 40px; }` */
   --list-view-radius: var(--app-radius-lg);
   --list-view-row-height: var(--app-row-height);
-  --list-view-header-bg: var(--mat-sys-secondary-container);
-  --list-view-header-fg: var(--mat-sys-on-secondary-container);
+  --list-view-header-bg: var(--mat-sys-surface-container-high);
+  --list-view-header-fg: var(--mat-sys-on-surface-variant);
   --list-view-cell-padding: var(--app-space-3) var(--app-space-4);
   --list-view-border-color: var(--app-color-border);
   --list-view-hover-bg: color-mix(in srgb, var(--mat-sys-on-surface) 8%, transparent);

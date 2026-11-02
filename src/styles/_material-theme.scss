@@ -17,6 +17,13 @@ html {
       density: c.$density,
     )
   );
+  // Menús un tono por encima del marco (nav = surface-container) y con borde fino para que no se fundan con él
+  @include mat.menu-overrides(
+    (
+      container-color: var(--mat-sys-surface-container-high),
+      container-shape: var(--app-radius-md),
+    )
+  );
   @include mat.dialog-overrides(
     (
       container-color: var(--app-dialog-bg),
@@ -32,4 +39,8 @@ html.theme-light {
 
 html.theme-dark {
   color-scheme: dark;
+}
+
+.mat-mdc-menu-panel {
+  border: 1px solid var(--app-color-border);
 }
