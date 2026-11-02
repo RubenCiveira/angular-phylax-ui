@@ -10,7 +10,11 @@
       [defined]="definedProperties()"
     />
     <div class="buttons">
-      <button mat-raised-button [disabled]="updateForm.form.invalid || !updateForm.form.dirty" (click)="save()">
+      <button
+        mat-raised-button
+        [disabled]="saving() || updateForm.form.invalid || !updateForm.form.dirty"
+        (click)="save()"
+      >
         {{ 'identity/consent-purpose.action.create.createButton' | transloco }}
       </button>
     </div>
