@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'template.theme-asset.list.filter.button' | transloco }}
+          {{ 'template/theme-asset.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'template.theme-asset.list.search.title' | transloco }}</h2>
+      <h2>{{ 'template/theme-asset.list.search.title' | transloco }}</h2>
       <theme-asset-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'template.theme-asset.list.search.button' | transloco }}
+        {{ 'template/theme-asset.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="theme"
-            title="{{ 'template.theme-asset.list.column.theme.title' | transloco }}"
-            tooltip="{{ 'template.theme-asset.list.column.theme.tooltip' | transloco }}"
+            title="{{ 'template/theme-asset.list.column.theme.title' | transloco }}"
+            tooltip="{{ 'template/theme-asset.list.column.theme.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.theme()?.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="code"
-            title="{{ 'template.theme-asset.list.column.code.title' | transloco }}"
-            tooltip="{{ 'template.theme-asset.list.column.code.tooltip' | transloco }}"
+            title="{{ 'template/theme-asset.list.column.code.title' | transloco }}"
+            tooltip="{{ 'template/theme-asset.list.column.code.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.code }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="type"
-            title="{{ 'template.theme-asset.list.column.type.title' | transloco }}"
-            tooltip="{{ 'template.theme-asset.list.column.type.tooltip' | transloco }}"
+            title="{{ 'template/theme-asset.list.column.type.title' | transloco }}"
+            tooltip="{{ 'template/theme-asset.list.column.type.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.type }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="content"
-            title="{{ 'template.theme-asset.list.column.content.title' | transloco }}"
-            tooltip="{{ 'template.theme-asset.list.column.content.tooltip' | transloco }}"
+            title="{{ 'template/theme-asset.list.column.content.title' | transloco }}"
+            tooltip="{{ 'template/theme-asset.list.column.content.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.content }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="enabled"
-            title="{{ 'template.theme-asset.list.column.enabled.title' | transloco }}"
-            tooltip="{{ 'template.theme-asset.list.column.enabled.tooltip' | transloco }}"
+            title="{{ 'template/theme-asset.list.column.enabled.title' | transloco }}"
+            tooltip="{{ 'template/theme-asset.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.enabled }}

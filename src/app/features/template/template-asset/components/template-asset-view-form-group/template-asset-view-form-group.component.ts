@@ -73,18 +73,18 @@ export class TemplateAssetViewFormGroupComponent extends SubFormEditable<Templat
     this.conflictFields = [
       {
         name: 'template',
-        label: 'template.template-asset.form-group.template',
+        label: 'template/template-asset.form-group.template',
         display: referenceDisplay(templateRepository),
       },
       {
         name: 'tenant',
-        label: 'template.template-asset.form-group.tenant',
+        label: 'template/template-asset.form-group.tenant',
         display: referenceDisplay(tenantRepository),
       },
-      { name: 'code', label: 'template.template-asset.form-group.code' },
-      { name: 'type', label: 'template.template-asset.form-group.type' },
-      { name: 'content', label: 'template.template-asset.form-group.content' },
-      { name: 'enabled', label: 'template.template-asset.form-group.enabled' },
+      { name: 'code', label: 'template/template-asset.form-group.code' },
+      { name: 'type', label: 'template/template-asset.form-group.type' },
+      { name: 'content', label: 'template/template-asset.form-group.content' },
+      { name: 'enabled', label: 'template/template-asset.form-group.enabled' },
     ];
     this.defaultValues = () => {
       return {

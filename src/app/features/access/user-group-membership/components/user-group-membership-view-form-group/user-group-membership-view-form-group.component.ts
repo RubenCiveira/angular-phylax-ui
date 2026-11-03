@@ -70,20 +70,20 @@ export class UserGroupMembershipViewFormGroupComponent extends SubFormEditable<U
     this.conflictFields = [
       {
         name: 'user',
-        label: 'access.user-group-membership.form-group.user',
+        label: 'access/user-group-membership.form-group.user',
         display: referenceDisplay(userRepository),
       },
       {
         name: 'resourceServer',
-        label: 'access.user-group-membership.form-group.resource-server',
+        label: 'access/user-group-membership.form-group.resource-server',
         display: referenceDisplay(resourceServerRepository),
       },
       {
         name: 'oauthClient',
-        label: 'access.user-group-membership.form-group.oauth-client',
+        label: 'access/user-group-membership.form-group.oauth-client',
         display: referenceDisplay(oauthClientRepository),
       },
-      { name: 'groups', label: 'access.user-group-membership.form-group.groups' },
+      { name: 'groups', label: 'access/user-group-membership.form-group.groups' },
     ];
     this.defaultValues = () => {
       return {

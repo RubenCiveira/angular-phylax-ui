@@ -67,16 +67,16 @@ export class UserFederatedIdentityViewFormGroupComponent extends SubFormEditable
     this.conflictFields = [
       {
         name: 'user',
-        label: 'identity.user-federated-identity.form-group.user',
+        label: 'identity/user-federated-identity.form-group.user',
         display: referenceDisplay(userRepository),
       },
       {
         name: 'loginProvider',
-        label: 'identity.user-federated-identity.form-group.login-provider',
+        label: 'identity/user-federated-identity.form-group.login-provider',
         display: referenceDisplay(tenantLoginProviderRepository),
       },
-      { name: 'subject', label: 'identity.user-federated-identity.form-group.subject' },
-      { name: 'createdAt', label: 'identity.user-federated-identity.form-group.created-at' },
+      { name: 'subject', label: 'identity/user-federated-identity.form-group.subject' },
+      { name: 'createdAt', label: 'identity/user-federated-identity.form-group.created-at' },
     ];
     this.defaultValues = () => {
       return {

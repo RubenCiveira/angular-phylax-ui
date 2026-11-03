@@ -81,6 +81,14 @@
     }
   },
   "form-group": {
+    "api-key": {
+      "error": {
+        "maxlength": "API Key tiene que tener menos de 250 caracteres",
+        "required": "API Key es obligatorio"
+      },
+      "label": "API Key",
+      "placeholder": "API Key"
+    },
     "apiKey": {
       "error": {
         "maxlength": "API Key tiene que tener menos de 250 caracteres",
@@ -91,7 +99,13 @@
       "error": {
         "maxlength": "código tiene que tener menos de 250 caracteres",
         "required": "código es obligatorio"
-      }
+      },
+      "label": "código",
+      "placeholder": "código"
+    },
+    "enabled": {
+      "label": "habilitado",
+      "placeholder": "habilitado"
     }
   },
   "list": {
@@ -118,12 +132,26 @@
     }
   },
   "search": {
+    "api-key": {
+      "label": "API Key",
+      "placeholder": "API Key"
+    },
+    "code": {
+      "label": "código",
+      "placeholder": "código"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "code-asc": "code-asc",
         "code-desc": "code-desc",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
     }
   }
 }

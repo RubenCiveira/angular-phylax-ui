@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'notification.smtp-outbound-config.list.filter.button' | transloco }}
+          {{ 'notification/smtp-outbound-config.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'notification.smtp-outbound-config.list.search.title' | transloco }}</h2>
+      <h2>{{ 'notification/smtp-outbound-config.list.search.title' | transloco }}</h2>
       <smtp-outbound-config-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'notification.smtp-outbound-config.list.search.button' | transloco }}
+        {{ 'notification/smtp-outbound-config.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="tenant"
-            title="{{ 'notification.smtp-outbound-config.list.column.tenant.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.tenant.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.tenant.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.tenant()?.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="host"
-            title="{{ 'notification.smtp-outbound-config.list.column.host.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.host.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.host.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.host.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.host }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="port"
-            title="{{ 'notification.smtp-outbound-config.list.column.port.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.port.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.port.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.port.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.port }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="login"
-            title="{{ 'notification.smtp-outbound-config.list.column.login.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.login.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.login.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.login.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.login }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="password"
-            title="{{ 'notification.smtp-outbound-config.list.column.password.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.password.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.password.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.password.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.password }}
@@ -112,8 +112,8 @@
           <ng-template
             listViewColumn
             key="sender-name"
-            title="{{ 'notification.smtp-outbound-config.list.column.sender-name.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.sender-name.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.sender-name.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.sender-name.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.senderName }}
@@ -121,8 +121,8 @@
           <ng-template
             listViewColumn
             key="sender-email"
-            title="{{ 'notification.smtp-outbound-config.list.column.sender-email.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.sender-email.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.sender-email.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.sender-email.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.senderEmail }}
@@ -130,8 +130,8 @@
           <ng-template
             listViewColumn
             key="timeout"
-            title="{{ 'notification.smtp-outbound-config.list.column.timeout.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.timeout.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.timeout.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.timeout.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.timeout }}
@@ -139,8 +139,8 @@
           <ng-template
             listViewColumn
             key="use-tls"
-            title="{{ 'notification.smtp-outbound-config.list.column.use-tls.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.use-tls.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.use-tls.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.use-tls.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.useTls }}
@@ -148,8 +148,8 @@
           <ng-template
             listViewColumn
             key="max-retries"
-            title="{{ 'notification.smtp-outbound-config.list.column.max-retries.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.max-retries.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.max-retries.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.max-retries.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.maxRetries }}
@@ -157,8 +157,8 @@
           <ng-template
             listViewColumn
             key="retry-delay"
-            title="{{ 'notification.smtp-outbound-config.list.column.retry-delay.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.retry-delay.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.retry-delay.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.retry-delay.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.retryDelay }}
@@ -166,8 +166,8 @@
           <ng-template
             listViewColumn
             key="rate-limit"
-            title="{{ 'notification.smtp-outbound-config.list.column.rate-limit.title' | transloco }}"
-            tooltip="{{ 'notification.smtp-outbound-config.list.column.rate-limit.tooltip' | transloco }}"
+            title="{{ 'notification/smtp-outbound-config.list.column.rate-limit.title' | transloco }}"
+            tooltip="{{ 'notification/smtp-outbound-config.list.column.rate-limit.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.rateLimit }}

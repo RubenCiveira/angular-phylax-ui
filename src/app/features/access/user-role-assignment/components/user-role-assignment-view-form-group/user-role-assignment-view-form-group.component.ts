@@ -106,20 +106,20 @@ export class UserRoleAssignmentViewFormGroupComponent extends SubFormEditable<Us
       },
     };
     this.conflictFields = [
-      { name: 'user', label: 'access.user-role-assignment.form-group.user', display: referenceDisplay(userRepository) },
+      { name: 'user', label: 'access/user-role-assignment.form-group.user', display: referenceDisplay(userRepository) },
       {
         name: 'resourceServer',
-        label: 'access.user-role-assignment.form-group.resource-server',
+        label: 'access/user-role-assignment.form-group.resource-server',
         display: referenceDisplay(resourceServerRepository),
       },
       {
         name: 'oauthClient',
-        label: 'access.user-role-assignment.form-group.oauth-client',
+        label: 'access/user-role-assignment.form-group.oauth-client',
         display: referenceDisplay(oauthClientRepository),
       },
       {
         name: 'roles',
-        label: 'access.user-role-assignment.form-group.roles',
+        label: 'access/user-role-assignment.form-group.roles',
         display: referenceDisplay(roleRepository),
       },
     ];

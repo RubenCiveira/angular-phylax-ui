@@ -54,11 +54,11 @@ export class ThemeVersionViewFormGroupComponent extends SubFormEditable<ThemeVer
     });
     this.themeProvider = themeRepository.selectorProvider(this.themeFilter);
     this.conflictFields = [
-      { name: 'theme', label: 'template.theme-version.form-group.theme', display: referenceDisplay(themeRepository) },
-      { name: 'channel', label: 'template.theme-version.form-group.channel' },
-      { name: 'locale', label: 'template.theme-version.form-group.locale' },
-      { name: 'contentHtml', label: 'template.theme-version.form-group.content-html' },
-      { name: 'contentText', label: 'template.theme-version.form-group.content-text' },
+      { name: 'theme', label: 'template/theme-version.form-group.theme', display: referenceDisplay(themeRepository) },
+      { name: 'channel', label: 'template/theme-version.form-group.channel' },
+      { name: 'locale', label: 'template/theme-version.form-group.locale' },
+      { name: 'contentHtml', label: 'template/theme-version.form-group.content-html' },
+      { name: 'contentText', label: 'template/theme-version.form-group.content-text' },
     ];
     this.defaultValues = () => {
       return {

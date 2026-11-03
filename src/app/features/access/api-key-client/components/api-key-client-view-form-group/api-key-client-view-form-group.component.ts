@@ -47,10 +47,10 @@ export class ApiKeyClientViewFormGroupComponent extends SubFormEditable<ApiKeyCl
       });
     });
     this.conflictFields = [
-      { name: 'code', label: 'access.api-key-client.form-group.code' },
-      { name: 'key', label: 'access.api-key-client.form-group.key', display: maskedDisplay },
-      { name: 'enabled', label: 'access.api-key-client.form-group.enabled' },
-      { name: 'scopes', label: 'access.api-key-client.form-group.scopes' },
+      { name: 'code', label: 'access/api-key-client.form-group.code' },
+      { name: 'key', label: 'access/api-key-client.form-group.key', display: maskedDisplay },
+      { name: 'enabled', label: 'access/api-key-client.form-group.enabled' },
+      { name: 'scopes', label: 'access/api-key-client.form-group.scopes' },
     ];
     this.defaultValues = () => {
       return {

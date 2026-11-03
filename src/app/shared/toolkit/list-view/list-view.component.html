@@ -151,7 +151,11 @@
     </div>
   } @else {
     @let layout = tableLayout();
-    <div class="material-table">
+    <div
+      class="material-table"
+      [class.has-column-menu]="choosableColumns().length > 1"
+      [style.--list-view-column-menu-space.px]="columnMenuWidth"
+    >
       <div class="table-scroll">
         <div
           class="table-inner"
@@ -247,17 +251,19 @@
         </div>
       </div>
       @if (choosableColumns().length > 1) {
-        <button
-          mat-icon-button
-          type="button"
-          class="column-menu"
-          [matMenuTriggerFor]="columnMenu"
-          [matTooltip]="'common.list.columns' | transloco"
-        >
-          <mat-icon aria-hidden="true">view_column</mat-icon>
-          <!-- Nombre como texto y no como aria-label: así coincide con el contenido (WCAG 2.5.3) -->
-          <span class="cdk-visually-hidden">{{ 'common.list.columns' | transloco }}</span>
-        </button>
+        <!-- Franja fija a la derecha de la cabecera: el fundido evita que la última columna parezca cortada -->
+        <div class="column-menu">
+          <button
+            mat-icon-button
+            type="button"
+            [matMenuTriggerFor]="columnMenu"
+            [matTooltip]="'common.list.columns' | transloco"
+          >
+            <mat-icon aria-hidden="true">view_column</mat-icon>
+            <!-- Nombre como texto y no como aria-label: así coincide con el contenido (WCAG 2.5.3) -->
+            <span class="cdk-visually-hidden">{{ 'common.list.columns' | transloco }}</span>
+          </button>
+        </div>
         <mat-menu #columnMenu="matMenu">
           @for (entry of choosableColumns(); track entry.key) {
             @let shown = isColumnShown(entry.key);

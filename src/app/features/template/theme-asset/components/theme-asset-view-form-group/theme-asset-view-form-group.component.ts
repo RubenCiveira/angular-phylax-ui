@@ -61,11 +61,11 @@ export class ThemeAssetViewFormGroupComponent extends SubFormEditable<ThemeAsset
     this.uploadContent = (file) => themeAssetRepository.storeContent(file);
     this.downloadContent = (url) => themeAssetRepository.downloadContent(url);
     this.conflictFields = [
-      { name: 'theme', label: 'template.theme-asset.form-group.theme', display: referenceDisplay(themeRepository) },
-      { name: 'code', label: 'template.theme-asset.form-group.code' },
-      { name: 'type', label: 'template.theme-asset.form-group.type' },
-      { name: 'content', label: 'template.theme-asset.form-group.content' },
-      { name: 'enabled', label: 'template.theme-asset.form-group.enabled' },
+      { name: 'theme', label: 'template/theme-asset.form-group.theme', display: referenceDisplay(themeRepository) },
+      { name: 'code', label: 'template/theme-asset.form-group.code' },
+      { name: 'type', label: 'template/theme-asset.form-group.type' },
+      { name: 'content', label: 'template/theme-asset.form-group.content' },
+      { name: 'enabled', label: 'template/theme-asset.form-group.enabled' },
     ];
     this.defaultValues = () => {
       return {

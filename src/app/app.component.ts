@@ -30,6 +30,7 @@ import { BootstrapComponent } from './bootstrap/layout/pages/bootstrap/bootstrap
 import { SelectorProvider } from '@shared/data/selector-provider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { contextProviders } from './bootstrap/context.config';
 import { LAYOUT_MOBILE_QUERY } from './bootstrap/layout/layout.constants';
 
@@ -46,6 +47,7 @@ import { LAYOUT_MOBILE_QUERY } from './bootstrap/layout/layout.constants';
     BootstrapComponent,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -53,6 +55,7 @@ import { LAYOUT_MOBILE_QUERY } from './bootstrap/layout/layout.constants';
 export class AppComponent implements OnInit, OnDestroy {
   currentUser: Signal<UserInfo>;
   currentMenu: Signal<MenuItem[]>;
+  redirecting: Signal<'login' | 'logout' | null>;
 
   mobile = signal(false);
 
@@ -86,6 +89,7 @@ export class AppComponent implements OnInit, OnDestroy {
     instrumentation.activate();
     this.currentUser = appState.user('main');
     this.currentMenu = layoutState.menu;
+    this.redirecting = identity.redirecting;
     this.contextProviders = contextProviders(injector);
 
     appState.language$.subscribe((lang) => {

@@ -43,13 +43,24 @@
       "error": {
         "maxlength": "compassion tiene que tener menos de 250 caracteres",
         "required": "compassion es obligatorio"
-      }
+      },
+      "label": "compassion",
+      "placeholder": "compassion"
     },
     "login": {
       "error": {
         "maxlength": "iniciar sesión tiene que tener menos de 250 caracteres",
         "required": "iniciar sesión es obligatorio"
-      }
+      },
+      "label": "iniciar sesión",
+      "placeholder": "iniciar sesión"
+    },
+    "max-retries": {
+      "error": {
+        "required": "Máximos intentos es obligatorio"
+      },
+      "label": "Máximos intentos",
+      "placeholder": "Máximos intentos"
     },
     "maxRetries": {
       "error": {
@@ -60,22 +71,55 @@
       "error": {
         "maxlength": "contraseña tiene que tener menos de 250 caracteres",
         "required": "contraseña es obligatorio"
-      }
+      },
+      "label": "contraseña",
+      "placeholder": "contraseña"
     },
     "port": {
       "error": {
         "required": "puerto es obligatorio"
-      }
+      },
+      "label": "puerto",
+      "placeholder": "puerto"
+    },
+    "rate-limit": {
+      "error": {
+        "required": "límite de tarifa es obligatorio"
+      },
+      "label": "límite de tarifa",
+      "placeholder": "límite de tarifa"
     },
     "rateLimit": {
       "error": {
         "required": "límite de tarifa es obligatorio"
       }
     },
+    "retry-delay": {
+      "error": {
+        "required": "Demora entre cada reintento es obligatorio"
+      },
+      "label": "Demora entre cada reintento",
+      "placeholder": "Demora entre cada reintento"
+    },
     "retryDelay": {
       "error": {
         "required": "Demora entre cada reintento es obligatorio"
       }
+    },
+    "sender-email": {
+      "error": {
+        "maxlength": "Correo del remitente tiene que tener menos de 250 caracteres",
+        "required": "Correo del remitente es obligatorio"
+      },
+      "label": "Correo del remitente",
+      "placeholder": "Correo del remitente"
+    },
+    "sender-name": {
+      "error": {
+        "maxlength": "Nombre del remitente tiene que tener menos de 250 caracteres"
+      },
+      "label": "Nombre del remitente",
+      "placeholder": "Nombre del remitente"
     },
     "senderEmail": {
       "error": {
@@ -88,10 +132,23 @@
         "maxlength": "Nombre del remitente tiene que tener menos de 250 caracteres"
       }
     },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
     "timeout": {
       "error": {
         "required": "tiempo límite es obligatorio"
-      }
+      },
+      "label": "tiempo límite",
+      "placeholder": "tiempo límite"
+    },
+    "use-tls": {
+      "error": {
+        "required": "Utilizar TLS es obligatorio"
+      },
+      "label": "Utilizar TLS",
+      "placeholder": "Utilizar TLS"
     },
     "useTls": {
       "error": {
@@ -156,6 +213,24 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "global-only": {
+      "label": "Solo global",
+      "placeholder": "Solo global"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

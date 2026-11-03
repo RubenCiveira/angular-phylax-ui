@@ -3,21 +3,21 @@
   <editable-selectone
     formControlName="themes"
     [visible]="isVisible['themes']"
-    label="template.theme-asset.search.themes"
+    label="template/theme-asset.search.themes"
     [provider]="themesProvider"
   />
-  <editable-text formControlName="search" [visible]="isVisible['search']" label="template.theme-asset.search.search" />
-  <editable-text formControlName="code" [visible]="isVisible['code']" label="template.theme-asset.search.code" />
+  <editable-text formControlName="search" [visible]="isVisible['search']" label="template/theme-asset.search.search" />
+  <editable-text formControlName="code" [visible]="isVisible['code']" label="template/theme-asset.search.code" />
   <editable-selectone
     formControlName="theme"
     [visible]="isVisible['theme']"
-    label="template.theme-asset.search.theme"
+    label="template/theme-asset.search.theme"
     [provider]="themeProvider"
   />
   <editable-choose
     formControlName="order"
     [visible]="isVisible['order']"
-    label="template.theme-asset.search.order"
+    label="template/theme-asset.search.order"
     [options]="['', 'CODE-ASC', 'CODE-DESC']"
   />
 </form-layout>

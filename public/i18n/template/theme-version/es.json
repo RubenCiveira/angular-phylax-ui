@@ -43,10 +43,23 @@
       "error": {
         "required": "canal es obligatorio"
       },
+      "label": "canal",
       "options": {
         "html": "HTML",
         "mail": "CORREO"
-      }
+      },
+      "placeholder": "canal"
+    },
+    "content-html": {
+      "error": {
+        "required": "Contenido HTML es obligatorio"
+      },
+      "label": "Contenido HTML",
+      "placeholder": "Contenido HTML"
+    },
+    "content-text": {
+      "label": "Texto de contenido",
+      "placeholder": "Texto de contenido"
     },
     "contentHtml": {
       "error": {
@@ -56,12 +69,16 @@
     "locale": {
       "error": {
         "maxlength": "Local tiene que tener menos de 250 caracteres"
-      }
+      },
+      "label": "Local",
+      "placeholder": "Local"
     },
     "theme": {
       "error": {
         "required": "lema es obligatorio"
-      }
+      },
+      "label": "lema",
+      "placeholder": "lema"
     }
   },
   "list": {
@@ -93,6 +110,20 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "theme": {
+      "label": "lema",
+      "placeholder": "lema"
+    },
+    "themes": {
+      "label": "temas",
+      "placeholder": "temas"
     }
   }
 }

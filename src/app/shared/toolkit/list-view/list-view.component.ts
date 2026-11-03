@@ -61,6 +61,8 @@ export interface ListViewTableColumn {
 const DEFAULT_ROW_HEIGHT = 52;
 const CHECK_WIDTH = 52;
 const ICON_WIDTH = 42;
+/** Hueco reservado al final de cabecera y filas para el botón "Columnas" (40px + margen). */
+const COLUMN_MENU_WIDTH = 48;
 const SKELETON_ROWS = 20;
 const COLUMNS_STORAGE_PREFIX = 'list-view-columns-';
 
@@ -141,6 +143,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   readonly skeleton = Array.from({ length: SKELETON_ROWS }, (_, index) => index);
   readonly checkWidth = CHECK_WIDTH;
+  readonly columnMenuWidth = COLUMN_MENU_WIDTH;
   readonly retryFn = () => this.retry.emit();
 
   /** Altura de fila usada por el virtual scroll. */
@@ -158,7 +161,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
     const shown = this.keyedColumns().filter(({ column, key }) => this.isShown(column, key));
     const base = shown.map(({ column }) => (column.title() ? column.width() : ICON_WIDTH * icons));
     const used = checks + base.reduce((total, width) => total + width, 0);
-    const available = this.availableWidth();
+    // Con el botón "Columnas" se reserva su hueco: si no, las columnas que caben justas quedarían debajo de él
+    const available = this.availableWidth() - (this.choosableColumns().length > 1 ? COLUMN_MENU_WIDTH : 0);
     // Si no caben, se mantiene su anchura y la tabla hace scroll horizontal
     const spare = Math.max(0, available - used);
     const titled = shown.filter(({ column }) => !!column.title());

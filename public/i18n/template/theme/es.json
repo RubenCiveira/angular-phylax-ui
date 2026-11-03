@@ -81,11 +81,25 @@
     }
   },
   "form-group": {
+    "enabled": {
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "is-default": {
+      "label": "Predeterminado",
+      "placeholder": "Predeterminado"
+    },
     "name": {
       "error": {
         "maxlength": "Nombre tiene que tener menos de 250 caracteres",
         "required": "Nombre es obligatorio"
-      }
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
     }
   },
   "list": {
@@ -116,12 +130,34 @@
     }
   },
   "search": {
+    "global": {
+      "label": "global",
+      "placeholder": "global"
+    },
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "name-asc": "Nombre ASC",
         "name-desc": "Nombre: DESC",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

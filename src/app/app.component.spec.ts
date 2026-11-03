@@ -41,6 +41,7 @@ class MockLayoutStateService {
 
 class MockIdentityService {
   bootstrap = jasmine.createSpy('bootstrap').and.returnValue(of(undefined));
+  redirecting = signal(null);
 }
 
 class MockTenantRepository {

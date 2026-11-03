@@ -12,7 +12,7 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="time">
-    <mat-label>{{ label() + '.time' | transloco }}</mat-label>
+    <mat-label>{{ label() + '.time.label' | transloco }}</mat-label>
     <input [formControl]="hour" type="time" matInput placeholder="{{ label() + '.time.placeholder' | transloco }}" />
   </mat-form-field>
 </editable-bare-field>

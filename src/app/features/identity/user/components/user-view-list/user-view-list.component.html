@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'identity.user.list.filter.button' | transloco }}
+          {{ 'identity/user.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'identity.user.list.search.title' | transloco }}</h2>
+      <h2>{{ 'identity/user.list.search.title' | transloco }}</h2>
       <user-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'identity.user.list.search.button' | transloco }}
+        {{ 'identity/user.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="tenant"
-            title="{{ 'identity.user.list.column.tenant.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.tenant.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.tenant.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.tenant()?.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="name"
-            title="{{ 'identity.user.list.column.name.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.name.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.name.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.name.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.name }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="password"
-            title="{{ 'identity.user.list.column.password.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.password.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.password.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.password.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.password }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="email"
-            title="{{ 'identity.user.list.column.email.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.email.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.email.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.email.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.email }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="welcome-at"
-            title="{{ 'identity.user.list.column.welcome-at.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.welcome-at.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.welcome-at.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.welcome-at.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.welcomeAt }}
@@ -112,8 +112,8 @@
           <ng-template
             listViewColumn
             key="email-verified"
-            title="{{ 'identity.user.list.column.email-verified.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.email-verified.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.email-verified.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.email-verified.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.emailVerified }}
@@ -121,8 +121,8 @@
           <ng-template
             listViewColumn
             key="enabled"
-            title="{{ 'identity.user.list.column.enabled.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.enabled.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.enabled.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.enabled }}
@@ -130,8 +130,8 @@
           <ng-template
             listViewColumn
             key="approval-status"
-            title="{{ 'identity.user.list.column.approval-status.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.approval-status.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.approval-status.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.approval-status.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.approvalStatus }}
@@ -139,8 +139,8 @@
           <ng-template
             listViewColumn
             key="temporal-password"
-            title="{{ 'identity.user.list.column.temporal-password.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.temporal-password.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.temporal-password.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.temporal-password.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.temporalPassword }}
@@ -148,8 +148,8 @@
           <ng-template
             listViewColumn
             key="use-second-factors"
-            title="{{ 'identity.user.list.column.use-second-factors.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.use-second-factors.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.use-second-factors.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.use-second-factors.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.useSecondFactors }}
@@ -157,8 +157,8 @@
           <ng-template
             listViewColumn
             key="blocked-until"
-            title="{{ 'identity.user.list.column.blocked-until.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.blocked-until.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.blocked-until.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.blocked-until.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.blockedUntil }}
@@ -166,8 +166,8 @@
           <ng-template
             listViewColumn
             key="federated-provider"
-            title="{{ 'identity.user.list.column.federated-provider.title' | transloco }}"
-            tooltip="{{ 'identity.user.list.column.federated-provider.tooltip' | transloco }}"
+            title="{{ 'identity/user.list.column.federated-provider.title' | transloco }}"
+            tooltip="{{ 'identity/user.list.column.federated-provider.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.federatedProvider }}

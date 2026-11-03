@@ -82,25 +82,41 @@
   },
   "form-group": {
     "activation-date": {
+      "label": "Fecha Activación",
+      "placeholder": "Fecha Activación",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
       }
     },
+    "document": {
+      "label": "documento",
+      "placeholder": "documento"
+    },
     "enabled": {
       "error": {
         "required": "habilitado es obligatorio"
-      }
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "resource-server": {
+      "label": "servidor de recursos",
+      "placeholder": "servidor de recursos"
     },
     "tenant": {
       "error": {
         "required": "inquilino es obligatorio"
-      }
+      },
+      "label": "inquilino",
+      "placeholder": "inquilino"
     },
     "text": {
       "error": {
         "required": "Texto es obligatorio"
-      }
+      },
+      "label": "Texto",
+      "placeholder": "Texto"
     }
   },
   "list": {
@@ -136,6 +152,28 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "resource-server": {
+      "label": "servidor de recursos",
+      "placeholder": "servidor de recursos"
+    },
+    "resource-servers": {
+      "label": "servidores de recursos",
+      "placeholder": "servidores de recursos"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

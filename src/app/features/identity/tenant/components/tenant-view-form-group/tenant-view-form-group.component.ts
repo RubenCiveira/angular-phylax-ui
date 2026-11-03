@@ -48,12 +48,12 @@ export class TenantViewFormGroupComponent extends SubFormEditable<Tenant> {
       });
     });
     this.conflictFields = [
-      { name: 'name', label: 'identity.tenant.form-group.name' },
-      { name: 'root', label: 'identity.tenant.form-group.root' },
-      { name: 'domain', label: 'identity.tenant.form-group.domain' },
-      { name: 'enabled', label: 'identity.tenant.form-group.enabled' },
-      { name: 'markForDelete', label: 'identity.tenant.form-group.mark-for-delete' },
-      { name: 'markForDeleteTime', label: 'identity.tenant.form-group.mark-for-delete-time' },
+      { name: 'name', label: 'identity/tenant.form-group.name' },
+      { name: 'root', label: 'identity/tenant.form-group.root' },
+      { name: 'domain', label: 'identity/tenant.form-group.domain' },
+      { name: 'enabled', label: 'identity/tenant.form-group.enabled' },
+      { name: 'markForDelete', label: 'identity/tenant.form-group.mark-for-delete' },
+      { name: 'markForDeleteTime', label: 'identity/tenant.form-group.mark-for-delete-time' },
     ];
     this.defaultValues = () => {
       return {

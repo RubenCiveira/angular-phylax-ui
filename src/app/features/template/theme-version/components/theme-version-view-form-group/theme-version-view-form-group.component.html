@@ -3,28 +3,28 @@
   <editable-selectone
     formControlName="theme"
     [visible]="isVisible['theme']"
-    label="template.theme-version.form-group.theme"
+    label="template/theme-version.form-group.theme"
     [provider]="themeProvider"
   />
   <editable-choose
     formControlName="channel"
     [visible]="isVisible['channel']"
-    label="template.theme-version.form-group.channel"
+    label="template/theme-version.form-group.channel"
     [options]="['MAIL', 'HTML']"
   />
   <editable-text
     formControlName="locale"
     [visible]="isVisible['locale']"
-    label="template.theme-version.form-group.locale"
+    label="template/theme-version.form-group.locale"
   />
   <editable-textarea
     formControlName="contentHtml"
     [visible]="isVisible['contentHtml']"
-    label="template.theme-version.form-group.content-html"
+    label="template/theme-version.form-group.content-html"
   />
   <editable-textarea
     formControlName="contentText"
     [visible]="isVisible['contentText']"
-    label="template.theme-version.form-group.content-text"
+    label="template/theme-version.form-group.content-text"
   />
 </form-layout>

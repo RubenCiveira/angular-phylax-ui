@@ -57,14 +57,14 @@ export class ConsentPurposeViewFormGroupComponent extends SubFormEditable<Consen
     this.conflictFields = [
       {
         name: 'tenant',
-        label: 'identity.consent-purpose.form-group.tenant',
+        label: 'identity/consent-purpose.form-group.tenant',
         display: referenceDisplay(tenantRepository),
       },
-      { name: 'key', label: 'identity.consent-purpose.form-group.key' },
-      { name: 'title', label: 'identity.consent-purpose.form-group.title' },
-      { name: 'description', label: 'identity.consent-purpose.form-group.description' },
-      { name: 'required', label: 'identity.consent-purpose.form-group.required' },
-      { name: 'activationDate', label: 'identity.consent-purpose.form-group.activation-date' },
+      { name: 'key', label: 'identity/consent-purpose.form-group.key' },
+      { name: 'title', label: 'identity/consent-purpose.form-group.title' },
+      { name: 'description', label: 'identity/consent-purpose.form-group.description' },
+      { name: 'required', label: 'identity/consent-purpose.form-group.required' },
+      { name: 'activationDate', label: 'identity/consent-purpose.form-group.activation-date' },
     ];
     this.defaultValues = () => {
       return {

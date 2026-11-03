@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'identity.tenant-terms-of-use.list.filter.button' | transloco }}
+          {{ 'identity/tenant-terms-of-use.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'identity.tenant-terms-of-use.list.search.title' | transloco }}</h2>
+      <h2>{{ 'identity/tenant-terms-of-use.list.search.title' | transloco }}</h2>
       <tenant-terms-of-use-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'identity.tenant-terms-of-use.list.search.button' | transloco }}
+        {{ 'identity/tenant-terms-of-use.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="tenant"
-            title="{{ 'identity.tenant-terms-of-use.list.column.tenant.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-terms-of-use.list.column.tenant.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-terms-of-use.list.column.tenant.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-terms-of-use.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.tenant()?.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="resource-server"
-            title="{{ 'identity.tenant-terms-of-use.list.column.resource-server.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-terms-of-use.list.column.resource-server.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-terms-of-use.list.column.resource-server.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-terms-of-use.list.column.resource-server.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.resourceServer()?.code }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="text"
-            title="{{ 'identity.tenant-terms-of-use.list.column.text.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-terms-of-use.list.column.text.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-terms-of-use.list.column.text.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-terms-of-use.list.column.text.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.text }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="enabled"
-            title="{{ 'identity.tenant-terms-of-use.list.column.enabled.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-terms-of-use.list.column.enabled.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-terms-of-use.list.column.enabled.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-terms-of-use.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.enabled }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="document"
-            title="{{ 'identity.tenant-terms-of-use.list.column.document.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-terms-of-use.list.column.document.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-terms-of-use.list.column.document.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-terms-of-use.list.column.document.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.document }}
@@ -112,8 +112,8 @@
           <ng-template
             listViewColumn
             key="activation-date"
-            title="{{ 'identity.tenant-terms-of-use.list.column.activation-date.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-terms-of-use.list.column.activation-date.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-terms-of-use.list.column.activation-date.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-terms-of-use.list.column.activation-date.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.activationDate }}

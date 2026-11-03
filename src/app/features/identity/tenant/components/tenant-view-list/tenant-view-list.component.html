@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'identity.tenant.list.filter.button' | transloco }}
+          {{ 'identity/tenant.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'identity.tenant.list.search.title' | transloco }}</h2>
+      <h2>{{ 'identity/tenant.list.search.title' | transloco }}</h2>
       <tenant-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'identity.tenant.list.search.button' | transloco }}
+        {{ 'identity/tenant.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="name"
-            title="{{ 'identity.tenant.list.column.name.title' | transloco }}"
-            tooltip="{{ 'identity.tenant.list.column.name.tooltip' | transloco }}"
+            title="{{ 'identity/tenant.list.column.name.title' | transloco }}"
+            tooltip="{{ 'identity/tenant.list.column.name.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="root"
-            title="{{ 'identity.tenant.list.column.root.title' | transloco }}"
-            tooltip="{{ 'identity.tenant.list.column.root.tooltip' | transloco }}"
+            title="{{ 'identity/tenant.list.column.root.title' | transloco }}"
+            tooltip="{{ 'identity/tenant.list.column.root.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.root }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="domain"
-            title="{{ 'identity.tenant.list.column.domain.title' | transloco }}"
-            tooltip="{{ 'identity.tenant.list.column.domain.tooltip' | transloco }}"
+            title="{{ 'identity/tenant.list.column.domain.title' | transloco }}"
+            tooltip="{{ 'identity/tenant.list.column.domain.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.domain }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="enabled"
-            title="{{ 'identity.tenant.list.column.enabled.title' | transloco }}"
-            tooltip="{{ 'identity.tenant.list.column.enabled.tooltip' | transloco }}"
+            title="{{ 'identity/tenant.list.column.enabled.title' | transloco }}"
+            tooltip="{{ 'identity/tenant.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.enabled }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="mark-for-delete"
-            title="{{ 'identity.tenant.list.column.mark-for-delete.title' | transloco }}"
-            tooltip="{{ 'identity.tenant.list.column.mark-for-delete.tooltip' | transloco }}"
+            title="{{ 'identity/tenant.list.column.mark-for-delete.title' | transloco }}"
+            tooltip="{{ 'identity/tenant.list.column.mark-for-delete.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.markForDelete }}
@@ -112,8 +112,8 @@
           <ng-template
             listViewColumn
             key="mark-for-delete-time"
-            title="{{ 'identity.tenant.list.column.mark-for-delete-time.title' | transloco }}"
-            tooltip="{{ 'identity.tenant.list.column.mark-for-delete-time.tooltip' | transloco }}"
+            title="{{ 'identity/tenant.list.column.mark-for-delete-time.title' | transloco }}"
+            tooltip="{{ 'identity/tenant.list.column.mark-for-delete-time.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.markForDeleteTime }}

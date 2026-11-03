@@ -1,6 +1,7 @@
 {
   "auth": {
     "redirecting": "Iniciando sesión…",
+    "signingOut": "Cerrando sesión…",
     "unauthorized": {
       "401": {
         "message": "Inicia sesión para ver esta página.",

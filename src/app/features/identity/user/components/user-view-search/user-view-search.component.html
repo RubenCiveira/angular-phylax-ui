@@ -3,21 +3,21 @@
   <editable-selectone
     formControlName="tenants"
     [visible]="isVisible['tenants']"
-    label="identity.user.search.tenants"
+    label="identity/user.search.tenants"
     [provider]="tenantsProvider"
   />
-  <editable-text formControlName="search" [visible]="isVisible['search']" label="identity.user.search.search" />
-  <editable-text formControlName="name" [visible]="isVisible['name']" label="identity.user.search.name" />
+  <editable-text formControlName="search" [visible]="isVisible['search']" label="identity/user.search.search" />
+  <editable-text formControlName="name" [visible]="isVisible['name']" label="identity/user.search.name" />
   <editable-selectone
     formControlName="tenant"
     [visible]="isVisible['tenant']"
-    label="identity.user.search.tenant"
+    label="identity/user.search.tenant"
     [provider]="tenantProvider"
   />
   <editable-choose
     formControlName="order"
     [visible]="isVisible['order']"
-    label="identity.user.search.order"
+    label="identity/user.search.order"
     [options]="['', 'NAME-ASC', 'NAME-DESC']"
   />
 </form-layout>

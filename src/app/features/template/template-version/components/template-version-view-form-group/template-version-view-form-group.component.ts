@@ -56,13 +56,13 @@ export class TemplateVersionViewFormGroupComponent extends SubFormEditable<Templ
     this.conflictFields = [
       {
         name: 'template',
-        label: 'template.template-version.form-group.template',
+        label: 'template/template-version.form-group.template',
         display: referenceDisplay(templateRepository),
       },
-      { name: 'locale', label: 'template.template-version.form-group.locale' },
-      { name: 'subject', label: 'template.template-version.form-group.subject' },
-      { name: 'contentHtml', label: 'template.template-version.form-group.content-html' },
-      { name: 'contentText', label: 'template.template-version.form-group.content-text' },
+      { name: 'locale', label: 'template/template-version.form-group.locale' },
+      { name: 'subject', label: 'template/template-version.form-group.subject' },
+      { name: 'contentHtml', label: 'template/template-version.form-group.content-html' },
+      { name: 'contentText', label: 'template/template-version.form-group.content-text' },
     ];
     this.defaultValues = () => {
       return {

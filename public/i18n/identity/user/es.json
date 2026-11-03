@@ -155,14 +155,18 @@
   },
   "form-group": {
     "approval-status": {
+      "label": "situación en el proceso de aprobación",
       "options": {
         "accepted": "ACEPTADO",
         "pending": "PREVIO",
         "rejected": "RECHAZADA",
         "unverified": "No verificado"
-      }
+      },
+      "placeholder": "situación en el proceso de aprobación"
     },
     "blocked-until": {
+      "label": "Bloqueado hasta",
+      "placeholder": "Bloqueado hasta",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -172,7 +176,24 @@
       "error": {
         "email": "correo electrónico debe ser un email",
         "maxlength": "correo electrónico tiene que tener menos de 250 caracteres"
-      }
+      },
+      "label": "correo electrónico",
+      "placeholder": "correo electrónico"
+    },
+    "email-verified": {
+      "label": "Correo Electrónico Verificado",
+      "placeholder": "Correo Electrónico Verificado"
+    },
+    "enabled": {
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "federated-provider": {
+      "error": {
+        "maxlength": "proveedor federado tiene que tener menos de 250 caracteres"
+      },
+      "label": "proveedor federado",
+      "placeholder": "proveedor federado"
     },
     "federatedProvider": {
       "error": {
@@ -183,20 +204,36 @@
       "error": {
         "maxlength": "Nombre tiene que tener menos de 250 caracteres",
         "required": "Nombre es obligatorio"
-      }
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
     },
     "password": {
       "error": {
         "maxlength": "contraseña tiene que tener menos de 250 caracteres",
         "required": "contraseña es obligatorio"
-      }
+      },
+      "label": "contraseña",
+      "placeholder": "contraseña"
+    },
+    "temporal-password": {
+      "label": "contraseña temporal",
+      "placeholder": "contraseña temporal"
     },
     "tenant": {
       "error": {
         "required": "inquilino es obligatorio"
-      }
+      },
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "use-second-factors": {
+      "label": "utilizar segundos factores",
+      "placeholder": "utilizar segundos factores"
     },
     "welcome-at": {
+      "label": "Bienvenido a",
+      "placeholder": "Bienvenido a",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -263,12 +300,30 @@
     }
   },
   "search": {
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "name-asc": "Nombre ASC",
         "name-desc": "Nombre: DESC",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

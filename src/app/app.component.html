@@ -20,5 +20,13 @@
   <app-footer />
 </footer>
 
+@if (redirecting()) {
+  <!-- Redirección al proveedor de identidad: puede tardar y la página no cambia hasta que responde -->
+  <div class="redirect-overlay" role="status" aria-live="polite">
+    <mat-spinner diameter="40" />
+    <p>{{ (redirecting() === 'login' ? 'auth.redirecting' : 'auth.signingOut') | transloco }}</p>
+  </div>
+}
+
 <!-- Backdrop -->
 <div class="nav-backdrop" (click)="closeOverlay()" aria-hidden="true"></div>

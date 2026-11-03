@@ -4,17 +4,17 @@
     formControlName="tenant"
     class="form-layout-col-lg-6 form-layout-col-12"
     [visible]="isVisible['tenant']"
-    label="identity.user.form-group.tenant"
+    label="identity/user.form-group.tenant"
     [provider]="tenantProvider"
   />
   <div class="form-layout-col-lg-6 form-layout-col-12">Hola vamos a ver que configura.</div>
-  <editable-text formControlName="name" [visible]="isVisible['name']" label="identity.user.form-group.name" />
+  <editable-text formControlName="name" [visible]="isVisible['name']" label="identity/user.form-group.name" />
   <editable-password
     formControlName="password"
     [visible]="isVisible['password']"
-    label="identity.user.form-group.password"
+    label="identity/user.form-group.password"
   />
-  <editable-text formControlName="email" [visible]="isVisible['email']" label="identity.user.form-group.email" />
+  <editable-text formControlName="email" [visible]="isVisible['email']" label="identity/user.form-group.email" />
   <mat-expansion-panel
     class="form-layout-col-xs-12 form-layout-row-3 form-layout-col-10"
     [expanded]="true"
@@ -27,17 +27,17 @@
       <editable-check
         formControlName="enabled"
         [visible]="isVisible['enabled']"
-        label="identity.user.form-group.enabled"
+        label="identity/user.form-group.enabled"
       />
       <editable-datetime
         formControlName="welcomeAt"
         [visible]="isVisible['welcomeAt']"
-        label="identity.user.form-group.welcome-at"
+        label="identity/user.form-group.welcome-at"
       />
       <editable-datetime
         formControlName="blockedUntil"
         [visible]="isVisible['blockedUntil']"
-        label="identity.user.form-group.blocked-until"
+        label="identity/user.form-group.blocked-until"
       />
     </form-layout>
   </mat-expansion-panel>
@@ -45,28 +45,28 @@
     formControlName="useSecondFactors"
     class="form-layout-col-xs-12 form-layout-col-2"
     [visible]="isVisible['useSecondFactors']"
-    label="identity.user.form-group.use-second-factors"
+    label="identity/user.form-group.use-second-factors"
   />
   <editable-check
     formControlName="temporalPassword"
     class="form-layout-col-xs-12 form-layout-col-2"
     [visible]="isVisible['temporalPassword']"
-    label="identity.user.form-group.temporal-password"
+    label="identity/user.form-group.temporal-password"
   />
   <editable-check
     formControlName="emailVerified"
     [visible]="isVisible['emailVerified']"
-    label="identity.user.form-group.email-verified"
+    label="identity/user.form-group.email-verified"
   />
   <editable-choose
     formControlName="approvalStatus"
     [visible]="isVisible['approvalStatus']"
-    label="identity.user.form-group.approval-status"
+    label="identity/user.form-group.approval-status"
     [options]="['UNVERIFIED', 'PENDING', 'ACCEPTED', 'REJECTED']"
   />
   <editable-text
     formControlName="federatedProvider"
     [visible]="isVisible['federatedProvider']"
-    label="identity.user.form-group.federated-provider"
+    label="identity/user.form-group.federated-provider"
   />
 </form-layout>

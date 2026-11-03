@@ -101,14 +101,27 @@
       "error": {
         "maxlength": "dominio tiene que tener menos de 250 caracteres",
         "required": "dominio es obligatorio"
-      }
+      },
+      "label": "dominio",
+      "placeholder": "dominio"
     },
     "enabled": {
       "error": {
         "required": "habilitado es obligatorio"
-      }
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "mark-for-delete": {
+      "error": {
+        "required": "Marcar para eliminar es obligatorio"
+      },
+      "label": "Marcar para eliminar",
+      "placeholder": "Marcar para eliminar"
     },
     "mark-for-delete-time": {
+      "label": "Marcar para eliminar",
+      "placeholder": "Marcar para eliminar",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -123,7 +136,13 @@
       "error": {
         "maxlength": "Nombre tiene que tener menos de 250 caracteres",
         "required": "Nombre es obligatorio"
-      }
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "root": {
+      "label": "raíz",
+      "placeholder": "raíz"
     }
   },
   "list": {
@@ -162,14 +181,24 @@
     }
   },
   "search": {
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "domain-asc": "domain-asc",
         "domain-desc": "domain-desc",
         "name-asc": "Nombre ASC",
         "name-desc": "Nombre: DESC",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
     }
   }
 }

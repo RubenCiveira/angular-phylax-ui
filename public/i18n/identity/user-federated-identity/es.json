@@ -40,10 +40,19 @@
   },
   "form-group": {
     "created-at": {
+      "label": "creado en",
+      "placeholder": "creado en",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
       }
+    },
+    "login-provider": {
+      "error": {
+        "required": "Inicio de sesión del proveedor es obligatorio"
+      },
+      "label": "Inicio de sesión del proveedor",
+      "placeholder": "Inicio de sesión del proveedor"
     },
     "loginProvider": {
       "error": {
@@ -54,12 +63,16 @@
       "error": {
         "maxlength": "asunto tiene que tener menos de 250 caracteres",
         "required": "asunto es obligatorio"
-      }
+      },
+      "label": "asunto",
+      "placeholder": "asunto"
     },
     "user": {
       "error": {
         "required": "usuario es obligatorio"
-      }
+      },
+      "label": "usuario",
+      "placeholder": "usuario"
     }
   },
   "list": {
@@ -90,12 +103,38 @@
     }
   },
   "search": {
+    "login-provider": {
+      "label": "Inicio de sesión del proveedor",
+      "placeholder": "Inicio de sesión del proveedor"
+    },
+    "login-providers": {
+      "label": "proveedores de inicio de sesión",
+      "placeholder": "proveedores de inicio de sesión"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "null": "Predeterminado",
         "subject-asc": "subject-asc",
         "subject-desc": "subject-desc"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "subject": {
+      "label": "asunto",
+      "placeholder": "asunto"
+    },
+    "user": {
+      "label": "usuario",
+      "placeholder": "usuario"
+    },
+    "users": {
+      "label": "usuarios",
+      "placeholder": "usuarios"
     }
   }
 }

@@ -81,22 +81,71 @@
     }
   },
   "form-group": {
+    "allow-all-scopes": {
+      "label": "permitir todos los ámbitos",
+      "placeholder": "permitir todos los ámbitos"
+    },
+    "allowed-audiences": {
+      "label": "audiencias permitidas",
+      "placeholder": "audiencias permitidas"
+    },
+    "allowed-login-redirects": {
+      "label": "redireccionamientos de inicio de sesión permitidos",
+      "placeholder": "redireccionamientos de inicio de sesión permitidos"
+    },
+    "allowed-logout-redirects": {
+      "label": "redireccionamientos de cierre de sesión permitidos",
+      "placeholder": "redireccionamientos de cierre de sesión permitidos"
+    },
     "audience": {
       "error": {
         "maxlength": "audience tiene que tener menos de 250 caracteres",
         "required": "audience es obligatorio"
-      }
+      },
+      "label": "audience",
+      "placeholder": "audience"
+    },
+    "authorization-details-types": {
+      "label": "tipos de detalles de autorización",
+      "placeholder": "tipos de detalles de autorización"
+    },
+    "authorization-signed-response-alg": {
+      "error": {
+        "maxlength": "autorización firmada respuesta alg tiene que tener menos de 250 caracteres"
+      },
+      "label": "autorización firmada respuesta alg",
+      "placeholder": "autorización firmada respuesta alg"
     },
     "authorizationSignedResponseAlg": {
       "error": {
         "maxlength": "autorización firmada respuesta alg tiene que tener menos de 250 caracteres"
       }
     },
+    "backchannel-client-notification-endpoint": {
+      "error": {
+        "maxlength": "punto final de notificación de cliente de backchannel tiene que tener menos de 250 caracteres"
+      },
+      "label": "punto final de notificación de cliente de backchannel",
+      "placeholder": "punto final de notificación de cliente de backchannel"
+    },
+    "backchannel-logout-session-required": {
+      "label": "sesión de cierre de sesión de backchannel requerida",
+      "placeholder": "sesión de cierre de sesión de backchannel requerida"
+    },
+    "backchannel-logout-uri": {
+      "error": {
+        "maxlength": "uRI de cierre de sesión de backchannel tiene que tener menos de 250 caracteres"
+      },
+      "label": "uRI de cierre de sesión de backchannel",
+      "placeholder": "uRI de cierre de sesión de backchannel"
+    },
     "backchannel-token-delivery-mode": {
+      "label": "modo de entrega de token de backchannel",
       "options": {
         "ping": "ping",
         "poll": "encuesta"
-      }
+      },
+      "placeholder": "modo de entrega de token de backchannel"
     },
     "backchannelClientNotificationEndpoint": {
       "error": {
@@ -107,6 +156,31 @@
       "error": {
         "maxlength": "uRI de cierre de sesión de backchannel tiene que tener menos de 250 caracteres"
       }
+    },
+    "client-credentials-scopes": {
+      "label": "ámbitos de credenciales de cliente",
+      "placeholder": "ámbitos de credenciales de cliente"
+    },
+    "client-credentials-token-ttl-seconds": {
+      "error": {
+        "required": "token de credenciales de cliente ttl segundos es obligatorio"
+      },
+      "label": "token de credenciales de cliente ttl segundos",
+      "placeholder": "token de credenciales de cliente ttl segundos"
+    },
+    "client-name": {
+      "error": {
+        "maxlength": "nombre del cliente tiene que tener menos de 250 caracteres"
+      },
+      "label": "nombre del cliente",
+      "placeholder": "nombre del cliente"
+    },
+    "client-uri": {
+      "error": {
+        "maxlength": "uRI del cliente tiene que tener menos de 250 caracteres"
+      },
+      "label": "uRI del cliente",
+      "placeholder": "uRI del cliente"
     },
     "clientCredentialsTokenTtlSeconds": {
       "error": {
@@ -127,34 +201,91 @@
       "error": {
         "maxlength": "código tiene que tener menos de 250 caracteres",
         "required": "código es obligatorio"
-      }
+      },
+      "label": "código",
+      "placeholder": "código"
+    },
+    "default-acr-values": {
+      "error": {
+        "maxlength": "valores acr predeterminados tiene que tener menos de 250 caracteres"
+      },
+      "label": "valores acr predeterminados",
+      "placeholder": "valores acr predeterminados"
+    },
+    "default-max-age": {
+      "label": "edad máxima predeterminada",
+      "placeholder": "edad máxima predeterminada"
     },
     "defaultAcrValues": {
       "error": {
         "maxlength": "valores acr predeterminados tiene que tener menos de 250 caracteres"
       }
     },
+    "dpop-bound-access-tokens": {
+      "error": {
+        "required": "tokens de acceso vinculados a dpop es obligatorio"
+      },
+      "label": "tokens de acceso vinculados a dpop",
+      "placeholder": "tokens de acceso vinculados a dpop"
+    },
     "dpopBoundAccessTokens": {
       "error": {
         "required": "tokens de acceso vinculados a dpop es obligatorio"
       }
     },
+    "dynamically-registered": {
+      "label": "registrado dinámicamente",
+      "placeholder": "registrado dinámicamente"
+    },
     "enabled": {
       "error": {
         "required": "habilitado es obligatorio"
-      }
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "frontchannel-logout-session-required": {
+      "label": "sesión de cierre de sesión de frontchannel requerida",
+      "placeholder": "sesión de cierre de sesión de frontchannel requerida"
+    },
+    "frontchannel-logout-uri": {
+      "error": {
+        "maxlength": "uRI de cierre de sesión de frontchannel tiene que tener menos de 250 caracteres"
+      },
+      "label": "uRI de cierre de sesión de frontchannel",
+      "placeholder": "uRI de cierre de sesión de frontchannel"
     },
     "frontchannelLogoutUri": {
       "error": {
         "maxlength": "uRI de cierre de sesión de frontchannel tiene que tener menos de 250 caracteres"
       }
     },
+    "grant-types-json": {
+      "label": "Tipos de concesión",
+      "placeholder": "Tipos de concesión"
+    },
+    "id-token-encrypted-response-alg": {
+      "error": {
+        "maxlength": "id token respuesta cifrada alg tiene que tener menos de 250 caracteres"
+      },
+      "label": "id token respuesta cifrada alg",
+      "placeholder": "id token respuesta cifrada alg"
+    },
+    "id-token-encrypted-response-enc": {
+      "error": {
+        "maxlength": "id token respuesta cifrada enc tiene que tener menos de 250 caracteres"
+      },
+      "label": "id token respuesta cifrada enc",
+      "placeholder": "id token respuesta cifrada enc"
+    },
     "id-token-signed-response-alg": {
+      "label": "id token signed response alg",
       "options": {
         "eddsa": "EdDSA",
         "es256": "ES256",
         "rs256": "RS256"
-      }
+      },
+      "placeholder": "id token signed response alg"
     },
     "idTokenEncryptedResponseAlg": {
       "error": {
@@ -166,15 +297,44 @@
         "maxlength": "id token respuesta cifrada enc tiene que tener menos de 250 caracteres"
       }
     },
+    "introspection-allowed": {
+      "error": {
+        "required": "introspección permitida es obligatorio"
+      },
+      "label": "introspección permitida",
+      "placeholder": "introspección permitida"
+    },
     "introspectionAllowed": {
       "error": {
         "required": "introspección permitida es obligatorio"
       }
     },
+    "jwks-json": {
+      "label": "jwks json",
+      "placeholder": "jwks json"
+    },
+    "jwks-uri": {
+      "label": "uRI de jwks",
+      "placeholder": "uRI de jwks"
+    },
+    "logo-uri": {
+      "error": {
+        "maxlength": "URI de logo tiene que tener menos de 250 caracteres"
+      },
+      "label": "URI de logo",
+      "placeholder": "URI de logo"
+    },
     "logoUri": {
       "error": {
         "maxlength": "URI de logo tiene que tener menos de 250 caracteres"
       }
+    },
+    "policy-uri": {
+      "error": {
+        "maxlength": "uRI de la política tiene que tener menos de 250 caracteres"
+      },
+      "label": "uRI de la política",
+      "placeholder": "uRI de la política"
     },
     "policyUri": {
       "error": {
@@ -182,20 +342,50 @@
       }
     },
     "registered-at": {
+      "label": "domiciliado de",
+      "placeholder": "domiciliado de",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
       }
+    },
+    "registration-access-token": {
+      "error": {
+        "maxlength": "token de acceso de registro tiene que tener menos de 250 caracteres"
+      },
+      "label": "token de acceso de registro",
+      "placeholder": "token de acceso de registro"
     },
     "registrationAccessToken": {
       "error": {
         "maxlength": "token de acceso de registro tiene que tener menos de 250 caracteres"
       }
     },
+    "request-object-signing-alg": {
+      "error": {
+        "maxlength": "solicitar objeto firmando alg tiene que tener menos de 250 caracteres"
+      },
+      "label": "solicitar objeto firmando alg",
+      "placeholder": "solicitar objeto firmando alg"
+    },
     "requestObjectSigningAlg": {
       "error": {
         "maxlength": "solicitar objeto firmando alg tiene que tener menos de 250 caracteres"
       }
+    },
+    "require-pkce": {
+      "error": {
+        "required": "Solicitar clave PKCE es obligatorio"
+      },
+      "label": "Solicitar clave PKCE",
+      "placeholder": "Solicitar clave PKCE"
+    },
+    "require-pushed-authorization-requests": {
+      "error": {
+        "required": "requerir solicitudes de autorización push es obligatorio"
+      },
+      "label": "requerir solicitudes de autorización push",
+      "placeholder": "requerir solicitudes de autorización push"
     },
     "requirePkce": {
       "error": {
@@ -207,10 +397,28 @@
         "required": "requerir solicitudes de autorización push es obligatorio"
       }
     },
+    "response-types-json": {
+      "label": "Tipos de respuesta",
+      "placeholder": "Tipos de respuesta"
+    },
+    "secret-oauth": {
+      "error": {
+        "maxlength": "oauth secreto tiene que tener menos de 250 caracteres"
+      },
+      "label": "oauth secreto",
+      "placeholder": "oauth secreto"
+    },
     "secretOauth": {
       "error": {
         "maxlength": "oauth secreto tiene que tener menos de 250 caracteres"
       }
+    },
+    "sector-identifier-uri": {
+      "error": {
+        "maxlength": "identificador de sector URI tiene que tener menos de 250 caracteres"
+      },
+      "label": "identificador de sector URI",
+      "placeholder": "identificador de sector URI"
     },
     "sectorIdentifierUri": {
       "error": {
@@ -218,15 +426,38 @@
       }
     },
     "subject-type": {
+      "error": {
+        "required": "Tipo Materias es obligatorio"
+      },
+      "label": "Tipo Materias",
       "options": {
         "pairwise": "Por pares",
         "public": "público"
-      }
+      },
+      "placeholder": "Tipo Materias"
     },
     "subjectType": {
       "error": {
         "required": "Tipo Materias es obligatorio"
       }
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tls-client-auth-subject-dn": {
+      "error": {
+        "maxlength": "tls cliente auth asunto dn tiene que tener menos de 250 caracteres"
+      },
+      "label": "tls cliente auth asunto dn",
+      "placeholder": "tls cliente auth asunto dn"
+    },
+    "tls-client-certificate-bound-access-tokens": {
+      "error": {
+        "required": "tokens de acceso vinculados a certificados de cliente tls es obligatorio"
+      },
+      "label": "tokens de acceso vinculados a certificados de cliente tls",
+      "placeholder": "tokens de acceso vinculados a certificados de cliente tls"
     },
     "tlsClientAuthSubjectDn": {
       "error": {
@@ -239,12 +470,24 @@
       }
     },
     "token-endpoint-auth-method": {
+      "error": {
+        "required": "método de autenticación de punto final de token es obligatorio"
+      },
+      "label": "método de autenticación de punto final de token",
       "options": {
         "client-secret-basic": "client_secret_basic",
         "client-secret-post": "client_secret_post",
         "none": "nada",
         "private-key-jwt": "private_key_jwt"
-      }
+      },
+      "placeholder": "método de autenticación de punto final de token"
+    },
+    "token-endpoint-auth-signing-alg": {
+      "error": {
+        "maxlength": "token endpoint auth firma alg tiene que tener menos de 250 caracteres"
+      },
+      "label": "token endpoint auth firma alg",
+      "placeholder": "token endpoint auth firma alg"
     },
     "tokenEndpointAuthMethod": {
       "error": {
@@ -256,6 +499,13 @@
         "maxlength": "token endpoint auth firma alg tiene que tener menos de 250 caracteres"
       }
     },
+    "tos-uri": {
+      "error": {
+        "maxlength": "tos URI tiene que tener menos de 250 caracteres"
+      },
+      "label": "tos URI",
+      "placeholder": "tos URI"
+    },
     "tosUri": {
       "error": {
         "maxlength": "tos URI tiene que tener menos de 250 caracteres"
@@ -265,7 +515,30 @@
       "error": {
         "maxlength": "url tiene que tener menos de 250 caracteres",
         "required": "url es obligatorio"
-      }
+      },
+      "label": "url",
+      "placeholder": "url"
+    },
+    "userinfo-encrypted-response-alg": {
+      "error": {
+        "maxlength": "userinfo respuesta cifrada alg tiene que tener menos de 250 caracteres"
+      },
+      "label": "userinfo respuesta cifrada alg",
+      "placeholder": "userinfo respuesta cifrada alg"
+    },
+    "userinfo-encrypted-response-enc": {
+      "error": {
+        "maxlength": "userinfo respuesta cifrada enc tiene que tener menos de 250 caracteres"
+      },
+      "label": "userinfo respuesta cifrada enc",
+      "placeholder": "userinfo respuesta cifrada enc"
+    },
+    "userinfo-signed-response-alg": {
+      "error": {
+        "maxlength": "userinfo respuesta firmada alg tiene que tener menos de 250 caracteres"
+      },
+      "label": "userinfo respuesta firmada alg",
+      "placeholder": "userinfo respuesta firmada alg"
     },
     "userinfoEncryptedResponseAlg": {
       "error": {
@@ -479,12 +752,38 @@
     }
   },
   "search": {
+    "code": {
+      "label": "código",
+      "placeholder": "código"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "code-asc": "code-asc",
         "code-desc": "code-desc",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
+    },
+    "with-backchannel-logout-url": {
+      "label": "con URL de cierre de sesión de backchannel",
+      "placeholder": "con URL de cierre de sesión de backchannel"
+    },
+    "with-frontchannel-logout-url": {
+      "label": "con la URL de cierre de sesión de frontchannel",
+      "placeholder": "con la URL de cierre de sesión de frontchannel"
     }
   }
 }

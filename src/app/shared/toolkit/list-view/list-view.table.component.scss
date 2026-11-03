@@ -5,6 +5,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  /* recuadro completo: la cabecera redondeada necesita un contenedor que la cierre */
+  border: 1px solid var(--list-view-border-color);
   border-radius: var(--list-view-radius);
   overflow: hidden;
 }
@@ -110,16 +112,33 @@
   border-radius: var(--app-radius-sm);
 }
 
-/* Menú "Columnas": fuera de la zona con scroll para que siempre se vea */
+/* Menú "Columnas": franja fija a la derecha de la cabecera, fuera de la zona con scroll para que siempre se vea.
+   El fundido hacia la izquierda deja que el título que pasa por debajo se desvanezca en vez de cortarse. */
 .material-table .column-menu {
+  --column-menu-fade: var(--app-space-6);
+
   position: absolute;
-  top: calc((var(--list-view-row-height) - 40px) / 2);
-  right: var(--app-space-1);
-  width: 40px;
-  height: 40px;
-  padding: var(--app-space-2);
-  background-color: var(--list-view-header-bg);
+  top: 0;
+  right: 0;
+  height: var(--list-view-row-height);
+  display: flex;
+  align-items: center;
+  padding-left: var(--column-menu-fade);
+  padding-right: var(--app-space-1);
+  background: linear-gradient(to right, transparent, var(--list-view-header-bg) var(--column-menu-fade));
   color: var(--list-view-header-fg);
+  pointer-events: none;
+}
+.material-table .column-menu button {
+  pointer-events: auto;
+}
+
+/* Hueco al final de cabecera y filas: al llegar al final del scroll la última columna queda entera junto al botón */
+.material-table.has-column-menu .thead::after,
+.material-table.has-column-menu .tbody .tr::after {
+  content: '';
+  flex: none;
+  width: var(--list-view-column-menu-space);
 }
 
 .material-table .td {

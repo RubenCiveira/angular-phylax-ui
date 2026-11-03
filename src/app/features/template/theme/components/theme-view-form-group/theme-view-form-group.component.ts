@@ -53,10 +53,10 @@ export class ThemeViewFormGroupComponent extends SubFormEditable<Theme> {
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.conflictFields = [
-      { name: 'tenant', label: 'template.theme.form-group.tenant', display: referenceDisplay(tenantRepository) },
-      { name: 'name', label: 'template.theme.form-group.name' },
-      { name: 'isDefault', label: 'template.theme.form-group.is-default' },
-      { name: 'enabled', label: 'template.theme.form-group.enabled' },
+      { name: 'tenant', label: 'template/theme.form-group.tenant', display: referenceDisplay(tenantRepository) },
+      { name: 'name', label: 'template/theme.form-group.name' },
+      { name: 'isDefault', label: 'template/theme.form-group.is-default' },
+      { name: 'enabled', label: 'template/theme.form-group.enabled' },
     ];
     this.defaultValues = () => {
       return {

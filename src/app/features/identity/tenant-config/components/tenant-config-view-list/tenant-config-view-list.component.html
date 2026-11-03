@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'identity.tenant-config.list.filter.button' | transloco }}
+          {{ 'identity/tenant-config.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'identity.tenant-config.list.search.title' | transloco }}</h2>
+      <h2>{{ 'identity/tenant-config.list.search.title' | transloco }}</h2>
       <tenant-config-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'identity.tenant-config.list.search.button' | transloco }}
+        {{ 'identity/tenant-config.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="tenant"
-            title="{{ 'identity.tenant-config.list.column.tenant.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.tenant.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.tenant.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.tenant()?.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="display-name"
-            title="{{ 'identity.tenant-config.list.column.display-name.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.display-name.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.display-name.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.display-name.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.displayName }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="force-mfa"
-            title="{{ 'identity.tenant-config.list.column.force-mfa.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.force-mfa.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.force-mfa.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.force-mfa.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.forceMfa }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="dynamic-registration-policy"
-            title="{{ 'identity.tenant-config.list.column.dynamic-registration-policy.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.dynamic-registration-policy.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.dynamic-registration-policy.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.dynamic-registration-policy.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.dynamicRegistrationPolicy }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="self-registration-enabled"
-            title="{{ 'identity.tenant-config.list.column.self-registration-enabled.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.self-registration-enabled.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.self-registration-enabled.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.self-registration-enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.selfRegistrationEnabled }}
@@ -112,8 +112,8 @@
           <ng-template
             listViewColumn
             key="auto-approve-registered-users"
-            title="{{ 'identity.tenant-config.list.column.auto-approve-registered-users.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.auto-approve-registered-users.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.auto-approve-registered-users.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.auto-approve-registered-users.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.autoApproveRegisteredUsers }}
@@ -121,8 +121,8 @@
           <ng-template
             listViewColumn
             key="magic-link-enabled"
-            title="{{ 'identity.tenant-config.list.column.magic-link-enabled.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.magic-link-enabled.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.magic-link-enabled.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.magic-link-enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.magicLinkEnabled }}
@@ -130,8 +130,8 @@
           <ng-template
             listViewColumn
             key="require-email-verification"
-            title="{{ 'identity.tenant-config.list.column.require-email-verification.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.require-email-verification.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.require-email-verification.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.require-email-verification.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.requireEmailVerification }}
@@ -139,8 +139,8 @@
           <ng-template
             listViewColumn
             key="invitation-expiry-days"
-            title="{{ 'identity.tenant-config.list.column.invitation-expiry-days.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.invitation-expiry-days.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.invitation-expiry-days.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.invitation-expiry-days.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.invitationExpiryDays }}
@@ -148,8 +148,8 @@
           <ng-template
             listViewColumn
             key="magic-link-expiry-minutes"
-            title="{{ 'identity.tenant-config.list.column.magic-link-expiry-minutes.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.magic-link-expiry-minutes.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.magic-link-expiry-minutes.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.magic-link-expiry-minutes.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.magicLinkExpiryMinutes }}
@@ -157,8 +157,8 @@
           <ng-template
             listViewColumn
             key="session-sso-ttl-seconds"
-            title="{{ 'identity.tenant-config.list.column.session-sso-ttl-seconds.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.session-sso-ttl-seconds.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.session-sso-ttl-seconds.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.session-sso-ttl-seconds.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.sessionSsoTtlSeconds }}
@@ -166,8 +166,8 @@
           <ng-template
             listViewColumn
             key="refresh-token-ttl-seconds"
-            title="{{ 'identity.tenant-config.list.column.refresh-token-ttl-seconds.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.refresh-token-ttl-seconds.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.refresh-token-ttl-seconds.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.refresh-token-ttl-seconds.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.refreshTokenTtlSeconds }}
@@ -175,8 +175,8 @@
           <ng-template
             listViewColumn
             key="refresh-token-max-lifetime-seconds"
-            title="{{ 'identity.tenant-config.list.column.refresh-token-max-lifetime-seconds.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.refresh-token-max-lifetime-seconds.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.refresh-token-max-lifetime-seconds.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.refresh-token-max-lifetime-seconds.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.refreshTokenMaxLifetimeSeconds }}
@@ -184,8 +184,8 @@
           <ng-template
             listViewColumn
             key="dcr-allowed-grant-types"
-            title="{{ 'identity.tenant-config.list.column.dcr-allowed-grant-types.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.dcr-allowed-grant-types.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.dcr-allowed-grant-types.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.dcr-allowed-grant-types.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.dcrAllowedGrantTypes }}
@@ -193,8 +193,8 @@
           <ng-template
             listViewColumn
             key="dcr-allowed-auth-methods"
-            title="{{ 'identity.tenant-config.list.column.dcr-allowed-auth-methods.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.dcr-allowed-auth-methods.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.dcr-allowed-auth-methods.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.dcr-allowed-auth-methods.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.dcrAllowedAuthMethods }}
@@ -202,8 +202,8 @@
           <ng-template
             listViewColumn
             key="allow-password-grant"
-            title="{{ 'identity.tenant-config.list.column.allow-password-grant.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.allow-password-grant.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.allow-password-grant.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.allow-password-grant.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.allowPasswordGrant }}
@@ -211,9 +211,9 @@
           <ng-template
             listViewColumn
             key="require-pushed-authorization-requests"
-            title="{{ 'identity.tenant-config.list.column.require-pushed-authorization-requests.title' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.require-pushed-authorization-requests.title' | transloco }}"
             tooltip="{{
-              'identity.tenant-config.list.column.require-pushed-authorization-requests.tooltip' | transloco
+              'identity/tenant-config.list.column.require-pushed-authorization-requests.tooltip' | transloco
             }}"
             let-row="$implicit"
           >
@@ -222,8 +222,8 @@
           <ng-template
             listViewColumn
             key="acr-values-supported"
-            title="{{ 'identity.tenant-config.list.column.acr-values-supported.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.acr-values-supported.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.acr-values-supported.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.acr-values-supported.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.acrValuesSupported }}
@@ -231,8 +231,8 @@
           <ng-template
             listViewColumn
             key="webauthn-enabled"
-            title="{{ 'identity.tenant-config.list.column.webauthn-enabled.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.webauthn-enabled.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.webauthn-enabled.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.webauthn-enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.webauthnEnabled }}
@@ -240,8 +240,8 @@
           <ng-template
             listViewColumn
             key="webauthn-rp-id"
-            title="{{ 'identity.tenant-config.list.column.webauthn-rp-id.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.webauthn-rp-id.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.webauthn-rp-id.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.webauthn-rp-id.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.webauthnRpId }}
@@ -249,8 +249,8 @@
           <ng-template
             listViewColumn
             key="webauthn-rp-name"
-            title="{{ 'identity.tenant-config.list.column.webauthn-rp-name.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.webauthn-rp-name.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.webauthn-rp-name.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.webauthn-rp-name.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.webauthnRpName }}
@@ -258,8 +258,8 @@
           <ng-template
             listViewColumn
             key="welcome-email-template"
-            title="{{ 'identity.tenant-config.list.column.welcome-email-template.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.welcome-email-template.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.welcome-email-template.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.welcome-email-template.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.welcomeEmailTemplate }}
@@ -267,8 +267,8 @@
           <ng-template
             listViewColumn
             key="registered-email-template"
-            title="{{ 'identity.tenant-config.list.column.registered-email-template.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.registered-email-template.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.registered-email-template.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.registered-email-template.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.registeredEmailTemplate }}
@@ -276,8 +276,8 @@
           <ng-template
             listViewColumn
             key="disabled-user-email-template"
-            title="{{ 'identity.tenant-config.list.column.disabled-user-email-template.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.disabled-user-email-template.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.disabled-user-email-template.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.disabled-user-email-template.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.disabledUserEmailTemplate }}
@@ -285,8 +285,8 @@
           <ng-template
             listViewColumn
             key="enabled-user-email-template"
-            title="{{ 'identity.tenant-config.list.column.enabled-user-email-template.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.enabled-user-email-template.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.enabled-user-email-template.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.enabled-user-email-template.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.enabledUserEmailTemplate }}
@@ -294,8 +294,8 @@
           <ng-template
             listViewColumn
             key="password-recovery-enabled"
-            title="{{ 'identity.tenant-config.list.column.password-recovery-enabled.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.password-recovery-enabled.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.password-recovery-enabled.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.password-recovery-enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.passwordRecoveryEnabled }}
@@ -303,8 +303,8 @@
           <ng-template
             listViewColumn
             key="recover-pass-email-template"
-            title="{{ 'identity.tenant-config.list.column.recover-pass-email-template.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-config.list.column.recover-pass-email-template.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-config.list.column.recover-pass-email-template.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-config.list.column.recover-pass-email-template.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.recoverPassEmailTemplate }}

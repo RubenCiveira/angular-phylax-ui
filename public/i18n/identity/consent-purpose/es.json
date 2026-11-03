@@ -40,6 +40,11 @@
   },
   "form-group": {
     "activation-date": {
+      "error": {
+        "required": "Fecha Activación es obligatorio"
+      },
+      "label": "Fecha Activación",
+      "placeholder": "Fecha Activación",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -53,34 +58,44 @@
     "description": {
       "error": {
         "required": "descripción es obligatorio"
-      }
+      },
+      "label": "descripción",
+      "placeholder": "descripción"
     },
     "key": {
       "error": {
         "required": "llave es obligatorio"
       },
+      "label": "llave",
       "options": {
         "analytics": "analítica",
         "marketing": "Marketing",
         "personalization": "personalización/productos a medida ",
         "third-party": "tercero oponente"
-      }
+      },
+      "placeholder": "llave"
     },
     "required": {
       "error": {
         "required": "de ser necesario es obligatorio"
-      }
+      },
+      "label": "de ser necesario",
+      "placeholder": "de ser necesario"
     },
     "tenant": {
       "error": {
         "required": "inquilino es obligatorio"
-      }
+      },
+      "label": "inquilino",
+      "placeholder": "inquilino"
     },
     "title": {
       "error": {
         "maxlength": "title tiene que tener menos de 250 caracteres",
         "required": "title es obligatorio"
-      }
+      },
+      "label": "title",
+      "placeholder": "title"
     }
   },
   "list": {
@@ -116,6 +131,24 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
+    },
+    "title": {
+      "label": "title",
+      "placeholder": "title"
     }
   }
 }

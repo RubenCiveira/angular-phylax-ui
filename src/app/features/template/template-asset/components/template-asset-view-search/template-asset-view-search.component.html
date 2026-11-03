@@ -3,37 +3,37 @@
   <editable-selectone
     formControlName="template"
     [visible]="isVisible['template']"
-    label="template.template-asset.search.template"
+    label="template/template-asset.search.template"
     [provider]="templateProvider"
   />
   <editable-selectone
     formControlName="tenants"
     [visible]="isVisible['tenants']"
-    label="template.template-asset.search.tenants"
+    label="template/template-asset.search.tenants"
     [provider]="tenantsProvider"
   />
   <editable-text
     formControlName="search"
     [visible]="isVisible['search']"
-    label="template.template-asset.search.search"
+    label="template/template-asset.search.search"
   />
-  <editable-text formControlName="code" [visible]="isVisible['code']" label="template.template-asset.search.code" />
+  <editable-text formControlName="code" [visible]="isVisible['code']" label="template/template-asset.search.code" />
   <editable-selectone
     formControlName="templates"
     [visible]="isVisible['templates']"
-    label="template.template-asset.search.templates"
+    label="template/template-asset.search.templates"
     [provider]="templatesProvider"
   />
   <editable-selectone
     formControlName="tenant"
     [visible]="isVisible['tenant']"
-    label="template.template-asset.search.tenant"
+    label="template/template-asset.search.tenant"
     [provider]="tenantProvider"
   />
   <editable-choose
     formControlName="order"
     [visible]="isVisible['order']"
-    label="template.template-asset.search.order"
+    label="template/template-asset.search.order"
     [options]="['', 'CODE-ASC', 'CODE-DESC']"
   />
 </form-layout>

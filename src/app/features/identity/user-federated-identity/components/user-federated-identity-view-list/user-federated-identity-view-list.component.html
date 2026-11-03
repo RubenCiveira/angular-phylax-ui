@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'identity.user-federated-identity.list.filter.button' | transloco }}
+          {{ 'identity/user-federated-identity.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'identity.user-federated-identity.list.search.title' | transloco }}</h2>
+      <h2>{{ 'identity/user-federated-identity.list.search.title' | transloco }}</h2>
       <user-federated-identity-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'identity.user-federated-identity.list.search.button' | transloco }}
+        {{ 'identity/user-federated-identity.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="user"
-            title="{{ 'identity.user-federated-identity.list.column.user.title' | transloco }}"
-            tooltip="{{ 'identity.user-federated-identity.list.column.user.tooltip' | transloco }}"
+            title="{{ 'identity/user-federated-identity.list.column.user.title' | transloco }}"
+            tooltip="{{ 'identity/user-federated-identity.list.column.user.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.user()?.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="login-provider"
-            title="{{ 'identity.user-federated-identity.list.column.login-provider.title' | transloco }}"
-            tooltip="{{ 'identity.user-federated-identity.list.column.login-provider.tooltip' | transloco }}"
+            title="{{ 'identity/user-federated-identity.list.column.login-provider.title' | transloco }}"
+            tooltip="{{ 'identity/user-federated-identity.list.column.login-provider.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.loginProvider()?.name }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="subject"
-            title="{{ 'identity.user-federated-identity.list.column.subject.title' | transloco }}"
-            tooltip="{{ 'identity.user-federated-identity.list.column.subject.tooltip' | transloco }}"
+            title="{{ 'identity/user-federated-identity.list.column.subject.title' | transloco }}"
+            tooltip="{{ 'identity/user-federated-identity.list.column.subject.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.subject }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="created-at"
-            title="{{ 'identity.user-federated-identity.list.column.created-at.title' | transloco }}"
-            tooltip="{{ 'identity.user-federated-identity.list.column.created-at.tooltip' | transloco }}"
+            title="{{ 'identity/user-federated-identity.list.column.created-at.title' | transloco }}"
+            tooltip="{{ 'identity/user-federated-identity.list.column.created-at.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.createdAt }}

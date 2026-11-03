@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'notification.message.list.filter.button' | transloco }}
+          {{ 'notification/message.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'notification.message.list.search.title' | transloco }}</h2>
+      <h2>{{ 'notification/message.list.search.title' | transloco }}</h2>
       <message-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'notification.message.list.search.button' | transloco }}
+        {{ 'notification/message.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="target"
-            title="{{ 'notification.message.list.column.target.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.target.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.target.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.target.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.target }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="tenant"
-            title="{{ 'notification.message.list.column.tenant.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.tenant.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.tenant.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.tenant()?.name }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="urgent"
-            title="{{ 'notification.message.list.column.urgent.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.urgent.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.urgent.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.urgent.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.urgent }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="content"
-            title="{{ 'notification.message.list.column.content.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.content.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.content.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.content.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.content }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="retries"
-            title="{{ 'notification.message.list.column.retries.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.retries.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.retries.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.retries.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.retries }}
@@ -112,8 +112,8 @@
           <ng-template
             listViewColumn
             key="created-at"
-            title="{{ 'notification.message.list.column.created-at.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.created-at.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.created-at.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.created-at.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.createdAt }}
@@ -121,8 +121,8 @@
           <ng-template
             listViewColumn
             key="send-at"
-            title="{{ 'notification.message.list.column.send-at.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.send-at.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.send-at.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.send-at.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.sendAt }}
@@ -130,8 +130,8 @@
           <ng-template
             listViewColumn
             key="lock-at"
-            title="{{ 'notification.message.list.column.lock-at.title' | transloco }}"
-            tooltip="{{ 'notification.message.list.column.lock-at.tooltip' | transloco }}"
+            title="{{ 'notification/message.list.column.lock-at.title' | transloco }}"
+            tooltip="{{ 'notification/message.list.column.lock-at.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.lockAt }}

@@ -3,21 +3,21 @@
   <editable-selectone
     formControlName="theme"
     [visible]="isVisible['theme']"
-    label="template.theme-asset.form-group.theme"
+    label="template/theme-asset.form-group.theme"
     [provider]="themeProvider"
   />
-  <editable-text formControlName="code" [visible]="isVisible['code']" label="template.theme-asset.form-group.code" />
-  <editable-text formControlName="type" [visible]="isVisible['type']" label="template.theme-asset.form-group.type" />
+  <editable-text formControlName="code" [visible]="isVisible['code']" label="template/theme-asset.form-group.code" />
+  <editable-text formControlName="type" [visible]="isVisible['type']" label="template/theme-asset.form-group.type" />
   <editable-upload
     formControlName="content"
     [visible]="isVisible['content']"
-    label="template.theme-asset.form-group.content"
+    label="template/theme-asset.form-group.content"
     [download]="downloadContent"
     [upload]="uploadContent"
   />
   <editable-check
     formControlName="enabled"
     [visible]="isVisible['enabled']"
-    label="template.theme-asset.form-group.enabled"
+    label="template/theme-asset.form-group.enabled"
   />
 </form-layout>

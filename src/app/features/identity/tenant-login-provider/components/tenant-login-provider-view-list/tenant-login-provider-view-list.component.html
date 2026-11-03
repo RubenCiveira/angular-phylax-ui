@@ -20,7 +20,7 @@
           } @else {
             <mat-icon>filter_list</mat-icon>
           }
-          {{ 'identity.tenant-login-provider.list.filter.button' | transloco }}
+          {{ 'identity/tenant-login-provider.list.filter.button' | transloco }}
         </button>
         <button mat-icon-button aria-label="{{ refreshDataLabel() }}" (click)="reload()">
           <mat-icon>refresh</mat-icon>
@@ -29,10 +29,10 @@
     }
     <mat-expansion-panel #panel class="search-form">
       <!-- Formulario de filtros -->
-      <h2>{{ 'identity.tenant-login-provider.list.search.title' | transloco }}</h2>
+      <h2>{{ 'identity/tenant-login-provider.list.search.title' | transloco }}</h2>
       <tenant-login-provider-view-search #searchForm [formControl]="search" />
       <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
-        {{ 'identity.tenant-login-provider.list.search.button' | transloco }}
+        {{ 'identity/tenant-login-provider.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>
   </div>
@@ -67,8 +67,8 @@
           <ng-template
             listViewColumn
             key="tenant"
-            title="{{ 'identity.tenant-login-provider.list.column.tenant.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.tenant.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.tenant.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.tenant.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.tenant()?.name }}
@@ -76,8 +76,8 @@
           <ng-template
             listViewColumn
             key="name"
-            title="{{ 'identity.tenant-login-provider.list.column.name.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.name.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.name.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.name.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.name }}
@@ -85,8 +85,8 @@
           <ng-template
             listViewColumn
             key="provider-type"
-            title="{{ 'identity.tenant-login-provider.list.column.provider-type.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.provider-type.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.provider-type.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.provider-type.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.providerType }}
@@ -94,8 +94,8 @@
           <ng-template
             listViewColumn
             key="enabled"
-            title="{{ 'identity.tenant-login-provider.list.column.enabled.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.enabled.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.enabled.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.enabled.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.enabled }}
@@ -103,8 +103,8 @@
           <ng-template
             listViewColumn
             key="direct-access"
-            title="{{ 'identity.tenant-login-provider.list.column.direct-access.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.direct-access.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.direct-access.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.direct-access.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.directAccess }}
@@ -112,8 +112,8 @@
           <ng-template
             listViewColumn
             key="public-key"
-            title="{{ 'identity.tenant-login-provider.list.column.public-key.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.public-key.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.public-key.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.public-key.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.publicKey }}
@@ -121,8 +121,8 @@
           <ng-template
             listViewColumn
             key="private-key"
-            title="{{ 'identity.tenant-login-provider.list.column.private-key.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.private-key.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.private-key.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.private-key.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.privateKey }}
@@ -130,8 +130,8 @@
           <ng-template
             listViewColumn
             key="certificate"
-            title="{{ 'identity.tenant-login-provider.list.column.certificate.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.certificate.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.certificate.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.certificate.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.certificate }}
@@ -139,8 +139,8 @@
           <ng-template
             listViewColumn
             key="metadata"
-            title="{{ 'identity.tenant-login-provider.list.column.metadata.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.metadata.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.metadata.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.metadata.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.metadata }}
@@ -148,8 +148,8 @@
           <ng-template
             listViewColumn
             key="oidc-scopes"
-            title="{{ 'identity.tenant-login-provider.list.column.oidc-scopes.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.oidc-scopes.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.oidc-scopes.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.oidc-scopes.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.oidcScopes }}
@@ -157,8 +157,8 @@
           <ng-template
             listViewColumn
             key="oidc-claim-mapping"
-            title="{{ 'identity.tenant-login-provider.list.column.oidc-claim-mapping.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.oidc-claim-mapping.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.oidc-claim-mapping.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.oidc-claim-mapping.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.oidcClaimMapping }}
@@ -166,8 +166,8 @@
           <ng-template
             listViewColumn
             key="account-link-policy"
-            title="{{ 'identity.tenant-login-provider.list.column.account-link-policy.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.account-link-policy.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.account-link-policy.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.account-link-policy.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.accountLinkPolicy }}
@@ -175,8 +175,8 @@
           <ng-template
             listViewColumn
             key="oidc-discovery-url"
-            title="{{ 'identity.tenant-login-provider.list.column.oidc-discovery-url.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.oidc-discovery-url.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.oidc-discovery-url.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.oidc-discovery-url.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.oidcDiscoveryUrl }}
@@ -184,8 +184,8 @@
           <ng-template
             listViewColumn
             key="saml-idp-metadata-url"
-            title="{{ 'identity.tenant-login-provider.list.column.saml-idp-metadata-url.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.saml-idp-metadata-url.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.saml-idp-metadata-url.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.saml-idp-metadata-url.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.samlIdpMetadataUrl }}
@@ -193,8 +193,8 @@
           <ng-template
             listViewColumn
             key="saml-idp-entity-id"
-            title="{{ 'identity.tenant-login-provider.list.column.saml-idp-entity-id.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.saml-idp-entity-id.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.saml-idp-entity-id.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.saml-idp-entity-id.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.samlIdpEntityId }}
@@ -202,8 +202,8 @@
           <ng-template
             listViewColumn
             key="saml-idp-sso-url"
-            title="{{ 'identity.tenant-login-provider.list.column.saml-idp-sso-url.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.saml-idp-sso-url.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.saml-idp-sso-url.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.saml-idp-sso-url.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.samlIdpSsoUrl }}
@@ -211,8 +211,8 @@
           <ng-template
             listViewColumn
             key="saml-idp-cert"
-            title="{{ 'identity.tenant-login-provider.list.column.saml-idp-cert.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.saml-idp-cert.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.saml-idp-cert.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.saml-idp-cert.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.samlIdpCert }}
@@ -220,8 +220,8 @@
           <ng-template
             listViewColumn
             key="users-enabled-by-default"
-            title="{{ 'identity.tenant-login-provider.list.column.users-enabled-by-default.title' | transloco }}"
-            tooltip="{{ 'identity.tenant-login-provider.list.column.users-enabled-by-default.tooltip' | transloco }}"
+            title="{{ 'identity/tenant-login-provider.list.column.users-enabled-by-default.title' | transloco }}"
+            tooltip="{{ 'identity/tenant-login-provider.list.column.users-enabled-by-default.tooltip' | transloco }}"
             let-row="$implicit"
           >
             {{ row.usersEnabledByDefault }}

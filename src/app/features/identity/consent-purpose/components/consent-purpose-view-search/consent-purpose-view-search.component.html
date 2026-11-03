@@ -3,19 +3,19 @@
   <editable-selectone
     formControlName="tenants"
     [visible]="isVisible['tenants']"
-    label="identity.consent-purpose.search.tenants"
+    label="identity/consent-purpose.search.tenants"
     [provider]="tenantsProvider"
   />
   <editable-text
     formControlName="search"
     [visible]="isVisible['search']"
-    label="identity.consent-purpose.search.search"
+    label="identity/consent-purpose.search.search"
   />
-  <editable-text formControlName="title" [visible]="isVisible['title']" label="identity.consent-purpose.search.title" />
+  <editable-text formControlName="title" [visible]="isVisible['title']" label="identity/consent-purpose.search.title" />
   <editable-selectone
     formControlName="tenant"
     [visible]="isVisible['tenant']"
-    label="identity.consent-purpose.search.tenant"
+    label="identity/consent-purpose.search.tenant"
     [provider]="tenantProvider"
   />
 </form-layout>

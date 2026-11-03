@@ -51,10 +51,10 @@ export class RoleViewFormGroupComponent extends SubFormEditable<Role> {
     });
     this.resourceServerProvider = resourceServerRepository.selectorProvider(this.resourceServerFilter);
     this.conflictFields = [
-      { name: 'name', label: 'access.role.form-group.name' },
+      { name: 'name', label: 'access/role.form-group.name' },
       {
         name: 'resourceServer',
-        label: 'access.role.form-group.resource-server',
+        label: 'access/role.form-group.resource-server',
         display: referenceDisplay(resourceServerRepository),
       },
     ];

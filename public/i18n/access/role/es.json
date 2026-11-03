@@ -43,7 +43,13 @@
       "error": {
         "maxlength": "Nombre tiene que tener menos de 250 caracteres",
         "required": "Nombre es obligatorio"
-      }
+      },
+      "label": "Nombre",
+      "placeholder": "El nombre de usuario a identificar en la pantalla de inicio de sesión"
+    },
+    "resource-server": {
+      "label": "servidor de recursos",
+      "placeholder": "servidor de recursos"
     }
   },
   "list": {
@@ -70,12 +76,30 @@
     }
   },
   "search": {
+    "name": {
+      "label": "Nombre",
+      "placeholder": ""
+    },
     "order": {
+      "label": "orden",
       "options": {
         "name-asc": "Nombre ASC",
         "name-desc": "Nombre: DESC",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "Orden en el que recuperar los resultados"
+    },
+    "resource-server": {
+      "label": "servidor de recursos",
+      "placeholder": "servidor de recursos"
+    },
+    "resource-servers": {
+      "label": "servidores de recursos",
+      "placeholder": "servidores de recursos"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "Búsqueda por texto"
     }
   }
 }

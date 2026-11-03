@@ -63,20 +63,20 @@ export class SmtpOutboundConfigViewFormGroupComponent extends SubFormEditable<Sm
     this.conflictFields = [
       {
         name: 'tenant',
-        label: 'notification.smtp-outbound-config.form-group.tenant',
+        label: 'notification/smtp-outbound-config.form-group.tenant',
         display: referenceDisplay(tenantRepository),
       },
-      { name: 'host', label: 'notification.smtp-outbound-config.form-group.host' },
-      { name: 'port', label: 'notification.smtp-outbound-config.form-group.port' },
-      { name: 'login', label: 'notification.smtp-outbound-config.form-group.login' },
-      { name: 'password', label: 'notification.smtp-outbound-config.form-group.password', display: maskedDisplay },
-      { name: 'senderName', label: 'notification.smtp-outbound-config.form-group.sender-name' },
-      { name: 'senderEmail', label: 'notification.smtp-outbound-config.form-group.sender-email' },
-      { name: 'timeout', label: 'notification.smtp-outbound-config.form-group.timeout' },
-      { name: 'useTls', label: 'notification.smtp-outbound-config.form-group.use-tls' },
-      { name: 'maxRetries', label: 'notification.smtp-outbound-config.form-group.max-retries' },
-      { name: 'retryDelay', label: 'notification.smtp-outbound-config.form-group.retry-delay' },
-      { name: 'rateLimit', label: 'notification.smtp-outbound-config.form-group.rate-limit' },
+      { name: 'host', label: 'notification/smtp-outbound-config.form-group.host' },
+      { name: 'port', label: 'notification/smtp-outbound-config.form-group.port' },
+      { name: 'login', label: 'notification/smtp-outbound-config.form-group.login' },
+      { name: 'password', label: 'notification/smtp-outbound-config.form-group.password', display: maskedDisplay },
+      { name: 'senderName', label: 'notification/smtp-outbound-config.form-group.sender-name' },
+      { name: 'senderEmail', label: 'notification/smtp-outbound-config.form-group.sender-email' },
+      { name: 'timeout', label: 'notification/smtp-outbound-config.form-group.timeout' },
+      { name: 'useTls', label: 'notification/smtp-outbound-config.form-group.use-tls' },
+      { name: 'maxRetries', label: 'notification/smtp-outbound-config.form-group.max-retries' },
+      { name: 'retryDelay', label: 'notification/smtp-outbound-config.form-group.retry-delay' },
+      { name: 'rateLimit', label: 'notification/smtp-outbound-config.form-group.rate-limit' },
     ];
     this.defaultValues = () => {
       return {

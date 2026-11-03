@@ -85,22 +85,30 @@
       "error": {
         "maxlength": "código tiene que tener menos de 250 caracteres",
         "required": "código es obligatorio"
-      }
+      },
+      "label": "código",
+      "placeholder": "código"
     },
     "enabled": {
       "error": {
         "required": "habilitado es obligatorio"
-      }
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
     },
     "key": {
       "error": {
         "maxlength": "llave tiene que tener menos de 250 caracteres"
-      }
+      },
+      "label": "llave",
+      "placeholder": "llave"
     },
     "scopes": {
       "error": {
         "maxlength": "ámbitos tiene que tener menos de 250 caracteres"
-      }
+      },
+      "label": "ámbitos",
+      "placeholder": "ámbitos"
     }
   },
   "list": {
@@ -128,6 +136,16 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "key": {
+      "label": "llave",
+      "placeholder": "llave"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
     }
   }
 }

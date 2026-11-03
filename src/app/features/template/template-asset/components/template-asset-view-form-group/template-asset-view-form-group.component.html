@@ -3,27 +3,27 @@
   <editable-selectone
     formControlName="template"
     [visible]="isVisible['template']"
-    label="template.template-asset.form-group.template"
+    label="template/template-asset.form-group.template"
     [provider]="templateProvider"
   />
   <editable-selectone
     formControlName="tenant"
     [visible]="isVisible['tenant']"
-    label="template.template-asset.form-group.tenant"
+    label="template/template-asset.form-group.tenant"
     [provider]="tenantProvider"
   />
-  <editable-text formControlName="code" [visible]="isVisible['code']" label="template.template-asset.form-group.code" />
-  <editable-text formControlName="type" [visible]="isVisible['type']" label="template.template-asset.form-group.type" />
+  <editable-text formControlName="code" [visible]="isVisible['code']" label="template/template-asset.form-group.code" />
+  <editable-text formControlName="type" [visible]="isVisible['type']" label="template/template-asset.form-group.type" />
   <editable-upload
     formControlName="content"
     [visible]="isVisible['content']"
-    label="template.template-asset.form-group.content"
+    label="template/template-asset.form-group.content"
     [download]="downloadContent"
     [upload]="uploadContent"
   />
   <editable-check
     formControlName="enabled"
     [visible]="isVisible['enabled']"
-    label="template.template-asset.form-group.enabled"
+    label="template/template-asset.form-group.enabled"
   />
 </form-layout>

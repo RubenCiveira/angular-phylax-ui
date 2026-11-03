@@ -63,13 +63,13 @@ export class SnippetAssetViewFormGroupComponent extends SubFormEditable<SnippetA
     this.conflictFields = [
       {
         name: 'snippet',
-        label: 'template.snippet-asset.form-group.snippet',
+        label: 'template/snippet-asset.form-group.snippet',
         display: referenceDisplay(snippetRepository),
       },
-      { name: 'code', label: 'template.snippet-asset.form-group.code' },
-      { name: 'type', label: 'template.snippet-asset.form-group.type' },
-      { name: 'content', label: 'template.snippet-asset.form-group.content' },
-      { name: 'enabled', label: 'template.snippet-asset.form-group.enabled' },
+      { name: 'code', label: 'template/snippet-asset.form-group.code' },
+      { name: 'type', label: 'template/snippet-asset.form-group.type' },
+      { name: 'content', label: 'template/snippet-asset.form-group.content' },
+      { name: 'enabled', label: 'template/snippet-asset.form-group.enabled' },
     ];
     this.defaultValues = () => {
       return {

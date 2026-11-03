@@ -45,9 +45,9 @@ export class ResourceServerViewFormGroupComponent extends SubFormEditable<Resour
       });
     });
     this.conflictFields = [
-      { name: 'code', label: 'access.resource-server.form-group.code' },
-      { name: 'apiKey', label: 'access.resource-server.form-group.api-key' },
-      { name: 'enabled', label: 'access.resource-server.form-group.enabled' },
+      { name: 'code', label: 'access/resource-server.form-group.code' },
+      { name: 'apiKey', label: 'access/resource-server.form-group.api-key' },
+      { name: 'enabled', label: 'access/resource-server.form-group.enabled' },
     ];
     this.defaultValues = () => {
       return {

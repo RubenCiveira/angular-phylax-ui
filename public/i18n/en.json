@@ -149,6 +149,7 @@
   },
   "auth": {
     "redirecting": "Signing you in…",
+    "signingOut": "Signing you out…",
     "unauthorized": {
       "401": {
         "title": "Sign-in required",

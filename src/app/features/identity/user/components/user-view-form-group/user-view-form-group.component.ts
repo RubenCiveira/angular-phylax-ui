@@ -61,18 +61,18 @@ export class UserViewFormGroupComponent extends SubFormEditable<User> {
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.conflictFields = [
-      { name: 'tenant', label: 'identity.user.form-group.tenant', display: referenceDisplay(tenantRepository) },
-      { name: 'name', label: 'identity.user.form-group.name' },
-      { name: 'password', label: 'identity.user.form-group.password', display: maskedDisplay },
-      { name: 'email', label: 'identity.user.form-group.email' },
-      { name: 'welcomeAt', label: 'identity.user.form-group.welcome-at' },
-      { name: 'emailVerified', label: 'identity.user.form-group.email-verified' },
-      { name: 'enabled', label: 'identity.user.form-group.enabled' },
-      { name: 'approvalStatus', label: 'identity.user.form-group.approval-status' },
-      { name: 'temporalPassword', label: 'identity.user.form-group.temporal-password' },
-      { name: 'useSecondFactors', label: 'identity.user.form-group.use-second-factors' },
-      { name: 'blockedUntil', label: 'identity.user.form-group.blocked-until' },
-      { name: 'federatedProvider', label: 'identity.user.form-group.federated-provider' },
+      { name: 'tenant', label: 'identity/user.form-group.tenant', display: referenceDisplay(tenantRepository) },
+      { name: 'name', label: 'identity/user.form-group.name' },
+      { name: 'password', label: 'identity/user.form-group.password', display: maskedDisplay },
+      { name: 'email', label: 'identity/user.form-group.email' },
+      { name: 'welcomeAt', label: 'identity/user.form-group.welcome-at' },
+      { name: 'emailVerified', label: 'identity/user.form-group.email-verified' },
+      { name: 'enabled', label: 'identity/user.form-group.enabled' },
+      { name: 'approvalStatus', label: 'identity/user.form-group.approval-status' },
+      { name: 'temporalPassword', label: 'identity/user.form-group.temporal-password' },
+      { name: 'useSecondFactors', label: 'identity/user.form-group.use-second-factors' },
+      { name: 'blockedUntil', label: 'identity/user.form-group.blocked-until' },
+      { name: 'federatedProvider', label: 'identity/user.form-group.federated-provider' },
     ];
     this.defaultValues = () => {
       return {

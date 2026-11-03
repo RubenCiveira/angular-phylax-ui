@@ -54,11 +54,11 @@ export class TemplateViewFormGroupComponent extends SubFormEditable<Template> {
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.conflictFields = [
-      { name: 'code', label: 'template.template.form-group.code' },
-      { name: 'tenant', label: 'template.template.form-group.tenant', display: referenceDisplay(tenantRepository) },
-      { name: 'theme', label: 'template.template.form-group.theme' },
-      { name: 'channel', label: 'template.template.form-group.channel' },
-      { name: 'enabled', label: 'template.template.form-group.enabled' },
+      { name: 'code', label: 'template/template.form-group.code' },
+      { name: 'tenant', label: 'template/template.form-group.tenant', display: referenceDisplay(tenantRepository) },
+      { name: 'theme', label: 'template/template.form-group.theme' },
+      { name: 'channel', label: 'template/template.form-group.channel' },
+      { name: 'enabled', label: 'template/template.form-group.enabled' },
     ];
     this.defaultValues = () => {
       return {

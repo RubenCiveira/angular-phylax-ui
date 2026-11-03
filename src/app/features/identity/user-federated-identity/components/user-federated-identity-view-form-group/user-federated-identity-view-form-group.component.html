@@ -3,23 +3,23 @@
   <editable-selectone
     formControlName="user"
     [visible]="isVisible['user']"
-    label="identity.user-federated-identity.form-group.user"
+    label="identity/user-federated-identity.form-group.user"
     [provider]="userProvider"
   />
   <editable-selectone
     formControlName="loginProvider"
     [visible]="isVisible['loginProvider']"
-    label="identity.user-federated-identity.form-group.login-provider"
+    label="identity/user-federated-identity.form-group.login-provider"
     [provider]="loginProviderProvider"
   />
   <editable-text
     formControlName="subject"
     [visible]="isVisible['subject']"
-    label="identity.user-federated-identity.form-group.subject"
+    label="identity/user-federated-identity.form-group.subject"
   />
   <editable-datetime
     formControlName="createdAt"
     [visible]="isVisible['createdAt']"
-    label="identity.user-federated-identity.form-group.created-at"
+    label="identity/user-federated-identity.form-group.created-at"
   />
 </form-layout>

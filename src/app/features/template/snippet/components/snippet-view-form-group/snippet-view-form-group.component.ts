@@ -52,9 +52,9 @@ export class SnippetViewFormGroupComponent extends SubFormEditable<Snippet> {
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.conflictFields = [
-      { name: 'code', label: 'template.snippet.form-group.code' },
-      { name: 'tenant', label: 'template.snippet.form-group.tenant', display: referenceDisplay(tenantRepository) },
-      { name: 'enabled', label: 'template.snippet.form-group.enabled' },
+      { name: 'code', label: 'template/snippet.form-group.code' },
+      { name: 'tenant', label: 'template/snippet.form-group.tenant', display: referenceDisplay(tenantRepository) },
+      { name: 'enabled', label: 'template/snippet.form-group.enabled' },
     ];
     this.defaultValues = () => {
       return {

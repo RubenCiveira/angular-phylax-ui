@@ -39,6 +39,17 @@
     }
   },
   "form-group": {
+    "content-html": {
+      "error": {
+        "required": "Contenido HTML es obligatorio"
+      },
+      "label": "Contenido HTML",
+      "placeholder": "Contenido HTML"
+    },
+    "content-text": {
+      "label": "Texto de contenido",
+      "placeholder": "Texto de contenido"
+    },
     "contentHtml": {
       "error": {
         "required": "Contenido HTML es obligatorio"
@@ -47,17 +58,23 @@
     "locale": {
       "error": {
         "maxlength": "Local tiene que tener menos de 250 caracteres"
-      }
+      },
+      "label": "Local",
+      "placeholder": "Local"
     },
     "subject": {
       "error": {
         "maxlength": "asunto tiene que tener menos de 250 caracteres"
-      }
+      },
+      "label": "asunto",
+      "placeholder": "asunto"
     },
     "template": {
       "error": {
         "required": "plantilla es obligatorio"
-      }
+      },
+      "label": "plantilla",
+      "placeholder": "plantilla"
     }
   },
   "list": {
@@ -89,6 +106,20 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "template": {
+      "label": "plantilla",
+      "placeholder": "plantilla"
+    },
+    "templates": {
+      "label": "plantillas",
+      "placeholder": "plantillas"
     }
   }
 }

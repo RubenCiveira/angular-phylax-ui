@@ -85,23 +85,39 @@
       "error": {
         "maxlength": "código tiene que tener menos de 250 caracteres",
         "required": "código es obligatorio"
-      }
+      },
+      "label": "código",
+      "placeholder": "código"
     },
     "content": {
       "error": {
         "required": "contenido es obligatorio"
-      }
+      },
+      "label": "contenido",
+      "placeholder": "contenido"
+    },
+    "enabled": {
+      "label": "habilitado",
+      "placeholder": "habilitado"
     },
     "template": {
       "error": {
         "required": "plantilla es obligatorio"
-      }
+      },
+      "label": "plantilla",
+      "placeholder": "plantilla"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
     },
     "type": {
       "error": {
         "maxlength": "tipo tiene que tener menos de 250 caracteres",
         "required": "tipo es obligatorio"
-      }
+      },
+      "label": "tipo",
+      "placeholder": "tipo"
     }
   },
   "list": {
@@ -140,12 +156,38 @@
     }
   },
   "search": {
+    "code": {
+      "label": "código",
+      "placeholder": "código"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "code-asc": "code-asc",
         "code-desc": "code-desc",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "template": {
+      "label": "plantilla",
+      "placeholder": "plantilla"
+    },
+    "templates": {
+      "label": "plantillas",
+      "placeholder": "plantillas"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

@@ -3,18 +3,18 @@
   <editable-selectone
     formControlName="tenant"
     [visible]="isVisible['tenant']"
-    label="template.theme.form-group.tenant"
+    label="template/theme.form-group.tenant"
     [provider]="tenantProvider"
   />
-  <editable-text formControlName="name" [visible]="isVisible['name']" label="template.theme.form-group.name" />
+  <editable-text formControlName="name" [visible]="isVisible['name']" label="template/theme.form-group.name" />
   <editable-check
     formControlName="isDefault"
     [visible]="isVisible['isDefault']"
-    label="template.theme.form-group.is-default"
+    label="template/theme.form-group.is-default"
   />
   <editable-check
     formControlName="enabled"
     [visible]="isVisible['enabled']"
-    label="template.theme.form-group.enabled"
+    label="template/theme.form-group.enabled"
   />
 </form-layout>

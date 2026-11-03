@@ -3,41 +3,41 @@
   <editable-text
     formControlName="search"
     [visible]="isVisible['search']"
-    label="identity.user-federated-identity.search.search"
+    label="identity/user-federated-identity.search.search"
   />
   <editable-selectone
     formControlName="loginProvider"
     [visible]="isVisible['loginProvider']"
-    label="identity.user-federated-identity.search.login-provider"
+    label="identity/user-federated-identity.search.login-provider"
     [provider]="loginProviderProvider"
   />
   <editable-selectone
     formControlName="loginProviders"
     [visible]="isVisible['loginProviders']"
-    label="identity.user-federated-identity.search.login-providers"
+    label="identity/user-federated-identity.search.login-providers"
     [provider]="loginProvidersProvider"
   />
   <editable-text
     formControlName="subject"
     [visible]="isVisible['subject']"
-    label="identity.user-federated-identity.search.subject"
+    label="identity/user-federated-identity.search.subject"
   />
   <editable-selectone
     formControlName="user"
     [visible]="isVisible['user']"
-    label="identity.user-federated-identity.search.user"
+    label="identity/user-federated-identity.search.user"
     [provider]="userProvider"
   />
   <editable-selectone
     formControlName="users"
     [visible]="isVisible['users']"
-    label="identity.user-federated-identity.search.users"
+    label="identity/user-federated-identity.search.users"
     [provider]="usersProvider"
   />
   <editable-choose
     formControlName="order"
     [visible]="isVisible['order']"
-    label="identity.user-federated-identity.search.order"
+    label="identity/user-federated-identity.search.order"
     [options]="['', 'SUBJECT-ASC', 'SUBJECT-DESC']"
   />
 </form-layout>

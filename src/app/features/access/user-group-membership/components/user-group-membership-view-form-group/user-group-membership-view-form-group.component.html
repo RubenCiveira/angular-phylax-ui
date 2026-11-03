@@ -3,24 +3,24 @@
   <editable-selectone
     formControlName="user"
     [visible]="isVisible['user']"
-    label="access.user-group-membership.form-group.user"
+    label="access/user-group-membership.form-group.user"
     [provider]="userProvider"
   />
   <editable-selectone
     formControlName="resourceServer"
     [visible]="isVisible['resourceServer']"
-    label="access.user-group-membership.form-group.resource-server"
+    label="access/user-group-membership.form-group.resource-server"
     [provider]="resourceServerProvider"
   />
   <editable-selectone
     formControlName="oauthClient"
     [visible]="isVisible['oauthClient']"
-    label="access.user-group-membership.form-group.oauth-client"
+    label="access/user-group-membership.form-group.oauth-client"
     [provider]="oauthClientProvider"
   />
   <editable-textarea
     formControlName="groups"
     [visible]="isVisible['groups']"
-    label="access.user-group-membership.form-group.groups"
+    label="access/user-group-membership.form-group.groups"
   />
 </form-layout>

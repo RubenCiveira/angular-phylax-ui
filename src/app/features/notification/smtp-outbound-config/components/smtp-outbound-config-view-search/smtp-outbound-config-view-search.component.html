@@ -3,24 +3,24 @@
   <editable-selectone
     formControlName="tenants"
     [visible]="isVisible['tenants']"
-    label="notification.smtp-outbound-config.search.tenants"
+    label="notification/smtp-outbound-config.search.tenants"
     [provider]="tenantsProvider"
   />
   <editable-text
     formControlName="search"
     [visible]="isVisible['search']"
-    label="notification.smtp-outbound-config.search.search"
+    label="notification/smtp-outbound-config.search.search"
   />
   <editable-selectone
     formControlName="globalOnly"
     [visible]="isVisible['globalOnly']"
-    label="notification.smtp-outbound-config.search.global-only"
+    label="notification/smtp-outbound-config.search.global-only"
     [provider]="globalOnlyProvider"
   />
   <editable-selectone
     formControlName="tenant"
     [visible]="isVisible['tenant']"
-    label="notification.smtp-outbound-config.search.tenant"
+    label="notification/smtp-outbound-config.search.tenant"
     [provider]="tenantProvider"
   />
 </form-layout>

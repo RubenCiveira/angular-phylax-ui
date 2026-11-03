@@ -39,10 +39,44 @@
     }
   },
   "form-group": {
+    "acr-values-supported": {
+      "label": "valores de acr admitidos",
+      "placeholder": "valores de acr admitidos"
+    },
+    "allow-password-grant": {
+      "error": {
+        "required": "permitir concesión de contraseña es obligatorio"
+      },
+      "label": "permitir concesión de contraseña",
+      "placeholder": "permitir concesión de contraseña"
+    },
     "allowPasswordGrant": {
       "error": {
         "required": "permitir concesión de contraseña es obligatorio"
       }
+    },
+    "auto-approve-registered-users": {
+      "label": "aprobar automáticamente los usuarios registrados",
+      "placeholder": "aprobar automáticamente los usuarios registrados"
+    },
+    "dcr-allowed-auth-methods": {
+      "label": "métodos de autenticación permitidos por dcr",
+      "placeholder": "métodos de autenticación permitidos por dcr"
+    },
+    "dcr-allowed-grant-types": {
+      "label": "dcr tipos de subvención permitidos",
+      "placeholder": "dcr tipos de subvención permitidos"
+    },
+    "disabled-user-email-template": {
+      "label": "plantilla de correo electrónico de usuario desactivada",
+      "placeholder": "plantilla de correo electrónico de usuario desactivada"
+    },
+    "display-name": {
+      "error": {
+        "maxlength": "nombre para mostrar tiene que tener menos de 250 caracteres"
+      },
+      "label": "nombre para mostrar",
+      "placeholder": "nombre para mostrar"
     },
     "displayName": {
       "error": {
@@ -50,26 +84,79 @@
       }
     },
     "dynamic-registration-policy": {
+      "label": "política de registro dinámico",
       "options": {
         "disabled": "desactivado",
         "open": "Abierta",
         "token-required": "token_required"
-      }
+      },
+      "placeholder": "política de registro dinámico"
+    },
+    "enabled-user-email-template": {
+      "label": "plantilla de correo electrónico de usuario habilitada",
+      "placeholder": "plantilla de correo electrónico de usuario habilitada"
+    },
+    "force-mfa": {
+      "error": {
+        "required": "fuerza mfa es obligatorio"
+      },
+      "label": "fuerza mfa",
+      "placeholder": "fuerza mfa"
     },
     "forceMfa": {
       "error": {
         "required": "fuerza mfa es obligatorio"
       }
     },
+    "invitation-expiry-days": {
+      "error": {
+        "required": "días de caducidad de la invitación es obligatorio"
+      },
+      "label": "días de caducidad de la invitación",
+      "placeholder": "días de caducidad de la invitación"
+    },
     "invitationExpiryDays": {
       "error": {
         "required": "días de caducidad de la invitación es obligatorio"
       }
     },
+    "magic-link-enabled": {
+      "label": "enlace mágico habilitado",
+      "placeholder": "enlace mágico habilitado"
+    },
+    "magic-link-expiry-minutes": {
+      "error": {
+        "required": "minutos de caducidad del enlace mágico es obligatorio"
+      },
+      "label": "minutos de caducidad del enlace mágico",
+      "placeholder": "minutos de caducidad del enlace mágico"
+    },
     "magicLinkExpiryMinutes": {
       "error": {
         "required": "minutos de caducidad del enlace mágico es obligatorio"
       }
+    },
+    "password-recovery-enabled": {
+      "label": "recuperación de contraseña habilitada",
+      "placeholder": "recuperación de contraseña habilitada"
+    },
+    "recover-pass-email-template": {
+      "label": "recuperar plantilla de correo electrónico de pase",
+      "placeholder": "recuperar plantilla de correo electrónico de pase"
+    },
+    "refresh-token-max-lifetime-seconds": {
+      "error": {
+        "required": "actualizar token máximo de segundos de vida útil es obligatorio"
+      },
+      "label": "actualizar token máximo de segundos de vida útil",
+      "placeholder": "actualizar token máximo de segundos de vida útil"
+    },
+    "refresh-token-ttl-seconds": {
+      "error": {
+        "required": "actualizar token ttl segundos es obligatorio"
+      },
+      "label": "actualizar token ttl segundos",
+      "placeholder": "actualizar token ttl segundos"
     },
     "refreshTokenMaxLifetimeSeconds": {
       "error": {
@@ -81,6 +168,24 @@
         "required": "actualizar token ttl segundos es obligatorio"
       }
     },
+    "registered-email-template": {
+      "label": "plantilla de correo electrónico registrada",
+      "placeholder": "plantilla de correo electrónico registrada"
+    },
+    "require-email-verification": {
+      "error": {
+        "required": "Requiere de la verificación del correo electrónico es obligatorio"
+      },
+      "label": "Requiere de la verificación del correo electrónico",
+      "placeholder": "Requiere de la verificación del correo electrónico"
+    },
+    "require-pushed-authorization-requests": {
+      "error": {
+        "required": "requerir solicitudes de autorización push es obligatorio"
+      },
+      "label": "requerir solicitudes de autorización push",
+      "placeholder": "requerir solicitudes de autorización push"
+    },
     "requireEmailVerification": {
       "error": {
         "required": "Requiere de la verificación del correo electrónico es obligatorio"
@@ -91,6 +196,17 @@
         "required": "requerir solicitudes de autorización push es obligatorio"
       }
     },
+    "self-registration-enabled": {
+      "label": "Habilitar crear cuentas",
+      "placeholder": "Habilitar crear cuentas"
+    },
+    "session-sso-ttl-seconds": {
+      "error": {
+        "required": "sesión sso ttl segundos es obligatorio"
+      },
+      "label": "sesión sso ttl segundos",
+      "placeholder": "sesión sso ttl segundos"
+    },
     "sessionSsoTtlSeconds": {
       "error": {
         "required": "sesión sso ttl segundos es obligatorio"
@@ -99,7 +215,27 @@
     "tenant": {
       "error": {
         "required": "inquilino es obligatorio"
-      }
+      },
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "webauthn-enabled": {
+      "label": "webauthn habilitado",
+      "placeholder": "webauthn habilitado"
+    },
+    "webauthn-rp-id": {
+      "error": {
+        "maxlength": "webauthn rp id tiene que tener menos de 250 caracteres"
+      },
+      "label": "webauthn rp id",
+      "placeholder": "webauthn rp id"
+    },
+    "webauthn-rp-name": {
+      "error": {
+        "maxlength": "webauthn rp nombre tiene que tener menos de 250 caracteres"
+      },
+      "label": "webauthn rp nombre",
+      "placeholder": "webauthn rp nombre"
     },
     "webauthnRpId": {
       "error": {
@@ -110,6 +246,10 @@
       "error": {
         "maxlength": "webauthn rp nombre tiene que tener menos de 250 caracteres"
       }
+    },
+    "welcome-email-template": {
+      "label": "Plantilla de correo electrónico de bienvenida del profesor",
+      "placeholder": "Plantilla de correo electrónico de bienvenida del profesor"
     }
   },
   "list": {
@@ -229,6 +369,20 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

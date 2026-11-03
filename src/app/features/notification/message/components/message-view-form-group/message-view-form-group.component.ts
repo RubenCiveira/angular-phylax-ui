@@ -57,14 +57,14 @@ export class MessageViewFormGroupComponent extends SubFormEditable<Message> {
     });
     this.tenantProvider = tenantRepository.selectorProvider(this.tenantFilter);
     this.conflictFields = [
-      { name: 'target', label: 'notification.message.form-group.target' },
-      { name: 'tenant', label: 'notification.message.form-group.tenant', display: referenceDisplay(tenantRepository) },
-      { name: 'urgent', label: 'notification.message.form-group.urgent' },
-      { name: 'content', label: 'notification.message.form-group.content' },
-      { name: 'retries', label: 'notification.message.form-group.retries' },
-      { name: 'createdAt', label: 'notification.message.form-group.created-at' },
-      { name: 'sendAt', label: 'notification.message.form-group.send-at' },
-      { name: 'lockAt', label: 'notification.message.form-group.lock-at' },
+      { name: 'target', label: 'notification/message.form-group.target' },
+      { name: 'tenant', label: 'notification/message.form-group.tenant', display: referenceDisplay(tenantRepository) },
+      { name: 'urgent', label: 'notification/message.form-group.urgent' },
+      { name: 'content', label: 'notification/message.form-group.content' },
+      { name: 'retries', label: 'notification/message.form-group.retries' },
+      { name: 'createdAt', label: 'notification/message.form-group.created-at' },
+      { name: 'sendAt', label: 'notification/message.form-group.send-at' },
+      { name: 'lockAt', label: 'notification/message.form-group.lock-at' },
     ];
     this.defaultValues = () => {
       return {

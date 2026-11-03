@@ -56,13 +56,13 @@ export class SnippetVersionViewFormGroupComponent extends SubFormEditable<Snippe
     this.conflictFields = [
       {
         name: 'snippet',
-        label: 'template.snippet-version.form-group.snippet',
+        label: 'template/snippet-version.form-group.snippet',
         display: referenceDisplay(snippetRepository),
       },
-      { name: 'locale', label: 'template.snippet-version.form-group.locale' },
-      { name: 'subject', label: 'template.snippet-version.form-group.subject' },
-      { name: 'contentHtml', label: 'template.snippet-version.form-group.content-html' },
-      { name: 'contentText', label: 'template.snippet-version.form-group.content-text' },
+      { name: 'locale', label: 'template/snippet-version.form-group.locale' },
+      { name: 'subject', label: 'template/snippet-version.form-group.subject' },
+      { name: 'contentHtml', label: 'template/snippet-version.form-group.content-html' },
+      { name: 'contentText', label: 'template/snippet-version.form-group.content-text' },
     ];
     this.defaultValues = () => {
       return {

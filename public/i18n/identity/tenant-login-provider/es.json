@@ -82,22 +82,63 @@
   },
   "form-group": {
     "account-link-policy": {
+      "error": {
+        "required": "política de enlaces de cuenta es obligatorio"
+      },
+      "label": "política de enlaces de cuenta",
       "options": {
         "manual": "manual",
         "none": "nada",
         "verified-email": "E-mail verificado"
-      }
+      },
+      "placeholder": "política de enlaces de cuenta"
     },
     "accountLinkPolicy": {
       "error": {
         "required": "política de enlaces de cuenta es obligatorio"
       }
     },
+    "certificate": {
+      "label": "certificado",
+      "placeholder": "certificado"
+    },
+    "direct-access": {
+      "label": "acceso directo",
+      "placeholder": "acceso directo"
+    },
+    "enabled": {
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "metadata": {
+      "label": "metadatos",
+      "placeholder": "metadatos"
+    },
     "name": {
       "error": {
         "maxlength": "Nombre tiene que tener menos de 250 caracteres",
         "required": "Nombre es obligatorio"
-      }
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "oidc-claim-mapping": {
+      "label": "asignación de notificaciones",
+      "placeholder": "asignación de notificaciones"
+    },
+    "oidc-discovery-url": {
+      "error": {
+        "maxlength": "uRL de descubrimiento de oidc tiene que tener menos de 250 caracteres"
+      },
+      "label": "uRL de descubrimiento de oidc",
+      "placeholder": "uRL de descubrimiento de oidc"
+    },
+    "oidc-scopes": {
+      "error": {
+        "maxlength": "oidc scopes tiene que tener menos de 250 caracteres"
+      },
+      "label": "oidc scopes",
+      "placeholder": "oidc scopes"
     },
     "oidcDiscoveryUrl": {
       "error": {
@@ -109,12 +150,23 @@
         "maxlength": "oidc scopes tiene que tener menos de 250 caracteres"
       }
     },
+    "private-key": {
+      "error": {
+        "maxlength": "clave privada tiene que tener menos de 250 caracteres"
+      },
+      "label": "clave privada",
+      "placeholder": "clave privada"
+    },
     "privateKey": {
       "error": {
         "maxlength": "clave privada tiene que tener menos de 250 caracteres"
       }
     },
     "provider-type": {
+      "error": {
+        "required": "Tipo de proveedor es obligatorio"
+      },
+      "label": "Tipo de proveedor",
       "options": {
         "apple": "APPLE",
         "github": "GitHub",
@@ -122,17 +174,50 @@
         "microsoft": "MICROSOFT",
         "oidc": "OIDC",
         "saml": "SAML"
-      }
+      },
+      "placeholder": "Tipo de proveedor"
     },
     "providerType": {
       "error": {
         "required": "Tipo de proveedor es obligatorio"
       }
     },
+    "public-key": {
+      "error": {
+        "maxlength": "clave pública tiene que tener menos de 250 caracteres"
+      },
+      "label": "clave pública",
+      "placeholder": "clave pública"
+    },
     "publicKey": {
       "error": {
         "maxlength": "clave pública tiene que tener menos de 250 caracteres"
       }
+    },
+    "saml-idp-cert": {
+      "label": "saml idp cert",
+      "placeholder": "saml idp cert"
+    },
+    "saml-idp-entity-id": {
+      "error": {
+        "maxlength": "id de entidad saml idp tiene que tener menos de 250 caracteres"
+      },
+      "label": "id de entidad saml idp",
+      "placeholder": "id de entidad saml idp"
+    },
+    "saml-idp-metadata-url": {
+      "error": {
+        "maxlength": "URL de metadatos de IdP: tiene que tener menos de 250 caracteres"
+      },
+      "label": "URL de metadatos de IdP:",
+      "placeholder": "URL de metadatos de IdP:"
+    },
+    "saml-idp-sso-url": {
+      "error": {
+        "maxlength": "saml idp sso url tiene que tener menos de 250 caracteres"
+      },
+      "label": "saml idp sso url",
+      "placeholder": "saml idp sso url"
     },
     "samlIdpEntityId": {
       "error": {
@@ -152,7 +237,16 @@
     "tenant": {
       "error": {
         "required": "inquilino es obligatorio"
-      }
+      },
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "users-enabled-by-default": {
+      "error": {
+        "required": "usuarios habilitados de forma predeterminada es obligatorio"
+      },
+      "label": "usuarios habilitados de forma predeterminada",
+      "placeholder": "usuarios habilitados de forma predeterminada"
     },
     "usersEnabledByDefault": {
       "error": {
@@ -244,12 +338,30 @@
     }
   },
   "search": {
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
     "order": {
+      "label": "orden",
       "options": {
         "name-asc": "Nombre ASC",
         "name-desc": "Nombre: DESC",
         "null": "Predeterminado"
-      }
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

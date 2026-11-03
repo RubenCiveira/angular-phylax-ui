@@ -3,98 +3,98 @@
   <editable-selectone
     formControlName="tenant"
     [visible]="isVisible['tenant']"
-    label="identity.tenant-login-provider.form-group.tenant"
+    label="identity/tenant-login-provider.form-group.tenant"
     [provider]="tenantProvider"
   />
   <editable-text
     formControlName="name"
     [visible]="isVisible['name']"
-    label="identity.tenant-login-provider.form-group.name"
+    label="identity/tenant-login-provider.form-group.name"
   />
   <editable-choose
     formControlName="providerType"
     [visible]="isVisible['providerType']"
-    label="identity.tenant-login-provider.form-group.provider-type"
+    label="identity/tenant-login-provider.form-group.provider-type"
     [options]="['GOOGLE', 'GITHUB', 'MICROSOFT', 'APPLE', 'SAML', 'OIDC']"
   />
   <editable-check
     formControlName="enabled"
     [visible]="isVisible['enabled']"
-    label="identity.tenant-login-provider.form-group.enabled"
+    label="identity/tenant-login-provider.form-group.enabled"
   />
   <editable-check
     formControlName="directAccess"
     [visible]="isVisible['directAccess']"
-    label="identity.tenant-login-provider.form-group.direct-access"
+    label="identity/tenant-login-provider.form-group.direct-access"
   />
   <editable-text
     formControlName="publicKey"
     [visible]="isVisible['publicKey']"
-    label="identity.tenant-login-provider.form-group.public-key"
+    label="identity/tenant-login-provider.form-group.public-key"
   />
   <editable-text
     formControlName="privateKey"
     [visible]="isVisible['privateKey']"
-    label="identity.tenant-login-provider.form-group.private-key"
+    label="identity/tenant-login-provider.form-group.private-key"
   />
   <editable-textarea
     formControlName="certificate"
     [visible]="isVisible['certificate']"
-    label="identity.tenant-login-provider.form-group.certificate"
+    label="identity/tenant-login-provider.form-group.certificate"
   />
   <editable-upload
     formControlName="metadata"
     [visible]="isVisible['metadata']"
-    label="identity.tenant-login-provider.form-group.metadata"
+    label="identity/tenant-login-provider.form-group.metadata"
     [download]="downloadMetadata"
     [upload]="uploadMetadata"
   />
   <editable-text
     formControlName="oidcScopes"
     [visible]="isVisible['oidcScopes']"
-    label="identity.tenant-login-provider.form-group.oidc-scopes"
+    label="identity/tenant-login-provider.form-group.oidc-scopes"
   />
   <editable-textarea
     formControlName="oidcClaimMapping"
     [visible]="isVisible['oidcClaimMapping']"
-    label="identity.tenant-login-provider.form-group.oidc-claim-mapping"
+    label="identity/tenant-login-provider.form-group.oidc-claim-mapping"
   />
   <editable-choose
     formControlName="accountLinkPolicy"
     [visible]="isVisible['accountLinkPolicy']"
-    label="identity.tenant-login-provider.form-group.account-link-policy"
+    label="identity/tenant-login-provider.form-group.account-link-policy"
     [options]="['NONE', 'VERIFIED-EMAIL', 'MANUAL']"
   />
   <editable-text
     formControlName="oidcDiscoveryUrl"
     [visible]="isVisible['oidcDiscoveryUrl']"
-    label="identity.tenant-login-provider.form-group.oidc-discovery-url"
+    label="identity/tenant-login-provider.form-group.oidc-discovery-url"
   />
   <editable-text
     formControlName="samlIdpMetadataUrl"
     [visible]="isVisible['samlIdpMetadataUrl']"
-    label="identity.tenant-login-provider.form-group.saml-idp-metadata-url"
+    label="identity/tenant-login-provider.form-group.saml-idp-metadata-url"
   />
   <editable-text
     formControlName="samlIdpEntityId"
     [visible]="isVisible['samlIdpEntityId']"
-    label="identity.tenant-login-provider.form-group.saml-idp-entity-id"
+    label="identity/tenant-login-provider.form-group.saml-idp-entity-id"
   />
   <editable-text
     formControlName="samlIdpSsoUrl"
     [visible]="isVisible['samlIdpSsoUrl']"
-    label="identity.tenant-login-provider.form-group.saml-idp-sso-url"
+    label="identity/tenant-login-provider.form-group.saml-idp-sso-url"
   />
   <editable-upload
     formControlName="samlIdpCert"
     [visible]="isVisible['samlIdpCert']"
-    label="identity.tenant-login-provider.form-group.saml-idp-cert"
+    label="identity/tenant-login-provider.form-group.saml-idp-cert"
     [download]="downloadSamlIdpCert"
     [upload]="uploadSamlIdpCert"
   />
   <editable-check
     formControlName="usersEnabledByDefault"
     [visible]="isVisible['usersEnabledByDefault']"
-    label="identity.tenant-login-provider.form-group.users-enabled-by-default"
+    label="identity/tenant-login-provider.form-group.users-enabled-by-default"
   />
 </form-layout>

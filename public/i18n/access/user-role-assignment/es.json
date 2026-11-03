@@ -39,10 +39,24 @@
     }
   },
   "form-group": {
+    "oauth-client": {
+      "label": "Cliente OAuth",
+      "placeholder": "Cliente OAuth"
+    },
+    "resource-server": {
+      "label": "servidor de recursos",
+      "placeholder": "servidor de recursos"
+    },
+    "roles": {
+      "label": "roles",
+      "placeholder": "roles"
+    },
     "user": {
       "error": {
         "required": "usuario es obligatorio"
-      }
+      },
+      "label": "usuario",
+      "placeholder": "usuario"
     }
   },
   "list": {
@@ -74,6 +88,36 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "oauth-client": {
+      "label": "Cliente OAuth",
+      "placeholder": "Cliente OAuth"
+    },
+    "oauth-clients": {
+      "label": "OAuth Clients",
+      "placeholder": "OAuth Clients"
+    },
+    "resource-server": {
+      "label": "servidor de recursos",
+      "placeholder": "servidor de recursos"
+    },
+    "resource-servers": {
+      "label": "servidores de recursos",
+      "placeholder": "servidores de recursos"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "user": {
+      "label": "usuario",
+      "placeholder": "usuario"
+    },
+    "users": {
+      "label": "usuarios",
+      "placeholder": "usuarios"
     }
   }
 }

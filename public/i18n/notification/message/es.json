@@ -42,9 +42,16 @@
     "content": {
       "error": {
         "required": "contenido es obligatorio"
-      }
+      },
+      "label": "contenido",
+      "placeholder": "contenido"
     },
     "created-at": {
+      "error": {
+        "required": "creado en es obligatorio"
+      },
+      "label": "creado en",
+      "placeholder": "creado en",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -56,6 +63,8 @@
       }
     },
     "lock-at": {
+      "label": "bloquear en",
+      "placeholder": "bloquear en",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -64,9 +73,13 @@
     "retries": {
       "error": {
         "required": "reintentos es obligatorio"
-      }
+      },
+      "label": "reintentos",
+      "placeholder": "reintentos"
     },
     "send-at": {
+      "label": "Enviar a",
+      "placeholder": "Enviar a",
       "time": {
         "label": "Hora",
         "placeholder": "Hora"
@@ -76,12 +89,20 @@
       "error": {
         "maxlength": "Objetivo tiene que tener menos de 250 caracteres",
         "required": "Objetivo es obligatorio"
-      }
+      },
+      "label": "Objetivo",
+      "placeholder": "Objetivo"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
     },
     "urgent": {
       "error": {
         "required": "urgente es obligatorio"
-      }
+      },
+      "label": "urgente",
+      "placeholder": "urgente"
     }
   },
   "list": {
@@ -125,6 +146,20 @@
     "search": {
       "button": "Buscar",
       "title": "Buscar"
+    }
+  },
+  "search": {
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "tenant": {
+      "label": "inquilino",
+      "placeholder": "inquilino"
+    },
+    "tenants": {
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
     }
   }
 }

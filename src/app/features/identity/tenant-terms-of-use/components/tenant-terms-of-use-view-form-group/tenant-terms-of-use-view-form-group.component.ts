@@ -73,18 +73,18 @@ export class TenantTermsOfUseViewFormGroupComponent extends SubFormEditable<Tena
     this.conflictFields = [
       {
         name: 'tenant',
-        label: 'identity.tenant-terms-of-use.form-group.tenant',
+        label: 'identity/tenant-terms-of-use.form-group.tenant',
         display: referenceDisplay(tenantRepository),
       },
       {
         name: 'resourceServer',
-        label: 'identity.tenant-terms-of-use.form-group.resource-server',
+        label: 'identity/tenant-terms-of-use.form-group.resource-server',
         display: referenceDisplay(resourceServerRepository),
       },
-      { name: 'text', label: 'identity.tenant-terms-of-use.form-group.text' },
-      { name: 'enabled', label: 'identity.tenant-terms-of-use.form-group.enabled' },
-      { name: 'document', label: 'identity.tenant-terms-of-use.form-group.document' },
-      { name: 'activationDate', label: 'identity.tenant-terms-of-use.form-group.activation-date' },
+      { name: 'text', label: 'identity/tenant-terms-of-use.form-group.text' },
+      { name: 'enabled', label: 'identity/tenant-terms-of-use.form-group.enabled' },
+      { name: 'document', label: 'identity/tenant-terms-of-use.form-group.document' },
+      { name: 'activationDate', label: 'identity/tenant-terms-of-use.form-group.activation-date' },
     ];
     this.defaultValues = () => {
       return {
