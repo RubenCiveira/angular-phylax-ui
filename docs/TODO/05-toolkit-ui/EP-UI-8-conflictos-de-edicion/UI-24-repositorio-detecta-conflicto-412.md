@@ -48,4 +48,4 @@ origen: peticion
 
 ## Relacionado
 
-**Origen:** petición directa (no procede de `docs/recomendaciones`).
+**Origen:** petición directa (no procede de `docs/TODO/recomendaciones`).

@@ -44,4 +44,4 @@ En las 21 apariciones de `<editable-choose>` el generador emite las opciones en 
 
 ## Relacionado
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-form-group/*.component.html (editable-choose)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-form-group/*.component.html (editable-choose)*

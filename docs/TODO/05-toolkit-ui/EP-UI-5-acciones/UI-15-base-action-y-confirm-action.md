@@ -47,4 +47,4 @@ La interfaz `Action` obliga a cada acción generada a implementar 12 miembros, p
 - [UI-17](UI-17-partir-action-container.md) — Partir action-container en subcomponentes
 - [FEAT-10](../../08-features-generadas/EP-FEAT-4-acciones-generadas/FEAT-10-acciones-sobre-clases-base.md) — Acciones generadas sobre BaseAction/ConfirmAction *(épica [EP-FEAT-4](../../08-features-generadas/EP-FEAT-4-acciones-generadas/README.md))*
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *action/action-container.component.ts + action.model.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *action/action-container.component.ts + action.model.ts*

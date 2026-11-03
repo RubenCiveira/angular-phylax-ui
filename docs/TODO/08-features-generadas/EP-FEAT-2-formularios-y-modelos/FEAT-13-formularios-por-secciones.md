@@ -43,4 +43,4 @@ Los formularios grandes (oauth-client: más de 45 campos) se pintan todos seguid
 **Depende de:**
 - [FEAT-03](../EP-FEAT-1-listas-de-entidad/FEAT-03-metadatos-de-campo.md) — Metadatos de campo en el generador (sensitive, list, group…) *(épica [EP-FEAT-1](../EP-FEAT-1-listas-de-entidad/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-form-group/*.component.ts / .html*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-form-group/*.component.ts / .html*

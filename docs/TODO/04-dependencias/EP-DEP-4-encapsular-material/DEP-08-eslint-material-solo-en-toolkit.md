@@ -40,4 +40,4 @@ Las features importan Material directamente (`MatButtonModule`, `MatExpansionMod
 **Depende de:**
 - [CFG-06](../../06-configuracion-y-build/EP-CFG-2-calidad-de-codigo/CFG-06-eslint.md) — Añadir ESLint con reglas para el código generado *(épica [EP-CFG-2](../../06-configuracion-y-build/EP-CFG-2-calidad-de-codigo/README.md))*
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *Angular Material / CDK (uso directo desde las features)*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *Angular Material / CDK (uso directo desde las features)*

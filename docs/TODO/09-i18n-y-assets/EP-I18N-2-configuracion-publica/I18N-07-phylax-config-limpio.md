@@ -48,4 +48,4 @@ origen: 09-i18n-y-assets-publicos.md
 **Depende de:**
 - [CTX-18](../../01-contexto-compartido/EP-CTX-6-configuracion-en-runtime/CTX-18-json-schema-configuracion.md) — Publicar phylax-config.schema.json *(épica [EP-CTX-6](../../01-contexto-compartido/EP-CTX-6-configuracion-en-runtime/README.md))*
 
-**Recomendación de origen:** [09 · i18n y assets públicos](../../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/config/phylax-config.json*
+**Recomendación de origen:** [09 · i18n y assets públicos](../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/config/phylax-config.json*

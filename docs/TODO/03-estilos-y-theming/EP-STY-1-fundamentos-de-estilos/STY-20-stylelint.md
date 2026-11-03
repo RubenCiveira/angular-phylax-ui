@@ -44,4 +44,4 @@ No hay linter de estilos: nada impide que vuelvan los hex, los tokens `--mdc-*` 
 **Depende de:**
 - [STY-03](STY-03-design-tokens-app.md) — Definir los design tokens --app-*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *Lint de estilos*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *Lint de estilos*

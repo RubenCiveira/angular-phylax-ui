@@ -43,4 +43,4 @@ La caché es un `Map` a nivel de módulo (`repositoryStore`), invisible para DI 
 **Desbloquea:**
 - [DATA-13](DATA-13-tick-shift-sobre-resource.md) — Reimplementar Tick/Shift sobre resource()/rxResource()
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/repository/repository.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/repository/repository.service.ts*

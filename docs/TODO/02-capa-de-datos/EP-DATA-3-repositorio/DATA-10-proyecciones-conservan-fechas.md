@@ -41,4 +41,4 @@ origen: 06-capa-de-datos.md
 - [DATA-13](DATA-13-tick-shift-sobre-resource.md) — Reimplementar Tick/Shift sobre resource()/rxResource()
 - [FEAT-04](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/FEAT-04-renderizadores-por-tipo.md) — Renderizado de valores por tipo en listas y detalle *(épica [EP-FEAT-1](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/README.md))*
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/repository/repository.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/repository/repository.service.ts*

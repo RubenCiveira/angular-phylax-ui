@@ -48,4 +48,4 @@ Hay cuatro idiomas por defecto distintos: `'en-EN'` en `HomeComponent` y `Author
 - [SHELL-08](SHELL-08-rutas-raiz-y-titulos.md) — Redirección inicial, títulos de pestaña y opciones del router
 - [SHELL-20](SHELL-20-container-simplificado.md) — ContainerComponent: inputs de ruta y valores por defecto
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/app.routes.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/app.routes.ts*

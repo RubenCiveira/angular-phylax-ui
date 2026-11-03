@@ -43,4 +43,4 @@ Si falta una clave, Transloco devuelve la clave literal (`access.oauth-client.li
 **Depende de:**
 - [CTX-19](CTX-19-i18n-loader-tolerante.md) — i18n loader: tolerar ficheros ausentes y prodMode real
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/config/i18n-loader.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/config/i18n-loader.service.ts*

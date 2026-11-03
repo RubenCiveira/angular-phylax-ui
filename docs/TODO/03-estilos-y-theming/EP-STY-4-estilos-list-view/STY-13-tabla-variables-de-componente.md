@@ -53,4 +53,4 @@ La tabla usa `solid black`/`silver`, toma la tipografía de tokens de **botón**
 **Desbloquea:**
 - [UI-12](../../05-toolkit-ui/EP-UI-4-list-view/UI-12-list-view-limpieza.md) — list-view: seleccionar todo y limpieza interna *(épica [EP-UI-4](../../05-toolkit-ui/EP-UI-4-list-view/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *list-view.table.component.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *list-view.table.component.scss*

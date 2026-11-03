@@ -44,4 +44,4 @@ Hoy se convierte a `Date` **cualquier** string con forma de fecha (también text
 **Depende de:**
 - [DATA-15](DATA-15-entity-metadata-activo.md) — Activar EntityMetadata y borrar APIs comentadas
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/api/client.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/api/client.service.ts*

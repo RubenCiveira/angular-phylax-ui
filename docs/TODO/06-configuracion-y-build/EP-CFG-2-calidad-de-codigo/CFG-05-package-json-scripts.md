@@ -44,4 +44,4 @@ origen: 01-configuracion-y-build.md
 - [CFG-15](CFG-15-hooks-de-git.md) — Hooks de git con lefthook (commitlint y format)
 - [FEAT-18](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/FEAT-18-formatear-al-generar.md) — Formatear el código al terminar de generar *(épica [EP-FEAT-7](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *package.json*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *package.json*

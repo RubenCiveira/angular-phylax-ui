@@ -46,4 +46,4 @@ Quien despliega no tiene forma de saber qué claves admite `phylax-config.json` 
 **Desbloquea:**
 - [I18N-07](../../09-i18n-y-assets/EP-I18N-2-configuracion-publica/I18N-07-phylax-config-limpio.md) — Limpiar phylax-config.json y publicar un ejemplo de producción *(épica [EP-I18N-2](../../09-i18n-y-assets/EP-I18N-2-configuracion-publica/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/config/app-config.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/config/app-config.service.ts*

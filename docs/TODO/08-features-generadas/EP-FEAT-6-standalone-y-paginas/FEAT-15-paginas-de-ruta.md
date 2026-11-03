@@ -41,4 +41,4 @@ origen: 08-features-generadas.md
 - [STY-19](../../03-estilos-y-theming/EP-STY-6-estilos-de-features/STY-19-estilos-comunes-de-entidad.md) — Clases globales de pantalla de entidad y fin de los estilos inline *(épica [EP-STY-6](../../03-estilos-y-theming/EP-STY-6-estilos-de-features/README.md))*
 - [SHELL-08](../../07-shell-y-layout/EP-SHELL-2-arranque-y-rutas/SHELL-08-rutas-raiz-y-titulos.md) — Redirección inicial, títulos de pestaña y opciones del router *(épica [EP-SHELL-2](../../07-shell-y-layout/EP-SHELL-2-arranque-y-rutas/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *routes/*-view-list-route/*-page.component.ts*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *routes/*-view-list-route/*-page.component.ts*

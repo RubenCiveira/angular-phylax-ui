@@ -50,4 +50,4 @@ Las acciones `*-view-edit-action` cargan el elemento con `form.patchValue(select
 
 ## Relacionado
 
-**Origen:** petición directa (no procede de `docs/recomendaciones`).
+**Origen:** petición directa (no procede de `docs/TODO/recomendaciones`).

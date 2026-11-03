@@ -41,4 +41,4 @@ origen: 05-contexto-compartido.md
 **Depende de:**
 - [DATA-01](../../02-capa-de-datos/EP-DATA-1-cliente-http/DATA-01-token-con-timeout.md) — Peticiones sin sesión: error 401 en lugar de esperar para siempre *(épica [EP-DATA-1](../../02-capa-de-datos/EP-DATA-1-cliente-http/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/identity/user-info.model.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/identity/user-info.model.ts*

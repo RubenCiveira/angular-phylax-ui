@@ -42,4 +42,4 @@ Cada lista generada (~190 líneas) repite toolbar, panel de filtros, estado vac�
 - [FEAT-05](FEAT-05-pantalla-de-lista-usable.md) — Pantalla de lista: textos, estado vacío y filtros visibles
 - [UI-10](../../05-toolkit-ui/EP-UI-4-list-view/UI-10-list-view-selector-de-columnas.md) — list-view: selector de columnas y columnas visibles por defecto *(épica [EP-UI-4](../../05-toolkit-ui/EP-UI-4-list-view/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (resto de la plantilla)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (resto de la plantilla)*

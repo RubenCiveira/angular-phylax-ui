@@ -50,4 +50,4 @@ origen: 08-features-generadas.md
 - [CTX-15](../../01-contexto-compartido/EP-CTX-6-configuracion-en-runtime/CTX-15-app-config-tipado.md) — Configuración en runtime tipada (APP_CONFIG) *(épica [EP-CTX-6](../../01-contexto-compartido/EP-CTX-6-configuracion-en-runtime/README.md))*
 - [DATA-18](../../02-capa-de-datos/EP-DATA-5-rutas-locales/DATA-18-local-route-state-sin-navegaciones-fantasma.md) — LocalRouteState: ámbito de componente y sin navegaciones al destruir *(épica [EP-DATA-5](../../02-capa-de-datos/EP-DATA-5-rutas-locales/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.ts*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.ts*

@@ -43,4 +43,4 @@ origen: 01-configuracion-y-build.md
 **Desbloquea:**
 - [FEAT-18](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/FEAT-18-formatear-al-generar.md) — Formatear el código al terminar de generar *(épica [EP-FEAT-7](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *.prettierrc*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *.prettierrc*

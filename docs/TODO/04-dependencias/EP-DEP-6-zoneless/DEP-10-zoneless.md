@@ -47,4 +47,4 @@ La app depende de `zone.js` y usa muchos `setTimeout(() => signal.set(...))` par
 - [DATA-13](../../02-capa-de-datos/EP-DATA-3-repositorio/DATA-13-tick-shift-sobre-resource.md) — Reimplementar Tick/Shift sobre resource()/rxResource() *(épica [EP-DATA-3](../../02-capa-de-datos/EP-DATA-3-repositorio/README.md))*
 - [CTX-23](../../01-contexto-compartido/EP-CTX-8-estado-global/CTX-23-app-state-con-signals.md) — AppStateService con signals reales y claves tipadas *(épica [EP-CTX-8](../../01-contexto-compartido/EP-CTX-8-estado-global/README.md))*
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *zone.js*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *zone.js*

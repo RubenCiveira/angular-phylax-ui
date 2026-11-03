@@ -40,4 +40,4 @@ La regla `immutable` de un año se aplica a todos los `.js`, `.css` y `.json`, i
 
 ## Relacionado
 
-**Recomendación de origen:** [09 · i18n y assets públicos](../../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/.htaccess*
+**Recomendación de origen:** [09 · i18n y assets públicos](../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/.htaccess*

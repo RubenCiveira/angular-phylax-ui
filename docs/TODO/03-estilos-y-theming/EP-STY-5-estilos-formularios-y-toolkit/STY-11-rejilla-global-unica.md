@@ -44,4 +44,4 @@ origen: 02-estilos-y-theming.md
 **Depende de:**
 - [STY-01](../EP-STY-1-fundamentos-de-estilos/STY-01-estructura-src-styles.md) — Crear la estructura src/styles/ sin cambios visuales *(épica [EP-STY-1](../EP-STY-1-fundamentos-de-estilos/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *grid-utils.scss + form-layout.component.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *grid-utils.scss + form-layout.component.scss*

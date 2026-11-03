@@ -40,4 +40,4 @@ Hoy personalizar el menú implica editar un fichero que el generador sobrescribe
 **Depende de:**
 - [SHELL-01](SHELL-01-registro-de-features.md) — Registro único de features: todas las entidades en rutas y menú
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/menu.config.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/menu.config.ts*

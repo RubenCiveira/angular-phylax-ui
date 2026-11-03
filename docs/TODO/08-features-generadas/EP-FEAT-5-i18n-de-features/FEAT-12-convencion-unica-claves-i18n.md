@@ -47,4 +47,4 @@ En una misma entidad conviven `'access.oauth-client.list.filter.button'` (95 uso
 **Desbloquea:**
 - [FEAT-14](../EP-FEAT-6-standalone-y-paginas/FEAT-14-standalone-onpush.md) — Generar componentes standalone con OnPush y rutas sin NgModule *(épica [EP-FEAT-6](../EP-FEAT-6-standalone-y-paginas/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *i18n de las plantillas generadas (claves)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *i18n de las plantillas generadas (claves)*

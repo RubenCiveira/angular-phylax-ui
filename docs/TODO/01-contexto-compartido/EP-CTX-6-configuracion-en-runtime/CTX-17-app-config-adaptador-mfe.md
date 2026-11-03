@@ -41,4 +41,4 @@ origen: 05-contexto-compartido.md
 **Depende de:**
 - [CFG-10](../../06-configuracion-y-build/EP-CFG-3-build-y-tests/CFG-10-decidir-microfrontend.md) — Decidir sobre micro-frontends (borrar webpack o Native Federation) *(épica [EP-CFG-3](../../06-configuracion-y-build/EP-CFG-3-build-y-tests/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/config/app-config.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/config/app-config.service.ts*

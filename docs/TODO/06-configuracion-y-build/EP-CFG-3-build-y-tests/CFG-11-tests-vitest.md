@@ -44,4 +44,4 @@ origen: 01-configuracion-y-build.md
 **Desbloquea:**
 - [CFG-03](../EP-CFG-1-secretos-y-artefactos/CFG-03-sonar-exclusiones-y-cobertura.md) — Sonar: excluir código de terceros y cobertura real *(épica [EP-CFG-1](../EP-CFG-1-secretos-y-artefactos/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *karma.config.js*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *karma.config.js*

@@ -37,4 +37,4 @@ origen: 05-contexto-compartido.md
 
 ## Relacionado
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *oidc-identity-provider.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *oidc-identity-provider.service.ts*

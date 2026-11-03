@@ -40,4 +40,4 @@ origen: 08-features-generadas.md
 **Desbloquea:**
 - [FEAT-10](FEAT-10-acciones-sobre-clases-base.md) — Acciones generadas sobre BaseAction/ConfirmAction
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *actions/*-action/*.component.ts*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *actions/*-action/*.component.ts*

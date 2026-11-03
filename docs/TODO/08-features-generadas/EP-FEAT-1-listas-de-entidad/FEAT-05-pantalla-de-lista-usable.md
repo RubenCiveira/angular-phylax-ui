@@ -51,4 +51,4 @@ origen: 08-features-generadas.md
 **Desbloquea:**
 - [FEAT-06](FEAT-06-entity-list-layout.md) — Componente <entity-list-layout> en el toolkit
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (resto de la plantilla)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (resto de la plantilla)*

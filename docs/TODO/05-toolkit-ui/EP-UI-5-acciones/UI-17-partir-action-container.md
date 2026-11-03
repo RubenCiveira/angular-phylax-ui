@@ -41,4 +41,4 @@ origen: 07-toolkit-ui.md
 **Depende de:**
 - [UI-15](UI-15-base-action-y-confirm-action.md) — Clases base BaseAction y ConfirmAction
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *action/action-container.component.ts + action.model.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *action/action-container.component.ts + action.model.ts*

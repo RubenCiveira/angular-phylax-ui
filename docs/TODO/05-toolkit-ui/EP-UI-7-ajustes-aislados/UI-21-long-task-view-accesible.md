@@ -41,4 +41,4 @@ Se usa mucho (56 referencias) para el progreso de operaciones masivas.
 **Depende de:**
 - [DATA-08](../../02-capa-de-datos/EP-DATA-2-api-service-y-provider/DATA-08-poll-until-con-backoff.md) — Sondeo de operaciones masivas con backoff y límite *(épica [EP-DATA-2](../../02-capa-de-datos/EP-DATA-2-api-service-y-provider/README.md))*
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *long-task-view/**
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *long-task-view/**

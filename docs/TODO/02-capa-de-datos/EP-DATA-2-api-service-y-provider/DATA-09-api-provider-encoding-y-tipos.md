@@ -38,4 +38,4 @@ Las URLs se construyen con `bodyUrl + '/' + key` sin `encodeURIComponent`, y `fo
 
 ## Relacionado
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/repository/provider/impl/api.provider.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/repository/provider/impl/api.provider.ts*

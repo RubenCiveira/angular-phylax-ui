@@ -45,4 +45,4 @@ origen: 02-estilos-y-theming.md
 **Desbloquea:**
 - [SHELL-14](../../07-shell-y-layout/EP-SHELL-4-toolbar/SHELL-14-menu-de-usuario-preferencias.md) — Menú de usuario con idioma, tenant y tema *(épica [EP-SHELL-4](../../07-shell-y-layout/EP-SHELL-4-toolbar/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*

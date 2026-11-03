@@ -39,4 +39,4 @@ Se usa `APP_INITIALIZER` (deprecado). `$$_loadConfig` hace `fetch` sin control d
 
 ## Relacionado
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/config/app-config.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/config/app-config.service.ts*

@@ -51,4 +51,4 @@ La configuración en runtime resuelve API, identidad, i18n y telemetría, pero n
 - [STY-17](STY-17-marca-del-menu-configurable.md) — Logo y nombre del producto configurables en el menú
 - [I18N-10](../../09-i18n-y-assets/EP-I18N-3-servidor-y-assets/I18N-10-imagenes-svg-y-favicon.md) — Ilustraciones y logo en SVG adaptables al tema *(épica [EP-I18N-3](../../09-i18n-y-assets/EP-I18N-3-servidor-y-assets/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *public/config/theme.css (nuevo)*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *public/config/theme.css (nuevo)*

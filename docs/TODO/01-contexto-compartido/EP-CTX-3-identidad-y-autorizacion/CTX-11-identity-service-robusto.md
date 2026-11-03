@@ -42,4 +42,4 @@ origen: 05-contexto-compartido.md
 **Desbloquea:**
 - [SHELL-11](../../07-shell-y-layout/EP-SHELL-3-app-component/SHELL-11-bootstrap-identidad-con-timeout.md) — Arranque con timeout y reintento si la identidad no responde *(épica [EP-SHELL-3](../../07-shell-y-layout/EP-SHELL-3-app-component/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/identity/identity.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/identity/identity.service.ts*

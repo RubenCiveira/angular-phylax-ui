@@ -44,4 +44,4 @@ El botón de desplegar es un `<mat-icon (click)>` (no se enfoca ni se activa con
 **Depende de:**
 - [DATA-16](../../02-capa-de-datos/EP-DATA-4-seleccion-y-selectores/DATA-16-selector-provider-error.md) — selectorProvider: exponer error y no relanzarlo *(épica [EP-DATA-4](../../02-capa-de-datos/EP-DATA-4-seleccion-y-selectores/README.md))*
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *editable-selectone + search-editable.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *editable-selectone + search-editable.ts*

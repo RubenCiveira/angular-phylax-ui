@@ -51,4 +51,4 @@ Para resolver un 412 hay que comparar tres versiones de la misma entidad (origin
 
 ## Relacionado
 
-**Origen:** petición directa (no procede de `docs/recomendaciones`).
+**Origen:** petición directa (no procede de `docs/TODO/recomendaciones`).

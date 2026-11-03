@@ -52,4 +52,4 @@ No hay una capa de tokens propia: cada componente decide colores, radios y espac
 - [STY-16](../EP-STY-5-estilos-formularios-y-toolkit/STY-16-error-modal-tokens.md) — Colores del modal de error con tokens y contraste AA *(épica [EP-STY-5](../EP-STY-5-estilos-formularios-y-toolkit/README.md))*
 - [STY-19](../EP-STY-6-estilos-de-features/STY-19-estilos-comunes-de-entidad.md) — Clases globales de pantalla de entidad y fin de los estilos inline *(épica [EP-STY-6](../EP-STY-6-estilos-de-features/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *Arquitectura objetivo*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *Arquitectura objetivo*

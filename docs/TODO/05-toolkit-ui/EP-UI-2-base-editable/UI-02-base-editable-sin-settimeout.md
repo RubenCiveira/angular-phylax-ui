@@ -42,4 +42,4 @@ No ha aparecido `ExpressionChangedAfterItHasBeenChecked`. Test en `base-editable
 
 ## Relacionado
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *editable/base-editable.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *editable/base-editable.ts*

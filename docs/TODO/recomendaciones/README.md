@@ -42,7 +42,7 @@ Etiquetas que se usan:
 
 ### 🔴 Para atender ya
 
-1. **Hay un token de SonarQube commiteado** en [Makefile](../../Makefile) y en [sonar-project.properties](../../sonar-project.properties) (prefijo `sqa_`). Hay que revocarlo y sacarlo del repositorio (ver doc 01).
+1. **Hay un token de SonarQube commiteado** en [Makefile](../../../Makefile) y en [sonar-project.properties](../../../sonar-project.properties) (prefijo `sqa_`). Hay que revocarlo y sacarlo del repositorio (ver doc 01).
 2. **Los valores de `editable-choose` no coinciden con el modelo.** Los formularios ofrecen `'CLIENT-SECRET-BASIC'`, pero el modelo, el valor por defecto y las claves i18n usan `'client-secret-basic'`. El valor por defecto no aparece seleccionado, las etiquetas no se traducen y se envía al API un valor en mayúsculas (ver doc 08).
 3. **Las listas muestran secretos en columnas** (`secretOauth` y `registrationAccessToken` en oauth-client, `password` y `temporalPassword` en user, `password` en smtp-outbound-config y `apiKey` en resource-server) (ver doc 08).
 4. **El menú solo registra 2 de las 26 entidades** (`tenant` y `users`). El resto de pantallas generadas no se puede alcanzar desde la aplicación (ver doc 04).

@@ -44,4 +44,4 @@ El `Resource` solo lleva `service.name` (hay un `TODO: ¿podemos añadir usuario
 **Depende de:**
 - [SHELL-23](../../07-shell-y-layout/EP-SHELL-6-ficheros-de-bootstrap/SHELL-23-environment-con-version.md) — Renombrar enviroment y añadir versión de build *(épica [EP-SHELL-6](../../07-shell-y-layout/EP-SHELL-6-ficheros-de-bootstrap/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/observability/instrumentation.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/observability/instrumentation.service.ts*

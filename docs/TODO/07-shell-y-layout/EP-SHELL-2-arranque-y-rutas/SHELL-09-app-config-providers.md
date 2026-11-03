@@ -44,4 +44,4 @@ origen: 04-shell-y-layout.md
 - [CTX-10](../../01-contexto-compartido/EP-CTX-1-step-up-e-interceptores/CTX-10-provide-oidc-identity.md) — Sustituir OidcLoginModule por provideOidcIdentity() *(épica [EP-CTX-1](../../01-contexto-compartido/EP-CTX-1-step-up-e-interceptores/README.md))*
 - [CTX-19](../../01-contexto-compartido/EP-CTX-7-cargador-i18n/CTX-19-i18n-loader-tolerante.md) — i18n loader: tolerar ficheros ausentes y prodMode real *(épica [EP-CTX-7](../../01-contexto-compartido/EP-CTX-7-cargador-i18n/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/app.config.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/app.config.ts*

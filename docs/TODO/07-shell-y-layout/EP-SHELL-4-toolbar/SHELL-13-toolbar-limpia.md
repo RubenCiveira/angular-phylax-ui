@@ -44,4 +44,4 @@ origen: 04-shell-y-layout.md
 **Desbloquea:**
 - [SHELL-14](SHELL-14-menu-de-usuario-preferencias.md) — Menú de usuario con idioma, tenant y tema
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *toolbar.component.ts / .html*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *toolbar.component.ts / .html*

@@ -47,7 +47,7 @@ El shell se mejora en la aplicación de referencia y se lleva a la plantilla con
 |Incluye los ficheros raíz y `.ci/`.
 
 |`--with-docs`
-|Incluye `docs/`, salvo lo propio del proyecto (`docs/TODO`, `docs/recomendaciones`).
+|Incluye `docs/`, salvo lo propio del proyecto (`docs/TODO`: auditoría y backlog).
 
 |`--delete`
 |Borra de la plantilla lo que ya no existe en el proyecto.

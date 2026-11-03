@@ -45,4 +45,4 @@ No hay estilos globales de foco visible ni respeto a `prefers-reduced-motion`.
 **Desbloquea:**
 - [SHELL-12](../../07-shell-y-layout/EP-SHELL-3-app-component/SHELL-12-skip-link-y-aria.md) — Skip link y botón de menú accesible *(épica [EP-SHELL-3](../../07-shell-y-layout/EP-SHELL-3-app-component/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*

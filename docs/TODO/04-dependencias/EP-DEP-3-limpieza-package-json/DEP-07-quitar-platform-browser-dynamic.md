@@ -36,4 +36,4 @@ Está en las dependencias, pero el arranque usa `bootstrapApplication` de `@angu
 
 ## Relacionado
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *@angular/platform-browser-dynamic*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *@angular/platform-browser-dynamic*

@@ -45,4 +45,4 @@ origen: 02-estilos-y-theming.md
 **Desbloquea:**
 - [STY-07](STY-07-index-html.md) — index.html: idioma dinámico, theme-color y splash
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *public/assets/roboto.css*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *public/assets/roboto.css*

@@ -38,4 +38,4 @@ Quedan `console.log('REMOVE UNSUSCRIBES OF THE PROYECTION')`, varios `FIXME`/`TO
 
 ## Relacionado
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/repository/repository.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/repository/repository.service.ts*

@@ -49,4 +49,4 @@ origen: 04-shell-y-layout.md
 - [SHELL-03](SHELL-03-menu-accesible-con-router-link.md) — Menú con enlaces reales, iconos y modo mini usable
 - [SHELL-19](../EP-SHELL-2-arranque-y-rutas/SHELL-19-home-redirect-y-dashboard.md) — Portada: redirección sin parpadeo y dashboard opcional *(épica [EP-SHELL-2](../EP-SHELL-2-arranque-y-rutas/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/menu.config.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/menu.config.ts*

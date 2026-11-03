@@ -43,4 +43,4 @@ El servicio es `providedIn: 'root'` e inyecta `ActivatedRoute` (la raíz). Su su
 **Desbloquea:**
 - [FEAT-07](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/FEAT-07-lista-busqueda-reactiva-y-url.md) — Lista: búsqueda reactiva, tamaño de página y filtros en la URL *(épica [EP-FEAT-1](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/README.md))*
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *interaction/local-route-state/local-route-state.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *interaction/local-route-state/local-route-state.service.ts*

@@ -40,4 +40,4 @@ Todos los proyectos generados reciben OIDC, telemetría, editores y configuraci�
 
 ## Relacionado
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *Política de dependencias*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *Política de dependencias*

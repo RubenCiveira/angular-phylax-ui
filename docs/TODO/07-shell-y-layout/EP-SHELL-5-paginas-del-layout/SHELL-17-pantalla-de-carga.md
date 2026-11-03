@@ -37,4 +37,4 @@ origen: 04-shell-y-layout.md
 
 ## Relacionado
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *pages/bootstrap/bootstrap.component.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *pages/bootstrap/bootstrap.component.ts*

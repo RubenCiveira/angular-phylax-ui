@@ -43,4 +43,4 @@ Hay traducción automática sin revisar: `action.delete.title: "Ticket passed"`,
 - [I18N-01](I18N-01-recolocar-traducciones-en.md) — Mover los en.json a sus carpetas actuales y borrar las huérfanas
 - [I18N-05](I18N-05-i18n-global.md) — Traducciones globales del shell, toolkit y errores
 
-**Recomendación de origen:** [09 · i18n y assets públicos](../../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/<dominio>/<entidad>/{es,en}.json (calidad del contenido)*
+**Recomendación de origen:** [09 · i18n y assets públicos](../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/<dominio>/<entidad>/{es,en}.json (calidad del contenido)*

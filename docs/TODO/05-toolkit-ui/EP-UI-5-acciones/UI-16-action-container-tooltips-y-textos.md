@@ -38,4 +38,4 @@ origen: 07-toolkit-ui.md
 
 ## Relacionado
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *action/action-container.component.ts + action.model.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *action/action-container.component.ts + action.model.ts*

@@ -44,4 +44,4 @@ El menú pinta `<img src="./assets/img/logo-75x75.png" style="width: 75px; …">
 **Depende de:**
 - [STY-06](STY-06-theming-en-runtime.md) — Theming en runtime desde la configuración (por despliegue y tenant)
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *menu.component.html*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *menu.component.html*

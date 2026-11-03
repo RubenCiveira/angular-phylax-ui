@@ -43,4 +43,4 @@ Variables de rejilla inline en la plantilla, `mat-toolbar { background-color: in
 **Depende de:**
 - [STY-02](../EP-STY-1-fundamentos-de-estilos/STY-02-tema-material-parametrizable.md) — Tema de Material parametrizable y overrides sin !important *(épica [EP-STY-1](../EP-STY-1-fundamentos-de-estilos/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *toolbar.component.html / .scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *toolbar.component.html / .scss*

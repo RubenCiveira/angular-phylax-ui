@@ -39,4 +39,4 @@ origen: 03-dependencias.md
 
 ## Relacionado
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *app.config.ts (@angular/animations)*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *app.config.ts (@angular/animations)*

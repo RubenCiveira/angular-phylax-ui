@@ -48,4 +48,4 @@ origen: 09-i18n-y-assets-publicos.md
 - [I18N-06](I18N-06-calidad-de-traducciones.md) — Revisar la calidad de las traducciones generadas
 - [I18N-02](../EP-I18N-2-configuracion-publica/I18N-02-idiomas-disponibles-reales.md) — available-langs solo con idiomas que existen *(épica [EP-I18N-2](../EP-I18N-2-configuracion-publica/README.md))*
 
-**Recomendación de origen:** [09 · i18n y assets públicos](../../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/** (estructura de carpetas)*
+**Recomendación de origen:** [09 · i18n y assets públicos](../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/** (estructura de carpetas)*

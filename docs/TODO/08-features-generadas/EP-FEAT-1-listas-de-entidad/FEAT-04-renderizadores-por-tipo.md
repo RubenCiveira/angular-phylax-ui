@@ -45,4 +45,4 @@ Los valores se pintan en crudo: `true`/`false`, fechas ISO, enums técnicos y JS
 - [FEAT-03](FEAT-03-metadatos-de-campo.md) — Metadatos de campo en el generador (sensitive, list, group…)
 - [DATA-10](../../02-capa-de-datos/EP-DATA-3-repositorio/DATA-10-proyecciones-conservan-fechas.md) — Las proyecciones no deben convertir las fechas en strings *(épica [EP-DATA-3](../../02-capa-de-datos/EP-DATA-3-repositorio/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (columnas)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (columnas)*

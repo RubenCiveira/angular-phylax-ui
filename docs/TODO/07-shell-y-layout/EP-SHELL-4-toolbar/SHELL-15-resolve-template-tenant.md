@@ -38,4 +38,4 @@ El reemplazo de `{{tenant}}` se hace a mano en OIDC, toolbar y configuración.
 
 ## Relacionado
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *toolbar.component.ts / .html*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *toolbar.component.ts / .html*

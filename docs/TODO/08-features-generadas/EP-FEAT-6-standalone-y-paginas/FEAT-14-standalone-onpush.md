@@ -48,4 +48,4 @@ origen: 08-features-generadas.md
 **Desbloquea:**
 - [DEP-10](../../04-dependencias/EP-DEP-6-zoneless/DEP-10-zoneless.md) — Pasar a detección de cambios zoneless *(épica [EP-DEP-6](../../04-dependencias/EP-DEP-6-zoneless/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → ***/*.module.ts y standalone: false*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → ***/*.module.ts y standalone: false*

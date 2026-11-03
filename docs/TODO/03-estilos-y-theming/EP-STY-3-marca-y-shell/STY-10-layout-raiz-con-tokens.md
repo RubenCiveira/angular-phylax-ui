@@ -45,4 +45,4 @@ origen: 02-estilos-y-theming.md
 **Desbloquea:**
 - [SHELL-10](../../07-shell-y-layout/EP-SHELL-3-app-component/SHELL-10-app-component-signals.md) — AppComponent: estado del nav con signals y persistido *(épica [EP-SHELL-3](../../07-shell-y-layout/EP-SHELL-3-app-component/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *src/app/app.component.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *src/app/app.component.scss*

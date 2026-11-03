@@ -45,4 +45,4 @@ Las ~230 acciones generadas inyectan `MatDialog` y `MatSnackBar` directamente y 
 - [CTX-07](../../01-contexto-compartido/EP-CTX-2-proveedor-oidc/CTX-07-oidc-sin-alert-confirm.md) — OIDC: sustituir alert/confirm por diálogos traducidos *(épica [EP-CTX-2](../../01-contexto-compartido/EP-CTX-2-proveedor-oidc/README.md))*
 - [UI-15](../../05-toolkit-ui/EP-UI-5-acciones/UI-15-base-action-y-confirm-action.md) — Clases base BaseAction y ConfirmAction *(épica [EP-UI-5](../../05-toolkit-ui/EP-UI-5-acciones/README.md))*
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *Angular Material / CDK (uso directo desde las features)*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *Angular Material / CDK (uso directo desde las features)*

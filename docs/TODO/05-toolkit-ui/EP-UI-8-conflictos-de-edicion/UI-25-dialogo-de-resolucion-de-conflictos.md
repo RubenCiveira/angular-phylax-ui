@@ -53,4 +53,4 @@ Con el resultado de `threeWayMerge` hace falta una pantalla en la que el usuario
 
 ## Relacionado
 
-**Origen:** petición directa (no procede de `docs/recomendaciones`).
+**Origen:** petición directa (no procede de `docs/TODO/recomendaciones`).

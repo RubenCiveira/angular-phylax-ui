@@ -42,4 +42,4 @@ origen: 02-estilos-y-theming.md
 
 ## Relacionado
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *list-view.grid.component.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *list-view.grid.component.scss*

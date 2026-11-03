@@ -50,4 +50,4 @@ origen: 07-toolkit-ui.md
 **Desbloquea:**
 - [FEAT-06](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/FEAT-06-entity-list-layout.md) — Componente <entity-list-layout> en el toolkit *(épica [EP-FEAT-1](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/README.md))*
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *list-view/list-view.component.html / .ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *list-view/list-view.component.html / .ts*

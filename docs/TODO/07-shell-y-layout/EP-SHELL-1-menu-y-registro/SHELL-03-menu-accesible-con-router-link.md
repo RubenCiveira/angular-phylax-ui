@@ -49,4 +49,4 @@ Los ítems son `<a mat-list-item (click)>` sin `href` (no se enfocan con tabulad
 **Desbloquea:**
 - [SHELL-04](SHELL-04-visibilidad-por-permisos.md) — Visibilidad del menú por permiso, calculada una vez
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *menu.component.html / .ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *menu.component.html / .ts*

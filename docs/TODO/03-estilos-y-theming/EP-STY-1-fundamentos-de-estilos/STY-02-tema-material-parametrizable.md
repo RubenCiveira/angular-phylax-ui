@@ -49,4 +49,4 @@ origen: 02-estilos-y-theming.md
 - [STY-09](../EP-STY-2-index-fuentes-e-iconos/STY-09-tipografia-autoalojada.md) — Tipografía autoalojada o pila del sistema *(épica [EP-STY-2](../EP-STY-2-index-fuentes-e-iconos/README.md))*
 - [STY-18](../EP-STY-3-marca-y-shell/STY-18-toolbar-con-overrides.md) — Toolbar personalizable desde el tema *(épica [EP-STY-3](../EP-STY-3-marca-y-shell/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*

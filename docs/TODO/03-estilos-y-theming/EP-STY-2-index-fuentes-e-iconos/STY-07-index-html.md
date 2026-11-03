@@ -43,4 +43,4 @@ origen: 02-estilos-y-theming.md
 - [STY-08](STY-08-iconos-autoalojados.md) — Iconos autoalojados (Material Symbols o sprite SVG)
 - [STY-09](STY-09-tipografia-autoalojada.md) — Tipografía autoalojada o pila del sistema
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *src/index.html*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *src/index.html*

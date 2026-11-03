@@ -49,4 +49,4 @@ origen: 05-contexto-compartido.md
 - [CTX-10](CTX-10-provide-oidc-identity.md) — Sustituir OidcLoginModule por provideOidcIdentity()
 - [SHELL-09](../../07-shell-y-layout/EP-SHELL-2-arranque-y-rutas/SHELL-09-app-config-providers.md) — Ordenar app.config.ts: una sola configuración de i18n *(épica [EP-SHELL-2](../../07-shell-y-layout/EP-SHELL-2-arranque-y-rutas/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *step-up.interceptor.ts + step-up.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *step-up.interceptor.ts + step-up.service.ts*

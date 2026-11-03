@@ -45,4 +45,4 @@ origen: 05-contexto-compartido.md
 - [CTX-13](CTX-13-pagina-unauthorized-con-salida.md) — Página de acceso denegado con acciones (401/403)
 - [SHELL-04](../../07-shell-y-layout/EP-SHELL-1-menu-y-registro/SHELL-04-visibilidad-por-permisos.md) — Visibilidad del menú por permiso, calculada una vez *(épica [EP-SHELL-1](../../07-shell-y-layout/EP-SHELL-1-menu-y-registro/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *guards/is-authenticated.guards.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *guards/is-authenticated.guards.ts*

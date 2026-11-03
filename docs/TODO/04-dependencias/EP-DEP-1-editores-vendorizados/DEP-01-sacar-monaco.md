@@ -45,4 +45,4 @@ origen: 03-dependencias.md
 **Desbloquea:**
 - [CFG-08](../../06-configuracion-y-build/EP-CFG-3-build-y-tests/CFG-08-builder-y-assets.md) — Migrar a @angular/build y filtrar assets *(épica [EP-CFG-3](../../06-configuracion-y-build/EP-CFG-3-build-y-tests/README.md))*
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *public/assets/monaco/***
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *public/assets/monaco/***

@@ -43,4 +43,4 @@ origen: 05-contexto-compartido.md
 **Desbloquea:**
 - [CTX-05](CTX-05-error-service-api-errores-gestionados.md) — ErrorService: traducir mensajes y formalizar los errores gestionados
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/observability/error.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/observability/error.service.ts*

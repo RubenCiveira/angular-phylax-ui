@@ -36,4 +36,4 @@ Reimplementa un `BehaviorSubject` con `.set` mediante `as any`.
 
 ## Relacionado
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *layout-state.service.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *layout-state.service.ts*

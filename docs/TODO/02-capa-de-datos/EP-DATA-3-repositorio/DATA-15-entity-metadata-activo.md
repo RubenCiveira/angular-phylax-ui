@@ -44,4 +44,4 @@ origen: 06-capa-de-datos.md
 - [DATA-03](DATA-03-fechas-por-metadatos.md) — Convertir fechas según los metadatos de la entidad
 - [FEAT-03](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/FEAT-03-metadatos-de-campo.md) — Metadatos de campo en el generador (sensitive, list, group…) *(épica [EP-FEAT-1](../../08-features-generadas/EP-FEAT-1-listas-de-entidad/README.md))*
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *repository-provider.interface.ts y repository.model.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *repository-provider.interface.ts y repository.model.ts*

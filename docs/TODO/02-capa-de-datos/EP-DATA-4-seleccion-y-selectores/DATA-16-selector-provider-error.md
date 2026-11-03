@@ -43,4 +43,4 @@ La interfaz declara `error: Signal<any>`, pero `selectorProvider()` nunca asigna
 **Desbloquea:**
 - [UI-08](../../05-toolkit-ui/EP-UI-3-editables-de-seleccion/UI-08-selectone-accesible.md) — editable-selectone accesible y con feedback *(épica [EP-UI-3](../../05-toolkit-ui/EP-UI-3-editables-de-seleccion/README.md))*
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/selector-provider.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/selector-provider.ts*

@@ -38,4 +38,4 @@ Los parámetros `{ url; params?; headers?; identity?; withIdentity? }` se repite
 
 ## Relacionado
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/api/client.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/api/client.service.ts*

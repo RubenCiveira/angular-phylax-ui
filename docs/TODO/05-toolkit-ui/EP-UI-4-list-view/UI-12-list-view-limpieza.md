@@ -52,4 +52,4 @@ No hay "seleccionar todo"; el output `prev` nunca se emite; `mode='list'` acaba 
 **Depende de:**
 - [STY-13](../../03-estilos-y-theming/EP-STY-4-estilos-list-view/STY-13-tabla-variables-de-componente.md) — Tabla de list-view con variables de componente *(épica [EP-STY-4](../../03-estilos-y-theming/EP-STY-4-estilos-list-view/README.md))*
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *list-view/list-view.component.html / .ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *list-view/list-view.component.html / .ts*

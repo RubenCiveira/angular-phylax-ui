@@ -42,4 +42,4 @@ El README es el genérico de Angular CLI 18 con título "Vista".
 **Depende de:**
 - [FEAT-17](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/FEAT-17-marcas-de-generacion-y-extension.md) — Contrato de regeneración: @generated, @generated-once y extensiones *(épica [EP-FEAT-7](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *README.md*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *README.md*

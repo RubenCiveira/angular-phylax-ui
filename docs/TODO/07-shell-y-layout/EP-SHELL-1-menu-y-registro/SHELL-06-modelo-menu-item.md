@@ -40,4 +40,4 @@ origen: 04-shell-y-layout.md
 - [SHELL-01](SHELL-01-registro-de-features.md) — Registro único de features: todas las entidades en rutas y menú
 - [SHELL-03](SHELL-03-menu-accesible-con-router-link.md) — Menú con enlaces reales, iconos y modo mini usable
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *menu-item.model.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *menu-item.model.ts*

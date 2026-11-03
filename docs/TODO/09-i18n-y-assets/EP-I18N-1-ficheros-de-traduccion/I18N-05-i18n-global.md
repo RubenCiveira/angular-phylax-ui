@@ -45,4 +45,4 @@ origen: 09-i18n-y-assets-publicos.md
 - [UI-19](../../05-toolkit-ui/EP-UI-6-paginas-de-error/UI-19-error-page-traducida.md) — Página de error traducida y útil *(épica [EP-UI-6](../../05-toolkit-ui/EP-UI-6-paginas-de-error/README.md))*
 - [I18N-06](I18N-06-calidad-de-traducciones.md) — Revisar la calidad de las traducciones generadas
 
-**Recomendación de origen:** [09 · i18n y assets públicos](../../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/{es,en}.json (global)*
+**Recomendación de origen:** [09 · i18n y assets públicos](../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/{es,en}.json (global)*

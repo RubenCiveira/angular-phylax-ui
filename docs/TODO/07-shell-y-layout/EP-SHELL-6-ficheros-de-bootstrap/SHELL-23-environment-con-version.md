@@ -45,4 +45,4 @@ La carpeta y el fichero tienen errata (`enviroment`) y solo contienen `{ name: '
 **Desbloquea:**
 - [CTX-22](../../01-contexto-compartido/EP-CTX-5-observabilidad/CTX-22-telemetria-atributos-de-recurso.md) — Telemetría: atributos útiles y nombres correctos *(épica [EP-CTX-5](../../01-contexto-compartido/EP-CTX-5-observabilidad/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *enviroment/enviroment.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *enviroment/enviroment.ts*

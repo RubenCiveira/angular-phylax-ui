@@ -39,4 +39,4 @@ Cada modelo declara tres veces los mismos campos (`Entity`, `EntityProjection` y
 
 ## Relacionado
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *model/*.model.ts*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *model/*.model.ts*

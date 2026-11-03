@@ -38,4 +38,4 @@ El scope `access/security-domain` no tiene ficheros en `public/i18n`.
 
 ## Relacionado
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *access/security-domain/***
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *access/security-domain/***

@@ -42,4 +42,4 @@ El código generado sale sin formatear (`}    update(`, decoradores en una líne
 - [CFG-05](../../06-configuracion-y-build/EP-CFG-2-calidad-de-codigo/CFG-05-package-json-scripts.md) — package.json: nombre, engines y scripts útiles *(épica [EP-CFG-2](../../06-configuracion-y-build/EP-CFG-2-calidad-de-codigo/README.md))*
 - [CFG-14](../../06-configuracion-y-build/EP-CFG-2-calidad-de-codigo/CFG-14-prettier-lf.md) — Prettier con finales de línea LF *(épica [EP-CFG-2](../../06-configuracion-y-build/EP-CFG-2-calidad-de-codigo/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (resto de la plantilla)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (resto de la plantilla)*

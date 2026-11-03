@@ -41,4 +41,4 @@ Cada ítem se suscribe a todos los `router.events` y ejecuta guards de navegaci�
 - [SHELL-03](SHELL-03-menu-accesible-con-router-link.md) — Menú con enlaces reales, iconos y modo mini usable
 - [CTX-12](../../01-contexto-compartido/EP-CTX-3-identidad-y-autorizacion/CTX-12-guards-return-url-y-permisos.md) — Guards: returnUrl y guard por permiso *(épica [EP-CTX-3](../../01-contexto-compartido/EP-CTX-3-identidad-y-autorizacion/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *menu.component.html / .ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *menu.component.html / .ts*

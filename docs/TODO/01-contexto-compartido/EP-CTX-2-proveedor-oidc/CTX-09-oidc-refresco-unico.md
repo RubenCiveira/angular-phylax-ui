@@ -41,4 +41,4 @@ En `token_expires` se hace `setTimeout(() => refreshToken(), 1000)` a mano, adem
 **Desbloquea:**
 - [I18N-09](../../09-i18n-y-assets/EP-I18N-3-servidor-y-assets/I18N-09-quitar-silent-refresh.md) — Quitar silent-refresh.html *(épica [EP-I18N-3](../../09-i18n-y-assets/EP-I18N-3-servidor-y-assets/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *oidc-identity-provider.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *oidc-identity-provider.service.ts*

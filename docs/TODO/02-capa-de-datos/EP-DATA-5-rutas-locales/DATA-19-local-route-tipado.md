@@ -40,4 +40,4 @@ origen: 06-capa-de-datos.md
 
 ## Relacionado
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *interaction/local-route/**
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *interaction/local-route/**

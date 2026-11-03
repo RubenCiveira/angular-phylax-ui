@@ -44,4 +44,4 @@ Sincroniza URL y estado con dos `effect` que navegan y una suscripción a `route
 - [SHELL-07](SHELL-07-defaults-service.md) — Idioma y tenant por defecto en un único sitio
 - [SHELL-08](SHELL-08-rutas-raiz-y-titulos.md) — Redirección inicial, títulos de pestaña y opciones del router
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *pages/container/container.component.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *pages/container/container.component.ts*

@@ -50,4 +50,4 @@ La tabla es un conjunto de `div`/`span` sin `role`; las filas solo se activan co
 
 ## Relacionado
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *list-view/list-view.component.html / .ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *list-view/list-view.component.html / .ts*

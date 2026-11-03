@@ -39,4 +39,4 @@ origen: 06-capa-de-datos.md
 
 ## Relacionado
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/selection-model.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/selection-model.ts*

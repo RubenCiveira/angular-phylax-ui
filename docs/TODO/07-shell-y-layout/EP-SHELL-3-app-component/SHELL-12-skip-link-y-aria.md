@@ -43,4 +43,4 @@ No hay enlace "Saltar al contenido", el botón de menú no tiene `aria-label`, `
 **Depende de:**
 - [STY-05](../../03-estilos-y-theming/EP-STY-1-fundamentos-de-estilos/STY-05-base-accesible.md) — Estilos base de accesibilidad (foco y movimiento reducido) *(épica [EP-STY-1](../../03-estilos-y-theming/EP-STY-1-fundamentos-de-estilos/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/app.component.html*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/app.component.html*

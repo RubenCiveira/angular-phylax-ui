@@ -38,4 +38,4 @@ origen: 01-configuracion-y-build.md
 
 ## Relacionado
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *.gitignore / .scannerwork*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *.gitignore / .scannerwork*

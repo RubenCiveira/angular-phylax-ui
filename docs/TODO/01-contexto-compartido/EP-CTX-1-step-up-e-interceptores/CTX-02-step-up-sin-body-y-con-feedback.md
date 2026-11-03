@@ -46,4 +46,4 @@ origen: 05-contexto-compartido.md
 - [CTX-01](CTX-01-interceptor-step-up-funcional.md) — Hacer que el interceptor de step-up se ejecute
 - [DEP-09](../../04-dependencias/EP-DEP-4-encapsular-material/DEP-09-servicios-confirm-y-notify.md) — Crear ConfirmDialogService y NotifyService en el toolkit *(épica [EP-DEP-4](../../04-dependencias/EP-DEP-4-encapsular-material/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *step-up.interceptor.ts + step-up.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *step-up.interceptor.ts + step-up.service.ts*

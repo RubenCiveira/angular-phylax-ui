@@ -40,4 +40,4 @@ origen: 04-shell-y-layout.md
 
 ## Relacionado
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *route-accesible.service.ts y route-accessible.service.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *route-accesible.service.ts y route-accessible.service.ts*

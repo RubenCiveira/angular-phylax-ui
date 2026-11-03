@@ -43,4 +43,4 @@ La configuración de nginx se genera con `echo` en el Dockerfile y cachea todo `
 **Depende de:**
 - [CFG-12](CFG-12-dockerfile-unico.md) — Un único Dockerfile que funcione
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *src/docker/Dockerfile*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *src/docker/Dockerfile*

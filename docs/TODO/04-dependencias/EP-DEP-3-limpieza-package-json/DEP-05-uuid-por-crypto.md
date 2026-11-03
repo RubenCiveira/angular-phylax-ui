@@ -40,4 +40,4 @@ origen: 03-dependencias.md
 
 ## Relacionado
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *repository.service.ts (uuid)*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *repository.service.ts (uuid)*

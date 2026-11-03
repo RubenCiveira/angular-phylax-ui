@@ -41,4 +41,4 @@ Hay versiones mezcladas: `sdk-logs@0.208` con `exporter-logs-otlp-http@0.202`, `
 
 ## Relacionado
 
-**Recomendación de origen:** [03 · Dependencias](../../../recomendaciones/03-dependencias.md) → *instrumentation.service.ts (OpenTelemetry)*
+**Recomendación de origen:** [03 · Dependencias](../../recomendaciones/03-dependencias.md) → *instrumentation.service.ts (OpenTelemetry)*

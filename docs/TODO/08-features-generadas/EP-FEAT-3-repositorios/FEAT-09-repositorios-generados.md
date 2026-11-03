@@ -43,4 +43,4 @@ origen: 08-features-generadas.md
 
 ## Relacionado
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *repository/*-repository.service.ts*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *repository/*-repository.service.ts*

@@ -43,4 +43,4 @@ origen: 04-shell-y-layout.md
 **Depende de:**
 - [STY-10](../../03-estilos-y-theming/EP-STY-3-marca-y-shell/STY-10-layout-raiz-con-tokens.md) — Layout raíz con tokens (corrige el nav móvil en modo oscuro) *(épica [EP-STY-3](../../03-estilos-y-theming/EP-STY-3-marca-y-shell/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/app.component.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/app.component.ts*

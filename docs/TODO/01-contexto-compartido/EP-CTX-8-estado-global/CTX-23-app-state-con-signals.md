@@ -50,4 +50,4 @@ origen: 05-contexto-compartido.md
 - [CTX-24](CTX-24-sincronizar-estado-entre-pestanas.md) — Sincronizar sesión, idioma y tenant entre pestañas
 - [DEP-10](../../04-dependencias/EP-DEP-6-zoneless/DEP-10-zoneless.md) — Pasar a detección de cambios zoneless *(épica [EP-DEP-6](../../04-dependencias/EP-DEP-6-zoneless/README.md))*
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/state/app-state.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/state/app-state.service.ts*

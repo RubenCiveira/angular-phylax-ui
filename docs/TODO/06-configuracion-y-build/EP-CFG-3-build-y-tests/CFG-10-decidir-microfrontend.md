@@ -44,4 +44,4 @@ origen: 01-configuracion-y-build.md
 **Desbloquea:**
 - [CTX-17](../../01-contexto-compartido/EP-CTX-6-configuracion-en-runtime/CTX-17-app-config-adaptador-mfe.md) — Aislar la lógica de micro-frontend de configuración e i18n *(épica [EP-CTX-6](../../01-contexto-compartido/EP-CTX-6-configuracion-en-runtime/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *webpack.config.js / webpack.prod.config.js*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *webpack.config.js / webpack.prod.config.js*

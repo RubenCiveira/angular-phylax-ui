@@ -1,6 +1,6 @@
 # TODO — épicas e issues de mejora de phylax-ui
 
-Issues derivados de [docs/recomendaciones](../recomendaciones/README.md), agrupados en **épicas**: conjuntos de issues que tocan los mismos ficheros y conviene hacer juntos, en una misma rama o PR.
+Issues derivados de [docs/TODO/recomendaciones](recomendaciones/README.md), agrupados en **épicas**: conjuntos de issues que tocan los mismos ficheros y conviene hacer juntos, en una misma rama o PR.
 
 ## Estructura
 
@@ -47,7 +47,7 @@ docs/TODO/<nn>-<área>/<EP-ID>-<épica>/<ID>-<issue>.md    ← issue individual
 
 ## 1. Contexto compartido
 
-Origen: [05 · Contexto compartido](../recomendaciones/05-contexto-compartido.md)
+Origen: [05 · Contexto compartido](recomendaciones/05-contexto-compartido.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -62,7 +62,7 @@ Origen: [05 · Contexto compartido](../recomendaciones/05-contexto-compartido.md
 
 ## 2. Capa de datos e interacción
 
-Origen: [06 · Capa de datos](../recomendaciones/06-capa-de-datos.md)
+Origen: [06 · Capa de datos](recomendaciones/06-capa-de-datos.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -74,7 +74,7 @@ Origen: [06 · Capa de datos](../recomendaciones/06-capa-de-datos.md)
 
 ## 3. Estilos y theming
 
-Origen: [02 · Estilos y theming](../recomendaciones/02-estilos-y-theming.md)
+Origen: [02 · Estilos y theming](recomendaciones/02-estilos-y-theming.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -87,7 +87,7 @@ Origen: [02 · Estilos y theming](../recomendaciones/02-estilos-y-theming.md)
 
 ## 4. Reducción de dependencias
 
-Origen: [03 · Dependencias](../recomendaciones/03-dependencias.md)
+Origen: [03 · Dependencias](recomendaciones/03-dependencias.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -100,7 +100,7 @@ Origen: [03 · Dependencias](../recomendaciones/03-dependencias.md)
 
 ## 5. Toolkit de UI
 
-Origen: [07 · Toolkit de UI](../recomendaciones/07-toolkit-ui.md)
+Origen: [07 · Toolkit de UI](recomendaciones/07-toolkit-ui.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -115,7 +115,7 @@ Origen: [07 · Toolkit de UI](../recomendaciones/07-toolkit-ui.md)
 
 ## 6. Configuración, build y tooling
 
-Origen: [01 · Configuración y build](../recomendaciones/01-configuracion-y-build.md)
+Origen: [01 · Configuración y build](recomendaciones/01-configuracion-y-build.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -127,7 +127,7 @@ Origen: [01 · Configuración y build](../recomendaciones/01-configuracion-y-bui
 
 ## 7. Shell, rutas y layout
 
-Origen: [04 · Shell y layout](../recomendaciones/04-shell-y-layout.md)
+Origen: [04 · Shell y layout](recomendaciones/04-shell-y-layout.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -140,7 +140,7 @@ Origen: [04 · Shell y layout](../recomendaciones/04-shell-y-layout.md)
 
 ## 8. Features generadas
 
-Origen: [08 · Features generadas](../recomendaciones/08-features-generadas.md)
+Origen: [08 · Features generadas](recomendaciones/08-features-generadas.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|
@@ -154,7 +154,7 @@ Origen: [08 · Features generadas](../recomendaciones/08-features-generadas.md)
 
 ## 9. i18n y assets públicos
 
-Origen: [09 · i18n y assets públicos](../recomendaciones/09-i18n-y-assets-publicos.md)
+Origen: [09 · i18n y assets públicos](recomendaciones/09-i18n-y-assets-publicos.md)
 
 | Épica | Prioridad | Issues | Esfuerzo | Orden |
 |---|---|---|---|---|

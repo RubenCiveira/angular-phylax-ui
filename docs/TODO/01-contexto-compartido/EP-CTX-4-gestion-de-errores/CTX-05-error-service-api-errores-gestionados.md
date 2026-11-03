@@ -45,4 +45,4 @@ El mecanismo de "error diferido" (`initialiceError` con `setTimeout(2000)` + `ca
 **Depende de:**
 - [CTX-04](CTX-04-error-service-fuga-suscripcion.md) — ErrorService: eliminar la suscripción que se acumula por error
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/observability/error.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/observability/error.service.ts*

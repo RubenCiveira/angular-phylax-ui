@@ -47,4 +47,4 @@ No hay soporte para texto de ayuda ni `aria-describedby`. Si un campo está ocul
 **Desbloquea:**
 - [UI-06](UI-06-envoltorio-editable-field.md) — Componente envoltorio <editable-field>
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *editable/base-editable.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *editable/base-editable.ts*

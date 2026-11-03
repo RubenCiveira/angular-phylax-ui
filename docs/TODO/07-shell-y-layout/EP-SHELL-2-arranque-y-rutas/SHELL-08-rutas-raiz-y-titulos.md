@@ -48,4 +48,4 @@ La ruta `''` usa un componente que navega en el constructor, `'**'` aparece dos 
 - [SHELL-20](SHELL-20-container-simplificado.md) — ContainerComponent: inputs de ruta y valores por defecto
 - [FEAT-15](../../08-features-generadas/EP-FEAT-6-standalone-y-paginas/FEAT-15-paginas-de-ruta.md) — Páginas de ruta con clase global y título *(épica [EP-FEAT-6](../../08-features-generadas/EP-FEAT-6-standalone-y-paginas/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/app.routes.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/bootstrap/app.routes.ts*

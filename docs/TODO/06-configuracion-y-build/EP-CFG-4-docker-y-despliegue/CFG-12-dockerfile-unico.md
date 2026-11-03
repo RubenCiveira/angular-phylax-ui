@@ -47,4 +47,4 @@ origen: 01-configuracion-y-build.md
 - [CFG-02](CFG-02-makefile-coherente.md) — Makefile coherente con el proyecto
 - [CFG-13](CFG-13-nginx-conf-y-cache.md) — nginx.conf propio: caché correcta y cabeceras de seguridad
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *Dockerfile (raíz) y _no_Dockerfile / src/docker/Dockerfile*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *Dockerfile (raíz) y _no_Dockerfile / src/docker/Dockerfile*

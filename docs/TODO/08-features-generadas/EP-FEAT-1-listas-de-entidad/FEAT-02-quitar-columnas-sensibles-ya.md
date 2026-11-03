@@ -48,4 +48,4 @@ Las listas tienen columnas con secretos y su valor llega al DOM:
 **Desbloquea:**
 - [FEAT-03](FEAT-03-metadatos-de-campo.md) — Metadatos de campo en el generador (sensitive, list, group…)
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (columnas)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (columnas)*

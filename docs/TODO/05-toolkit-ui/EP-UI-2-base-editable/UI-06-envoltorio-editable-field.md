@@ -47,4 +47,4 @@ Dos componentes en `editable-field/`: `<editable-field>` (con mat-form-field) y 
 - [UI-04](UI-04-mensajes-de-error-con-parametros.md) — Mensajes de validación con parámetros y fallback común
 - [UI-05](UI-05-hint-appearance-y-marca-oculta.md) — BaseEditable: hint, apariencia por campo y marca de oculto accesible
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *editable/base-editable.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *editable/base-editable.ts*

@@ -41,4 +41,4 @@ La app espera a `identity.bootstrap('main')` antes de mostrar el router. Si el d
 **Depende de:**
 - [CTX-11](../../01-contexto-compartido/EP-CTX-3-identidad-y-autorizacion/CTX-11-identity-service-robusto.md) — IdentityService: tipado y error explícito si falta el handler *(épica [EP-CTX-3](../../01-contexto-compartido/EP-CTX-3-identidad-y-autorizacion/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *src/app/app.component.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *src/app/app.component.ts*

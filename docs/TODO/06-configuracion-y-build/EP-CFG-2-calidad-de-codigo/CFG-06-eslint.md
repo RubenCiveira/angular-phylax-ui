@@ -45,4 +45,4 @@ No hay linter: no se detectan regresiones del generador ni imports con `app/...`
 - [CFG-09](CFG-09-tsconfig-alias.md) — tsconfig: alias coherentes y sin experimentalDecorators
 - [CFG-02](../EP-CFG-4-docker-y-despliegue/CFG-02-makefile-coherente.md) — Makefile coherente con el proyecto *(épica [EP-CFG-4](../EP-CFG-4-docker-y-despliegue/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *package.json*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *package.json*

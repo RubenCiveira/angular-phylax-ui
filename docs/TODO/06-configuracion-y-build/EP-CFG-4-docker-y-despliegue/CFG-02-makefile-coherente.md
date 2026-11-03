@@ -43,4 +43,4 @@ origen: 01-configuracion-y-build.md
 - [CFG-06](../EP-CFG-2-calidad-de-codigo/CFG-06-eslint.md) — Añadir ESLint con reglas para el código generado *(épica [EP-CFG-2](../EP-CFG-2-calidad-de-codigo/README.md))*
 - [CFG-12](CFG-12-dockerfile-unico.md) — Un único Dockerfile que funcione
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *Makefile*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *Makefile*

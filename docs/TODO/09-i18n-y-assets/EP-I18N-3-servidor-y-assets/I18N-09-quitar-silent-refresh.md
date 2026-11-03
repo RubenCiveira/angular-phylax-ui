@@ -40,4 +40,4 @@ origen: 09-i18n-y-assets-publicos.md
 **Depende de:**
 - [CTX-09](../../01-contexto-compartido/EP-CTX-2-proveedor-oidc/CTX-09-oidc-refresco-unico.md) — OIDC: un único mecanismo de refresco de token *(épica [EP-CTX-2](../../01-contexto-compartido/EP-CTX-2-proveedor-oidc/README.md))*
 
-**Recomendación de origen:** [09 · i18n y assets públicos](../../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/silent-refresh.html*
+**Recomendación de origen:** [09 · i18n y assets públicos](../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/silent-refresh.html*

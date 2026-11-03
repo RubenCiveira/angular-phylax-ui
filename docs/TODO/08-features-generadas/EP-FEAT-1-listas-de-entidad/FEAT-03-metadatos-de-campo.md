@@ -49,4 +49,4 @@ El generador crea una columna por cada campo del modelo (hasta 47) sin distingui
 - [FEAT-04](FEAT-04-renderizadores-por-tipo.md) — Renderizado de valores por tipo en listas y detalle
 - [FEAT-13](../EP-FEAT-2-formularios-y-modelos/FEAT-13-formularios-por-secciones.md) — Formularios agrupados por secciones y con tipos semánticos *(épica [EP-FEAT-2](../EP-FEAT-2-formularios-y-modelos/README.md))*
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (columnas)*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *components/*-view-list/*.component.html (columnas)*

@@ -45,4 +45,4 @@ Las operaciones masivas sondean con `timer(1000, 4000)` (el comentario dice "cad
 **Desbloquea:**
 - [UI-21](../../05-toolkit-ui/EP-UI-7-ajustes-aislados/UI-21-long-task-view-accesible.md) — long-task-view: progreso accesible *(épica [EP-UI-7](../../05-toolkit-ui/EP-UI-7-ajustes-aislados/README.md))*
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/repository/provider/impl/api.provider.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/repository/provider/impl/api.provider.ts*

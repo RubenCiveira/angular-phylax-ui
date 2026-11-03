@@ -43,4 +43,4 @@ Conviven imports `app/...` (posibles por `baseUrl: "src"`) y `@shared/...`. `exp
 **Depende de:**
 - [CFG-06](CFG-06-eslint.md) — Añadir ESLint con reglas para el código generado
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *tsconfig.json*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *tsconfig.json*

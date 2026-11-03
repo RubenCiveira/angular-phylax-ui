@@ -41,4 +41,4 @@ El proyecto se llama `lughauth` y el output es `dist/lughauth`, restos de otra p
 - [CFG-08](CFG-08-builder-y-assets.md) — Migrar a @angular/build y filtrar assets
 - [CFG-12](../EP-CFG-4-docker-y-despliegue/CFG-12-dockerfile-unico.md) — Un único Dockerfile que funcione *(épica [EP-CFG-4](../EP-CFG-4-docker-y-despliegue/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *angular.json*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *angular.json*

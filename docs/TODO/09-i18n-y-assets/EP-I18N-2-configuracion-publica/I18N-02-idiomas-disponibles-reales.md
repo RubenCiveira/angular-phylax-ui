@@ -39,4 +39,4 @@ origen: 09-i18n-y-assets-publicos.md
 **Depende de:**
 - [I18N-01](../EP-I18N-1-ficheros-de-traduccion/I18N-01-recolocar-traducciones-en.md) — Mover los en.json a sus carpetas actuales y borrar las huérfanas *(épica [EP-I18N-1](../EP-I18N-1-ficheros-de-traduccion/README.md))*
 
-**Recomendación de origen:** [09 · i18n y assets públicos](../../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/** (estructura de carpetas)*
+**Recomendación de origen:** [09 · i18n y assets públicos](../../recomendaciones/09-i18n-y-assets-publicos.md) → *public/i18n/** (estructura de carpetas)*

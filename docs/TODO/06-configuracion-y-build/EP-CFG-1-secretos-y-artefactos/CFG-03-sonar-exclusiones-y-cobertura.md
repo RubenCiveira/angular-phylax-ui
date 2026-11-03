@@ -40,4 +40,4 @@ Sonar analiza `public/assets/monaco/**` y `editorjs/**`, y lee `coverage/lcov.in
 **Depende de:**
 - [CFG-11](../EP-CFG-3-build-y-tests/CFG-11-tests-vitest.md) — Migrar los tests de Karma a Vitest (o Jest) *(épica [EP-CFG-3](../EP-CFG-3-build-y-tests/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *sonar-project.properties*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *sonar-project.properties*

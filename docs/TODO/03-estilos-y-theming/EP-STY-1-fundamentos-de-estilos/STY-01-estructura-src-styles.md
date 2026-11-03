@@ -49,4 +49,4 @@ Todo el estilo global está en `src/styles.scss` y los parciales se importan con
 - [STY-05](STY-05-base-accesible.md) — Estilos base de accesibilidad (foco y movimiento reducido)
 - [STY-11](../EP-STY-5-estilos-formularios-y-toolkit/STY-11-rejilla-global-unica.md) — Generar la rejilla una sola vez y simplificar form-layout *(épica [EP-STY-5](../EP-STY-5-estilos-formularios-y-toolkit/README.md))*
 
-**Recomendación de origen:** [02 · Estilos y theming](../../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*
+**Recomendación de origen:** [02 · Estilos y theming](../../recomendaciones/02-estilos-y-theming.md) → *src/styles.scss*

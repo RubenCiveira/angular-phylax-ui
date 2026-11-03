@@ -42,4 +42,4 @@ origen: 06-capa-de-datos.md
 **Desbloquea:**
 - [CTX-25](../../01-contexto-compartido/EP-CTX-3-identidad-y-autorizacion/CTX-25-user-info-sin-token.md) — UserInfo como interfaz y sin token en el estado de UI *(épica [EP-CTX-3](../../01-contexto-compartido/EP-CTX-3-identidad-y-autorizacion/README.md))*
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/api/client.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/api/client.service.ts*

@@ -40,4 +40,4 @@ origen: 04-shell-y-layout.md
 **Depende de:**
 - [FEAT-17](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/FEAT-17-marcas-de-generacion-y-extension.md) — Contrato de regeneración: @generated, @generated-once y extensiones *(épica [EP-FEAT-7](../../08-features-generadas/EP-FEAT-7-contrato-del-generador/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *context.config.ts*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *context.config.ts*

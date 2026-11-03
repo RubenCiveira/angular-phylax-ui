@@ -43,4 +43,4 @@ El estado y la URL soportan idioma y tenant, pero no hay forma de cambiarlos des
 - [SHELL-13](SHELL-13-toolbar-limpia.md) — Toolbar: sin console.log, con título de página y textos traducidos
 - [STY-04](../../03-estilos-y-theming/EP-STY-1-fundamentos-de-estilos/STY-04-modo-claro-oscuro-forzable.md) — Permitir forzar modo claro u oscuro *(épica [EP-STY-1](../../03-estilos-y-theming/EP-STY-1-fundamentos-de-estilos/README.md))*
 
-**Recomendación de origen:** [04 · Shell y layout](../../../recomendaciones/04-shell-y-layout.md) → *toolbar.component.ts / .html*
+**Recomendación de origen:** [04 · Shell y layout](../../recomendaciones/04-shell-y-layout.md) → *toolbar.component.ts / .html*

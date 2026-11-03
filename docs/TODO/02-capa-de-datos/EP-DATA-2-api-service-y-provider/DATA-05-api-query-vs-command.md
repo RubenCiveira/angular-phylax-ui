@@ -43,4 +43,4 @@ origen: 06-capa-de-datos.md
 **Desbloquea:**
 - [DATA-08](DATA-08-poll-until-con-backoff.md) — Sondeo de operaciones masivas con backoff y límite
 
-**Recomendación de origen:** [06 · Capa de datos](../../../recomendaciones/06-capa-de-datos.md) → *data/api/api.service.ts*
+**Recomendación de origen:** [06 · Capa de datos](../../recomendaciones/06-capa-de-datos.md) → *data/api/api.service.ts*

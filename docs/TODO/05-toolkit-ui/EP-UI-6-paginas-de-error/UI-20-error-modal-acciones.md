@@ -41,4 +41,4 @@ Textos sin traducir (`{{ 'controls.errorhandler.retrySuccess' }}`), `retryError`
 **Depende de:**
 - [UI-19](UI-19-error-page-traducida.md) — Página de error traducida y útil
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *error-modal/error-modal.component.ts / .html*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *error-modal/error-modal.component.ts / .html*

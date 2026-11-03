@@ -43,4 +43,4 @@ Se usa `@angular-devkit/build-angular` y `assets` copia todo `public/**`, inclui
 - [DEP-01](../../04-dependencias/EP-DEP-1-editores-vendorizados/DEP-01-sacar-monaco.md) — Sacar Monaco de la base (21 MB) *(épica [EP-DEP-1](../../04-dependencias/EP-DEP-1-editores-vendorizados/README.md))*
 - [DEP-02](../../04-dependencias/EP-DEP-1-editores-vendorizados/DEP-02-sacar-editorjs.md) — Sacar Editor.js de la base *(épica [EP-DEP-1](../../04-dependencias/EP-DEP-1-editores-vendorizados/README.md))*
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *angular.json*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *angular.json*

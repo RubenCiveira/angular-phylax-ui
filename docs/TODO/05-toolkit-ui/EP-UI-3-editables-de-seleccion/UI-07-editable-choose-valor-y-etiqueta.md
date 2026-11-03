@@ -39,4 +39,4 @@ Recibe `options: string[]` y usa el mismo string como valor y como sufijo de la 
 
 ## Relacionado
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *editable/editable-choose/editable-choose.component.ts*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *editable/editable-choose/editable-choose.component.ts*

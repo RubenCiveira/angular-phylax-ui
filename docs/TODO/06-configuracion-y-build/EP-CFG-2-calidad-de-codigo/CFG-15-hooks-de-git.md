@@ -41,4 +41,4 @@ Hay `.commitlintrc`, pero nada lo ejecuta.
 **Depende de:**
 - [CFG-05](CFG-05-package-json-scripts.md) — package.json: nombre, engines y scripts útiles
 
-**Recomendación de origen:** [01 · Configuración y build](../../../recomendaciones/01-configuracion-y-build.md) → *.commitlintrc*
+**Recomendación de origen:** [01 · Configuración y build](../../recomendaciones/01-configuracion-y-build.md) → *.commitlintrc*

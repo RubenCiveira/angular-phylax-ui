@@ -50,4 +50,4 @@ La plantilla no usa el pipe `transloco`: pinta literalmente `{{ 'app.layout.erro
 - [UI-20](UI-20-error-modal-acciones.md) — Modal de error con acciones y sin código muerto
 - [SHELL-18](../../07-shell-y-layout/EP-SHELL-5-paginas-del-layout/SHELL-18-pagina-404.md) — Página 404 con salida *(épica [EP-SHELL-5](../../07-shell-y-layout/EP-SHELL-5-paginas-del-layout/README.md))*
 
-**Recomendación de origen:** [07 · Toolkit de UI](../../../recomendaciones/07-toolkit-ui.md) → *error-page/error-page.component.ts / .html*
+**Recomendación de origen:** [07 · Toolkit de UI](../../recomendaciones/07-toolkit-ui.md) → *error-page/error-page.component.ts / .html*

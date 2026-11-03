@@ -17,7 +17,7 @@
 #   --dry-run    Muestra qué cambiaría en la plantilla sin escribir nada.
 #   --delete     Borra de la plantilla los ficheros que ya no existen en el proyecto.
 #   --with-root  Incluye también los ficheros raíz (angular.json, package.json, Makefile...) y .ci/.
-#   --with-docs  Incluye también docs/, salvo lo propio del proyecto (docs/TODO, docs/recomendaciones).
+#   --with-docs  Incluye también docs/, salvo lo propio del proyecto (docs/TODO).
 #
 # Variables de entorno:
 #   TEMPLATE_DIR      Destino (por defecto la plantilla container del civi-generator).
@@ -84,8 +84,8 @@ EXCLUDES=(
 ROOT_FILES=(.commitlintrc .gitignore .prettierrc .stylelintrc.json Dockerfile Makefile README.md angular.json package.json
   tsconfig.json tsconfig.app.json tsconfig.spec.json)
 ROOT_DIRS=(.ci)
-# Documentación propia del proyecto (análisis y backlog), que no es de la plantilla
-DOC_EXCLUDES=(--exclude='.DS_Store' --exclude='/docs/TODO/' --exclude='/docs/recomendaciones/')
+# Documentación propia del proyecto (auditoría y backlog), que no es de la plantilla
+DOC_EXCLUDES=(--exclude='.DS_Store' --exclude='/docs/TODO/')
 
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT

@@ -44,4 +44,4 @@ origen: 08-features-generadas.md
 - [UI-15](../../05-toolkit-ui/EP-UI-5-acciones/UI-15-base-action-y-confirm-action.md) — Clases base BaseAction y ConfirmAction *(épica [EP-UI-5](../../05-toolkit-ui/EP-UI-5-acciones/README.md))*
 - [FEAT-11](FEAT-11-erratas-de-plantillas.md) — Corregir erratas que se propagan a cientos de ficheros
 
-**Recomendación de origen:** [08 · Features generadas](../../../recomendaciones/08-features-generadas.md) → *actions/*-action/*.component.ts*
+**Recomendación de origen:** [08 · Features generadas](../../recomendaciones/08-features-generadas.md) → *actions/*-action/*.component.ts*

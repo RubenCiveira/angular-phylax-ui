@@ -41,4 +41,4 @@ A nivel de módulo se hace `window.addEventListener('state-item', …)` (efecto 
 **Depende de:**
 - [CTX-23](CTX-23-app-state-con-signals.md) — AppStateService con signals reales y claves tipadas
 
-**Recomendación de origen:** [05 · Contexto compartido](../../../recomendaciones/05-contexto-compartido.md) → *context/state/app-state.service.ts*
+**Recomendación de origen:** [05 · Contexto compartido](../../recomendaciones/05-contexto-compartido.md) → *context/state/app-state.service.ts*
