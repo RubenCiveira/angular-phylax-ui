@@ -9,6 +9,8 @@ export interface IdentityProvider {
 }
 
 export interface IdentityHandler {
+  /** `false` si login y logout no salen de la página (por ejemplo, un diálogo): no se muestra el aviso de redirección. Por defecto `true`. */
+  readonly redirects?: boolean;
   bootstrap(): Observable<void>;
   /** Access token vigente, o `null` sin sesión. Emite cada vez que cambia. */
   token$(): Observable<string | null>;

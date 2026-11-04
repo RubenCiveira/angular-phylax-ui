@@ -4,12 +4,10 @@ import { provideRouter } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideConfiguration } from '@shared/context/config/app-config.service';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideI18nConfiguration, I18nLoaderService } from '@shared/context/config/i18n-loader.service';
 import { provideAuthorizationAccess } from '@shared/context/authorization-access/authorization-access.provider';
 import { provideConfiguredRoutes } from './bootstrap/app.routes';
-import { provideOidcIdentity } from '@shared/context/identity/oidc-identity/oidc-identity.provider';
-import { stepUpInterceptor } from '@shared/context/identity/oidc-identity/step-up.interceptor';
+import { provideConnector } from '@shared/connector/connector.provider';
 import { GlobalErrorHandler } from '@shared/context/observability/error.service';
 import { provideThemeMode } from '@shared/context/theme/theme-mode.service';
 import { provideRuntimeTheme } from '@shared/context/theme/runtime-theme.service';
@@ -25,14 +23,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter([]),
     provideAuthorizationAccess(),
     provideConfiguredRoutes(),
-    provideHttpClient(withInterceptors([stepUpInterceptor])),
+    // HttpClient, identidad y acceso a datos del conector elegido (front-connector: rest, appwrite, firebase)
+    provideConnector(),
     // Idiomas e idioma por defecto: provideI18nConfiguration() sustituye esta configuración con la de runtime
     provideTransloco({
       config: { reRenderOnLangChange: true, prodMode: false },
       loader: I18nLoaderService,
     }),
     provideI18nConfiguration(),
-    provideOidcIdentity(),
     provideThemeMode(),
     // Marca en runtime: theme.tokens / theme.tenants.<tenant>.tokens de la configuración
     provideRuntimeTheme(),

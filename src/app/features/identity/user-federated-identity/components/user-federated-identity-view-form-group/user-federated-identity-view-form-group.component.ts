@@ -45,7 +45,7 @@ export class UserFederatedIdentityViewFormGroupComponent extends SubFormEditable
         user: new FormControl<any>(null, [Validators.required]),
         loginProvider: new FormControl<any>(null, [Validators.required]),
         subject: new FormControl<string>('', [Validators.required]),
-        createdAt: new FormControl<Date>(now),
+        createdAt: new FormControl<Date>(new Date()),
         version: new FormControl<number>(0),
       }),
     );
@@ -84,7 +84,7 @@ export class UserFederatedIdentityViewFormGroupComponent extends SubFormEditable
         user: null,
         loginProvider: null,
         subject: '',
-        createdAt: now,
+        createdAt: new Date(),
         version: 0,
       };
     };

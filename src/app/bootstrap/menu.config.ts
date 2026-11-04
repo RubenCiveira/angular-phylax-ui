@@ -7,8 +7,71 @@ import { MenuItem } from './layout/menu-item.model';
 export function menuRoutes(_appConfig: RuntimeConfigService, _mfeConfig: MicroFrontConfigService): Routes {
   return [
     {
-      path: 'tenant',
-      data: { label: 'Tenants', path: 'Access' },
+      path: 'api-key-clients',
+      data: { label: 'Api key clients', path: 'Access' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/access/api-key-client/routes/api-key-client-view-list-route/api-key-client-view-list-route.module').then(
+          (m) => m.ApiKeyClientViewListRouteModule,
+        ),
+    },
+    {
+      path: 'oauth-clients',
+      data: { label: 'Oauth clients', path: 'Access' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/access/oauth-client/routes/oauth-client-view-list-route/oauth-client-view-list-route.module').then(
+          (m) => m.OauthClientViewListRouteModule,
+        ),
+    },
+    {
+      path: 'resource-servers',
+      data: { label: 'Resource servers', path: 'Access' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/access/resource-server/routes/resource-server-view-list-route/resource-server-view-list-route.module').then(
+          (m) => m.ResourceServerViewListRouteModule,
+        ),
+    },
+    {
+      path: 'roles',
+      data: { label: 'Roles', path: 'Access' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/access/role/routes/role-view-list-route/role-view-list-route.module').then(
+          (m) => m.RoleViewListRouteModule,
+        ),
+    },
+    {
+      path: 'user-group-membership',
+      data: { label: 'User group membership', path: 'Access' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/access/user-group-membership/routes/user-group-membership-view-list-route/user-group-membership-view-list-route.module').then(
+          (m) => m.UserGroupMembershipViewListRouteModule,
+        ),
+    },
+    {
+      path: 'user-role-assignment',
+      data: { label: 'User role assignment', path: 'Access' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/access/user-role-assignment/routes/user-role-assignment-view-list-route/user-role-assignment-view-list-route.module').then(
+          (m) => m.UserRoleAssignmentViewListRouteModule,
+        ),
+    },
+    {
+      path: 'consent-purposes',
+      data: { label: 'Consent purposes', path: 'Identity' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/identity/consent-purpose/routes/consent-purpose-view-list-route/consent-purpose-view-list-route.module').then(
+          (m) => m.ConsentPurposeViewListRouteModule,
+        ),
+    },
+    {
+      path: 'tenants',
+      data: { label: 'Tenants', path: 'Identity' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
         import('@features/identity/tenant/routes/tenant-view-list-route/tenant-view-list-route.module').then(
@@ -16,40 +79,309 @@ export function menuRoutes(_appConfig: RuntimeConfigService, _mfeConfig: MicroFr
         ),
     },
     {
+      path: 'tenants-config',
+      data: { label: 'Tenants config', path: 'Identity' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/identity/tenant-config/routes/tenant-config-view-list-route/tenant-config-view-list-route.module').then(
+          (m) => m.TenantConfigViewListRouteModule,
+        ),
+    },
+    {
+      path: 'login-providers',
+      data: { label: 'Login providers', path: 'Identity' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/identity/tenant-login-provider/routes/tenant-login-provider-view-list-route/tenant-login-provider-view-list-route.module').then(
+          (m) => m.TenantLoginProviderViewListRouteModule,
+        ),
+    },
+    {
+      path: 'tenants-terms-of-use',
+      data: { label: 'Tenants terms of use', path: 'Identity' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/identity/tenant-terms-of-use/routes/tenant-terms-of-use-view-list-route/tenant-terms-of-use-view-list-route.module').then(
+          (m) => m.TenantTermsOfUseViewListRouteModule,
+        ),
+    },
+    {
       path: 'users',
-      data: { label: 'Tenants', path: 'Access' },
+      data: { label: 'Users', path: 'Identity' },
       canActivate: [isAuthenticated],
       loadChildren: () =>
         import('@features/identity/user/routes/user-view-list-route/user-view-list-route.module').then(
           (m) => m.UserViewListRouteModule,
         ),
     },
-    // {
-    //   path: 'info',
-    //   loadChildren: () =>
-    //     import(
-    //       '../../../features/actuator/info/info.routing.module'
-    //     ).then((m) => m.InfoRoutingModule),
-    // }
+    {
+      path: 'user-federated-identities',
+      data: { label: 'User federated identities', path: 'Identity' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/identity/user-federated-identity/routes/user-federated-identity-view-list-route/user-federated-identity-view-list-route.module').then(
+          (m) => m.UserFederatedIdentityViewListRouteModule,
+        ),
+    },
+    {
+      path: 'template',
+      data: { label: 'Template', path: 'Notification' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/notification/message/routes/message-view-list-route/message-view-list-route.module').then(
+          (m) => m.MessageViewListRouteModule,
+        ),
+    },
+    {
+      path: 'smtp-outbound-config',
+      data: { label: 'Smtp outbound config', path: 'Notification' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/notification/smtp-outbound-config/routes/smtp-outbound-config-view-list-route/smtp-outbound-config-view-list-route.module').then(
+          (m) => m.SmtpOutboundConfigViewListRouteModule,
+        ),
+    },
+    {
+      path: 'snippet',
+      data: { label: 'Snippet', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/snippet/routes/snippet-view-list-route/snippet-view-list-route.module').then(
+          (m) => m.SnippetViewListRouteModule,
+        ),
+    },
+    {
+      path: 'snippet-asset',
+      data: { label: 'Snippet asset', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/snippet-asset/routes/snippet-asset-view-list-route/snippet-asset-view-list-route.module').then(
+          (m) => m.SnippetAssetViewListRouteModule,
+        ),
+    },
+    {
+      path: 'snippet-versions',
+      data: { label: 'Snippet versions', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/snippet-version/routes/snippet-version-view-list-route/snippet-version-view-list-route.module').then(
+          (m) => m.SnippetVersionViewListRouteModule,
+        ),
+    },
+    {
+      path: 'template-template',
+      data: { label: 'Template', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/template/routes/template-view-list-route/template-view-list-route.module').then(
+          (m) => m.TemplateViewListRouteModule,
+        ),
+    },
+    {
+      path: 'template-asset',
+      data: { label: 'Template asset', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/template-asset/routes/template-asset-view-list-route/template-asset-view-list-route.module').then(
+          (m) => m.TemplateAssetViewListRouteModule,
+        ),
+    },
+    {
+      path: 'template-variable',
+      data: { label: 'Template variable', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/template-variable/routes/template-variable-view-list-route/template-variable-view-list-route.module').then(
+          (m) => m.TemplateVariableViewListRouteModule,
+        ),
+    },
+    {
+      path: 'template-versions',
+      data: { label: 'Template versions', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/template-version/routes/template-version-view-list-route/template-version-view-list-route.module').then(
+          (m) => m.TemplateVersionViewListRouteModule,
+        ),
+    },
+    {
+      path: 'theme',
+      data: { label: 'Theme', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/theme/routes/theme-view-list-route/theme-view-list-route.module').then(
+          (m) => m.ThemeViewListRouteModule,
+        ),
+    },
+    {
+      path: 'theme-asset',
+      data: { label: 'Theme asset', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/theme-asset/routes/theme-asset-view-list-route/theme-asset-view-list-route.module').then(
+          (m) => m.ThemeAssetViewListRouteModule,
+        ),
+    },
+    {
+      path: 'theme-versions',
+      data: { label: 'Theme versions', path: 'Template' },
+      canActivate: [isAuthenticated],
+      loadChildren: () =>
+        import('@features/template/theme-version/routes/theme-version-view-list-route/theme-version-view-list-route.module').then(
+          (m) => m.ThemeVersionViewListRouteModule,
+        ),
+    },
   ];
 }
 
-// Este será el menú.
 export function menu(): MenuItem[] {
   return [
     {
-      label: 'access',
-      icon: 'badge',
+      label: 'Access',
+      icon: 'folder',
       subItems: [
         {
-          label: 'users',
-          icon: 'group',
+          label: 'Api key clients',
+          icon: 'list',
+          route: 'api-key-clients',
+        },
+        {
+          label: 'Oauth clients',
+          icon: 'list',
+          route: 'oauth-clients',
+        },
+        {
+          label: 'Resource servers',
+          icon: 'list',
+          route: 'resource-servers',
+        },
+        {
+          label: 'Roles',
+          icon: 'list',
+          route: 'roles',
+        },
+        {
+          label: 'User group membership',
+          icon: 'list',
+          route: 'user-group-membership',
+        },
+        {
+          label: 'User role assignment',
+          icon: 'list',
+          route: 'user-role-assignment',
+        },
+      ],
+    },
+    {
+      label: 'Identity',
+      icon: 'folder',
+      subItems: [
+        {
+          label: 'Consent purposes',
+          icon: 'list',
+          route: 'consent-purposes',
+        },
+        {
+          label: 'Tenants',
+          icon: 'list',
+          route: 'tenants',
+        },
+        {
+          label: 'Tenants config',
+          icon: 'list',
+          route: 'tenants-config',
+        },
+        {
+          label: 'Login providers',
+          icon: 'list',
+          route: 'login-providers',
+        },
+        {
+          label: 'Tenants terms of use',
+          icon: 'list',
+          route: 'tenants-terms-of-use',
+        },
+        {
+          label: 'Users',
+          icon: 'list',
           route: 'users',
         },
         {
-          label: 'tenants',
-          icon: 'domain',
-          route: 'tenant',
+          label: 'User federated identities',
+          icon: 'list',
+          route: 'user-federated-identities',
+        },
+      ],
+    },
+    {
+      label: 'Notification',
+      icon: 'folder',
+      subItems: [
+        {
+          label: 'Template',
+          icon: 'list',
+          route: 'template',
+        },
+        {
+          label: 'Smtp outbound config',
+          icon: 'list',
+          route: 'smtp-outbound-config',
+        },
+      ],
+    },
+    {
+      label: 'Template',
+      icon: 'folder',
+      subItems: [
+        {
+          label: 'Snippet',
+          icon: 'list',
+          route: 'snippet',
+        },
+        {
+          label: 'Snippet asset',
+          icon: 'list',
+          route: 'snippet-asset',
+        },
+        {
+          label: 'Snippet versions',
+          icon: 'list',
+          route: 'snippet-versions',
+        },
+        {
+          label: 'Template',
+          icon: 'list',
+          route: 'template-template',
+        },
+        {
+          label: 'Template asset',
+          icon: 'list',
+          route: 'template-asset',
+        },
+        {
+          label: 'Template variable',
+          icon: 'list',
+          route: 'template-variable',
+        },
+        {
+          label: 'Template versions',
+          icon: 'list',
+          route: 'template-versions',
+        },
+        {
+          label: 'Theme',
+          icon: 'list',
+          route: 'theme',
+        },
+        {
+          label: 'Theme asset',
+          icon: 'list',
+          route: 'theme-asset',
+        },
+        {
+          label: 'Theme versions',
+          icon: 'list',
+          route: 'theme-versions',
         },
       ],
     },

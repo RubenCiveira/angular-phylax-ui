@@ -5,6 +5,7 @@ import { menuRoutes } from './menu.config';
 import { UnknownComponent } from './layout/pages/unknown/unknown.component';
 import { HomeComponent } from './layout/pages/home/home.component';
 import { ContainerComponent } from './layout/pages/container/container.component';
+import { urlContextGuard } from './url-context.guard';
 
 export function provideConfiguredRoutes() {
   function initializeRoutes(appConfig: RuntimeConfigService, mfeConfig: MicroFrontConfigService) {
@@ -12,6 +13,8 @@ export function provideConfiguredRoutes() {
       {
         path: ':language/:tenant',
         component: ContainerComponent,
+        // Antes que las guardas de las hijas: si redirigen, el destino ya usa el idioma de la URL
+        canActivate: [urlContextGuard],
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         children: aditioanlRoutes(appConfig, mfeConfig),
       },

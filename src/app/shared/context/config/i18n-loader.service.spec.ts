@@ -91,12 +91,22 @@ describe('I18nLoaderService', () => {
 
   it('overrides arrays (does not deep-merge them)', (done) => {
     service.getTranslation('es').subscribe((result) => {
-      expect(result['items']).toEqual(['one', 'two', 'three']);
+      expect(result['items']).toEqual(['uno', 'dos']);
       done();
     });
 
     http.expectOne('i18n/es.json').flush({ items: ['uno', 'dos'] });
     http.expectOne('i18n/en.json').flush({ items: ['one', 'two', 'three'] });
+  });
+
+  it('gives the requested language priority over the default one on the same key', (done) => {
+    service.getTranslation('es').subscribe((result) => {
+      expect(result).toEqual({ ui: { save: 'guardar', cancel: 'cancel' }, title: 'Título' });
+      done();
+    });
+
+    http.expectOne('i18n/es.json').flush({ ui: { save: 'guardar' }, title: 'Título' });
+    http.expectOne('i18n/en.json').flush({ ui: { save: 'save', cancel: 'cancel' }, title: 'Title' });
   });
 
   it('loads a scope that only has es.json when lang is es', (done) => {
@@ -169,6 +179,16 @@ describe('I18nLoaderService — unknown lang', () => {
     http.expectOne('i18n/en.json').flush({});
   });
 
+  it('uses the base language file for a regional variant that is not available', (done) => {
+    service.getTranslation('es-AR').subscribe((result) => {
+      expect(result['title']).toBe('Título');
+      done();
+    });
+
+    http.expectOne('i18n/es.json').flush({ title: 'Título' });
+    http.expectOne('i18n/en.json').flush({ title: 'Title' });
+  });
+
   it('uses || "" fallback when pop() returns empty string (path is "")', (done) => {
     // ''.split('/') → [''] → pop() → '' (falsy) → lang = '' via || ''
     // langsPath('', config): ''.split('/').pop() → '' (falsy) → lang = '' via || ''
@@ -206,12 +226,14 @@ describe('I18nLoaderService — 3-step fallback chain', () => {
       expect(result['a']).toBe('a-es-ES');
       expect(result['b']).toBe('b-es');
       expect(result['c']).toBe('c-en');
+      // En una clave repetida gana el más específico
+      expect(result['shared']).toBe('es-ES');
       done();
     });
 
-    http.expectOne('i18n/es-ES.json').flush({ a: 'a-es-ES' });
-    http.expectOne('i18n/es.json').flush({ b: 'b-es' });
-    http.expectOne('i18n/en.json').flush({ c: 'c-en' });
+    http.expectOne('i18n/es-ES.json').flush({ a: 'a-es-ES', shared: 'es-ES' });
+    http.expectOne('i18n/es.json').flush({ b: 'b-es', shared: 'es' });
+    http.expectOne('i18n/en.json').flush({ c: 'c-en', shared: 'en' });
   });
 });
 

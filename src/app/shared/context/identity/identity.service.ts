@@ -52,7 +52,9 @@ export class IdentityService {
   login(name: string): void {
     const handler = this.handlers.get(name);
     if (handler) {
-      this.markRedirect('login');
+      if (handler.redirects !== false) {
+        this.markRedirect('login');
+      }
       handler.login();
     }
   }
@@ -60,7 +62,9 @@ export class IdentityService {
   logout(name: string): void {
     const handler = this.handlers.get(name);
     if (handler) {
-      this.markRedirect('logout');
+      if (handler.redirects !== false) {
+        this.markRedirect('logout');
+      }
       handler.logout();
     }
   }

@@ -114,6 +114,10 @@ export function versionQuery(env: Environment = environment): string {
   return env.buildDate ? '?v=' + encodeURIComponent(env.version) : '';
 }
 
+/**
+ * Ficheros a fusionar, del más general al más específico: idioma por defecto, idioma base y variante regional
+ * (`es-ES` → `en`, `es`, `es-ES`). Al fusionarse en este orden, el más específico pisa al resto.
+ */
 function langsPath(failedLang: string, config: TranslocoConfig): string[] {
   const lang = failedLang.split('/').pop() || '';
   const baseLang = lang.split('-');
@@ -122,7 +126,7 @@ function langsPath(failedLang: string, config: TranslocoConfig): string[] {
   baseLang.forEach((part) => {
     preffix += (preffix.length == 0 ? '' : '-') + part;
     if (!paths.includes(preffix) && (config.availableLangs as string[]).includes(preffix)) {
-      paths.unshift(preffix);
+      paths.push(preffix);
     }
   });
   return paths;
