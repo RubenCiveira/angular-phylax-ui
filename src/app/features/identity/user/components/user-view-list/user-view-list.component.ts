@@ -23,6 +23,8 @@ export class UserViewListComponent {
   list: Shift<UserProjection[], UserFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<UserFilter>({});
 
   constructor(repository: UserRepository) {
     this.displayer = repository.displayProvider();
@@ -62,6 +64,8 @@ export class UserViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

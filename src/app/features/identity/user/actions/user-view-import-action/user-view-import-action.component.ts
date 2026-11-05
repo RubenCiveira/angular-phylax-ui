@@ -1,4 +1,5 @@
 import { User } from 'app/features/identity/user/model/user.model';
+import { USER_EXCEL_COLUMNS, USER_EXCEL_SENSITIVE } from 'app/features/identity/user/model/user-excel-columns';
 import { UserRepository } from 'app/features/identity/user/repository/user-repository.service';
 import { TenantRepository } from 'app/features/identity/tenant/repository/tenant-repository.service';
 import { BaseImportAction } from 'app/shared/toolkit/action/base-import-action';
@@ -25,29 +26,8 @@ export class UserViewImportActionComponent extends BaseImportAction<User> {
     scope: this.scope,
     // El nombre es único dentro del tenant: el del contexto (va como filtro) o el de su columna
     keys: ['name'],
-    columns: [
-      { field: 'tenant', label: 'form-group.tenant.label', type: 'reference', required: true, aliases: ['tenant'] },
-      { field: 'name', label: 'form-group.name.label', required: true, aliases: ['usuario', 'username', 'login'] },
-      { field: 'password', label: 'form-group.password.label', required: true, aliases: ['password', 'clave'] },
-      { field: 'email', label: 'form-group.email.label', aliases: ['email', 'mail', 'e-mail'] },
-      { field: 'welcomeAt', label: 'form-group.welcome-at.label', type: 'datetime' },
-      { field: 'emailVerified', label: 'form-group.email-verified.label', type: 'boolean' },
-      { field: 'enabled', label: 'form-group.enabled.label', type: 'boolean' },
-      {
-        field: 'approvalStatus',
-        label: 'form-group.approval-status.label',
-        type: 'enum',
-        options: ['unverified', 'pending', 'accepted', 'rejected'].map((value) => ({
-          value,
-          label: `form-group.approval-status.options.${value}`,
-        })),
-      },
-      { field: 'temporalPassword', label: 'form-group.temporal-password.label', type: 'boolean' },
-      { field: 'useSecondFactors', label: 'form-group.use-second-factors.label', type: 'boolean' },
-      { field: 'blockedUntil', label: 'form-group.blocked-until.label', type: 'datetime' },
-      { field: 'federatedProvider', label: 'form-group.federated-provider.label' },
-    ],
-    sensitive: ['password'],
+    columns: USER_EXCEL_COLUMNS,
+    sensitive: USER_EXCEL_SENSITIVE,
     // Campos que el backend solo cambia con sus acciones: se aplican tras crear o actualizar
     actions: {
       approvalStatus: [

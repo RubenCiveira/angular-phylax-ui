@@ -233,6 +233,45 @@
       },
       "reject-selection": {
         "icon": "visibility_off"
+      },
+      "export": {
+        "icon": "download",
+        "label": "Export",
+        "title": "Export to Excel",
+        "tooltip": "Download the listed items as an Excel file that can be imported again"
+      }
+    },
+    "export": {
+      "fileName": "{{entity}}-{{date}}.xlsx",
+      "sheet": "Data",
+      "choose": {
+        "title": "What do you want to export?",
+        "description": "You have {{count}} items selected.",
+        "selection": "The {{count}} selected",
+        "all": "All items matching the filter"
+      },
+      "running": {
+        "title": "Exporting…",
+        "read": "{{read}} read",
+        "readOf": "{{read}} of {{total}}",
+        "limit": "At most {{limit}} items are exported."
+      },
+      "done": {
+        "title": "{{count}} items exported",
+        "truncated": "The {{limit}} item limit was reached: the file does not include them all. Narrow the filter to export the rest.",
+        "reimport": "You can edit the file and upload it again with “Import”."
+      },
+      "cancelled": {
+        "title": "Export cancelled"
+      },
+      "failed": {
+        "title": "The export failed"
+      },
+      "button": {
+        "cancel": "Cancel",
+        "close": "Close",
+        "again": "Export again",
+        "retry": "Try again"
       }
     }
   },

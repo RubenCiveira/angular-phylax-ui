@@ -1,6 +1,7 @@
 <action-container #container [mapper]="mapper" [display]="repository.displayProvider()" [name]="'user'">
   <user-view-create-action #action [fixed]="fixed()" [hidden]="hidden()" />
   <user-view-import-action #action />
+  <user-view-export-action #action [filter]="filter()" />
   <user-view-edit-action #action [default]="true" [fixed]="fixed()" [hidden]="hidden()" />
   <user-view-detail-action #action [default]="true" />
   <user-view-delete-action #action />

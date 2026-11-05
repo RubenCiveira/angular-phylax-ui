@@ -1,6 +1,7 @@
 import { ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 import { UserViewCreateActionModule } from 'app/features/identity/user/actions/user-view-create-action/user-view-create-action.module';
 import { UserViewImportActionModule } from 'app/features/identity/user/actions/user-view-import-action/user-view-import-action.module';
+import { UserViewExportActionModule } from 'app/features/identity/user/actions/user-view-export-action/user-view-export-action.module';
 import { UserViewEditActionModule } from 'app/features/identity/user/actions/user-view-edit-action/user-view-edit-action.module';
 import { UserViewDetailActionModule } from 'app/features/identity/user/actions/user-view-detail-action/user-view-detail-action.module';
 import { UserViewDeleteActionModule } from 'app/features/identity/user/actions/user-view-delete-action/user-view-delete-action.module';
@@ -38,6 +39,7 @@ import { NgModule } from '@angular/core';
     UserViewEnableActionModule,
     UserViewEnableSelectionActionModule,
     UserViewImportActionModule,
+    UserViewExportActionModule,
     UserViewRejectActionModule,
     UserViewRejectSelectionActionModule,
     UserViewUnlockActionModule,

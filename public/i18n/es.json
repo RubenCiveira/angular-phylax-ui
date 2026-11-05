@@ -114,6 +114,12 @@
       },
       "unlock-selection": {
         "icon": "lock"
+      },
+      "export": {
+        "icon": "download",
+        "label": "Exportar",
+        "title": "Exportar a Excel",
+        "tooltip": "Descargar los elementos del listado en un Excel que se puede volver a importar"
       }
     },
     "confirm": {
@@ -249,6 +255,39 @@
       "error": "No se pudieron cargar las opciones. Inténtalo de nuevo.",
       "noResults": "Sin resultados",
       "open": "Mostrar opciones"
+    },
+    "export": {
+      "fileName": "{{entity}}-{{date}}.xlsx",
+      "sheet": "Datos",
+      "choose": {
+        "title": "¿Qué quieres exportar?",
+        "description": "Tienes {{count}} elementos seleccionados.",
+        "selection": "Los {{count}} seleccionados",
+        "all": "Todos los que coinciden con el filtro"
+      },
+      "running": {
+        "title": "Exportando…",
+        "read": "{{read}} leídos",
+        "readOf": "{{read}} de {{total}}",
+        "limit": "Como mucho se exportan {{limit}} elementos."
+      },
+      "done": {
+        "title": "Exportados {{count}} elementos",
+        "truncated": "Se ha llegado al límite de {{limit}} elementos: el fichero no los incluye todos. Afina el filtro para exportar el resto.",
+        "reimport": "Puedes editar el fichero y volver a subirlo con «Importar»."
+      },
+      "cancelled": {
+        "title": "Exportación cancelada"
+      },
+      "failed": {
+        "title": "No se ha podido exportar"
+      },
+      "button": {
+        "cancel": "Cancelar",
+        "close": "Cerrar",
+        "again": "Exportar otra vez",
+        "retry": "Volver a intentarlo"
+      }
     }
   },
   "editConflict": {

@@ -1,0 +1,28 @@
+import { ImportColumn } from 'app/shared/toolkit/entity-import/entity-import.model';
+
+/** Columnas del Excel de usuarios: las comparten la importación y la exportación, para poder reimportar. */
+export const USER_EXCEL_COLUMNS: ImportColumn[] = [
+  { field: 'tenant', label: 'form-group.tenant.label', type: 'reference', required: true, aliases: ['tenant'] },
+  { field: 'name', label: 'form-group.name.label', required: true, aliases: ['usuario', 'username', 'login'] },
+  { field: 'password', label: 'form-group.password.label', required: true, aliases: ['password', 'clave'] },
+  { field: 'email', label: 'form-group.email.label', aliases: ['email', 'mail', 'e-mail'] },
+  { field: 'welcomeAt', label: 'form-group.welcome-at.label', type: 'datetime' },
+  { field: 'emailVerified', label: 'form-group.email-verified.label', type: 'boolean' },
+  { field: 'enabled', label: 'form-group.enabled.label', type: 'boolean' },
+  {
+    field: 'approvalStatus',
+    label: 'form-group.approval-status.label',
+    type: 'enum',
+    options: ['unverified', 'pending', 'accepted', 'rejected'].map((value) => ({
+      value,
+      label: `form-group.approval-status.options.${value}`,
+    })),
+  },
+  { field: 'temporalPassword', label: 'form-group.temporal-password.label', type: 'boolean' },
+  { field: 'useSecondFactors', label: 'form-group.use-second-factors.label', type: 'boolean' },
+  { field: 'blockedUntil', label: 'form-group.blocked-until.label', type: 'datetime' },
+  { field: 'federatedProvider', label: 'form-group.federated-provider.label' },
+];
+
+/** Campos que no se muestran, no se guardan en `localStorage` y no se exportan. */
+export const USER_EXCEL_SENSITIVE = ['password'];

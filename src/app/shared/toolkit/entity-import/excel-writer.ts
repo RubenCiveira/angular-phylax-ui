@@ -35,6 +35,52 @@ export async function downloadTemplate(fileName: string, template: ImportTemplat
   XLSX.writeFile(await buildTemplate(template), fileName);
 }
 
+/** Hoja con datos: cabeceras y filas ya convertidas a valores de celda. */
+export interface DataSheet {
+  name: string;
+  headers: string[];
+  /** Una fila por elemento; las fechas van como `Date` y se escriben como fecha de Excel. */
+  rows: unknown[][];
+  /** Formato numérico de Excel por columna (p. ej. `dd/mm/yyyy` para fechas); vacío para el general. */
+  formats?: (string | undefined)[];
+}
+
+/** Libro con una sola hoja de datos. */
+export async function buildDataBook(sheet: DataSheet): Promise<WorkBook> {
+  const XLSX = await import('xlsx');
+  const book = XLSX.utils.book_new();
+  const data = XLSX.utils.aoa_to_sheet([sheet.headers, ...sheet.rows], { cellDates: true });
+  const texts = [sheet.headers, ...sheet.rows.map((row) => row.map(cellText))];
+  data['!cols'] = sheet.headers.map((_, index) => ({ wch: width(texts, index) }));
+  sheet.formats?.forEach((format, column) => {
+    if (!format) {
+      return;
+    }
+    sheet.rows.forEach((_, row) => {
+      const cell = data[XLSX.utils.encode_cell({ r: row + 1, c: column })];
+      if (cell) {
+        cell.z = format;
+      }
+    });
+  });
+  XLSX.utils.book_append_sheet(book, data, sheetName(sheet.name));
+  return book;
+}
+
+/** Genera el libro con la hoja de datos y lo descarga como `fileName`. */
+export async function downloadDataBook(fileName: string, sheet: DataSheet): Promise<void> {
+  const XLSX = await import('xlsx');
+  XLSX.writeFile(await buildDataBook(sheet), fileName);
+}
+
+/** Texto aproximado de una celda, solo para calcular el ancho de su columna. */
+function cellText(value: unknown): string {
+  if (value instanceof Date) {
+    return '00/00/0000 00:00';
+  }
+  return value === null || value === undefined ? '' : String(value);
+}
+
 /** Excel limita el nombre de hoja a 31 caracteres y no admite `: \ / ? * [ ]`. */
 function sheetName(name: string): string {
   return name.replace(/[:\\/?*[\]]/g, ' ').substring(0, 31);

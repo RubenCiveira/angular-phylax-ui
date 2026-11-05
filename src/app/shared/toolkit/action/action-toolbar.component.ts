@@ -2,14 +2,16 @@
 import { Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslocoPipe } from '@jsverse/transloco';
 import type { ActionContainerComponent } from './action-container.component';
 
 /** Acciones generales (no contextuales) del contenedor, para la barra de la lista. */
 @Component({
   selector: 'action-toolbar',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, TranslocoPipe],
   styles: ':host { display: contents; }',
   template: `
     @let c = container();
@@ -26,6 +28,29 @@ import type { ActionContainerComponent } from './action-container.component';
         }
         {{ action.label() }}
       </button>
+    }
+    <!-- Las que no caben como botón (más de maxIcons) van al menú "más" -->
+    @if (c.toolbarMenu().length) {
+      @let more = 'common.moreActions' | transloco;
+      <button mat-icon-button type="button" [matTooltip]="more" [matMenuTriggerFor]="toolbarMenu">
+        <mat-icon aria-hidden="true">more_vert</mat-icon>
+        <span class="cdk-visually-hidden">{{ more }}</span>
+      </button>
+      <mat-menu #toolbarMenu="matMenu">
+        @for (action of c.toolbarMenu(); track $index) {
+          <button
+            mat-menu-item
+            type="button"
+            (click)="c.executeAction(action.name)"
+            [disabled]="!action.enabled(c.selectionModel.selected())()"
+          >
+            @if (action.icon()) {
+              <mat-icon aria-hidden="true">{{ action.icon() }}</mat-icon>
+            }
+            <span>{{ action.label() }}</span>
+          </button>
+        }
+      </mat-menu>
     }
   `,
 })

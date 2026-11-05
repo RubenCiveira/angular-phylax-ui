@@ -85,8 +85,12 @@ export class ActionContainerComponent implements OnDestroy {
   contextualActions = computed(() =>
     this.actions().filter((act) => act.name != this.current()?.name && act.contextual),
   );
-  multipleActions = computed(() => this.visibleActions((act) => act.contextual && act.multiple));
-  toolbarActions = computed(() => this.visibleActions((act) => !act.contextual).slice(0, this.maxIcons()));
+  /** Acciones sobre la selección: las múltiples, también las generales que admiten selección (p. ej. exportar). */
+  multipleActions = computed(() => this.visibleActions((act) => act.multiple));
+  private generalActions = computed(() => this.visibleActions((act) => !act.contextual));
+  toolbarActions = computed(() => this.generalActions().slice(0, this.maxIcons()));
+  /** Acciones generales que no caben en la barra: van al menú "más". */
+  toolbarMenu = computed(() => this.generalActions().slice(this.maxIcons()));
   breadcrumActions = computed(() =>
     this.selectionModel.selected().length == 1 ? this.visibleActions((act) => act.contextual && !act.multiple) : [],
   );

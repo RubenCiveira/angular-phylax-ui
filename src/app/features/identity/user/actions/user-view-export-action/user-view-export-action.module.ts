@@ -1,0 +1,12 @@
+import { provideTranslocoScope } from '@jsverse/transloco';
+import { EntityExportComponent } from 'app/shared/toolkit/entity-export/entity-export.component';
+import { UserViewExportActionComponent } from './user-view-export-action.component';
+import { NgModule } from '@angular/core';
+
+@NgModule({
+  declarations: [UserViewExportActionComponent],
+  exports: [UserViewExportActionComponent],
+  imports: [EntityExportComponent],
+  providers: [provideTranslocoScope({ scope: 'identity/user', alias: 'identity/user' })],
+})
+export class UserViewExportActionModule {}
