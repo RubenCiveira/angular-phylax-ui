@@ -91,8 +91,11 @@ export class ActionContainerComponent implements OnDestroy {
   toolbarActions = computed(() => this.generalActions().slice(0, this.maxIcons()));
   /** Acciones generales que no caben en la barra: van al menú "más". */
   toolbarMenu = computed(() => this.generalActions().slice(this.maxIcons()));
+  /** Acciones del elemento abierto en la cabecera y las migas: sin la que se está aplicando. */
   breadcrumActions = computed(() =>
-    this.selectionModel.selected().length == 1 ? this.visibleActions((act) => act.contextual && !act.multiple) : [],
+    this.selectionModel.selected().length == 1
+      ? this.visibleActions((act) => act.contextual && !act.multiple && act.name != this.current()?.name)
+      : [],
   );
   dialogActions = computed(() => this.breadcrumActions().slice(0, this.maxIcons()));
   dialogMenu = computed(() => this.breadcrumActions().slice(this.maxIcons()));

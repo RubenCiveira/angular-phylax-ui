@@ -201,6 +201,24 @@
   align-items: center;
   justify-content: flex-end;
 }
+/* Con ratón las acciones de la fila aparecen al pasar por encima, con el foco del teclado, en la fila seleccionada
+   o con su menú abierto. Se ocultan con opacidad (siguen en el orden del tabulador y para los lectores de pantalla)
+   y la celda entera: así tampoco tapa las columnas con scroll horizontal. En táctil se ven siempre: tocar la fila
+   la abre, no la selecciona. */
+@media (hover: hover) and (pointer: fine) {
+  .material-table .td.pinned {
+    opacity: 0;
+    transition:
+      opacity var(--list-view-transition),
+      box-shadow var(--list-view-transition);
+  }
+  .material-table .tbody .tr:hover .td.pinned,
+  .material-table .tbody .tr:focus-within .td.pinned,
+  .material-table .tbody .tr.selected .td.pinned,
+  .material-table .tbody .tr:has([aria-expanded='true']) .td.pinned {
+    opacity: 1;
+  }
+}
 .material-table.overflow-end .th.pinned,
 .material-table.overflow-end .td.pinned {
   box-shadow: -8px 0 8px -8px color-mix(in srgb, var(--mat-sys-shadow) 40%, transparent);

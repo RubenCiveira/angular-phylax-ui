@@ -102,4 +102,23 @@ describe('ActionContainerComponent', () => {
     expect(names(container.multipleActions())).toEqual(['export', 'deleteSelection']);
     expect(names(container.contextualActions())).toEqual(['edit', 'deleteSelection']);
   });
+
+  it('does not offer the action being applied in the header of the open item', () => {
+    TestBed.configureTestingModule({
+      imports: [HostComponent],
+      providers: [{ provide: BreakpointObserver, useClass: MockBreakpointObserver }],
+    });
+    TestBed.overrideProvider(LocalRouteStateService, { useValue: new MockLocalRouteStateService() });
+
+    const fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    const container = fixture.debugElement.children[0].componentInstance as ActionContainerComponent;
+    const names = (actions: { name: string }[]) => actions.map((action) => action.name);
+
+    container.selectionModel.select([{ id: 1 }]);
+    expect(names(container.breadcrumActions())).toEqual(['edit']);
+
+    container.current.set(container.actions().find((action) => action.name === 'edit'));
+    expect(names(container.breadcrumActions())).toEqual([]);
+  });
 });
