@@ -194,7 +194,8 @@
         "button": "Elegir fichero",
         "description": "Elige un Excel (xlsx, xls, ods o csv) con una fila de cabeceras. Cada fila se crea o, si ya existe, se actualiza. Columnas que se pueden importar:",
         "error": "No se ha podido leer el fichero.",
-        "reading": "Leyendo el fichero"
+        "reading": "Leyendo el fichero",
+        "template": "Descargar plantilla"
       },
       "summary": {
         "errors": "Filas con errores",
@@ -206,6 +207,22 @@
         },
         "row": "Fila",
         "uploaded": "{{count}} filas subidas"
+      },
+      "template": {
+        "column": "Columna",
+        "dataSheet": "Datos",
+        "fileName": "plantilla-{{entity}}.xlsx",
+        "format": "Formato",
+        "helpSheet": "Instrucciones",
+        "mandatory": "Obligatoria",
+        "type": {
+          "boolean": "sí / no",
+          "date": "fecha (dd/mm/aaaa)",
+          "datetime": "fecha y hora (dd/mm/aaaa hh:mm)",
+          "number": "número",
+          "reference": "nombre del elemento relacionado",
+          "text": "texto"
+        }
       }
     },
     "list": {

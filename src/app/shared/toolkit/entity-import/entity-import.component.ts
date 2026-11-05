@@ -13,6 +13,7 @@ import { Acl } from '@shared/data/acl/acl.model';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { matchColumns } from './column-match';
 import { IMPORT_ACCEPT, readWorkbook } from './excel-reader';
+import { downloadTemplate } from './excel-writer';
 import { EntityImportService } from './entity-import.service';
 import { ImportColumn, ImportDefinition, ImportPlan, ImportPlanColumn, ImportSheet } from './entity-import.model';
 
@@ -79,6 +80,7 @@ export class EntityImportComponent {
   readonly successes = computed(() => this.job()?.outcomes.filter((o) => o.result !== 'failed') ?? []);
 
   readonly reading = signal(false);
+  readonly downloading = signal(false);
   readonly readFailed = signal(false);
   readonly fileName = signal('');
   readonly sheets = signal<ImportSheet[]>([]);
@@ -232,6 +234,34 @@ export class EntityImportComponent {
     }
   }
 
+  /**
+   * Descarga un Excel en blanco con las columnas que se pueden importar (las mismas etiquetas que reconoce el
+   * emparejado) y una hoja de instrucciones con la clave, los obligatorios y el formato de cada columna.
+   */
+  async downloadTemplate(): Promise<void> {
+    const t = (key: string, params?: Record<string, string>) =>
+      this.transloco.translate(`common.import.${key}`, params);
+    const columns = this.columns();
+    this.downloading.set(true);
+    try {
+      await downloadTemplate(t('template.fileName', { entity: this.storageKey() }), {
+        dataSheet: t('template.dataSheet'),
+        headers: columns.map((column) => column.text),
+        helpSheet: t('template.helpSheet'),
+        help: [
+          [t('template.column'), t('template.mandatory'), t('template.format')],
+          ...columns.map((column) => [
+            column.text,
+            column.key ? t('mapping.key') : column.required ? t('mapping.required') : '',
+            this.formatOf(column),
+          ]),
+        ],
+      });
+    } finally {
+      this.downloading.set(false);
+    }
+  }
+
   /** Asigna la cabecera al campo; una cabecera solo puede ir a un campo. */
   assign(field: string, index: number | null): void {
     this.mapping.update((current) => {
@@ -297,6 +327,14 @@ export class EntityImportComponent {
   /** Descarta el resultado para empezar otra importación. */
   restart(): void {
     this.imports.clear(this.storageKey());
+  }
+
+  /** Formato o valores admitidos de una columna, para la hoja de instrucciones. */
+  private formatOf(column: ExpectedColumn): string {
+    if (column.type === 'enum' && column.options?.length) {
+      return column.options.map((option) => this.texts()[option.label] ?? option.value).join(' / ');
+    }
+    return this.transloco.translate(`common.import.template.type.${column.type ?? 'text'}`);
   }
 
   private allowed(name: string): boolean {

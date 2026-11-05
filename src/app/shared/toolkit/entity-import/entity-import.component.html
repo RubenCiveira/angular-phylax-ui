@@ -232,6 +232,10 @@
         <mat-icon>upload_file</mat-icon>
         {{ 'common.import.select.button' | transloco }}
       </button>
+      <button mat-stroked-button [disabled]="!aclLoaded() || downloading()" (click)="downloadTemplate()">
+        <mat-icon>download</mat-icon>
+        {{ 'common.import.select.template' | transloco }}
+      </button>
     </div>
     @if (reading()) {
       <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.import.select.reading' | transloco" />

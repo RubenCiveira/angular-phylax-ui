@@ -87,7 +87,8 @@
         "button": "Choose file",
         "description": "Choose an Excel file (xlsx, xls, ods or csv) with a header row. Each row is created or, if it already exists, updated. Columns that can be imported:",
         "error": "The file could not be read.",
-        "reading": "Reading the file"
+        "reading": "Reading the file",
+        "template": "Download template"
       },
       "summary": {
         "errors": "Rows with errors",
@@ -99,6 +100,22 @@
         },
         "row": "Row",
         "uploaded": "{{count}} rows uploaded"
+      },
+      "template": {
+        "column": "Column",
+        "dataSheet": "Data",
+        "fileName": "{{entity}}-template.xlsx",
+        "format": "Format",
+        "helpSheet": "Instructions",
+        "mandatory": "Mandatory",
+        "type": {
+          "boolean": "yes / no",
+          "date": "date (dd/mm/yyyy)",
+          "datetime": "date and time (dd/mm/yyyy hh:mm)",
+          "number": "number",
+          "reference": "name of the related item",
+          "text": "text"
+        }
       }
     },
     "list": {
