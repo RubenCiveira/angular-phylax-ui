@@ -26,6 +26,8 @@ export class ResourceServerViewListComponent {
   list: Shift<ResourceServerProjection[], ResourceServerFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<ResourceServerFilter>({});
 
   constructor(repository: ResourceServerRepository) {
     this.displayer = repository.displayProvider();
@@ -59,6 +61,8 @@ export class ResourceServerViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

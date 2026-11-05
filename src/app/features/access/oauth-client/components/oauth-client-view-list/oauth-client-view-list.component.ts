@@ -23,6 +23,8 @@ export class OauthClientViewListComponent {
   list: Shift<OauthClientProjection[], OauthClientFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<OauthClientFilter>({});
 
   constructor(repository: OauthClientRepository) {
     this.displayer = repository.displayProvider();
@@ -74,6 +76,8 @@ export class OauthClientViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

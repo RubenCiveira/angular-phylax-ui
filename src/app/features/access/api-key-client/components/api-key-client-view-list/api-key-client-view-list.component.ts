@@ -26,6 +26,8 @@ export class ApiKeyClientViewListComponent {
   list: Shift<ApiKeyClientProjection[], ApiKeyClientFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<ApiKeyClientFilter>({});
 
   constructor(repository: ApiKeyClientRepository) {
     this.displayer = repository.displayProvider();
@@ -50,6 +52,8 @@ export class ApiKeyClientViewListComponent {
     if (filter?.key) {
       result.key = filter.key;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

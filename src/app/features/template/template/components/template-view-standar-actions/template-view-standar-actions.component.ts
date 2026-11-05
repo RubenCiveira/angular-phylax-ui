@@ -2,9 +2,9 @@
 import { Tick } from 'app/shared/data/repository/repository.model';
 import { TemplateRepository } from 'app/features/template/template/repository/template-repository.service';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
-import { TemplateProjection } from 'app/features/template/template/model/template.model';
 import { Acl } from 'app/shared/data/acl/acl.model';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
+import { TemplateFilter, TemplateProjection } from 'app/features/template/template/model/template.model';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
 @Component({
@@ -17,6 +17,8 @@ export class TemplateViewStandarActionsComponent extends AbstactContainerWrapper
   override actions = viewChild<ActionContainerComponent>('container');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Filtro actual del listado, para exportar lo que coincide con él. */
+  filter = input<TemplateFilter>();
 
   activated: Tick<TemplateProjection, string>;
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;

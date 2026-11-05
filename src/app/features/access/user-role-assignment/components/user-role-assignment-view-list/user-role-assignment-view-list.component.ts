@@ -26,6 +26,8 @@ export class UserRoleAssignmentViewListComponent {
   list: Shift<UserRoleAssignmentProjection[], UserRoleAssignmentFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<UserRoleAssignmentFilter>({});
 
   constructor(repository: UserRoleAssignmentRepository) {
     this.displayer = repository.displayProvider();
@@ -80,6 +82,8 @@ export class UserRoleAssignmentViewListComponent {
     if (filter?.oauthClients?.$ref) {
       result.oauthClients = filter.oauthClients.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

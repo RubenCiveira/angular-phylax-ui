@@ -4,7 +4,7 @@ import { Tick } from 'app/shared/data/repository/repository.model';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
 import { Acl } from 'app/shared/data/acl/acl.model';
 import { UserRepository } from 'app/features/identity/user/repository/user-repository.service';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
 @Component({

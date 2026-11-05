@@ -26,6 +26,8 @@ export class TenantTermsOfUseViewListComponent {
   list: Shift<TenantTermsOfUseProjection[], TenantTermsOfUseFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<TenantTermsOfUseFilter>({});
 
   constructor(repository: TenantTermsOfUseRepository) {
     this.displayer = repository.displayProvider();
@@ -68,6 +70,8 @@ export class TenantTermsOfUseViewListComponent {
     if (filter?.resourceServers?.$ref) {
       result.resourceServers = filter.resourceServers.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

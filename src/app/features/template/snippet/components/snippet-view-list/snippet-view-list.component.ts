@@ -23,6 +23,8 @@ export class SnippetViewListComponent {
   list: Shift<SnippetProjection[], SnippetFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<SnippetFilter>({});
 
   constructor(repository: SnippetRepository) {
     this.displayer = repository.displayProvider();
@@ -68,6 +70,8 @@ export class SnippetViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

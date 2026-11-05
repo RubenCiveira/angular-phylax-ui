@@ -3,8 +3,8 @@ import { Tick } from 'app/shared/data/repository/repository.model';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
 import { MessageRepository } from 'app/features/notification/message/repository/message-repository.service';
 import { Acl } from 'app/shared/data/acl/acl.model';
-import { MessageProjection } from 'app/features/notification/message/model/message.model';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
+import { MessageProjection, MessageFilter } from 'app/features/notification/message/model/message.model';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
 @Component({
@@ -17,6 +17,8 @@ export class MessageViewStandarActionsComponent extends AbstactContainerWrapper 
   override actions = viewChild<ActionContainerComponent>('container');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Filtro actual del listado, para exportar lo que coincide con él. */
+  filter = input<MessageFilter>();
 
   activated: Tick<MessageProjection, string>;
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;

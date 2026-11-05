@@ -26,6 +26,8 @@ export class TemplateVariableViewListComponent {
   list: Shift<TemplateVariableProjection[], TemplateVariableFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<TemplateVariableFilter>({});
 
   constructor(repository: TemplateVariableRepository) {
     this.displayer = repository.displayProvider();
@@ -65,6 +67,8 @@ export class TemplateVariableViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

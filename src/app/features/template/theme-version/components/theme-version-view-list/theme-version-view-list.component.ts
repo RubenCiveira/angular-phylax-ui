@@ -26,6 +26,8 @@ export class ThemeVersionViewListComponent {
   list: Shift<ThemeVersionProjection[], ThemeVersionFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<ThemeVersionFilter>({});
 
   constructor(repository: ThemeVersionRepository) {
     this.displayer = repository.displayProvider();
@@ -56,6 +58,8 @@ export class ThemeVersionViewListComponent {
     if (filter?.themes?.$ref) {
       result.themes = filter.themes.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

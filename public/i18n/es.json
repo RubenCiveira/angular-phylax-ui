@@ -96,6 +96,12 @@
         "title": "Habilitar selección",
         "tooltip": "Habilitar los elementos seleccionados"
       },
+      "export": {
+        "icon": "download",
+        "label": "Exportar",
+        "title": "Exportar a Excel",
+        "tooltip": "Descargar los elementos del listado en un Excel que se puede volver a importar"
+      },
       "import": {
         "icon": "upload_file",
         "label": "Importar",
@@ -114,12 +120,6 @@
       },
       "unlock-selection": {
         "icon": "lock"
-      },
-      "export": {
-        "icon": "download",
-        "label": "Exportar",
-        "title": "Exportar a Excel",
-        "tooltip": "Descargar los elementos del listado en un Excel que se puede volver a importar"
       }
     },
     "confirm": {
@@ -128,6 +128,39 @@
       "title": "Confirmar"
     },
     "empty": "No hay elementos que mostrar.",
+    "export": {
+      "button": {
+        "again": "Exportar otra vez",
+        "cancel": "Cancelar",
+        "close": "Cerrar",
+        "retry": "Volver a intentarlo"
+      },
+      "cancelled": {
+        "title": "Exportación cancelada"
+      },
+      "choose": {
+        "all": "Todos los que coinciden con el filtro",
+        "description": "Tienes {{count}} elementos seleccionados.",
+        "selection": "Los {{count}} seleccionados",
+        "title": "¿Qué quieres exportar?"
+      },
+      "done": {
+        "reimport": "Puedes editar el fichero y volver a subirlo con «Importar».",
+        "title": "Exportados {{count}} elementos",
+        "truncated": "Se ha llegado al límite de {{limit}} elementos: el fichero no los incluye todos. Afina el filtro para exportar el resto."
+      },
+      "failed": {
+        "title": "No se ha podido exportar"
+      },
+      "fileName": "{{entity}}-{{date}}.xlsx",
+      "running": {
+        "limit": "Como mucho se exportan {{limit}} elementos.",
+        "read": "{{read}} leídos",
+        "readOf": "{{read}} de {{total}}",
+        "title": "Exportando…"
+      },
+      "sheet": "Datos"
+    },
     "hiddenField": "Campo oculto por permisos",
     "import": {
       "button": {
@@ -255,39 +288,6 @@
       "error": "No se pudieron cargar las opciones. Inténtalo de nuevo.",
       "noResults": "Sin resultados",
       "open": "Mostrar opciones"
-    },
-    "export": {
-      "fileName": "{{entity}}-{{date}}.xlsx",
-      "sheet": "Datos",
-      "choose": {
-        "title": "¿Qué quieres exportar?",
-        "description": "Tienes {{count}} elementos seleccionados.",
-        "selection": "Los {{count}} seleccionados",
-        "all": "Todos los que coinciden con el filtro"
-      },
-      "running": {
-        "title": "Exportando…",
-        "read": "{{read}} leídos",
-        "readOf": "{{read}} de {{total}}",
-        "limit": "Como mucho se exportan {{limit}} elementos."
-      },
-      "done": {
-        "title": "Exportados {{count}} elementos",
-        "truncated": "Se ha llegado al límite de {{limit}} elementos: el fichero no los incluye todos. Afina el filtro para exportar el resto.",
-        "reimport": "Puedes editar el fichero y volver a subirlo con «Importar»."
-      },
-      "cancelled": {
-        "title": "Exportación cancelada"
-      },
-      "failed": {
-        "title": "No se ha podido exportar"
-      },
-      "button": {
-        "cancel": "Cancelar",
-        "close": "Cerrar",
-        "again": "Exportar otra vez",
-        "retry": "Volver a intentarlo"
-      }
     }
   },
   "editConflict": {

@@ -26,6 +26,8 @@ export class UserGroupMembershipViewListComponent {
   list: Shift<UserGroupMembershipProjection[], UserGroupMembershipFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<UserGroupMembershipFilter>({});
 
   constructor(repository: UserGroupMembershipRepository) {
     this.displayer = repository.displayProvider();
@@ -80,6 +82,8 @@ export class UserGroupMembershipViewListComponent {
     if (filter?.oauthClients?.$ref) {
       result.oauthClients = filter.oauthClients.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

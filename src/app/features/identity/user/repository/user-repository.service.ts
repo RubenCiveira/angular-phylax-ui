@@ -13,9 +13,6 @@ import { selectorProvider, SelectorProvider } from '@shared/data/selector-provid
 import { Observable, of } from 'rxjs';
 import { Injectable, Signal } from '@angular/core';
 
-/** Campos de `UserFilter`: los demás parámetros de una consulta son de paginación y se envían tal cual. */
-const USER_FILTER_FIELDS = ['search', 'uids', 'limit', 'order', 'name', 'tenant', 'tenants'];
-
 @Injectable({ providedIn: 'root' })
 export class UserRepository {
   private readonly repo: RepositoryService<User, UserFilter>;
@@ -216,7 +213,12 @@ export class UserRepository {
     }
     // Lo que no es del filtro llega del enlace `next` (cursor de la página siguiente, con nombres del backend)
     Object.entries(filter).forEach(([key, value]) => {
-      if (!USER_FILTER_FIELDS.includes(key) && value !== undefined && value !== null && value !== '') {
+      if (
+        !['search', 'uids', 'limit', 'order', 'name', 'tenant', 'tenants'].includes(key) &&
+        value !== undefined &&
+        value !== null &&
+        value !== ''
+      ) {
         morphed[key] = value;
       }
     });

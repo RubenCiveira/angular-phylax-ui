@@ -23,6 +23,8 @@ export class MessageViewListComponent {
   list: Shift<MessageProjection[], MessageFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<MessageFilter>({});
 
   constructor(repository: MessageRepository) {
     this.displayer = repository.displayProvider();
@@ -53,6 +55,8 @@ export class MessageViewListComponent {
     if (filter?.tenants?.$ref) {
       result.tenants = filter.tenants.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

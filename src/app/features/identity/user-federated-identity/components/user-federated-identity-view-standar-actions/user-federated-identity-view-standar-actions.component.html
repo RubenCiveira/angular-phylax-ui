@@ -6,6 +6,8 @@
   [name]="'user-federated-identity'"
 >
   <user-federated-identity-view-create-action #action [fixed]="fixed()" [hidden]="hidden()" />
+  <user-federated-identity-view-import-action #action />
+  <user-federated-identity-view-export-action #action [filter]="filter()" />
   <user-federated-identity-view-edit-action #action [default]="true" [fixed]="fixed()" [hidden]="hidden()" />
   <user-federated-identity-view-detail-action #action [default]="true" />
   <user-federated-identity-view-delete-action #action />

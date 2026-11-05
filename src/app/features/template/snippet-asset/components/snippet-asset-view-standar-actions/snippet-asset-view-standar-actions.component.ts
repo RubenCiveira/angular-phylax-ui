@@ -2,9 +2,12 @@
 import { Tick } from 'app/shared/data/repository/repository.model';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
 import { Acl } from 'app/shared/data/acl/acl.model';
-import { SnippetAssetProjection } from 'app/features/template/snippet-asset/model/snippet-asset.model';
+import {
+  SnippetAssetProjection,
+  SnippetAssetFilter,
+} from 'app/features/template/snippet-asset/model/snippet-asset.model';
 import { SnippetAssetRepository } from 'app/features/template/snippet-asset/repository/snippet-asset-repository.service';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
 @Component({
@@ -17,6 +20,8 @@ export class SnippetAssetViewStandarActionsComponent extends AbstactContainerWra
   override actions = viewChild<ActionContainerComponent>('container');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Filtro actual del listado, para exportar lo que coincide con él. */
+  filter = input<SnippetAssetFilter>();
 
   activated: Tick<SnippetAssetProjection, string>;
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;

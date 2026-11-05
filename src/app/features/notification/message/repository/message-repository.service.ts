@@ -118,7 +118,8 @@ export class MessageRepository {
       morphed['search'] = filter.search;
     }
     if (filter.uids) {
-      morphed['uids'] = filter.uids.join(',');
+      // Desde el enlace `next` ya llegan unidos
+      morphed['uids'] = Array.isArray(filter.uids) ? filter.uids.join(',') : filter.uids;
     }
     if (filter.limit) {
       morphed['limit'] = filter.limit;
@@ -129,6 +130,17 @@ export class MessageRepository {
     if (filter.tenants) {
       morphed['tenants'] = filter.tenants;
     }
+    // Lo que no es del filtro llega del enlace `next` (cursor de la página siguiente, con nombres del backend)
+    Object.entries(filter).forEach(([key, value]) => {
+      if (
+        !['search', 'uids', 'limit', 'order', 'tenant', 'tenants'].includes(key) &&
+        value !== undefined &&
+        value !== null &&
+        value !== ''
+      ) {
+        morphed[key] = value;
+      }
+    });
     return morphed;
   }
 }

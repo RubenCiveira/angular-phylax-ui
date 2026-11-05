@@ -26,6 +26,8 @@ export class SnippetVersionViewListComponent {
   list: Shift<SnippetVersionProjection[], SnippetVersionFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<SnippetVersionFilter>({});
 
   constructor(repository: SnippetVersionRepository) {
     this.displayer = repository.displayProvider();
@@ -56,6 +58,8 @@ export class SnippetVersionViewListComponent {
     if (filter?.snippets?.$ref) {
       result.snippets = filter.snippets.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

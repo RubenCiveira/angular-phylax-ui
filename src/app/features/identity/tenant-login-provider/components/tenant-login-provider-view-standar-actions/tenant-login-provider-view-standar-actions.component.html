@@ -6,6 +6,8 @@
   [name]="'tenant-login-provider'"
 >
   <tenant-login-provider-view-create-action #action [fixed]="fixed()" [hidden]="hidden()" />
+  <tenant-login-provider-view-import-action #action />
+  <tenant-login-provider-view-export-action #action [filter]="filter()" />
   <tenant-login-provider-view-edit-action #action [default]="true" [fixed]="fixed()" [hidden]="hidden()" />
   <tenant-login-provider-view-detail-action #action [default]="true" />
   <tenant-login-provider-view-delete-action #action />

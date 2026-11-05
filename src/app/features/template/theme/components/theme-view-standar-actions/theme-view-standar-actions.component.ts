@@ -2,8 +2,8 @@
 import { Tick } from 'app/shared/data/repository/repository.model';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
 import { Acl } from 'app/shared/data/acl/acl.model';
-import { ThemeProjection } from 'app/features/template/theme/model/theme.model';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
+import { ThemeFilter, ThemeProjection } from 'app/features/template/theme/model/theme.model';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
 import { ThemeRepository } from 'app/features/template/theme/repository/theme-repository.service';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
@@ -17,6 +17,8 @@ export class ThemeViewStandarActionsComponent extends AbstactContainerWrapper {
   override actions = viewChild<ActionContainerComponent>('container');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Filtro actual del listado, para exportar lo que coincide con él. */
+  filter = input<ThemeFilter>();
 
   activated: Tick<ThemeProjection, string>;
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;

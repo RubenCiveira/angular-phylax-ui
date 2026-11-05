@@ -166,7 +166,11 @@
   cursor: pointer;
 }
 .material-table .tbody .tr.selected:hover {
-  --list-view-row-state: color-mix(in srgb, var(--mat-sys-on-secondary-container) 8%, var(--mat-sys-secondary-container));
+  --list-view-row-state: color-mix(
+    in srgb,
+    var(--mat-sys-on-secondary-container) 8%,
+    var(--mat-sys-secondary-container)
+  );
 }
 .material-table .tbody .tr {
   --list-view-row-state: transparent;
@@ -188,9 +192,7 @@
 }
 /* Fondo opaco con el estado de la fila (hover, seleccionada) encima, para tapar lo que pasa por debajo */
 .material-table .td.pinned {
-  background:
-    linear-gradient(var(--list-view-row-state), var(--list-view-row-state)),
-    var(--list-view-bg);
+  background: linear-gradient(var(--list-view-row-state), var(--list-view-row-state)), var(--list-view-bg);
 }
 /* La última columna de acciones llega hasta el borde derecho y alinea sus botones con él */
 .material-table .td.pinned:last-child {

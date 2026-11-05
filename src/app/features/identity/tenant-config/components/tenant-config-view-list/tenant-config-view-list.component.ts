@@ -26,6 +26,8 @@ export class TenantConfigViewListComponent {
   list: Shift<TenantConfigProjection[], TenantConfigFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<TenantConfigFilter>({});
 
   constructor(repository: TenantConfigRepository) {
     this.displayer = repository.displayProvider();
@@ -56,6 +58,8 @@ export class TenantConfigViewListComponent {
     if (filter?.tenants?.$ref) {
       result.tenants = filter.tenants.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

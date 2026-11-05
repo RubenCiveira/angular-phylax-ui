@@ -23,6 +23,8 @@ export class ThemeAssetViewListComponent {
   list: Shift<ThemeAssetProjection[], ThemeAssetFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<ThemeAssetFilter>({});
 
   constructor(repository: ThemeAssetRepository) {
     this.displayer = repository.displayProvider();
@@ -62,6 +64,8 @@ export class ThemeAssetViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

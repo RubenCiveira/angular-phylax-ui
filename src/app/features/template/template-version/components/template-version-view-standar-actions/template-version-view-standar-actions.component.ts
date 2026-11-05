@@ -3,8 +3,11 @@ import { Tick } from 'app/shared/data/repository/repository.model';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
 import { Acl } from 'app/shared/data/acl/acl.model';
 import { TemplateVersionRepository } from 'app/features/template/template-version/repository/template-version-repository.service';
-import { TemplateVersionProjection } from 'app/features/template/template-version/model/template-version.model';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
+import {
+  TemplateVersionFilter,
+  TemplateVersionProjection,
+} from 'app/features/template/template-version/model/template-version.model';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
 @Component({
@@ -17,6 +20,8 @@ export class TemplateVersionViewStandarActionsComponent extends AbstactContainer
   override actions = viewChild<ActionContainerComponent>('container');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Filtro actual del listado, para exportar lo que coincide con él. */
+  filter = input<TemplateVersionFilter>();
 
   activated: Tick<TemplateVersionProjection, string>;
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;

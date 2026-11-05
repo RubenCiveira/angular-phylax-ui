@@ -26,6 +26,8 @@ export class ConsentPurposeViewListComponent {
   list: Shift<ConsentPurposeProjection[], ConsentPurposeFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<ConsentPurposeFilter>({});
 
   constructor(repository: ConsentPurposeRepository) {
     this.displayer = repository.displayProvider();
@@ -62,6 +64,8 @@ export class ConsentPurposeViewListComponent {
     if (filter?.tenants?.$ref) {
       result.tenants = filter.tenants.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

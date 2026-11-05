@@ -3,8 +3,8 @@ import { OauthClientRepository } from 'app/features/access/oauth-client/reposito
 import { Tick } from 'app/shared/data/repository/repository.model';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
 import { Acl } from 'app/shared/data/acl/acl.model';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
-import { OauthClientProjection } from 'app/features/access/oauth-client/model/oauth-client.model';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
+import { OauthClientProjection, OauthClientFilter } from 'app/features/access/oauth-client/model/oauth-client.model';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
 @Component({
@@ -17,6 +17,8 @@ export class OauthClientViewStandarActionsComponent extends AbstactContainerWrap
   override actions = viewChild<ActionContainerComponent>('container');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Filtro actual del listado, para exportar lo que coincide con él. */
+  filter = input<OauthClientFilter>();
 
   activated: Tick<OauthClientProjection, string>;
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;

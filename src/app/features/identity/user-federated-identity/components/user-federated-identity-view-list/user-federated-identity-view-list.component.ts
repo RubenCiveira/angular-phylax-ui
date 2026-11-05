@@ -26,6 +26,8 @@ export class UserFederatedIdentityViewListComponent {
   list: Shift<UserFederatedIdentityProjection[], UserFederatedIdentityFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<UserFederatedIdentityFilter>({});
 
   constructor(repository: UserFederatedIdentityRepository) {
     this.displayer = repository.displayProvider();
@@ -77,6 +79,8 @@ export class UserFederatedIdentityViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

@@ -26,6 +26,8 @@ export class TemplateAssetViewListComponent {
   list: Shift<TemplateAssetProjection[], TemplateAssetFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<TemplateAssetFilter>({});
 
   constructor(repository: TemplateAssetRepository) {
     this.displayer = repository.displayProvider();
@@ -77,6 +79,8 @@ export class TemplateAssetViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

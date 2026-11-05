@@ -23,6 +23,8 @@ export class RoleViewListComponent {
   list: Shift<RoleProjection[], RoleFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<RoleFilter>({});
 
   constructor(repository: RoleRepository) {
     this.displayer = repository.displayProvider();
@@ -62,6 +64,8 @@ export class RoleViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

@@ -26,6 +26,8 @@ export class TemplateVersionViewListComponent {
   list: Shift<TemplateVersionProjection[], TemplateVersionFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<TemplateVersionFilter>({});
 
   constructor(repository: TemplateVersionRepository) {
     this.displayer = repository.displayProvider();
@@ -56,6 +58,8 @@ export class TemplateVersionViewListComponent {
     if (filter?.templates?.$ref) {
       result.templates = filter.templates.$ref;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 

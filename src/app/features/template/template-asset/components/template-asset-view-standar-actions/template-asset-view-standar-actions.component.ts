@@ -2,9 +2,12 @@
 import { Tick } from 'app/shared/data/repository/repository.model';
 import { AbstactContainerWrapper } from 'app/shared/toolkit/action/abstract-container-wrapper';
 import { Acl } from 'app/shared/data/acl/acl.model';
-import { TemplateAssetProjection } from 'app/features/template/template-asset/model/template-asset.model';
+import {
+  TemplateAssetFilter,
+  TemplateAssetProjection,
+} from 'app/features/template/template-asset/model/template-asset.model';
 import { TemplateAssetRepository } from 'app/features/template/template-asset/repository/template-asset-repository.service';
-import { input, computed, effect, viewChild, Component } from '@angular/core';
+import { computed, input, effect, viewChild, Component } from '@angular/core';
 import { ItemMapper, ActionContainerComponent } from 'app/shared/toolkit/action/action-container.component';
 
 @Component({
@@ -17,6 +20,8 @@ export class TemplateAssetViewStandarActionsComponent extends AbstactContainerWr
   override actions = viewChild<ActionContainerComponent>('container');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Filtro actual del listado, para exportar lo que coincide con él. */
+  filter = input<TemplateAssetFilter>();
 
   activated: Tick<TemplateAssetProjection, string>;
   acl: Tick<{ generic: Acl; specific: Acl }, string | null>;

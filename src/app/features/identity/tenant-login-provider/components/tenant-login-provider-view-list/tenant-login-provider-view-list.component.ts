@@ -26,6 +26,8 @@ export class TenantLoginProviderViewListComponent {
   list: Shift<TenantLoginProviderProjection[], TenantLoginProviderFilter>;
   displayer: DisplayProvider<any>;
   refreshDataLabel = signal('Refresh');
+  /** Último filtro buscado, sin paginación: lo usa la exportación. */
+  query = signal<TenantLoginProviderFilter>({});
 
   constructor(repository: TenantLoginProviderRepository) {
     this.displayer = repository.displayProvider();
@@ -65,6 +67,8 @@ export class TenantLoginProviderViewListComponent {
     if (filter?.order) {
       result.order = filter.order;
     }
+    const { limit, ...query } = result;
+    this.query.set(query);
     this.list.fetch(result);
   }
 
