@@ -371,7 +371,8 @@ describe('ListViewComponent', () => {
 
       const layout = list.tableLayout();
       expect(layout.columns.map((c) => c.width)).toEqual([100, 100]);
-      expect(layout.width).toBe(252);
+      // 52 (checkbox) + 200 (columnas) + 48 (hueco del botón "Columnas")
+      expect(layout.width).toBe(300);
     });
 
     it('cycles sort on sortable headers and announces it', async () => {

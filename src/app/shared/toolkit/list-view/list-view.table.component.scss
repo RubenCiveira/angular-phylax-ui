@@ -133,9 +133,9 @@
   pointer-events: auto;
 }
 
-/* Hueco al final de cabecera y filas: al llegar al final del scroll la última columna queda entera junto al botón */
-.material-table.has-column-menu .thead::after,
-.material-table.has-column-menu .tbody .tr::after {
+/* Hueco al final de la cabecera: al llegar al final del scroll el último título queda entero junto al botón.
+   Las filas no lo necesitan (el botón solo está en la cabecera): ahí lo ocupa la última columna de acciones. */
+.material-table.has-column-menu .thead::after {
   content: '';
   flex: none;
   width: var(--list-view-column-menu-space);
@@ -153,7 +153,7 @@
 }
 
 .material-table .tbody .tr.selected {
-  background-color: var(--mat-sys-secondary-container);
+  --list-view-row-state: var(--mat-sys-secondary-container);
 }
 
 .material-table .tbody .tr:focus-visible {
@@ -162,9 +162,44 @@
 }
 
 .material-table .tbody .tr:hover {
-  background-color: var(--list-view-hover-bg);
+  --list-view-row-state: var(--list-view-hover-bg);
   cursor: pointer;
 }
+.material-table .tbody .tr.selected:hover {
+  --list-view-row-state: color-mix(in srgb, var(--mat-sys-on-secondary-container) 8%, var(--mat-sys-secondary-container));
+}
 .material-table .tbody .tr {
+  --list-view-row-state: transparent;
+  background-color: var(--list-view-row-state);
   transition: background-color var(--list-view-transition);
+}
+
+/* Acciones (columnas sin título del final): con scroll horizontal se desplazan lo que falta hasta el final y
+   flotan sobre las demás columnas, junto al botón "Columnas". Sin overflow quedan en su sitio. */
+.material-table .th.pinned,
+.material-table .td.pinned {
+  position: relative;
+  z-index: 1;
+  transform: translateX(calc(-1 * var(--list-view-scroll-end, 0px)));
+  transition: box-shadow var(--list-view-transition);
+}
+.material-table .th.pinned {
+  background-color: var(--list-view-header-bg);
+}
+/* Fondo opaco con el estado de la fila (hover, seleccionada) encima, para tapar lo que pasa por debajo */
+.material-table .td.pinned {
+  background:
+    linear-gradient(var(--list-view-row-state), var(--list-view-row-state)),
+    var(--list-view-bg);
+}
+/* La última columna de acciones llega hasta el borde derecho y alinea sus botones con él */
+.material-table .td.pinned:last-child {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.material-table.overflow-end .th.pinned,
+.material-table.overflow-end .td.pinned {
+  box-shadow: -8px 0 8px -8px color-mix(in srgb, var(--mat-sys-shadow) 40%, transparent);
 }

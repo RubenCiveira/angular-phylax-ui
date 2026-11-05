@@ -56,6 +56,8 @@ export interface ListViewTableColumn {
   column: ListViewColumnDirective;
   key: string;
   width: number;
+  /** Columna sin título al final (acciones): se queda a la vista flotando sobre las demás si hay scroll horizontal. */
+  pinned: boolean;
 }
 
 /** Reserva si `--list-view-row-height` no se puede leer en px; debe coincidir con `--app-row-height`. */
@@ -132,6 +134,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   tableTemplate = contentChildren(ListViewTableTemplate);
   theTableScroll = viewChild<CdkVirtualScrollViewport>('tableScroll');
+  private theTableScrollX = viewChild<ElementRef<HTMLElement>>('tableScrollX');
   table = computed(() => {
     const theColumns = this.tableTemplate();
     return theColumns.length > 0 ? theColumns[0] : new ListViewTableTemplate();
@@ -169,7 +172,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
     const base = shown.map(({ column }) => (column.title() ? column.width() : ICON_WIDTH * icons));
     const used = checks + base.reduce((total, width) => total + width, 0);
     // Con el botón "Columnas" se reserva su hueco: si no, las columnas que caben justas quedarían debajo de él
-    const available = this.availableWidth() - (this.choosableColumns().length > 1 ? COLUMN_MENU_WIDTH : 0);
+    const menuSpace = this.choosableColumns().length > 1 ? COLUMN_MENU_WIDTH : 0;
+    const available = this.availableWidth() - menuSpace;
     // Si no caben, se mantiene su anchura y la tabla hace scroll horizontal
     const spare = Math.max(0, available - used);
     const titled = shown.filter(({ column }) => !!column.title());
@@ -183,9 +187,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
       } else {
         share = factors > 0 ? Math.max(0, column.factor()) / factors : 1 / titled.length;
       }
-      return { column, key, width: base[index] + Math.floor(spare * share) };
+      const pinned = !column.title() && shown.slice(index).every((entry) => !entry.column.title());
+      return { column, key, width: base[index] + Math.floor(spare * share), pinned };
     });
-    return { columns, width: Math.max(used, available) };
+    // El ancho incluye el hueco del botón: si no, con overflow las filas acabarían antes que la cabecera
+    return { columns, width: Math.max(used, available) + menuSpace };
   });
 
   allSelected = computed(() => {
@@ -241,6 +247,12 @@ export class ListViewComponent implements OnInit, OnDestroy {
       this.data();
       this.searching();
       this.refreshView();
+    });
+    effect((onCleanup) => {
+      const element = this.theTableScrollX()?.nativeElement;
+      if (element) {
+        onCleanup(this.trackScrollEnd(element));
+      }
     });
   }
 
@@ -368,8 +380,43 @@ export class ListViewComponent implements OnInit, OnDestroy {
     return Number.isFinite(value) && value > 0 ? value : DEFAULT_ROW_HEIGHT;
   }
 
+  /**
+   * En la tabla se mide la zona con scroll (sin el borde del recuadro): con el ancho del host sobrarían esos px
+   * y siempre habría un mínimo de scroll horizontal. Se redondea hacia abajo para no desbordar por subpíxeles.
+   */
   private updateAvailableWidth(): void {
-    this.availableWidth.set(this.elRef.nativeElement.getBoundingClientRect().width);
+    const scroll = untracked(this.theTableScrollX)?.nativeElement;
+    const width = scroll ? scroll.clientWidth : this.elRef.nativeElement.getBoundingClientRect().width;
+    this.availableWidth.set(Math.floor(width));
+  }
+
+  /**
+   * Publica en `--list-view-scroll-end` lo que queda de scroll horizontal hasta el final: las columnas ancladas
+   * se desplazan eso hacia la izquierda y siempre quedan junto al borde derecho. Se escribe directamente en el
+   * estilo para no lanzar la detección de cambios en cada evento de scroll.
+   */
+  private trackScrollEnd(element: HTMLElement): () => void {
+    const table = element.parentElement!;
+    const update = () => {
+      // Al aparecer la tabla, su anchura útil sustituye a la del host
+      this.updateAvailableWidth();
+      // Menos de 1px es redondeo, no overflow real
+      const rest = element.scrollWidth - element.clientWidth - Math.abs(element.scrollLeft);
+      const end = rest >= 1 ? rest : 0;
+      table.style.setProperty('--list-view-scroll-end', `${end}px`);
+      table.classList.toggle('overflow-end', end > 0);
+    };
+    update();
+    element.addEventListener('scroll', update, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    if (element.firstElementChild) {
+      observer.observe(element.firstElementChild);
+    }
+    return () => {
+      element.removeEventListener('scroll', update);
+      observer.disconnect();
+    };
   }
 
   private refreshView() {

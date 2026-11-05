@@ -26,6 +26,7 @@ const plan = (rows: unknown[][], extra: Partial<ImportPlan> = {}): ImportPlan =>
   sensitive: false,
   canCreate: true,
   canUpdate: true,
+  allowedActions: [],
   ...extra,
 });
 
@@ -215,6 +216,95 @@ describe('EntityImportService', () => {
 
     expect(service.job(KEY)()!.status).toBe('interrupted');
     expect(JSON.parse(localStorage.getItem('entity-import-job-' + KEY)!).status).toBe('interrupted');
+  });
+
+  describe('read-only fields set through actions', () => {
+    let enable: jasmine.Spy;
+    let disable: jasmine.Spy;
+    const statusPlan = (rows: unknown[][], extra: Partial<ImportPlan> = {}) =>
+      plan(rows, {
+        columns: [
+          { field: 'name', type: 'text', label: 'Nombre', index: 0, required: true },
+          { field: 'enabled', type: 'boolean', label: 'Habilitado', index: 1, viaAction: true },
+        ],
+        allowedActions: ['enable', 'disable'],
+        ...extra,
+      });
+
+    beforeEach(() => {
+      enable = jasmine.createSpy('enable').and.callFake((item: Item) => of({ ...item, enabled: true }));
+      disable = jasmine.createSpy('disable').and.callFake((item: Item) => of({ ...item, enabled: false }));
+      definition.actions = {
+        enabled: [
+          { name: 'enable', value: true, run: enable },
+          { name: 'disable', value: false, run: disable },
+        ],
+      };
+    });
+
+    it('saves without the field and then runs the action that sets it', async () => {
+      service.start(definition, statusPlan([['bea', 'no']]));
+      const job = service.job(KEY);
+      await until(() => job()?.status === 'finished');
+
+      expect(target.add).toHaveBeenCalledWith({ enabled: true, name: 'bea' });
+      expect(disable).toHaveBeenCalledWith({ enabled: true, name: 'bea', uid: 'new' });
+      expect(job()).toEqual(jasmine.objectContaining({ created: 1, warned: 0 }));
+      expect(job()!.outcomes[0].messages).toBeUndefined();
+    });
+
+    it('does not run the action when the saved item already has the value', async () => {
+      service.start(definition, statusPlan([['ana', 'no']]));
+      await until(() => service.job(KEY)()?.status === 'finished');
+
+      expect(target.update).toHaveBeenCalledWith({ uid: 'u1', name: 'ana', enabled: false, version: 3 });
+      expect(enable).not.toHaveBeenCalled();
+      expect(disable).not.toHaveBeenCalled();
+    });
+
+    it('warns when the action is not allowed, keeping the row saved', async () => {
+      service.start(definition, statusPlan([['ana', 'sí']], { allowedActions: ['disable'] }));
+      const job = service.job(KEY);
+      await until(() => job()?.status === 'finished');
+
+      expect(enable).not.toHaveBeenCalled();
+      expect(job()).toEqual(jasmine.objectContaining({ updated: 1, failed: 0, warned: 1 }));
+      expect(job()!.outcomes[0].messages).toEqual([
+        { key: 'common.import.warn.notAllowed', params: { field: 'Habilitado', value: 'sí', action: 'enable' } },
+      ]);
+      expect(notify.info).toHaveBeenCalled();
+    });
+
+    it('warns when no action leads to the value', async () => {
+      definition.actions = { enabled: [{ name: 'enable', value: true, run: enable }] };
+      service.start(
+        definition,
+        statusPlan([
+          ['ana', 'no'],
+          ['bea', 'no'],
+        ]),
+      );
+      const job = service.job(KEY);
+      await until(() => job()?.status === 'finished');
+
+      // "ana" ya está deshabilitada; "bea" se crea habilitada y no hay acción para deshabilitarla
+      expect(job()!.outcomes.map((o) => o.messages?.[0]?.key)).toEqual([undefined, 'common.import.warn.noAction']);
+    });
+
+    it('warns with the server message when the action fails', async () => {
+      disable.and.returnValue(throwError(() => ({ status: 409, error: { message: 'last admin' } })));
+      service.start(definition, statusPlan([['bea', 'no']]));
+      const job = service.job(KEY);
+      await until(() => job()?.status === 'finished');
+
+      expect(job()).toEqual(jasmine.objectContaining({ created: 1, warned: 1 }));
+      expect(job()!.outcomes[0].messages).toEqual([
+        {
+          key: 'common.import.warn.actionFailed',
+          params: { field: 'Habilitado', value: 'no', action: 'disable', message: 'last admin' },
+        },
+      ]);
+    });
   });
 
   it('forgets a finished import', async () => {

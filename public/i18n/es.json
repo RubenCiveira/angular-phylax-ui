@@ -163,7 +163,8 @@
           "interrupted": "Importación interrumpida",
           "running": "Importando…"
         },
-        "updated": "{{count}} actualizados"
+        "updated": "{{count}} actualizados",
+        "warned": "{{count}} con avisos"
       },
       "mapping": {
         "emptyCells": "Las celdas vacías no modifican el valor existente.",
@@ -183,7 +184,8 @@
         "sheet": "Hoja",
         "skip": "— No importar —",
         "title": "Columnas",
-        "unused": "Columnas del Excel que no se importan:"
+        "unused": "Columnas del Excel que no se importan:",
+        "viaAction": "mediante acción"
       },
       "notify": {
         "cancelled": "Importación detenida: {{created}} creados, {{updated}} actualizados, {{failed}} con errores",
@@ -206,7 +208,9 @@
           "updated": "Actualizado"
         },
         "row": "Fila",
-        "uploaded": "{{count}} filas subidas"
+        "uploaded": "{{count}} filas subidas",
+        "warning": "Aviso",
+        "warnings": "Filas guardadas con avisos"
       },
       "template": {
         "column": "Columna",
@@ -223,6 +227,11 @@
           "reference": "nombre del elemento relacionado",
           "text": "texto"
         }
+      },
+      "warn": {
+        "actionFailed": "{{field}}: no se ha podido aplicar «{{action}}» para pasar a «{{value}}»: {{message}}",
+        "noAction": "{{field}}: no hay ninguna acción que lo pase a «{{value}}»",
+        "notAllowed": "{{field}}: no tienes permiso para «{{action}}» (pasar a «{{value}}»)"
       }
     },
     "list": {

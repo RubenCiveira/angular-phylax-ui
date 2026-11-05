@@ -28,6 +28,8 @@ const REFRESH_MS = 10_000;
 interface ExpectedColumn extends ImportColumn {
   text: string;
   key: boolean;
+  /** De solo lectura: se lleva al valor del Excel con una de sus acciones tras guardar. */
+  viaAction?: boolean;
 }
 
 /**
@@ -78,6 +80,7 @@ export class EntityImportComponent {
   });
   readonly failures = computed(() => this.job()?.outcomes.filter((o) => o.result === 'failed') ?? []);
   readonly successes = computed(() => this.job()?.outcomes.filter((o) => o.result !== 'failed') ?? []);
+  readonly warnings = computed(() => this.successes().filter((o) => o.messages?.length));
 
   readonly reading = signal(false);
   readonly downloading = signal(false);
@@ -97,18 +100,33 @@ export class EntityImportComponent {
     return this.allColumns().filter((column) => fixed.includes(column.field));
   });
   /** Columnas que se pueden leer del Excel: las claves y las que el ACL deja escribir. */
-  readonly columns = computed(() => {
-    const blocked = this.blockedFields();
+  /**
+   * Columnas que se pueden leer del Excel: las claves, las que el ACL deja escribir y las de solo lectura que alguna
+   * acción permitida puede cambiar. Las ocultas por el ACL no se ofrecen.
+   */
+  readonly columns = computed<ExpectedColumn[]>(() => {
+    const fields = this.acl()?.fields;
+    const hidden = fields?.noVisibles ?? [];
+    const readOnly = fields?.noEditables ?? [];
     const fixed = this.fixedColumns().map((column) => column.field);
-    return this.allColumns().filter(
-      (column) => !fixed.includes(column.field) && (column.key || !blocked.includes(column.field)),
-    );
+    return this.allColumns().flatMap((column) => {
+      if (fixed.includes(column.field)) {
+        return [];
+      }
+      if (column.key || (!hidden.includes(column.field) && !readOnly.includes(column.field))) {
+        return [column];
+      }
+      return !hidden.includes(column.field) && this.allowedActions(column.field).length
+        ? [{ ...column, viaAction: true }]
+        : [];
+    });
   });
-  /** Columnas que el ACL no deja escribir. */
+  /** Columnas que el ACL no deja escribir ni cambiar con una acción. */
   readonly forbiddenLabels = computed(() => {
-    const blocked = this.blockedFields();
+    const offered = this.columns().map((column) => column.field);
+    const fixed = this.fixedColumns().map((column) => column.field);
     return this.allColumns()
-      .filter((column) => !column.key && blocked.includes(column.field))
+      .filter((column) => !offered.includes(column.field) && !fixed.includes(column.field))
       .map((column) => column.text)
       .join(', ');
   });
@@ -151,11 +169,6 @@ export class EntityImportComponent {
         text: texts[column.label] ?? column.field,
         key: definition.keys.includes(column.field),
       }));
-  });
-
-  private readonly blockedFields = computed(() => {
-    const fields = this.acl()?.fields;
-    return [...(fields?.noEditables ?? []), ...(fields?.noVisibles ?? [])];
   });
 
   constructor() {
@@ -252,7 +265,13 @@ export class EntityImportComponent {
           [t('template.column'), t('template.mandatory'), t('template.format')],
           ...columns.map((column) => [
             column.text,
-            column.key ? t('mapping.key') : column.required ? t('mapping.required') : '',
+            column.key
+              ? t('mapping.key')
+              : column.viaAction
+                ? t('mapping.viaAction')
+                : column.required
+                  ? t('mapping.required')
+                  : '',
             this.formatOf(column),
           ]),
         ],
@@ -298,6 +317,7 @@ export class EntityImportComponent {
         label: column.text,
         index: mapping[column.field]!,
         required: column.required,
+        viaAction: column.viaAction,
         options: column.options?.map((option) => ({
           value: option.value,
           names: [option.value, this.texts()[option.label] ?? option.value],
@@ -309,6 +329,9 @@ export class EntityImportComponent {
       rows: sheet.rows,
       missingRequired: this.missingRequired().map((column) => column.text),
       sensitive: columns.some((column) => definition.sensitive?.includes(column.field)),
+      allowedActions: Object.keys(definition.actions ?? {}).flatMap((field) =>
+        this.allowedActions(field).map((action) => action.name),
+      ),
       canCreate: this.canCreate(),
       canUpdate: this.canUpdate(),
     };
@@ -332,9 +355,19 @@ export class EntityImportComponent {
   /** Formato o valores admitidos de una columna, para la hoja de instrucciones. */
   private formatOf(column: ExpectedColumn): string {
     if (column.type === 'enum' && column.options?.length) {
-      return column.options.map((option) => this.texts()[option.label] ?? option.value).join(' / ');
+      // Si va por acción, solo los valores a los que lleva alguna acción permitida
+      const reachable = this.allowedActions(column.field).map((action) => action.value);
+      return column.options
+        .filter((option) => !column.viaAction || reachable.includes(option.value))
+        .map((option) => this.texts()[option.label] ?? option.value)
+        .join(' / ');
     }
     return this.transloco.translate(`common.import.template.type.${column.type ?? 'text'}`);
+  }
+
+  /** Acciones que cambian `field` y que permite el ACL genérico. */
+  private allowedActions(field: string) {
+    return (this.definition().actions?.[field] ?? []).filter((action) => this.allowed(action.name));
   }
 
   private allowed(name: string): boolean {

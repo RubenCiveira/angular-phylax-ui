@@ -48,6 +48,17 @@ export class UserViewImportActionComponent extends BaseImportAction<User> {
       { field: 'federatedProvider', label: 'form-group.federated-provider.label' },
     ],
     sensitive: ['password'],
+    // Campos que el backend solo cambia con sus acciones: se aplican tras crear o actualizar
+    actions: {
+      approvalStatus: [
+        { name: 'accept', value: 'accepted', run: (user) => this.repository.accept(user.uid) },
+        { name: 'reject', value: 'rejected', run: (user) => this.repository.reject(user.uid) },
+      ],
+      enabled: [
+        { name: 'enable', value: true, run: (user) => this.repository.enable(user.uid) },
+        { name: 'disable', value: false, run: (user) => this.repository.disable(user.uid) },
+      ],
+    },
     references: {
       tenant: {
         resolve: (text) =>

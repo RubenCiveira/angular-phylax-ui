@@ -12,6 +12,7 @@ import {
   ImportOutcome,
   ImportPlan,
   ImportRow,
+  ImportRowResult,
 } from './entity-import.model';
 
 const JOB_PREFIX = 'entity-import-job-';
@@ -114,6 +115,7 @@ export class EntityImportService {
       created: 0,
       updated: 0,
       failed: 0,
+      warned: 0,
       outcomes: [],
       resumable,
     };
@@ -176,6 +178,9 @@ export class EntityImportService {
         const outcome = await this.processRow(definition, plan, plan.rows[index]);
         job.outcomes.push(outcome);
         job = { ...job, processed: index + 1, [outcome.result]: job[outcome.result] + 1 };
+        if (outcome.result !== 'failed' && outcome.messages?.length) {
+          job = { ...job, warned: (job.warned ?? 0) + 1 };
+        }
         publish();
       }
       job = { ...job, status: control.cancelled ? 'cancelled' : 'finished', finishedAt: new Date().toISOString() };
@@ -199,6 +204,8 @@ export class EntityImportService {
     const params = { created: String(job.created), updated: String(job.updated), failed: String(job.failed) };
     if (job.failed) {
       this.notify.error('common.import.notify.' + job.status, params);
+    } else if (job.warned) {
+      this.notify.info('common.import.notify.' + job.status, params);
     } else {
       this.notify.success('common.import.notify.' + job.status, params);
     }
@@ -210,6 +217,8 @@ export class EntityImportService {
     row: ImportRow,
   ): Promise<ImportOutcome> {
     const values: Record<string, unknown> = {};
+    // Campos de solo lectura: se aplican con su acción una vez guardado el elemento
+    const desired: Record<string, Desired> = {};
     const messages: ImportMessage[] = [];
     for (const column of plan.columns) {
       const parsed = parseCell(row.cells[column.index], column);
@@ -226,7 +235,11 @@ export class EntityImportService {
           });
         }
       } else if (parsed.value !== undefined) {
-        values[column.field] = parsed.value;
+        if (column.viaAction) {
+          desired[column.field] = { value: parsed.value, text: String(row.cells[column.index]).trim() };
+        } else {
+          values[column.field] = parsed.value;
+        }
       }
     }
     const item = values as Partial<T>;
@@ -258,8 +271,8 @@ export class EntityImportService {
         if (!plan.canUpdate) {
           return failed({ key: 'common.import.error.notAllowed.update' });
         }
-        await once(definition.target.update({ ...found[0], ...item }), null);
-        return { row: row.row, display, result: 'updated' };
+        const saved = await once(definition.target.update({ ...found[0], ...item }), null);
+        return this.saved(row, display, 'updated', await this.applyActions(definition, plan, saved, desired));
       }
       if (!plan.canCreate) {
         return failed({ key: 'common.import.error.notAllowed.create' });
@@ -271,13 +284,57 @@ export class EntityImportService {
       if (missing.length) {
         return failed({ key: 'common.import.error.missingRequired', params: { fields: missing.join(', ') } });
       }
-      await once(definition.target.add({ ...(definition.defaults?.() ?? {}), ...item } as T), null);
-      return { row: row.row, display, result: 'created' };
+      const saved = await once(definition.target.add({ ...(definition.defaults?.() ?? {}), ...item } as T), null);
+      return this.saved(row, display, 'created', await this.applyActions(definition, plan, saved, desired));
     } catch (error) {
       // El fallo queda en el resumen de la fila: sin el aviso global por cada una
       markErrorHandled(error);
       return failed(...serverMessages(error));
     }
+  }
+
+  private saved(row: ImportRow, display: string, result: ImportRowResult, warnings: ImportMessage[]): ImportOutcome {
+    return warnings.length ? { row: row.row, display, result, messages: warnings } : { row: row.row, display, result };
+  }
+
+  /**
+   * Lleva cada campo de solo lectura al valor del Excel con la acción que lo deja en él, si el elemento guardado no lo
+   * tiene ya. Lo que no se puede aplicar (no hay acción, no hay permiso o falla) queda como aviso de la fila.
+   */
+  private async applyActions<T>(
+    definition: ImportDefinition<T>,
+    plan: StoredPlan,
+    saved: T | null,
+    desired: Record<string, Desired>,
+  ): Promise<ImportMessage[]> {
+    const warnings: ImportMessage[] = [];
+    let current = saved;
+    for (const [field, { value, text }] of Object.entries(desired)) {
+      if (!current || (current as Record<string, unknown>)[field] === value) {
+        continue;
+      }
+      const column = plan.columns.find((c) => c.field === field)!;
+      const params = { field: column.label, value: text };
+      const action = definition.actions?.[field]?.find((candidate) => candidate.value === value);
+      if (!action) {
+        warnings.push({ key: 'common.import.warn.noAction', params });
+      } else if (!plan.allowedActions.includes(action.name)) {
+        warnings.push({ key: 'common.import.warn.notAllowed', params: { ...params, action: action.name } });
+      } else {
+        try {
+          current = await once(action.run(current), current);
+        } catch (error) {
+          markErrorHandled(error);
+          warnings.push(
+            ...serverMessages(error).map((message) => ({
+              key: 'common.import.warn.actionFailed',
+              params: { ...params, action: action.name, message: message.params?.['message'] ?? '' },
+            })),
+          );
+        }
+      }
+    }
+    return warnings;
   }
 
   private async reference<T>(definition: ImportDefinition<T>, field: string, text: string) {
@@ -303,6 +360,12 @@ export class EntityImportService {
     }
     return job;
   }
+}
+
+/** Valor que pide el Excel para un campo de solo lectura, y el texto de la celda para los avisos. */
+interface Desired {
+  value: unknown;
+  text: string;
 }
 
 /** Primer valor del observable (los del repositorio no completan), o `fallback` si completa sin emitir. */

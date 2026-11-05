@@ -25,6 +25,19 @@ export interface ImportReference {
   resolve(text: string): Observable<{ $ref: string } | null>;
 }
 
+/**
+ * Acción que deja un campo de solo lectura en un valor (p. ej. `enable` deja `enabled` en `true`). Se ejecuta tras
+ * crear o actualizar si el valor guardado no es el del Excel.
+ */
+export interface ImportAction<T> {
+  /** Nombre de la acción: es también el permiso del ACL que la permite. */
+  name: string;
+  /** Valor en que deja el campo. */
+  value: unknown;
+  /** Ejecuta la acción sobre el elemento guardado y devuelve cómo queda. */
+  run(item: T): Observable<T>;
+}
+
 /** Operaciones que la importación necesita del repositorio. Cada observable debe emitir una vez. */
 export interface ImportTarget<T> {
   /** ACL genérico: qué campos se pueden escribir y si se permite `create` y `update`. */
@@ -47,6 +60,8 @@ export interface ImportDefinition<T> {
   /** Campos que no se muestran ni se guardan en `localStorage`. */
   sensitive?: string[];
   references?: { [field: string]: ImportReference };
+  /** Acciones que cambian campos que no se pueden escribir directamente, por campo. */
+  actions?: { [field: string]: ImportAction<T>[] };
   /** Valores con los que se completa un elemento nuevo. */
   defaults?: () => Partial<T>;
   /** Texto con el que se identifica la fila en el resumen; por defecto los valores de las claves. */
@@ -71,6 +86,8 @@ export interface ImportPlanColumn {
   index: number;
   /** Obligatoria para crear. */
   required?: boolean;
+  /** El campo no se puede escribir: no va en el cuerpo y se aplica después con su acción. */
+  viaAction?: boolean;
   /** Nombres (valor y etiqueta traducida) por los que se reconoce cada opción de un `enum`. */
   options?: { value: string; names: string[] }[];
 }
@@ -92,6 +109,8 @@ export interface ImportPlan {
   sensitive: boolean;
   canCreate: boolean;
   canUpdate: boolean;
+  /** Acciones que permite el ACL genérico. */
+  allowedActions: string[];
 }
 
 export type ImportJobStatus = 'running' | 'finished' | 'cancelled' | 'interrupted';
@@ -108,6 +127,7 @@ export interface ImportOutcome {
   row: number;
   display: string;
   result: ImportRowResult;
+  /** Motivos del fallo o, en una fila guardada, avisos (una acción que no se ha podido aplicar). */
   messages?: ImportMessage[];
 }
 
@@ -125,6 +145,8 @@ export interface ImportJob {
   created: number;
   updated: number;
   failed: number;
+  /** Filas guardadas con algún aviso (también cuentan en `created` o `updated`). */
+  warned?: number;
   outcomes: ImportOutcome[];
   /** Hay filas pendientes guardadas: se puede reanudar en otra sesión. */
   resumable: boolean;

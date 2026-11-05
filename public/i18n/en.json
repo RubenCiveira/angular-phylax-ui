@@ -56,7 +56,8 @@
           "interrupted": "Import interrupted",
           "running": "Importing…"
         },
-        "updated": "{{count}} updated"
+        "updated": "{{count}} updated",
+        "warned": "{{count}} with warnings"
       },
       "mapping": {
         "emptyCells": "Empty cells do not change the existing value.",
@@ -76,7 +77,8 @@
         "sheet": "Sheet",
         "skip": "— Do not import —",
         "title": "Columns",
-        "unused": "Excel columns that are not imported:"
+        "unused": "Excel columns that are not imported:",
+        "viaAction": "via action"
       },
       "notify": {
         "cancelled": "Import stopped: {{created}} created, {{updated}} updated, {{failed}} with errors",
@@ -99,7 +101,9 @@
           "updated": "Updated"
         },
         "row": "Row",
-        "uploaded": "{{count}} rows uploaded"
+        "uploaded": "{{count}} rows uploaded",
+        "warning": "Warning",
+        "warnings": "Rows saved with warnings"
       },
       "template": {
         "column": "Column",
@@ -116,6 +120,11 @@
           "reference": "name of the related item",
           "text": "text"
         }
+      },
+      "warn": {
+        "actionFailed": "{{field}}: \"{{action}}\" could not be applied to set \"{{value}}\": {{message}}",
+        "noAction": "{{field}}: there is no action that sets \"{{value}}\"",
+        "notAllowed": "{{field}}: you are not allowed to \"{{action}}\" (to set \"{{value}}\")"
       }
     },
     "list": {

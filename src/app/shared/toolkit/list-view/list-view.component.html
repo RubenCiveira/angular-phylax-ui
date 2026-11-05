@@ -156,7 +156,7 @@
       [class.has-column-menu]="choosableColumns().length > 1"
       [style.--list-view-column-menu-space.px]="columnMenuWidth"
     >
-      <div class="table-scroll">
+      <div #tableScrollX class="table-scroll">
         <div
           class="table-inner"
           role="table"
@@ -181,6 +181,7 @@
                 class="th"
                 role="columnheader"
                 [class.small]="!column.title()"
+                [class.pinned]="entry.pinned"
                 [style.width.px]="entry.width"
                 [attr.aria-sort]="ariaSort(column, entry.key)"
                 [matTooltip]="column.tooltip() ?? ''"
@@ -238,7 +239,7 @@
                       ></ng-container>
                     </span>
                   } @else {
-                    <span class="td small" role="cell" [style.width.px]="entry.width">
+                    <span class="td small" role="cell" [class.pinned]="entry.pinned" [style.width.px]="entry.width">
                       <ng-container
                         *ngTemplateOutlet="entry.column.template; context: { $implicit: item }"
                       ></ng-container>

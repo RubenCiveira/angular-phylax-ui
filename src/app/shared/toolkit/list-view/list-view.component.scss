@@ -7,6 +7,8 @@
   --list-view-header-fg: var(--mat-sys-on-surface-variant);
   --list-view-cell-padding: var(--app-space-3) var(--app-space-4);
   --list-view-border-color: var(--app-color-border);
+  /* Fondo de la tabla: lo usan las columnas ancladas para tapar las que pasan por debajo */
+  --list-view-bg: var(--mat-sys-surface);
   --list-view-hover-bg: color-mix(in srgb, var(--mat-sys-on-surface) 8%, transparent);
   --list-view-transition: var(--app-transition-fast);
   --list-view-card-min: 280px;

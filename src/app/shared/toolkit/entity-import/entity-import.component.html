@@ -29,6 +29,12 @@
         <mat-icon aria-hidden="true">edit</mat-icon
         >{{ 'common.import.job.updated' | transloco: { count: job.updated } }}
       </li>
+      @if (job.warned) {
+        <li class="warned">
+          <mat-icon aria-hidden="true">warning</mat-icon
+          >{{ 'common.import.job.warned' | transloco: { count: job.warned } }}
+        </li>
+      }
       <li class="failed">
         <mat-icon aria-hidden="true">error</mat-icon>{{ 'common.import.job.failed' | transloco: { count: job.failed } }}
       </li>
@@ -56,6 +62,31 @@
         </thead>
         <tbody>
           @for (outcome of failures(); track outcome.row) {
+            <tr>
+              <td class="num">{{ outcome.row }}</td>
+              <td>{{ outcome.display }}</td>
+              <td>
+                @for (message of outcome.messages; track $index) {
+                  <div>{{ message.key | transloco: message.params }}</div>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+    @if (warnings().length) {
+      <h4>{{ 'common.import.summary.warnings' | transloco }}</h4>
+      <table class="outcomes">
+        <thead>
+          <tr>
+            <th scope="col">{{ 'common.import.summary.row' | transloco }}</th>
+            <th scope="col">{{ 'common.import.summary.item' | transloco }}</th>
+            <th scope="col">{{ 'common.import.summary.warning' | transloco }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (outcome of warnings(); track outcome.row) {
             <tr>
               <td class="num">{{ outcome.row }}</td>
               <td>{{ outcome.display }}</td>
@@ -146,6 +177,8 @@
               {{ column.text }}
               @if (column.key) {
                 <span class="badge">{{ 'common.import.mapping.key' | transloco }}</span>
+              } @else if (column.viaAction) {
+                <span class="badge">{{ 'common.import.mapping.viaAction' | transloco }}</span>
               } @else if (column.required) {
                 <span class="badge">{{ 'common.import.mapping.required' | transloco }}</span>
               }
@@ -216,6 +249,8 @@
           {{ column.text }}
           @if (column.key) {
             <span class="badge">{{ 'common.import.mapping.key' | transloco }}</span>
+          } @else if (column.viaAction) {
+            <span class="badge">{{ 'common.import.mapping.viaAction' | transloco }}</span>
           }
         </li>
       }
