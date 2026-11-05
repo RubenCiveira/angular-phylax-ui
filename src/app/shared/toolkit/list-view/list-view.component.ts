@@ -16,6 +16,7 @@ import {
   OnInit,
   output,
   signal,
+  untracked,
   viewChild,
   viewChildren,
 } from '@angular/core';
@@ -33,7 +34,7 @@ import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
-import { filter, map, pairwise, Subscription, throttleTime } from 'rxjs';
+import { filter, fromEvent, map, merge, pairwise, Subscription, tap, throttleTime } from 'rxjs';
 import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -59,6 +60,12 @@ export interface ListViewTableColumn {
 
 /** Reserva si `--list-view-row-height` no se puede leer en px; debe coincidir con `--app-row-height`. */
 const DEFAULT_ROW_HEIGHT = 52;
+/** Margen (px) hasta el final del scroll a partir del que se pide la página siguiente. */
+const SCROLL_THRESHOLD = 50;
+/** Arrastre táctil (px) hacia arriba, ya al final, que cuenta como gesto para buscar elementos nuevos. */
+const OVERSCROLL_DRAG = 40;
+/** Como mucho un gesto de "buscar más" por este intervalo. */
+const OVERSCROLL_THROTTLE_MS = 1000;
 const CHECK_WIDTH = 52;
 const ICON_WIDTH = 42;
 /** Hueco reservado al final de cabecera y filas para el botón "Columnas" (40px + margen). */
@@ -204,6 +211,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
   private readonly keyManager = new FocusKeyManager(this.focusables, inject(Injector)).withVerticalOrientation();
   private cssRowHeight = signal<number>(DEFAULT_ROW_HEIGHT);
   private scrollSubs = new Subscription();
+  /** Datos con los que el autorrelleno pidió más por última vez: si no han cambiado, no se vuelve a pedir. */
+  private filledWith?: string;
   private availableWidth = signal<number>(0);
   private resizeObserver?: ResizeObserver;
 
@@ -228,8 +237,9 @@ export class ListViewComponent implements OnInit, OnDestroy {
       this.keyManager.withHorizontalOrientation(this.view() === 'card' ? (this.direction?.value ?? 'ltr') : null);
     });
     effect(() => {
-      // we need to check effect on data changes
+      // Al cambiar los datos o terminar una búsqueda se vuelve a comprobar si hay que pedir más
       this.data();
+      this.searching();
       this.refreshView();
     });
   }
@@ -239,7 +249,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
     // La altura de fila la define --list-view-row-height; el virtual scroll necesita conocerla en px
     this.cssRowHeight.set(this.readRowHeight(element));
     this.updateAvailableWidth();
-    this.resizeObserver = new ResizeObserver(() => this.updateAvailableWidth());
+    this.resizeObserver = new ResizeObserver(() => {
+      this.updateAvailableWidth();
+      // También al volver a mostrarse (estaba fuera del DOM y medía 0) o al crecer la ventana
+      this.fillViewport();
+    });
     this.resizeObserver.observe(element);
   }
 
@@ -359,43 +373,73 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   private refreshView() {
-    const tableScroll = this.theTableScroll();
-    const listScroll = this.theListScroll();
-    const scroll = tableScroll ?? listScroll;
-    const searching = this.searching();
+    const scroll = this.theTableScroll() ?? this.theListScroll();
     if (scroll) {
       scroll.checkViewportSize();
-      this.attachScroll(searching || false, scroll);
+      this.attachScroll(scroll);
     }
   }
 
-  private attachScroll(searching: boolean, scroller: CdkVirtualScrollViewport) {
-    const frameSize = 50;
+  private attachScroll(scroller: CdkVirtualScrollViewport) {
     setTimeout(() => {
-      if (
-        !searching &&
-        scroller.measureScrollOffset('bottom') < frameSize &&
-        scroller.measureViewportSize('vertical') > frameSize
-      ) {
-        this.next.emit();
-      }
+      this.fillViewport();
       this.scrollSubs.unsubscribe();
-      this.scrollSubs = scroller
-        .elementScrolled()
-        .pipe(
-          map(() => scroller.measureScrollOffset('bottom')),
-          pairwise(),
-          filter(([y1, y2]) => y2 < y1 && y2 < frameSize),
-          throttleTime(200),
-        )
-        .subscribe({
-          next: () => {
-            if (scroller.measureViewportSize('vertical') > frameSize) {
-              this.next.emit();
-            }
-          },
-        });
+      const element = scroller.elementRef.nativeElement;
+      const atBottom = () => scroller.measureScrollOffset('bottom') < SCROLL_THRESHOLD;
+      // Al acercarse al final con el scroll se pide la página siguiente
+      const scrolled = scroller.elementScrolled().pipe(
+        map(() => scroller.measureScrollOffset('bottom')),
+        pairwise(),
+        filter(([y1, y2]) => y2 < y1 && y2 < SCROLL_THRESHOLD),
+        throttleTime(200),
+      );
+      // Ya al final no hay scroll: la rueda o un arrastre hacia arriba piden más (o la última página otra vez)
+      let touchStart = 0;
+      const overscrolled = merge(
+        fromEvent<WheelEvent>(element, 'wheel', { passive: true }).pipe(filter((event) => event.deltaY > 0)),
+        fromEvent<TouchEvent>(element, 'touchstart', { passive: true }).pipe(
+          tap((event) => (touchStart = event.touches[0]?.clientY ?? 0)),
+          filter(() => false),
+        ),
+        fromEvent<TouchEvent>(element, 'touchmove', { passive: true }).pipe(
+          filter((event) => touchStart - (event.touches[0]?.clientY ?? touchStart) > OVERSCROLL_DRAG),
+        ),
+      ).pipe(
+        filter(() => atBottom() && !untracked(this.searching)),
+        throttleTime(OVERSCROLL_THROTTLE_MS),
+      );
+      this.scrollSubs = merge(scrolled, overscrolled).subscribe(() => {
+        if (scroller.measureViewportSize('vertical') > SCROLL_THRESHOLD) {
+          this.next.emit();
+        }
+      });
     });
+  }
+
+  /**
+   * Si las filas no llenan el área visible no hay scroll con el que pedir más: se pide la página siguiente.
+   * Al llegar, cambian los datos y se vuelve a comprobar, hasta llenarla o agotar las páginas. Si la última
+   * petición no trajo nada nuevo (fin de la lista) no se insiste: buscar más queda para el gesto del usuario.
+   * Fuera del DOM el viewport mide 0 y no se pide nada.
+   */
+  private fillViewport() {
+    const scroller = untracked(() => this.theTableScroll() ?? this.theListScroll());
+    if (!scroller) {
+      return;
+    }
+    // El virtual scroll guarda el tamaño medido: al reaparecer hay que volver a medir para pintar las filas
+    scroller.checkViewportSize();
+    const data = untracked(this.data) ?? [];
+    const signature = `${data.length}:${JSON.stringify(data[0] ?? null)}`;
+    const emits =
+      !untracked(this.searching) &&
+      signature !== this.filledWith &&
+      scroller.measureViewportSize('vertical') > SCROLL_THRESHOLD &&
+      scroller.measureScrollOffset('bottom') < SCROLL_THRESHOLD;
+    if (emits) {
+      this.filledWith = signature;
+      this.next.emit();
+    }
   }
 }
 

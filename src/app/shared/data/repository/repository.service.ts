@@ -340,7 +340,8 @@ export class RepositoryService<T, F> {
   }
 
   /**
-   * Lista paginada: `fetch(query)` carga la primera página y `next()` añade la siguiente.
+   * Lista paginada: `fetch(query)` carga la primera página y `next()` añade la siguiente. Al final de la lista,
+   * `next()` vuelve a pedir la última página (sin caché) por si han aparecido elementos nuevos.
    * Cada referencia de `includes` se expone como un `Signal` con el elemento referenciado.
    * Requiere contexto de inyección.
    */
@@ -348,13 +349,20 @@ export class RepositoryService<T, F> {
     const injector = inject(Injector);
     const project = this.projector(includes, injector);
     const pages = signal<ResourceRef<Slide<T> | undefined>[]>([]);
+    // Consulta de cada página, para volver a pedirla
+    const queries = new WeakMap<ResourceRef<Slide<T> | undefined>, F>();
     // Filas que se siguen mostrando mientras llega la primera página de una consulta nueva
     const stale = signal<T[] | undefined>(undefined);
     let current: F | undefined;
 
     // fetch() y next() se suelen llamar desde un effect: el recurso de cada página se crea fuera de él
-    const page = (query: F) =>
-      untracked(() => rxResource({ params: () => query, stream: ({ params }) => this.list(params), injector }));
+    const page = (query: F) => {
+      const ref = untracked(() =>
+        rxResource({ params: () => query, stream: ({ params }) => this.list(params), injector }),
+      );
+      queries.set(ref, query);
+      return ref;
+    };
     const rows = computed(() => {
       const all = pages();
       if (!all.length) {
@@ -392,9 +400,16 @@ export class RepositoryService<T, F> {
       next: () => {
         const last = untracked(pages).at(-1);
         // Mientras la última página carga no se sabe cuál es la siguiente: se ignora
-        if (current !== undefined && last && !last.isLoading() && last.hasValue() && last.value().hasNext) {
+        if (current === undefined || !last || last.isLoading() || !last.hasValue()) {
+          return shift;
+        }
+        if (last.value().hasNext) {
           const query: F = { ...current, ...last.value().next };
           pages.update((all) => [...all, page(query)]);
+        } else {
+          // Sin más páginas: se vuelve a pedir la última saltando la caché; mientras llega se siguen viendo sus filas
+          this.evictList(queries.get(last)!);
+          last.reload();
         }
         return shift;
       },
@@ -416,6 +431,11 @@ export class RepositoryService<T, F> {
       return current === undefined ? undefined : project(current);
     });
     return asTick(injector, value, item.searching, item.fetch, item.reset);
+  }
+
+  /** Caduca la lista cacheada de `query`: la siguiente suscripción la vuelve a pedir. */
+  private evictList(query: F) {
+    this.cache.listMap[JSON.stringify(query)]?.cache.evict();
   }
 
   private refreshAfterBulk() {

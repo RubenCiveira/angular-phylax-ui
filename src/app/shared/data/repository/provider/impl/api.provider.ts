@@ -29,6 +29,15 @@ const withTaskDates = (task: LongTask): LongTask => ({
 
 const isLongTaskDone = (task: LongTask) => task.detailStatus === 'FAILED' || task.detailStatus === 'FINISHED';
 
+/**
+ * El backend no manda `hasNext` y devuelve el enlace `next` también en la última página: hay más páginas si lo trae
+ * y la página viene completa (tantos elementos como `limit`, si se pidió).
+ */
+const hasMore = (query: unknown, next: object, items: unknown[] | undefined): boolean => {
+  const limit = Number((query as { limit?: unknown } | null)?.limit);
+  return Object.keys(next).length > 0 && (!limit || (items?.length ?? 0) >= limit);
+};
+
 export class ApiProvider<T, F> implements RepositoryProvider<T, F> {
   constructor(
     private readonly key: string,
@@ -48,7 +57,7 @@ export class ApiProvider<T, F> implements RepositoryProvider<T, F> {
         const next = queryString ? Object.fromEntries(new URLSearchParams(queryString)) : {};
         return {
           next: next,
-          hasNext: value.hasNext,
+          hasNext: value.hasNext ?? hasMore(query, next, value.items),
           content: value.items,
         };
       }),

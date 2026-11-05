@@ -701,6 +701,46 @@ describe('RepositoryService', () => {
       expect(shift.searching()).toBeTrue();
     });
 
+    it('next() at the end asks for the last page again, skipping the cache and keeping its rows', async () => {
+      const reload = new Subject<Slide<Item>>();
+      let call = 0;
+      const provider = buildProvider({
+        list: jasmine.createSpy('list').and.callFake(() => {
+          call++;
+          if (call === 1) {
+            return of({ hasNext: true, next: { cursor: 'c2' }, content: [{ id: '1', name: 'One' }] });
+          }
+          if (call === 2) {
+            return of({ hasNext: false, next: null, content: [{ id: '2', name: 'Two' }] });
+          }
+          return reload;
+        }),
+      });
+      const repo = buildRepo(provider);
+      const shift = TestBed.runInInjectionContext(() => repo.projections());
+      shift.fetch({});
+      await settle();
+      shift.next();
+      await settle();
+
+      shift.next();
+      await flush();
+      expect(provider.list).toHaveBeenCalledTimes(3);
+      expect((provider.list as jasmine.Spy).calls.mostRecent().args[0]).toEqual({ cursor: 'c2' });
+      expect(shift()?.map((row) => row.id)).toEqual(['1', '2']);
+
+      reload.next({
+        hasNext: false,
+        next: null,
+        content: [
+          { id: '2', name: 'Two' },
+          { id: '3', name: 'Three' },
+        ],
+      });
+      await flush();
+      expect(shift()?.map((row) => row.id)).toEqual(['1', '2', '3']);
+    });
+
     it('keeps the previous rows while a new query loads, and clears them on reset()', async () => {
       const second = new Subject<Slide<Item>>();
       let call = 0;

@@ -35,6 +35,53 @@ describe('ApiProvider', () => {
     expect(api.get.calls.argsFor(1)[0]).toBe('http://svc/acl/items/a%2Fb%20c');
   });
 
+  it('takes the next page from the next link of a full page', (done) => {
+    const items = Array.from({ length: 10 }, (_, i) => ({ uid: 'u' + i }));
+    const api = {
+      get: jasmine
+        .createSpy('get')
+        .and.returnValue(of({ items, next: '?limit=10&since-uid=bb7da003-56d3-1a1a-aad0-ee2ef053b671' })),
+    };
+
+    build(api)
+      .list({ limit: 10 })
+      .subscribe((slide) => {
+        expect(slide).toEqual({
+          hasNext: true,
+          next: { limit: '10', 'since-uid': 'bb7da003-56d3-1a1a-aad0-ee2ef053b671' },
+          content: items,
+        });
+        done();
+      });
+  });
+
+  it('treats a page shorter than the limit as the last one, even with a next link', (done) => {
+    const api = {
+      get: jasmine
+        .createSpy('get')
+        .and.returnValue(of({ items: [{ uid: 'a' }, { uid: 'b' }, { uid: 'c' }], next: '?limit=10&since-uid=c' })),
+    };
+
+    build(api)
+      .list({ limit: 10 })
+      .subscribe((slide) => {
+        expect(slide.hasNext).toBeFalse();
+        done();
+      });
+  });
+
+  it('has no next page without the next link', (done) => {
+    const api = { get: jasmine.createSpy('get').and.returnValue(of({ items: [] })) };
+
+    build(api)
+      .list({ limit: 10 })
+      .subscribe((slide) => {
+        expect(slide.hasNext).toBeFalse();
+        expect(slide.next).toEqual({});
+        done();
+      });
+  });
+
   it('maps the acl response', (done) => {
     const api = {
       get: jasmine.createSpy('get').and.returnValue(

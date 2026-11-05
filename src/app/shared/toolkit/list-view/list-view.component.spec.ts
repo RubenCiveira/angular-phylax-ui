@@ -61,6 +61,7 @@ const transloco = TranslocoTestingModule.forRoot({
       [(sort)]="sort"
       (activate)="activated.push($event)"
       (retry)="retries = retries + 1"
+      (next)="nexts = nexts + 1"
     >
       <list-view-table>
         <ng-template listViewColumn key="name" title="Name" tooltip="The name" [sortable]="true" let-row>
@@ -89,6 +90,7 @@ class ListViewHostComponent {
   sort: ListViewSort | null = null;
   activated: any[] = [];
   retries = 0;
+  nexts = 0;
 }
 
 function createHost(mode: ListViewMode = 'table') {
@@ -123,6 +125,79 @@ function contrast(fg: string, bg: string): number {
 
 describe('ListViewComponent', () => {
   afterEach(() => TestBed.resetTestingModule());
+
+  describe('pagination', () => {
+    /** Deja pasar el setTimeout de la comprobación y las notificaciones del ResizeObserver. */
+    const settle = () => new Promise((resolve) => setTimeout(resolve, 50));
+    /** Como en las páginas: el listado ocupa el alto disponible de un contenedor flex. */
+    const createFilledHost = () => {
+      const fixture = createHost('table');
+      Object.assign(fixture.nativeElement.style, { display: 'flex', flexDirection: 'column' });
+      fixture.detectChanges();
+      return fixture;
+    };
+
+    it('asks for the next page while the rows do not fill the viewport', async () => {
+      const fixture = createFilledHost();
+      await settle();
+
+      expect(fixture.componentInstance.nexts).toBeGreaterThan(0);
+    });
+
+    it('does not ask again while the data does not change (end of the list)', async () => {
+      const fixture = createFilledHost();
+      await settle();
+      const before = fixture.componentInstance.nexts;
+
+      window.dispatchEvent(new Event('resize'));
+      fixture.componentInstance.data.set([...fixture.componentInstance.data()!]);
+      fixture.detectChanges();
+      await settle();
+
+      expect(fixture.componentInstance.nexts).toBe(before);
+    });
+
+    it('asks for more with the wheel once at the end', async () => {
+      const fixture = createFilledHost();
+      await settle();
+      const before = fixture.componentInstance.nexts;
+      const viewport = fixture.nativeElement.querySelector('cdk-virtual-scroll-viewport') as HTMLElement;
+
+      viewport.dispatchEvent(new WheelEvent('wheel', { deltaY: 100 }));
+      viewport.dispatchEvent(new WheelEvent('wheel', { deltaY: 100 }));
+
+      expect(fixture.componentInstance.nexts).toBe(before + 1);
+    });
+
+    it('checks again when it is shown after being out of the DOM', async () => {
+      const fixture = createFilledHost();
+      const element: HTMLElement = fixture.nativeElement;
+      const parent = element.parentNode!;
+      parent.removeChild(element);
+      await settle();
+      const before = fixture.componentInstance.nexts;
+
+      parent.appendChild(element);
+      await settle();
+
+      expect(fixture.componentInstance.nexts).toBeGreaterThan(before);
+    });
+
+    it('does not ask while it is out of the DOM', async () => {
+      const fixture = createFilledHost();
+      await settle();
+      const element: HTMLElement = fixture.nativeElement;
+      element.parentNode!.removeChild(element);
+      await settle();
+      const before = fixture.componentInstance.nexts;
+
+      fixture.componentInstance.data.set([{ id: 3, name: 'Three', code: 'c', secret: 's3' }]);
+      fixture.detectChanges();
+      await settle();
+
+      expect(fixture.componentInstance.nexts).toBe(before);
+    });
+  });
 
   it('toggles selection using SelectionModel', () => {
     TestBed.configureTestingModule({
