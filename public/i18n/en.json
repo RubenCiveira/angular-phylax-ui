@@ -16,6 +16,91 @@
     },
     "empty": "There are no items to show.",
     "hiddenField": "Field hidden by permissions",
+    "import": {
+      "button": {
+        "back": "Choose another file",
+        "cancel": "Stop",
+        "close": "Close",
+        "restart": "New import",
+        "resume": "Resume",
+        "start": "Import {{count}} rows"
+      },
+      "error": {
+        "ambiguous": "There are {{count}} items with that key: unable to tell which one to update",
+        "invalid": {
+          "boolean": "{{field}}: \"{{value}}\" is not yes or no",
+          "date": "{{field}}: \"{{value}}\" is not a date",
+          "enum": "{{field}}: \"{{value}}\" is not a valid value",
+          "number": "{{field}}: \"{{value}}\" is not a number"
+        },
+        "missingKey": "Missing key: {{fields}}",
+        "missingRequired": "Cannot be created without: {{fields}}",
+        "notAllowed": {
+          "create": "It does not exist and you are not allowed to create",
+          "update": "It already exists and you are not allowed to update"
+        },
+        "reference": "{{field}}: \"{{value}}\" not found",
+        "server": "Error {{status}}: {{message}}"
+      },
+      "job": {
+        "background": "You can close this screen: the import keeps running in the background while the tab is open.",
+        "created": "{{count}} created",
+        "elsewhere": "The import is running in another tab.",
+        "failed": "{{count}} with errors",
+        "notResumable": "It cannot be resumed (it has sensitive fields that are not stored): import the file again; rows already uploaded will be updated.",
+        "processed": "{{processed}} of {{total}} rows",
+        "resumable": "It can be resumed from the first pending row.",
+        "status": {
+          "cancelled": "Import stopped",
+          "finished": "Import finished",
+          "interrupted": "Import interrupted",
+          "running": "Importing…"
+        },
+        "updated": "{{count}} updated"
+      },
+      "mapping": {
+        "emptyCells": "Empty cells do not change the existing value.",
+        "field": "Field",
+        "fixed": "{{field}}: the value selected in the top bar will be used.",
+        "forbidden": "Not allowed to write (not imported):",
+        "header": "Excel column",
+        "key": "key",
+        "missingKeys": "Choose the column of the key:",
+        "missingRequired": "Without these columns only existing items can be updated:",
+        "notAllowed": "You are not allowed to create or update.",
+        "onlyCreate": "You are only allowed to create: rows that already exist will fail.",
+        "onlyUpdate": "You are only allowed to update: rows that do not exist will fail.",
+        "required": "required",
+        "rows": "{{count}} rows in {{file}}",
+        "samples": "Sample values",
+        "sheet": "Sheet",
+        "skip": "— Do not import —",
+        "title": "Columns",
+        "unused": "Excel columns that are not imported:"
+      },
+      "notify": {
+        "cancelled": "Import stopped: {{created}} created, {{updated}} updated, {{failed}} with errors",
+        "finished": "Import finished: {{created}} created, {{updated}} updated, {{failed}} with errors",
+        "interrupted": "Import interrupted: {{created}} created, {{updated}} updated, {{failed}} with errors"
+      },
+      "select": {
+        "button": "Choose file",
+        "description": "Choose an Excel file (xlsx, xls, ods or csv) with a header row. Each row is created or, if it already exists, updated. Columns that can be imported:",
+        "error": "The file could not be read.",
+        "reading": "Reading the file"
+      },
+      "summary": {
+        "errors": "Rows with errors",
+        "item": "Item",
+        "reason": "Reason",
+        "result": {
+          "created": "Created",
+          "updated": "Updated"
+        },
+        "row": "Row",
+        "uploaded": "{{count}} rows uploaded"
+      }
+    },
     "list": {
       "columns": "Columns",
       "selectAll": "Select all",
@@ -32,6 +117,12 @@
         "icon": "add",
         "tooltip": "Create a new item",
         "title": "New item"
+      },
+      "import": {
+        "label": "Import",
+        "icon": "upload_file",
+        "tooltip": "Create or update items from an Excel file",
+        "title": "Import from Excel"
       },
       "edit": {
         "label": "Edit",

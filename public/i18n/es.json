@@ -96,6 +96,12 @@
         "title": "Habilitar selección",
         "tooltip": "Habilitar los elementos seleccionados"
       },
+      "import": {
+        "icon": "upload_file",
+        "label": "Importar",
+        "title": "Importar desde Excel",
+        "tooltip": "Crear o actualizar elementos a partir de un Excel"
+      },
       "reject": {
         "icon": "visibility_off"
       },
@@ -117,6 +123,91 @@
     },
     "empty": "No hay elementos que mostrar.",
     "hiddenField": "Campo oculto por permisos",
+    "import": {
+      "button": {
+        "back": "Elegir otro fichero",
+        "cancel": "Detener",
+        "close": "Cerrar",
+        "restart": "Nueva importación",
+        "resume": "Reanudar",
+        "start": "Importar {{count}} filas"
+      },
+      "error": {
+        "ambiguous": "Hay {{count}} elementos con esa clave: no se sabe cuál actualizar",
+        "invalid": {
+          "boolean": "{{field}}: «{{value}}» no es sí o no",
+          "date": "{{field}}: «{{value}}» no es una fecha",
+          "enum": "{{field}}: «{{value}}» no es un valor válido",
+          "number": "{{field}}: «{{value}}» no es un número"
+        },
+        "missingKey": "Falta la clave: {{fields}}",
+        "missingRequired": "No se puede crear sin: {{fields}}",
+        "notAllowed": {
+          "create": "No existe y no tienes permiso para crear",
+          "update": "Ya existe y no tienes permiso para modificar"
+        },
+        "reference": "{{field}}: no se encuentra «{{value}}»",
+        "server": "Error {{status}}: {{message}}"
+      },
+      "job": {
+        "background": "Puedes cerrar esta pantalla: la importación sigue en segundo plano mientras la pestaña esté abierta.",
+        "created": "{{count}} creados",
+        "elsewhere": "La importación se está ejecutando en otra pestaña.",
+        "failed": "{{count}} con errores",
+        "notResumable": "No se puede reanudar (lleva campos sensibles que no se guardan): vuelve a importar el fichero; las filas ya subidas se actualizarán.",
+        "processed": "{{processed}} de {{total}} filas",
+        "resumable": "Se puede reanudar desde la primera fila pendiente.",
+        "status": {
+          "cancelled": "Importación detenida",
+          "finished": "Importación terminada",
+          "interrupted": "Importación interrumpida",
+          "running": "Importando…"
+        },
+        "updated": "{{count}} actualizados"
+      },
+      "mapping": {
+        "emptyCells": "Las celdas vacías no modifican el valor existente.",
+        "field": "Campo",
+        "fixed": "{{field}}: se usará el valor seleccionado en la barra superior.",
+        "forbidden": "Sin permiso para escribir (no se importan):",
+        "header": "Columna del Excel",
+        "key": "clave",
+        "missingKeys": "Elige la columna de la clave:",
+        "missingRequired": "Sin estas columnas solo se podrán actualizar elementos existentes:",
+        "notAllowed": "No tienes permiso para crear ni para modificar.",
+        "onlyCreate": "Solo tienes permiso para crear: las filas que ya existan darán error.",
+        "onlyUpdate": "Solo tienes permiso para modificar: las filas que no existan darán error.",
+        "required": "obligatorio",
+        "rows": "{{count}} filas en {{file}}",
+        "samples": "Valores de ejemplo",
+        "sheet": "Hoja",
+        "skip": "— No importar —",
+        "title": "Columnas",
+        "unused": "Columnas del Excel que no se importan:"
+      },
+      "notify": {
+        "cancelled": "Importación detenida: {{created}} creados, {{updated}} actualizados, {{failed}} con errores",
+        "finished": "Importación terminada: {{created}} creados, {{updated}} actualizados, {{failed}} con errores",
+        "interrupted": "Importación interrumpida: {{created}} creados, {{updated}} actualizados, {{failed}} con errores"
+      },
+      "select": {
+        "button": "Elegir fichero",
+        "description": "Elige un Excel (xlsx, xls, ods o csv) con una fila de cabeceras. Cada fila se crea o, si ya existe, se actualiza. Columnas que se pueden importar:",
+        "error": "No se ha podido leer el fichero.",
+        "reading": "Leyendo el fichero"
+      },
+      "summary": {
+        "errors": "Filas con errores",
+        "item": "Elemento",
+        "reason": "Motivo",
+        "result": {
+          "created": "Creado",
+          "updated": "Actualizado"
+        },
+        "row": "Fila",
+        "uploaded": "{{count}} filas subidas"
+      }
+    },
     "list": {
       "columns": "Columnas",
       "selectAll": "Seleccionar todo",
