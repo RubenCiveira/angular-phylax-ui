@@ -58,6 +58,8 @@ export interface ListViewTableColumn {
   width: number;
   /** Columna sin título al final (acciones): se queda a la vista flotando sobre las demás si hay scroll horizontal. */
   pinned: boolean;
+  /** Distancia (px) al final de la fila de una columna anclada: el ancho de las ancladas que van detrás. */
+  offset: number;
 }
 
 /** Reserva si `--list-view-row-height` no se puede leer en px; debe coincidir con `--app-row-height`. */
@@ -73,6 +75,8 @@ const ICON_WIDTH = 42;
 /** Hueco reservado al final de cabecera y filas para el botón "Columnas" (40px + margen). */
 const COLUMN_MENU_WIDTH = 48;
 const SKELETON_ROWS = 20;
+/** Con ratón las acciones de la fila solo se ven al pasar por encima: flotan al final de la fila sin ocupar ancho. */
+const FLOATING_ACTIONS_QUERY = '(hover: hover) and (pointer: fine)';
 const COLUMNS_STORAGE_PREFIX = 'list-view-columns-';
 
 @Component({
@@ -110,6 +114,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
   retry = output<void>();
   mobile = signal<boolean>(false);
   rowIcons = signal<number>(1);
+  /** Las acciones de la fila flotan sobre las columnas (con ratón) en lugar de tener su propia columna (táctil). */
+  floatingActions = signal<boolean>(false);
   data = input.required<any[] | undefined>();
   mode = input<ListViewMode>('auto');
   display = input<DisplayProvider<any>>();
@@ -170,7 +176,12 @@ export class ListViewComponent implements OnInit, OnDestroy {
     const checks = this.selectionMultiple() ? CHECK_WIDTH : 0;
     const shown = this.keyedColumns().filter(({ column, key }) => this.isShown(column, key));
     const base = shown.map(({ column }) => (column.title() ? column.width() : ICON_WIDTH * icons));
-    const used = checks + base.reduce((total, width) => total + width, 0);
+    const pinned = shown.map(
+      ({ column }, index) => !column.title() && shown.slice(index).every((e) => !e.column.title()),
+    );
+    // Si las acciones flotan no se les reserva ancho: se superponen al final de la fila al pasar por encima
+    const floats = this.floatingActions();
+    const used = checks + base.reduce((total, width, index) => total + (floats && pinned[index] ? 0 : width), 0);
     // Con el botón "Columnas" se reserva su hueco: si no, las columnas que caben justas quedarían debajo de él
     const menuSpace = this.choosableColumns().length > 1 ? COLUMN_MENU_WIDTH : 0;
     const available = this.availableWidth() - menuSpace;
@@ -187,8 +198,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
       } else {
         share = factors > 0 ? Math.max(0, column.factor()) / factors : 1 / titled.length;
       }
-      const pinned = !column.title() && shown.slice(index).every((entry) => !entry.column.title());
-      return { column, key, width: base[index] + Math.floor(spare * share), pinned };
+      const offset = pinned[index]
+        ? base.reduce((total, width, after) => total + (after > index && pinned[after] ? width : 0), 0)
+        : 0;
+      return { column, key, width: base[index] + Math.floor(spare * share), pinned: pinned[index], offset };
     });
     // El ancho incluye el hueco del botón: si no, con overflow las filas acabarían antes que la cabecera
     return { columns, width: Math.max(used, available) + menuSpace };
@@ -236,6 +249,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
         this.mobile.set(!!bp[Breakpoints.XSmall]);
         this.rowIcons.set(bp[Breakpoints.XLarge] ? 6 : bp[Breakpoints.Large] ? 5 : bp[Breakpoints.Medium] ? 4 : 1);
       });
+    inject(BreakpointObserver)
+      .observe(FLOATING_ACTIONS_QUERY)
+      .pipe(takeUntilDestroyed())
+      .subscribe(({ matches }) => this.floatingActions.set(matches));
     inject(DestroyRef).onDestroy(() => this.keyManager.destroy());
 
     effect(() => {

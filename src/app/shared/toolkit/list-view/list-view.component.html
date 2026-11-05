@@ -154,6 +154,7 @@
     <div
       class="material-table"
       [class.has-column-menu]="choosableColumns().length > 1"
+      [class.floating-actions]="floatingActions()"
       [style.--list-view-column-menu-space.px]="columnMenuWidth"
     >
       <div #tableScrollX class="table-scroll">
@@ -239,7 +240,13 @@
                       ></ng-container>
                     </span>
                   } @else {
-                    <span class="td small" role="cell" [class.pinned]="entry.pinned" [style.width.px]="entry.width">
+                    <span
+                      class="td small"
+                      role="cell"
+                      [class.pinned]="entry.pinned"
+                      [style.width.px]="entry.width"
+                      [style.--list-view-pinned-offset.px]="entry.offset"
+                    >
                       <ng-container
                         *ngTemplateOutlet="entry.column.template; context: { $implicit: item }"
                       ></ng-container>

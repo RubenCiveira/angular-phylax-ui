@@ -201,23 +201,34 @@
   align-items: center;
   justify-content: flex-end;
 }
-/* Con ratón las acciones de la fila aparecen al pasar por encima, con el foco del teclado, en la fila seleccionada
-   o con su menú abierto. Se ocultan con opacidad (siguen en el orden del tabulador y para los lectores de pantalla)
-   y la celda entera: así tampoco tapa las columnas con scroll horizontal. En táctil se ven siempre: tocar la fila
-   la abre, no la selecciona. */
-@media (hover: hover) and (pointer: fine) {
-  .material-table .td.pinned {
-    opacity: 0;
-    transition:
-      opacity var(--list-view-transition),
-      box-shadow var(--list-view-transition);
-  }
-  .material-table .tbody .tr:hover .td.pinned,
-  .material-table .tbody .tr:focus-within .td.pinned,
-  .material-table .tbody .tr.selected .td.pinned,
-  .material-table .tbody .tr:has([aria-expanded='true']) .td.pinned {
-    opacity: 1;
-  }
+/* Con ratón (clase `floating-actions`, la misma media query con la que se calculan los anchos) las acciones no
+   tienen columna propia: flotan al final de la fila, sobre las demás columnas, y aparecen al pasar por encima, con
+   el foco del teclado, en la fila seleccionada o con su menú abierto. Se ocultan con opacidad: siguen en el orden
+   del tabulador y para los lectores de pantalla. En táctil se ven siempre en su columna: tocar la fila la abre, no
+   la selecciona. */
+.material-table.floating-actions .th.pinned {
+  display: none;
+}
+.material-table.floating-actions .tbody .tr {
+  position: relative;
+}
+.material-table.floating-actions .td.pinned {
+  position: absolute;
+  top: 0;
+  right: var(--list-view-pinned-offset, 0);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  /* Siempre sobre otras columnas: la sombra separa la botonera de lo que tapa */
+  box-shadow: -8px 0 8px -8px color-mix(in srgb, var(--mat-sys-shadow) 40%, transparent);
+  transition: opacity var(--list-view-transition);
+}
+.material-table.floating-actions .tbody .tr:hover .td.pinned,
+.material-table.floating-actions .tbody .tr:focus-within .td.pinned,
+.material-table.floating-actions .tbody .tr.selected .td.pinned,
+.material-table.floating-actions .tbody .tr:has([aria-expanded='true']) .td.pinned {
+  opacity: 1;
 }
 .material-table.overflow-end .th.pinned,
 .material-table.overflow-end .td.pinned {

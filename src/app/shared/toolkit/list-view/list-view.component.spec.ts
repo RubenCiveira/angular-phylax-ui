@@ -93,6 +93,24 @@ class ListViewHostComponent {
   nexts = 0;
 }
 
+/** Tabla con una columna de acciones (sin título) al final. */
+@Component({
+  standalone: true,
+  imports: [LIST_VIEW],
+  template: `
+    <list-view mode="table" [data]="data">
+      <list-view-table>
+        <ng-template listViewColumn key="name" title="Name" let-row>{{ row.name }}</ng-template>
+        <ng-template listViewColumn key="code" title="Code" let-row>{{ row.code }}</ng-template>
+        <ng-template listViewColumn let-row><button type="button">Edit</button></ng-template>
+      </list-view-table>
+    </list-view>
+  `,
+})
+class ActionsHostComponent {
+  data = [{ id: 1, name: 'One', code: 'a' }];
+}
+
 function createHost(mode: ListViewMode = 'table') {
   TestBed.configureTestingModule({
     imports: [ListViewHostComponent, transloco],
@@ -373,6 +391,33 @@ describe('ListViewComponent', () => {
       expect(layout.columns.map((c) => c.width)).toEqual([100, 100]);
       // 52 (checkbox) + 200 (columnas) + 48 (hueco del botón "Columnas")
       expect(layout.width).toBe(300);
+    });
+
+    it('reserves width for the row actions only when they do not float over the columns', async () => {
+      TestBed.configureTestingModule({
+        imports: [ActionsHostComponent, transloco],
+        providers: [{ provide: BreakpointObserver, useClass: MockBreakpointObserver }],
+      });
+      const fixture = TestBed.createComponent(ActionsHostComponent);
+      fixture.nativeElement.style.display = 'block';
+      fixture.nativeElement.style.width = '150px';
+      fixture.detectChanges();
+      await fixture.whenStable();
+      const list = fixture.debugElement.children[0].componentInstance as ListViewComponent;
+      list['updateAvailableWidth']();
+
+      // Táctil: columna propia de 42px (un icono) + 48 del botón "Columnas"
+      expect(list.tableLayout().width).toBe(100 + 100 + 42 + 48);
+      expect(list.tableLayout().columns.map((c) => [c.pinned, c.offset])).toEqual([
+        [false, 0],
+        [false, 0],
+        [true, 0],
+      ]);
+
+      // Con ratón flotan al final de la fila: no suman ancho
+      list.floatingActions.set(true);
+      expect(list.tableLayout().width).toBe(100 + 100 + 48);
+      expect(list.tableLayout().columns.at(-1)!.width).toBe(42);
     });
 
     it('cycles sort on sortable headers and announces it', async () => {
