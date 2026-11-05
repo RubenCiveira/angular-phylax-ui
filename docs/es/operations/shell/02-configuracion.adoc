@@ -157,6 +157,27 @@ Como alternativa a `tokens`, se puede montar `config/theme.css` junto al JSON: s
 |`convert-iso-dates` |sí/no |Convierte en fechas todas las cadenas con forma de fecha ISO de las respuestas. Por defecto `false`.
 |===
 
+=== `actions`
+
+Quién ve las acciones de importar y exportar a Excel de los listados. Cada una (`import`, `export`) admite:
+
+[cols="1,1,3",options="header"]
+|===
+|Clave |Tipo |Uso
+|`roles` |lista |Roles que ven la acción en todas las entidades. `*` la deja a todo el mundo y una lista vacía la oculta.
+|`entities.<entidad>` |lista |Roles para una entidad concreta (`identity.user`), que sustituyen a `roles`.
+|===
+
+Sin configurar, la ve todo el mundo. Basta con uno de los roles (los del claim `roles-claim` de la identidad `main`), y además el ACL del backend tiene que permitir la operación.
+
+[source,json]
+----
+"actions": {
+  "import": { "roles": ["admin"], "entities": { "identity.user": ["admin", "iam"] } },
+  "export": { "roles": ["*"] }
+}
+----
+
 === `layout`
 
 Reservada; hoy no se usa.

@@ -14,6 +14,7 @@ export interface AppConfig {
   theme: ThemeConfig;
   layout: Record<string, unknown>;
   data: DataConfig;
+  actions: ActionsConfig;
 }
 
 /**
@@ -118,6 +119,23 @@ export interface DataConfig {
   'convert-iso-dates'?: boolean;
 }
 
+/**
+ * Roles que ven una acción general, en todas las entidades o en una concreta. `*` la deja a todo el mundo y una lista
+ * vacía la oculta; sin la clave la ve todo el mundo. Siempre manda además el ACL del backend.
+ */
+export interface ActionRolesConfig {
+  /** Roles para todas las entidades. */
+  roles?: string[];
+  /** Roles de una entidad (`identity.user`); sustituyen a `roles`. */
+  entities?: Record<string, string[]>;
+}
+
+/** Quién ve las acciones de importar y exportar a Excel que se generan para cada entidad. */
+export interface ActionsConfig {
+  import?: ActionRolesConfig;
+  export?: ActionRolesConfig;
+}
+
 /** Configuración sin cargar: todas las secciones vacías. */
 export function emptyConfig(name: string): AppConfig {
   return {
@@ -131,6 +149,7 @@ export function emptyConfig(name: string): AppConfig {
     theme: {},
     layout: {},
     data: {},
+    actions: {},
   };
 }
 

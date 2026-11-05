@@ -2,6 +2,43 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
   "definitions": {
+    "ActionRolesConfig": {
+      "additionalProperties": false,
+      "description": "Roles que ven una acción general, en todas las entidades o en una concreta. `*` la deja a todo el mundo y una lista vacía la oculta; sin la clave la ve todo el mundo. Siempre manda además el ACL del backend.",
+      "properties": {
+        "entities": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "description": "Roles de una entidad (`identity.user`); sustituyen a `roles`.",
+          "type": "object"
+        },
+        "roles": {
+          "description": "Roles para todas las entidades.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ActionsConfig": {
+      "additionalProperties": false,
+      "description": "Quién ve las acciones de importar y exportar a Excel que se generan para cada entidad.",
+      "properties": {
+        "export": {
+          "$ref": "#/definitions/ActionRolesConfig"
+        },
+        "import": {
+          "$ref": "#/definitions/ActionRolesConfig"
+        }
+      },
+      "type": "object"
+    },
     "ApiConfig": {
       "additionalProperties": false,
       "properties": {
@@ -261,6 +298,9 @@
     "$schema": {
       "description": "Ruta al JSON Schema, para que el IDE autocomplete y valide.",
       "type": "string"
+    },
+    "actions": {
+      "$ref": "#/definitions/ActionsConfig"
     },
     "api": {
       "additionalProperties": {

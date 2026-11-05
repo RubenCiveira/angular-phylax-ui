@@ -22,6 +22,22 @@
   "tenant": {
     "default": "main"
   },
+  "actions": {
+    "import": {
+      "roles": ["*"],
+      "entities": {
+        "identity.user": ["*"],
+        "identity.tenant": ["*"]
+      }
+    },
+    "export": {
+      "roles": ["*"],
+      "entities": {
+        "identity.user": ["*"],
+        "identity.tenant": ["*"]
+      }
+    }
+  },
   "identity": {
     "main": {
       "type": "oidc",
