@@ -37,6 +37,7 @@ export class ThemeVersionViewSearchComponent extends SubFormEditable<any> {
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(themeVersionRepository.context(), 'search');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

@@ -3,11 +3,14 @@ import { Directive, inject } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { LongTask } from 'app/shared/data/long-task.model';
 import { LongTaskService } from '../long-task-view/long-task.service';
+import { ActionParamValues } from '../dialog/action-params-dialog.service';
 import { AclSource } from './base-action';
 import { ConfirmAction } from './confirm-action';
+import { DisplayProvider } from '@shared/data/display-provider';
 
 export interface SelectionSource extends AclSource {
   canDeleteSelection(): boolean;
+  displayProvider?(): DisplayProvider<any>;
 }
 
 /**
@@ -22,8 +25,8 @@ export abstract class ConfirmSelectionAction<T> extends ConfirmAction<T> {
   protected abstract override readonly repository: SelectionSource;
   private readonly longTask = inject(LongTaskService);
 
-  /** Lanza la tarea en el servidor y devuelve su progreso. */
-  protected abstract runSelection(items: T[]): Observable<LongTask>;
+  /** Lanza la tarea (en el servidor o, si no admite operaciones masivas, elemento a elemento) y devuelve su progreso. */
+  protected abstract runSelection(items: T[], params: ActionParamValues): Observable<LongTask>;
 
   protected override get permission(): string {
     return this.name.replace(/Selection$/, '');
@@ -34,9 +37,23 @@ export abstract class ConfirmSelectionAction<T> extends ConfirmAction<T> {
     return this.repository.canDeleteSelection() && super.allowed(name);
   }
 
-  protected execute(items: T[]): Observable<unknown> {
+  protected execute(items: T[], params: ActionParamValues): Observable<unknown> {
+    const display = this.repository.displayProvider?.();
+    const labels = Object.fromEntries(
+      items.flatMap((item) => {
+        const key = itemKey(item);
+        return key ? [[key, display?.display(item) || String((item as any)?.name ?? key)]] : [];
+      }),
+    );
     return this.longTask
-      .run(this.text('progress'), this.runSelection(items))
+      .run(this.text('progress'), this.runSelection(items, params), labels)
       .pipe(tap({ complete: () => this.container()?.selectionModel.clearSelection() }));
   }
+}
+
+function itemKey(item: unknown): string | undefined {
+  if (!item || typeof item !== 'object') return undefined;
+  const value = item as Record<string, unknown>;
+  const key = value['uid'] ?? value['id'] ?? value['key'] ?? value['$id'];
+  return key === undefined || key === null ? undefined : String(key);
 }

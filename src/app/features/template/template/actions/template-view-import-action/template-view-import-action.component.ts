@@ -76,6 +76,7 @@ export class TemplateViewImportActionComponent extends BaseImportAction<Template
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

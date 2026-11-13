@@ -11,7 +11,15 @@ export class UserViewAcceptActionComponent extends ConfirmAction<User> {
   protected readonly repository = inject(UserRepository);
 
   protected override appliesTo(items: User[]) {
-    return items.every((item) => item.approvalStatus !== 'accepted') && true;
+    return (
+      items.every((item) => item.approvalStatus !== 'accepted') &&
+      items.every(
+        (item) =>
+          (item.approvalStatus?.toLowerCase() ?? null) === 'pending' ||
+          (item.approvalStatus?.toLowerCase() ?? null) === 'rejected',
+      ) &&
+      true
+    );
   }
   protected execute([item]: User[]) {
     return this.repository.accept(item.uid);

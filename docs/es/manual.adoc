@@ -32,3 +32,6 @@ include::site-attrs.adoc[]
 |===
 
 Cada contexto funcional (las _features_ de `src/app/features/<contexto>`) puede añadir su propia carpeta en cada documento: `functional/<contexto>`, `operations/<contexto>`, `end-user/<contexto>`.
+
+// Índice generado desde el modelo: un documento funcional por contexto, con sus entidades, campos, acciones y validaciones
+include::functional/_contexts.partial.adoc[]

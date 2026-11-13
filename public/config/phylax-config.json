@@ -60,10 +60,12 @@
     "environment": "local",
     "exporter": {
       "tracer": {
-        "url": "http://localhost:8090/v1/traces"
+        "url": "http://localhost:8090/v1/traces",
+        "headers": { "X-Observe-Key": "obs_YN3vdGvzvGAzpUGLMN4eTncTKeWK7UgtPs1-ziJsWCA" }
       },
       "logger": {
-        "url": "http://localhost:8090/v1/logs"
+        "url": "http://localhost:8090/v1/logs",
+        "headers": { "X-Observe-Key": "obs_YN3vdGvzvGAzpUGLMN4eTncTKeWK7UgtPs1-ziJsWCA" }
       }
     }
   }

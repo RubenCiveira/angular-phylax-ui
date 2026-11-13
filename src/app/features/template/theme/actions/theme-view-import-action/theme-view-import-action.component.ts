@@ -73,6 +73,7 @@ export class ThemeViewImportActionComponent extends BaseImportAction<Theme> {
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

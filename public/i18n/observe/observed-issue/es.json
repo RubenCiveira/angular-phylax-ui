@@ -1,0 +1,469 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldCulprit": "Culpable",
+      "fieldFingerprint": "Impresión dactilar",
+      "fieldKind": "Tipo",
+      "fieldLevel": "Nivel",
+      "fieldTitle": "Título",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear problema observado",
+      "title": "Crear un nuevo problema observado",
+      "tooltip": "Crear un nuevo registro de problema observado"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el problema observado",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar un problema observado"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el problema observado",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle del problema observado",
+      "title": "Ver los valores de un problema observado",
+      "tooltip": "Ver los valores de un problema observado"
+    },
+    "edit": {
+      "label": "Editar el problema observado",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de un problema observado"
+    },
+    "ignore": {
+      "cancelBtn": "No ignorar",
+      "content": "Confirme que quiere ignorar a __.",
+      "dismiss": "Aceptar",
+      "label": "ignorar el problema observado",
+      "okBtn": "ignorar registro",
+      "report": "Hecho: ignorar",
+      "title": "ignorar",
+      "tooltip": "ignorar el problema observado"
+    },
+    "ignore-selection": {
+      "cancelBtn": "No ignorar",
+      "content": "Confirma que quieres ignorar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "ignorar el problema observado",
+      "okBtn": "ignorar registros",
+      "progress": "En curso: ignorar",
+      "report": "Hecho en los registros seleccionados: ignorar",
+      "title": "Ignorar la selección",
+      "tooltip": "ignorar los registros seleccionados"
+    },
+    "mark-resolved": {
+      "cancelBtn": "No marcar como resuelto",
+      "content": "Confirma que quieres marcarlo como resuelto",
+      "dismiss": "Aceptar",
+      "label": "marcar como resuelto el problema observado",
+      "okBtn": "marcar el registro como resuelto",
+      "report": "Hecho: marcar como resuelto",
+      "title": "Marcar como resuelto",
+      "tooltip": "marcar como resuelto el problema observado"
+    },
+    "mark-resolved-selection": {
+      "cancelBtn": "No marcar como resuelto",
+      "content": "Confirma que quieres marcar como resueltos los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "marcar como resuelto el problema observado",
+      "okBtn": "marcar registros resueltos",
+      "progress": "En curso - Resuelto",
+      "report": "Hecho en los registros seleccionados: marcar como resuelto",
+      "title": "marcar la selección como resuelta",
+      "tooltip": "marcar los registros seleccionados como resueltos"
+    },
+    "reopen": {
+      "cancelBtn": "No reabrir",
+      "content": "Confirma que quieres reabrirla",
+      "dismiss": "Aceptar",
+      "label": "reabrir el problema observado",
+      "okBtn": "reabrir registro",
+      "report": "Hecho: reabrir",
+      "title": "reopen",
+      "tooltip": "reabrir el problema observado"
+    },
+    "reopen-selection": {
+      "cancelBtn": "No reabrir",
+      "content": "Confirma que quieres reabrir los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "reabrir el problema observado",
+      "okBtn": "reabrir registros",
+      "progress": "En curso: reabrir",
+      "report": "Hecho en los registros seleccionados: reabrir",
+      "title": "volver a abrir la selección",
+      "tooltip": "reabrir los registros seleccionados"
+    },
+    "resolve": {
+      "cancelBtn": "resolvemos",
+      "content": "Confirma que quieres resolverlo",
+      "dismiss": "Aceptar",
+      "label": "resolver el problema observado",
+      "okBtn": "resolver registro",
+      "report": "Hecho: resolver",
+      "title": "resuelven",
+      "tooltip": "resolver el problema observado"
+    },
+    "resolve-selection": {
+      "cancelBtn": "resolvemos",
+      "content": "Confirma que quieres resolver los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "resolver el problema observado",
+      "okBtn": "resolver registros",
+      "progress": "En curso: resolver",
+      "report": "Hecho en los registros seleccionados: resolver",
+      "title": "resolver la selección",
+      "tooltip": "resolver los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "assignee": {
+      "error": {
+        "maxlength": "El cesionario debe tener menos de 250 caracteres"
+      },
+      "label": "asignado",
+      "placeholder": "asignado"
+    },
+    "assignee-name": {
+      "error": {
+        "maxlength": "El nombre del cesionario debe tener menos de 250 caracteres."
+      },
+      "label": "Nombre del asignado",
+      "placeholder": "Nombre del asignado"
+    },
+    "count": {
+      "error": {
+        "required": "Se requiere un recuento"
+      },
+      "label": "count",
+      "placeholder": "count"
+    },
+    "culprit": {
+      "error": {
+        "maxlength": "El campo «Responsable» debe tener menos de 250 caracteres"
+      },
+      "label": "culpable",
+      "placeholder": "culpable"
+    },
+    "fingerprint": {
+      "error": {
+        "maxlength": "La huella digital debe tener menos de 250 caracteres",
+        "required": "Se requiere la huella dactilar"
+      },
+      "label": "huella digital",
+      "placeholder": "huella digital"
+    },
+    "first-release": {
+      "error": {
+        "maxlength": "El primer comunicado debe tener menos de 250 caracteres"
+      },
+      "label": "primer lanzamiento",
+      "placeholder": "primer lanzamiento"
+    },
+    "first-seen-at": {
+      "label": "Visto por primera vez",
+      "placeholder": "Visto por primera vez",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "ignore-until": {
+      "label": "Ignorar hasta el",
+      "placeholder": "Ignorar hasta el",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "ignore-until-count": {
+      "label": "Ignorar hasta el recuento",
+      "placeholder": "Ignorar hasta el recuento"
+    },
+    "kind": {
+      "error": {
+        "required": "Se requiere el tipo"
+      },
+      "label": "tipo",
+      "options": {
+        "error": "ERROR",
+        "performance": "ALTO RENDIMIENTO."
+      },
+      "placeholder": "tipo"
+    },
+    "last-event-id": {
+      "error": {
+        "maxlength": "El ID del último evento debe tener menos de 250 caracteres"
+      },
+      "label": "Identificador del evento",
+      "placeholder": "Identificador del evento"
+    },
+    "last-seen-at": {
+      "label": "Visto por última a las",
+      "placeholder": "Visto por última a las",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "last-trace-id": {
+      "error": {
+        "maxlength": "El último ID de seguimiento debe tener menos de 250 caracteres"
+      },
+      "label": "ID del último seguimiento",
+      "placeholder": "ID del último seguimiento"
+    },
+    "level": {
+      "error": {
+        "required": "Se requiere el nivel"
+      },
+      "label": "nivel",
+      "options": {
+        "error": "error",
+        "fatal": "fatal (calificador)",
+        "warning": "advertencia"
+      },
+      "placeholder": "nivel"
+    },
+    "merged-into": {
+      "error": {
+        "maxlength": "El campo «Fusionado en» debe tener menos de 250 caracteres"
+      },
+      "label": "fusionado con",
+      "placeholder": "fusionado con"
+    },
+    "origin": {
+      "error": {
+        "required": "El origen es obligatorio"
+      },
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "release": {
+      "error": {
+        "maxlength": "La nota de prensa debe tener menos de 250 caracteres"
+      },
+      "label": "liberar",
+      "placeholder": "liberar"
+    },
+    "status": {
+      "error": {
+        "required": "El estado es obligatorio"
+      },
+      "label": "estado",
+      "options": {
+        "ignored": "IGNORADO",
+        "merged": "Fusiones y adquisiciones",
+        "resolved": "RESUELVE",
+        "unresolved": "Sin resolver"
+      },
+      "placeholder": "estado"
+    },
+    "tenants": {
+      "error": {
+        "required": "Se requiere el número de inquilinos."
+      },
+      "label": "inquilinos",
+      "placeholder": "inquilinos"
+    },
+    "tenants-sketch": {
+      "label": "croquis de los inquilinos",
+      "placeholder": "croquis de los inquilinos"
+    },
+    "title": {
+      "error": {
+        "maxlength": "el título debe tener menos de 250 caracteres",
+        "required": "el título es obligatorio"
+      },
+      "label": "title",
+      "placeholder": "title"
+    },
+    "tracker-url": {
+      "error": {
+        "maxlength": "La URL del rastreador debe tener menos de 250 caracteres"
+      },
+      "label": "URL del rastreador",
+      "placeholder": "URL del rastreador"
+    },
+    "users": {
+      "error": {
+        "required": "Se requieren usuarios"
+      },
+      "label": "usuarios",
+      "placeholder": "usuarios"
+    },
+    "users-sketch": {
+      "label": "boceto de usuarios",
+      "placeholder": "boceto de usuarios"
+    }
+  },
+  "list": {
+    "column": {
+      "assignee": {
+        "title": "asignado",
+        "tooltip": "asignado"
+      },
+      "assignee-name": {
+        "title": "Nombre del asignado",
+        "tooltip": "Nombre del asignado"
+      },
+      "count": {
+        "title": "count",
+        "tooltip": "count"
+      },
+      "culprit": {
+        "title": "culpable",
+        "tooltip": "culpable"
+      },
+      "fingerprint": {
+        "title": "huella digital",
+        "tooltip": "huella digital"
+      },
+      "first-release": {
+        "title": "primer lanzamiento",
+        "tooltip": "primer lanzamiento"
+      },
+      "first-seen-at": {
+        "title": "Visto por primera vez",
+        "tooltip": "Visto por primera vez"
+      },
+      "ignore-until": {
+        "title": "Ignorar hasta el",
+        "tooltip": "Ignorar hasta el"
+      },
+      "ignore-until-count": {
+        "title": "Ignorar hasta el recuento",
+        "tooltip": "Ignorar hasta el recuento"
+      },
+      "kind": {
+        "title": "tipo",
+        "tooltip": "tipo"
+      },
+      "last-event-id": {
+        "title": "Identificador del evento",
+        "tooltip": "Identificador del evento"
+      },
+      "last-seen-at": {
+        "title": "Visto por última a las",
+        "tooltip": "Visto por última a las"
+      },
+      "last-trace-id": {
+        "title": "ID del último seguimiento",
+        "tooltip": "ID del último seguimiento"
+      },
+      "level": {
+        "title": "nivel",
+        "tooltip": "nivel"
+      },
+      "merged-into": {
+        "title": "fusionado con",
+        "tooltip": "fusionado con"
+      },
+      "origin": {
+        "title": "de origen único",
+        "tooltip": "de origen único"
+      },
+      "release": {
+        "title": "liberar",
+        "tooltip": "liberar"
+      },
+      "status": {
+        "title": "estado",
+        "tooltip": "estado"
+      },
+      "tenants": {
+        "title": "inquilinos",
+        "tooltip": "inquilinos"
+      },
+      "tenants-sketch": {
+        "title": "croquis de los inquilinos",
+        "tooltip": "croquis de los inquilinos"
+      },
+      "title": {
+        "title": "title",
+        "tooltip": "title"
+      },
+      "tracker-url": {
+        "title": "URL del rastreador",
+        "tooltip": "URL del rastreador"
+      },
+      "users": {
+        "title": "usuarios",
+        "tooltip": "usuarios"
+      },
+      "users-sketch": {
+        "title": "boceto de usuarios",
+        "tooltip": "boceto de usuarios"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "fingerprint": {
+      "label": "huella digital",
+      "placeholder": "huella digital"
+    },
+    "kind": {
+      "label": "tipo",
+      "placeholder": "tipo"
+    },
+    "level": {
+      "label": "nivel",
+      "placeholder": "nivel"
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "null": "Predeterminado",
+        "title-asc": "Título Asc",
+        "title-desc": "Título Desc"
+      },
+      "placeholder": "orden"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "status": {
+      "label": "estado",
+      "placeholder": "estado"
+    },
+    "title": {
+      "label": "title",
+      "placeholder": "title"
+    }
+  }
+}

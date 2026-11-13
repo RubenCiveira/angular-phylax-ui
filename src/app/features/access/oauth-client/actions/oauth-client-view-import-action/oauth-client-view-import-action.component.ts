@@ -89,6 +89,7 @@ export class OauthClientViewImportActionComponent extends BaseImportAction<Oauth
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

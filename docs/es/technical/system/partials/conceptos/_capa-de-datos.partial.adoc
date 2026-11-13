@@ -35,18 +35,18 @@ Los repositorios no conocen URLs reales. Escriben `http://<host-lógico>/<ruta>`
 * `url`: base real. La ruta del repositorio se añade a ella.
 * `identity`: identidad con la que se firma la petición. Sin ella, la petición va sin token.
 * `headers`: cabeceras fijas para esa API.
-* `inject-context`: claves del contexto fijo que se añaden al cuerpo de las mutaciones; sin ella, todas.
 
 Si la URL no lleva esquema, se busca por prefijo (`<host>/…` o `<api.url>/…`, respetando el límite de segmento) y gana el más largo.
 
 === Contexto
 
-`AppStateService` guarda entradas de contexto (por ejemplo el tenant elegido en la barra superior). Cada una puede ser:
+`AppStateService` guarda entradas de contexto (por ejemplo el cliente elegido en la barra superior). Cada entrada lleva su valor y, opcionalmente, la entidad a la que apunta (`entity`). La aplica el repositorio, igual con cualquier conector:
 
-* *de filtro*: `ApiService` la envía como parámetro en todas las peticiones. Una lectura se relanza, cancelando la anterior, cada vez que cambia;
-* *fija*: se añade al cuerpo de las mutaciones (filtrada por `inject-context`). Una mutación toma una sola instantánea del contexto y no se repite si cambia después.
+* *a qué campo*: con `entity`, al campo de referencia que apunta a esa entidad, se llame como se llame. Si la entidad tiene varios, al marcado con `context-default="true"` en el modelo; si no hay marca, al que se llame como la clave del contexto; si sigue habiendo duda, a ninguno. Sin `entity`, al campo de referencia con el nombre de la clave. Las entidades sin ese campo no se ven afectadas;
+* *de filtro* (`ContextValue.fixed`, `ContextValue.filter`): el repositorio lleva el valor al filtro múltiple del campo (`clients`), intersecado con lo que ya pida la consulta: una sublista de otro cliente sale vacía sin llegar al servidor. El contexto forma parte de la clave de caché, y los listados abiertos se vuelven a pedir desde la primera página cuando cambia;
+* *fija* (`ContextValue.fixed`, `ContextValue.default`): el repositorio pone el valor en el campo al dar de alta y al modificar; `default` solo rellena el campo si viene vacío.
 
-Los selectores de la barra superior que alimentan el contexto se declaran en `bootstrap/context.config.ts`.
+Las referencias de cada entidad (`references`) y su campo por defecto (`contextFields`) los genera el modelo en los metadatos del repositorio. Los selectores que alimentan el contexto son los de cada workspace (ver <<workspaces>>), cada uno con su `entity`; sus entradas solo se ven en su workspace, salvo las globales.
 
 === Repositorio
 
@@ -57,11 +57,17 @@ Los selectores de la barra superior que alimentan el contexto se declaran en `bo
 |`list(filtro)` / `values(filtro)`
 |Una página (`Slide`: `content`, `next`, `hasNext`) o todos los valores. Las consultas iguales comparten caché.
 
-|`projections(includes)` / `projection(includes)`
-|_Signals_ (`Shift`, `Tick`) que se alimentan con `fetch(filtro)` y `next()`: paginación incremental para `list-view`. Mientras llega la primera página de una consulta nueva se siguen mostrando las filas anteriores.
+|`projections(includes, hijos)` / `projection(includes, hijos)`
+|_Signals_ (`Shift`, `Tick`) que se alimentan con `fetch(filtro)` y `next()`: paginación incremental para `list-view`. Mientras llega la primera página de una consulta nueva se siguen mostrando las filas anteriores. Las referencias de `includes` (también anidadas) y los hijos llegan como _signals_; ver <<Proyecciones>>.
 
-|`retrieve(clave)`
-|Un elemento, desde la caché si está vigente.
+|`retrieve(clave)` / `retrieveAll(claves)`
+|Un elemento, o varios en lote, desde la caché si está vigente; ver <<Lectura en lote>>.
+
+|`resolve(clave, includes, hijos)` / `resolveAll(elementos, includes, hijos)`
+|Lo mismo que una proyección pero en una sola emisión y como objeto plano, sin _signals_: para documentos, exportaciones e informes; ver <<Resolución plana>>.
+
+|`children(referencia, includes, hijos)`
+|Descriptor para pedir los elementos de esta entidad como hijos en la proyección o la resolución de otra; ver <<Hijos>>.
 
 |`add`, `update`, `partialByKey`, `deleteByKey`
 |Escriben y actualizan la caché: el elemento y, al crear o borrar, todas las listas. `add` asigna antes un `uid` COMB generado en el cliente.
@@ -69,8 +75,8 @@ Los selectores de la barra superior que alimentan el contexto se declaran en `bo
 |`update(item, { original })`
 |Bloqueo optimista: ante un 412 emite `EditConflictError` con las tres versiones (xref:{adr-root}/0005-conflictos-de-edicion-con-fusion-a-tres-vias.adoc[ADR-0005]).
 
-|`deleteSelection(filtro)`
-|Borrado en una operación de todo lo que cumple el filtro, si el proveedor lo admite (`canDeleteSelection()`). Las acciones de selección generadas pasan como filtro los `uids` seleccionados.
+|`deleteSelection(filtro)`, `partialBySelection(filtro, datos, ruta)`
+|Borrado o cambio parcial de todo lo que cumple el filtro; emiten el progreso como `LongTask` para el diálogo de tareas largas. Si el proveedor lo admite (`deleteAllForQuery` / `patchAllForQuery`) es una sola operación en el backend; si no, el repositorio recorre el listado del filtro, recoge las claves y aplica `delete` / `patch` uno a uno, en serie, componiendo el progreso en local (un paso con los correctos y los errores por elemento). Las acciones de selección generadas pasan como filtro los `uids` seleccionados.
 
 |`acl()` / `checkAcl(clave)`
 |ACL genérica (del recurso) y específica (del elemento), leídas de `/me/acl/<recurso>`. Sin cargar, no concede nada.
@@ -89,6 +95,113 @@ Los metadatos de la entidad declaran sus campos `dates` (sin hora: viajan como `
 
 Una referencia a otra entidad viaja como `{ "$ref": "<clave>" }`. `RepositoryMetadata.reference(nombre)` da los metadatos del repositorio referenciado, para resolver su texto (`display`) en listas, detalles y en la resolución de conflictos.
 
+=== Lectura en lote
+
+`retrieveAll(claves)` pide varios elementos en las mínimas peticiones posibles y emite una vez, con los encontrados en el orden pedido:
+
+* los vigentes en caché no se piden; el resto va en una sola llamada a `RepositoryProvider.retrieveAll` y queda cacheado;
+* mientras el lote está en vuelo, un `retrieve` de esas claves lo espera en lugar de pedirlas otra vez;
+* si el proveedor no ofrece `retrieveAll`, se pide cada clave por separado (las que fallan se omiten);
+* si el lote trae elementos que no se pidieron, el destino ha ignorado el filtro: las claves que faltan se piden una a una en lugar de darlas por inexistentes.
+
+Cada proveedor resuelve el lote a su manera:
+
+[cols="1,4",options="header"]
+|===
+|Proveedor |Lote
+
+|Appwrite
+|`Query.equal(<id>, [claves])`, en bloques de 100 (el máximo de valores de una consulta).
+
+|REST (`ApiProvider`)
+|El listado filtrado por varias claves (`GET …?uids=a,b,c&limit=n`), en bloques de 50 para no superar la longitud de URL. Solo si el generador declara el filtro en `ApiProviderOptions.filters.ids`; sin él no hay lote.
+|===
+
+Las proyecciones y la resolución plana usan siempre esta lectura: cada referencia de cada nivel se pide con un solo lote para todas las filas.
+
+=== Proyecciones
+
+`projections(includes)` sustituye cada referencia pedida por un _signal_ con la entidad referenciada. `includes` admite rutas a cualquier profundidad:
+
+[source,typescript]
+----
+readonly list = inject(DeviceInstanceRepository).projections(['projectDevice', 'model', 'model.vendor']);
+----
+
+[source,html]
+----
+{{ row.model()?.name }} · {{ row.model()?.vendor()?.name }}
+----
+
+* Se resuelve *por niveles*: las referencias nuevas de un campo se piden juntas (<<Lectura en lote>>) y, al llegar, las del nivel siguiente de todas ellas van en otro único lote. Una página de 25 filas con `['model.vendor']` hace dos peticiones, no 50.
+* La misma referencia comparte _signal_ entre filas. Una referencia vacía es un _signal_ sin valor. Un campo que no es referencia se deja tal cual (`'model.vendor.name'` equivale a `'model.vendor'`).
+
+*Tipado.* El tipo de cada fila sale de las rutas pedidas: solo las referencias incluidas son _signals_ y el resto siguen siendo `{ $ref }`. Con las rutas de arriba, `row.model()?.vendor()?.name` compila y `row.model()?.type()` no. Cada modelo genera sus tipos para esto:
+
+[source,typescript]
+----
+export interface DeviceModelTypes { value: DeviceModel; refs: { vendor: VendorTypes; type: DeviceTypeTypes } }
+/** Proyección de los listados: cada referencia directa es un Signal de su entidad. */
+export type DeviceModelProjection = Projected<DeviceModelTypes, 'vendor' | 'type'>;
+----
+
+Para conservar el tipo, el campo que recibe la proyección no se declara: se deja que lo infiera (`readonly list = …projections([...])`), como hacen los listados generados. Declararlo como `Shift<XProjection[]>` lo limita a un nivel.
+
+=== Hijos
+
+Una proyección puede traer también los elementos de *otra* entidad que apuntan a cada fila. Los pide quien llama, con el `children()` del repositorio del hijo; el repositorio del padre no necesita conocerlos:
+
+[source,typescript]
+----
+readonly list = inject(ClientRepository).projections([], {
+  sites: inject(SiteRepository).children('client', ['client'], {
+    floors: inject(FloorRepository).children('site'),
+  }),
+});
+----
+
+[source,html]
+----
+@for (site of row.sites(); track site.uid) {
+  {{ site.name }} ({{ site.floors()?.length }} plantas)
+}
+----
+
+* `children(referencia, includes, hijos)`: `referencia` es el campo del hijo que apunta al padre (`client`). El repositorio generado lo traduce al filtro múltiple que el modelo crea para cada referencia (`client` → `clients`), y el tipo solo admite esas referencias. `includes` y `hijos` se aplican a cada hijo, igual que en la proyección.
+* Los hijos de todas las filas nuevas se piden en *una* consulta (`list({ clients: [c1, c2, …] })`, en bloques de 25 padres y recorriendo todas las páginas) y se reparten por la referencia de cada hijo. Los nietos de todos los hijos, en otra.
+* Cada fila recibe un _signal_ con la lista: `undefined` mientras carga y `[]` si no tiene hijos.
+* El tipo se infiere de la llamada (`row.sites()?.[0].floors()`), con el nombre de campo que se elija. Un campo que no se pidió no existe para el compilador.
+* La lista de hijos se pide una vez: no se refresca sola si se crean o borran hijos mientras está en pantalla.
+
+=== Resolución plana
+
+`resolve(clave, includes, hijos)` y `resolveAll(elementos, includes, hijos)` hacen lo mismo que una proyección, con los mismos `includes` y `children()`, pero emiten una sola vez un objeto plano: referencias sustituidas por su entidad (`null` si está vacía o no existe) y listas de hijos como arrays. Es lo que necesitan las plantillas de documentos (<<Documentos>>), exportaciones e informes:
+
+[source,typescript]
+----
+clientRepository.resolve(uid, [], {
+  sites: siteRepository.children('client', [], { floors: floorRepository.children('site') }),
+}); // → { name, sites: [{ name, floors: [ … ] }] }
+----
+
+Se resuelve por niveles, igual que la proyección: el número de peticiones depende del árbol pedido, no de cuántos elementos haya. Seguir una ruta más allá de un campo que no es referencia, o una referencia sin metadatos, da error; un error de cualquier nivel se propaga.
+
+=== Nombres de los filtros
+
+El repositorio trabaja siempre con los nombres de filtro del modelo del front (`serialNumber`, `projectDevices`) y cada proveedor los traduce a su backend:
+
+* Appwrite los lee tal cual (`appwrite-query.method.ts`), incluido `uids`.
+* `ApiProvider` los traduce con `ApiProviderOptions.filters.names` (`{ serialNumber: 'serial-number' }`, kebab-case como el contrato OpenAPI) y envía las listas separadas por comas. Los campos que llegan del enlace `next`, ya con nombres del backend, pasan tal cual. Se aplica a listados, borrados y cambios masivos.
+
+`ApiProviderOptions` lo compone el generador a partir del modelo, para que el cliente no deduzca nombres por convención:
+
+[source,typescript]
+----
+new ApiProvider('uid', api, 'http://netconfighub/installations/device-instances', '…/me/acl/…', {
+  filters: { ids: 'uids', names: { serialNumber: 'serial-number', projectDevices: 'project-devices' } },
+});
+----
+
 === Tareas largas
 
 Una operación que el backend ejecuta en segundo plano devuelve una tarea (`LongTask`). `pollUntil` la consulta con espera creciente (inicial, máxima, multiplicador y tiempo total configurables) hasta que termina, y `LongTaskService` muestra su progreso en un diálogo; al cerrarlo o terminar, se refresca la caché.
@@ -96,3 +209,28 @@ Una operación que el backend ejecuta en segundo plano devuelve una tarea (`Long
 === Ficheros
 
 `ClientService.download` devuelve la respuesta como `Blob`; `upload` envía un `multipart/form-data` con el fichero y sus campos `<nombre>Name` y `<nombre>Type`, e informa del progreso.
+
+=== Sin conexión
+
+Con `data.offline: true` en la configuración, `RepositoryStore.provider` envuelve el provider de cada repositorio con `OfflineProvider` (`shared/data/offline`). Sin la opción las llamadas pasan tal cual. Lo que se guarda va a IndexedDB, separado por usuario y tenant: la cola de una sesión no se sube con otra.
+
+[cols="1,4",options="header"]
+|===
+| Caso | Comportamiento
+| Escritura | Sin red, o si la llamada falla por la red (`fetch` sin conexión, estado 0, timeout, 502/503/504), se valida (`provider.validate`) y se encola. Mientras haya cambios pendientes, todas las escrituras se encolan aunque vuelva la red, para no alterar el orden.
+| Lectura | Una entidad con cambios pendientes se sirve desde su copia local. Sin red se sirve la última respuesta guardada (se conserva 30 días). Los listados muestran las copias locales y, en la primera página, las altas pendientes que cumplen el filtro (por nombre de campo, plural de la referencia o `search`).
+| Adjunto | `storeFile` sin red guarda el fichero y devuelve `offline-file://<id>`, que `downloadFile` sirve en local. Al subirlo, la URL definitiva sustituye a la local en las operaciones pendientes.
+| Compactación | Un cambio sobre un alta pendiente se aplica al alta; un `update` sustituye al anterior y los `patch` se mezclan. Borrar algo creado sin conexión elimina sus operaciones y no sube nada.
+|===
+
+La subida (`OfflineQueueService.sync`) va operación a operación, por orden. Se lanza desde el indicador de la barra superior o sola. Si una falla, se para: queda `failed` y las que dependen de ella quedan `blocked`, sin intentarse. Dependen de una operación los cambios posteriores de la misma entidad y lo que referencia algo que creaba, sea un `$ref` o un adjunto. Para resolver el fallo se puede:
+
+* Reintentar.
+* Corregir los datos.
+* Resolver el conflicto, si fue un 412, con la fusión a tres bandas.
+* Descartar la operación, con las que dependen de ella.
+* Seguir con las independientes.
+
+La subida automática se lanza cuando hay cambios pendientes, ninguno con error, y la conexión se mantiene `data.offline-sync-delay` ms (30000 por defecto; `0` la desactiva). Cualquier fallo de red, sea en una lectura, una escritura o el evento `offline`, desarma la espera y la vuelve a empezar, para no intentarlo con una red intermitente (por ejemplo, en movimiento). Si un intento se corta por la red, la espera siguiente se dobla, hasta 10 minutos. No reintenta lo que ya falló: eso lo decide el usuario desde el diálogo.
+
+Si la red se corta durante la subida, la operación queda pendiente. Un alta que pudo llegar al servidor se comprueba antes de repetirla. `bootstrap/repositories.config.ts` (generado) registra los repositorios por nombre, para subir cambios de entidades que no se han abierto en la sesión.

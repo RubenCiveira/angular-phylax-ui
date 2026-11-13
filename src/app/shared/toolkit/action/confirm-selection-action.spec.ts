@@ -85,7 +85,7 @@ describe('ConfirmSelectionAction', () => {
     action.run();
 
     expect(repository.deleteSelection).toHaveBeenCalledWith({ uids: ['a', 'b'] });
-    expect(longTask.run).toHaveBeenCalledWith('Deleting…', progress);
+    expect(longTask.run).toHaveBeenCalledWith('Deleting…', progress, { a: 'a', b: 'b' });
     expect(container.selectionModel.clearSelection).toHaveBeenCalled();
     expect(container.close).toHaveBeenCalled();
   });

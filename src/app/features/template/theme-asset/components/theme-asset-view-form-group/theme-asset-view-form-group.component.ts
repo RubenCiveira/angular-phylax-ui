@@ -48,6 +48,7 @@ export class ThemeAssetViewFormGroupComponent extends SubFormEditable<ThemeAsset
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(themeAssetRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

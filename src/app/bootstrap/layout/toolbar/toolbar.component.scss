@@ -16,13 +16,6 @@
   flex: 1 1 auto;
 }
 
-// Columnas de los selectores de contexto por breakpoint
-.toolbar-context {
-  --form-layout-def-xs: 12;
-  --form-layout-def-md: 6;
-  --form-layout-def-lg: 4;
-}
-
 // Cuenta: avatar, nombre y chevron en una fila; en escritorio ocupa el pie de la nav
 .account {
   all: unset;
@@ -102,14 +95,22 @@
     flex: 1;
     order: 1;
   }
+  // El indicador offline va en la fila del usuario, a su izquierda
+  offline-indicator {
+    order: 1;
+  }
   // en la nav mini solo cabe el avatar
   :host-context(.nav-mini) .account-name,
-  :host-context(.nav-mini) .account-more,
-  :host-context(.nav-mini) .toolbar-context {
+  :host-context(.nav-mini) .account-more {
     display: none;
   }
   :host-context(.nav-mini) .account {
     flex: none;
     margin-inline: auto;
+  }
+  // en la nav mini no cabe al lado del avatar: va encima, centrado
+  :host-context(.nav-mini) offline-indicator {
+    flex-basis: 100%;
+    justify-content: center;
   }
 }

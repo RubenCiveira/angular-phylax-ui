@@ -44,6 +44,7 @@ export class TenantViewImportActionComponent extends BaseImportAction<Tenant> {
         ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

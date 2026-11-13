@@ -11,7 +11,15 @@ export class UserViewRejectSelectionActionComponent extends ConfirmSelectionActi
   protected readonly repository = inject(UserRepository);
 
   protected override appliesTo(items: User[]) {
-    return items.every((item) => item.approvalStatus !== 'rejected') && true;
+    return (
+      items.every((item) => item.approvalStatus !== 'rejected') &&
+      items.every(
+        (item) =>
+          (item.approvalStatus?.toLowerCase() ?? null) === 'pending' ||
+          (item.approvalStatus?.toLowerCase() ?? null) === 'accepted',
+      ) &&
+      true
+    );
   }
   protected runSelection(items: User[]) {
     return this.repository.rejectSelection({ uids: items.map((item) => item.uid) });

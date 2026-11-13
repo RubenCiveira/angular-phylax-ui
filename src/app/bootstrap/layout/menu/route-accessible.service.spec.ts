@@ -247,6 +247,34 @@ describe('RouteAccessService', () => {
     });
   });
 
+  describe('routes without segment (the default workspace)', () => {
+    // :language/:tenant con un workspace con segmento y el de por defecto colgando de ''
+    const clients: Route = { path: 'clients', component: class {}, canActivate: [() => false] };
+    const sites: Route = { path: 'sites', component: class {} };
+    const admin: Route = { path: '@admin', children: [{ path: 'clients', component: class {} }] };
+    const main: Route = { path: '', children: [clients, sites] };
+    const tenant: Route = { path: ':language/:tenant', children: [admin, main] };
+
+    it('evaluates the guards of the routes inside it', () => {
+      setupWithMockRouter([tenant]);
+      let result: boolean | undefined;
+      service.checkRouteGuards('es/acme/clients').subscribe((v) => (result = v));
+      expect(result).toBe(false);
+      service.checkRouteGuards('es/acme/sites').subscribe((v) => (result = v));
+      expect(result).toBe(true);
+    });
+
+    it('marks as active only the entry of the current page', () => {
+      const page = { routeConfig: sites, children: [] };
+      const group = { routeConfig: main, children: [page] };
+      const root = { routeConfig: null, children: [{ routeConfig: tenant, children: [group] }] };
+      setupWithMockRouter([tenant], root as unknown as ActivatedRouteSnapshot);
+      expect(service.isUrlActive('es/acme/sites')).toBe(true);
+      expect(service.isUrlActive('es/acme/clients')).toBe(false);
+      expect(service.isUrlActive('es/acme/@admin/clients')).toBe(false);
+    });
+  });
+
   describe('findMostSpecificRoute (via checkRouteGuards)', () => {
     it('returns false when route path is undefined', () => {
       setupWithMockRouter([{ component: class {} } as Route]);

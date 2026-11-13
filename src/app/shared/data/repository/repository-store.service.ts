@@ -3,9 +3,11 @@ import { inject, Injectable, Signal } from '@angular/core';
 import { distinctUntilChanged, map, merge, skip, switchMap } from 'rxjs';
 import { Acl } from '../acl/acl.model';
 import { RuntimeConfigService } from '@shared/context/config/app-config.service';
-import { AppStateService } from '@shared/context/state/app-state.service';
+import { AppStateService, ContextValue } from '@shared/context/state/app-state.service';
 import { CacheResource } from './cache-resource';
-import { Slide } from './provider/repository-provider.interface';
+import { RepositoryProvider, Slide } from './provider/repository-provider.interface';
+import { OfflineQueueService } from '../offline/offline-queue.service';
+import type { RepositoryMetadata } from './repository.service';
 
 /** Vida por defecto (ms) de la caché si no la fijan `data.cache-ttl` ni los metadatos. */
 export const DEFAULT_CACHE_TTL = 3_000;
@@ -27,10 +29,16 @@ export interface RepositoryCache {
 export class RepositoryStore {
   private readonly caches = new Map<string, RepositoryCache>();
   private readonly configuredTtl: Signal<number | undefined>;
+  private readonly offline = inject(OfflineQueueService);
+  /** Entradas del contexto: cada repositorio aplica las que referencian a sus campos (ver `contextBindings`). */
+  readonly contexts: Signal<Record<string, ContextValue | null>>;
 
   constructor() {
     const config = inject(RuntimeConfigService);
     const state = inject(AppStateService);
+    this.contexts = state.contexts;
+    // Un cambio subido desde la cola offline: la siguiente consulta de esa entidad va al servidor
+    this.offline.applied$.subscribe(({ repo, key }) => this.evict(repo, key));
     this.configuredTtl = config.value('data.cache-ttl');
     // skip(1): el valor inicial no es un cambio de sesión
     state.tenant$.pipe(distinctUntilChanged(), skip(1)).subscribe(() => this.clear());
@@ -60,6 +68,20 @@ export class RepositoryStore {
       this.caches.set(name, cache);
     }
     return cache;
+  }
+
+  /** Provider del repositorio, envuelto para trabajar sin conexión si está activo el modo offline. */
+  provider<T, F>(meta: RepositoryMetadata<T, F>): RepositoryProvider<T, F> {
+    return this.offline.wrap(meta);
+  }
+
+  /** Caduca el elemento `key` y los listados del repositorio `name`. */
+  evict(name: string, key: string): void {
+    const cache = this.caches.get(name);
+    if (cache) {
+      cache.resourceMap[key]?.cache.evict();
+      Object.values(cache.listMap).forEach((entry) => entry.cache.evict());
+    }
   }
 
   /** Vida de la caché: la de los metadatos, la de `data.cache-ttl` o la de por defecto. */

@@ -53,6 +53,7 @@ export class UserFederatedIdentityViewFormGroupComponent extends SubFormEditable
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(userFederatedIdentityRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

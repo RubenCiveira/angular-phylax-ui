@@ -75,6 +75,7 @@ export class ThemeAssetViewImportActionComponent extends BaseImportAction<ThemeA
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

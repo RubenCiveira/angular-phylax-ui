@@ -16,9 +16,9 @@ export class LongTaskService {
   private readonly dialog = inject(MatDialog);
 
   /** Emite y completa cuando el usuario cierra el diálogo. */
-  run(title: string, progress: Observable<LongTask>): Observable<void> {
+  run(title: string, progress: Observable<LongTask>, labels: Readonly<Record<string, string>> = {}): Observable<void> {
     return this.dialog
-      .open(LongTaskViewComponent, { data: { title, progress } })
+      .open(LongTaskViewComponent, { data: { title, progress, labels } })
       .afterClosed()
       .pipe(map(() => undefined));
   }

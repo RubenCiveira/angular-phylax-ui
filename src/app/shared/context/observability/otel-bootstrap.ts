@@ -14,6 +14,7 @@ import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic
 import { ZoneContextManager } from '@opentelemetry/context-zone';
 import type { TelemetryConfig } from '@shared/context/config/app-config.model';
 import type { LogLevel, LogRecord, LogSink } from './logger.service';
+import { startWebVitals } from './web-vitals';
 
 // SeverityNumber de OpenTelemetry (DEBUG, INFO, WARN, ERROR)
 const SEVERITY_NUMBER: Record<LogLevel, number> = { debug: 5, info: 9, warn: 13, error: 17 };
@@ -45,13 +46,39 @@ export function startTelemetry(conf: TelemetryConfig, context: TelemetryContext)
     [ATTR_DEPLOYMENT_ENVIRONMENT_NAME]: conf.environment,
     [ATTR_SESSION_ID]: context.sessionId,
   });
+  const flushers: (() => Promise<void>)[] = [];
   if (conf.exporter?.tracer) {
-    registerSpan(conf, resource, context);
+    flushers.push(registerSpan(conf, resource, context));
   }
-  return conf.exporter?.logger ? { logSink: registerLogger(conf, resource) } : {};
+  let logSink: LogSink | undefined;
+  if (conf.exporter?.logger) {
+    const logs = registerLogger(conf, resource);
+    logSink = logs.sink;
+    flushers.push(logs.flush);
+    if (conf['web-vitals'] !== false) {
+      const sink = logs.sink;
+      startWebVitals((vital) =>
+        sink({ level: 'info', message: 'web-vital', args: [vital], timestamp: new Date().toISOString() }),
+      );
+    }
+  }
+  // Al salir de la página (o pasarla a segundo plano) se vacían las colas: sin esto se pierden los
+  // últimos spans y logs, que suelen ser los del error que hizo salir al usuario.
+  const flush = () => flushers.forEach((fn) => fn().catch(() => undefined));
+  addEventListener('pagehide', flush);
+  addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') flush();
+  });
+  return logSink ? { logSink } : {};
 }
 
-function registerSpan(conf: TelemetryConfig, resource: Resource, context: TelemetryContext) {
+/** Orígenes a los que se propaga traceparent: el propio y los de `propagate-to`. */
+function propagation(conf: TelemetryConfig): RegExp[] {
+  const own = new RegExp(`^${location.origin.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`);
+  return [own, ...(conf['propagate-to'] || []).map((pattern) => new RegExp(pattern))];
+}
+
+function registerSpan(conf: TelemetryConfig, resource: Resource, context: TelemetryContext): () => Promise<void> {
   const provider = new WebTracerProvider({
     resource,
     spanProcessors: [
@@ -65,10 +92,11 @@ function registerSpan(conf: TelemetryConfig, resource: Resource, context: Teleme
   registerInstrumentations({
     instrumentations: [
       new DocumentLoadInstrumentation(),
-      new FetchInstrumentation(),
-      new XMLHttpRequestInstrumentation(),
+      new FetchInstrumentation({ propagateTraceHeaderCorsUrls: propagation(conf) }),
+      new XMLHttpRequestInstrumentation({ propagateTraceHeaderCorsUrls: propagation(conf) }),
     ],
   });
+  return () => provider.forceFlush();
 }
 
 /** El tenant puede cambiar durante la sesión: se pone en cada span, no en el Resource. */
@@ -86,7 +114,7 @@ export function tenantSpanProcessor(tenant: () => string | undefined): SpanProce
   };
 }
 
-function registerLogger(conf: TelemetryConfig, resource: Resource): LogSink {
+function registerLogger(conf: TelemetryConfig, resource: Resource): { sink: LogSink; flush: () => Promise<void> } {
   const loggerProvider = new LoggerProvider({
     resource,
     processors: [
@@ -101,7 +129,7 @@ function registerLogger(conf: TelemetryConfig, resource: Resource): LogSink {
   const logger = loggerProvider.getLogger('app-logger');
 
   // Los registros llegan ya redactados desde Logger
-  return (record: LogRecord) => {
+  const sink = (record: LogRecord) => {
     logger.emit({
       body: record.message,
       severityText: record.level.toUpperCase(),
@@ -112,6 +140,7 @@ function registerLogger(conf: TelemetryConfig, resource: Resource): LogSink {
       },
     });
   };
+  return { sink, flush: () => loggerProvider.forceFlush() };
 }
 
 function safeStringify(value: unknown): string {

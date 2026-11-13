@@ -103,24 +103,116 @@ table {
   }
 }
 
+.ok {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-1);
+
+  mat-icon {
+    color: var(--app-color-success);
+  }
+}
+
+.parsing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--app-space-2) var(--app-space-4);
+  margin: 0 0 var(--app-space-3);
+  padding: var(--app-space-2) var(--app-space-3);
+  border: 1px solid var(--app-color-border);
+  border-radius: var(--app-radius-sm);
+
+  legend {
+    font: var(--mat-sys-label-large);
+    color: var(--app-color-text-muted);
+  }
+
+  mat-form-field {
+    min-width: 14rem;
+  }
+
+  .hint {
+    flex-basis: 100%;
+    margin: 0;
+  }
+}
+
+.check {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--app-space-2);
+
+  .warn {
+    display: flex;
+    align-items: center;
+    gap: var(--app-space-1);
+  }
+}
+
+.preview {
+  max-height: 60vh;
+  overflow: auto;
+  border: 1px solid var(--app-color-border);
+  border-radius: var(--app-radius-sm);
+}
+
 .columns {
+  width: auto;
+  min-width: 100%;
+
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    vertical-align: top;
+    background: var(--mat-sys-surface);
+  }
+
+  .header-text {
+    margin-bottom: var(--app-space-1);
+    white-space: nowrap;
+  }
+
+  thead mat-form-field {
+    width: 100%;
+    min-width: 11rem;
+  }
+
   tbody th {
     font-weight: normal;
     white-space: nowrap;
   }
 
-  .unmapped th {
-    color: var(--app-color-text-muted);
+  td {
+    max-width: 20rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  mat-form-field {
-    width: 100%;
-    min-width: 12rem;
+  .skipped {
+    color: var(--app-color-text-muted);
+    opacity: 0.6;
   }
 
-  .samples {
-    color: var(--app-color-text-muted);
-    overflow-wrap: anywhere;
+  .failing th {
+    color: var(--app-color-error);
+  }
+
+  .mark {
+    width: 1rem;
+    height: 1rem;
+    font-size: 1rem;
+    vertical-align: text-bottom;
+  }
+
+  td.invalid {
+    color: var(--app-color-error);
+    background: color-mix(in srgb, var(--app-color-error) 12%, transparent);
+    outline: 1px solid var(--app-color-error);
+    outline-offset: -1px;
   }
 }
 

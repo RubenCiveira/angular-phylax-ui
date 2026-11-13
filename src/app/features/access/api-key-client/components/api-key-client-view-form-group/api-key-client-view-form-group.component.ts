@@ -37,6 +37,7 @@ export class ApiKeyClientViewFormGroupComponent extends SubFormEditable<ApiKeyCl
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(apiKeyClientRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

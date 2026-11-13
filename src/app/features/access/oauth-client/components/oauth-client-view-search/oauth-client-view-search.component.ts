@@ -41,6 +41,7 @@ export class OauthClientViewSearchComponent extends SubFormEditable<any> {
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(oauthClientRepository.context(), 'search');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

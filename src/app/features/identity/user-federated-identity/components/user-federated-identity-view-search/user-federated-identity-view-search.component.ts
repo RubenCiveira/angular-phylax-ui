@@ -54,6 +54,7 @@ export class UserFederatedIdentityViewSearchComponent extends SubFormEditable<an
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(userFederatedIdentityRepository.context(), 'search');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

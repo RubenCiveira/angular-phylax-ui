@@ -55,6 +55,7 @@ export class UserGroupMembershipViewFormGroupComponent extends SubFormEditable<U
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(userGroupMembershipRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

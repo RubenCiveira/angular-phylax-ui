@@ -63,6 +63,7 @@ export class UserRoleAssignmentViewFormGroupComponent extends SubFormEditable<Us
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(userRoleAssignmentRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

@@ -23,7 +23,7 @@ export class TenantViewConfigComponent implements Action {
 
   title = signal<string>('config');
   label = signal<string>('config');
-  icon = signal<string>('gavel');
+  icon = signal<string>('settings');
   tooltip = signal<string>('config');
   default = input<boolean>(false);
 

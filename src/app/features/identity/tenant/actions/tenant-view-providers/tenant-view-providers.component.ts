@@ -22,7 +22,7 @@ export class TenantViewProvidersComponent implements Action {
 
   title = signal<string>('providers');
   label = signal<string>('providers');
-  icon = signal<string>('gavel');
+  icon = signal<string>('login');
   tooltip = signal<string>('providers');
   default = input<boolean>(false);
 

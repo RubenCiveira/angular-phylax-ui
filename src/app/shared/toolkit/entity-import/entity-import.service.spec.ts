@@ -133,6 +133,31 @@ describe('EntityImportService', () => {
     ]);
   });
 
+  it('creates when a required field is empty but has an initial value or goes through its action', async () => {
+    const columns = [
+      { field: 'name', type: 'text' as const, label: 'Nombre', index: 0, required: true },
+      { field: 'enabled', type: 'boolean' as const, label: 'Habilitado', index: 1, required: true, viaAction: true },
+      { field: 'version', type: 'number' as const, label: 'Versión', index: 2, required: true },
+    ];
+    definition.defaults = () => ({ enabled: true, version: 1 });
+    service.start(
+      definition,
+      plan(
+        [
+          ['bea', '', ''],
+          ['eva', 'si', ''],
+        ],
+        { columns },
+      ),
+    );
+    const job = service.job(KEY);
+    await until(() => job()?.status === 'finished');
+
+    expect(job()!.created).toBe(2);
+    expect(job()!.failed).toBe(0);
+    expect(target.add).toHaveBeenCalledWith(jasmine.objectContaining({ name: 'bea', enabled: true, version: 1 }));
+  });
+
   it('resolves references and fails the row when there is none', async () => {
     definition.references = { group: { resolve: (text) => of(text === 'admins' ? { $ref: 'g1' } : null) } };
     const columns = [...plan([]).columns, { field: 'group', type: 'reference' as const, label: 'Grupo', index: 2 }];

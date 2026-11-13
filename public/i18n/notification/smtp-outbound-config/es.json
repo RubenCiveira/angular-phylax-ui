@@ -1,5 +1,27 @@
 {
   "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldHost": "Acogida",
+      "fieldLogin": "Iniciar sesión",
+      "fieldMaxRetries": "Máx. Reintentos",
+      "fieldPort": "Puerto",
+      "fieldRateLimit": "Límite de tarifa",
+      "fieldRetryDelay": "Demora entre cada reintento",
+      "fieldSenderEmail": "Correo del remitente",
+      "fieldSenderName": "Nombre del remitente",
+      "fieldTimeout": "Tiempo de espera",
+      "fieldUseTls": "Utilizar TLS",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
     "create": {
       "createButton": "Create",
       "label": "Create smtp outbound config",

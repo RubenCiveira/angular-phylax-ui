@@ -1,0 +1,333 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldExpectedStatus": "Estado esperado del artículo",
+      "fieldExpectedText": "Texto esperado",
+      "fieldFailuresToAlert": "Fallos en las alertas",
+      "fieldIntervalSeconds": "Intervalo (segundos)",
+      "fieldMethod": "Método",
+      "fieldName": "Nombre",
+      "fieldOrigin": "Origen",
+      "fieldTimeoutMs": "Tiempo de espera (ms)",
+      "fieldTlsWarnDays": "Días de aviso de Tls",
+      "fieldUrl": "Url",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear sonda observada",
+      "title": "Crear una nueva sonda observada",
+      "tooltip": "Crear un nuevo registro de sonda observada"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar sonda observada",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar una sonda observada"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar sonda observada",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle de la sonda observada",
+      "title": "Visualización de los valores de una sonda observada",
+      "tooltip": "Ver los valores de una sonda observada"
+    },
+    "disable": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirma que quieres desactivar",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar sonda observada",
+      "okBtn": "deshabilitar registro",
+      "report": "Listo: deshabilitar",
+      "title": "deshabilitar",
+      "tooltip": "deshabilitar sonda observada"
+    },
+    "disable-selection": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirme que desea desactivar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar sonda observada",
+      "okBtn": "deshabilitar registros",
+      "progress": "En curso: desactivar",
+      "report": "Listo en los registros seleccionados: deshabilitar",
+      "title": "Desactivar selección",
+      "tooltip": "deshabilitar los registros seleccionados"
+    },
+    "edit": {
+      "label": "Editar sonda observada",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de una sonda observada"
+    },
+    "enable": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirma que quieres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar sonda observada",
+      "okBtn": "habilitar registro",
+      "report": "Listo: habilitar",
+      "title": "habilitar",
+      "tooltip": "habilitar sonda observada"
+    },
+    "enable-selection": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirme que desea habilitar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar sonda observada",
+      "okBtn": "habilitar registros",
+      "progress": "En curso: habilitar",
+      "report": "Hecho en los registros seleccionados: habilitar",
+      "title": "Activar selección de texto",
+      "tooltip": "habilitar los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "consecutive-failures": {
+      "label": "fallos consecutivos",
+      "placeholder": "fallos consecutivos"
+    },
+    "enabled": {
+      "error": {
+        "required": "activado es obligatorio"
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "expected-status": {
+      "error": {
+        "required": "Se requiere el estado esperado"
+      },
+      "label": "Estado esperado del artículo",
+      "placeholder": "Estado esperado del artículo"
+    },
+    "expected-text": {
+      "error": {
+        "maxlength": "El texto esperado debe tener menos de 250 caracteres."
+      },
+      "label": "Texto esperado",
+      "placeholder": "Texto esperado"
+    },
+    "failures-to-alert": {
+      "error": {
+        "required": "Es necesario indicar los fallos para enviar alertas."
+      },
+      "label": "fallos en las alertas",
+      "placeholder": "fallos en las alertas"
+    },
+    "interval-seconds": {
+      "error": {
+        "required": "Se requiere el intervalo en segundos"
+      },
+      "label": "- SEGUNDOS DE INTERVALO",
+      "placeholder": "- SEGUNDOS DE INTERVALO"
+    },
+    "last-checked-at": {
+      "label": "Verificado el",
+      "placeholder": "Verificado el",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "last-error": {
+      "error": {
+        "maxlength": "El último error debe tener menos de 250 caracteres."
+      },
+      "label": "Último error",
+      "placeholder": "Último error"
+    },
+    "last-latency-ms": {
+      "label": "última latencia (ms)",
+      "placeholder": "última latencia (ms)"
+    },
+    "last-status": {
+      "label": "Último estado",
+      "options": {
+        "down": "BAJAR",
+        "up": "SUBIR"
+      },
+      "placeholder": "Último estado"
+    },
+    "method": {
+      "error": {
+        "required": "Se requiere un método."
+      },
+      "label": "método",
+      "options": {
+        "get": "comprar",
+        "head": "cabeza",
+        "post": "Públicar"
+      },
+      "placeholder": "método"
+    },
+    "name": {
+      "error": {
+        "maxlength": "el nombre debe tener menos de 250 caracteres",
+        "required": "El nombre es necesario"
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "timeout-ms": {
+      "error": {
+        "required": "Tiempo de espera obligatorio."
+      },
+      "label": "Tiempo de espera (ms)",
+      "placeholder": "Tiempo de espera (ms)"
+    },
+    "tls-expires-at": {
+      "label": "Expira en",
+      "placeholder": "Expira en",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "tls-warn-days": {
+      "error": {
+        "required": "Se requiere el número de días de aviso de TLS"
+      },
+      "label": "Días de aviso de TLS",
+      "placeholder": "Días de aviso de TLS"
+    },
+    "url": {
+      "error": {
+        "maxlength": "la url debe tener menos de 250 caracteres",
+        "required": "La URL es obligatoria"
+      },
+      "label": "url",
+      "placeholder": "url"
+    }
+  },
+  "list": {
+    "column": {
+      "consecutive-failures": {
+        "title": "fallos consecutivos",
+        "tooltip": "fallos consecutivos"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "expected-status": {
+        "title": "Estado esperado del artículo",
+        "tooltip": "Estado esperado del artículo"
+      },
+      "expected-text": {
+        "title": "Texto esperado",
+        "tooltip": "Texto esperado"
+      },
+      "failures-to-alert": {
+        "title": "fallos en las alertas",
+        "tooltip": "fallos en las alertas"
+      },
+      "interval-seconds": {
+        "title": "- SEGUNDOS DE INTERVALO",
+        "tooltip": "- SEGUNDOS DE INTERVALO"
+      },
+      "last-checked-at": {
+        "title": "Verificado el",
+        "tooltip": "Verificado el"
+      },
+      "last-error": {
+        "title": "Último error",
+        "tooltip": "Último error"
+      },
+      "last-latency-ms": {
+        "title": "última latencia (ms)",
+        "tooltip": "última latencia (ms)"
+      },
+      "last-status": {
+        "title": "Último estado",
+        "tooltip": "Último estado"
+      },
+      "method": {
+        "title": "método",
+        "tooltip": "método"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "origin": {
+        "title": "de origen único",
+        "tooltip": "de origen único"
+      },
+      "timeout-ms": {
+        "title": "Tiempo de espera (ms)",
+        "tooltip": "Tiempo de espera (ms)"
+      },
+      "tls-expires-at": {
+        "title": "Expira en",
+        "tooltip": "Expira en"
+      },
+      "tls-warn-days": {
+        "title": "Días de aviso de TLS",
+        "tooltip": "Días de aviso de TLS"
+      },
+      "url": {
+        "title": "url",
+        "tooltip": "url"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Predeterminado"
+      },
+      "placeholder": "orden"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "origins": {
+      "label": "orígenes",
+      "placeholder": "orígenes"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    }
+  }
+}

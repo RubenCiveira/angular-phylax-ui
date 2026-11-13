@@ -9,7 +9,9 @@ import { IdentityService } from '@shared/context/identity/identity.service';
 import { RuntimeConfigService } from '@shared/context/config/app-config.service';
 import { RouteAccessService } from './route-accessible.service';
 import { RuntimeThemeService } from '@shared/context/theme/runtime-theme.service';
-import { MenuItem } from '../menu-item.model';
+import { NavItem } from 'app/bootstrap/workspace/workspace.model';
+import { WorkspaceStateService } from 'app/bootstrap/workspace/workspace-state.service';
+import { ContextValue } from '@shared/context/state/app-state.service';
 import { ANONYMOUS_USER, UserInfo } from '@shared/context/identity/user-info.model';
 
 describe('MenuComponent', () => {
@@ -21,6 +23,7 @@ describe('MenuComponent', () => {
   let identityMock: any;
   let appStateMock: any;
   let user: ReturnType<typeof signal<UserInfo>>;
+  let contexts: ReturnType<typeof signal<Record<string, ContextValue | null>>>;
 
   beforeEach(async () => {
     routerEvents$ = new Subject();
@@ -42,10 +45,12 @@ describe('MenuComponent', () => {
     };
 
     user = signal<UserInfo>(ANONYMOUS_USER);
+    contexts = signal<Record<string, ContextValue | null>>({});
     appStateMock = {
       language: signal('es'),
       tenant: signal('main'),
       user: (key: string) => user,
+      contexts,
     };
 
     await TestBed.configureTestingModule({
@@ -61,8 +66,15 @@ describe('MenuComponent', () => {
         { provide: IdentityService, useValue: identityMock },
         { provide: AppStateService, useValue: appStateMock },
         {
+          provide: WorkspaceStateService,
+          useValue: {
+            link: (route: string) => ['/', 'es', 'main', '@admin', route],
+            url: (route: string) => 'es/main/@admin/' + route,
+          },
+        },
+        {
           provide: RuntimeConfigService,
-          useValue: { value: (path: string) => signal(path === 'meta.title' ? 'phylax' : undefined) },
+          useValue: { value: (path: string) => signal(path === 'meta.title' ? 'netconfighub' : undefined) },
         },
       ],
     }).compileComponents();
@@ -89,7 +101,7 @@ describe('MenuComponent', () => {
   });
 
   it('builds computed menu from input items', () => {
-    const items: MenuItem[] = [{ label: 'Users', route: 'users' }];
+    const items: NavItem[] = [{ label: 'Users', route: 'users' }];
     fixture.componentRef.setInput('items', items);
     fixture.detectChanges();
 
@@ -98,20 +110,217 @@ describe('MenuComponent', () => {
   });
 
   it('run emits select and navigates when route exists', () => {
-    const item: MenuItem = { label: 'Users', route: 'users' };
-    let emitted: MenuItem | undefined;
+    const item: NavItem = { label: 'Users', route: 'users' };
+    let emitted: NavItem | undefined;
     component.select.subscribe((value) => (emitted = value));
 
     component.run(item, null);
 
     expect(emitted).toEqual(item);
-    expect(routerMock.navigate).toHaveBeenCalledWith(['es', 'main', 'users']);
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/', 'es', 'main', '@admin', 'users']);
   });
 
-  it('run shows alert when route is missing', () => {
-    spyOn(window, 'alert');
+  it('checks the routes inside the active workspace', () => {
+    fixture.componentRef.setInput('items', [{ label: 'Users', route: 'users' }]);
+    fixture.detectChanges();
+    expect(checkerMock.checkRouteGuards).toHaveBeenCalledWith('es/main/@admin/users');
+  });
+
+  it('run does not navigate without route', () => {
     component.run({ label: 'Group only' }, null);
-    expect(window.alert).toHaveBeenCalledWith('No route');
+    expect(routerMock.navigate).not.toHaveBeenCalled();
+  });
+
+  it('hides entries and groups until their required selectors have a value', () => {
+    fixture.componentRef.setInput('items', [
+      { label: 'Clients', route: 'clients' },
+      { label: 'Sites', route: 'sites', requires: ['client'] },
+      { label: 'Work', requires: ['site'], children: [{ label: 'Projects', route: 'projects' }] },
+    ]);
+    fixture.detectChanges();
+    expect(component.menu().map((item) => item.hidden)).toEqual([false, true, true]);
+
+    contexts.set({ client: ContextValue.fixed('client', { $ref: 'c1' }, 'client') });
+    fixture.detectChanges();
+    expect(component.menu().map((item) => item.hidden)).toEqual([false, false, true]);
+
+    contexts.set({
+      client: ContextValue.fixed('client', { $ref: 'c1' }, 'client'),
+      site: ContextValue.fixed('site', { $ref: 's1' }, 'site'),
+    });
+    fixture.detectChanges();
+    expect(component.menu().map((item) => item.hidden)).toEqual([false, false, false]);
+  });
+
+  it('hides entries and groups when an except selector has a value', () => {
+    fixture.componentRef.setInput('items', [
+      { label: 'Clients', route: 'clients', except: ['client'] },
+      { label: 'Organization', except: ['client'], children: [{ label: 'Sites', route: 'sites' }] },
+    ]);
+    fixture.detectChanges();
+    expect(component.menu().map((item) => item.hidden)).toEqual([false, false]);
+
+    contexts.set({ client: ContextValue.fixed('client', { $ref: 'c1' }, 'client') });
+    fixture.detectChanges();
+    expect(component.menu().map((item) => item.hidden)).toEqual([true, true]);
+    expect(component.menu()[1].childs[0].hidden).toBeTrue();
+
+    contexts.set({ client: null });
+    fixture.detectChanges();
+    expect(component.menu().map((item) => item.hidden)).toEqual([false, false]);
+    expect(component.menu()[1].childs[0].hidden).toBeFalse();
+  });
+
+  it('navigates to go-on-except when an except selector hides the active entry', async () => {
+    checkerMock.isUrlActive.and.callFake((url: string) => url === 'es/main/@admin/clients');
+    fixture.componentRef.setInput('items', [
+      { label: 'Clients', route: 'clients', except: ['client'], goOnExcept: 'sites' },
+    ]);
+    fixture.detectChanges();
+
+    contexts.set({ client: ContextValue.fixed('client', { $ref: 'c1' }, 'client') });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/', 'es', 'main', '@admin', 'sites']);
+  });
+
+  it('navigates to go-on-except when an except selector hides an active group', async () => {
+    checkerMock.isUrlActive.and.callFake((url: string) => url === 'es/main/@admin/clients');
+    fixture.componentRef.setInput('items', [
+      {
+        label: 'Organization',
+        except: ['client'],
+        goOnExcept: 'sites',
+        children: [{ label: 'Clients', route: 'clients' }],
+      },
+    ]);
+    fixture.detectChanges();
+
+    contexts.set({ client: ContextValue.fixed('client', { $ref: 'c1' }, 'client') });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/', 'es', 'main', '@admin', 'sites']);
+  });
+
+  it('navigates to go-on-unrequired when a required selector is cleared on the active entry', async () => {
+    checkerMock.isUrlActive.and.callFake((url: string) => url === 'es/main/@admin/sites');
+    fixture.componentRef.setInput('items', [
+      { label: 'Sites', route: 'sites', requires: ['client'], goOnUnrequired: 'clients' },
+    ]);
+    contexts.set({ client: ContextValue.fixed('client', { $ref: 'c1' }, 'client') });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    contexts.set({ client: null });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/', 'es', 'main', '@admin', 'clients']);
+  });
+
+  it('navigates to go-on-no-required when a group loses all required selectors', async () => {
+    checkerMock.isUrlActive.and.callFake((url: string) => url === 'es/main/@admin/projects');
+    contexts.set({ site: ContextValue.fixed('site', { $ref: 's1' }, 'site') });
+    fixture.componentRef.setInput('items', [
+      {
+        label: 'Installations',
+        requires: ['site'],
+        goOnNoRequired: 'floors',
+        children: [{ label: 'Projects', route: 'projects' }],
+      },
+    ]);
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    contexts.set({ site: null });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/', 'es', 'main', '@admin', 'floors']);
+  });
+
+  it('uses go-on-unrequired when a required selector disappears even if except still hides the entry', async () => {
+    checkerMock.isUrlActive.and.callFake((url: string) => url === 'es/main/@admin/sites');
+    contexts.set({
+      client: ContextValue.fixed('client', { $ref: 'c1' }, 'client'),
+      site: ContextValue.fixed('site', { $ref: 's1' }, 'site'),
+    });
+    fixture.componentRef.setInput('items', [
+      {
+        label: 'Sites',
+        route: 'sites',
+        requires: ['client'],
+        except: ['site'],
+        goOnExcept: 'floors',
+        goOnUnrequired: 'clients',
+      },
+    ]);
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    routerMock.navigate.calls.reset();
+
+    contexts.set({ client: null, site: ContextValue.fixed('site', { $ref: 's1' }, 'site') });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/', 'es', 'main', '@admin', 'clients']);
+  });
+
+  it('does not redirect just because an entry starts hidden or the user state changes', async () => {
+    checkerMock.isUrlActive.and.callFake((url: string) => url === 'es/main/@admin/clients');
+    contexts.set({ client: ContextValue.fixed('client', { $ref: 'c1' }, 'client') });
+    fixture.componentRef.setInput('items', [
+      { label: 'Clients', route: 'clients', except: ['client'], goOnExcept: 'sites' },
+    ]);
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    routerMock.navigate.calls.reset();
+
+    user.set({ authenticated: true });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(routerMock.navigate).not.toHaveBeenCalled();
+  });
+
+  it('resolves a chain of secondary and primary context changes from the active section', async () => {
+    checkerMock.isUrlActive.and.callFake((url: string) => url === 'es/main/@admin/floors');
+    contexts.set({
+      client: ContextValue.fixed('client', { $ref: 'c1' }, 'client'),
+      site: ContextValue.fixed('site', { $ref: 's1' }, 'site'),
+    });
+    fixture.componentRef.setInput('items', [
+      { label: 'Clients', route: 'clients', except: ['client'], goOnExcept: 'sites' },
+      { label: 'Sites', route: 'sites', requires: ['client'], goOnUnrequired: 'clients' },
+      { label: 'Floors', route: 'floors', requires: ['site'], goOnNoRequired: 'sites' },
+    ]);
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    contexts.set({ client: null, site: ContextValue.fixed('site', { $ref: 's1' }, 'site') });
+    fixture.detectChanges();
+    contexts.set({ client: null, site: null });
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(routerMock.navigate.calls.allArgs()).toEqual([
+      [['/', 'es', 'main', '@admin', 'sites']],
+      [['/', 'es', 'main', '@admin', 'clients']],
+    ]);
+  });
+
+  it('keeps a group hidden after navigating while its required selector is empty', () => {
+    fixture.componentRef.setInput('items', [
+      { label: 'Work', requires: ['site'], children: [{ label: 'Projects', route: 'projects' }] },
+    ]);
+    fixture.detectChanges();
+    routerEvents$.next({ type: 'NavigationEnd' });
+
+    const group = component.menu()[0];
+    expect(group.hidden).toBeTrue();
+    expect(group.childs[0].hidden).toBeTrue();
   });
 
   it('updates language and tenant state through helper methods', () => {
@@ -137,7 +346,7 @@ describe('MenuComponent', () => {
     fixture.componentRef.setInput('items', [
       {
         label: 'Access',
-        subItems: [{ label: 'Users', route: 'users' }],
+        children: [{ label: 'Users', route: 'users' }],
       },
     ]);
     fixture.detectChanges();
@@ -164,7 +373,7 @@ describe('MenuComponent', () => {
     fixture.componentRef.setInput('items', [
       {
         label: 'Access',
-        subItems: [{ label: 'Users', route: 'users' }],
+        children: [{ label: 'Users', route: 'users' }],
       },
     ]);
     fixture.detectChanges();

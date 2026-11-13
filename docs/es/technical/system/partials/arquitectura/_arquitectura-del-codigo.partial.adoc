@@ -9,7 +9,7 @@ La aplicación es una SPA Angular (componentes `standalone` en el shell, _signal
 |Carpeta |Contenido
 
 |`bootstrap`
-|Lo propio de la aplicación: rutas (`app.routes.ts`), menú y registro de features (`menu.config.ts`), entorno de compilación (`environment/`), selectores de contexto de la barra superior (`context.config.ts`) y layout (`layout/`: menú, barra superior, pie y páginas de inicio, contenedor y no encontrada).
+|Lo propio de la aplicación: rutas (`app.routes.ts`), workspaces (`workspace/` para el runtime común y `workspaces/<nombre>/` para sus rutas, menús y selectores de contexto), entorno de compilación (`environment/`) y layout (`layout/`: menú, barra superior, pie y páginas de inicio, contenedor y no encontrada).
 
 |`shared/context`
 |Lo que necesita toda la aplicación antes de pintar nada: configuración en runtime (`config`), identidad (`identity`), autorización (`authorization-access`), estado global (`state`), observabilidad (`observability`) y tema (`theme`).
@@ -55,7 +55,7 @@ Fuera de `src/app`:
 === Reglas de dependencia
 
 . `shared` no importa nada de `features` y, de `bootstrap`, solo `environment`.
-. `bootstrap` conoce las features solo a través de `loadChildren` en `menu.config.ts`.
+. `bootstrap` conoce las features solo a través del `loadChildren` de las rutas de cada workspace y de los repositorios que usan sus selectores de contexto.
 . Una feature usa otra solo a través de su repositorio (para los selectores de referencias), nunca de sus componentes.
 . Los componentes no llaman a `HttpClient`: todo acceso al backend pasa por el repositorio de la entidad, y este por `ApiService` y `ClientService`.
 . Las piezas sustituibles se inyectan por _token_: `IDENTITY_PROVIDER` (tipos de identidad), `IDENTITY_UI` (avisos de identidad), `STATIC_CONF`, `APP_CONFIG`.

@@ -77,6 +77,16 @@ describe('LongTaskViewComponent', () => {
     ).toBeTrue();
   });
 
+  it('uses the descriptor associated with a task item key', () => {
+    TestBed.configureTestingModule({
+      imports: [LongTaskViewComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: { labels: { 'site-1': 'Main site' } } }],
+    });
+    const component = TestBed.createComponent(LongTaskViewComponent).componentInstance;
+    expect(component.displayItem('site-1')).toBe('Main site');
+    expect(component.displayItem('unknown')).toBe('unknown');
+  });
+
   it('shows a visible message when polling timed out', () => {
     const progress$ = new Subject<LongTask>();
     TestBed.configureTestingModule({

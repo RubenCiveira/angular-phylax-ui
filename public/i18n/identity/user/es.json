@@ -21,6 +21,22 @@
       "title": "accept selección",
       "tooltip": "accept los registros seleccionados"
     },
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldEmail": "Correo electrónico",
+      "fieldName": "Nombre",
+      "fieldTemporalPassword": "Contraseña temporal",
+      "fieldUseSecondFactors": "Utilizar segundos factores",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
     "create": {
       "createButton": "Create",
       "label": "Create user",
@@ -99,6 +115,12 @@
       "report": "Se han enable los registros",
       "title": "enable selección",
       "tooltip": "enable los registros seleccionados"
+    },
+    "profile": {
+      "icon": "Distintivo",
+      "label": "Perfil del usuario",
+      "title": "Perfil del usuario",
+      "tooltip": "Perfil del usuario"
     },
     "reject": {
       "cancelBtn": "No reject",
@@ -199,6 +221,10 @@
       "error": {
         "maxlength": "proveedor federado tiene que tener menos de 250 caracteres"
       }
+    },
+    "layout": {
+      "account-status": "Estado de mi cuenta",
+      "security": "Seguridad"
     },
     "name": {
       "error": {

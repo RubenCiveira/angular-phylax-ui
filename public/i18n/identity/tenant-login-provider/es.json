@@ -1,5 +1,31 @@
 {
   "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldAccountLinkPolicy": "Política de enlaces de la cuenta",
+      "fieldCertificate": "Certificado",
+      "fieldDirectAccess": "Acceso directo al peritaje",
+      "fieldName": "Nombre",
+      "fieldOidcClaimMapping": "asignación de notificaciones",
+      "fieldOidcDiscoveryUrl": "URL de descubrimiento de Oidc",
+      "fieldOidcScopes": "Ámbitos Oidc",
+      "fieldPrivateKey": "Clave privada",
+      "fieldProviderType": "Tipo de proveedor",
+      "fieldPublicKey": "Clave pública",
+      "fieldSamlIdpEntityId": "ID de entidad Saml idp",
+      "fieldSamlIdpMetadataUrl": "URL de metadatos de IdP:",
+      "fieldSamlIdpSsoUrl": "Saml idp sso url",
+      "fieldUsersEnabledByDefault": "Usuarios habilitados por defecto",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
     "create": {
       "createButton": "Create",
       "label": "Create tenant login provider",

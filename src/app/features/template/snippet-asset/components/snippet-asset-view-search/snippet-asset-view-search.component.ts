@@ -39,6 +39,7 @@ export class SnippetAssetViewSearchComponent extends SubFormEditable<any> {
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(snippetAssetRepository.context(), 'search');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

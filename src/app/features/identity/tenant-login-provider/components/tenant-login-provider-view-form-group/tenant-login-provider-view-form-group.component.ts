@@ -63,6 +63,7 @@ export class TenantLoginProviderViewFormGroupComponent extends SubFormEditable<T
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(tenantLoginProviderRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

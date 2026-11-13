@@ -35,7 +35,7 @@ const asTexts = (value: unknown): ActionTexts => (value && typeof value === 'obj
 /**
  * Base de las acciones: textos traducidos, ACL y valores por defecto de `Action`.
  *
- * Textos: `<scope>.action.<textKey>.*` con fallback a `common.action.<textKey>.*`.
+ * Textos: `<scope>.action.<textKey>.*` con fallback a `common.action.<commonTextKey>.*`.
  * Visibilidad: permiso `permission` en el ACL genérico del repositorio y `appliesTo(items)`.
  */
 @Directive()
@@ -71,6 +71,11 @@ export abstract class BaseAction<T = any> implements Action, OnInit {
     return this.name.replace(/[A-Z]/g, (char) => '-' + char.toLowerCase());
   }
 
+  /** Clave de los textos comunes (`common.action.<clave>`) cuando la entidad no define los suyos; por defecto `textKey`. */
+  protected get commonTextKey(): string {
+    return this.textKey;
+  }
+
   /** Permiso del ACL que hace visible la acción; por defecto su nombre. */
   protected get permission(): string {
     return this.name;
@@ -85,7 +90,7 @@ export abstract class BaseAction<T = any> implements Action, OnInit {
     this.aclTick.set(acl);
     combineLatest([
       this.transloco.selectTranslateObject(`action.${this.textKey}`, {}, this.scope),
-      this.transloco.selectTranslateObject(`common.action.${this.textKey}`),
+      this.transloco.selectTranslateObject(`common.action.${this.commonTextKey}`),
     ])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(([scoped, common]) => {
@@ -121,7 +126,7 @@ export abstract class BaseAction<T = any> implements Action, OnInit {
       return `${this.scope}.action.${this.textKey}.${field}`;
     }
     if (this.commonTexts()[field]) {
-      return `common.action.${this.textKey}.${field}`;
+      return `common.action.${this.commonTextKey}.${field}`;
     }
     return undefined;
   }

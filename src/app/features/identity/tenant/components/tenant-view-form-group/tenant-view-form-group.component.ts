@@ -38,6 +38,7 @@ export class TenantViewFormGroupComponent extends SubFormEditable<Tenant> {
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(tenantRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

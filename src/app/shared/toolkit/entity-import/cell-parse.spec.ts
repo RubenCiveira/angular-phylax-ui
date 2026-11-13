@@ -31,6 +31,23 @@ describe('parseCell', () => {
     });
   });
 
+  it('reads the yes / no words chosen when importing before the usual ones', () => {
+    const parsing = { trueWords: ['oui', 'Vrai'], falseWords: ['non', 'x'] };
+
+    expect(parseCell('Oui', column('boolean'), parsing)).toEqual({ value: true });
+    expect(parseCell('vrai', column('boolean'), parsing)).toEqual({ value: true });
+    expect(parseCell('NON', column('boolean'), parsing)).toEqual({ value: false });
+    expect(parseCell('x', column('boolean'), parsing)).toEqual({ value: false });
+    expect(parseCell('si', column('boolean'), parsing)).toEqual({ value: true });
+  });
+
+  it('reads month-first dates when asked', () => {
+    const parsing = { trueWords: [], falseWords: [], monthFirst: true };
+
+    expect(parseCell('03/05/2026', column('date'), parsing)).toEqual({ value: new Date(2026, 2, 5) });
+    expect(parseCell('03/05/2026', column('date'))).toEqual({ value: new Date(2026, 4, 3) });
+  });
+
   it('reads numbers with either decimal separator', () => {
     expect(parseCell('1.234,5', column('number'))).toEqual({ value: 1234.5 });
     expect(parseCell('1,234.5', column('number'))).toEqual({ value: 1234.5 });

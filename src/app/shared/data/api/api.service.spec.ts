@@ -4,11 +4,10 @@ import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { RuntimeConfigService } from '@shared/context/config/app-config.service';
-import { AppStateService } from '@shared/context/state/app-state.service';
 import { ClientService } from './client.service';
 
 describe('ApiService', () => {
-  it('resolves endpoint config and merges filter context params', () => {
+  it('resolves endpoint config and sends the params as given', () => {
     const client = {
       get: jasmine.createSpy('get').and.returnValue(of({ ok: true })),
     } as unknown as ClientService;
@@ -22,21 +21,12 @@ describe('ApiService', () => {
           },
         }),
     } as unknown as RuntimeConfigService;
-    const appState = {
-      filterContext: () =>
-        of({
-          tenant: { $ref: 't1' },
-          q: 'hello',
-        }),
-      fixedContext: () => of({}),
-    } as unknown as AppStateService;
 
     TestBed.configureTestingModule({
       providers: [
         ApiService,
         { provide: ClientService, useValue: client },
         { provide: RuntimeConfigService, useValue: appConfig },
-        { provide: AppStateService, useValue: appState },
       ],
     });
 
@@ -50,101 +40,47 @@ describe('ApiService', () => {
     expect(call.identity).toBe('main');
     expect(call.withIdentity).toBeTrue();
     expect(call.headers).toEqual({ 'X-Test': '1' });
-    expect(call.params.toString()).toContain('page=1');
-    expect(call.params.toString()).toContain('tenant=t1');
-    expect(call.params.toString()).toContain('q=hello');
+    expect(call.params.toString()).toBe('page=1');
   });
 
-  it('merges fixed context into body on post', () => {
-    const client = {
-      post: jasmine.createSpy('post').and.returnValue(of({ ok: true })),
-    } as unknown as ClientService;
-    const appConfig = {
-      value$: () =>
-        of({
-          service: {
-            url: 'https://api.test',
-          },
-        }),
-    } as unknown as RuntimeConfigService;
-    const appState = {
-      filterContext: () => of({ q: 'x' }),
-      fixedContext: () => of({ tenant: 'main' }),
-    } as unknown as AppStateService;
-
-    TestBed.configureTestingModule({
-      providers: [
-        ApiService,
-        { provide: ClientService, useValue: client },
-        { provide: RuntimeConfigService, useValue: appConfig },
-        { provide: AppStateService, useValue: appState },
-      ],
-    });
-
-    const service = TestBed.inject(ApiService);
-    const params = new HttpParams().set('page', '2');
-
-    service.post('service/items', { name: 'Item' }, params).subscribe();
-
-    const call = (client.post as jasmine.Spy).calls.mostRecent().args[0];
-    expect(call.url).toBe('https://api.test/items');
-    expect(call.body).toEqual({ name: 'Item', tenant: 'main' });
-    expect(call.params.toString()).toContain('page=2');
-    expect(call.params.toString()).toContain('q=x');
-  });
-
-  function setup(apiConf: any, appState: Partial<AppStateService>, client: Partial<ClientService>) {
-    return new ApiService(
-      appState as AppStateService,
-      client as ClientService,
-      { value$: () => of(apiConf) } as unknown as RuntimeConfigService,
-    );
+  function setup(apiConf: any, client: Partial<ClientService>, config$ = of(apiConf)) {
+    return new ApiService(client as ClientService, { value$: () => config$ } as unknown as RuntimeConfigService);
   }
 
   describe('query vs command', () => {
-    it('re-sends a query when the filter context changes', () => {
-      const filter$ = new BehaviorSubject<any>({ q: 'a' });
+    it('re-sends a query when the endpoint configuration changes', () => {
+      const config$ = new BehaviorSubject<any>({ service: { url: 'https://one.test' } });
       const client = { get: jasmine.createSpy('get').and.returnValue(of({})) };
-      const service = setup(
-        { service: { url: 'https://api.test' } },
-        { filterContext: () => filter$, fixedContext: () => of({}) },
-        client,
-      );
+      const service = setup(null, client, config$);
 
       service.get('service/items').subscribe();
-      filter$.next({ q: 'b' });
+      config$.next({ service: { url: 'https://two.test' } });
 
       expect(client.get).toHaveBeenCalledTimes(2);
-      expect(client.get.calls.mostRecent().args[0].params.get('q')).toBe('b');
+      expect(client.get.calls.mostRecent().args[0].url).toBe('https://two.test/items');
     });
 
-    it('sends a mutation only once even if the context changes afterwards', () => {
-      const filter$ = new BehaviorSubject<any>({ q: 'a' });
-      const fixed$ = new BehaviorSubject<any>({ tenant: 't1' });
+    it('sends a mutation once, with the body untouched', () => {
+      const config$ = new BehaviorSubject<any>({ service: { url: 'https://api.test' } });
       const client = {
         post: jasmine.createSpy('post').and.returnValue(of({})),
         put: jasmine.createSpy('put').and.returnValue(of({})),
         patch: jasmine.createSpy('patch').and.returnValue(of({})),
         delete: jasmine.createSpy('delete').and.returnValue(of({})),
       };
-      const service = setup(
-        { service: { url: 'https://api.test' } },
-        { filterContext: () => filter$, fixedContext: () => fixed$ },
-        client,
-      );
+      const service = setup(null, client, config$);
 
       service.post('service/items', { a: 1 }).subscribe();
       service.put('service/items/1', { a: 1 }).subscribe();
       service.patch('service/items/1', { a: 1 }).subscribe();
       service.delete('service/items/1').subscribe();
-      filter$.next({ q: 'b' });
-      fixed$.next({ tenant: 't2' });
+      config$.next({ service: { url: 'https://other.test' } });
 
       expect(client.post).toHaveBeenCalledTimes(1);
       expect(client.put).toHaveBeenCalledTimes(1);
       expect(client.patch).toHaveBeenCalledTimes(1);
       expect(client.delete).toHaveBeenCalledTimes(1);
-      expect(client.post.calls.mostRecent().args[0].body).toEqual({ a: 1, tenant: 't1' });
+      expect(client.post.calls.mostRecent().args[0].body).toEqual({ a: 1 });
     });
   });
 
@@ -156,7 +92,7 @@ describe('ApiService', () => {
 
     function resolve(url: string) {
       const client = { get: jasmine.createSpy('get').and.returnValue(of({})) };
-      const service = setup(apiConf, { filterContext: () => of({}), fixedContext: () => of({}) }, client);
+      const service = setup(apiConf, client);
       service.get(url).subscribe();
       return client.get.calls.mostRecent().args[0];
     }
@@ -177,31 +113,6 @@ describe('ApiService', () => {
       const call = resolve('https://other.test/items');
       expect(call.url).toBe('https://other.test/items');
       expect(call.withIdentity).toBeFalse();
-    });
-  });
-
-  describe('inject-context', () => {
-    function postWith(api: any) {
-      const client = { post: jasmine.createSpy('post').and.returnValue(of({})) };
-      const service = setup(
-        { service: { url: 'https://api.test', ...api } },
-        { filterContext: () => of({}), fixedContext: () => of({ tenant: 't1', org: 'o1' }) },
-        client,
-      );
-      service.post('service/items', { name: 'x' }).subscribe();
-      return client.post.calls.mostRecent().args[0].body;
-    }
-
-    it('injects every fixed context key by default', () => {
-      expect(postWith({})).toEqual({ name: 'x', tenant: 't1', org: 'o1' });
-    });
-
-    it('injects only the listed keys', () => {
-      expect(postWith({ 'inject-context': ['tenant'] })).toEqual({ name: 'x', tenant: 't1' });
-    });
-
-    it('sends the body untouched with an empty list', () => {
-      expect(postWith({ 'inject-context': [] })).toEqual({ name: 'x' });
     });
   });
 });

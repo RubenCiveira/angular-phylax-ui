@@ -110,6 +110,13 @@ export class RouteAccessService {
   private matchChain(urlSegments: string[], routes: Route[], parentParams: Params): MatchedRoute[] {
     for (const route of routes) {
       if (!route.path) {
+        // Ruta sin segmento que agrupa otras (el workspace por defecto): la URL sigue en sus hijas
+        if (route.children && urlSegments.length) {
+          const children = this.matchChain(urlSegments, route.children, parentParams);
+          if (children.length) {
+            return [{ route, snapshot: this.snapshot(route, [], parentParams) }, ...children];
+          }
+        }
         continue;
       }
       const routeSegments = route.path.split('/');

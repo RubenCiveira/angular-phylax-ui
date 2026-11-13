@@ -72,6 +72,12 @@
         "title": "Deshabilitar selección",
         "tooltip": "Deshabilitar los elementos seleccionados"
       },
+      "document": {
+        "icon": "description",
+        "label": "Documento",
+        "title": "Generar documento",
+        "tooltip": "Generar un documento Word o PDF a partir de una plantilla"
+      },
       "edit": {
         "icon": "edit_note",
         "label": "Editar",
@@ -122,10 +128,45 @@
         "icon": "lock"
       }
     },
+    "bulkEdit": {
+      "operation": "Operación",
+      "operations": {
+        "add": "Sumar",
+        "clear": "Borrar valor",
+        "multiply": "Multiplicar",
+        "prefix": "Añadir prefijo",
+        "replace": "Reemplazar",
+        "setFalse": "Marcar como no",
+        "setNull": "Vaciar",
+        "setTrue": "Marcar como sí",
+        "setValue": "Asignar valor",
+        "suffix": "Añadir sufijo"
+      },
+      "value": "Valor"
+    },
     "confirm": {
       "cancel": "Cancelar",
       "ok": "Aceptar",
       "title": "Confirmar"
+    },
+    "document": {
+      "button": {
+        "close": "Cerrar",
+        "retry": "Volver a intentarlo"
+      },
+      "download": {
+        "docx": "Descargar Word",
+        "pdf": "Descargar PDF"
+      },
+      "failed": {
+        "file": "No se ha podido generar el fichero.",
+        "notFound": "No existe la plantilla «{{template}}».",
+        "render": "No se han podido preparar los datos del documento.",
+        "title": "No se ha podido generar el documento"
+      },
+      "generating": "Generando el fichero…",
+      "loading": "Preparando el documento…",
+      "preview": "Vista previa"
     },
     "empty": "No hay elementos que mostrar.",
     "export": {
@@ -223,6 +264,7 @@
         "sheet": "Hoja",
         "skip": "— No importar —",
         "title": "Columnas",
+        "unmapped": "Campos sin columna (no se importan):",
         "unused": "Columnas del Excel que no se importan:",
         "viaAction": "mediante acción"
       },
@@ -230,6 +272,26 @@
         "cancelled": "Importación detenida: {{created}} creados, {{updated}} actualizados, {{failed}} con errores",
         "finished": "Importación terminada: {{created}} creados, {{updated}} actualizados, {{failed}} con errores",
         "interrupted": "Importación interrumpida: {{created}} creados, {{updated}} actualizados, {{failed}} con errores"
+      },
+      "parsing": {
+        "dateOrder": "Fechas escritas como texto",
+        "dayFirst": "día/mes/año",
+        "falsePlaceholder": "p. ej. non, faux",
+        "falseWords": "Otros textos para «no»",
+        "monthFirst": "mes/día/año",
+        "title": "Ajustes de lectura",
+        "truePlaceholder": "p. ej. oui, vrai",
+        "trueWords": "Otros textos para «sí»",
+        "wordsHint": "Separados por comas. Ya se reconocen sí/no, yes/no, true/false, verdadero/falso, 1/0 y x."
+      },
+      "preview": {
+        "errors": "{{count}} filas con errores: no se importarán si no se corrigen (pasa el ratón por la celda para ver el motivo).",
+        "more": "Mostrar más",
+        "noErrors": "No se han detectado errores en los datos leídos.",
+        "serverChecks": "Las referencias a otros elementos y los permisos se comprueban al importar.",
+        "showAll": "Ver todas las filas",
+        "showErrors": "Ver solo filas con errores",
+        "showing": "Se muestran {{shown}} de {{total}} filas."
       },
       "select": {
         "button": "Elegir fichero",
@@ -282,6 +344,24 @@
     "moreActions": "Más acciones",
     "notify": {
       "close": "Cerrar"
+    },
+    "password": {
+      "assign": "Asignar",
+      "assignDescription": "Introduce la contraseña y confírmala.",
+      "assignSubmit": "Asignar",
+      "assignTitle": "Asignar contraseña",
+      "assigned": "Contraseña asignada",
+      "cancel": "Cancelar",
+      "change": "Cambiar",
+      "changeDescription": "La contraseña actual se sustituirá por la nueva. Introdúcela y confírmala.",
+      "changeSubmit": "Cambiar",
+      "changeTitle": "Cambiar contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "hide": "Ocultar contraseña",
+      "mismatch": "Las contraseñas no coinciden",
+      "newPassword": "Nueva contraseña",
+      "show": "Mostrar contraseña",
+      "unassigned": "Sin contraseña"
     },
     "retry": "Reintentar",
     "selector": {
@@ -387,6 +467,73 @@
     }
   },
   "info": "Modulo",
+  "offline": {
+    "action": {
+      "cancel": "Cancelar",
+      "close": "Cerrar",
+      "conflict": "Resolver conflicto",
+      "discard": "Descartar",
+      "edit": "Corregir",
+      "retry": "Reintentar",
+      "save": "Guardar",
+      "skip": "Seguir con el resto",
+      "skipTooltip": "Deja los cambios con error (y los que dependen de ellos) y sube los demás",
+      "sync": "Subir cambios"
+    },
+    "blockedBy": "Bloqueado: depende de «{{label}}», que no se ha podido subir",
+    "discard": {
+      "message": "Se perderá el cambio «{{label}}». ¿Continuar?",
+      "ok": "Descartar",
+      "title": "Descartar cambio",
+      "withDependents": "Se perderá el cambio «{{label}}» y {{count}} cambios que dependen de él. ¿Continuar?"
+    },
+    "edit": {
+      "title": "Corregir «{{label}}»"
+    },
+    "error": {
+      "missingFile": "El adjunto ya no está guardado en este dispositivo",
+      "noRepository": "No se encuentra el repositorio de esta entidad",
+      "uploadWithoutUrl": "El servidor no ha devuelto la dirección del adjunto"
+    },
+    "indicator": {
+      "failed": "{{failed}} cambios con error de {{count}} pendientes",
+      "offline": "Sin conexión: {{count}} cambios pendientes de subir",
+      "pending": "{{count}} cambios pendientes de subir"
+    },
+    "kind": {
+      "add": "Alta",
+      "delete": "Borrado",
+      "file": "Adjunto",
+      "patch": "Cambio",
+      "update": "Modificación"
+    },
+    "notify": {
+      "autoFailed": "La subida automática se ha parado: {{count}} cambios con error. Ábrela desde el indicador para resolverlos",
+      "backOnline": "Conexión recuperada: hay {{count}} cambios pendientes de subir",
+      "backOnlineAuto": "Conexión recuperada: los {{count}} cambios pendientes se subirán si la conexión se mantiene {{seconds}} s",
+      "conflictUnavailable": "No se ha podido obtener la versión del servidor para resolver el conflicto",
+      "queued": "Sin conexión: los cambios se guardan en este dispositivo y se subirán después",
+      "synced": "Todos los cambios se han subido"
+    },
+    "state": {
+      "blocked": "Bloqueado",
+      "done": "Subido",
+      "failed": "Error",
+      "pending": "Pendiente",
+      "running": "Subiendo"
+    },
+    "sync": {
+      "state": {
+        "auto": "La conexión ha vuelto: los cambios se subirán solos en cuanto se mantenga estable.",
+        "empty": "No hay cambios pendientes.",
+        "failed": "La subida se ha parado: {{failed}} cambios con error. Resuélvelos para continuar; los cambios que dependen de ellos quedan bloqueados.",
+        "offline": "Sin conexión con el servidor. Los {{count}} cambios se subirán cuando vuelva la conexión.",
+        "pending": "{{count}} cambios guardados en este dispositivo a la espera de subir.",
+        "syncing": "Subiendo los cambios uno a uno…"
+      },
+      "title": "Cambios pendientes"
+    }
+  },
   "validation": {
     "email": "Introduce un correo electrónico válido",
     "invalid": "El valor no es válido",

@@ -30,6 +30,8 @@ include::partials/conceptos/_identidad-y-permisos.partial.adoc[leveloffset=+1]
 
 include::partials/conceptos/_capa-de-datos.partial.adoc[leveloffset=+1]
 
+include::partials/conceptos/_documentos.partial.adoc[leveloffset=+1]
+
 include::partials/conceptos/_modelo-de-errores.partial.adoc[leveloffset=+1]
 
 include::partials/conceptos/_observabilidad.partial.adoc[leveloffset=+1]

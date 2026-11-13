@@ -5,9 +5,9 @@ import { firstValueFrom } from 'rxjs';
 import { APP_CONFIG } from '../config/app-config.service';
 import { AppConfig, emptyConfig } from '../config/app-config.model';
 import { ANONYMOUS_USER } from '../identity/user-info.model';
-import { APP_STATE_CHANNEL, AppStateMessage, AppStateService, ContextValue } from './app-state.service';
+import { APP_STATE_CHANNEL, AppStateMessage, AppStateService, ContextValue, GLOBAL_CONTEXT } from './app-state.service';
 
-const STORED_KEYS = ['state-item-selected-language', 'state-item-selected-tenant', 'state-item-context'];
+const STORED_KEYS = ['state-item-selected-language', 'state-item-selected-tenant', 'state-item-contexts'];
 
 // BroadcastChannel entrega los mensajes en una tarea posterior
 const delivered = () => new Promise((resolve) => setTimeout(resolve, 50));
@@ -87,15 +87,29 @@ describe('AppStateService', () => {
       expect(state.contexts()).toEqual({});
     });
 
-    it('splits fixed and filter values', () => {
+    it('keeps the entries of each workspace apart, with the global ones visible in all', () => {
       const state = create();
-      state.setContext('tenant', ContextValue.fixed('tenant', 't1'));
-      state.setContext('org', ContextValue.default('org', 'o1'));
-      state.setContext('q', ContextValue.filter('q', 'x'));
-      state.setContext('empty', ContextValue.null('empty'));
+      state.contextScope.set('admin');
+      state.setContext('client', ContextValue.fixed('client', 'c1', 'client'));
+      state.setContext('lang', ContextValue.filter('lang', 'es'), GLOBAL_CONTEXT);
 
-      expect(state.fixedValues()).toEqual({ tenant: 't1', org: 'o1' });
-      expect(state.filterValues()).toEqual({ tenant: 't1', q: 'x' });
+      state.contextScope.set('main');
+      expect(state.contexts()['client']).toBeUndefined();
+      expect(state.contextValue('lang')()?.value).toBe('es');
+
+      state.contextScope.set('admin');
+      expect(state.contextValue('client')()?.value).toBe('c1');
+    });
+
+    it('keeps the kind and the entity of each entry, also after a reload', () => {
+      create().setContext('client', ContextValue.default('client', { $ref: 'c1' }, 'client'));
+      TestBed.resetTestingModule();
+
+      const restored = create().contextValue('client')();
+      expect(restored?.value).toEqual({ $ref: 'c1' });
+      expect(restored?.fixed).toBeTrue();
+      expect(restored?.toFilter).toBeFalse();
+      expect(restored?.entity).toBe('client');
     });
 
     it('is persisted and restored as ContextValue', () => {

@@ -1,0 +1,431 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldAllowedOrigins": "Orígenes CORS permitidos",
+      "fieldDeriveMetrics": "Obtener métricas",
+      "fieldDetached": "Separado",
+      "fieldEnvironment": "Medio ambiente",
+      "fieldErrorSampleRate": "Frecuencia de muestreo de errores",
+      "fieldExpectedEveryMinutes": "Se espera cada minuto",
+      "fieldKind": "Tipo",
+      "fieldManaged": "Gestionado",
+      "fieldMaxSeries": "Serie MAX",
+      "fieldMetricsMode": "Modo de métricas",
+      "fieldMinLevel": "Nivel min.",
+      "fieldName": "Nombre",
+      "fieldOriginEnabled": "Origen habilitado",
+      "fieldOriginRef": "Ref. de origen",
+      "fieldOriginType": "Tipo origen",
+      "fieldRateLimit": "Límite de tarifa",
+      "fieldRetentionDays": "Retención (Dias)",
+      "fieldScrapeInterval": "Intervalo de «scraping»",
+      "fieldScrapeUrl": "Extraer datos de la URL",
+      "fieldScrubFields": "Borrar campos",
+      "fieldTraceSampleRate": "Tasa de muestreo de trazas",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear fuente observada",
+      "title": "Crear una nueva fuente observada",
+      "tooltip": "Crear un nuevo registro de fuente observada"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar fuente observada",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar una fuente observada"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar fuente observada",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle de la fuente observada",
+      "title": "Visualización de los valores de una fuente observada",
+      "tooltip": "Ver los valores de una fuente observada"
+    },
+    "disable": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirma que quieres desactivar",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar fuente observada",
+      "okBtn": "deshabilitar registro",
+      "report": "Listo: deshabilitar",
+      "title": "deshabilitar",
+      "tooltip": "deshabilitar fuente observada"
+    },
+    "disable-selection": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirme que desea desactivar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar fuente observada",
+      "okBtn": "deshabilitar registros",
+      "progress": "En curso: desactivar",
+      "report": "Listo en los registros seleccionados: deshabilitar",
+      "title": "Desactivar selección",
+      "tooltip": "deshabilitar los registros seleccionados"
+    },
+    "edit": {
+      "label": "Editar fuente observada",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de una fuente observada"
+    },
+    "enable": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirma que quieres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar la fuente observada",
+      "okBtn": "habilitar registro",
+      "report": "Listo: habilitar",
+      "title": "habilitar",
+      "tooltip": "habilitar la fuente observada"
+    },
+    "enable-selection": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirme que desea habilitar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar la fuente observada",
+      "okBtn": "habilitar registros",
+      "progress": "En curso: habilitar",
+      "report": "Hecho en los registros seleccionados: habilitar",
+      "title": "Activar selección de texto",
+      "tooltip": "habilitar los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "allowed-origins": {
+      "error": {
+        "maxlength": "Los orígenes permitidos deben tener menos de 250 caracteres"
+      },
+      "label": "Orígenes CORS permitidos",
+      "placeholder": "Orígenes CORS permitidos"
+    },
+    "code": {
+      "error": {
+        "maxlength": "el código debe tener menos de 250 caracteres",
+        "required": "El código es requerido"
+      },
+      "label": "código",
+      "placeholder": "código"
+    },
+    "derive-metrics": {
+      "label": "obtener métricas",
+      "placeholder": "obtener métricas"
+    },
+    "detached": {
+      "error": {
+        "required": "Se requiere que esté separado"
+      },
+      "label": "separado",
+      "placeholder": "separado"
+    },
+    "dropped-count": {
+      "label": "número de paquetes perdidos",
+      "placeholder": "número de paquetes perdidos"
+    },
+    "enabled": {
+      "error": {
+        "required": "activado es obligatorio"
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "environment": {
+      "error": {
+        "maxlength": "El campo «Entorno» debe tener menos de 250 caracteres."
+      },
+      "label": "Medioambiente",
+      "placeholder": "Medioambiente"
+    },
+    "error-sample-rate": {
+      "label": "frecuencia de muestreo de errores",
+      "placeholder": "frecuencia de muestreo de errores"
+    },
+    "expected-every-minutes": {
+      "label": "se espera cada minuto",
+      "placeholder": "se espera cada minuto"
+    },
+    "ingest-key": {
+      "error": {
+        "maxlength": "La clave de ingesta debe tener menos de 250 caracteres"
+      },
+      "label": "clave de importación",
+      "placeholder": "clave de importación"
+    },
+    "kind": {
+      "label": "tipo",
+      "options": {
+        "backend": "administración",
+        "frontend": "front-end",
+        "mobile": "móvil",
+        "worker": "compañero de trabajo/compañera de trabajo"
+      },
+      "placeholder": "tipo"
+    },
+    "last-seen-at": {
+      "label": "Visto por última a las",
+      "placeholder": "Visto por última a las",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "managed": {
+      "error": {
+        "required": "Se requiere «gestionado»"
+      },
+      "label": "administrado",
+      "placeholder": "administrado"
+    },
+    "max-series": {
+      "label": "Serie MAX",
+      "placeholder": "Serie MAX"
+    },
+    "metrics-mode": {
+      "label": "modo de métricas",
+      "options": {
+        "disabled": "desactivado",
+        "push": "empujar",
+        "scrape": "raspado"
+      },
+      "placeholder": "modo de métricas"
+    },
+    "min-level": {
+      "error": {
+        "maxlength": "El nivel mínimo debe tener menos de 250 caracteres"
+      },
+      "label": "Nivel mínimo",
+      "placeholder": "Nivel mínimo"
+    },
+    "name": {
+      "error": {
+        "maxlength": "el nombre debe tener menos de 250 caracteres"
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "origin-enabled": {
+      "error": {
+        "required": "Es obligatorio que el origen esté habilitado"
+      },
+      "label": "origen habilitado",
+      "placeholder": "origen habilitado"
+    },
+    "origin-ref": {
+      "error": {
+        "maxlength": "La referencia de origen debe tener menos de 250 caracteres"
+      },
+      "label": "ref. de origen",
+      "placeholder": "ref. de origen"
+    },
+    "origin-type": {
+      "error": {
+        "maxlength": "El tipo de origen debe tener menos de 250 caracteres",
+        "required": "El tipo de origen es obligatorio"
+      },
+      "label": "clase de origen",
+      "placeholder": "clase de origen"
+    },
+    "rate-limit": {
+      "label": "límite de tarifa",
+      "placeholder": "límite de tarifa"
+    },
+    "retention-days": {
+      "label": "Retención (Dias)",
+      "placeholder": "Retención (Dias)"
+    },
+    "scrape-interval": {
+      "label": "intervalo de recopilación de datos",
+      "placeholder": "intervalo de recopilación de datos"
+    },
+    "scrape-url": {
+      "error": {
+        "maxlength": "La URL de extracción debe tener menos de 250 caracteres"
+      },
+      "label": "extraer datos de la URL",
+      "placeholder": "extraer datos de la URL"
+    },
+    "scrub-fields": {
+      "error": {
+        "maxlength": "Los campos de depuración deben tener menos de 250 caracteres"
+      },
+      "label": "campos de matorral",
+      "placeholder": "campos de matorral"
+    },
+    "trace-sample-rate": {
+      "label": "frecuencia de muestreo del seguimiento",
+      "placeholder": "frecuencia de muestreo del seguimiento"
+    }
+  },
+  "list": {
+    "column": {
+      "allowed-origins": {
+        "title": "Orígenes CORS permitidos",
+        "tooltip": "Orígenes CORS permitidos"
+      },
+      "code": {
+        "title": "código",
+        "tooltip": "código"
+      },
+      "derive-metrics": {
+        "title": "obtener métricas",
+        "tooltip": "obtener métricas"
+      },
+      "detached": {
+        "title": "separado",
+        "tooltip": "separado"
+      },
+      "dropped-count": {
+        "title": "número de paquetes perdidos",
+        "tooltip": "número de paquetes perdidos"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "environment": {
+        "title": "Medioambiente",
+        "tooltip": "Medioambiente"
+      },
+      "error-sample-rate": {
+        "title": "frecuencia de muestreo de errores",
+        "tooltip": "frecuencia de muestreo de errores"
+      },
+      "expected-every-minutes": {
+        "title": "se espera cada minuto",
+        "tooltip": "se espera cada minuto"
+      },
+      "ingest-key": {
+        "title": "clave de importación",
+        "tooltip": "clave de importación"
+      },
+      "kind": {
+        "title": "tipo",
+        "tooltip": "tipo"
+      },
+      "last-seen-at": {
+        "title": "Visto por última a las",
+        "tooltip": "Visto por última a las"
+      },
+      "managed": {
+        "title": "administrado",
+        "tooltip": "administrado"
+      },
+      "max-series": {
+        "title": "Serie MAX",
+        "tooltip": "Serie MAX"
+      },
+      "metrics-mode": {
+        "title": "modo de métricas",
+        "tooltip": "modo de métricas"
+      },
+      "min-level": {
+        "title": "Nivel mínimo",
+        "tooltip": "Nivel mínimo"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "origin-enabled": {
+        "title": "origen habilitado",
+        "tooltip": "origen habilitado"
+      },
+      "origin-ref": {
+        "title": "ref. de origen",
+        "tooltip": "ref. de origen"
+      },
+      "origin-type": {
+        "title": "clase de origen",
+        "tooltip": "clase de origen"
+      },
+      "rate-limit": {
+        "title": "límite de tarifa",
+        "tooltip": "límite de tarifa"
+      },
+      "retention-days": {
+        "title": "Retención (Dias)",
+        "tooltip": "Retención (Dias)"
+      },
+      "scrape-interval": {
+        "title": "intervalo de recopilación de datos",
+        "tooltip": "intervalo de recopilación de datos"
+      },
+      "scrape-url": {
+        "title": "extraer datos de la URL",
+        "tooltip": "extraer datos de la URL"
+      },
+      "scrub-fields": {
+        "title": "campos de matorral",
+        "tooltip": "campos de matorral"
+      },
+      "trace-sample-rate": {
+        "title": "frecuencia de muestreo del seguimiento",
+        "tooltip": "frecuencia de muestreo del seguimiento"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "code": {
+      "label": "código",
+      "placeholder": "código"
+    },
+    "ingest-key": {
+      "label": "clave de importación",
+      "placeholder": "clave de importación"
+    },
+    "kind": {
+      "label": "tipo",
+      "placeholder": "tipo"
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "code-asc": "code-asc",
+        "code-desc": "code-desc",
+        "null": "Predeterminado"
+      },
+      "placeholder": "orden"
+    },
+    "origin-ref": {
+      "label": "ref. de origen",
+      "placeholder": "ref. de origen"
+    },
+    "origin-type": {
+      "label": "clase de origen",
+      "placeholder": "clase de origen"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    }
+  }
+}

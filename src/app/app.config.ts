@@ -13,6 +13,8 @@ import { provideThemeMode } from '@shared/context/theme/theme-mode.service';
 import { provideRuntimeTheme } from '@shared/context/theme/runtime-theme.service';
 import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
 import { provideUiDefaults } from '@shared/toolkit/ui-defaults.provider';
+import { provideOfflineRepositories } from '@shared/data/offline/offline.model';
+import { repositories } from './bootstrap/repositories.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideConfiguredRoutes(),
     // HttpClient, identidad y acceso a datos del conector elegido (front-connector: rest, appwrite, firebase)
     provideConnector(),
+    // Repositorios que la cola offline (data.offline) puede necesitar al subir cambios pendientes
+    provideOfflineRepositories(repositories),
     // Idiomas e idioma por defecto: provideI18nConfiguration() sustituye esta configuración con la de runtime
     provideTransloco({
       config: { reRenderOnLangChange: true, prodMode: false },

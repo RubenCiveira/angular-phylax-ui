@@ -76,6 +76,7 @@ export class TenantLoginProviderViewImportActionComponent extends BaseImportActi
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

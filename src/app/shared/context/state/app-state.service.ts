@@ -21,6 +21,9 @@ import { DefaultsService } from '../config/defaults.service';
 /** Clave de una entrada del contexto (tenant, organización…): la define cada selector de contexto. */
 export type ContextKey = string;
 
+/** Ámbito compartido por todos los workspaces: sus entradas se ven en cualquiera de ellos. */
+export const GLOBAL_CONTEXT = '*';
+
 /** @deprecated Usa los signals de `AppStateService` o sus observables `*$`. Se eliminará en la próxima versión. */
 export interface AppStateItem<T> extends Observable<T> {
   set: (value: T) => void;
@@ -62,21 +65,20 @@ export class AppStateService {
   /** Usuario de cada identidad; las identidades sin usuario no aparecen. */
   public readonly users = this.usersState.asReadonly();
 
-  private readonly contextState = persistedSignal<Record<ContextKey, ContextValue | null>>(
-    'context',
+  /** Entradas de cada ámbito (un workspace o {@link GLOBAL_CONTEXT}). */
+  private readonly contextState = persistedSignal<Record<string, Record<ContextKey, ContextValue | null>>>(
+    'contexts',
     {},
     undefined,
-    reviveContext,
+    reviveScopes,
   );
-  public readonly contexts = this.contextState.asReadonly();
-
-  /** Valores del contexto que se inyectan en el body de las mutaciones. */
-  public readonly fixedValues = computed(() => pickValues(this.contexts(), (ctx) => ctx.fixed && !!ctx.value));
-  /** Valores del contexto que se envían como filtro en las peticiones. */
-  public readonly filterValues = computed(() => pickValues(this.contexts(), (ctx) => ctx.toFilter));
-
-  private readonly fixedValues$ = toObservable(this.fixedValues);
-  private readonly filterValues$ = toObservable(this.filterValues);
+  /** Ámbito activo: el workspace de la ruta. Las entradas de otros workspaces no se ven ni se aplican. */
+  public readonly contextScope = signal<string>('');
+  /** Entradas visibles: las globales y, encima, las del ámbito activo. */
+  public readonly contexts = computed<Record<ContextKey, ContextValue | null>>(() => {
+    const scopes = this.contextState();
+    return { ...(scopes[GLOBAL_CONTEXT] ?? {}), ...(scopes[this.contextScope()] ?? {}) };
+  });
 
   private readonly userSignals = new Map<string, Signal<UserInfo>>();
   private readonly userStreams = new Map<string, Observable<UserInfo>>();
@@ -132,16 +134,9 @@ export class AppStateService {
     return cached(this.contextStreams, key, () => toObservable(this.contextValue(key), { injector: this.injector }));
   }
 
-  public setContext(key: ContextKey, value: ContextValue | null): void {
-    this.contextState.update((contexts) => ({ ...contexts, [key]: value }));
-  }
-
-  public fixedContext(): Observable<Record<ContextKey, unknown>> {
-    return this.fixedValues$;
-  }
-
-  public filterContext(): Observable<Record<ContextKey, unknown>> {
-    return this.filterValues$;
+  /** Guarda la entrada `key` en `scope`: por defecto, el ámbito activo; {@link GLOBAL_CONTEXT} la comparte. */
+  public setContext(key: ContextKey, value: ContextValue | null, scope: string = untracked(this.contextScope)): void {
+    this.contextState.update((scopes) => ({ ...scopes, [scope]: { ...(scopes[scope] ?? {}), [key]: value } }));
   }
 
   private publish(message: AppStateMessage): void {
@@ -169,32 +164,40 @@ export class AppStateService {
   }
 }
 
+/**
+ * Entrada del contexto. Con `entity` (nombre de la entidad, p. ej. `'client'`) los repositorios la aplican al campo
+ * que referencia a esa entidad, se llame como se llame; sin ella, al campo de referencia con el nombre de la clave.
+ */
 export class ContextValue {
   private constructor(
     public readonly label: string,
     public readonly value: any,
     public readonly fixed: boolean,
     public readonly toFilter: boolean,
+    public readonly entity?: string,
   ) {}
 
-  public static null(label: string) {
-    return new ContextValue(label, null, true, false);
+  public static null(label: string, entity?: string) {
+    return new ContextValue(label, null, true, false, entity);
   }
 
-  public static default(label: string, value: any) {
-    return new ContextValue(label, value, true, false);
+  /** Rellena el campo en las altas si viene vacío; no filtra. */
+  public static default(label: string, value: any, entity?: string) {
+    return new ContextValue(label, value, true, false, entity);
   }
 
-  public static fixed(label: string, value: any) {
-    return new ContextValue(label, value, true, true);
+  /** Filtra los listados e impone el valor en las altas y modificaciones. */
+  public static fixed(label: string, value: any, entity?: string) {
+    return new ContextValue(label, value, true, true, entity);
   }
 
-  public static filter(label: string, value: any) {
-    return new ContextValue(label, value, false, true);
+  /** Solo filtra los listados. */
+  public static filter(label: string, value: any, entity?: string) {
+    return new ContextValue(label, value, false, true, entity);
   }
 
-  public static selection(label: string, value: any) {
-    return new ContextValue(label, value, false, false);
+  public static selection(label: string, value: any, entity?: string) {
+    return new ContextValue(label, value, false, false, entity);
   }
 
   /** Reconstruye un valor leído de `localStorage`; null si no tiene la forma esperada. */
@@ -202,8 +205,10 @@ export class ContextValue {
     if (typeof raw !== 'object' || raw === null) {
       return null;
     }
-    const { label, value, fixed, toFilter } = raw as Partial<ContextValue>;
-    return typeof label === 'string' ? new ContextValue(label, value, !!fixed, !!toFilter) : null;
+    const { label, value, fixed, toFilter, entity } = raw as Partial<ContextValue>;
+    return typeof label === 'string'
+      ? new ContextValue(label, value, !!fixed, !!toFilter, typeof entity === 'string' ? entity : undefined)
+      : null;
   }
 }
 
@@ -256,24 +261,18 @@ function writeStored(storageKey: string, value: unknown): void {
   }
 }
 
+function reviveScopes(raw: unknown): Record<string, Record<ContextKey, ContextValue | null>> {
+  if (typeof raw !== 'object' || raw === null) {
+    return {};
+  }
+  return Object.fromEntries(Object.entries(raw).map(([scope, entries]) => [scope, reviveContext(entries)]));
+}
+
 function reviveContext(raw: unknown): Record<ContextKey, ContextValue | null> {
   if (typeof raw !== 'object' || raw === null) {
     return {};
   }
   return Object.fromEntries(Object.entries(raw).map(([key, value]) => [key, ContextValue.restore(value)]));
-}
-
-function pickValues(
-  contexts: Record<ContextKey, ContextValue | null>,
-  accept: (ctx: ContextValue) => boolean,
-): Record<ContextKey, unknown> {
-  const result: Record<ContextKey, unknown> = {};
-  Object.entries(contexts).forEach(([key, ctx]) => {
-    if (ctx && accept(ctx)) {
-      result[key] = ctx.value;
-    }
-  });
-  return result;
 }
 
 function cached<K, V>(cache: Map<K, V>, key: K, build: () => V): V {

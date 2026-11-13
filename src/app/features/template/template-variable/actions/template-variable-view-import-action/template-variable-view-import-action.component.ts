@@ -76,6 +76,7 @@ export class TemplateVariableViewImportActionComponent extends BaseImportAction<
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

@@ -1,0 +1,294 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldAllowRaw": "Permitir RAW",
+      "fieldAllowedOrigins": "Orígenes CORS permitidos",
+      "fieldMaxRange": "Autonomía máxima",
+      "fieldMinRefresh": "Actualización mínima",
+      "fieldName": "Nombre",
+      "fieldOrigin": "Origen",
+      "fieldPanelUid": "UID del panel",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear incrustación observada",
+      "title": "Creando un nuevo elemento incrustado observado",
+      "tooltip": "Crear un nuevo registro de elemento incrustado observado"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el elemento incrustado detectado",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar un elemento incrustado observado"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el elemento incrustado detectado",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle del empotramiento observado",
+      "title": "Visualización de los valores de un elemento incrustado observado",
+      "tooltip": "Ver los valores de un elemento incrustado observado"
+    },
+    "disable": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirma que quieres desactivar",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar la incrustación observada",
+      "okBtn": "deshabilitar registro",
+      "report": "Listo: deshabilitar",
+      "title": "deshabilitar",
+      "tooltip": "deshabilitar la incrustación observada"
+    },
+    "disable-selection": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirme que desea desactivar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar la incrustación observada",
+      "okBtn": "deshabilitar registros",
+      "progress": "En curso: desactivar",
+      "report": "Listo en los registros seleccionados: deshabilitar",
+      "title": "Desactivar selección",
+      "tooltip": "deshabilitar los registros seleccionados"
+    },
+    "edit": {
+      "label": "Editar el elemento incrustado detectado",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de un elemento incrustado observado"
+    },
+    "enable": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirma que quieres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar la incrustación observada",
+      "okBtn": "habilitar registro",
+      "report": "Listo: habilitar",
+      "title": "habilitar",
+      "tooltip": "habilitar la incrustación observada"
+    },
+    "enable-selection": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirme que desea habilitar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar la incrustación observada",
+      "okBtn": "habilitar registros",
+      "progress": "En curso: habilitar",
+      "report": "Hecho en los registros seleccionados: habilitar",
+      "title": "Activar selección de texto",
+      "tooltip": "habilitar los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "allow-raw": {
+      "error": {
+        "required": "Es obligatorio permitir los archivos RAW"
+      },
+      "label": "permitir sin procesar",
+      "placeholder": "permitir sin procesar"
+    },
+    "allowed-origins": {
+      "error": {
+        "maxlength": "Los orígenes permitidos deben tener menos de 250 caracteres",
+        "required": "Se requieren los orígenes permitidos"
+      },
+      "label": "Orígenes CORS permitidos",
+      "placeholder": "Orígenes CORS permitidos"
+    },
+    "dashboard": {
+      "error": {
+        "required": "El panel es obligatorio."
+      },
+      "label": "panel de control",
+      "placeholder": "panel de control"
+    },
+    "enabled": {
+      "error": {
+        "required": "activado es obligatorio"
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "expires-at": {
+      "label": "caduca el",
+      "placeholder": "caduca el",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "last-used-at": {
+      "label": "Usado por última vez el",
+      "placeholder": "Usado por última vez el",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "max-range": {
+      "error": {
+        "required": "Se requiere el rango máximo"
+      },
+      "label": "rango máximo",
+      "options": {
+        "day": "día",
+        "hour": "hora",
+        "month": "mes",
+        "six-hours": "seis horas",
+        "week": "semana"
+      },
+      "placeholder": "rango máximo"
+    },
+    "min-refresh": {
+      "error": {
+        "required": "Se requiere una actualización mínima de"
+      },
+      "label": "Actualización cada  min",
+      "placeholder": "Actualización cada  min"
+    },
+    "name": {
+      "error": {
+        "maxlength": "el nombre debe tener menos de 250 caracteres",
+        "required": "El nombre es necesario"
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "panel-uid": {
+      "error": {
+        "maxlength": "El UID del panel debe tener menos de 250 caracteres"
+      },
+      "label": "UID del panel",
+      "placeholder": "UID del panel"
+    },
+    "token-hash": {
+      "error": {
+        "maxlength": "El hash del token debe tener menos de 250 caracteres"
+      },
+      "label": "hash de token",
+      "placeholder": "hash de token"
+    }
+  },
+  "list": {
+    "column": {
+      "allow-raw": {
+        "title": "permitir sin procesar",
+        "tooltip": "permitir sin procesar"
+      },
+      "allowed-origins": {
+        "title": "Orígenes CORS permitidos",
+        "tooltip": "Orígenes CORS permitidos"
+      },
+      "dashboard": {
+        "title": "panel de control",
+        "tooltip": "panel de control"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "expires-at": {
+        "title": "caduca el",
+        "tooltip": "caduca el"
+      },
+      "last-used-at": {
+        "title": "Usado por última vez el",
+        "tooltip": "Usado por última vez el"
+      },
+      "max-range": {
+        "title": "rango máximo",
+        "tooltip": "rango máximo"
+      },
+      "min-refresh": {
+        "title": "Actualización cada  min",
+        "tooltip": "Actualización cada  min"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "origin": {
+        "title": "de origen único",
+        "tooltip": "de origen único"
+      },
+      "panel-uid": {
+        "title": "UID del panel",
+        "tooltip": "UID del panel"
+      },
+      "token-hash": {
+        "title": "hash de token",
+        "tooltip": "hash de token"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "dashboard": {
+      "label": "panel de control",
+      "placeholder": "panel de control"
+    },
+    "dashboards": {
+      "label": "paneles",
+      "placeholder": "paneles"
+    },
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Predeterminado"
+      },
+      "placeholder": "orden"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "origins": {
+      "label": "orígenes",
+      "placeholder": "orígenes"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "token-hash": {
+      "label": "hash de token",
+      "placeholder": "hash de token"
+    }
+  }
+}

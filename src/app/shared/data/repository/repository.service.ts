@@ -2,13 +2,17 @@
 import { computed, effect, inject, Injector, ResourceRef, Signal, signal, untracked } from '@angular/core';
 import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import {
+  asapScheduler,
   catchError,
+  defer,
   EMPTY,
   filter,
   finalize,
+  forkJoin,
   map,
   mergeMap,
   Observable,
+  observeOn,
   of,
   Subscription,
   take,
@@ -26,11 +30,23 @@ import {
   Slide,
   UploadProgress,
 } from './provider/repository-provider.interface';
-import { Shift, Tick, UpdateOptions } from './repository.model';
+import { Children, ChildrenMap, ProjectionSpec, projectionSpec, Shift, Tick, UpdateOptions } from './repository.model';
+import { chunk } from '../chunk';
 import { CacheResource } from './cache-resource';
+import { collectKeys, runLocalTask } from './local-task';
+import { LongTask } from '../long-task.model';
 import { RepositoryCache, RepositoryStore } from './repository-store.service';
+import {
+  ContextBinding,
+  contextBindings,
+  ContextFields,
+  contextFields,
+  ContextReferences,
+  injectContext,
+  scopeQuery,
+} from './context-filter';
 
-export interface RepositoryMetadata<T, F> {
+export interface RepositoryMetadata<T, F> extends ContextReferences {
   key: string;
   name: string;
   provider: RepositoryProvider<T, F>;
@@ -48,19 +64,43 @@ const NO_ACL: Acl = {};
 /** Estado HTTP con el que el backend rechaza un guardado con una `version` que ya no es la vigente. */
 const PRECONDITION_FAILED = 412;
 
+/** Padres por consulta al pedir hijos: sus claves viajan en la URL del GET, así que se limita el tamaño de cada petición. */
+const PARENTS_PER_QUERY = 25;
+
+/** Elementos por página al recorrer el listado de los hijos. */
+const CHILDREN_PAGE_SIZE = 100;
+
+/** Hijos de una fila sin clave. */
+const NO_CHILDREN: Signal<any[] | undefined> = signal([]).asReadonly();
+
 /** Valor de una referencia sin `$ref`. */
 const NO_REFERENCE: Signal<undefined> = signal(undefined).asReadonly();
 
 export class RepositoryService<T, F> {
   private readonly cache: RepositoryCache;
   private readonly ttl: () => number;
+  private readonly meta: RepositoryMetadata<T, F>;
+  private readonly contextState: Signal<ContextFields>;
 
   constructor(
-    private readonly meta: RepositoryMetadata<T, F>,
+    meta: RepositoryMetadata<T, F>,
     private readonly store: RepositoryStore,
   ) {
+    // El provider pasa por la cola offline (sin modo offline, las llamadas van tal cual)
+    this.meta = { ...meta, provider: store.provider(meta) };
     this.cache = store.of(meta.name);
     this.ttl = () => store.ttl(meta.ttl);
+    this.contextState = computed(() => contextFields(this.bindings(store.contexts())), {
+      equal: (a, b) => JSON.stringify(a) === JSON.stringify(b),
+    });
+  }
+
+  /**
+   * Lo que el contexto fija, rellena o ya filtra en los campos de esta entidad, con las mismas reglas de encaje
+   * que se aplican al filtrar y al guardar: los formularios y la importación lo leen de aquí.
+   */
+  context(): Signal<ContextFields> {
+    return this.contextState;
   }
 
   generateComb(): string {
@@ -144,7 +184,7 @@ export class RepositoryService<T, F> {
 
   add(item: T): Observable<T> {
     const key = this.itemKey(item);
-    return this.meta.provider.add(this.toWire(item)).pipe(
+    return this.meta.provider.add(this.toWire(injectContext(item, this.bindings()))).pipe(
       take(1),
       map((result) => this.mapItem(result)),
       tap((result) => {
@@ -164,17 +204,24 @@ export class RepositoryService<T, F> {
     );
   }
 
+  /** Siempre se puede: sin borrado masivo en el backend, se borra elemento a elemento. */
   canDeleteSelection(): boolean {
-    return !!this.meta.provider.deleteAllForQuery;
+    return true;
   }
 
+  /**
+   * Borra los elementos de `query` y emite el progreso como `LongTask`. Con `deleteAllForQuery` lo hace el backend;
+   * si no, se borran uno a uno desde aquí (ver {@link runLocalTask}).
+   */
   deleteSelection(query: F): Observable<any> {
-    const call = this.meta.provider.deleteAllForQuery;
-    if (!call) {
-      throw new Error('Unable to make deleteSelection');
-    }
+    const provider = this.meta.provider;
+    const scoped = this.scoped(query);
+    const task =
+      scoped && provider.deleteAllForQuery
+        ? provider.deleteAllForQuery(scoped)
+        : this.runOneByOne('delete', scoped, (key) => provider.delete(key));
     // El sondeo completa al terminar la tarea; si se abandona antes (se cierra el diálogo) también se refresca
-    return call.call(this.meta.provider, query).pipe(finalize(() => this.refreshAfterBulk()));
+    return task.pipe(finalize(() => this.refreshAfterBulk()));
   }
 
   /**
@@ -188,11 +235,12 @@ export class RepositoryService<T, F> {
    */
   update(item: T, options: UpdateOptions<T> = {}): Observable<T> {
     const key = this.itemKey(item);
-    const saved = this.meta.provider.update(key, this.toWire(item)).pipe(
+    const saved = this.meta.provider.update(key, this.toWire(injectContext(item, this.bindings()))).pipe(
       take(1),
       map((result) => this.mapItem(result)),
       tap((result) => {
         this.cacheItem(key, result);
+        this.refreshAcl(key);
       }),
     );
     const original = options.original;
@@ -234,29 +282,55 @@ export class RepositoryService<T, F> {
       map((result) => this.mapItem(result)),
       tap((result) => {
         this.cacheItem(key, result);
+        this.refreshAcl(key);
       }),
     );
   }
 
+  /** Siempre se puede: sin modificación masiva en el backend, se aplica elemento a elemento. */
   canUsePartialsByKey(): boolean {
-    return !!this.meta.provider.patchAllForQuery;
+    return true;
   }
 
+  /**
+   * Aplica `args` a los elementos de `query` y emite el progreso como `LongTask`. Con `patchAllForQuery` lo hace el
+   * backend; si no, se aplica `patch` uno a uno desde aquí (ver {@link runLocalTask}).
+   */
   partialBySelection(query: F, args: any, path?: string): Observable<any> {
-    const call = this.meta.provider.patchAllForQuery;
-    if (!call) {
-      throw new Error('Unable to make partialBySelection');
-    }
-    return call
-      .call(this.meta.provider, path || '', query, this.toWire(args))
-      .pipe(finalize(() => this.refreshAfterBulk()));
+    const provider = this.meta.provider;
+    const data = this.toWire(args);
+    const scoped = this.scoped(query);
+    const task =
+      scoped && provider.patchAllForQuery
+        ? provider.patchAllForQuery(path || '', scoped, data)
+        : this.runOneByOne(path || 'patch', scoped, (key) => provider.patch(key, data, path));
+    return task.pipe(finalize(() => this.refreshAfterBulk()));
+  }
+
+  /**
+   * Recoge las claves de `query` (ya acotada por el contexto; `null` si no deja ninguna) y lanza `operation` sobre
+   * cada una, en serie, informando del progreso.
+   */
+  private runOneByOne(
+    name: string,
+    query: F | null,
+    operation: (key: string) => Observable<unknown>,
+  ): Observable<LongTask> {
+    const provider = this.meta.provider;
+    const keys = query === null ? of([]) : collectKeys((page: F) => provider.list(page), query, this.meta.key);
+    return runLocalTask(name, keys, operation);
   }
 
   values(query: F): Observable<T[]> {
     return this.list(query).pipe(map((slide) => slide?.content || []));
   }
 
-  list(query: F): Observable<Slide<T>> {
+  /** Lista de `query` acotada por el contexto (ver {@link scopeQuery}). */
+  list(original: F): Observable<Slide<T>> {
+    const query = this.scoped(original);
+    if (query === null) {
+      return of({ hasNext: false, next: null, content: [] });
+    }
     const paged = (query as any).cursor !== undefined || (query as any).since !== undefined;
     const listKey = JSON.stringify(query);
     const listMap = this.cache.listMap;
@@ -316,7 +390,9 @@ export class RepositoryService<T, F> {
               );
             });
             if (!paged || data.content.length !== 0) {
-              listMap[listKey].cache.touch(result);
+              // The context may have changed while the provider request was in flight, clearing this cache entry.
+              // Do not write through a missing entry (or repopulate a cache for the previous context).
+              listMap[listKey]?.cache.touch(result);
             } else {
               observer.next(result);
             }
@@ -336,7 +412,205 @@ export class RepositoryService<T, F> {
   }
 
   retrieve(key: string): Observable<T | undefined> {
-    return this.cached(key, this.meta.provider.retrieve(key).pipe(map((item) => this.mapItem(item))));
+    // Diferido: con la clave en caché (o esperando a un lote) el provider no llega a invocarse
+    return this.cached(key, defer(() => this.meta.provider.retrieve(key)).pipe(map((item) => this.mapItem(item))));
+  }
+
+  /**
+   * Varios elementos por clave en una sola emisión (y completa). Los vigentes en caché no se piden; el resto va en un
+   * único `retrieveAll` del provider (o un `retrieve` por clave si no lo tiene) y queda cacheado. Mientras llega el
+   * lote, un `retrieve` de esas claves lo espera en lugar de pedirlas otra vez. Si el lote trae elementos que no se
+   * pidieron, el destino ha ignorado el filtro: las claves que falten se piden una a una en lugar de darlas por perdidas.
+   * Devuelve los encontrados en el orden de `keys`; las claves sin elemento no aparecen.
+   */
+  retrieveAll(keys: string[]): Observable<T[]> {
+    return defer(() => {
+      const wanted = [...new Set(keys.filter((key) => !!key))];
+      const found = new Map<string, T>();
+      const missing: string[] = [];
+      wanted.forEach((key) => {
+        const stored = this.cache.resourceMap[key]?.cache;
+        const value = stored && !stored.isExpired() ? stored.currentValue() : undefined;
+        if (value === undefined) {
+          missing.push(key);
+        } else {
+          found.set(key, value);
+        }
+      });
+      const ordered = () => wanted.filter((key) => found.has(key)).map((key) => found.get(key)!);
+      if (!missing.length) {
+        return of(ordered());
+      }
+      const pending = missing.map((key) => {
+        const stored = this.cacheItem(key);
+        stored.markWaiting();
+        return stored;
+      });
+      const asked = new Set(missing);
+      // Guarda las filas pedidas; dice si ha llegado alguna que no se pidió
+      const store = (rows: any[]) => {
+        let unasked = false;
+        rows.forEach((row) => {
+          const item = this.mapItem(row);
+          const key = this.itemKey(item);
+          if (asked.has(key)) {
+            found.set(key, item);
+            this.cacheItem(key, item);
+          } else {
+            unasked = true;
+          }
+        });
+        return unasked;
+      };
+      const batch = this.meta.provider.retrieveAll;
+      const fetched = batch
+        ? batch.call(this.meta.provider, missing).pipe(
+            take(1),
+            mergeMap((rows) => {
+              // Filas que no se pidieron: el destino ha ignorado el filtro. Lo que falte se pide clave a clave
+              const ignored = store(rows);
+              const left = missing.filter((key) => !found.has(key));
+              return ignored && left.length ? this.retrieveEach(left).pipe(tap(store)) : of(rows);
+            }),
+          )
+        : this.retrieveEach(missing).pipe(tap(store));
+      return fetched.pipe(
+        map(() => ordered()),
+        catchError((error) => {
+          pending.forEach((stored) => stored.evict());
+          return throwError(() => error);
+        }),
+      );
+    });
+  }
+
+  /**
+   * Descriptor para pedir los elementos de este repositorio como hijos en la proyección de otro: los que tienen la
+   * referencia `field` apuntando a cada fila, buscados en lote con el filtro `filter` (que acepta varias claves).
+   * Lo usan los repositorios generados, que aportan el tipo y la correspondencia entre `field` y `filter`.
+   */
+  children(
+    field: string,
+    filter: string,
+    include: ProjectionSpec | readonly string[] = [],
+    children: ChildrenMap = {},
+  ): Children<any> {
+    return { meta: this.meta, field, filter, include, children };
+  }
+
+  /**
+   * Todos los elementos cuya referencia `field` apunta a alguna de `parents`, recorriendo todas las páginas.
+   * Una consulta por bloque de padres, con el filtro `filter` (que acepta varias claves).
+   */
+  private childrenOf(filter: string, parents: string[]): Observable<T[]> {
+    const blocks = chunk(parents, PARENTS_PER_QUERY);
+    const all = (query: F): Observable<T[]> => {
+      const page = (current: F, found: T[]): Observable<T[]> =>
+        this.list(current).pipe(
+          take(1),
+          mergeMap((slide) => {
+            const content = slide?.content ?? [];
+            const rows = [...found, ...content];
+            return slide?.hasNext && content.length && slide.next ? page({ ...query, ...slide.next }, rows) : of(rows);
+          }),
+        );
+      return page(query, []);
+    };
+    return forkJoin(blocks.map((block) => all({ [filter]: block, limit: CHILDREN_PAGE_SIZE } as unknown as F))).pipe(
+      map((pages) => pages.flat()),
+    );
+  }
+
+  /**
+   * El elemento de `key` con las referencias de `spec` sustituidas por sus entidades, a cualquier profundidad
+   * (`['model.vendor.name']` o `{ model: { vendor: {} } }`). Una sola emisión con un objeto plano; `undefined` si no
+   * existe. Ver `resolveAll`.
+   */
+  resolve(
+    key: string,
+    spec: ProjectionSpec | readonly string[],
+    children: ChildrenMap = {},
+  ): Observable<any | undefined> {
+    return this.retrieveAll([key]).pipe(
+      mergeMap((items) => this.resolveAll(items, spec, children)),
+      map((resolved) => resolved[0]),
+    );
+  }
+
+  /**
+   * Copias planas de `items` con las referencias de `spec` sustituidas por sus entidades, a cualquier profundidad.
+   * Se resuelve por niveles: cada campo de cada nivel es un único `retrieveAll` con las claves distintas de todos los
+   * elementos de ese nivel, así que el número de peticiones depende del árbol, no de cuántos elementos haya.
+   * Una referencia vacía o que no existe queda en `null`. Un error de cualquier nivel se propaga.
+   * Con `children` (los `children()` de otros repositorios, como en `projections`), cada copia lleva además la lista
+   * plana de sus hijos (`[]` si no tiene), también resueltos con sus referencias y sus propios hijos: los de todos los
+   * elementos de un nivel en una sola consulta.
+   */
+  resolveAll(items: T[], spec: ProjectionSpec | readonly string[], children: ChildrenMap = {}): Observable<any[]> {
+    return defer(() => this.expand(items, isPaths(spec) ? projectionSpec(spec) : spec, children));
+  }
+
+  private expand(items: any[], spec: ProjectionSpec, children: ChildrenMap = {}): Observable<any[]> {
+    const copies = items.map((item) => ({ ...item }));
+    const steps = [
+      ...Object.entries(spec).map(([field, sub]) => this.expandField(copies, field, sub)),
+      ...Object.entries(children).map(([name, wanted]) => this.expandChildren(copies, name, wanted)),
+    ];
+    return steps.length ? forkJoin(steps).pipe(map(() => copies)) : of(copies);
+  }
+
+  /** Pone en `copies` (in situ), en el campo `name`, la lista de hijos `wanted` de cada una, ya resueltos. */
+  private expandChildren(copies: any[], name: string, wanted: Children<any>): Observable<void> {
+    const parents = [...new Set(copies.map((copy) => this.itemKey(copy)).filter((key) => !!key))];
+    if (!parents.length) {
+      copies.forEach((copy) => (copy[name] = []));
+      return of(undefined);
+    }
+    const repository = new RepositoryService<any, any>(wanted.meta, this.store);
+    const include = isPaths(wanted.include) ? projectionSpec(wanted.include) : wanted.include;
+    return repository.childrenOf(wanted.filter, parents).pipe(
+      mergeMap((rows) => {
+        // El padre se lee antes de resolver: si la propia referencia está en `include`, deja de ser un `$ref`
+        const owners = rows.map((row) => refOf(row?.[wanted.field]));
+        return repository
+          .expand(rows, include, wanted.children)
+          .pipe(map((resolved) => resolved.map((row, i) => ({ row, owner: owners[i] }))));
+      }),
+      map((resolved) => {
+        const groups = new Map<string, any[]>(parents.map((key) => [key, []]));
+        resolved.forEach(({ row, owner }) => owner && groups.get(owner)?.push(row));
+        copies.forEach((copy) => (copy[name] = groups.get(this.itemKey(copy)) ?? []));
+      }),
+    );
+  }
+
+  /** Sustituye en `copies` (in situ) la referencia `field` por su entidad ya resuelta con `sub`. */
+  private expandField(copies: any[], field: string, sub: ProjectionSpec): Observable<void> {
+    const refs = [...new Set(copies.map((copy) => refOf(copy[field])).filter((ref): ref is string => !!ref))];
+    if (!refs.length) {
+      // Sin referencias: campo normal (se deja tal cual) o referencias vacías (null)
+      const scalar = copies.some((copy) => copy[field] !== null && copy[field] !== undefined);
+      return scalar && Object.keys(sub).length
+        ? throwError(() => new Error(`'${field}' is not a reference: it can not be resolved further`))
+        : of(undefined);
+    }
+    const meta = this.meta.reference?.(field);
+    if (!meta) {
+      return throwError(() => new Error('There is no ref repository for ' + field));
+    }
+    const repository = new RepositoryService<any, any>(meta, this.store);
+    return repository.retrieveAll(refs).pipe(
+      mergeMap((found) => repository.expand(found, sub)),
+      map((resolved) => {
+        const byKey = new Map(resolved.map((item) => [repository.itemKey(item), item]));
+        copies.forEach((copy) => {
+          const ref = refOf(copy[field]);
+          if (ref) {
+            copy[field] = byKey.get(ref) ?? null;
+          }
+        });
+      }),
+    );
   }
 
   /**
@@ -345,9 +619,9 @@ export class RepositoryService<T, F> {
    * Cada referencia de `includes` se expone como un `Signal` con el elemento referenciado.
    * Requiere contexto de inyección.
    */
-  public projections(includes: string[] = []): Shift<any[], F> {
+  public projections(includes: readonly string[] = [], children: ChildrenMap = {}): Shift<any[], F> {
     const injector = inject(Injector);
-    const project = this.projector(includes, injector);
+    const project = this.projector(includes, injector, children);
     const pages = signal<ResourceRef<Slide<T> | undefined>[]>([]);
     // Consulta de cada página, para volver a pedirla
     const queries = new WeakMap<ResourceRef<Slide<T> | undefined>, F>();
@@ -378,8 +652,29 @@ export class RepositoryService<T, F> {
       untracked(pages).forEach((p) => p.destroy());
       pages.set([page(query)]);
     };
+    // Al cambiar el contexto que filtra esta entidad se vuelve a pedir la consulta desde la primera página
+    const filtering = () => JSON.stringify(this.bindings(this.store.contexts()).filter((binding) => binding.toFilter));
+    let context = untracked(filtering);
+    effect(
+      () => {
+        const next = filtering();
+        if (next !== context) {
+          context = next;
+          untracked(() => {
+            if (current !== undefined) {
+              stale.set(rows());
+              load(current);
+            }
+          });
+        }
+      },
+      { injector },
+    );
 
-    const value = computed(() => rows()?.map(project));
+    const value = computed(() => {
+      const current = rows();
+      return current === undefined ? undefined : project.project(current);
+    });
     const shift: Shift<any[], F> = Object.assign(value, {
       searching: computed(() => pages().some((p) => p.isLoading())),
       fetch: (query: F) => {
@@ -422,25 +717,50 @@ export class RepositoryService<T, F> {
    * Un elemento por clave. Cada referencia de `includes` se expone como un `Signal` con el elemento
    * referenciado. Requiere contexto de inyección.
    */
-  public projection(includes: string[] = []): Tick<any, string> {
+  public projection(includes: readonly string[] = [], children: ChildrenMap = {}): Tick<any, string> {
     const injector = inject(Injector);
-    const project = this.projector(includes, injector);
+    const project = this.projector(includes, injector, children);
     const item = ticker(injector, (key: string) => this.retrieve(key));
     const value = computed(() => {
       const current = item.value();
-      return current === undefined ? undefined : project(current);
+      return current === undefined ? undefined : project.project([current])[0];
     });
     return asTick(injector, value, item.searching, item.fetch, item.reset);
   }
 
   /** Caduca la lista cacheada de `query`: la siguiente suscripción la vuelve a pedir. */
   private evictList(query: F) {
-    this.cache.listMap[JSON.stringify(query)]?.cache.evict();
+    const scoped = this.scoped(query);
+    if (scoped !== null) {
+      this.cache.listMap[JSON.stringify(scoped)]?.cache.evict();
+    }
+  }
+
+  /** Entradas del contexto que se aplican a los campos de esta entidad. */
+  private bindings(contexts = untracked(this.store.contexts)): ContextBinding[] {
+    return contextBindings(this.meta, contexts);
+  }
+
+  /** `query` acotada por el contexto; `null` si el contexto y la consulta se excluyen (no hay resultados). */
+  private scoped(query: F): F | null {
+    return scopeQuery(query, this.bindings());
   }
 
   private refreshAfterBulk() {
     this.refreshAll();
     this.evictItems();
+  }
+
+  /**
+   * Tras cambiar un registro, su ACL puede ser otro (los campos fijos u ocultos de su nuevo estado): si alguien lo
+   * está usando, se caduca y se vuelve a pedir, y quien lo observa recibe el nuevo.
+   */
+  private refreshAcl(key: string) {
+    const entry = this.cache.resourceAclData[key];
+    if (entry) {
+      entry.cache.evict();
+      this.checkAcl(key).pipe(take(1)).subscribe();
+    }
   }
 
   private refreshAll() {
@@ -491,6 +811,18 @@ export class RepositoryService<T, F> {
     return copy;
   }
 
+  /** Filas crudas de `keys`, una petición por clave; las que fallan se omiten. */
+  private retrieveEach(keys: string[]): Observable<any[]> {
+    return forkJoin(
+      keys.map((key) =>
+        this.meta.provider.retrieve(key).pipe(
+          take(1),
+          catchError(() => of(undefined)),
+        ),
+      ),
+    ).pipe(map((rows) => rows.filter((row) => row !== undefined)));
+  }
+
   private cached(key: string, obs: Observable<T>) {
     return new Observable<T>((observer) => {
       const suscrip = new Subscription();
@@ -526,44 +858,204 @@ export class RepositoryService<T, F> {
   }
 
   /**
-   * Copia superficial del elemento con cada referencia de `includes` sustituida por un `Signal` del
-   * elemento referenciado. Las copias conservan los `Date`. Cada referencia se carga una sola vez.
+   * Copia superficial de cada elemento con cada referencia de `includes` sustituida por un `Signal` del elemento
+   * referenciado, a cualquier profundidad: con `'model.vendor'`, `row.model()` es a su vez una proyección y
+   * `row.model()?.vendor()` es otro `Signal`. Las copias conservan los `Date` y los campos que no son referencias
+   * quedan tal cual. Cada referencia se carga una sola vez, y por niveles: las nuevas de un campo se piden juntas con
+   * `retrieveAll` y, al llegar, las del nivel siguiente de todas ellas van en otro único lote.
    */
-  private projector(includes: string[], injector: Injector): (item: any) => any {
+  private projector(
+    includes: readonly string[] | ProjectionSpec,
+    injector: Injector,
+    childrenMap: ChildrenMap = {},
+  ): Projector {
+    const spec = isPaths(includes) ? projectionSpec(includes) : includes;
     const reference = this.meta.reference;
-    if (!includes.length || !reference) {
-      return (item) => item;
+    const fields = reference ? Object.entries(spec) : [];
+    const offspring = Object.entries(childrenMap).map(([name, wanted]) => this.offspring(name, wanted, injector));
+    if (!fields.length && !offspring.length) {
+      return { prefetch: () => undefined, project: (items) => items };
     }
-    const loaded = new Map<string, Signal<any>>();
-    const load = (include: string, ref: string) =>
-      untracked(() => {
-        const meta = reference(include);
+    const repositories = new Map<string, RepositoryService<any, any>>();
+    const repository = (field: string) => {
+      let repo = repositories.get(field);
+      if (!repo) {
+        const meta = reference!(field);
         if (!meta) {
-          throw new Error('There is no ref repository for ' + include);
+          throw new Error('There is no ref repository for ' + field);
         }
-        const retrieved = new RepositoryService<any, any>(meta, this.store).retrieve(ref).pipe(
-          // El ClientService ya ha notificado el error: la referencia queda sin valor
-          catchError(() => EMPTY),
-        );
-        return toSignal(retrieved, { injector });
+        repo = new RepositoryService<any, any>(meta, this.store);
+        repositories.set(field, repo);
+      }
+      return repo;
+    };
+    // Proyector del nivel siguiente de cada campo con subárbol
+    const children = new Map<string, Projector | null>();
+    const child = (field: string, sub: ProjectionSpec) => {
+      if (!children.has(field)) {
+        children.set(field, Object.keys(sub).length ? repository(field).projector(sub, injector) : null);
+      }
+      return children.get(field)!;
+    };
+    const loaded = new Map<string, Signal<any>>();
+    // Ya pedidas en un lote (aunque no hayan llegado): no se vuelven a pedir
+    const requested = new Set<string>();
+    const id = (field: string, ref: string) => field + '\u0000' + ref;
+    const load = (field: string, sub: ProjectionSpec, ref: string) =>
+      untracked(() => {
+        const retrieved = repository(field)
+          .retrieve(ref)
+          .pipe(
+            // El ClientService ya ha notificado el error: la referencia queda sin valor
+            catchError(() => EMPTY),
+          );
+        const value = toSignal(retrieved, { injector });
+        const next = child(field, sub);
+        return next
+          ? computed(() => {
+              const current = value();
+              return current === undefined || current === null ? current : next.project([current])[0];
+            })
+          : value;
       });
-    return (item) => {
-      const copy = { ...item };
-      includes.forEach((include) => {
-        const ref: string | undefined = item?.[include]?.['$ref'];
-        if (!ref) {
-          copy[include] = NO_REFERENCE;
+    // Antes de crear los Signal: el lote deja las claves en espera y cada `retrieve` lo aguarda sin pedir nada
+    const prefetch = (items: any[]) =>
+      fields.forEach(([field, sub]) => {
+        const refs = [
+          ...new Set(
+            items.map((item) => refOf(item?.[field])).filter((ref) => !!ref && !requested.has(id(field, ref))),
+          ),
+        ] as string[];
+        if (!refs.length) {
           return;
         }
-        const id = include + '\u0000' + ref;
-        if (!loaded.has(id)) {
-          loaded.set(id, load(include, ref));
+        refs.forEach((ref) => requested.add(id(field, ref)));
+        const next = child(field, sub);
+        untracked(() =>
+          repository(field)
+            .retrieveAll(refs)
+            .pipe(
+              tap((found) => next?.prefetch(found)),
+              catchError(() => EMPTY),
+            )
+            .subscribe(),
+        );
+      });
+    const project = (item: any) => {
+      const copy = { ...item };
+      fields.forEach(([field, sub]) => {
+        const value = item?.[field];
+        const ref = refOf(value);
+        if (!ref) {
+          // Referencia vacía: un Signal sin valor. Un campo que no es referencia se queda como está
+          if (value === null || value === undefined) {
+            copy[field] = NO_REFERENCE;
+          }
+          return;
         }
-        copy[include] = loaded.get(id);
+        const key = id(field, ref);
+        if (!loaded.has(key)) {
+          loaded.set(key, load(field, sub, ref));
+        }
+        copy[field] = loaded.get(key);
       });
       return copy;
     };
+    return {
+      prefetch: (items) => {
+        prefetch(items);
+        offspring.forEach((part) => part.prefetch(items));
+      },
+      project: (items) => {
+        prefetch(items);
+        offspring.forEach((part) => part.prefetch(items));
+        return items.map((item) => {
+          const copy = project(item);
+          offspring.forEach((part) => part.project(copy, item));
+          return copy;
+        });
+      },
+    };
   }
+
+  /**
+   * Hijos `wanted` de cada fila, en el campo `name`: un `Signal` con su lista proyectada (con sus referencias y sus
+   * propios hijos), `undefined` mientras carga. Los de todas las filas nuevas de una llamada se piden en lote.
+   */
+  private offspring(name: string, wanted: Children<any>, injector: Injector) {
+    const repository = new RepositoryService<any, any>(wanted.meta, this.store);
+    const projector = repository.projector(wanted.include, injector, wanted.children);
+    // Hijos de cada padre ya recibido
+    const groups = signal(new Map<string, any[]>());
+    const requested = new Set<string>();
+    const lists = new Map<string, Signal<any[] | undefined>>();
+    const prefetch = (items: any[]) => {
+      const parents = [
+        ...new Set(items.map((item) => this.itemKey(item)).filter((key) => !!key && !requested.has(key))),
+      ];
+      if (!parents.length) {
+        return;
+      }
+      parents.forEach((key) => requested.add(key));
+      untracked(() =>
+        repository
+          .childrenOf(wanted.filter, parents)
+          .pipe(
+            // Se suele pedir desde un computed, donde no se puede escribir un signal: se aplica después
+            observeOn(asapScheduler),
+            catchError(() => EMPTY),
+          )
+          .subscribe((rows) => {
+            projector.prefetch(rows);
+            const batch = new Set(parents);
+            const next = new Map(groups());
+            parents.forEach((key) => next.set(key, []));
+            rows.forEach((row) => {
+              const parent = refOf(row?.[wanted.field]);
+              if (parent && batch.has(parent)) {
+                next.get(parent)!.push(row);
+              }
+            });
+            groups.set(next);
+          }),
+      );
+    };
+    const project = (copy: any, item: any) => {
+      const key = this.itemKey(item);
+      if (!key) {
+        copy[name] = NO_CHILDREN;
+        return;
+      }
+      if (!lists.has(key)) {
+        lists.set(
+          key,
+          computed(() => {
+            const rows = groups().get(key);
+            return rows === undefined ? undefined : projector.project(rows);
+          }),
+        );
+      }
+      copy[name] = lists.get(key);
+    };
+    return { prefetch, project };
+  }
+}
+
+/** Proyección de elementos: `prefetch` pide en lote sus referencias; `project` las expone como `Signal`. */
+interface Projector {
+  prefetch(items: any[]): void;
+  project(items: any[]): any[];
+}
+
+/** `Array.isArray` no estrecha las listas de solo lectura. */
+function isPaths(value: ProjectionSpec | readonly string[]): value is readonly string[] {
+  return Array.isArray(value);
+}
+
+/** Clave de un valor de referencia (`{ $ref }`), o `undefined` si no lo es. */
+function refOf(value: unknown): string | undefined {
+  const ref = (value as { $ref?: unknown } | null)?.$ref;
+  return typeof ref === 'string' && ref ? ref : undefined;
 }
 
 interface Ticker<K, V> {

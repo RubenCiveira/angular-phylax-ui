@@ -31,13 +31,13 @@ export class UserViewImportActionComponent extends BaseImportAction<User> {
     sensitive: USER_EXCEL_SENSITIVE,
     // Campos que el backend solo cambia con sus acciones: se aplican tras crear o actualizar
     actions: {
-      approvalStatus: [
-        { name: 'accept', value: 'accepted', run: (item) => this.repository.accept(item.uid) },
-        { name: 'reject', value: 'rejected', run: (item) => this.repository.reject(item.uid) },
-      ],
       enabled: [
         { name: 'disable', value: false, run: (item) => this.repository.disable(item.uid) },
         { name: 'enable', value: true, run: (item) => this.repository.enable(item.uid) },
+      ],
+      approvalStatus: [
+        { name: 'accept', value: 'accepted', run: (item) => this.repository.accept(item.uid) },
+        { name: 'reject', value: 'rejected', run: (item) => this.repository.reject(item.uid) },
       ],
     },
     references: {
@@ -83,6 +83,7 @@ export class UserViewImportActionComponent extends BaseImportAction<User> {
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

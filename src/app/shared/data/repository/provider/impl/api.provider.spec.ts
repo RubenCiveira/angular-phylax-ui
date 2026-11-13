@@ -2,15 +2,21 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { HttpParams } from '@angular/common/http';
 import { BehaviorSubject, first, of, switchMap } from 'rxjs';
-import { ApiProvider } from './api.provider';
+import { ApiProvider, ApiProviderOptions } from './api.provider';
 import { ApiService } from '@shared/data/api/api.service';
 import { LongTask } from '@shared/data/long-task.model';
 
 describe('ApiProvider', () => {
   const task = (detailStatus: LongTask['detailStatus']): LongTask => ({ uid: 'u1', detailStatus, steps: [] });
 
-  function build(api: Partial<Record<keyof ApiService, jasmine.Spy>>) {
-    return new ApiProvider<any, any>('uid', api as unknown as ApiService, 'http://svc/items', 'http://svc/acl/items');
+  function build(api: Partial<Record<keyof ApiService, jasmine.Spy>>, options?: ApiProviderOptions) {
+    return new ApiProvider<any, any>(
+      'uid',
+      api as unknown as ApiService,
+      'http://svc/items',
+      'http://svc/acl/items',
+      options,
+    );
   }
 
   it('encodes the key in item urls', () => {
@@ -69,6 +75,99 @@ describe('ApiProvider', () => {
         done();
       });
   });
+
+  it('retrieves several keys as a list filtered by the declared ids parameter, one request per block of 50', (done) => {
+    const keys = Array.from({ length: 60 }, (_, i) => 'k' + i);
+    const api = {
+      get: jasmine.createSpy('get').and.callFake((_url: string, params: HttpParams) =>
+        of({
+          items: params
+            .get('uids')!
+            .split(',')
+            .map((uid) => ({ uid })),
+        }),
+      ),
+    };
+
+    build(api, { filters: { ids: 'uids' } }).retrieveAll!([...keys, 'k0']).subscribe((items) => {
+      expect(api.get).toHaveBeenCalledTimes(2);
+      const [url, first] = api.get.calls.argsFor(0) as [string, HttpParams];
+      const second = api.get.calls.argsFor(1)[1] as HttpParams;
+      expect(url).toBe('http://svc/items');
+      expect(first.get('uids')).toBe(keys.slice(0, 50).join(','));
+      expect(first.get('limit')).toBe('50');
+      expect(second.get('uids')).toBe(keys.slice(50).join(','));
+      expect(second.get('limit')).toBe('10');
+      expect(items.map((item: any) => item.uid)).toEqual(keys);
+      done();
+    });
+  });
+
+  it('uses the ids parameter exactly as declared', () => {
+    const api = { get: jasmine.createSpy('get').and.returnValue(of({ items: [] })) };
+
+    build(api, { filters: { ids: 'device-ids' } }).retrieveAll!(['a', 'b']).subscribe();
+
+    const params = api.get.calls.argsFor(0)[1] as HttpParams;
+    expect(params.keys()).toEqual(['device-ids', 'limit']);
+    expect(params.get('device-ids')).toBe('a,b');
+  });
+
+  it('offers no retrieveAll when the backend declares no ids filter', () => {
+    expect(build({}).retrieveAll).toBeUndefined();
+    expect(build({}, { filters: {} }).retrieveAll).toBeUndefined();
+  });
+
+  it('retrieves nothing for no keys', (done) => {
+    const api = { get: jasmine.createSpy('get') };
+
+    build(api, { filters: { ids: 'uids' } }).retrieveAll!([]).subscribe((items) => {
+      expect(items).toEqual([]);
+      expect(api.get).not.toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it('sends the filter with the backend names, lists joined by commas and without empty values', () => {
+    const api = { get: jasmine.createSpy('get').and.returnValue(of({ items: [] })) };
+
+    build(api, { filters: { names: { serialNumber: 'serial-number', projectDevices: 'project-devices' } } })
+      .list({ serialNumber: 'SN-1', projectDevices: ['a', 'b'], limit: 10, search: '', model: undefined, sites: [] })
+      .subscribe();
+
+    const params = api.get.calls.argsFor(0)[1] as HttpParams;
+    expect(params.keys()).toEqual(['serial-number', 'project-devices', 'limit']);
+    expect(params.get('serial-number')).toBe('SN-1');
+    expect(params.get('project-devices')).toBe('a,b');
+  });
+
+  it('sends as they are the fields from the next link, already with backend names', () => {
+    const api = { get: jasmine.createSpy('get').and.returnValue(of({ items: [] })) };
+
+    build(api, { filters: { names: { projectDevices: 'project-devices' } } })
+      .list({ projectDevices: ['a'], 'project-devices': 'a', 'since-uid': 'x', limit: '10' })
+      .subscribe();
+
+    const params = api.get.calls.argsFor(0)[1] as HttpParams;
+    expect(params.getAll('project-devices')).toEqual(['a']);
+    expect(params.get('since-uid')).toBe('x');
+  });
+
+  it('translates the filter of mass operations too', fakeAsync(() => {
+    const api = {
+      delete: jasmine.createSpy('delete').and.returnValue(of({ uid: 't1' })),
+      get: jasmine.createSpy('get').and.returnValue(of(task('FINISHED'))),
+    };
+
+    build(api, { filters: { names: { serialNumber: 'serial-number' } } })
+      .deleteAllForQuery({ serialNumber: 'SN-1', uids: ['a', 'b'] })
+      .subscribe();
+    tick(5000);
+
+    const params = api.delete.calls.argsFor(0)[1] as HttpParams;
+    expect(params.get('serial-number')).toBe('SN-1');
+    expect(params.get('uids')).toBe('a,b');
+  }));
 
   it('has no next page without the next link', (done) => {
     const api = { get: jasmine.createSpy('get').and.returnValue(of({ items: [] })) };

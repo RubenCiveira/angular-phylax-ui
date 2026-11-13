@@ -39,6 +39,7 @@ export class RoleViewSearchComponent extends SubFormEditable<any> {
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(roleRepository.context(), 'search');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

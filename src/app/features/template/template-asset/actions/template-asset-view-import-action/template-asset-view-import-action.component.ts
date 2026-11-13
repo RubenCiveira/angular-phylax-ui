@@ -94,6 +94,7 @@ export class TemplateAssetViewImportActionComponent extends BaseImportAction<Tem
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

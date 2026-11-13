@@ -48,11 +48,13 @@ export class LongTaskViewComponent implements OnDestroy, OnInit {
   summary = '';
   title = 'Delete file';
   known = false;
+  labels: Readonly<Record<string, string>> = {};
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     if (data.title) {
       this.title = data.title;
     }
+    this.labels = data.labels ?? {};
     if (data.progress) {
       this.subscription.add(
         data.progress.subscribe((item: LongTask) => {
@@ -101,6 +103,10 @@ export class LongTaskViewComponent implements OnDestroy, OnInit {
     const oksNum = value.oks && value.oks.length > 0 ? 1 : 0;
 
     return warnNum + erroNum + oksNum < 2;
+  }
+
+  displayItem(item: string): string {
+    return this.labels[item] || item;
   }
 
   ngOnDestroy(): void {

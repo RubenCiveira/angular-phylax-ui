@@ -78,7 +78,8 @@
         "skip": "— Do not import —",
         "title": "Columns",
         "unused": "Excel columns that are not imported:",
-        "viaAction": "via action"
+        "viaAction": "via action",
+        "unmapped": "Fields without a column (not imported):"
       },
       "notify": {
         "cancelled": "Import stopped: {{created}} created, {{updated}} updated, {{failed}} with errors",
@@ -125,6 +126,26 @@
         "actionFailed": "{{field}}: \"{{action}}\" could not be applied to set \"{{value}}\": {{message}}",
         "noAction": "{{field}}: there is no action that sets \"{{value}}\"",
         "notAllowed": "{{field}}: you are not allowed to \"{{action}}\" (to set \"{{value}}\")"
+      },
+      "parsing": {
+        "dateOrder": "Dates written as text",
+        "dayFirst": "day/month/year",
+        "falsePlaceholder": "e.g. non, faux",
+        "falseWords": "Other texts for “no”",
+        "monthFirst": "month/day/year",
+        "title": "Reading settings",
+        "truePlaceholder": "e.g. oui, vrai",
+        "trueWords": "Other texts for “yes”",
+        "wordsHint": "Comma separated. yes/no, sí/no, true/false, 1/0 and x are already recognised."
+      },
+      "preview": {
+        "errors": "{{count}} rows with errors: they will not be imported unless fixed (hover over a cell to see why).",
+        "more": "Show more",
+        "noErrors": "No errors found in the data read.",
+        "serverChecks": "References to other items and permissions are checked when importing.",
+        "showAll": "Show all rows",
+        "showErrors": "Show only rows with errors",
+        "showing": "Showing {{shown}} of {{total}} rows."
       }
     },
     "list": {
@@ -239,6 +260,12 @@
         "label": "Export",
         "title": "Export to Excel",
         "tooltip": "Download the listed items as an Excel file that can be imported again"
+      },
+      "document": {
+        "icon": "description",
+        "label": "Document",
+        "title": "Generate document",
+        "tooltip": "Generate a Word or PDF document from a template"
       }
     },
     "export": {
@@ -272,6 +299,59 @@
         "close": "Close",
         "again": "Export again",
         "retry": "Try again"
+      }
+    },
+    "password": {
+      "assign": "Set",
+      "assignDescription": "Enter the password and confirm it.",
+      "assignSubmit": "Set",
+      "assignTitle": "Set password",
+      "assigned": "Password set",
+      "cancel": "Cancel",
+      "change": "Change",
+      "changeDescription": "The current password will be replaced. Enter the new one and confirm it.",
+      "changeSubmit": "Change",
+      "changeTitle": "Change password",
+      "confirmPassword": "Confirm password",
+      "hide": "Hide password",
+      "mismatch": "Passwords do not match",
+      "newPassword": "New password",
+      "show": "Show password",
+      "unassigned": "No password"
+    },
+    "document": {
+      "button": {
+        "close": "Close",
+        "retry": "Try again"
+      },
+      "download": {
+        "docx": "Download Word",
+        "pdf": "Download PDF"
+      },
+      "failed": {
+        "file": "The file could not be generated.",
+        "notFound": "The template “{{template}}” does not exist.",
+        "render": "The document data could not be prepared.",
+        "title": "The document could not be generated"
+      },
+      "generating": "Generating the file…",
+      "loading": "Preparing the document…",
+      "preview": "Preview"
+    },
+    "bulkEdit": {
+      "operation": "Operation",
+      "value": "Value",
+      "operations": {
+        "replace": "Replace",
+        "setValue": "Set value",
+        "setTrue": "Set to true",
+        "setFalse": "Set to false",
+        "setNull": "Set to null",
+        "add": "Add",
+        "multiply": "Multiply",
+        "prefix": "Add prefix",
+        "suffix": "Add suffix",
+        "clear": "Clear value"
       }
     }
   },
@@ -395,6 +475,73 @@
       "theirs": "Server change",
       "same": "Same change",
       "unchanged": "Unchanged"
+    }
+  },
+  "offline": {
+    "action": {
+      "cancel": "Cancel",
+      "close": "Close",
+      "conflict": "Resolve conflict",
+      "discard": "Discard",
+      "edit": "Fix",
+      "retry": "Retry",
+      "save": "Save",
+      "skip": "Continue with the rest",
+      "skipTooltip": "Leave the failed changes (and those depending on them) and upload the others",
+      "sync": "Upload changes"
+    },
+    "blockedBy": "Blocked: depends on “{{label}}”, which could not be uploaded",
+    "discard": {
+      "message": "The change “{{label}}” will be lost. Continue?",
+      "ok": "Discard",
+      "title": "Discard change",
+      "withDependents": "The change “{{label}}” and {{count}} changes depending on it will be lost. Continue?"
+    },
+    "edit": {
+      "title": "Fix “{{label}}”"
+    },
+    "error": {
+      "missingFile": "The attachment is no longer stored on this device",
+      "noRepository": "The repository for this entity was not found",
+      "uploadWithoutUrl": "The server did not return the attachment address"
+    },
+    "indicator": {
+      "failed": "{{failed}} of {{count}} pending changes failed",
+      "offline": "Offline: {{count}} changes waiting to upload",
+      "pending": "{{count}} changes waiting to upload"
+    },
+    "kind": {
+      "add": "Create",
+      "delete": "Delete",
+      "file": "Attachment",
+      "patch": "Change",
+      "update": "Update"
+    },
+    "notify": {
+      "autoFailed": "Automatic upload stopped: {{count}} changes failed. Open it from the indicator to resolve them",
+      "backOnline": "Connection restored: {{count}} changes waiting to upload",
+      "backOnlineAuto": "Connection restored: the {{count}} pending changes will upload if the connection holds for {{seconds}} s",
+      "conflictUnavailable": "Could not get the server version to resolve the conflict",
+      "queued": "Offline: changes are saved on this device and will be uploaded later",
+      "synced": "All changes have been uploaded"
+    },
+    "state": {
+      "blocked": "Blocked",
+      "done": "Uploaded",
+      "failed": "Error",
+      "pending": "Pending",
+      "running": "Uploading"
+    },
+    "sync": {
+      "state": {
+        "auto": "The connection is back: changes will upload on their own once it stays stable.",
+        "empty": "No pending changes.",
+        "failed": "Upload stopped: {{failed}} changes failed. Resolve them to continue; changes that depend on them are blocked.",
+        "offline": "The server can't be reached. The {{count}} changes will be uploaded when the connection is back.",
+        "pending": "{{count}} changes saved on this device waiting to upload.",
+        "syncing": "Uploading changes one by one…"
+      },
+      "title": "Pending changes"
     }
   }
 }

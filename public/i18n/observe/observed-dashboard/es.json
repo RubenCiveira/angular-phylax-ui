@@ -1,0 +1,262 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldDefaultRange": "<g id=\"1\">Rango de defecto.</g>",
+      "fieldDescription": "Descripción",
+      "fieldName": "Nombre",
+      "fieldRefresh": "Refresh",
+      "fieldSourceKind": "Tipo de fuente",
+      "fieldSourceVariable": "Variable de origen",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear panel de control de observaciones",
+      "title": "Crear un nuevo panel de control de observaciones",
+      "tooltip": "Crear un nuevo registro de panel observado"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el panel de control observado",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar un panel de control observado"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el panel de control observado",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle del panel observado",
+      "title": "Visualización de los valores de un panel observado",
+      "tooltip": "Ver los valores de un panel observado"
+    },
+    "edit": {
+      "label": "Editar el panel de control observado",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de un panel observado"
+    }
+  },
+  "form-group": {
+    "builtin": {
+      "error": {
+        "required": "Se requiere un elemento integrado"
+      },
+      "label": "construido",
+      "placeholder": "construido"
+    },
+    "chart-type": {
+      "error": {
+        "maxlength": "El tipo de gráfico debe tener menos de 250 caracteres",
+        "required": "Se requiere el tipo de gráfico"
+      },
+      "label": "tipo de gráfico",
+      "placeholder": "tipo de gráfico"
+    },
+    "code": {
+      "error": {
+        "maxlength": "el código debe tener menos de 250 caracteres",
+        "required": "El código es requerido"
+      },
+      "label": "código",
+      "placeholder": "código"
+    },
+    "default-range": {
+      "error": {
+        "required": "Se requiere un rango predeterminado"
+      },
+      "label": "<g id=\"1\">Rango de defecto.</g>",
+      "options": {
+        "day": "día",
+        "hour": "hora",
+        "month": "mes",
+        "six-hours": "seis horas",
+        "week": "semana"
+      },
+      "placeholder": "<g id=\"1\">Rango de defecto.</g>"
+    },
+    "description": {
+      "error": {
+        "maxlength": "La descripción debe tener menos de 250 caracteres."
+      },
+      "label": "descripción",
+      "placeholder": "descripción"
+    },
+    "h": {
+      "error": {
+        "required": "Se requiere h"
+      },
+      "label": "h",
+      "placeholder": "h"
+    },
+    "name": {
+      "error": {
+        "maxlength": "el nombre debe tener menos de 250 caracteres",
+        "required": "El nombre es necesario"
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "options": {
+      "label": ".",
+      "placeholder": "."
+    },
+    "panels": {
+      "label": "paneles",
+      "placeholder": "paneles"
+    },
+    "query": {
+      "label": "consulta",
+      "placeholder": "consulta"
+    },
+    "refresh": {
+      "error": {
+        "required": "Es necesario actualizar"
+      },
+      "label": "actualizar",
+      "options": {
+        "five-minutes": ".",
+        "manual": "manual",
+        "minute": "minuto",
+        "ten-seconds": "diez segundos.",
+        "thirty-seconds": "Treinta segundos"
+      },
+      "placeholder": "actualizar"
+    },
+    "source-kind": {
+      "label": "tipo de fuente",
+      "options": {
+        "backend": "administración",
+        "frontend": "front-end",
+        "mobile": "móvil",
+        "worker": "compañero de trabajo/compañera de trabajo"
+      },
+      "placeholder": "tipo de fuente"
+    },
+    "source-variable": {
+      "error": {
+        "required": "Se requiere la variable de origen"
+      },
+      "label": "Variable de origen",
+      "placeholder": "Variable de origen"
+    },
+    "title": {
+      "error": {
+        "maxlength": "el título debe tener menos de 250 caracteres",
+        "required": "el título es obligatorio"
+      },
+      "label": "title",
+      "placeholder": "title"
+    },
+    "w": {
+      "error": {
+        "required": "El campo «w» es obligatorio"
+      },
+      "label": "w",
+      "placeholder": "w"
+    },
+    "x": {
+      "error": {
+        "required": "x es obligatorio"
+      },
+      "label": "x",
+      "placeholder": "x"
+    },
+    "y": {
+      "error": {
+        "required": "El campo «y» es obligatorio"
+      },
+      "label": "y",
+      "placeholder": "y"
+    }
+  },
+  "list": {
+    "column": {
+      "builtin": {
+        "title": "construido",
+        "tooltip": "construido"
+      },
+      "code": {
+        "title": "código",
+        "tooltip": "código"
+      },
+      "default-range": {
+        "title": "<g id=\"1\">Rango de defecto.</g>",
+        "tooltip": "<g id=\"1\">Rango de defecto.</g>"
+      },
+      "description": {
+        "title": "descripción",
+        "tooltip": "descripción"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "refresh": {
+        "title": "actualizar",
+        "tooltip": "actualizar"
+      },
+      "source-kind": {
+        "title": "tipo de fuente",
+        "tooltip": "tipo de fuente"
+      },
+      "source-variable": {
+        "title": "Variable de origen",
+        "tooltip": "Variable de origen"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "code": {
+      "label": "código",
+      "placeholder": "código"
+    },
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Predeterminado"
+      },
+      "placeholder": "orden"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "source-kind": {
+      "label": "tipo de fuente",
+      "placeholder": "tipo de fuente"
+    }
+  }
+}

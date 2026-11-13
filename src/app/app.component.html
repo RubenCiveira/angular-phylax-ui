@@ -2,11 +2,12 @@
 <nav aria-label="Main menu" [attr.aria-hidden]="isMobile && !navOverlayOpen ? 'true' : null">
   <app-menu [items]="currentMenu()" [mode]="navMode" (select)="closeOverlay()">
     <button navToggle mat-icon-button aria-label="Menu" (click)="toggleNav()"><mat-icon>menu</mat-icon></button>
+    <app-selectors-outlet navSelectors />
   </app-menu>
 </nav>
 
 <header [attr.inert]="isMobile && navOverlayOpen ? '' : null">
-  <app-toolbar (menuClicked)="toggleNav()" [user]="currentUser()" [providers]="contextProviders" />
+  <app-toolbar (menuClicked)="toggleNav()" [user]="currentUser()" />
 </header>
 
 <main [attr.inert]="isMobile && navOverlayOpen ? '' : null">

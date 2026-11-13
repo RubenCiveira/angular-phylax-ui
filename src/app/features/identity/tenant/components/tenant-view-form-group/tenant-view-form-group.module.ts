@@ -2,12 +2,13 @@
 import { EditableTextComponent } from 'app/shared/toolkit/editable/editable-text/editable-text.component';
 import { EditableCheckComponent } from 'app/shared/toolkit/editable/editable-check/editable-check.component';
 import { EditableDatetimeComponent } from 'app/shared/toolkit/editable/editable-datetime/editable-datetime.component';
+import { TranslocoModule, provideTranslocoScope } from '@jsverse/transloco';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormLayoutComponent } from 'app/shared/toolkit/form-layout/form-layout.component';
 import { TenantViewFormGroupComponent } from './tenant-view-form-group.component';
-import { provideTranslocoScope } from '@jsverse/transloco';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -20,8 +21,10 @@ import { NgModule } from '@angular/core';
     EditableTextComponent,
     FormLayoutComponent,
     FormsModule,
+    MatExpansionModule,
     MatInputModule,
     ReactiveFormsModule,
+    TranslocoModule,
   ],
   providers: [provideTranslocoScope({ scope: 'identity/tenant', alias: 'identity/tenant' })],
 })

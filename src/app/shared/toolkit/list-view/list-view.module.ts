@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ListViewComponent } from './list-view.component';
 import {
   ListViewActionDirective,
+  ListViewCardTemplate,
   ListViewColumnDirective,
   ListViewEmptyDirective,
   ListViewErrorDirective,
@@ -14,12 +15,15 @@ import {
   ListViewTitleDirective,
   ListViewTrailingDirective,
 } from './list-view.directives';
+import { ListViewImageComponent } from './list-view-image.component';
+import { ListViewIconComponent } from './list-view-icon.component';
 
 /** Todo lo que necesita una plantilla que usa `<list-view>`: impórtalo en un componente standalone. */
 export const LIST_VIEW = [
   ListViewComponent,
   ListViewTableTemplate,
   ListViewRowTemplate,
+  ListViewCardTemplate,
   ListViewColumnDirective,
   ListViewTitleDirective,
   ListViewSubtitleDirective,
@@ -29,6 +33,8 @@ export const LIST_VIEW = [
   ListViewActionDirective,
   ListViewEmptyDirective,
   ListViewErrorDirective,
+  ListViewImageComponent,
+  ListViewIconComponent,
 ] as const;
 
 /** Fachada para los módulos que aún no son standalone. */

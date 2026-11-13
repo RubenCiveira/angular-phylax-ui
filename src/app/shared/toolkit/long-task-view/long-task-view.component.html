@@ -58,11 +58,11 @@
           @if (allTheSame(task)) {
             <ul>
               @for (ok of task.oks; track $index) {
-                <li>{{ ok }}</li>
+                <li>{{ displayItem(ok) }}</li>
               }
               @for (warn of task.warns; track $index) {
                 <li>
-                  {{ warn.item }}
+                  {{ displayItem(warn.item) }}
                   <ul>
                     @for (fail of warn.fails; track $index) {
                       <li>
@@ -79,7 +79,7 @@
               }
               @for (error of task.errors; track $index) {
                 <li>
-                  {{ error.item }}
+                  {{ displayItem(error.item) }}
                   <ul>
                     @for (fail of error.fails; track $index) {
                       <li>
@@ -105,7 +105,7 @@
                   </mat-expansion-panel-header>
                   <ul>
                     @for (ok of task.oks; track $index) {
-                      <li>{{ ok }}</li>
+                      <li>{{ displayItem(ok) }}</li>
                     }
                   </ul>
                 </mat-expansion-panel>
@@ -118,14 +118,23 @@
                   </mat-expansion-panel-header>
                   <ul>
                     @for (warn of task.warns; track $index) {
-                      {{ warn.item }}
-                      <ul>
-                        @for (fail of warn.fails; track $index) {
-                          <li>
-                            {{ fail }}
-                          </li>
-                        }
-                      </ul>
+                      <li>
+                        {{ displayItem(warn.item) }}
+                        <ul>
+                          @for (fail of warn.fails; track $index) {
+                            <li>
+                              {{ fail.code }} - {{ fail.violation }}
+                              @if (fail.wrongValues.length) {
+                                <ul>
+                                  @for (wrong of fail.wrongValues; track $index) {
+                                    <li>{{ wrong.field }} - {{ wrong.error }} ({{ wrong.wrong }})</li>
+                                  }
+                                </ul>
+                              }
+                            </li>
+                          }
+                        </ul>
+                      </li>
                     }
                   </ul>
                 </mat-expansion-panel>
@@ -141,14 +150,23 @@
                   </mat-expansion-panel-header>
                   <ul>
                     @for (error of task.errors; track $index) {
-                      {{ error.item }}
-                      <ul>
-                        @for (fail of error.fails; track $index) {
-                          <li>
-                            {{ fail }}
-                          </li>
-                        }
-                      </ul>
+                      <li>
+                        {{ displayItem(error.item) }}
+                        <ul>
+                          @for (fail of error.fails; track $index) {
+                            <li>
+                              {{ fail.code }} - {{ fail.violation }}
+                              @if (fail.wrongValues.length) {
+                                <ul>
+                                  @for (wrong of fail.wrongValues; track $index) {
+                                    <li>{{ wrong.field }} - {{ wrong.error }} ({{ wrong.wrong }})</li>
+                                  }
+                                </ul>
+                              }
+                            </li>
+                          }
+                        </ul>
+                      </li>
                     }
                   </ul>
                 </mat-expansion-panel>

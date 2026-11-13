@@ -221,7 +221,7 @@ export class EntityImportService {
     const desired: Record<string, Desired> = {};
     const messages: ImportMessage[] = [];
     for (const column of plan.columns) {
-      const parsed = parseCell(row.cells[column.index], column);
+      const parsed = parseCell(row.cells[column.index], column, plan.parsing);
       if ('error' in parsed) {
         messages.push(parsed.error);
       } else if (parsed.value !== undefined && column.type === 'reference') {
@@ -277,14 +277,18 @@ export class EntityImportService {
       if (!plan.canCreate) {
         return failed({ key: 'common.import.error.notAllowed.create' });
       }
+      // Un obligatorio vacío vale si tiene valor inicial; los que van por acción los pone el backend al crear
+      const defaults = (definition.defaults?.() ?? {}) as Record<string, unknown>;
       const missing = [
         ...plan.missingRequired,
-        ...plan.columns.filter((c) => c.required && values[c.field] === undefined).map((c) => c.label),
+        ...plan.columns
+          .filter((c) => c.required && !c.viaAction && values[c.field] === undefined && defaults[c.field] === undefined)
+          .map((c) => c.label),
       ];
       if (missing.length) {
         return failed({ key: 'common.import.error.missingRequired', params: { fields: missing.join(', ') } });
       }
-      const saved = await once(definition.target.add({ ...(definition.defaults?.() ?? {}), ...item } as T), null);
+      const saved = await once(definition.target.add({ ...defaults, ...item } as T), null);
       return this.saved(row, display, 'created', await this.applyActions(definition, plan, saved, desired));
     } catch (error) {
       // El fallo queda en el resumen de la fila: sin el aviso global por cada una

@@ -6,14 +6,12 @@ import { provideRouter } from '@angular/router';
 import { TranslocoService, TRANSLOCO_CONFIG } from '@jsverse/transloco';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { InstrumentationService } from '@shared/context/observability/instrumentation.service';
-import { LayoutStateService } from './bootstrap/layout/layout-state.service';
+import { WorkspaceStateService } from './bootstrap/workspace/workspace-state.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { IDENTITY_PROVIDER } from '@shared/context/identity/identity-provider.interface';
 import { IdentityService } from '@shared/context/identity/identity.service';
-import { TenantRepository } from '@features/identity/tenant/repository/tenant-repository.service';
 import { RuntimeConfigService } from '@shared/context/config/app-config.service';
 import { RouteAccessService } from './bootstrap/layout/menu/route-accessible.service';
-import { selectorProvider } from '@shared/data/selector-provider';
 
 @Component({ selector: 'router-outlet', template: '' })
 class MockRouterOutlet {}
@@ -31,29 +29,22 @@ class MockAppStateService {
   language$ = of('lang');
   tenant = signal('main');
   user = () => signal({ authenticated: false });
+  contexts = signal({});
 }
 class MockInstrumentationService {
   activate = jasmine.createSpy('activate').and.returnValue('');
 }
-class MockLayoutStateService {
-  menu = signal([]);
+class MockWorkspaceStateService {
+  nav = signal([]);
+  userMenu = signal([]);
+  selectors = signal([]);
+  link = () => ['/'];
+  url = () => '';
 }
 
 class MockIdentityService {
   bootstrap = jasmine.createSpy('bootstrap').and.returnValue(of(undefined));
   redirecting = signal(null);
-}
-
-class MockTenantRepository {
-  selectorProvider = jasmine.createSpy('selectorProvider').and.callFake(() =>
-    selectorProvider({
-      search: () => of([]),
-      select: () => of(undefined),
-      equals: () => false,
-      display: () => '',
-      value: () => ({ $ref: '' }),
-    }),
-  );
 }
 
 class MockRuntimeConfigService {
@@ -83,10 +74,9 @@ describe('AppComponent', () => {
         },
         { provide: AppStateService, useClass: MockAppStateService },
         { provide: InstrumentationService, useClass: MockInstrumentationService },
-        { provide: LayoutStateService, useClass: MockLayoutStateService },
+        { provide: WorkspaceStateService, useClass: MockWorkspaceStateService },
         { provide: IDENTITY_PROVIDER, useValue: [] },
         { provide: IdentityService, useClass: MockIdentityService },
-        { provide: TenantRepository, useClass: MockTenantRepository },
         { provide: RuntimeConfigService, useClass: MockRuntimeConfigService },
         { provide: RouteAccessService, useClass: MockRouteAccessService },
       ], // Reemplazo de RouterTestingModule

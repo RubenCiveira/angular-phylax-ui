@@ -5,22 +5,32 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { combineLatest, of, switchMap, take } from 'rxjs';
 import { Acl } from '@shared/data/acl/acl.model';
-import { AppStateService } from '@shared/context/state/app-state.service';
+import { parseCell } from './cell-parse';
 import { matchColumns } from './column-match';
 import { IMPORT_ACCEPT, readWorkbook } from './excel-reader';
 import { downloadTemplate } from './excel-writer';
 import { EntityImportService } from './entity-import.service';
-import { ImportColumn, ImportDefinition, ImportPlan, ImportPlanColumn, ImportSheet } from './entity-import.model';
+import {
+  ImportColumn,
+  ImportDefinition,
+  ImportMessage,
+  ImportParsing,
+  ImportPlan,
+  ImportPlanColumn,
+  ImportRow,
+  ImportSheet,
+} from './entity-import.model';
 
 /** Campos que nunca llegan en el Excel: los asigna el sistema. */
 const SYSTEM_FIELDS = ['uid', 'version'];
-/** Valores de ejemplo que se muestran de cada cabecera. */
-const SAMPLES = 3;
+/** Filas que se muestran de la vista previa; se pueden pedir más. */
+const PREVIEW_ROWS = 50;
 /** Cada cuánto se comprueba si sigue viva una importación que ejecuta otra pestaña. */
 const REFRESH_MS = 10_000;
 
@@ -30,6 +40,20 @@ interface ExpectedColumn extends ImportColumn {
   key: boolean;
   /** De solo lectura: se lleva al valor del Excel con una de sus acciones tras guardar. */
   viaAction?: boolean;
+}
+
+/** Cabecera del Excel con la posición de su columna. */
+interface SheetHeader {
+  text: string;
+  index: number;
+}
+
+/** Errores de una fila que se detectan sin el servidor: celdas que no se pueden leer y claves vacías. */
+interface RowCheck {
+  row: ImportRow;
+  /** Motivos de cada celda con error, por posición de la columna. */
+  cells: Record<number, ImportMessage[]>;
+  messages: ImportMessage[];
 }
 
 /**
@@ -49,6 +73,7 @@ interface ExpectedColumn extends ImportColumn {
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatProgressBarModule,
     MatSelectModule,
     TranslocoModule,
@@ -64,7 +89,6 @@ export class EntityImportComponent {
 
   private readonly imports = inject(EntityImportService);
   private readonly transloco = inject(TranslocoService);
-  private readonly appState = inject(AppStateService);
 
   private readonly storageKey = computed(() => this.definition().storageKey);
   readonly job = computed(() => this.imports.job(this.storageKey())());
@@ -94,9 +118,9 @@ export class EntityImportComponent {
   /** Textos traducidos por clave (etiquetas de los campos y de las opciones). */
   private readonly texts = signal<Record<string, string>>({});
 
-  /** Campos que fija el contexto global y que se aplican a todas las filas. */
+  /** Campos que fija el contexto de la entidad (según su repositorio) y que se aplican a todas las filas. */
   readonly fixedColumns = computed(() => {
-    const fixed = Object.keys(this.appState.fixedValues());
+    const fixed = Object.keys(this.definition().target.context?.().fixed ?? {});
     return this.allColumns().filter((column) => fixed.includes(column.field));
   });
   /** Columnas que se pueden leer del Excel: las claves y las que el ACL deja escribir. */
@@ -147,17 +171,111 @@ export class EntityImportComponent {
     return matchColumns(sheet.headers, candidates);
   });
   readonly missingKeys = computed(() => this.columns().filter((c) => c.key && this.mapping()[c.field] == null));
-  /** Obligatorios para crear que no llegan del Excel: solo se podrán actualizar elementos existentes. */
-  readonly missingRequired = computed(() =>
-    this.columns().filter((c) => c.required && !c.key && this.mapping()[c.field] == null),
-  );
-  readonly unusedHeaders = computed(() => {
-    const used = Object.values(this.mapping());
-    return (this.sheet()?.headers ?? []).filter((header, index) => header && !used.includes(index));
+  /**
+   * Obligatorios para crear que no llegan del Excel: solo se podrán actualizar elementos existentes. No faltan los que
+   * tienen valor inicial (`defaults`) ni los que se aplican con su acción: al crear los pone el backend.
+   */
+  readonly missingRequired = computed(() => {
+    const defaults = (this.definition().defaults?.() ?? {}) as Record<string, unknown>;
+    return this.columns().filter(
+      (c) => c.required && !c.key && !c.viaAction && defaults[c.field] === undefined && this.mapping()[c.field] == null,
+    );
   });
   readonly canStart = computed(
     () => !!this.sheet()?.rows.length && !this.missingKeys().length && (this.canCreate() || this.canUpdate()),
   );
+  /** Campos que se pueden importar y no tienen columna. */
+  readonly unmappedLabels = computed(() =>
+    this.columns()
+      .filter((column) => this.mapping()[column.field] == null)
+      .map((column) => column.text)
+      .join(', '),
+  );
+  /** Cabeceras con nombre del Excel: las columnas de la vista previa. */
+  readonly headers = computed<SheetHeader[]>(() =>
+    (this.sheet()?.headers ?? []).flatMap((text, index) => (text ? [{ text, index }] : [])),
+  );
+  /** Campo asignado a cada cabecera, por su posición. */
+  readonly fieldAt = computed<Partial<Record<number, string>>>(() =>
+    Object.fromEntries(
+      Object.entries(this.mapping()).flatMap(([field, index]) => (index == null ? [] : [[index, field]])),
+    ),
+  );
+
+  /** Otros textos de sí / no, tal como se escriben (separados por comas). */
+  readonly trueText = signal('');
+  readonly falseText = signal('');
+  readonly monthFirst = signal(false);
+  readonly parsing = computed<ImportParsing>(() => ({
+    trueWords: splitWords(this.trueText()),
+    falseWords: splitWords(this.falseText()),
+    monthFirst: this.monthFirst(),
+  }));
+
+  /** Columnas emparejadas, tal como se leerán al importar. */
+  readonly planColumns = computed<ImportPlanColumn[]>(() => {
+    const mapping = this.mapping();
+    const texts = this.texts();
+    return this.columns()
+      .filter((column) => mapping[column.field] != null)
+      .map((column) => ({
+        field: column.field,
+        type: column.type ?? 'text',
+        label: column.text,
+        index: mapping[column.field]!,
+        required: column.required,
+        viaAction: column.viaAction,
+        options: column.options?.map((option) => ({
+          value: option.value,
+          names: [option.value, texts[option.label] ?? option.value],
+        })),
+      }));
+  });
+  readonly hasBoolean = computed(() => this.planColumns().some((column) => column.type === 'boolean'));
+  readonly hasDate = computed(() =>
+    this.planColumns().some((column) => column.type === 'date' || column.type === 'datetime'),
+  );
+
+  /** Comprobación de cada fila con las columnas y los ajustes elegidos. */
+  readonly checks = computed<RowCheck[]>(() => {
+    const columns = this.planColumns();
+    const parsing = this.parsing();
+    const keys = this.definition().keys;
+    return (this.sheet()?.rows ?? []).map((row) => {
+      const cells: Record<number, ImportMessage[]> = {};
+      const messages: ImportMessage[] = [];
+      const emptyKeys: ImportPlanColumn[] = [];
+      columns.forEach((column) => {
+        const parsed = parseCell(row.cells[column.index], column, parsing);
+        if ('error' in parsed) {
+          cells[column.index] = [parsed.error];
+          messages.push(parsed.error);
+        } else if (parsed.value === undefined && keys.includes(column.field)) {
+          emptyKeys.push(column);
+        }
+      });
+      if (emptyKeys.length) {
+        const missing: ImportMessage = {
+          key: 'common.import.error.missingKey',
+          params: { fields: emptyKeys.map((column) => column.label).join(', ') },
+        };
+        emptyKeys.forEach((column) => (cells[column.index] = [missing]));
+        messages.push(missing);
+      }
+      return { row, cells, messages };
+    });
+  });
+  readonly failingRows = computed(() => this.checks().filter((check) => check.messages.length).length);
+  readonly onlyErrors = signal(false);
+  readonly previewLimit = linkedSignal(() => {
+    this.sheet();
+    return PREVIEW_ROWS;
+  });
+  private readonly filteredChecks = computed(() =>
+    this.onlyErrors() ? this.checks().filter((check) => check.messages.length) : this.checks(),
+  );
+  readonly preview = computed(() => this.filteredChecks().slice(0, this.previewLimit()));
+  readonly hiddenRows = computed(() => this.filteredChecks().length - this.preview().length);
 
   private readonly allColumns = computed<ExpectedColumn[]>(() => {
     const definition = this.definition();
@@ -208,17 +326,44 @@ export class EntityImportComponent {
     });
   }
 
-  /** Primeros valores de la cabecera `index`; los de campos sensibles, enmascarados. */
-  samples(field: string, index: number | null): string[] {
-    if (index == null) {
-      return [];
+  /** Texto de la celda para la vista previa; el de un campo sensible, enmascarado. */
+  cellText(row: ImportRow, index: number): string {
+    const cell = row.cells[index];
+    if (cell === null || cell === undefined || String(cell).trim() === '') {
+      return '';
     }
-    const values = (this.sheet()?.rows ?? [])
-      .map((row) => row.cells[index])
-      .filter((cell) => cell !== null && cell !== undefined && String(cell).trim() !== '')
-      .slice(0, SAMPLES)
-      .map((cell) => (cell instanceof Date ? cell.toLocaleString() : String(cell)));
-    return this.definition().sensitive?.includes(field) ? values.map(() => '••••••') : values;
+    const field = this.fieldAt()[index];
+    if (field && this.definition().sensitive?.includes(field)) {
+      return '••••••';
+    }
+    return cell instanceof Date ? cell.toLocaleString() : String(cell);
+  }
+
+  /** Motivos traducidos, uno por línea (para el `title` de la celda o la fila). */
+  describe(messages: ImportMessage[] | undefined): string {
+    return (messages ?? []).map((message) => this.transloco.translate(message.key, message.params)).join('\n');
+  }
+
+  /** Etiqueta con la que se ofrece un campo en el selector de una cabecera. */
+  optionText(column: ExpectedColumn): string {
+    const badge = column.key ? 'key' : column.viaAction ? 'viaAction' : column.required ? 'required' : null;
+    return badge ? `${column.text} (${this.transloco.translate('common.import.mapping.' + badge)})` : column.text;
+  }
+
+  /** Asigna un campo a la cabecera `index` (o la deja sin importar con `null`). */
+  assignHeader(index: number, field: string | null): void {
+    if (field != null) {
+      this.assign(field, index);
+      return;
+    }
+    const current = this.fieldAt()[index];
+    if (current) {
+      this.assign(current, null);
+    }
+  }
+
+  showMore(): void {
+    this.previewLimit.update((limit) => limit + PREVIEW_ROWS);
   }
 
   async read(event: Event): Promise<void> {
@@ -308,25 +453,12 @@ export class EntityImportComponent {
       return;
     }
     const definition = this.definition();
-    const mapping = this.mapping();
-    const columns: ImportPlanColumn[] = this.columns()
-      .filter((column) => mapping[column.field] != null)
-      .map((column) => ({
-        field: column.field,
-        type: column.type ?? 'text',
-        label: column.text,
-        index: mapping[column.field]!,
-        required: column.required,
-        viaAction: column.viaAction,
-        options: column.options?.map((option) => ({
-          value: option.value,
-          names: [option.value, this.texts()[option.label] ?? option.value],
-        })),
-      }));
+    const columns = this.planColumns();
     const plan: ImportPlan = {
       fileName: this.fileName(),
       columns,
       rows: sheet.rows,
+      parsing: this.parsing(),
       missingRequired: this.missingRequired().map((column) => column.text),
       sensitive: columns.some((column) => definition.sensitive?.includes(column.field)),
       allowedActions: Object.keys(definition.actions ?? {}).flatMap((field) =>
@@ -374,4 +506,12 @@ export class EntityImportComponent {
     const acl = this.acl();
     return !!acl?.allAllowed || !!acl?.allows?.find((allow) => allow.name === name)?.allowed;
   }
+}
+
+/** Textos separados por comas o punto y coma, sin vacíos. */
+function splitWords(text: string): string[] {
+  return text
+    .split(/[,;]/)
+    .map((word) => word.trim())
+    .filter((word) => !!word);
 }

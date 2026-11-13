@@ -1,0 +1,231 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldKind": "Tipo",
+      "fieldLatencyMs": "Latencia (ms)",
+      "fieldName": "Nombre",
+      "fieldObjective": "Objetivo",
+      "fieldRoute": "Ruta",
+      "fieldWindowDays": "Ventana (días)",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear SLO observado",
+      "title": "Creando nuevo SLO observado",
+      "tooltip": "Crear un nuevo registro de SLO observado"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el turno observado",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar un turno observado"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar el turno observado",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle de la pendiente observada",
+      "title": "Visualización de los valores de una pendiente observada",
+      "tooltip": "Ver los valores de una pendiente observada"
+    },
+    "disable": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirma que quieres desactivar",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar el SLO observado",
+      "okBtn": "deshabilitar registro",
+      "report": "Listo: deshabilitar",
+      "title": "deshabilitar",
+      "tooltip": "deshabilitar el SLO observado"
+    },
+    "disable-selection": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirme que desea desactivar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar el SLO observado",
+      "okBtn": "deshabilitar registros",
+      "progress": "En curso: desactivar",
+      "report": "Listo en los registros seleccionados: deshabilitar",
+      "title": "Desactivar selección",
+      "tooltip": "deshabilitar los registros seleccionados"
+    },
+    "edit": {
+      "label": "Editar el SLO observado",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de una pendiente observada"
+    },
+    "enable": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirma que quieres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar el SLO observado",
+      "okBtn": "habilitar registro",
+      "report": "Listo: habilitar",
+      "title": "habilitar",
+      "tooltip": "habilitar el SLO observado"
+    },
+    "enable-selection": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirme que desea habilitar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar el SLO observado",
+      "okBtn": "habilitar registros",
+      "progress": "En curso: habilitar",
+      "report": "Hecho en los registros seleccionados: habilitar",
+      "title": "Activar selección de texto",
+      "tooltip": "habilitar los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "enabled": {
+      "error": {
+        "required": "activado es obligatorio"
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "kind": {
+      "error": {
+        "required": "Se requiere el tipo"
+      },
+      "label": "tipo",
+      "options": {
+        "availability": "dsponibilidiad",
+        "latency": "latencia"
+      },
+      "placeholder": "tipo"
+    },
+    "latency-ms": {
+      "label": "Latencia (ms)",
+      "placeholder": "Latencia (ms)"
+    },
+    "name": {
+      "error": {
+        "maxlength": "el nombre debe tener menos de 250 caracteres",
+        "required": "El nombre es necesario"
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "objective": {
+      "error": {
+        "required": "El objetivo es obligatorio"
+      },
+      "label": "objetivo",
+      "placeholder": "objetivo"
+    },
+    "origin": {
+      "error": {
+        "required": "El origen es obligatorio"
+      },
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "route": {
+      "error": {
+        "maxlength": "La ruta debe tener menos de 250 caracteres"
+      },
+      "label": "vía",
+      "placeholder": "vía"
+    },
+    "window-days": {
+      "error": {
+        "required": "Se requiere el número de días del período."
+      },
+      "label": "Ventana (días)",
+      "placeholder": "Ventana (días)"
+    }
+  },
+  "list": {
+    "column": {
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "kind": {
+        "title": "tipo",
+        "tooltip": "tipo"
+      },
+      "latency-ms": {
+        "title": "Latencia (ms)",
+        "tooltip": "Latencia (ms)"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "objective": {
+        "title": "objetivo",
+        "tooltip": "objetivo"
+      },
+      "origin": {
+        "title": "de origen único",
+        "tooltip": "de origen único"
+      },
+      "route": {
+        "title": "vía",
+        "tooltip": "vía"
+      },
+      "window-days": {
+        "title": "Ventana (días)",
+        "tooltip": "Ventana (días)"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Predeterminado"
+      },
+      "placeholder": "orden"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "origins": {
+      "label": "orígenes",
+      "placeholder": "orígenes"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    }
+  }
+}

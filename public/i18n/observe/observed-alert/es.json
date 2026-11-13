@@ -1,0 +1,200 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldLink": "Enlaces",
+      "fieldProblemKey": "Clave del problema",
+      "fieldSummary": "Resumen",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear alerta observada",
+      "title": "Crear una nueva alerta observada",
+      "tooltip": "Crear un nuevo registro de alerta observada"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar alerta observada",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar una alerta observada"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar alerta observada",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle de la alerta observada",
+      "title": "Visualización de los valores de una alerta observada",
+      "tooltip": "Ver los valores de una alerta observada"
+    },
+    "edit": {
+      "label": "Editar alerta observada",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de una alerta observada"
+    }
+  },
+  "form-group": {
+    "fired-at": {
+      "error": {
+        "required": "Se requiere el campo «Disparado a»."
+      },
+      "label": "disparó a",
+      "placeholder": "disparó a",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "last-notified-at": {
+      "label": "Última notificación:",
+      "placeholder": "Última notificación:",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "link": {
+      "error": {
+        "maxlength": "El enlace debe tener menos de 250 caracteres"
+      },
+      "label": "enlace",
+      "placeholder": "enlace"
+    },
+    "problem-key": {
+      "error": {
+        "maxlength": "La clave del problema debe tener menos de 250 caracteres",
+        "required": "Se requiere la clave del problema"
+      },
+      "label": "clave del problema",
+      "placeholder": "clave del problema"
+    },
+    "resolved-at": {
+      "label": "Resuelto en",
+      "placeholder": "Resuelto en",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "rule": {
+      "error": {
+        "required": "Se requiere una regla"
+      },
+      "label": "regla",
+      "placeholder": "regla"
+    },
+    "status": {
+      "error": {
+        "required": "El estado es obligatorio"
+      },
+      "label": "estado",
+      "options": {
+        "firing": "CALDEO",
+        "resolved": "RESUELVE"
+      },
+      "placeholder": "estado"
+    },
+    "summary": {
+      "error": {
+        "maxlength": "El resumen debe tener menos de 250 caracteres",
+        "required": "El resumen es necesario"
+      },
+      "label": "Resumen",
+      "placeholder": "Resumen"
+    }
+  },
+  "list": {
+    "column": {
+      "fired-at": {
+        "title": "disparó a",
+        "tooltip": "disparó a"
+      },
+      "last-notified-at": {
+        "title": "Última notificación:",
+        "tooltip": "Última notificación:"
+      },
+      "link": {
+        "title": "enlace",
+        "tooltip": "enlace"
+      },
+      "problem-key": {
+        "title": "clave del problema",
+        "tooltip": "clave del problema"
+      },
+      "resolved-at": {
+        "title": "Resuelto en",
+        "tooltip": "Resuelto en"
+      },
+      "rule": {
+        "title": "regla",
+        "tooltip": "regla"
+      },
+      "status": {
+        "title": "estado",
+        "tooltip": "estado"
+      },
+      "summary": {
+        "title": "Resumen",
+        "tooltip": "Resumen"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "order": {
+      "label": "orden",
+      "options": {
+        "null": "Predeterminado",
+        "summary-asc": "resumen-asc",
+        "summary-desc": "descripción-resumen"
+      },
+      "placeholder": "orden"
+    },
+    "problem-key": {
+      "label": "clave del problema",
+      "placeholder": "clave del problema"
+    },
+    "rule": {
+      "label": "regla",
+      "placeholder": "regla"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "status": {
+      "label": "estado",
+      "placeholder": "estado"
+    },
+    "summary": {
+      "label": "Resumen",
+      "placeholder": "Resumen"
+    }
+  }
+}

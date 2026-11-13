@@ -111,6 +111,53 @@ class ActionsHostComponent {
   data = [{ id: 1, name: 'One', code: 'a' }];
 }
 
+@Component({
+  standalone: true,
+  imports: [LIST_VIEW],
+  template: `
+    <list-view [mode]="mode" [data]="data" [display]="display">
+      <list-view-row>
+        <ng-template listViewRowTitle let-row>row {{ row.name }}</ng-template>
+        <ng-template listViewRowIcon [listViewRowIconWhen]="isRoot" let-row
+          ><span class="root-icon">R</span></ng-template
+        >
+      </list-view-row>
+      @if (withCard) {
+        <list-view-card>
+          <ng-template listViewRowTitle let-row>card {{ row.name }}</ng-template>
+        </list-view-card>
+      }
+    </list-view>
+  `,
+})
+class CardHostComponent {
+  mode: ListViewMode = 'card';
+  withCard = true;
+  data = [
+    { id: 1, name: 'Root', root: true },
+    { id: 2, name: 'Plain', root: false },
+  ];
+  display: DisplayProvider<any> = { display: (item: any) => item.name };
+  isRoot = (item: any) => item.root;
+}
+
+async function createCardHost(mode: ListViewMode, withCard: boolean) {
+  TestBed.configureTestingModule({
+    imports: [CardHostComponent, transloco],
+    providers: [{ provide: BreakpointObserver, useClass: MockBreakpointObserver }],
+  });
+  const fixture = TestBed.createComponent(CardHostComponent);
+  fixture.componentInstance.mode = mode;
+  fixture.componentInstance.withCard = withCard;
+  // La vista de lista usa scroll virtual: sin tamaño no pinta filas
+  Object.assign(fixture.nativeElement.style, { display: 'block', width: '600px', height: '400px' });
+  fixture.detectChanges();
+  await fixture.whenStable();
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  fixture.detectChanges();
+  return fixture;
+}
+
 function createHost(mode: ListViewMode = 'table') {
   TestBed.configureTestingModule({
     imports: [ListViewHostComponent, transloco],
@@ -236,6 +283,32 @@ describe('ListViewComponent', () => {
 
     component.check(row);
     expect(selection.isSelected(row)).toBeFalse();
+  });
+
+  describe('cards', () => {
+    it('uses <list-view-card> for the cards and <list-view-row> for the list', async () => {
+      const cards = await createCardHost('card', true);
+      expect(cards.nativeElement.textContent).toContain('card Root');
+      expect(cards.nativeElement.textContent).not.toContain('row Root');
+      TestBed.resetTestingModule();
+      const list = await createCardHost('list', true);
+      expect(list.nativeElement.textContent).toContain('row Root');
+      expect(list.nativeElement.textContent).not.toContain('card Root');
+    });
+
+    it('falls back to <list-view-row> when there is no card template', async () => {
+      const fixture = await createCardHost('card', false);
+      expect(fixture.nativeElement.textContent).toContain('row Root');
+    });
+
+    it('shows the icon only where it applies and the avatar elsewhere', async () => {
+      const fixture = await createCardHost('list', true);
+      const items = fixture.nativeElement.querySelectorAll('.material-list-item');
+      expect(items.length).toBe(2);
+      expect(items[0].querySelector('.root-icon')).not.toBeNull();
+      expect(items[1].querySelector('.root-icon')).toBeNull();
+      expect(items[1].querySelector('.avatar')?.textContent?.trim()).toBe('PL');
+    });
   });
 
   it('builds fallback avatar from display provider', () => {

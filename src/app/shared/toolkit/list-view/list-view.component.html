@@ -41,7 +41,7 @@
           (keydown)="onItemKeydown($event, item, focusable)"
         >
           @let avatar = fallbackIcon(item);
-          @if (row().icon()) {
+          @if (hasIcon(row(), item)) {
             <div class="material-list-item-icon-container">
               <i class="material-list-item-icon">
                 <ng-container *ngTemplateOutlet="row().icon()!.template; context: { $implicit: item }"></ng-container>
@@ -103,9 +103,9 @@
         >
           <mat-card-header>
             @let avatar = fallbackIcon(item);
-            @if (row().icon()) {
+            @if (hasIcon(card(), item)) {
               <div mat-card-avatar>
-                <ng-container *ngTemplateOutlet="row().icon()!.template; context: { $implicit: item }"></ng-container>
+                <ng-container *ngTemplateOutlet="card().icon()!.template; context: { $implicit: item }"></ng-container>
               </div>
             } @else if (avatar) {
               <div
@@ -117,33 +117,33 @@
                 <div [attr.aria-label]="avatar.ariaLabel">{{ avatar.initials }}</div>
               </div>
             }
-            @if (row().title()) {
+            @if (card().title()) {
               <mat-card-title>
                 <div (click)="selectAndActivate(item)">
                   <ng-container
-                    *ngTemplateOutlet="row().title()!.template; context: { $implicit: item }"
+                    *ngTemplateOutlet="card().title()!.template; context: { $implicit: item }"
                   ></ng-container>
                 </div>
               </mat-card-title>
             }
-            @if (row().subtitle()) {
+            @if (card().subtitle()) {
               <mat-card-subtitle>
                 <ng-container
-                  *ngTemplateOutlet="row().subtitle()!.template; context: { $implicit: item }"
+                  *ngTemplateOutlet="card().subtitle()!.template; context: { $implicit: item }"
                 ></ng-container>
               </mat-card-subtitle>
             }
           </mat-card-header>
           <mat-card-content>
-            @if (row().text()) {
-              <ng-container *ngTemplateOutlet="row().text()!.template; context: { $implicit: item }"></ng-container>
+            @if (card().text()) {
+              <ng-container *ngTemplateOutlet="card().text()!.template; context: { $implicit: item }"></ng-container>
             } @else {
               <br />
             }
           </mat-card-content>
           <mat-card-actions>
-            @if (row().action()) {
-              <ng-container *ngTemplateOutlet="row().action()!.template; context: { $implicit: item }"></ng-container>
+            @if (card().action()) {
+              <ng-container *ngTemplateOutlet="card().action()!.template; context: { $implicit: item }"></ng-container>
             }
           </mat-card-actions>
         </mat-card>

@@ -122,3 +122,12 @@
   flex-shrink: 0;
   object-fit: cover;
 }
+
+// El icono de la fila es un avatar: una imagen propia (de la plantilla de la feature) también va redonda.
+// Sin overflow: hidden en el contenedor, que recortaría los badges y contadores que sobresalen.
+.material-list-item-icon-container ::ng-deep img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}

@@ -22,7 +22,7 @@ export class UserViewUserGroupMembershipsComponent implements Action {
 
   title = signal<string>('user group memberships');
   label = signal<string>('user group memberships');
-  icon = signal<string>('gavel');
+  icon = signal<string>('groups');
   tooltip = signal<string>('user group memberships');
   default = input<boolean>(false);
 

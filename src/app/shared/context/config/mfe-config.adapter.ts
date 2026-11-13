@@ -35,6 +35,12 @@ export class MfeConfigAdapter {
     return remote ? remote[0] + 'i18n' : 'i18n';
   }
 
+  /** Base de las plantillas de documentos: la del remoto `name` si está registrado; si no, `templates` relativo a la app. */
+  templatesBase(name: string): string {
+    const remote = this.remotes()?.[name];
+    return remote ? remote[0] + 'templates' : 'templates';
+  }
+
   private remotes(): Record<string, MfeRemote> | undefined {
     return (window as any)[MFE_REMOTES_GLOBAL];
   }

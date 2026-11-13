@@ -8,6 +8,10 @@
     }
   </a>
 </div>
+<!-- Selectores de contexto del workspace: al inicio del menú (no caben en modo mini) -->
+<div class="nav-selectors">
+  <ng-content select="[navSelectors]" />
+</div>
 <mat-nav-list>
   @for (item of menu(); track $index) {
     <ng-template [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ $implicit: $any(item) }"></ng-template>

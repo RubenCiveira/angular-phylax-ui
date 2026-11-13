@@ -16,7 +16,6 @@ class MockTranslocoService {
 
 class MockAppStateService {
   language$ = of('en');
-  fixedContext = () => of({});
 }
 
 const PROVIDERS = [

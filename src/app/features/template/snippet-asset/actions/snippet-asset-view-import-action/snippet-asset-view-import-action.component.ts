@@ -76,6 +76,7 @@ export class SnippetAssetViewImportActionComponent extends BaseImportAction<Snip
           ),
       add: (item) => this.repository.add(item),
       update: (item) => this.repository.update(item),
+      context: this.repository.context(),
     },
   };
 }

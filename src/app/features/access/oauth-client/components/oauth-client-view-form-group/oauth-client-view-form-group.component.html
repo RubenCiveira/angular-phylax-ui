@@ -16,7 +16,7 @@
     formControlName="tokenEndpointAuthMethod"
     [visible]="isVisible['tokenEndpointAuthMethod']"
     label="access/oauth-client.form-group.token-endpoint-auth-method"
-    [options]="['CLIENT-SECRET-BASIC', 'CLIENT-SECRET-POST', 'PRIVATE-KEY-JWT', 'NONE']"
+    [options]="['client-secret-basic', 'client-secret-post', 'private-key-jwt', 'none']"
   />
   <editable-text
     formControlName="tokenEndpointAuthSigningAlg"
@@ -32,7 +32,7 @@
     formControlName="idTokenSignedResponseAlg"
     [visible]="isVisible['idTokenSignedResponseAlg']"
     label="access/oauth-client.form-group.id-token-signed-response-alg"
-    [options]="['RS256', 'ES256', 'EDDSA']"
+    [options]="['rs256', 'es256', 'eddsa']"
   />
   <editable-text
     formControlName="tlsClientAuthSubjectDn"
@@ -53,7 +53,7 @@
     formControlName="backchannelTokenDeliveryMode"
     [visible]="isVisible['backchannelTokenDeliveryMode']"
     label="access/oauth-client.form-group.backchannel-token-delivery-mode"
-    [options]="['POLL', 'PING']"
+    [options]="['poll', 'ping']"
   />
   <editable-text
     formControlName="backchannelClientNotificationEndpoint"
@@ -64,7 +64,7 @@
     formControlName="subjectType"
     [visible]="isVisible['subjectType']"
     label="access/oauth-client.form-group.subject-type"
-    [options]="['PUBLIC', 'PAIRWISE']"
+    [options]="['public', 'pairwise']"
   />
   <editable-text
     formControlName="idTokenEncryptedResponseAlg"

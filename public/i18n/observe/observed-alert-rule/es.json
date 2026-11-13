@@ -1,0 +1,289 @@
+{
+  "action": {
+    "bulk-edit": {
+      "cancel": "Cancelar",
+      "confirm": "Aplicar cambios",
+      "dialogTitle": "Editar los registros seleccionados",
+      "fieldChannel": "Canal",
+      "fieldCooldownMinutes": "Enfriamiento: 12 minutos",
+      "fieldMinLevel": "Nivel min.",
+      "fieldName": "Nombre",
+      "fieldOrigin": "Origen",
+      "fieldTarget": "Objetivo",
+      "fieldThreshold": "Threshold",
+      "fieldTrigger": "Disparador",
+      "fieldWindowMinutes": "Minutos de la ventana",
+      "fixedFields": "No se pueden cambiar en su estado actual:",
+      "label": "Editar selección",
+      "notAllowed": "No se puede modificar este registro",
+      "progress": "Se están actualizando los registros",
+      "selectedPlural": "registros seleccionados",
+      "selectedSingular": "registro seleccionado",
+      "tooltip": "Cambiar campos en los registros seleccionados"
+    },
+    "create": {
+      "createButton": "Crear",
+      "label": "Crear regla de alerta observada",
+      "title": "Crear una nueva regla de alerta observada",
+      "tooltip": "Crear un nuevo registro de regla de alerta observada"
+    },
+    "delete": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar",
+      "dismiss": "Aceptar",
+      "label": "Eliminar la regla de alerta observada",
+      "okBtn": "Borrar registro",
+      "report": "Se ha borrado",
+      "title": "Borrar",
+      "tooltip": "Eliminar una regla de alerta observada"
+    },
+    "delete-selection": {
+      "cancelBtn": "No borrar",
+      "content": "Confirme que quiere borrar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "Eliminar la regla de alerta observada",
+      "okBtn": "Borrar registros",
+      "progress": "Se está borrando",
+      "report": "Se han borrado los registros",
+      "title": "Borrar selección",
+      "tooltip": "Borrar los registros seleccionados"
+    },
+    "detail": {
+      "label": "Detalle de la regla de alerta observada",
+      "title": "Visualización de los valores de una regla de alerta observada",
+      "tooltip": "Ver los valores de una regla de alerta observada"
+    },
+    "disable": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirma que quieres desactivar",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar la regla de alerta observada",
+      "okBtn": "deshabilitar registro",
+      "report": "Listo: deshabilitar",
+      "title": "deshabilitar",
+      "tooltip": "deshabilitar la regla de alerta observada"
+    },
+    "disable-selection": {
+      "cancelBtn": "No los desactive.",
+      "content": "Confirme que desea desactivar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "deshabilitar la regla de alerta observada",
+      "okBtn": "deshabilitar registros",
+      "progress": "En curso: desactivar",
+      "report": "Listo en los registros seleccionados: deshabilitar",
+      "title": "Desactivar selección",
+      "tooltip": "deshabilitar los registros seleccionados"
+    },
+    "edit": {
+      "label": "Editar la regla de alerta observada",
+      "saveBtn": "Actualizar",
+      "tooltip": "Modificar los valores de una regla de alerta observada"
+    },
+    "enable": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirma que quieres habilitar",
+      "dismiss": "Aceptar",
+      "label": "habilitar la regla de alerta observada",
+      "okBtn": "habilitar registro",
+      "report": "Listo: habilitar",
+      "title": "habilitar",
+      "tooltip": "habilitar la regla de alerta observada"
+    },
+    "enable-selection": {
+      "cancelBtn": "No activar@info",
+      "content": "Confirme que desea habilitar los registros seleccionados",
+      "dismiss": "Aceptar",
+      "label": "habilitar la regla de alerta observada",
+      "okBtn": "habilitar registros",
+      "progress": "En curso: habilitar",
+      "report": "Hecho en los registros seleccionados: habilitar",
+      "title": "Activar selección de texto",
+      "tooltip": "habilitar los registros seleccionados"
+    }
+  },
+  "form-group": {
+    "channel": {
+      "error": {
+        "required": "el canal es obligatorio"
+      },
+      "label": "canal",
+      "options": {
+        "email": "correo electrónico",
+        "log": "registro",
+        "webhook": "webhook"
+      },
+      "placeholder": "canal"
+    },
+    "cooldown-minutes": {
+      "error": {
+        "required": "Se requieren  minutos de enfriamiento"
+      },
+      "label": "Enfriamiento: 12 minutos",
+      "placeholder": "Enfriamiento: 12 minutos"
+    },
+    "enabled": {
+      "error": {
+        "required": "activado es obligatorio"
+      },
+      "label": "habilitado",
+      "placeholder": "habilitado"
+    },
+    "min-level": {
+      "error": {
+        "required": "Se requiere el nivel"
+      },
+      "label": "Nivel mínimo",
+      "options": {
+        "error": "error",
+        "fatal": "fatal (calificador)"
+      },
+      "placeholder": "Nivel mínimo"
+    },
+    "muted-until": {
+      "label": "silenciado hasta el",
+      "placeholder": "silenciado hasta el",
+      "time": {
+        "label": "Hora",
+        "placeholder": "Hora"
+      }
+    },
+    "name": {
+      "error": {
+        "maxlength": "el nombre debe tener menos de 250 caracteres",
+        "required": "El nombre es necesario"
+      },
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "target": {
+      "error": {
+        "maxlength": "el objetivo debe tener menos de 250 caracteres"
+      },
+      "label": "Objetivo",
+      "placeholder": "Objetivo"
+    },
+    "threshold": {
+      "error": {
+        "required": "Se requiere un umbral"
+      },
+      "label": "umbral",
+      "placeholder": "umbral"
+    },
+    "trigger": {
+      "error": {
+        "required": "Se requiere un desencadenante"
+      },
+      "label": "detonante",
+      "options": {
+        "anomaly": "anomalía",
+        "collector-dropping": "caída-del-colector",
+        "disk-high": "disco-alto",
+        "error-rate": "tasa de error",
+        "new-issue": "nueva emisión",
+        "probe-down": "sonda hacia abajo",
+        "regression": "regresión",
+        "slo-burn": "combustión lenta",
+        "source-silent": "fuente-silenciosa",
+        "tls-expiring": "tls-a-punto-de-caducar"
+      },
+      "placeholder": "detonante"
+    },
+    "window-minutes": {
+      "error": {
+        "required": "Se requiere el número de minutos del margen."
+      },
+      "label": "minutos de margen",
+      "placeholder": "minutos de margen"
+    }
+  },
+  "list": {
+    "column": {
+      "channel": {
+        "title": "canal",
+        "tooltip": "canal"
+      },
+      "cooldown-minutes": {
+        "title": "Enfriamiento: 12 minutos",
+        "tooltip": "Enfriamiento: 12 minutos"
+      },
+      "enabled": {
+        "title": "habilitado",
+        "tooltip": "habilitado"
+      },
+      "min-level": {
+        "title": "Nivel mínimo",
+        "tooltip": "Nivel mínimo"
+      },
+      "muted-until": {
+        "title": "silenciado hasta el",
+        "tooltip": "silenciado hasta el"
+      },
+      "name": {
+        "title": "Nombre",
+        "tooltip": "Nombre"
+      },
+      "origin": {
+        "title": "de origen único",
+        "tooltip": "de origen único"
+      },
+      "target": {
+        "title": "Objetivo",
+        "tooltip": "Objetivo"
+      },
+      "threshold": {
+        "title": "umbral",
+        "tooltip": "umbral"
+      },
+      "trigger": {
+        "title": "detonante",
+        "tooltip": "detonante"
+      },
+      "window-minutes": {
+        "title": "minutos de margen",
+        "tooltip": "minutos de margen"
+      }
+    },
+    "filter": {
+      "button": "Filtrar"
+    },
+    "search": {
+      "button": "Buscar",
+      "title": "Buscar"
+    }
+  },
+  "search": {
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Nombre"
+    },
+    "order": {
+      "label": "orden",
+      "options": {
+        "name-asc": "Nombre ASC",
+        "name-desc": "Nombre: DESC",
+        "null": "Predeterminado"
+      },
+      "placeholder": "orden"
+    },
+    "origin": {
+      "label": "de origen único",
+      "placeholder": "de origen único"
+    },
+    "origins": {
+      "label": "orígenes",
+      "placeholder": "orígenes"
+    },
+    "search": {
+      "label": "buscar",
+      "placeholder": "buscar"
+    },
+    "trigger": {
+      "label": "detonante",
+      "placeholder": "detonante"
+    }
+  }
+}

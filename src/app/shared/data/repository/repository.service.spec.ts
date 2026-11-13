@@ -3,7 +3,7 @@ import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { of, Subject, take } from 'rxjs';
+import { firstValueFrom, Observable, of, Subject, take, throwError, toArray } from 'rxjs';
 import { EditConflictError, isEditConflict } from '@shared/toolkit/edit-conflict/edit-conflict.model';
 import { RepositoryMetadata, RepositoryService } from './repository.service';
 import { RepositoryStore } from './repository-store.service';
@@ -130,9 +130,9 @@ describe('RepositoryService', () => {
   // ── canDeleteSelection / deleteSelection ──────────────────────────────────
 
   describe('canDeleteSelection', () => {
-    it('returns false when provider lacks deleteAllForQuery', () => {
+    it('returns true when provider lacks deleteAllForQuery (falls back to one by one)', () => {
       const repo = buildRepo(buildProvider());
-      expect(repo.canDeleteSelection()).toBe(false);
+      expect(repo.canDeleteSelection()).toBe(true);
     });
 
     it('returns true when provider has deleteAllForQuery', () => {
@@ -145,11 +145,6 @@ describe('RepositoryService', () => {
   });
 
   describe('deleteSelection', () => {
-    it('throws when deleteAllForQuery is not defined', () => {
-      const repo = buildRepo(buildProvider());
-      expect(() => repo.deleteSelection({}).subscribe()).toThrowError('Unable to make deleteSelection');
-    });
-
     it('calls deleteAllForQuery and emits result', (done) => {
       const provider = buildProvider({
         deleteAllForQuery: jasmine.createSpy('deleteAllForQuery').and.returnValue(of('deleted')),
@@ -159,6 +154,51 @@ describe('RepositoryService', () => {
         expect(res).toBe('deleted');
         done();
       });
+    });
+
+    it('without deleteAllForQuery deletes each listed item and reports local progress', async () => {
+      const provider = buildProvider({
+        list: jasmine
+          .createSpy('list')
+          .and.callFake((query: any) =>
+            of(
+              query.cursor
+                ? ({ hasNext: false, next: null, content: [{ id: '3' }] } as Slide<Item>)
+                : ({ hasNext: true, next: { cursor: 'c1' }, content: [{ id: '1' }, { id: '2' }] } as Slide<Item>),
+            ),
+          ),
+        delete: jasmine
+          .createSpy('delete')
+          .and.callFake((key: string) =>
+            key === '2' ? throwError(() => ({ status: 403, message: 'no' })) : of(undefined),
+          ),
+      });
+      const repo = buildRepo(provider);
+      const emitted = await firstValueFrom(repo.deleteSelection({ uids: '1,2,3' }).pipe(toArray()));
+
+      expect(provider.list).toHaveBeenCalledWith(jasmine.objectContaining({ uids: '1,2,3' }));
+      expect((provider.list as jasmine.Spy).calls.mostRecent().args[0]).toEqual(
+        jasmine.objectContaining({ uids: '1,2,3', cursor: 'c1' }),
+      );
+      expect((provider.delete as jasmine.Spy).calls.allArgs()).toEqual([['1'], ['2'], ['3']]);
+      const last = emitted[emitted.length - 1];
+      expect(last.detailStatus).toBe('FINISHED');
+      expect(last.steps[0]).toEqual(
+        jasmine.objectContaining({ name: 'delete', stepStatus: 'FINISHED', totalItems: 3, processedItems: 3 }),
+      );
+      expect(last.steps[0].oks).toEqual(['1', '3']);
+      expect(last.steps[0].errors).toEqual([{ item: '2', fails: [{ code: '403', violation: 'no', wrongValues: [] }] }]);
+      // Progreso intermedio: uno por elemento procesado
+      expect(emitted.map((task) => task.steps[0].processedItems)).toEqual([0, 0, 1, 2, 3, 3]);
+    });
+
+    it('without deleteAllForQuery fails the task when the listing fails', async () => {
+      const provider = buildProvider({
+        list: jasmine.createSpy('list').and.returnValue(throwError(() => new Error('down'))),
+      });
+      const emitted = await firstValueFrom(buildRepo(provider).deleteSelection({}).pipe(toArray()));
+      expect(emitted[emitted.length - 1].detailStatus).toBe('FAILED');
+      expect(provider.delete).not.toHaveBeenCalled();
     });
   });
 
@@ -275,8 +315,8 @@ describe('RepositoryService', () => {
   // ── partialByKey / canUsePartialsByKey ────────────────────────────────────
 
   describe('canUsePartialsByKey', () => {
-    it('returns false when provider lacks patchAllForQuery', () => {
-      expect(buildRepo(buildProvider()).canUsePartialsByKey()).toBe(false);
+    it('returns true when provider lacks patchAllForQuery (falls back to one by one)', () => {
+      expect(buildRepo(buildProvider()).canUsePartialsByKey()).toBe(true);
     });
 
     it('returns true when provider has patchAllForQuery', () => {
@@ -310,9 +350,15 @@ describe('RepositoryService', () => {
   // ── partialBySelection ────────────────────────────────────────────────────
 
   describe('partialBySelection', () => {
-    it('throws when patchAllForQuery is not defined', () => {
-      const repo = buildRepo(buildProvider());
-      expect(() => repo.partialBySelection({}, {}).subscribe()).toThrowError('Unable to make partialBySelection');
+    it('without patchAllForQuery patches each listed item with the path', async () => {
+      const provider = buildProvider();
+      const emitted = await firstValueFrom(
+        buildRepo(provider).partialBySelection({ uids: '1' }, { enabled: true }, 'enable').pipe(toArray()),
+      );
+      expect(provider.patch).toHaveBeenCalledWith('1', { enabled: true }, 'enable');
+      const last = emitted[emitted.length - 1];
+      expect(last.detailStatus).toBe('FINISHED');
+      expect(last.steps[0]).toEqual(jasmine.objectContaining({ name: 'enable', oks: ['1'], totalItems: 1 }));
     });
 
     it('calls patchAllForQuery and emits result', (done) => {
@@ -369,6 +415,16 @@ describe('RepositoryService', () => {
       repo.list({ q: 'a' }).subscribe();
       repo.list({ q: 'b' }).subscribe();
       expect(provider.list).toHaveBeenCalledTimes(2);
+    });
+
+    it('does not write into a cache entry cleared while the provider request is in flight', () => {
+      const response = new Subject<Slide<Item>>();
+      const provider = buildProvider({ list: jasmine.createSpy('list').and.returnValue(response) });
+      const repo = buildRepo(provider);
+      repo.list({ q: 'a' }).subscribe();
+
+      TestBed.inject(RepositoryStore).clear();
+      expect(() => response.next({ hasNext: false, next: null, content: [{ id: '1', name: 'One' }] })).not.toThrow();
     });
 
     it('emits content from provider', (done) => {
@@ -462,6 +518,297 @@ describe('RepositoryService', () => {
             expect(item).toEqual({ id: '2', name: 'Cached' });
             done();
           });
+      });
+    });
+  });
+
+  // ── retrieveAll ───────────────────────────────────────────────────────────
+
+  describe('retrieveAll', () => {
+    const named = (id: string) => ({ id, name: 'N' + id });
+
+    function batchProvider(rows = (keys: string[]) => keys.map(named)) {
+      return buildProvider({
+        retrieveAll: jasmine.createSpy('retrieveAll').and.callFake((keys: string[]) => of(rows(keys))),
+      } as Partial<RepositoryProvider<Item, any>>);
+    }
+
+    it('asks the provider once for the distinct keys and returns them in request order', (done) => {
+      const provider = batchProvider((keys) => [...keys].reverse().map(named));
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['b', 'a', 'b', '']).subscribe((items) => {
+        expect(provider.retrieveAll).toHaveBeenCalledOnceWith(['b', 'a']);
+        expect(items).toEqual([named('b'), named('a')]);
+        done();
+      });
+    });
+
+    it('only asks for the keys that are not cached', (done) => {
+      const provider = batchProvider();
+      const repo = buildRepo(provider);
+      repo.add({ id: 'a', name: 'Cached' }).subscribe(() => {
+        repo.retrieveAll(['a', 'b']).subscribe((items) => {
+          expect(provider.retrieveAll).toHaveBeenCalledOnceWith(['b']);
+          expect(items).toEqual([{ id: 'a', name: 'Cached' }, named('b')]);
+          done();
+        });
+      });
+    });
+
+    it('does not call the provider when every key is cached', (done) => {
+      const provider = batchProvider();
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['a', 'b']).subscribe(() => {
+        repo.retrieveAll(['b', 'a']).subscribe((items) => {
+          expect(provider.retrieveAll).toHaveBeenCalledTimes(1);
+          expect(items).toEqual([named('b'), named('a')]);
+          done();
+        });
+      });
+    });
+
+    it('caches the batch so retrieve() does not ask again', (done) => {
+      const provider = batchProvider();
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['a', 'b']).subscribe(() => {
+        repo
+          .retrieve('b')
+          .pipe(take(1))
+          .subscribe((item) => {
+            expect(item).toEqual(named('b'));
+            expect(provider.retrieve).not.toHaveBeenCalled();
+            done();
+          });
+      });
+    });
+
+    it('lets a retrieve() issued while the batch is in flight wait for it', () => {
+      const response = new Subject<Item[]>();
+      const provider = buildProvider({
+        retrieveAll: jasmine.createSpy('retrieveAll').and.returnValue(response),
+      } as Partial<RepositoryProvider<Item, any>>);
+      const repo = buildRepo(provider);
+      let batch: Item[] | undefined;
+      let single: Item | undefined;
+      repo.retrieveAll(['a', 'b']).subscribe((items) => (batch = items));
+      repo.retrieve('a').subscribe((item) => (single = item));
+      response.next([named('a'), named('b')]);
+      expect(provider.retrieve).not.toHaveBeenCalled();
+      expect(batch?.length).toBe(2);
+      expect(single).toEqual(named('a'));
+    });
+
+    it('omits missing keys and items that were not asked for', (done) => {
+      const provider = batchProvider(() => [named('a'), named('zz')]);
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['a', 'b']).subscribe((items) => {
+        expect(items).toEqual([named('a')]);
+        done();
+      });
+    });
+
+    it('asks the missing keys one by one when the batch brings items that were not asked for', (done) => {
+      // Un backend que ignora el filtro devuelve la primera página del listado
+      const provider = buildProvider({
+        retrieveAll: jasmine.createSpy('retrieveAll').and.returnValue(of([named('a'), named('x'), named('y')])),
+        retrieve: jasmine.createSpy('retrieve').and.callFake((id: string) => of(named(id))),
+      } as Partial<RepositoryProvider<Item, any>>);
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['a', 'b', 'c']).subscribe((items) => {
+        expect(items).toEqual([named('a'), named('b'), named('c')]);
+        expect((provider.retrieve as jasmine.Spy).calls.allArgs()).toEqual([['b'], ['c']]);
+        done();
+      });
+    });
+
+    it('trusts a batch with only asked items: absent keys do not exist', (done) => {
+      const provider = batchProvider(() => [named('a')]);
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['a', 'b']).subscribe((items) => {
+        expect(items).toEqual([named('a')]);
+        expect(provider.retrieve).not.toHaveBeenCalled();
+        done();
+      });
+    });
+
+    it('falls back to one retrieve per key when the provider has no batch, skipping failures', (done) => {
+      const provider = buildProvider({
+        retrieve: jasmine
+          .createSpy('retrieve')
+          .and.callFake((id: string) =>
+            id === 'bad' ? new Observable<Item>((o) => o.error(new Error('404'))) : of(named(id)),
+          ),
+      });
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['a', 'bad', 'c']).subscribe((items) => {
+        expect(provider.retrieve).toHaveBeenCalledTimes(3);
+        expect(items).toEqual([named('a'), named('c')]);
+        done();
+      });
+    });
+
+    it('completes after the first emission of a provider that keeps emitting', () => {
+      const response = new Subject<Item[]>();
+      const provider = buildProvider({
+        retrieveAll: jasmine.createSpy('retrieveAll').and.returnValue(response),
+      } as Partial<RepositoryProvider<Item, any>>);
+      const repo = buildRepo(provider);
+      let emissions = 0;
+      let completed = false;
+      repo.retrieveAll(['a']).subscribe({ next: () => emissions++, complete: () => (completed = true) });
+      response.next([named('a')]);
+      response.next([named('a')]);
+      expect(emissions).toBe(1);
+      expect(completed).toBeTrue();
+    });
+
+    it('lets the keys be asked again after a failed batch', (done) => {
+      let calls = 0;
+      const provider = buildProvider({
+        retrieveAll: jasmine
+          .createSpy('retrieveAll')
+          .and.callFake((keys: string[]) =>
+            ++calls === 1 ? new Observable<Item[]>((o) => o.error(new Error('boom'))) : of(keys.map(named)),
+          ),
+      } as Partial<RepositoryProvider<Item, any>>);
+      const repo = buildRepo(provider);
+      repo.retrieveAll(['a']).subscribe({
+        error: () =>
+          repo.retrieveAll(['a']).subscribe((items) => {
+            expect(items).toEqual([named('a')]);
+            done();
+          }),
+      });
+    });
+  });
+
+  // ── resolve / resolveAll (proyección anidada) ─────────────────────────────
+
+  describe('resolve', () => {
+    /** Provider con `retrieveAll` sobre una tabla en memoria. */
+    function table(rows: any[]) {
+      return buildProvider({
+        retrieveAll: jasmine
+          .createSpy('retrieveAll')
+          .and.callFake((keys: string[]) => of(rows.filter((row) => keys.includes(row.id)))),
+      } as Partial<RepositoryProvider<Item, any>>);
+    }
+
+    // project-device → model (device-model) → vendor; project-device → type
+    function chain() {
+      const vendors = table([{ id: 'v1', name: 'Cisco' }]);
+      const types = table([{ id: 't1', name: 'Switch' }]);
+      const models = table([
+        { id: 'm1', name: 'C9200', vendor: { $ref: 'v1' } },
+        { id: 'm2', name: 'C9300', vendor: { $ref: 'v1' } },
+      ]);
+      const vendorMeta = { key: 'id', name: UNIQUE(), provider: vendors };
+      const typeMeta = { key: 'id', name: UNIQUE(), provider: types };
+      const modelMeta = {
+        key: 'id',
+        name: UNIQUE(),
+        provider: models,
+        reference: (name: string) => (name === 'vendor' ? vendorMeta : null),
+      };
+      const devices = table([
+        { id: 'd1', name: 'SW-1', model: { $ref: 'm1' }, type: { $ref: 't1' }, installedAt: '2026-11-01T10:00:00Z' },
+        { id: 'd2', name: 'SW-2', model: { $ref: 'm2' }, type: { $ref: 't1' } },
+        { id: 'd3', name: 'SW-3', model: { $ref: 'm1' }, type: null },
+        { id: 'd4', name: 'SW-4', model: { $ref: 'gone' }, type: null },
+      ]);
+      const repo = buildRepo(devices, UNIQUE(), {
+        entity: { id: 'id', datetimes: ['installedAt'] },
+        reference: (name) => (name === 'model' ? modelMeta : name === 'type' ? typeMeta : null),
+      } as Partial<RepositoryMetadata<Item, any>>);
+      return { repo, devices, models, vendors, types };
+    }
+
+    it('follows references at any depth from dotted paths', (done) => {
+      const { repo } = chain();
+      repo.resolve('d1', ['model.vendor.name', 'type']).subscribe((device) => {
+        expect(device.name).toBe('SW-1');
+        expect(device.model.name).toBe('C9200');
+        expect(device.model.vendor).toEqual({ id: 'v1', name: 'Cisco' });
+        expect(device.type).toEqual({ id: 't1', name: 'Switch' });
+        done();
+      });
+    });
+
+    it('asks once per field and level, with the distinct keys of the whole level', (done) => {
+      const { repo, devices, models, vendors, types } = chain();
+      repo.retrieveAll(['d1', 'd2', 'd3']).subscribe((items) =>
+        repo.resolveAll(items, { model: { vendor: {} }, type: {} }).subscribe((resolved) => {
+          expect(resolved.map((d) => d.model.vendor.name)).toEqual(['Cisco', 'Cisco', 'Cisco']);
+          expect(devices.retrieveAll).toHaveBeenCalledTimes(1);
+          expect(models.retrieveAll).toHaveBeenCalledOnceWith(['m1', 'm2']);
+          expect(vendors.retrieveAll).toHaveBeenCalledOnceWith(['v1']);
+          expect(types.retrieveAll).toHaveBeenCalledOnceWith(['t1']);
+          done();
+        }),
+      );
+    });
+
+    it('leaves empty and missing references as null', (done) => {
+      const { repo } = chain();
+      repo.retrieveAll(['d3', 'd4']).subscribe((items) =>
+        repo.resolveAll(items, ['type', 'model.vendor']).subscribe(([d3, d4]) => {
+          expect(d3.type).toBeNull();
+          expect(d3.model.vendor.name).toBe('Cisco');
+          expect(d4.model).toBeNull();
+          done();
+        }),
+      );
+    });
+
+    it('returns plain copies that keep the dates and do not touch the cached items', (done) => {
+      const { repo } = chain();
+      repo.resolve('d1', ['model']).subscribe((device) => {
+        expect(device.installedAt instanceof Date).toBeTrue();
+        repo
+          .retrieve('d1')
+          .pipe(take(1))
+          .subscribe((cached: any) => {
+            expect(cached.model).toEqual({ $ref: 'm1' });
+            done();
+          });
+      });
+    });
+
+    it('does not ask for anything else with an empty spec', (done) => {
+      const { repo, models } = chain();
+      repo.resolve('d1', {}).subscribe((device) => {
+        expect(device.model).toEqual({ $ref: 'm1' });
+        expect(models.retrieveAll).not.toHaveBeenCalled();
+        done();
+      });
+    });
+
+    it('emits undefined for a key that does not exist', (done) => {
+      const { repo } = chain();
+      repo.resolve('nope', ['model']).subscribe((device) => {
+        expect(device).toBeUndefined();
+        done();
+      });
+    });
+
+    it('fails when asked to go further from a field that is not a reference', (done) => {
+      const { repo } = chain();
+      repo.resolve('d1', ['name.first']).subscribe({
+        error: (error) => {
+          expect(error.message).toContain("'name' is not a reference");
+          done();
+        },
+      });
+    });
+
+    it('fails for a reference without repository metadata', (done) => {
+      const vendors = table([{ id: 'v1', name: 'Cisco', parent: { $ref: 'x' } }]);
+      const repo = buildRepo(vendors, UNIQUE(), { reference: () => null });
+      repo.resolve('v1', ['parent']).subscribe({
+        error: (error) => {
+          expect(error.message).toContain('There is no ref repository for parent');
+          done();
+        },
       });
     });
   });
@@ -821,6 +1168,32 @@ describe('RepositoryService', () => {
       expect(tenantProvider.retrieve).toHaveBeenCalledTimes(1);
     });
 
+    it('asks for the distinct references of a page in one batch', async () => {
+      const tenantProvider = buildProvider({
+        retrieveAll: jasmine
+          .createSpy('retrieveAll')
+          .and.callFake((ids: string[]) => of(ids.map((id) => ({ id, name: 'T' + id })))),
+      } as Partial<RepositoryProvider<Item, any>>);
+      const content = [
+        { id: '1', tenant: { $ref: 't1' } },
+        { id: '2', tenant: { $ref: 't2' } },
+        { id: '3', tenant: { $ref: 't1' } },
+      ];
+      const tenantMeta = { key: 'id', name: UNIQUE(), provider: tenantProvider };
+      const repo = buildRepo(
+        buildProvider({ list: jasmine.createSpy('list').and.returnValue(of({ hasNext: false, next: null, content })) }),
+        UNIQUE(),
+        { reference: (name) => (name === 'tenant' ? tenantMeta : null) },
+      );
+      const shift = TestBed.runInInjectionContext(() => repo.projections(['tenant']));
+      shift.fetch({});
+      await settle();
+      const rows = shift()!;
+      expect(rows.map((row) => row.tenant()?.name)).toEqual(['Tt1', 'Tt2', 'Tt1']);
+      expect(tenantProvider.retrieveAll).toHaveBeenCalledOnceWith(['t1', 't2']);
+      expect(tenantProvider.retrieve).not.toHaveBeenCalled();
+    });
+
     it('keeps Date fields as Date in projection()', async () => {
       const { repo } = datedRepo([{ id: '1', registeredAt: '2025-10-30T10:00:00Z', tenant: { $ref: 't1' } }]);
       const tick = TestBed.runInInjectionContext(() => repo.projection(['tenant']));
@@ -828,6 +1201,290 @@ describe('RepositoryService', () => {
       await settle();
       expect(tick().registeredAt instanceof Date).toBeTrue();
       expect(tick().tenant()?.name).toBe('Main');
+    });
+  });
+
+  // ── nested projections ────────────────────────────────────────────────────
+
+  describe('nested projections', () => {
+    function table(rows: any[]) {
+      return buildProvider({
+        retrieveAll: jasmine
+          .createSpy('retrieveAll')
+          .and.callFake((keys: string[]) => of(rows.filter((row) => keys.includes(row.id)))),
+      } as Partial<RepositoryProvider<Item, any>>);
+    }
+
+    // device-instance → model → vendor
+    function chain() {
+      const vendors = table([
+        { id: 'v1', name: 'Cisco' },
+        { id: 'v2', name: 'Aruba' },
+      ]);
+      const models = table([
+        { id: 'm1', name: 'C9200', vendor: { $ref: 'v1' } },
+        { id: 'm2', name: 'C9300', vendor: { $ref: 'v1' } },
+        { id: 'm3', name: 'CX6100', vendor: { $ref: 'v2' } },
+        { id: 'm4', name: 'Generic', vendor: null },
+      ]);
+      const vendorMeta = { key: 'id', name: UNIQUE(), provider: vendors };
+      const modelMeta = {
+        key: 'id',
+        name: UNIQUE(),
+        provider: models,
+        reference: (name: string) => (name === 'vendor' ? vendorMeta : null),
+      };
+      const content = ['m1', 'm2', 'm3', 'm1', 'm4'].map((model, i) => ({ id: 'i' + i, model: { $ref: model } }));
+      const repo = buildRepo(
+        buildProvider({
+          list: jasmine.createSpy('list').and.returnValue(of({ hasNext: false, next: null, content })),
+          retrieve: jasmine
+            .createSpy('retrieve')
+            .and.callFake((id: string) => of(content.find((row) => row.id === id))),
+        }),
+        UNIQUE(),
+        { reference: (name) => (name === 'model' ? modelMeta : null) },
+      );
+      return { repo, models, vendors };
+    }
+
+    it('exposes the reference of a reference as a signal', async () => {
+      const { repo } = chain();
+      const shift = TestBed.runInInjectionContext(() => repo.projections(['model', 'model.vendor']));
+      shift.fetch({});
+      await settle();
+      const rows = shift()!;
+      expect(rows.map((row) => row.model()?.vendor()?.name)).toEqual(['Cisco', 'Cisco', 'Aruba', 'Cisco', undefined]);
+      expect(rows[0].model().name).toBe('C9200');
+    });
+
+    it('asks each level in one batch with the distinct keys', async () => {
+      const { repo, models, vendors } = chain();
+      const shift = TestBed.runInInjectionContext(() => repo.projections(['model.vendor']));
+      shift.fetch({});
+      await settle();
+      shift()!.forEach((row) => row.model()?.vendor?.());
+      await settle();
+      expect(models.retrieveAll).toHaveBeenCalledOnceWith(['m1', 'm2', 'm3', 'm4']);
+      expect(vendors.retrieveAll).toHaveBeenCalledOnceWith(['v1', 'v2']);
+      expect(models.retrieve).not.toHaveBeenCalled();
+      expect(vendors.retrieve).not.toHaveBeenCalled();
+    });
+
+    it('shares the signal of the same nested reference between rows', async () => {
+      const { repo } = chain();
+      const shift = TestBed.runInInjectionContext(() => repo.projections(['model.vendor']));
+      shift.fetch({});
+      await settle();
+      const rows = shift()!;
+      expect(rows[3].model).toBe(rows[0].model);
+      expect(rows[0].model().vendor).toBe(rows[1].model().vendor);
+    });
+
+    it('leaves the fields that are not references as they are', async () => {
+      const { repo } = chain();
+      const shift = TestBed.runInInjectionContext(() => repo.projections(['model.vendor.name', 'model.name']));
+      shift.fetch({});
+      await settle();
+      const model = shift()![0].model();
+      expect(model.name).toBe('C9200');
+      expect(model.vendor().name).toBe('Cisco');
+    });
+
+    it('resolves nested references in projection() too', async () => {
+      const { repo } = chain();
+      const tick = TestBed.runInInjectionContext(() => repo.projection(['model.vendor']));
+      tick.fetch('i0');
+      await settle();
+      expect(tick()?.model()?.vendor()?.name).toBe('Cisco');
+    });
+  });
+
+  // ── children projections ──────────────────────────────────────────────────
+
+  describe('children projections', () => {
+    /** Provider cuyo listado filtra por `filter` (varias claves) sobre la referencia `field`, en páginas de `page`. */
+    function childTable(rows: any[], field: string, filter: string, page = 100) {
+      return buildProvider({
+        list: jasmine.createSpy('list').and.callFake((query: any) => {
+          const parents: string[] = query[filter] ?? [];
+          const matching = rows.filter((row) => parents.includes(row[field]?.$ref));
+          const from = Number(query.cursor ?? 0);
+          const content = matching.slice(from, from + page);
+          const more = from + page < matching.length;
+          return of({ content, hasNext: more, next: more ? { cursor: String(from + page) } : null });
+        }),
+        retrieveAll: jasmine
+          .createSpy('retrieveAll')
+          .and.callFake((keys: string[]) => of(rows.filter((row) => keys.includes(row.id)))),
+      } as Partial<RepositoryProvider<Item, any>>);
+    }
+
+    function world(sitePage = 100) {
+      const clientRows = [
+        { id: 'c1', name: 'ACME' },
+        { id: 'c2', name: 'Globex' },
+        { id: 'c3', name: 'Initech' },
+      ];
+      const siteRows = [
+        { id: 's1', name: 'Madrid', client: { $ref: 'c1' } },
+        { id: 's2', name: 'Vigo', client: { $ref: 'c1' } },
+        { id: 's3', name: 'Lyon', client: { $ref: 'c2' } },
+      ];
+      const floorRows = [
+        { id: 'f1', name: 'P0', site: { $ref: 's1' } },
+        { id: 'f2', name: 'P1', site: { $ref: 's1' } },
+        { id: 'f3', name: 'P0', site: { $ref: 's3' } },
+      ];
+      const clients = buildProvider({
+        list: jasmine.createSpy('list').and.returnValue(of({ hasNext: false, next: null, content: clientRows })),
+        retrieveAll: jasmine
+          .createSpy('retrieveAll')
+          .and.callFake((keys: string[]) => of(clientRows.filter((row) => keys.includes(row.id)))),
+      } as Partial<RepositoryProvider<Item, any>>);
+      const sites = childTable(siteRows, 'client', 'clients', sitePage);
+      const floors = childTable(floorRows, 'site', 'sites');
+      const clientMeta: RepositoryMetadata<any, any> = { key: 'id', name: UNIQUE(), provider: clients };
+      const siteMeta: RepositoryMetadata<any, any> = {
+        key: 'id',
+        name: UNIQUE(),
+        provider: sites,
+        reference: (name) => (name === 'client' ? clientMeta : null),
+      };
+      const floorMeta: RepositoryMetadata<any, any> = { key: 'id', name: UNIQUE(), provider: floors };
+      const repo = new RepositoryService<any, any>(clientMeta, TestBed.inject(RepositoryStore));
+      const siteRepo = new RepositoryService<any, any>(siteMeta, TestBed.inject(RepositoryStore));
+      const floorRepo = new RepositoryService<any, any>(floorMeta, TestBed.inject(RepositoryStore));
+      return { repo, siteRepo, floorRepo, clients, sites, floors };
+    }
+
+    async function loaded(shift: any) {
+      shift.fetch({});
+      await settle();
+      await flush();
+      return shift()!;
+    }
+
+    it('exposes the children of each row as a signal, asked in one batch for the whole page', async () => {
+      const { repo, siteRepo, sites } = world();
+      const shift = TestBed.runInInjectionContext(() =>
+        repo.projections([], { sites: siteRepo.children('client', 'clients') }),
+      );
+      const rows = await loaded(shift);
+      expect(rows.map((row: any) => row.sites()?.map((site: any) => site.name))).toEqual([
+        ['Madrid', 'Vigo'],
+        ['Lyon'],
+        [],
+      ]);
+      expect(sites.list).toHaveBeenCalledTimes(1);
+      expect((sites.list as jasmine.Spy).calls.argsFor(0)[0]).toEqual({ clients: ['c1', 'c2', 'c3'], limit: 100 });
+    });
+
+    it('resolves children as plain lists, with their references and grandchildren, one query per level', (done) => {
+      const { repo, siteRepo, floorRepo, sites, floors } = world();
+      repo
+        .resolveAll(
+          [
+            { id: 'c1', name: 'ACME' },
+            { id: 'c2', name: 'Globex' },
+            { id: 'c3', name: 'Initech' },
+          ],
+          [],
+          {
+            sites: siteRepo.children('client', 'clients', ['client'], { floors: floorRepo.children('site', 'sites') }),
+          },
+        )
+        .subscribe(([acme, globex, initech]) => {
+          expect(acme.sites.map((site: any) => site.name)).toEqual(['Madrid', 'Vigo']);
+          expect(acme.sites[0].client.name).toBe('ACME');
+          expect(acme.sites[0].floors.map((floor: any) => floor.id)).toEqual(['f1', 'f2']);
+          expect(acme.sites[1].floors).toEqual([]);
+          expect(globex.sites[0].floors.map((floor: any) => floor.id)).toEqual(['f3']);
+          expect(initech.sites).toEqual([]);
+          expect(sites.list).toHaveBeenCalledTimes(1);
+          expect(floors.list).toHaveBeenCalledTimes(1);
+          done();
+        });
+    });
+
+    it('resolves the children of a single item', (done) => {
+      const { repo, siteRepo } = world();
+      repo.resolve('c2', ['name'], { sites: siteRepo.children('client', 'clients') }).subscribe((client) => {
+        expect(client.name).toBe('Globex');
+        expect(client.sites.map((site: any) => site.id)).toEqual(['s3']);
+        done();
+      });
+    });
+
+    it('is undefined while the children are loading', async () => {
+      const { repo, siteRepo, sites } = world();
+      (sites.list as jasmine.Spy).and.returnValue(new Subject());
+      const shift = TestBed.runInInjectionContext(() =>
+        repo.projections([], { sites: siteRepo.children('client', 'clients') }),
+      );
+      const rows = await loaded(shift);
+      expect(rows[0].sites()).toBeUndefined();
+    });
+
+    it('projects the references of the children', async () => {
+      const { repo, siteRepo } = world();
+      const shift = TestBed.runInInjectionContext(() =>
+        repo.projections([], { sites: siteRepo.children('client', 'clients', ['client']) }),
+      );
+      const rows = await loaded(shift);
+      await settle();
+      expect(rows[0].sites()[0].client()?.name).toBe('ACME');
+    });
+
+    it('asks the grandchildren of all the children in one more batch', async () => {
+      const { repo, siteRepo, floorRepo, floors } = world();
+      const shift = TestBed.runInInjectionContext(() =>
+        repo.projections([], {
+          sites: siteRepo.children('client', 'clients', [], { floors: floorRepo.children('site', 'sites') }),
+        }),
+      );
+      const rows = await loaded(shift);
+      rows.forEach((row: any) => row.sites()?.forEach((site: any) => site.floors()));
+      await flush();
+      const madrid = rows[0].sites()[0];
+      expect(madrid.floors().map((floor: any) => floor.id)).toEqual(['f1', 'f2']);
+      expect(
+        rows[1]
+          .sites()[0]
+          .floors()
+          .map((floor: any) => floor.id),
+      ).toEqual(['f3']);
+      expect(rows[0].sites()[1].floors()).toEqual([]);
+      expect(floors.list).toHaveBeenCalledTimes(1);
+      expect((floors.list as jasmine.Spy).calls.argsFor(0)[0].sites).toEqual(['s1', 's2', 's3']);
+    });
+
+    it('follows every page of the children', async () => {
+      const { repo, siteRepo, sites } = world(2);
+      const shift = TestBed.runInInjectionContext(() =>
+        repo.projections([], { sites: siteRepo.children('client', 'clients') }),
+      );
+      const rows = await loaded(shift);
+      expect(rows[0].sites().length + rows[1].sites().length).toBe(3);
+      expect(sites.list).toHaveBeenCalledTimes(2);
+    });
+
+    it('works with projection() too', async () => {
+      const { repo, siteRepo, clients } = world();
+      (clients.retrieve as jasmine.Spy).and.returnValue(of({ id: 'c1', name: 'ACME' }));
+      const tick = TestBed.runInInjectionContext(() =>
+        repo.projection([], { sites: siteRepo.children('client', 'clients') }),
+      );
+      tick.fetch('c1');
+      await settle();
+      // El lote de hijos sale al leer el valor por primera vez
+      tick()?.sites();
+      await flush();
+      expect(
+        tick()
+          ?.sites()
+          ?.map((site: any) => site.id),
+      ).toEqual(['s1', 's2']);
     });
   });
 

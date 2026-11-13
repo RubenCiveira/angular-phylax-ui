@@ -11,7 +11,9 @@ export class UserViewUnlockActionComponent extends ConfirmAction<User> {
   protected readonly repository = inject(UserRepository);
 
   protected override appliesTo(items: User[]) {
-    return items.every((item) => !!item.blockedUntil) && true;
+    return (
+      items.every((item) => !!item.blockedUntil) && items.every((item) => (item.blockedUntil ?? null) !== null) && true
+    );
   }
   protected execute([item]: User[]) {
     return this.repository.unlock(item.uid);

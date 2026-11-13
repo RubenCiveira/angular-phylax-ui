@@ -84,3 +84,16 @@ a[mat-list-item] {
 :host(.mini) [matListItemIcon] {
   margin-inline: auto;
 }
+
+.nav-selectors {
+  display: flex;
+  flex-direction: column;
+
+  &:empty {
+    display: none;
+  }
+}
+
+:host(.mini) .nav-selectors {
+  display: none;
+}

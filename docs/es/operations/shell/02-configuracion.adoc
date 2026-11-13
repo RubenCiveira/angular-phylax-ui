@@ -67,7 +67,6 @@ Una entrada por API del backend. `<host-lógico>` es el nombre que usa el códig
 |`url` |URL |Base real de la API. Obligatoria.
 |`identity` |texto |Identidad (`identity.<nombre>`) cuyo token se envía. Sin ella, las peticiones a esta API van sin token.
 |`headers` |objeto |Cabeceras fijas que se añaden a cada petición.
-|`inject-context` |lista |Claves del contexto que se añaden al cuerpo de las escrituras; sin ella, todas las del contexto fijo.
 |===
 
 === `i18n`

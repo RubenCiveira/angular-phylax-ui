@@ -27,7 +27,7 @@ import { SearchEditable } from '../search-editable';
         (blur)="blur()"
         [formControl]="search"
       />
-      @if (!control.disabled) {
+      @if (!disabled()) {
         <button
           mat-icon-button
           matSuffix

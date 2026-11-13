@@ -43,6 +43,7 @@ export class SnippetVersionViewFormGroupComponent extends SubFormEditable<Snippe
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(snippetVersionRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

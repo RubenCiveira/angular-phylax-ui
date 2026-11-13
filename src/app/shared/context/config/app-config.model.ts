@@ -58,7 +58,6 @@ export interface ApiConfig {
   url?: string;
   identity?: string;
   headers?: Record<string, string>;
-  'inject-context'?: string[];
 }
 
 export interface I18nConfig {
@@ -97,9 +96,18 @@ export interface TelemetryConfig {
   /** Entorno de despliegue (`deployment.environment.name`): dev, pre, pro… */
   environment?: string;
   exporter?: {
-    tracer?: { url: string };
-    logger?: { url: string };
+    /** `headers`: por ejemplo `{ "X-Observe-Key": "obs_..." }` para el colector de observable. */
+    tracer?: { url: string; headers?: Record<string, string> };
+    logger?: { url: string; headers?: Record<string, string> };
   };
+  /**
+   * Orígenes (expresiones regulares) a los que se propaga `traceparent` en fetch/XHR, para unir las
+   * trazas del front y del back. El propio origen siempre; añadir el de la API si es otro
+   * (`"^http://localhost:8090"`). No poner orígenes de terceros: verían el id de la traza.
+   */
+  'propagate-to'?: string[];
+  /** Mide LCP, INP, CLS, FCP y TTFB y los envía como logs `web-vital`. Por defecto `true`. */
+  'web-vitals'?: boolean;
   logger?: {
     /** Nivel mínimo que se registra. Por defecto `info`. */
     level?: LogLevel;
@@ -117,6 +125,17 @@ export interface DataConfig {
    * los repositorios convierten solo los campos que sus metadatos declaran como fecha.
    */
   'convert-iso-dates'?: boolean;
+  /**
+   * Modo sin conexión: si falla la red, las escrituras y los adjuntos se guardan en el navegador (IndexedDB) y se
+   * suben después desde el indicador de cambios pendientes de la barra superior. Por defecto `false`.
+   */
+  offline?: boolean;
+  /**
+   * Con el modo sin conexión, tiempo (ms) que la conexión tiene que mantenerse antes de subir los cambios pendientes
+   * sin intervención; si la red se vuelve a cortar, la espera empieza de nuevo y se dobla tras cada intento fallido.
+   * `0` la desactiva (solo se sube desde el indicador). Por defecto 30000.
+   */
+  'offline-sync-delay'?: number;
 }
 
 /**

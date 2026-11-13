@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { TranslocoTestingModule } from '@jsverse/transloco';
 import { of, Subject } from 'rxjs';
 import { Acl } from '@shared/data/acl/acl.model';
+import { ActionParam, ActionParamValues, ActionParamsDialogService } from '../dialog/action-params-dialog.service';
 import { ConfirmDialogService } from '../dialog/confirm-dialog.service';
 import { NotifyService } from '../notify/notify.service';
 import { ConfirmAction } from './confirm-action';
@@ -21,6 +22,7 @@ const repository = {
     return Object.assign(acl, { fetch: jasmine.createSpy('fetch') }) as any;
   },
   deleteByKey: jasmine.createSpy('deleteByKey'),
+  cancel: jasmine.createSpy('cancel'),
 };
 
 @Component({ selector: 'test-delete-action', template: '' })
@@ -54,9 +56,25 @@ class TestEnableSelectionAction extends ConfirmAction<Item> {
   }
 }
 
+@Component({ selector: 'test-cancel-action', template: '' })
+class TestCancelAction extends ConfirmAction<Item> {
+  readonly name = 'cancel';
+  protected readonly scope = 'test';
+  protected readonly repository = repository;
+
+  protected override get params(): readonly ActionParam[] {
+    return [{ name: 'reason', type: 'text', label: this.text('param-reason'), required: true }];
+  }
+
+  protected execute([item]: Item[], params: ActionParamValues) {
+    return this.repository.cancel(item.uid, params);
+  }
+}
+
 describe('ConfirmAction', () => {
   let confirm: jasmine.SpyObj<ConfirmDialogService>;
   let notify: jasmine.SpyObj<NotifyService>;
+  let paramsDialog: jasmine.SpyObj<ActionParamsDialogService>;
 
   const create = <T>(type: new (...args: any[]) => T) => {
     const fixture = TestBed.createComponent(type);
@@ -67,16 +85,30 @@ describe('ConfirmAction', () => {
   beforeEach(() => {
     acl.set(undefined);
     repository.deleteByKey.calls.reset();
+    repository.cancel.calls.reset();
+    paramsDialog = jasmine.createSpyObj<ActionParamsDialogService>('ActionParamsDialogService', ['ask']);
     confirm = jasmine.createSpyObj<ConfirmDialogService>('ConfirmDialogService', ['confirm']);
     notify = jasmine.createSpyObj<NotifyService>('NotifyService', ['success']);
     TestBed.configureTestingModule({
       imports: [
         TestDeleteAction,
         TestEnableSelectionAction,
+        TestCancelAction,
         TranslocoTestingModule.forRoot({
           langs: {
             en: { common: { action: { delete: { label: 'Delete', icon: 'delete', report: 'Deleted' } } } },
-            'test/en': { action: { delete: { label: 'Delete test', content: 'Sure?' } } },
+            'test/en': {
+              action: {
+                delete: { label: 'Delete test', content: 'Sure?' },
+                cancel: {
+                  title: 'Cancel',
+                  content: 'Why?',
+                  okBtn: 'Cancel it',
+                  cancelBtn: 'Back',
+                  'param-reason': 'Reason',
+                },
+              },
+            },
           },
           translocoConfig: { availableLangs: ['en'], defaultLang: 'en' },
         }),
@@ -84,6 +116,7 @@ describe('ConfirmAction', () => {
       providers: [
         { provide: ConfirmDialogService, useValue: confirm },
         { provide: NotifyService, useValue: notify },
+        { provide: ActionParamsDialogService, useValue: paramsDialog },
       ],
     });
   });
@@ -146,6 +179,38 @@ describe('ConfirmAction', () => {
     expect(repository.deleteByKey).not.toHaveBeenCalled();
     expect(notify.success).not.toHaveBeenCalled();
     expect(container.close).toHaveBeenCalled();
+  });
+
+  it('asks the params instead of confirming and passes them to execute', () => {
+    paramsDialog.ask.and.returnValue(of({ reason: 'No budget' }));
+    repository.cancel.and.returnValue(of(undefined));
+    const action = create(TestCancelAction);
+    action.container.set(jasmine.createSpyObj('ActionContainerComponent', ['close']));
+    action.selection = signal([{ uid: 'a' }]);
+
+    action.run();
+
+    expect(confirm.confirm).not.toHaveBeenCalled();
+    expect(paramsDialog.ask).toHaveBeenCalledWith({
+      title: 'Cancel',
+      message: 'Why?',
+      ok: 'Cancel it',
+      cancel: 'Back',
+      params: [{ name: 'reason', type: 'text', label: 'Reason', required: true }],
+    });
+    expect(repository.cancel).toHaveBeenCalledWith('a', { reason: 'No budget' });
+  });
+
+  it('does not execute when the params dialog is cancelled', () => {
+    paramsDialog.ask.and.returnValue(of(null));
+    const action = create(TestCancelAction);
+    action.container.set(jasmine.createSpyObj('ActionContainerComponent', ['close']));
+    action.selection = signal([{ uid: 'a' }]);
+
+    action.run();
+
+    expect(repository.cancel).not.toHaveBeenCalled();
+    expect(notify.success).not.toHaveBeenCalled();
   });
 
   it('drops the pending confirmation when destroyed', () => {

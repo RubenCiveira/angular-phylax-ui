@@ -37,6 +37,7 @@ export class TenantConfigViewSearchComponent extends SubFormEditable<any> {
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(tenantConfigRepository.context(), 'search');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

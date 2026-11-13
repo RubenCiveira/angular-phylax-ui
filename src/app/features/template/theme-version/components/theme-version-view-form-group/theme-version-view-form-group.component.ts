@@ -43,6 +43,7 @@ export class ThemeVersionViewFormGroupComponent extends SubFormEditable<ThemeVer
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(themeVersionRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

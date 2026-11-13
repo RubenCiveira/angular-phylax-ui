@@ -29,6 +29,7 @@ import {
   ListViewRowTemplate,
   ListViewSort,
   ListViewTableTemplate,
+  ListViewCardTemplate,
 } from './list-view.directives';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
@@ -152,6 +153,13 @@ export class ListViewComponent implements OnInit, OnDestroy {
   row = computed(() => {
     const theRows = this.rowTemplate();
     return theRows.length > 0 ? theRows[0] : new ListViewRowTemplate();
+  });
+
+  cardTemplate = contentChildren(ListViewCardTemplate);
+  /** Estructura de las tarjetas: la de `<list-view-card>` o, si no hay, la de las filas. */
+  card = computed<ListViewRowTemplate>(() => {
+    const theCards = this.cardTemplate();
+    return theCards.length > 0 ? theCards[0] : this.row();
   });
 
   emptyTemplate = contentChild(ListViewEmptyDirective);
@@ -381,6 +389,12 @@ export class ListViewComponent implements OnInit, OnDestroy {
     }
     const current = this.sort();
     return current?.key !== key ? 'none' : current.direction === 'asc' ? 'ascending' : 'descending';
+  }
+
+  /** Si `template` tiene un icono que se aplica a `item`; si no, se muestra el avatar por defecto. */
+  hasIcon(template: ListViewRowTemplate, item: any): boolean {
+    const icon = template.icon();
+    return !!icon && icon.appliesTo(item);
   }
 
   fallbackIcon(str: any): AvatarSpec | null {

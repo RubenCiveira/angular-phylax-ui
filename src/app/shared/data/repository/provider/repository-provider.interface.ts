@@ -34,6 +34,11 @@ export interface RepositoryProvider<T, F> {
   acl?: (key: string | null) => Observable<Acl>;
   list(query: F): Observable<Slide<T>>;
   retrieve(key: string): Observable<T>;
+  /**
+   * Varios elementos por clave en las mínimas peticiones que permita el destino. Emite los que existan, en cualquier
+   * orden; las claves sin elemento no aparecen. El repositorio solo usa la primera emisión. Sin él, el repositorio recurre a `retrieve` por clave.
+   */
+  retrieveAll?: (keys: string[]) => Observable<T[]>;
   add(item: any): Observable<T>;
   update(key: string, item: any): Observable<T>;
   patch(key: string, data: any, path?: string): Observable<T>;
@@ -41,6 +46,11 @@ export interface RepositoryProvider<T, F> {
   downloadFile(endpoint: string): Observable<DownloadBlob>;
   storeFile(endpoint: string, name: string, file: File): Observable<UploadProgress>;
 
+  /**
+   * Comprueba los datos sin guardarlos (las mismas reglas que `add`/`update`). Lo usa el modo offline para avisar de
+   * los errores al guardar y no al sincronizar; sin él, los valida el backend al subirlos.
+   */
+  validate?: (item: any, isNew: boolean) => Observable<unknown>;
   patchAllForQuery?: (of: string, query: F, data: any) => Observable<any>;
   deleteAllForQuery?: (query: F) => Observable<any>;
 }

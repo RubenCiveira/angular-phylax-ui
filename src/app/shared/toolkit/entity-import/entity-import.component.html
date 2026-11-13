@@ -162,48 +162,115 @@
       </p>
     }
 
-    <table class="columns">
-      <thead>
-        <tr>
-          <th scope="col">{{ 'common.import.mapping.field' | transloco }}</th>
-          <th scope="col">{{ 'common.import.mapping.header' | transloco }}</th>
-          <th scope="col">{{ 'common.import.mapping.samples' | transloco }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (column of columns(); track column.field) {
-          <tr [class.unmapped]="mapping()[column.field] == null">
-            <th scope="row">
-              {{ column.text }}
-              @if (column.key) {
-                <span class="badge">{{ 'common.import.mapping.key' | transloco }}</span>
-              } @else if (column.viaAction) {
-                <span class="badge">{{ 'common.import.mapping.viaAction' | transloco }}</span>
-              } @else if (column.required) {
-                <span class="badge">{{ 'common.import.mapping.required' | transloco }}</span>
-              }
-            </th>
-            <td>
-              <mat-form-field subscriptSizing="dynamic">
-                <mat-select
-                  [attr.aria-label]="column.text"
-                  [value]="mapping()[column.field]"
-                  (valueChange)="assign(column.field, $event)"
-                >
-                  <mat-option [value]="null">{{ 'common.import.mapping.skip' | transloco }}</mat-option>
-                  @for (header of sheet.headers; track $index) {
-                    @if (header) {
-                      <mat-option [value]="$index">{{ header }}</mat-option>
-                    }
-                  }
-                </mat-select>
-              </mat-form-field>
-            </td>
-            <td class="samples">{{ samples(column.field, mapping()[column.field]).join(' · ') }}</td>
-          </tr>
+    @if (hasBoolean() || hasDate()) {
+      <!-- Ajustes de lectura: sí / no en otro idioma, orden de las fechas -->
+      <fieldset class="parsing">
+        <legend>{{ 'common.import.parsing.title' | transloco }}</legend>
+        @if (hasBoolean()) {
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>{{ 'common.import.parsing.trueWords' | transloco }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'common.import.parsing.truePlaceholder' | transloco"
+              [value]="trueText()"
+              (input)="trueText.set($any($event.target).value)"
+            />
+          </mat-form-field>
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>{{ 'common.import.parsing.falseWords' | transloco }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'common.import.parsing.falsePlaceholder' | transloco"
+              [value]="falseText()"
+              (input)="falseText.set($any($event.target).value)"
+            />
+          </mat-form-field>
         }
-      </tbody>
-    </table>
+        @if (hasDate()) {
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>{{ 'common.import.parsing.dateOrder' | transloco }}</mat-label>
+            <mat-select [value]="monthFirst()" (valueChange)="monthFirst.set($event)">
+              <mat-option [value]="false">{{ 'common.import.parsing.dayFirst' | transloco }}</mat-option>
+              <mat-option [value]="true">{{ 'common.import.parsing.monthFirst' | transloco }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        }
+        @if (hasBoolean()) {
+          <p class="hint">{{ 'common.import.parsing.wordsHint' | transloco }}</p>
+        }
+      </fieldset>
+    }
+
+    <!-- Vista previa: cada cabecera elige su campo; las celdas y filas con error quedan marcadas -->
+    <div class="check" aria-live="polite">
+      @if (failingRows()) {
+        <p class="warn">
+          <mat-icon aria-hidden="true">error</mat-icon>
+          {{ 'common.import.preview.errors' | transloco: { count: failingRows() } }}
+        </p>
+        <button mat-button (click)="onlyErrors.set(!onlyErrors())">
+          {{ (onlyErrors() ? 'common.import.preview.showAll' : 'common.import.preview.showErrors') | transloco }}
+        </button>
+      } @else {
+        <p class="ok">
+          <mat-icon aria-hidden="true">check_circle</mat-icon>
+          {{ 'common.import.preview.noErrors' | transloco }}
+        </p>
+      }
+    </div>
+    <div class="preview">
+      <table class="columns">
+        <thead>
+          <tr>
+            <th scope="col" class="num">{{ 'common.import.summary.row' | transloco }}</th>
+            @for (header of headers(); track header.index) {
+              <th scope="col" [class.skipped]="!fieldAt()[header.index]">
+                <div class="header-text">{{ header.text }}</div>
+                <mat-form-field subscriptSizing="dynamic">
+                  <mat-select
+                    [attr.aria-label]="header.text"
+                    [value]="fieldAt()[header.index] ?? null"
+                    (valueChange)="assignHeader(header.index, $event)"
+                  >
+                    <mat-option [value]="null">{{ 'common.import.mapping.skip' | transloco }}</mat-option>
+                    @for (column of columns(); track column.field) {
+                      <mat-option [value]="column.field">{{ optionText(column) }}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (check of preview(); track check.row.row) {
+            <tr [class.failing]="check.messages.length">
+              <th scope="row" class="num" [attr.title]="describe(check.messages) || null">
+                @if (check.messages.length) {
+                  <mat-icon class="mark" [attr.aria-label]="describe(check.messages)">error</mat-icon>
+                }
+                {{ check.row.row }}
+              </th>
+              @for (header of headers(); track header.index) {
+                <td
+                  [class.skipped]="!fieldAt()[header.index]"
+                  [class.invalid]="check.cells[header.index]"
+                  [attr.title]="describe(check.cells[header.index]) || null"
+                >
+                  {{ cellText(check.row, header.index) }}
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="hint">
+      {{ 'common.import.preview.showing' | transloco: { shown: preview().length, total: sheet.rows.length } }}
+      @if (hiddenRows() > 0) {
+        <button mat-button (click)="showMore()">{{ 'common.import.preview.more' | transloco }}</button>
+      }
+    </p>
 
     @if (missingKeys().length) {
       <p class="warn" role="alert">
@@ -221,9 +288,10 @@
         }
       </p>
     }
-    @if (unusedHeaders().length) {
-      <p class="hint">{{ 'common.import.mapping.unused' | transloco }} {{ unusedHeaders().join(', ') }}</p>
+    @if (unmappedLabels()) {
+      <p class="hint">{{ 'common.import.mapping.unmapped' | transloco }} {{ unmappedLabels() }}</p>
     }
+    <p class="hint">{{ 'common.import.preview.serverChecks' | transloco }}</p>
     @if (forbiddenLabels()) {
       <p class="hint">
         {{ 'common.import.mapping.forbidden' | transloco }}

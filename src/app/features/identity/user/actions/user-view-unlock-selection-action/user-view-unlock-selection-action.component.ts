@@ -11,7 +11,7 @@ export class UserViewUnlockSelectionActionComponent extends ConfirmSelectionActi
   protected readonly repository = inject(UserRepository);
 
   protected override appliesTo(items: User[]) {
-    return true;
+    return items.every((item) => (item.blockedUntil ?? null) !== null) && true;
   }
   protected runSelection(items: User[]) {
     return this.repository.unlockSelection({ uids: items.map((item) => item.uid) });

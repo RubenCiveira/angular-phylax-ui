@@ -40,6 +40,7 @@ export class RoleViewFormGroupComponent extends SubFormEditable<Role> {
     effect(() => {
       this.acl.fetch(this.uid() || null);
     });
+    this.useContext(roleRepository.context(), 'edit');
     effect(() => {
       const vals = this.acl();
       const value = this.value();

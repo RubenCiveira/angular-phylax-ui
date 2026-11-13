@@ -15,7 +15,7 @@
     formControlName="providerType"
     [visible]="isVisible['providerType']"
     label="identity/tenant-login-provider.form-group.provider-type"
-    [options]="['GOOGLE', 'GITHUB', 'MICROSOFT', 'APPLE', 'SAML', 'OIDC']"
+    [options]="['google', 'github', 'microsoft', 'apple', 'saml', 'oidc']"
   />
   <editable-check
     formControlName="enabled"
@@ -63,7 +63,7 @@
     formControlName="accountLinkPolicy"
     [visible]="isVisible['accountLinkPolicy']"
     label="identity/tenant-login-provider.form-group.account-link-policy"
-    [options]="['NONE', 'VERIFIED-EMAIL', 'MANUAL']"
+    [options]="['none', 'verified-email', 'manual']"
   />
   <editable-text
     formControlName="oidcDiscoveryUrl"

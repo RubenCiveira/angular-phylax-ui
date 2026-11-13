@@ -65,7 +65,18 @@ export class ListViewActionDirective {
   selector: 'ng-template[listViewRowIcon]',
 })
 export class ListViewIconDirective {
+  /**
+   * Si el icono se aplica a una fila. Si no se aplica (o no hay plantilla de icono) se muestra el avatar por defecto
+   * con las iniciales del elemento.
+   */
+  when = input<((item: any) => boolean) | undefined>(undefined, { alias: 'listViewRowIconWhen' });
+
   readonly template = inject<TemplateRef<any>>(TemplateRef);
+
+  appliesTo(item: any): boolean {
+    const when = this.when();
+    return !when || when(item);
+  }
 }
 
 /** Sustituye el mensaje por defecto de lista vacía. */
@@ -150,3 +161,13 @@ export class ListViewRowTemplate {
     return value.length > 0 ? value[0] : null;
   });
 }
+
+/**
+ * Estructura de cada tarjeta en la vista `card`, con los mismos huecos que `<list-view-row>` (salvo `trailing`). Si no
+ * hay, las tarjetas usan la de `<list-view-row>`.
+ */
+@Component({
+  selector: 'list-view-card',
+  template: '',
+})
+export class ListViewCardTemplate extends ListViewRowTemplate {}

@@ -19,7 +19,7 @@ Para adaptar un fichero generado basta con quitar la marca. A partir de ese mome
 |===
 |Viene del modelo (por entidad) |Viene de la plantilla (común)
 
-|`src/app/features/**`, `src/app/bootstrap/menu.config.ts`, `public/i18n/<contexto>/**`
+|`src/app/features/**`, `src/app/bootstrap/workspaces/**`, `src/app/bootstrap/workspaces.config.ts`, `public/i18n/<contexto>/**`
 |El resto de `src/` y `public/`, los ficheros raíz (`angular.json`, `package.json`, `Makefile`…), `.ci/` y `docs/`
 |===
 
