@@ -10,7 +10,7 @@ import type { ActionContainerComponent } from './action-container.component';
   selector: 'action-selection-bar',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-  styles: ':host { display: contents; }',
+  styles: ':host { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--app-space-2); }',
   template: `
     @let c = container();
     @for (action of c.multipleActions(); track $index) {

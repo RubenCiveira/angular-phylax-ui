@@ -12,7 +12,7 @@ import type { ActionContainerComponent } from './action-container.component';
   selector: 'action-toolbar',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, TranslocoPipe],
-  styles: ':host { display: contents; }',
+  styles: ':host { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--app-space-2); }',
   template: `
     @let c = container();
     @for (action of c.toolbarActions(); track $index) {

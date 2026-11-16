@@ -12,7 +12,7 @@ import type { ActionContainerComponent } from './action-container.component';
   selector: 'action-row-menu',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, TranslocoPipe],
-  styles: ':host { display: contents; }',
+  styles: ':host { display: inline-flex; align-items: center; gap: var(--app-space-1); }',
   template: `
     @let c = container();
     @let item = row();

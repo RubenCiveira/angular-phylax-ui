@@ -3,7 +3,8 @@ import { Shift, Projected } from '@shared/data/repository/repository.model';
 import { TenantConfigFilter, TenantConfigTypes } from 'app/features/identity/tenant-config/model/tenant-config.model';
 import { TenantConfigRepository } from 'app/features/identity/tenant-config/repository/tenant-config-repository.service';
 import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal } from '@angular/core';
+import { input, effect, Component, signal, contentChild } from '@angular/core';
+import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({
@@ -17,6 +18,9 @@ export class TenantConfigViewListComponent {
   actionName = input<string>('tenant-config');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Estructura de fila o tarjeta que pasa quien usa el listado (`<list-view-row>`/`<list-view-card>` como contenido). */
+  rowLayout = contentChild(ListViewRowTemplate);
+  cardLayout = contentChild(ListViewCardTemplate);
   search = new FormControl<any>(undefined);
   showSearchLabel = signal('Refresh');
   hideSearchLabel = signal('Refresh');

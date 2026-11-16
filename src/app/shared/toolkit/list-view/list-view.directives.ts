@@ -120,6 +120,31 @@ export class ListViewTableTemplate {
   });
 }
 
+/**
+ * Huecos con los que list-view pinta cada fila o tarjeta. Los cumple `<list-view-row>`/`<list-view-card>` y también la
+ * mezcla de una estructura recibida desde fuera (`rowLayout`/`cardLayout`) con la propia del listado.
+ */
+export interface ListViewRowSlots {
+  icon: () => ListViewIconDirective | undefined;
+  title: () => ListViewTitleDirective | null;
+  subtitle: () => ListViewSubtitleDirective | null;
+  text: () => ListViewTextDirective | null;
+  trailing: () => ListViewTrailingDirective | null;
+  action: () => ListViewActionDirective | null;
+}
+
+/** Superpone `over` a `base` hueco a hueco: lo que `over` no define (p. ej. las acciones de fila) sale de `base`. */
+export function mergeRowSlots(over: ListViewRowSlots, base: ListViewRowSlots): ListViewRowSlots {
+  return {
+    icon: () => over.icon() ?? base.icon(),
+    title: () => over.title() ?? base.title(),
+    subtitle: () => over.subtitle() ?? base.subtitle(),
+    text: () => over.text() ?? base.text(),
+    trailing: () => over.trailing() ?? base.trailing(),
+    action: () => over.action() ?? base.action(),
+  };
+}
+
 @Component({
   selector: 'list-view-row',
   template: '',

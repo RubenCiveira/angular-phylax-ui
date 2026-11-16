@@ -2,7 +2,8 @@
 import { Shift, Projected } from '@shared/data/repository/repository.model';
 import { SnippetRepository } from 'app/features/template/snippet/repository/snippet-repository.service';
 import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal } from '@angular/core';
+import { input, effect, Component, signal, contentChild } from '@angular/core';
+import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
 import { SnippetFilter, SnippetTypes } from 'app/features/template/snippet/model/snippet.model';
 import { DisplayProvider } from '@shared/data/display-provider';
 
@@ -17,6 +18,9 @@ export class SnippetViewListComponent {
   actionName = input<string>('snippet');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Estructura de fila o tarjeta que pasa quien usa el listado (`<list-view-row>`/`<list-view-card>` como contenido). */
+  rowLayout = contentChild(ListViewRowTemplate);
+  cardLayout = contentChild(ListViewCardTemplate);
   search = new FormControl<any>(undefined);
   showSearchLabel = signal('Refresh');
   hideSearchLabel = signal('Refresh');

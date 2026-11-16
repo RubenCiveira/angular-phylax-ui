@@ -3,7 +3,8 @@ import { UserFilter, UserTypes } from 'app/features/identity/user/model/user.mod
 import { Shift, Projected } from '@shared/data/repository/repository.model';
 import { UserRepository } from 'app/features/identity/user/repository/user-repository.service';
 import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal } from '@angular/core';
+import { input, effect, Component, signal, contentChild } from '@angular/core';
+import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({
@@ -17,6 +18,9 @@ export class UserViewListComponent {
   actionName = input<string>('user');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Estructura de fila o tarjeta que pasa quien usa el listado (`<list-view-row>`/`<list-view-card>` como contenido). */
+  rowLayout = contentChild(ListViewRowTemplate);
+  cardLayout = contentChild(ListViewCardTemplate);
   search = new FormControl<any>(undefined);
   showSearchLabel = signal('Refresh');
   hideSearchLabel = signal('Refresh');

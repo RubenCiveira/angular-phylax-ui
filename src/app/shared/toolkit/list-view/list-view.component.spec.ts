@@ -58,6 +58,7 @@ const transloco = TranslocoTestingModule.forRoot({
       [error]="error()"
       [selectionMultiple]="true"
       [selectionModel]="selection"
+      [fixed]="fixed()"
       [(sort)]="sort"
       (activate)="activated.push($event)"
       (retry)="retries = retries + 1"
@@ -86,6 +87,7 @@ class ListViewHostComponent {
     { id: 2, name: 'Two', code: 'b', secret: 's2' },
   ]);
   error = signal<unknown>(undefined);
+  fixed = signal<{ [key: string]: any } | undefined>(undefined);
   selection = new SelectionModel<any>();
   sort: ListViewSort | null = null;
   activated: any[] = [];
@@ -115,7 +117,11 @@ class ActionsHostComponent {
   standalone: true,
   imports: [LIST_VIEW],
   template: `
-    <list-view [mode]="mode" [data]="data" [display]="display">
+    <!-- Estructura que llega desde fuera, como la que un sublistado recibe de su contenedor -->
+    <list-view-row #outer>
+      <ng-template listViewRowTitle let-row>outer {{ row.name }}</ng-template>
+    </list-view-row>
+    <list-view [mode]="mode" [data]="data" [display]="display" [rowLayout]="withLayout ? outer : undefined">
       <list-view-row>
         <ng-template listViewRowTitle let-row>row {{ row.name }}</ng-template>
         <ng-template listViewRowIcon [listViewRowIconWhen]="isRoot" let-row
@@ -133,6 +139,7 @@ class ActionsHostComponent {
 class CardHostComponent {
   mode: ListViewMode = 'card';
   withCard = true;
+  withLayout = false;
   data = [
     { id: 1, name: 'Root', root: true },
     { id: 2, name: 'Plain', root: false },
@@ -141,7 +148,7 @@ class CardHostComponent {
   isRoot = (item: any) => item.root;
 }
 
-async function createCardHost(mode: ListViewMode, withCard: boolean) {
+async function createCardHost(mode: ListViewMode, withCard: boolean, withLayout = false) {
   TestBed.configureTestingModule({
     imports: [CardHostComponent, transloco],
     providers: [{ provide: BreakpointObserver, useClass: MockBreakpointObserver }],
@@ -149,6 +156,7 @@ async function createCardHost(mode: ListViewMode, withCard: boolean) {
   const fixture = TestBed.createComponent(CardHostComponent);
   fixture.componentInstance.mode = mode;
   fixture.componentInstance.withCard = withCard;
+  fixture.componentInstance.withLayout = withLayout;
   // La vista de lista usa scroll virtual: sin tamaño no pinta filas
   Object.assign(fixture.nativeElement.style, { display: 'block', width: '600px', height: '400px' });
   fixture.detectChanges();
@@ -308,6 +316,21 @@ describe('ListViewComponent', () => {
       expect(fixture.nativeElement.textContent).toContain('row Root');
     });
 
+    it('overlays an outer row layout slot by slot over its own row', async () => {
+      const fixture = await createCardHost('list', true, true);
+      const items = fixture.nativeElement.querySelectorAll('.material-list-item');
+      expect(items[0].textContent).toContain('outer Root');
+      expect(items[0].textContent).not.toContain('row Root');
+      // El icono no lo define la estructura de fuera: se conserva el propio
+      expect(items[0].querySelector('.root-icon')).not.toBeNull();
+    });
+
+    it('uses the outer row layout for the cards when there is no outer card layout', async () => {
+      const fixture = await createCardHost('card', true, true);
+      expect(fixture.nativeElement.textContent).toContain('outer Root');
+      expect(fixture.nativeElement.textContent).not.toContain('card Root');
+    });
+
     it('shows the icon only where it applies and the avatar elsewhere', async () => {
       const fixture = await createCardHost('list', true);
       const items = fixture.nativeElement.querySelectorAll('.material-list-item');
@@ -448,6 +471,17 @@ describe('ListViewComponent', () => {
       await fixture.whenStable();
       list = fixture.debugElement.children[0].componentInstance as ListViewComponent;
       expect(list.tableLayout().columns.map((c) => c.key)).toEqual(['name', 'secret']);
+    });
+
+    it('hides the columns of fixed values, matching camelCase and kebab-case', async () => {
+      const fixture = createHost();
+      fixture.componentInstance.fixed.set({ Code: { $ref: 'a' } });
+      fixture.detectChanges();
+      await fixture.whenStable();
+      const list = fixture.debugElement.children[0].componentInstance as ListViewComponent;
+      expect(list.tableLayout().columns.map((c) => c.key)).toEqual(['name']);
+      expect(list.choosableColumns().map((c) => c.key)).toEqual(['name', 'secret']);
+      expect(fixture.nativeElement.textContent).not.toContain('Code');
     });
 
     it('never hides the last titled column', async () => {

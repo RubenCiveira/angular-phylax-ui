@@ -52,6 +52,9 @@
         (activate)="actions.defaultAction([$event])"
         [selectionMultiple]="!!actions.hasMultiple()"
         [selectionModel]="actions.selectionModel"
+        [fixed]="fixed()"
+        [rowLayout]="rowLayout()"
+        [cardLayout]="cardLayout()"
       >
         <list-view-row>
           <ng-template listViewRowTitle let-row="$implicit">

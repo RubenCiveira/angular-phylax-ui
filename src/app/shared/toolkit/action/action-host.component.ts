@@ -17,48 +17,49 @@ import type { ActionContainerComponent } from './action-container.component';
     @let leaf = container().leaf;
     @let breadcrumb = container().breadcrumb;
     @let more = 'common.moreActions' | transloco;
-    <div class="toolbar-title">
+    <nav class="crumbs">
       @for (step of breadcrumb; track $index) {
-        <div class="bread-step">
-          <div class="bread-step-title" (click)="step.close()">
-            @if ($index == 0) {
-              <mat-icon>chevron_left</mat-icon>
-            }
-            {{ step.name() }}
-          </div>
-          <div class="bread-step-subtitle">
-            {{ step.display() ? step.display()?.display(step.selectionModel.selected()[0]) : step.current()?.title() }}
-            <button mat-icon-button aria-label="{{ more }}" [matTooltip]="more" [matMenuTriggerFor]="breadDialogMenu">
-              <mat-icon>more_horiz</mat-icon>
-            </button>
-            <mat-menu #breadDialogMenu="matMenu">
-              @for (action of step.breadcrumActions(); track $index) {
-                <button
-                  mat-menu-item
-                  aria-label="{{ action.label() }}"
-                  (click)="step.executeAction(action.name, step.selectionModel.selected())"
-                  [disabled]="!action.enabled(step.selectionModel.selected())()"
-                >
-                  @if (action.icon()) {
-                    <mat-icon>{{ action.icon() }}</mat-icon>
-                  }
-                  {{ action.label() }}
-                </button>
-              }
-            </mat-menu>
-          </div>
-        </div>
-        <mat-icon>chevron_right</mat-icon>
-      }
-      <div class="bread-step">
-        <div class="bread-step-title" (click)="leaf.close()">
-          @if (breadcrumb.length == 0) {
-            <mat-icon>chevron_left</mat-icon>
+        @let selected = step.selectionModel.selected();
+        @let label = step.display() ? step.display()?.display(selected[0]) : step.current()?.title();
+        <button type="button" class="crumb crumb-link" (click)="step.close()">
+          @if ($index == 0) {
+            <mat-icon class="crumb-back">chevron_left</mat-icon>
           }
-          {{ leaf.name() }}
-        </div>
-      </div>
-    </div>
+          <span class="crumb-text">{{ step.name() }}</span>
+        </button>
+        <mat-icon class="crumb-sep" aria-hidden="true">chevron_right</mat-icon>
+        @if (step.breadcrumActions().length > 0) {
+          <button type="button" class="crumb crumb-item" [matTooltip]="more" [matMenuTriggerFor]="breadDialogMenu">
+            <span class="crumb-text">{{ label }}</span>
+            <mat-icon class="crumb-caret">arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #breadDialogMenu="matMenu">
+            @for (action of step.breadcrumActions(); track $index) {
+              <button
+                mat-menu-item
+                aria-label="{{ action.label() }}"
+                (click)="step.executeAction(action.name, selected)"
+                [disabled]="!action.enabled(selected)()"
+              >
+                @if (action.icon()) {
+                  <mat-icon>{{ action.icon() }}</mat-icon>
+                }
+                {{ action.label() }}
+              </button>
+            }
+          </mat-menu>
+        } @else {
+          <span class="crumb crumb-item"><span class="crumb-text">{{ label }}</span></span>
+        }
+        <mat-icon class="crumb-sep" aria-hidden="true">chevron_right</mat-icon>
+      }
+      <button type="button" class="crumb crumb-current" aria-current="page" (click)="leaf.close()">
+        @if (breadcrumb.length == 0) {
+          <mat-icon class="crumb-back">chevron_left</mat-icon>
+        }
+        <span class="crumb-text">{{ leaf.name() }}</span>
+      </button>
+    </nav>
     @for (action of leaf.dialogActions(); track $index) {
       <button
         [matButton]="action.appearance?.() ?? 'tonal'"

@@ -26,10 +26,12 @@ import {
   ListViewEmptyDirective,
   ListViewErrorDirective,
   ListViewFocusableDirective,
+  ListViewRowSlots,
   ListViewRowTemplate,
   ListViewSort,
   ListViewTableTemplate,
   ListViewCardTemplate,
+  mergeRowSlots,
 } from './list-view.directives';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
@@ -78,6 +80,9 @@ const COLUMN_MENU_WIDTH = 48;
 const SKELETON_ROWS = 20;
 /** Con ratón las acciones de la fila solo se ven al pasar por encima: flotan al final de la fila sin ocupar ancho. */
 const FLOATING_ACTIONS_QUERY = '(hover: hover) and (pointer: fine)';
+/** Nombre de campo o clave de columna normalizado para casar `resourceServer`, `resource-server` y `resource_server`. */
+const columnName = (name: string) => name.replace(/[-_]/g, '').toLowerCase();
+
 const COLUMNS_STORAGE_PREFIX = 'list-view-columns-';
 
 @Component({
@@ -131,6 +136,18 @@ export class ListViewComponent implements OnInit, OnDestroy {
   storageKey = input<string>();
   /** Altura de fila en px; si no se indica manda `--list-view-row-height`. */
   rowHeight = input<number>();
+  /**
+   * Valores fijados desde fuera (p. ej. el padre de un sublistado). Sus columnas se ocultan: repetirían el mismo valor
+   * en todas las filas. Se casan por nombre ignorando guiones y mayúsculas (`resourceServer` ↔ `resource-server`).
+   */
+  fixed = input<{ [key: string]: any } | undefined>();
+  /**
+   * Estructura de fila recibida desde fuera (p. ej. un sublistado que quiere destacar otro dato). Se superpone a la de
+   * `<list-view-row>` hueco a hueco: lo que no defina se conserva, como las acciones de fila.
+   */
+  rowLayout = input<ListViewRowSlots | undefined>();
+  /** Igual que `rowLayout` para las tarjetas; si no se indica, las tarjetas usan `rowLayout`. */
+  cardLayout = input<ListViewRowSlots | undefined>();
   /** Orden actual; su output `sortChange` se emite al pulsar una cabecera ordenable. */
   sort = model<ListViewSort | null>(null);
 
@@ -150,16 +167,24 @@ export class ListViewComponent implements OnInit, OnDestroy {
   rowTemplate = contentChildren(ListViewRowTemplate);
   theListScroll = viewChild<CdkVirtualScrollViewport>('listScroll');
 
-  row = computed(() => {
+  /** Estructura propia de las filas (la de `<list-view-row>`), sin la recibida desde fuera. */
+  private ownRow = computed<ListViewRowSlots>(() => {
     const theRows = this.rowTemplate();
     return theRows.length > 0 ? theRows[0] : new ListViewRowTemplate();
   });
 
+  row = computed<ListViewRowSlots>(() => {
+    const over = this.rowLayout();
+    return over ? mergeRowSlots(over, this.ownRow()) : this.ownRow();
+  });
+
   cardTemplate = contentChildren(ListViewCardTemplate);
   /** Estructura de las tarjetas: la de `<list-view-card>` o, si no hay, la de las filas. */
-  card = computed<ListViewRowTemplate>(() => {
+  card = computed<ListViewRowSlots>(() => {
     const theCards = this.cardTemplate();
-    return theCards.length > 0 ? theCards[0] : this.row();
+    const own = theCards.length > 0 ? theCards[0] : this.ownRow();
+    const over = this.cardLayout() ?? this.rowLayout();
+    return over ? mergeRowSlots(over, own) : own;
   });
 
   emptyTemplate = contentChild(ListViewEmptyDirective);
@@ -226,11 +251,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
     return !!selection && !this.allSelected() && (this.data() ?? []).some((row) => selection.isSelected(row));
   });
 
-  private keyedColumns = computed(() =>
-    this.table()
+  /** Columnas con su clave estable, sin las de valores fijados desde fuera. */
+  private keyedColumns = computed(() => {
+    const fixed = new Set(Object.keys(this.fixed() ?? {}).map(columnName));
+    return this.table()
       .columns()
-      .map((column, index) => ({ column, key: column.key() ?? `#${index}` })),
-  );
+      .map((column, index) => ({ column, key: column.key() ?? `#${index}` }))
+      .filter(({ column }) => !fixed.has(columnName(column.key() ?? '')));
+  });
 
   private readonly elRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly direction = inject(Directionality, { optional: true });
@@ -392,7 +420,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   /** Si `template` tiene un icono que se aplica a `item`; si no, se muestra el avatar por defecto. */
-  hasIcon(template: ListViewRowTemplate, item: any): boolean {
+  hasIcon(template: ListViewRowSlots, item: any): boolean {
     const icon = template.icon();
     return !!icon && icon.appliesTo(item);
   }

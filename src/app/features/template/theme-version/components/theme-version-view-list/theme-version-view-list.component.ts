@@ -3,7 +3,8 @@ import { Shift, Projected } from '@shared/data/repository/repository.model';
 import { ThemeVersionTypes, ThemeVersionFilter } from 'app/features/template/theme-version/model/theme-version.model';
 import { FormControl } from '@angular/forms';
 import { ThemeVersionRepository } from 'app/features/template/theme-version/repository/theme-version-repository.service';
-import { input, effect, Component, signal } from '@angular/core';
+import { input, effect, Component, signal, contentChild } from '@angular/core';
+import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({
@@ -17,6 +18,9 @@ export class ThemeVersionViewListComponent {
   actionName = input<string>('theme-version');
   fixed = input<{ [key: string]: any }>();
   hidden = input<{ [key: string]: any }>();
+  /** Estructura de fila o tarjeta que pasa quien usa el listado (`<list-view-row>`/`<list-view-card>` como contenido). */
+  rowLayout = contentChild(ListViewRowTemplate);
+  cardLayout = contentChild(ListViewCardTemplate);
   search = new FormControl<any>(undefined);
   showSearchLabel = signal('Refresh');
   hideSearchLabel = signal('Refresh');
