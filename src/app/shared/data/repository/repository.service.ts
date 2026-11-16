@@ -947,8 +947,8 @@ export class RepositoryService<T, F> {
         const value = item?.[field];
         const ref = refOf(value);
         if (!ref) {
-          // Referencia vacía: un Signal sin valor. Un campo que no es referencia se queda como está
-          if (value === null || value === undefined) {
+          // Referencia vacía (`null` o `{ $ref: null }`): un Signal sin valor. Un campo que no es referencia se queda como está
+          if (isEmptyRef(value)) {
             copy[field] = NO_REFERENCE;
           }
           return;
@@ -1056,6 +1056,18 @@ function isPaths(value: ProjectionSpec | readonly string[]): value is readonly s
 function refOf(value: unknown): string | undefined {
   const ref = (value as { $ref?: unknown } | null)?.$ref;
   return typeof ref === 'string' && ref ? ref : undefined;
+}
+
+/** Sin referencia: `null`, `undefined` o un objeto de referencia sin clave (`{}`, `{ $ref: null }`, `{ $ref: '' }`). */
+function isEmptyRef(value: unknown): boolean {
+  if (value === null || value === undefined) {
+    return true;
+  }
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    return false;
+  }
+  const keys = Object.keys(value);
+  return keys.every((key) => key === '$ref') && !refOf(value);
 }
 
 interface Ticker<K, V> {

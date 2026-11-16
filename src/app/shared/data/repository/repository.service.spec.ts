@@ -1168,6 +1168,20 @@ describe('RepositoryService', () => {
       expect(tenantProvider.retrieve).toHaveBeenCalledTimes(1);
     });
 
+    it('exposes empty reference objects as a signal without value', async () => {
+      const { repo, tenantProvider } = datedRepo([
+        { id: '1', registeredAt: '2025-10-30T10:00:00Z', tenant: { $ref: null } as any },
+        { id: '2', registeredAt: '2025-10-30T10:00:00Z', tenant: { $ref: '' } },
+        { id: '3', registeredAt: '2025-10-30T10:00:00Z', tenant: {} as any },
+      ]);
+      const shift = TestBed.runInInjectionContext(() => repo.projections(['tenant']));
+      shift.fetch({});
+      await settle();
+      const rows = shift()!;
+      rows.forEach((row) => expect(row.tenant()).toBeUndefined());
+      expect(tenantProvider.retrieve).not.toHaveBeenCalled();
+    });
+
     it('asks for the distinct references of a page in one batch', async () => {
       const tenantProvider = buildProvider({
         retrieveAll: jasmine
