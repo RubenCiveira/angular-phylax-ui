@@ -12,13 +12,13 @@
       <article class="preview" [innerHTML]="preview()"></article>
       <div class="buttons">
         @for (format of formats(); track format) {
-          <button mat-raised-button [disabled]="!!generating()" (click)="download(format)">
+          <button matButton="tonal" [disabled]="!!generating()" (click)="download(format)">
             <mat-icon aria-hidden="true">{{ format === 'pdf' ? 'picture_as_pdf' : 'description' }}</mat-icon>
             {{ 'common.document.download.' + format | transloco }}
           </button>
         }
         @if (closable()) {
-          <button mat-button (click)="closed.emit()">{{ 'common.document.button.close' | transloco }}</button>
+          <button matButton (click)="closed.emit()">{{ 'common.document.button.close' | transloco }}</button>
         }
       </div>
       @if (generating()) {
@@ -31,9 +31,9 @@
       <h3 id="entity-document-failed-title">{{ 'common.document.failed.title' | transloco }}</h3>
       <p>{{ 'common.document.failed.' + error() | transloco: { template: definition().template } }}</p>
       <div class="buttons">
-        <button mat-stroked-button (click)="load()">{{ 'common.document.button.retry' | transloco }}</button>
+        <button matButton="outlined" (click)="load()">{{ 'common.document.button.retry' | transloco }}</button>
         @if (closable()) {
-          <button mat-button (click)="closed.emit()">{{ 'common.document.button.close' | transloco }}</button>
+          <button matButton (click)="closed.emit()">{{ 'common.document.button.close' | transloco }}</button>
         }
       </div>
     </section>

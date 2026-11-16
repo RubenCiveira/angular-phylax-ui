@@ -4,9 +4,9 @@
   <app-page-error [asColumn]="true" [error]="data.error" [showTitle]="false" [showHome]="false" />
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <a mat-button mat-dialog-close [routerLink]="home()">{{ 'errors.page.home' | transloco }}</a>
+  <a matButton mat-dialog-close [routerLink]="home()">{{ 'errors.page.home' | transloco }}</a>
   @if (data.login) {
-    <button mat-flat-button (click)="login()">{{ 'auth.unauthorized.login' | transloco }}</button>
+    <button matButton="filled" (click)="login()">{{ 'auth.unauthorized.login' | transloco }}</button>
   }
-  <button mat-button mat-dialog-close cdkFocusInitial>{{ 'common.notify.close' | transloco }}</button>
+  <button matButton mat-dialog-close cdkFocusInitial>{{ 'common.notify.close' | transloco }}</button>
 </mat-dialog-actions>

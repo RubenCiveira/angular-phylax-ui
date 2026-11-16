@@ -62,8 +62,8 @@ interface EditField {
       </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" mat-dialog-close>{{ 'offline.action.cancel' | transloco }}</button>
-      <button mat-flat-button type="button" (click)="save()">{{ 'offline.action.save' | transloco }}</button>
+      <button matButton type="button" mat-dialog-close>{{ 'offline.action.cancel' | transloco }}</button>
+      <button matButton="filled" type="button" (click)="save()">{{ 'offline.action.save' | transloco }}</button>
     </mat-dialog-actions>
   `,
   styles: [

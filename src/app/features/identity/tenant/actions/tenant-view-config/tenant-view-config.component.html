@@ -10,7 +10,7 @@
       [defined]="definedProperties()"
     />
     <div class="buttons">
-      <button mat-raised-button [disabled]="formView.form.invalid || !formView.form.dirty" (click)="save()">
+      <button matButton="filled" [disabled]="formView.form.invalid || !formView.form.dirty" (click)="save()">
         {{ 'identity/tenant.action.config.saveBtn' | transloco }}
       </button>
     </div>

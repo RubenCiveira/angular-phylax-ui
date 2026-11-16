@@ -11,7 +11,7 @@
         <ng-container *ngTemplateOutlet="actions.theToolbarTemplate() || null"></ng-container>
         <div style="flex: 1"></div>
         <button
-          mat-raised-button
+          matButton="tonal"
           aria-label="{{ panel.expanded ? hideSearchLabel() : showSearchLabel() }}"
           (click)="panel.toggle()"
         >
@@ -31,7 +31,7 @@
       <!-- Formulario de filtros -->
       <h2>{{ 'template/theme-asset.list.search.title' | transloco }}</h2>
       <theme-asset-view-search #searchForm [formControl]="search" />
-      <button mat-raised-button [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
+      <button matButton="filled" [disabled]="searchForm.form.invalid || !searchForm.form.dirty" (click)="makeSearch()">
         {{ 'template/theme-asset.list.search.button' | transloco }}
       </button>
     </mat-expansion-panel>

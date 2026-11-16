@@ -23,9 +23,9 @@ import { ErrorPageComponent } from '@shared/toolkit/error-page/error-page.compon
       [showHome]="reason === '403'"
     >
       @if (reason === '401') {
-        <button mat-flat-button (click)="login()">{{ 'auth.unauthorized.login' | transloco }}</button>
+        <button matButton="filled" (click)="login()">{{ 'auth.unauthorized.login' | transloco }}</button>
       } @else {
-        <button mat-button (click)="switchAccount()">{{ 'auth.unauthorized.switchAccount' | transloco }}</button>
+        <button matButton (click)="switchAccount()">{{ 'auth.unauthorized.switchAccount' | transloco }}</button>
       }
     </app-page-error>
   `,

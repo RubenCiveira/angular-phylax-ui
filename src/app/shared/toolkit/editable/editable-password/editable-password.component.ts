@@ -59,7 +59,7 @@ function passwordMatchValidator(group: AbstractControl): ValidationErrors | null
         [placeholder]="(hasValue() ? 'common.password.assigned' : 'common.password.unassigned') | transloco"
       />
       @if (!disabled()) {
-        <button mat-button matSuffix type="button" (click)="open()">
+        <button matButton matSuffix type="button" (click)="open()">
           {{ (hasValue() ? 'common.password.change' : 'common.password.assign') | transloco }}
         </button>
       }
@@ -141,8 +141,8 @@ function passwordMatchValidator(group: AbstractControl): ValidationErrors | null
       <mat-divider />
 
       <div mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close type="button">{{ 'common.password.cancel' | transloco }}</button>
-        <button mat-flat-button type="button" [disabled]="passwordForm.invalid" (click)="update()">
+        <button matButton mat-dialog-close type="button">{{ 'common.password.cancel' | transloco }}</button>
+        <button matButton="filled" type="button" [disabled]="passwordForm.invalid" (click)="update()">
           {{ 'common.password.' + mode + 'Submit' | transloco }}
         </button>
       </div>

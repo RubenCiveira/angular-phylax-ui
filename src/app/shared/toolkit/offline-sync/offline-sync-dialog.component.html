@@ -42,16 +42,16 @@
             <div class="actions">
               @if (row.state === 'failed') {
                 @if (isConflict(op)) {
-                  <button mat-stroked-button type="button" [disabled]="busy()" (click)="resolveConflict(op)">
+                  <button matButton="outlined" type="button" [disabled]="busy()" (click)="resolveConflict(op)">
                     <mat-icon>merge</mat-icon>{{ 'offline.action.conflict' | transloco }}
                   </button>
                 } @else if (canEdit(op)) {
-                  <button mat-stroked-button type="button" (click)="edit(op)">
+                  <button matButton="outlined" type="button" (click)="edit(op)">
                     <mat-icon>edit</mat-icon>{{ 'offline.action.edit' | transloco }}
                   </button>
                 }
               }
-              <button mat-button type="button" class="discard" (click)="discard(op)">
+              <button matButton type="button" class="discard" (click)="discard(op)">
                 <mat-icon>delete</mat-icon>{{ 'offline.action.discard' | transloco }}
               </button>
             </div>
@@ -62,10 +62,10 @@
   }
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close type="button">{{ 'offline.action.close' | transloco }}</button>
+  <button matButton mat-dialog-close type="button">{{ 'offline.action.close' | transloco }}</button>
   @if (queue.failed() && !syncing()) {
     <button
-      mat-stroked-button
+      matButton="outlined"
       type="button"
       (click)="sync('skip')"
       [matTooltip]="'offline.action.skipTooltip' | transloco"
@@ -73,7 +73,7 @@
       {{ 'offline.action.skip' | transloco }}
     </button>
   }
-  <button mat-flat-button type="button" [disabled]="syncing() || !queue.pending()" (click)="sync('retry')">
+  <button matButton="filled" type="button" [disabled]="syncing() || !queue.pending()" (click)="sync('retry')">
     <mat-icon>cloud_upload</mat-icon>
     {{ (queue.failed() ? 'offline.action.retry' : 'offline.action.sync') | transloco }}
   </button>

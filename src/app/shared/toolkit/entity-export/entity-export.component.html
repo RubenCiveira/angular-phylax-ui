@@ -5,15 +5,15 @@
       <h3 id="entity-export-choose-title">{{ 'common.export.choose.title' | transloco }}</h3>
       <p>{{ 'common.export.choose.description' | transloco: { count: selection().length } }}</p>
       <div class="buttons">
-        <button mat-raised-button (click)="start('selection')">
+        <button matButton="filled" (click)="start('selection')">
           <mat-icon aria-hidden="true">checklist</mat-icon>
           {{ 'common.export.choose.selection' | transloco: { count: selection().length } }}
         </button>
-        <button mat-stroked-button (click)="start('all')">
+        <button matButton="outlined" (click)="start('all')">
           <mat-icon aria-hidden="true">filter_list</mat-icon>
           {{ 'common.export.choose.all' | transloco }}
         </button>
-        <button mat-button (click)="closed.emit()">{{ 'common.export.button.close' | transloco }}</button>
+        <button matButton (click)="closed.emit()">{{ 'common.export.button.close' | transloco }}</button>
       </div>
     </section>
   }
@@ -40,7 +40,7 @@
         <p class="hint">{{ 'common.export.running.limit' | transloco: { limit: limit() } }}</p>
       }
       <div class="buttons">
-        <button mat-stroked-button (click)="cancel()">{{ 'common.export.button.cancel' | transloco }}</button>
+        <button matButton="outlined" (click)="cancel()">{{ 'common.export.button.cancel' | transloco }}</button>
       </div>
     </section>
   }
@@ -55,8 +55,8 @@
       }
       <p class="hint">{{ 'common.export.done.reimport' | transloco }}</p>
       <div class="buttons">
-        <button mat-raised-button (click)="closed.emit()">{{ 'common.export.button.close' | transloco }}</button>
-        <button mat-stroked-button (click)="restart()">{{ 'common.export.button.again' | transloco }}</button>
+        <button matButton="filled" (click)="closed.emit()">{{ 'common.export.button.close' | transloco }}</button>
+        <button matButton="outlined" (click)="restart()">{{ 'common.export.button.again' | transloco }}</button>
       </div>
     </section>
   }
@@ -65,8 +65,8 @@
     <section role="alert">
       <h3 [class.warn]="status() === 'failed'">{{ 'common.export.' + status() + '.title' | transloco }}</h3>
       <div class="buttons">
-        <button mat-raised-button (click)="restart()">{{ 'common.export.button.retry' | transloco }}</button>
-        <button mat-button (click)="closed.emit()">{{ 'common.export.button.close' | transloco }}</button>
+        <button matButton="filled" (click)="restart()">{{ 'common.export.button.retry' | transloco }}</button>
+        <button matButton (click)="closed.emit()">{{ 'common.export.button.close' | transloco }}</button>
       </div>
     </section>
   }

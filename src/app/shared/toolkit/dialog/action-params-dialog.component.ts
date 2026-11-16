@@ -83,8 +83,8 @@ import { ActionParam, ActionParamValues, ActionParamsOptions } from './action-pa
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="null">{{ data.cancel }}</button>
-      <button mat-flat-button type="button" [disabled]="form.invalid" (click)="accept()">{{ data.ok }}</button>
+      <button matButton type="button" [mat-dialog-close]="null">{{ data.cancel }}</button>
+      <button matButton="filled" type="button" [disabled]="form.invalid" (click)="accept()">{{ data.ok }}</button>
     </mat-dialog-actions>
   `,
 })

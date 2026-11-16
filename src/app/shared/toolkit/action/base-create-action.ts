@@ -19,6 +19,8 @@ export interface CreateSource<T> extends AclSource {
 export abstract class BaseCreateAction<T> extends BaseFormAction<T> {
   readonly name = 'create';
   override readonly contextual = false;
+  /** Crear es la acción principal de la lista. */
+  protected override readonly defaultAppearance = 'filled';
 
   protected abstract override readonly repository: CreateSource<T>;
 

@@ -2,12 +2,20 @@
 import { Signal, TemplateRef, WritableSignal } from '@angular/core';
 import type { ActionContainerComponent } from './action-container.component';
 
+/**
+ * Estilo Material 3 del botón de la acción en barras y diálogos: `filled` para la principal de la pantalla,
+ * `tonal` (por defecto) para el resto y `outlined`/`text` para las de menos peso.
+ */
+export type ActionAppearance = 'filled' | 'tonal' | 'outlined' | 'text';
+
 /** Contrato que el contenedor espera de cada acción; las acciones nuevas extienden `BaseAction`/`ConfirmAction`. */
 export interface Action {
   readonly name: string;
   readonly contextual: boolean;
   readonly multiple: boolean;
   default: Signal<boolean>;
+  /** Estilo del botón; sin él se pinta `tonal`. */
+  appearance?: Signal<ActionAppearance>;
 
   label: Signal<string>;
   icon: Signal<string>;

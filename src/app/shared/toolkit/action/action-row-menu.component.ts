@@ -30,7 +30,7 @@ import type { ActionContainerComponent } from './action-container.component';
           </button>
         } @else {
           <button
-            mat-raised-button
+            matButton
             aria-label="{{ action.label() }}"
             [matTooltip]="action.tooltip()"
             (click)="c.executeAction(action.name, [item])"

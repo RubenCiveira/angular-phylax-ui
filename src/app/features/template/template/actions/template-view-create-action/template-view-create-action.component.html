@@ -11,7 +11,7 @@
     />
     <div class="buttons">
       <button
-        mat-raised-button
+        matButton="filled"
         [disabled]="saving() || updateForm.form.invalid || !updateForm.form.dirty"
         (click)="save()"
       >

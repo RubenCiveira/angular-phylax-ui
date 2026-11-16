@@ -11,7 +11,7 @@
     />
     <div class="buttons">
       <button
-        mat-raised-button
+        matButton="filled"
         [disabled]="saving() || createForm.form.invalid || !createForm.form.dirty"
         (click)="save(createForm.conflictFields)"
       >

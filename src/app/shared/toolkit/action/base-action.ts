@@ -17,7 +17,7 @@ import { TranslocoService } from '@jsverse/transloco';
 import { combineLatest } from 'rxjs';
 import { Acl } from '@shared/data/acl/acl.model';
 import { Tick } from '@shared/data/repository/repository.model';
-import { Action } from './action.model';
+import { Action, ActionAppearance } from './action.model';
 import type { ActionContainerComponent } from './action-container.component';
 
 /** Lo mínimo que una acción necesita de su repositorio para resolver permisos. */
@@ -44,6 +44,12 @@ export abstract class BaseAction<T = any> implements Action, OnInit {
   readonly contextual: boolean = true;
   readonly multiple: boolean = false;
   readonly default = input<boolean>(false);
+
+  /** Estilo del botón cuando la plantilla no fija `appearance`; las subclases lo cambian (crear → `filled`). */
+  protected readonly defaultAppearance: ActionAppearance = 'tonal';
+  /** `<x-action appearance="filled">` sobrescribe el estilo por defecto de la acción. */
+  readonly appearanceInput = input<ActionAppearance | undefined>(undefined, { alias: 'appearance' });
+  readonly appearance = computed(() => this.appearanceInput() ?? this.defaultAppearance);
 
   /** Scope de transloco con los textos de la entidad. */
   protected abstract readonly scope: string;

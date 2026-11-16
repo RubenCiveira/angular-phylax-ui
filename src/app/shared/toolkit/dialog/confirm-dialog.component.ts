@@ -14,8 +14,8 @@ import { ConfirmOptions } from './confirm-dialog.service';
     <h2 mat-dialog-title>{{ data.titleKey | transloco: data.params }}</h2>
     <mat-dialog-content>{{ data.messageKey | transloco: data.params }}</mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button [mat-dialog-close]="false">{{ data.cancelKey | transloco: data.params }}</button>
-      <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial>
+      <button matButton [mat-dialog-close]="false">{{ data.cancelKey | transloco: data.params }}</button>
+      <button matButton="filled" [mat-dialog-close]="true" cdkFocusInitial>
         {{ data.okKey | transloco: data.params }}
       </button>
     </mat-dialog-actions>

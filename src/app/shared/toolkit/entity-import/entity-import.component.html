@@ -119,15 +119,15 @@
 
     <div class="buttons">
       @if (runningHere()) {
-        <button mat-stroked-button (click)="cancel()">{{ 'common.import.button.cancel' | transloco }}</button>
+        <button matButton="outlined" (click)="cancel()">{{ 'common.import.button.cancel' | transloco }}</button>
       }
       @if (canResume()) {
-        <button mat-raised-button (click)="resume()">{{ 'common.import.button.resume' | transloco }}</button>
+        <button matButton="filled" (click)="resume()">{{ 'common.import.button.resume' | transloco }}</button>
       }
       @if (job.status !== 'running') {
-        <button mat-stroked-button (click)="restart()">{{ 'common.import.button.restart' | transloco }}</button>
+        <button matButton="outlined" (click)="restart()">{{ 'common.import.button.restart' | transloco }}</button>
       }
-      <button mat-button (click)="closed.emit()">{{ 'common.import.button.close' | transloco }}</button>
+      <button matButton (click)="closed.emit()">{{ 'common.import.button.close' | transloco }}</button>
     </div>
   </section>
 } @else if (sheet(); as sheet) {
@@ -208,7 +208,7 @@
           <mat-icon aria-hidden="true">error</mat-icon>
           {{ 'common.import.preview.errors' | transloco: { count: failingRows() } }}
         </p>
-        <button mat-button (click)="onlyErrors.set(!onlyErrors())">
+        <button matButton (click)="onlyErrors.set(!onlyErrors())">
           {{ (onlyErrors() ? 'common.import.preview.showAll' : 'common.import.preview.showErrors') | transloco }}
         </button>
       } @else {
@@ -268,7 +268,7 @@
     <p class="hint">
       {{ 'common.import.preview.showing' | transloco: { shown: preview().length, total: sheet.rows.length } }}
       @if (hiddenRows() > 0) {
-        <button mat-button (click)="showMore()">{{ 'common.import.preview.more' | transloco }}</button>
+        <button matButton (click)="showMore()">{{ 'common.import.preview.more' | transloco }}</button>
       }
     </p>
 
@@ -301,10 +301,10 @@
     <p class="hint">{{ 'common.import.mapping.emptyCells' | transloco }}</p>
 
     <div class="buttons">
-      <button mat-raised-button [disabled]="!canStart()" (click)="start()">
+      <button matButton="filled" [disabled]="!canStart()" (click)="start()">
         {{ 'common.import.button.start' | transloco: { count: sheet.rows.length } }}
       </button>
-      <button mat-button (click)="back()">{{ 'common.import.button.back' | transloco }}</button>
+      <button matButton (click)="back()">{{ 'common.import.button.back' | transloco }}</button>
     </div>
   </section>
 } @else {
@@ -331,11 +331,11 @@
     }
     <input #file type="file" hidden [accept]="accept" (change)="read($event)" />
     <div class="buttons">
-      <button mat-raised-button [disabled]="reading()" (click)="file.click()">
+      <button matButton="filled" [disabled]="reading()" (click)="file.click()">
         <mat-icon>upload_file</mat-icon>
         {{ 'common.import.select.button' | transloco }}
       </button>
-      <button mat-stroked-button [disabled]="!aclLoaded() || downloading()" (click)="downloadTemplate()">
+      <button matButton="outlined" [disabled]="!aclLoaded() || downloading()" (click)="downloadTemplate()">
         <mat-icon>download</mat-icon>
         {{ 'common.import.select.template' | transloco }}
       </button>

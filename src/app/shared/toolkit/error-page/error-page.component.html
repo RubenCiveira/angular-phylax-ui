@@ -9,7 +9,7 @@
     <div class="actions">
       <ng-content />
       @if (showHome()) {
-        <a mat-button [routerLink]="home()">{{ 'errors.page.home' | transloco }}</a>
+        <a matButton [routerLink]="home()">{{ 'errors.page.home' | transloco }}</a>
       }
     </div>
     @if (description().detail || description().traceId) {

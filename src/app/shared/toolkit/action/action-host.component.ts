@@ -61,7 +61,7 @@ import type { ActionContainerComponent } from './action-container.component';
     </div>
     @for (action of leaf.dialogActions(); track $index) {
       <button
-        mat-raised-button
+        [matButton]="action.appearance?.() ?? 'tonal'"
         aria-label="{{ action.label() }}"
         [matTooltip]="action.tooltip()"
         (click)="leaf.executeAction(action.name, leaf.selectionModel.selected())"

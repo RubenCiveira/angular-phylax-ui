@@ -5,7 +5,7 @@
       <ng-container *ngTemplateOutlet="custom.template; context: { $implicit: error(), retry: retryFn }"></ng-container>
     } @else {
       <p>{{ 'common.loadError' | transloco }}</p>
-      <button mat-stroked-button type="button" (click)="retryFn()">{{ 'common.retry' | transloco }}</button>
+      <button matButton="outlined" type="button" (click)="retryFn()">{{ 'common.retry' | transloco }}</button>
     }
   </div>
 } @else if (searching() && !data()) {

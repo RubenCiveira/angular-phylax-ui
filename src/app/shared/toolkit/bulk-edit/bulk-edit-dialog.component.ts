@@ -62,8 +62,8 @@ interface BulkEditRow {
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>{{ data.cancel }}</button>
-      <button mat-raised-button color="primary" [disabled]="!hasChanges()" (click)="submit()">
+      <button matButton mat-dialog-close>{{ data.cancel }}</button>
+      <button matButton="filled" color="primary" [disabled]="!hasChanges()" (click)="submit()">
         {{ data.confirm }}
       </button>
     </mat-dialog-actions>

@@ -17,7 +17,7 @@ import type { ActionContainerComponent } from './action-container.component';
     @let c = container();
     @for (action of c.toolbarActions(); track $index) {
       <button
-        mat-raised-button
+        [matButton]="action.appearance?.() ?? 'tonal'"
         aria-label="{{ action.label() }}"
         [matTooltip]="action.tooltip()"
         (click)="c.executeAction(action.name)"
