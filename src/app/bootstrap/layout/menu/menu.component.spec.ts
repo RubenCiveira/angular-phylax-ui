@@ -51,6 +51,7 @@ describe('MenuComponent', () => {
       tenant: signal('main'),
       user: (key: string) => user,
       contexts,
+      contextScope: signal(''),
     };
 
     await TestBed.configureTestingModule({

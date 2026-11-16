@@ -45,3 +45,79 @@ describe('EditableDatetimeComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 });
+
+describe('EditableDatetimeComponent day and hour', () => {
+  let component: EditableDatetimeComponent;
+  let changes: (Date | null)[];
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [EditableDatetimeComponent],
+      providers: [
+        { provide: TranslocoService, useClass: MockTranslocoService },
+        {
+          provide: TRANSLOCO_CONFIG,
+          useValue: { availableLangs: ['en'], defaultLang: 'en', reRenderOnLangChange: false, prodMode: true },
+        },
+        { provide: AppStateService, useClass: MockAppStateService },
+      ],
+    });
+    const fixture = TestBed.createComponent(EditableDatetimeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    changes = [];
+    component.registerOnChange((value: Date | null) => changes.push(value));
+  });
+
+  afterEach(() => TestBed.resetTestingModule());
+
+  const day = () => (component as any).day;
+  const hour = () => (component as any).hour;
+
+  it('changes the day keeping the hour', () => {
+    component.writeValue(new Date(2025, 0, 10, 8, 30));
+
+    day().setValue(new Date(2025, 1, 3));
+
+    expect(changes.at(-1)).toEqual(new Date(2025, 1, 3, 8, 30));
+  });
+
+  it('reads a day given as text', () => {
+    day().setValue('2025-03-04T00:00:00');
+
+    expect(changes.at(-1)!.getDate()).toBe(4);
+  });
+
+  it('changes the hour keeping the day', () => {
+    component.writeValue(new Date(2025, 0, 10, 8, 30));
+
+    hour().setValue('17:45');
+
+    expect(changes.at(-1)).toEqual(new Date(2025, 0, 10, 17, 45));
+  });
+
+  it('clears the value when the day or the hour are emptied', () => {
+    component.writeValue(new Date(2025, 0, 10, 8, 30));
+    day().setValue(null);
+    expect(changes.at(-1)).toBeNull();
+
+    component.writeValue(new Date(2025, 0, 10, 8, 30));
+    hour().setValue('');
+    expect(changes.at(-1)).toBeNull();
+  });
+
+  it('shows a value set from outside, also as text', () => {
+    (component as any).control.setValue('2025-05-06T07:08:00');
+
+    expect(day().value.getDate()).toBe(6);
+    expect(hour().value).toBe('07:08');
+  });
+
+  it('compares the days of two dates', () => {
+    const compare = (component as any).dayChange.bind(component);
+
+    expect(compare(null, null)).toBeFalse();
+    expect(compare(new Date(), null)).toBeTrue();
+    expect(compare(new Date(2025, 0, 1, 3), new Date(2025, 0, 1, 9))).toBeFalse();
+  });
+});

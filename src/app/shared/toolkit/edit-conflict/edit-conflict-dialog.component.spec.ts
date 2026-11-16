@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslocoTestingModule } from '@jsverse/transloco';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { EditConflictDialogComponent, EditConflictDialogData } from './edit-conflict-dialog.component';
 import { ConflictField } from './edit-conflict.model';
 
@@ -136,5 +136,83 @@ describe('EditConflictDialogComponent', () => {
     fixture.detectChanges();
     button('Apply').click();
     expect(dialogRef.close).toHaveBeenCalledWith(CURRENT);
+  });
+});
+
+describe('EditConflictDialogComponent values', () => {
+  const when = new Date(2025, 0, 2, 3, 4);
+  const ORIGINAL_ANY = { active: false, at: when, tags: ['a'], meta: { x: 1 }, label: 'L', owner: 'o1', extra: 'e' };
+
+  const create = (fields: ConflictField[], sent: any, current: any) => {
+    TestBed.configureTestingModule({
+      imports: [EditConflictDialogComponent, TranslocoTestingModule.forRoot({ langs: { en: {} } })],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: { conflict: { original: ORIGINAL_ANY, sent, current }, fields } },
+        { provide: MatDialogRef, useValue: jasmine.createSpyObj('MatDialogRef', ['close']) },
+      ],
+    });
+    TestBed.overrideTemplate(EditConflictDialogComponent, '');
+    return TestBed.createComponent(EditConflictDialogComponent<any>).componentInstance;
+  };
+
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('shows booleans, dates, lists and objects as text, and blanks as empty', () => {
+    const component = create(
+      [
+        { name: 'active', label: 'f.active' },
+        { name: 'at', label: 'f.at' },
+        { name: 'tags', label: 'f.tags' },
+        { name: 'meta', label: 'f.meta' },
+      ],
+      { ...ORIGINAL_ANY, active: true, tags: [true, 'b'], meta: null },
+      { ...ORIGINAL_ANY, tags: [], meta: { y: 2 } },
+    );
+
+    expect(component.rows.get('active')!.sent()).toEqual({ key: 'editConflict.yes' });
+    expect(component.rows.get('active')!.original()).toEqual({ key: 'editConflict.no' });
+    expect(component.rows.get('at')!.original()).toEqual({ text: when.toLocaleString('en') });
+    expect(component.rows.get('tags')!.sent()).toEqual({ text: 'editConflict.yes, b' });
+    expect(component.rows.get('meta')!.current()).toEqual({ text: '{"y":2}' });
+    expect(component.rows.get('meta')!.sent()).not.toEqual(component.rows.get('meta')!.current());
+  });
+
+  it('labels a field without definition by its name and puts it last', () => {
+    const component = create(
+      [{ name: 'label', label: 'f.label' }],
+      { ...ORIGINAL_ANY, label: 'M', extra: 'S' },
+      {
+        ...ORIGINAL_ANY,
+        label: 'C',
+        extra: 'T',
+      },
+    );
+
+    expect(component.rows.get('extra')!.label).toEqual({ text: 'extra' });
+    expect(
+      component
+        .merges()
+        .map((merge) => merge.field)
+        .indexOf('extra'),
+    ).toBeGreaterThan(
+      component
+        .merges()
+        .map((merge) => merge.field)
+        .indexOf('label'),
+    );
+  });
+
+  it('shows the display of a field, plain or failing back to the value', () => {
+    const component = create(
+      [
+        { name: 'label', label: 'f.label', display: (value: string) => 'Shown ' + value },
+        { name: 'owner', label: 'f.owner', display: () => throwError(() => new Error('gone')) },
+      ],
+      { ...ORIGINAL_ANY, label: 'M', owner: 'o2' },
+      { ...ORIGINAL_ANY, label: 'C', owner: 'o3' },
+    );
+
+    expect(component.rows.get('label')!.sent()).toEqual({ text: 'Shown M' });
+    expect(component.rows.get('owner')!.sent()).toEqual({ text: 'o2' });
   });
 });

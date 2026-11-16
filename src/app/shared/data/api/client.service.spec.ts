@@ -175,4 +175,110 @@ describe('ClientService', () => {
       expect(error?.status).toBe(401);
     }));
   });
+
+  describe('methods', () => {
+    it('sends the body of post, put and patch and nothing in delete', () => {
+      const service = TestBed.inject(ClientService);
+      const answers: unknown[] = [];
+
+      service.post({ url: '/api/items', body: { a: 1 } }).subscribe((value) => answers.push(value));
+      service.put({ url: '/api/items/1', body: { a: 2 } }).subscribe((value) => answers.push(value));
+      service.patch({ url: '/api/items/1', body: { a: 3 } }).subscribe((value) => answers.push(value));
+      service.delete({ url: '/api/items/1' }).subscribe((value) => answers.push(value));
+
+      ['POST', 'PUT', 'PATCH', 'DELETE'].forEach((method, index) => {
+        const req = httpMock.expectOne((r) => r.method === method);
+        expect(req.request.body).toEqual(method === 'DELETE' ? null : { a: index + 1 });
+        req.flush({ ok: method });
+      });
+      expect(answers).toEqual([{ ok: 'POST' }, { ok: 'PUT' }, { ok: 'PATCH' }, { ok: 'DELETE' }]);
+    });
+
+    it('downloads a blob', (done) => {
+      const service = TestBed.inject(ClientService);
+
+      service.download({ url: '/api/file' }).subscribe((response) => {
+        expect(response.body instanceof Blob).toBeTrue();
+        done();
+      });
+
+      const req = httpMock.expectOne('/api/file');
+      expect(req.request.responseType).toBe('blob');
+      req.flush(new Blob(['x']));
+    });
+
+    it('uploads a file as form data with its name and type', (done) => {
+      const service = TestBed.inject(ClientService);
+      const file = new File(['x'], 'doc.pdf', { type: 'application/pdf' });
+
+      service.upload({ url: '/api/upload', name: 'file', file }).subscribe((event: any) => {
+        if (event.body) {
+          expect(event.body).toBe('stored');
+          done();
+        }
+      });
+
+      const req = httpMock.expectOne('/api/upload');
+      const body = req.request.body as FormData;
+      expect(body.get('fileName')).toBe('doc.pdf');
+      expect(body.get('fileType')).toBe('application/pdf');
+      req.flush('stored');
+    });
+
+    it('reports the failed downloads and uploads', () => {
+      const service = TestBed.inject(ClientService);
+      const errors: unknown[] = [];
+
+      service.download({ url: '/api/file' }).subscribe({ error: (e) => errors.push(e) });
+      service
+        .upload({ url: '/api/upload', name: 'f', file: new File([''], 'a') })
+        .subscribe({ error: (e) => errors.push(e) });
+      httpMock.expectOne('/api/file').flush(null, { status: 500, statusText: 'boom' });
+      httpMock.expectOne('/api/upload').flush(null, { status: 500, statusText: 'boom' });
+
+      expect(errors.length).toBe(2);
+      expect(TestBed.inject(ErrorService).initializeError).toHaveBeenCalledTimes(2);
+    });
+
+    it('converts the dates of arrays and nested objects', (done) => {
+      const service = TestBed.inject(ClientService);
+
+      service.get<any>({ url: '/api/list' }).subscribe((value) => {
+        expect(value[0].when instanceof Date).toBeTrue();
+        expect(value[0].inner.at instanceof Date).toBeTrue();
+        expect(value[0].count).toBe(1);
+        expect(value[1]).toBeNull();
+        expect(value[2]).toBe('text');
+        done();
+      });
+
+      httpMock
+        .expectOne('/api/list')
+        .flush([{ when: '2020-01-01T00:00:00Z', inner: { at: '2020-01-01T10:00Z' }, count: 1 }, null, 'text']);
+    });
+  });
+
+  describe('tracing', () => {
+    it('opens a span for requests with identity tracing and ends it with the status', (done) => {
+      const service = TestBed.inject(ClientService);
+
+      service.get({ url: '/api/traced', withIdentity: true, headers: { 'X-Extra': 'yes' } }).subscribe(() => done());
+
+      const req = httpMock.expectOne('/api/traced');
+      expect(req.request.headers.get('X-Extra')).toBe('yes');
+      req.flush({});
+    });
+
+    it('marks the span of a failed request', () => {
+      const service = TestBed.inject(ClientService);
+      let failed = false;
+
+      service
+        .get({ url: '/api/traced', withIdentity: true, identity: 'main' })
+        .subscribe({ error: () => (failed = true) });
+
+      httpMock.expectOne('/api/traced').flush(null, { status: 500, statusText: 'boom' });
+      expect(failed).toBeTrue();
+    });
+  });
 });

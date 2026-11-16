@@ -210,3 +210,25 @@ describe('AppStateService', () => {
     });
   });
 });
+
+describe('ContextValue', () => {
+  it('builds each kind of context value', () => {
+    expect(ContextValue.null('None', 'tenant')).toEqual(
+      jasmine.objectContaining({ value: null, fixed: true, toFilter: false, entity: 'tenant' }),
+    );
+    expect(ContextValue.default('D', 1)).toEqual(jasmine.objectContaining({ fixed: true, toFilter: false }));
+    expect(ContextValue.fixed('F', 1)).toEqual(jasmine.objectContaining({ fixed: true, toFilter: true }));
+    expect(ContextValue.filter('L', 1)).toEqual(jasmine.objectContaining({ fixed: false, toFilter: true }));
+    expect(ContextValue.selection('S', 1)).toEqual(jasmine.objectContaining({ fixed: false, toFilter: false }));
+  });
+
+  it('restores a stored value only with its expected shape', () => {
+    expect(ContextValue.restore({ label: 'L', value: 2, fixed: 1, toFilter: 0, entity: 'e' })).toEqual(
+      jasmine.objectContaining({ label: 'L', value: 2, fixed: true, toFilter: false, entity: 'e' }),
+    );
+    expect(ContextValue.restore({ label: 'L', entity: 3 })!.entity).toBeUndefined();
+    expect(ContextValue.restore({ value: 1 })).toBeNull();
+    expect(ContextValue.restore('text')).toBeNull();
+    expect(ContextValue.restore(null)).toBeNull();
+  });
+});

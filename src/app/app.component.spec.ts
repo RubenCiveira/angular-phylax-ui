@@ -30,6 +30,7 @@ class MockAppStateService {
   tenant = signal('main');
   user = () => signal({ authenticated: false });
   contexts = signal({});
+  contextScope = signal('');
 }
 class MockInstrumentationService {
   activate = jasmine.createSpy('activate').and.returnValue('');

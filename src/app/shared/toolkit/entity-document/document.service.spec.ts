@@ -63,4 +63,23 @@ describe('DocumentService', () => {
   it('previews the markdown as html', async () => {
     expect(await service.html('# Hola')).toContain('<h1>Hola</h1>');
   });
+
+  it('writes the document as docx or pdf', async () => {
+    const docx = await service.file('# Title\n\nText', 'docx', 'Report');
+    const pdf = await service.file('# Title', 'pdf');
+
+    expect(docx.size).toBeGreaterThan(0);
+    expect(pdf.size).toBeGreaterThan(0);
+  });
+
+  it('downloads the document with the extension of its format', async () => {
+    const links: HTMLAnchorElement[] = [];
+    spyOn(HTMLAnchorElement.prototype, 'click').and.callFake(function (this: HTMLAnchorElement) {
+      links.push(this);
+    });
+
+    await service.download('# Title', 'docx', 'report');
+
+    expect(links[0].download).toBe('report.docx');
+  });
 });

@@ -349,4 +349,165 @@ describe('OfflineQueueService', () => {
       expect(queue.pending()).toBe(1);
     });
   });
+
+  describe('offline provider', () => {
+    const settle = () => new Promise((resolve) => setTimeout(resolve, 20));
+
+    it('queues updates, patches and deletes while offline and shows them locally', async () => {
+      sites.rows.set('s1', { uid: 's1', name: 'A' });
+      await firstValueFrom(siteApi.retrieve('s1'));
+      sites.down = true;
+      queue.markOffline();
+
+      await firstValueFrom(siteApi.update('s1', { uid: 's1', name: 'B' }));
+      await firstValueFrom(siteApi.patch('s1', { name: 'C' }));
+      await firstValueFrom(siteApi.patch('s1', { name: 'D' }, 'rename'));
+      expect(((await firstValueFrom(siteApi.retrieve('s1'))) as any).name).toBe('D');
+
+      await firstValueFrom(siteApi.delete('s1'));
+      await expectAsync(firstValueFrom(siteApi.retrieve('s1'))).toBeRejected();
+      // La cola compacta los cambios de una misma entidad: queda el borrado
+      expect(queue.ops().map((op) => op.kind)).toEqual(['delete']);
+
+      sites.down = false;
+      expect(await queue.sync()).toBe('done');
+      expect(sites.rows.has('s1')).toBeFalse();
+    });
+
+    it('does not queue a write the server rejects', async () => {
+      sites.reject.add('bad');
+
+      await expectAsync(firstValueFrom(siteApi.update('bad', { uid: 'bad' }))).toBeRejectedWith(
+        jasmine.objectContaining({ status: 400 }),
+      );
+      expect(queue.ops()).toEqual([]);
+    });
+
+    it('does not serve from the store a read the server rejects', async () => {
+      await expectAsync(firstValueFrom(siteApi.retrieve('missing'))).toBeRejectedWith({ status: 404 });
+    });
+
+    it('fails a read offline without anything stored', async () => {
+      sites.down = true;
+      queue.markOffline();
+
+      await expectAsync(firstValueFrom(siteApi.retrieve('never'))).toBeRejected();
+    });
+
+    it('keeps an attachment locally offline and downloads it from there', async () => {
+      sites.down = true;
+      queue.markOffline();
+      const file = new File(['data'], 'photo.png', { type: 'image/png' });
+
+      const progress = await firstValueFrom(siteApi.storeFile('/files', 'file', file));
+      const download = await firstValueFrom(siteApi.downloadFile(progress.data));
+
+      expect(download.name).toBe('photo.png');
+      await expectAsync(firstValueFrom(siteApi.downloadFile(progress.data + '-other'))).toBeRejected();
+    });
+
+    it('keeps an attachment locally when the upload hits the network', async () => {
+      const original = sites.storeFile.bind(sites);
+      spyOn(sites, 'storeFile').and.returnValues(
+        throwError(NETWORK),
+        throwError(() => ({ status: 413 })),
+      );
+
+      const progress = await firstValueFrom(siteApi.storeFile('/files', 'file', new File(['x'], 'a.png')));
+      expect(progress.data).toBeTruthy();
+      expect(queue.online()).toBeFalse();
+
+      queue['onlineSignal'].set(true);
+      await expectAsync(firstValueFrom(siteApi.storeFile('/files', 'file', new File(['x'], 'b.png')))).toBeRejected();
+      expect(original).toBeTruthy();
+    });
+
+    it('downloads from the server the files that are not local', async () => {
+      await expectAsync(firstValueFrom(siteApi.downloadFile('https://server/files/a.png'))).toBeRejected();
+    });
+
+    it('reads several items at once, serving the local ones and the stored ones offline', async () => {
+      const many = new MemoryProvider() as any;
+      many.rows.set('a', { uid: 'a', name: 'A' });
+      many.rows.set('b', { uid: 'b', name: 'B' });
+      many.retrieveAll = (keys: string[]) =>
+        many.down ? throwError(NETWORK) : of(keys.map((key) => many.rows.get(key)));
+      many.validate = jasmine.createSpy('validate').and.returnValue(of(undefined));
+      const api = queue.wrap({ key: 'uid', name: 'many', provider: many });
+
+      expect(((await firstValueFrom(api.retrieveAll!(['a', 'b']))) as any[]).length).toBe(2);
+      await settle();
+
+      many.down = true;
+      await firstValueFrom(api.add({ uid: 'c', name: 'C' }));
+      const offline = (await firstValueFrom(api.retrieveAll!(['a', 'c']))) as any[];
+      expect(offline.map((item) => item.uid).sort()).toEqual(['a', 'c']);
+      expect(many.validate).toHaveBeenCalledWith({ uid: 'c', name: 'C' }, true);
+
+      queue['onlineSignal'].set(true);
+      const again = (await firstValueFrom(api.retrieveAll!(['b']))) as any[];
+      expect(again.map((item) => item.uid)).toEqual(['b']);
+      expect(((await firstValueFrom(api.retrieveAll!(['c']))) as any[]).length).toBe(1);
+    });
+
+    it('leaves out of the lists the items deleted offline', async () => {
+      sites.rows.set('s1', { uid: 's1', name: 'A' });
+      sites.rows.set('s2', { uid: 's2', name: 'B' });
+      sites.down = true;
+      queue.markOffline();
+      await firstValueFrom(siteApi.delete('s1'));
+      sites.down = false;
+      queue['onlineSignal'].set(true);
+
+      const page = await firstValueFrom(siteApi.list({ cursor: 'next' }));
+
+      expect(page.content.map((item: any) => item.uid)).toEqual(['s2']);
+    });
+  });
+
+  describe('sync of changes', () => {
+    it('uploads updates and patches of different items', async () => {
+      sites.rows.set('s1', { uid: 's1', name: 'A' });
+      sites.rows.set('s2', { uid: 's2', name: 'B' });
+      sites.down = true;
+      queue.markOffline();
+      await firstValueFrom(siteApi.update('s1', { uid: 's1', name: 'A2' }));
+      await firstValueFrom(siteApi.patch('s2', { name: 'B2' }, 'rename'));
+      sites.down = false;
+
+      expect(await queue.sync()).toBe('done');
+      expect(sites.calls).toContain('update:s1');
+      expect(sites.calls).toContain('patch:s2');
+      expect(sites.rows.get('s2').name).toBe('B2');
+    });
+
+    it('reads the current value of an item in conflict', async () => {
+      sites.rows.set('s1', { uid: 's1', name: 'server' });
+      sites.down = true;
+      queue.markOffline();
+      await firstValueFrom(siteApi.update('s1', { uid: 's1', name: 'mine' }));
+      sites.down = false;
+
+      const conflict = await queue.conflict(queue.ops()[0]);
+
+      expect(conflict.sent).toEqual({ uid: 's1', name: 'mine' });
+      expect(conflict.current).toEqual({ uid: 's1', name: 'server' });
+    });
+
+    it('forgets the last run when it is not syncing', async () => {
+      sites.down = true;
+      await firstValueFrom(siteApi.add({ uid: 's1', name: 'A' }));
+      sites.down = false;
+      await queue.sync();
+
+      queue.resetRun();
+
+      expect(queue.run().size).toBe(0);
+      expect(queue.syncState()).toBe('idle');
+    });
+
+    it('fails to find the repository of an unknown operation', async () => {
+      await expectAsync(queue.conflict({ repo: 'nope', key: 'x', kind: 'update' } as any)).toBeRejected();
+    });
+  });
 });

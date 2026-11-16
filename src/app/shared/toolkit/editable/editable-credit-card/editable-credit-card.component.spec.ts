@@ -67,3 +67,72 @@ describe('EditableCreditCardComponent', () => {
     expect(comp.validate(null as any)).toEqual(jasmine.objectContaining({ cardExpired: true }));
   });
 });
+
+describe('EditableCreditCardComponent fields', () => {
+  let component: EditableCreditCardComponent;
+
+  const key = (name: string, extra: Partial<KeyboardEvent> = {}) =>
+    ({ key: name, ctrlKey: false, metaKey: false, preventDefault: jasmine.createSpy(), ...extra }) as any;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({ imports: [EditableCreditCardComponent], providers: PROVIDERS });
+    const fixture = TestBed.createComponent(EditableCreditCardComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('groups an amex number 4-6-5 and asks for a 4 digit code', () => {
+    component.form.get('number')!.setValue('378282246310005');
+
+    expect(component.network()).toBe('amex');
+    expect(component.form.get('number')!.value).toBe('3782 822463 10005');
+    expect(component.maxNumberLength()).toBe(19);
+    expect(component.cvvLength()).toBe(4);
+    expect(component.validate(null)).toBeNull();
+  });
+
+  it('groups other numbers by four', () => {
+    component.form.get('number')!.setValue('5555555555554444');
+
+    expect(component.network()).toBe('mastercard');
+    expect(component.form.get('number')!.value).toBe('5555 5555 5555 4444');
+    expect(component.maxNumberLength()).toBe(23);
+  });
+
+  it('marks a number with the wrong length for its network', () => {
+    component.form.get('number')!.setValue('4111 1111');
+
+    expect(component.validate(null)).toEqual({ cardInvalidLength: true });
+  });
+
+  it('writes the slash of the expiry date and checks its month', () => {
+    component.form.get('expiry')!.setValue('1399');
+
+    expect(component.form.get('expiry')!.value).toBe('13/99');
+    expect(component.validate(null)).toEqual({ cardExpiryFormat: true });
+  });
+
+  it('checks the length of the security code', () => {
+    component.form.get('cvv')!.setValue('12');
+
+    expect(component.validate(null)).toEqual({ cardCvvLength: true });
+  });
+
+  it('only lets type digits and moves in the number and the expiry', () => {
+    const letter = key('a');
+    const digit = key('4');
+    const copy = key('c', { ctrlKey: true });
+
+    component.onNumberKeydown(letter);
+    component.onNumberKeydown(digit);
+    component.onNumberKeydown(copy);
+    component.onExpiryKeydown(key('x'));
+    component.onExpiryKeydown(key('/'));
+
+    expect(letter.preventDefault).toHaveBeenCalled();
+    expect(digit.preventDefault).not.toHaveBeenCalled();
+    expect(copy.preventDefault).not.toHaveBeenCalled();
+  });
+});

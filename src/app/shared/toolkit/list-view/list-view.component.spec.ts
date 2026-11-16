@@ -197,7 +197,14 @@ describe('ListViewComponent', () => {
     /** Como en las páginas: el listado ocupa el alto disponible de un contenedor flex. */
     const createFilledHost = () => {
       const fixture = createHost('table');
-      Object.assign(fixture.nativeElement.style, { display: 'flex', flexDirection: 'column' });
+      // Fijo arriba: con muchos specs, el informe de Karma empuja los fixtures fuera de la ventana
+      Object.assign(fixture.nativeElement.style, {
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'fixed',
+        top: '0',
+        left: '0',
+      });
       fixture.detectChanges();
       return fixture;
     };

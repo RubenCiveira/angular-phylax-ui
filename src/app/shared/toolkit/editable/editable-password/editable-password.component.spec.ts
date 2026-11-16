@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-import { TranslocoService, TRANSLOCO_CONFIG } from '@jsverse/transloco';
+import { TranslocoService, TranslocoTestingModule, TRANSLOCO_CONFIG } from '@jsverse/transloco';
+import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
+import { Logger } from '@shared/context/observability/logger.service';
 import { EditablePasswordComponent } from './editable-password.component';
 
 class MockTranslocoService {
@@ -108,5 +111,90 @@ describe('EditablePasswordComponent', () => {
 
     expect(editable.passwordForm.hasError('passwordMismatch')).toBeTrue();
     expect(fixture.componentInstance.control.value).toBeNull();
+  });
+});
+
+describe('EditablePasswordComponent change dialog', () => {
+  let component: EditablePasswordComponent;
+  let dialog: { open: jasmine.Spy };
+  let closed: Subject<void>;
+  let dialogRef: { close: jasmine.Spy; afterClosed: () => Subject<void> };
+  let logger: jasmine.SpyObj<Logger>;
+  let changes: (string | null)[];
+
+  const create = (template?: string) => {
+    closed = new Subject<void>();
+    dialogRef = { close: jasmine.createSpy('close'), afterClosed: () => closed };
+    dialog = { open: jasmine.createSpy('open').and.returnValue(dialogRef) };
+    logger = jasmine.createSpyObj<Logger>('Logger', ['error']);
+    TestBed.configureTestingModule({
+      imports: [EditablePasswordComponent, TranslocoTestingModule.forRoot({ langs: { en: {} } })],
+      providers: [{ provide: Logger, useValue: logger }],
+    });
+    TestBed.overrideProvider(MatDialog, { useValue: dialog });
+    if (template !== undefined) {
+      TestBed.overrideTemplate(EditablePasswordComponent, template);
+    }
+    const fixture = TestBed.createComponent(EditablePasswordComponent);
+    component = fixture.componentInstance;
+    changes = [];
+    component.registerOnChange((value: string | null) => changes.push(value));
+    fixture.detectChanges();
+  };
+
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('opens the dialog with a clean form and marks the field touched when it closes', () => {
+    create('<ng-template #changeDialog></ng-template>');
+    component.passwordForm.setValue({ newPassword: 'typed', confirmPassword: 'typed' });
+
+    component.open();
+    closed.next();
+
+    expect(dialog.open).toHaveBeenCalledWith(jasmine.anything(), { width: '420px', maxWidth: '95vw' });
+    expect(component.passwordForm.getRawValue()).toEqual({ newPassword: '', confirmPassword: '' });
+    expect((component as any).touched()).toBeTrue();
+  });
+
+  it('logs when it has no dialog template', () => {
+    create('');
+
+    component.open();
+
+    expect(logger.error).toHaveBeenCalled();
+    expect(dialog.open).not.toHaveBeenCalled();
+  });
+
+  it('saves the new password when both match', () => {
+    create('<ng-template #changeDialog></ng-template>');
+    component.open();
+    component.passwordForm.setValue({ newPassword: 'secret1', confirmPassword: 'secret1' });
+
+    component.update();
+
+    expect(changes).toEqual(['secret1']);
+    expect(dialogRef.close).toHaveBeenCalled();
+  });
+
+  it('does not save while the passwords do not match', () => {
+    create('<ng-template #changeDialog></ng-template>');
+    component.passwordForm.setValue({ newPassword: 'secret1', confirmPassword: 'other' });
+
+    component.update();
+
+    expect(changes).toEqual([]);
+    expect(component.passwordForm.hasError('passwordMismatch')).toBeTrue();
+    expect(component.passwordForm.controls.confirmPassword.touched).toBeTrue();
+  });
+
+  it('shows the confirmation in error once touched and not matching', () => {
+    create('<ng-template #changeDialog></ng-template>');
+    const confirm = component.passwordForm.controls.confirmPassword;
+
+    expect(component.confirmMatcher.isErrorState(confirm, null)).toBeFalse();
+    component.passwordForm.setValue({ newPassword: 'secret1', confirmPassword: 'other' });
+    confirm.markAsTouched();
+    expect(component.confirmMatcher.isErrorState(confirm, null)).toBeTrue();
+    expect(component.confirmMatcher.isErrorState(null, { submitted: true } as any)).toBeFalse();
   });
 });

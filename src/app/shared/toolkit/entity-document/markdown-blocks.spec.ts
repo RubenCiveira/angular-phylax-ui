@@ -56,4 +56,20 @@ describe('markdownBlocks', () => {
     const text = (paragraph as any).runs.map((run: any) => run.text).join('');
     expect(text).toBe('A | B *C* & D');
   });
+
+  it('reads code, quotes and rules', async () => {
+    const result = await markdownBlocks('```\nlet a = 1;\n```\n\n> quoted\n\n---');
+
+    expect(result.map((block: any) => block.kind)).toEqual(['code', 'quote', 'rule']);
+    expect((result[0] as any).text).toBe('let a = 1;');
+    expect((result[1] as any).blocks[0].kind).toBe('paragraph');
+  });
+
+  it('reads struck text, line breaks and entities', async () => {
+    const [paragraph] = (await markdownBlocks('one ~~two~~  \nthree &amp; four')) as any[];
+
+    expect(paragraph.runs.some((run: any) => run.strike && run.text === 'two')).toBeTrue();
+    expect(paragraph.runs.some((run: any) => run.break)).toBeTrue();
+    expect(paragraph.runs.map((run: any) => run.text).join('')).toContain('three & four');
+  });
 });

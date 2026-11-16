@@ -2,9 +2,9 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
-import { TranslocoService, TRANSLOCO_CONFIG } from '@jsverse/transloco';
+import { TranslocoService, TranslocoTestingModule, TRANSLOCO_CONFIG } from '@jsverse/transloco';
 import { EditableRepeatComponent, RepeatBuilder } from './editable-repeat.component';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 class MockTranslocoService {
   config = { reRenderOnLangChange: false };
@@ -59,5 +59,108 @@ describe('EditableRepeatComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.componentInstance).toBeTruthy();
+  });
+});
+
+interface Row {
+  uid: string;
+  name: string;
+}
+
+@Component({
+  standalone: true,
+  imports: [EditableRepeatComponent, ReactiveFormsModule],
+  template: `
+    <editable-repeat [formControl]="control" [provider]="provider">
+      <ng-template let-form>
+        <span class="row" [attr.data-uid]="form.value.uid">{{ form.value.name }}</span>
+      </ng-template>
+    </editable-repeat>
+  `,
+})
+class RowsHostComponent {
+  control = new FormControl<Row[] | null>([{ uid: 'a', name: 'Ana' }]);
+  next = 0;
+  provider: RepeatBuilder<Row> = {
+    newItem: () => ({ uid: `new-${++this.next}`, name: '' }),
+    uid: (item) => item.uid,
+    formRow: (item) => new FormGroup({ uid: new FormControl(item.uid), name: new FormControl(item.name) }),
+    visibles: () => signal({ name: true }),
+  };
+}
+
+describe('EditableRepeatComponent rows', () => {
+  let fixture: import('@angular/core/testing').ComponentFixture<RowsHostComponent>;
+  let host: RowsHostComponent;
+  let repeat: EditableRepeatComponent;
+
+  const rows = () => Array.from(fixture.nativeElement.querySelectorAll('.row')).map((el: any) => el.textContent.trim());
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [RowsHostComponent, TranslocoTestingModule.forRoot({ langs: { en: {} } })],
+    });
+    fixture = TestBed.createComponent(RowsHostComponent);
+    host = fixture.componentInstance;
+    fixture.detectChanges();
+    repeat = fixture.debugElement.query(
+      (el) => el.componentInstance instanceof EditableRepeatComponent,
+    ).componentInstance;
+  });
+
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('paints a form for each row of the value', () => {
+    expect(repeat.ids()).toEqual(['a']);
+    expect(rows()).toEqual(['Ana']);
+  });
+
+  it('adds a new row from the provider', () => {
+    repeat.add();
+    fixture.detectChanges();
+
+    expect(host.control.value!.map((row) => row.uid)).toEqual(['a', 'new-1']);
+    expect(repeat.ids()).toEqual(['a', 'new-1']);
+  });
+
+  it('starts the list when there is no value', () => {
+    host.control.setValue(null);
+    fixture.detectChanges();
+
+    repeat.add();
+
+    expect(host.control.value!.length).toBe(1);
+  });
+
+  it('removes a row and rebuilds the others', () => {
+    repeat.add();
+    fixture.detectChanges();
+
+    repeat.remove(host.provider, 'a');
+    fixture.detectChanges();
+
+    expect(host.control.value!.map((row) => row.uid)).toEqual(['new-1']);
+    expect(repeat.ids()).toEqual(['new-1']);
+  });
+
+  it('removes nothing from an empty list', () => {
+    host.control.setValue(null);
+    fixture.detectChanges();
+
+    repeat.remove(host.provider, 'a');
+
+    expect(host.control.value).toEqual([]);
+  });
+
+  it('updates the value with the changes of a row form', () => {
+    repeat.add();
+    fixture.detectChanges();
+
+    repeat.forms['a'].patchValue({ name: 'Ana María' });
+
+    expect(host.control.value).toEqual([
+      { uid: 'a', name: 'Ana María' },
+      { uid: 'new-1', name: '' },
+    ]);
   });
 });

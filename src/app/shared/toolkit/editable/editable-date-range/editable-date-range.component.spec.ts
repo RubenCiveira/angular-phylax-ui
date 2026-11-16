@@ -68,3 +68,49 @@ describe('EditableDateRangeComponent', () => {
     expect(comp.validate(null as any)).toBeNull();
   });
 });
+
+describe('EditableDateRangeComponent ranges', () => {
+  let fixture: import('@angular/core/testing').ComponentFixture<EditableDateRangeComponent>;
+  let component: EditableDateRangeComponent;
+  let changes: any[];
+
+  const create = (inputs: Record<string, unknown> = {}) => {
+    TestBed.configureTestingModule({ imports: [EditableDateRangeComponent], providers: PROVIDERS });
+    fixture = TestBed.createComponent(EditableDateRangeComponent);
+    Object.entries(inputs).forEach(([name, value]) => fixture.componentRef.setInput(name, value));
+    component = fixture.componentInstance;
+    changes = [];
+    component.registerOnChange((value: any) => changes.push(value));
+    fixture.detectChanges();
+  };
+
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('applies a preset range', () => {
+    create();
+    const from = new Date(2025, 0, 1);
+    const to = new Date(2025, 0, 31);
+
+    component.applyPreset({ label: 'January', resolve: () => ({ from, to }) } as any);
+
+    expect(component.form.getRawValue()).toEqual(jasmine.objectContaining({ from, to }));
+  });
+
+  it('checks the range against its limits', () => {
+    create({ minDate: new Date(2025, 0, 10), maxDate: new Date(2025, 0, 20) });
+
+    component.form.patchValue({ from: new Date(2025, 0, 5), to: new Date(2025, 0, 25) });
+
+    expect(component.validate(null)).toEqual({ dateRangeFromBeforeMin: true, dateRangeToAfterMax: true });
+  });
+
+  it('adds the chosen times to the dates', () => {
+    create({ showTime: true });
+    component.form.patchValue({ from: new Date(2025, 0, 1), to: new Date(2025, 0, 2) });
+
+    component.fromTime.setValue('08:30');
+    component.toTime.setValue('');
+
+    expect(changes.at(-1)).toEqual({ from: new Date(2025, 0, 1, 8, 30), to: new Date(2025, 0, 2, 0, 0) });
+  });
+});

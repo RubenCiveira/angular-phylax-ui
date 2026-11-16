@@ -57,6 +57,45 @@ describe('renderTemplate', () => {
     );
     expect(md).toBe('— uno x / y ab');
   });
+
+  it('formats dates given as text or number and leaves invalid ones empty', async () => {
+    const md = await renderTemplate(
+      '{{date text}}|{{datetime number}}|{{date bad}}|{{date wrong}}|{{datetime nothing}}',
+      { text: '2025-03-04', number: Date.UTC(2025, 2, 4, 10), bad: 'not a date', wrong: new Date('x'), nothing: {} },
+      context,
+    );
+    const [text, number, bad, wrong, nothing] = md.split('|');
+
+    expect(text).toContain('2025');
+    expect(number).toContain('2025');
+    expect([bad, wrong, nothing]).toEqual(['', '', '']);
+  });
+
+  it('formats numbers with fixed decimals and leaves empty values empty', async () => {
+    const md = await renderTemplate(
+      '{{number value 2}}|{{number text}}|{{number empty}}',
+      { value: 3, text: 'x', empty: '' },
+      context,
+    );
+
+    expect(md).toBe('3,00||');
+  });
+
+  it('joins and sorts lists, also of plain values', async () => {
+    const md = await renderTemplate(
+      '{{join tags}}|{{join none}}|{{#each (sort names)}}{{this}}{{/each}}|{{#each (sort none)}}x{{/each}}',
+      { tags: ['a', 'b'], names: ['c', 'a', 'b'] },
+      context,
+    );
+
+    expect(md).toBe('a, b||abc|');
+  });
+
+  it('concatenates empty values', async () => {
+    const md = await renderTemplate("{{concat 'a' missing 'b'}}", {}, context);
+
+    expect(md).toBe('ab');
+  });
 });
 
 describe('escapeData', () => {

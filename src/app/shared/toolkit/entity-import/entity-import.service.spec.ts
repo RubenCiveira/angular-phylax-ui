@@ -341,4 +341,68 @@ describe('EntityImportService', () => {
     expect(service.job(KEY)()).toBeNull();
     expect(localStorage.getItem('entity-import-job-' + KEY)).toBeNull();
   });
+
+  describe('state', () => {
+    it('refuses to start twice, to resume nothing and to clear a running import', async () => {
+      const pending = new Subject<Item[]>();
+      target.find.and.returnValue(pending);
+      service.start(definition, plan([['ana', null]]));
+
+      expect(() => service.start(definition, plan([['bea', null]]))).toThrowError(/already an import running/);
+      expect(() => service.clear(KEY)).toThrowError(/Unable to clear/);
+      expect(() => service.resume(definition)).toThrowError(/no import to resume/);
+      expect(service.isRunningHere(KEY)).toBeTrue();
+
+      pending.next([]);
+      pending.complete();
+      await until(() => service.job(KEY)()?.status === 'finished');
+    });
+
+    it('reads again the state written by another tab', () => {
+      const job = { key: KEY, status: 'finished', total: 1, processed: 1, outcomes: [] };
+      localStorage.setItem('entity-import-job-' + KEY, JSON.stringify(job));
+
+      service.refresh(KEY);
+
+      expect(service.job(KEY)()?.status).toBe('finished');
+    });
+
+    it('follows the storage events of another tab', () => {
+      const job = { key: KEY, status: 'finished', total: 2, processed: 2, outcomes: [] };
+      service.job(KEY);
+      localStorage.setItem('entity-import-job-' + KEY, JSON.stringify(job));
+
+      window.dispatchEvent(new StorageEvent('storage', { key: 'entity-import-job-' + KEY }));
+      window.dispatchEvent(new StorageEvent('storage', { key: 'other-key' }));
+
+      expect(service.job(KEY)()?.processed).toBe(2);
+    });
+
+    it('leaves interrupted the import running here when the page is closed', async () => {
+      const pending = new Subject<Item[]>();
+      target.find.and.returnValue(pending);
+      service.start(definition, plan([['ana', null]]));
+
+      window.dispatchEvent(new Event('pagehide'));
+
+      expect(JSON.parse(localStorage.getItem('entity-import-job-' + KEY)!).status).toBe('interrupted');
+      pending.next([]);
+      pending.complete();
+      await until(() => service.job(KEY)()?.status === 'finished');
+    });
+
+    it('stops as interrupted when processing a row breaks', async () => {
+      const broken = {
+        ...definition,
+        display: () => {
+          throw new Error('broken display');
+        },
+      };
+      spyOn(console, 'error');
+
+      service.start(broken as any, plan([['ana', null]]));
+
+      await until(() => service.job(KEY)()?.status === 'interrupted');
+    });
+  });
 });
