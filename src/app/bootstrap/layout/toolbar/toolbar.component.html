@@ -10,7 +10,13 @@
   <offline-indicator />
 
   @if (user()?.authenticated) {
-    <button class="account" [matMenuTriggerFor]="userMenu" [attr.aria-label]="user()?.name">
+    <button
+      #accountButton
+      class="account"
+      [matMenuTriggerFor]="userMenu"
+      (menuOpened)="menuWidth.set(accountButton.offsetWidth)"
+      [attr.aria-label]="user()?.name"
+    >
       <span class="avatar" aria-hidden="true">{{ initial() }}</span>
       <span class="account-name">{{ user()?.name }}</span>
       <mat-icon class="account-more" aria-hidden="true">unfold_more</mat-icon>
@@ -24,24 +30,27 @@
   }
 </mat-toolbar>
 
+<!-- El panel toma el ancho del botón de cuenta (como mínimo) para quedar alineado con él -->
 <mat-menu #userMenu="matMenu" yPosition="above">
-  @if (user()?.authenticated) {
-    <!-- Opciones del workspace activo, antes de las genéricas -->
-    @for (item of workspaceItems(); track $index) {
-      <button mat-menu-item (click)="open(item)">
-        @if (item.icon) {
-          <mat-icon>{{ item.icon }}</mat-icon>
-        }
-        {{ item.label }}
-      </button>
+  <div class="account-menu-body" [style.--account-menu-width]="menuWidth() + 'px'">
+    @if (user()?.authenticated) {
+      <!-- Opciones del workspace activo, antes de las genéricas -->
+      @for (item of workspaceItems(); track $index) {
+        <button mat-menu-item (click)="open(item)">
+          @if (item.icon) {
+            <mat-icon>{{ item.icon }}</mat-icon>
+          }
+          {{ item.label }}
+        </button>
+      }
+      @if (workspaceItems().length) {
+        <mat-divider />
+      }
+      @if (accountUrl()) {
+        <button mat-menu-item (click)="account()"><mat-icon>manage_accounts</mat-icon>account</button>
+        <mat-divider />
+      }
+      <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>logout</button>
     }
-    @if (workspaceItems().length) {
-      <mat-divider />
-    }
-    @if (accountUrl()) {
-      <button mat-menu-item (click)="account()"><mat-icon>manage_accounts</mat-icon>account</button>
-      <mat-divider />
-    }
-    <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>logout</button>
-  }
+  </div>
 </mat-menu>

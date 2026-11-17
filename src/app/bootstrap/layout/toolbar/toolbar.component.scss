@@ -70,6 +70,11 @@
   color: var(--app-color-text-muted);
 }
 
+// Menú de cuenta: al menos tan ancho como el botón (descontando el borde del panel); la nav no supera el máximo del panel
+.account-menu-body {
+  min-width: calc(var(--account-menu-width, 0px) - 2px);
+}
+
 // Móvil: cabecera superior con menú y solo el avatar
 @include bp.mobile {
   .account-name,
