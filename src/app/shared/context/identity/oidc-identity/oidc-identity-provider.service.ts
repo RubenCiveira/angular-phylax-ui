@@ -17,6 +17,15 @@ import { ErrorService } from '@shared/context/observability/error.service';
 import { ANONYMOUS_USER, UserInfo } from '../user-info.model';
 
 const DEFAULT_ROLES_CLAIM = 'groups';
+/** Errores con los que el proveedor responde a `prompt=none` cuando haría falta interacción (OIDC Core §3.1.2.6). */
+const SILENT_LOGIN_ERRORS = [
+  'login_required',
+  'interaction_required',
+  'consent_required',
+  'account_selection_required',
+];
+/** Parámetros de una respuesta de error del proveedor que la librería no quita de la URL. */
+const ERROR_RESPONSE_PARAMS = ['error', 'error_description', 'error_uri', 'iss'];
 
 export class OidcIdentityProviderService implements IdentityProvider {
   constructor(
@@ -53,6 +62,12 @@ export class OidcIdentityHandlerService implements IdentityHandler {
   private currentUser: UserInfo = ANONYMOUS_USER;
   private readonly accessToken = new BehaviorSubject<string | null>(null);
   private rolesClaim = DEFAULT_ROLES_CLAIM;
+  /** Ya se intentó recuperar la sesión con el refresh token: un segundo fallo no se reintenta. */
+  private recovering = false;
+  /** La página vuelve de un login silencioso (`prompt=none`): no se vuelve a intentar en esta carga. */
+  private readonly silentReturn: boolean;
+  /** `iss` de un login iniciado por terceros (OIDC Core §4), por ejemplo al volver de la página de perfil. */
+  private initiatedBy: string | null;
   /** Si la página se abre con `code` y `state` se vuelve del proveedor: lo que tarda es el canje del código. */
   private readonly phase = new BehaviorSubject<IdentityPhase>(returningFromLogin() ? 'signing-in' : 'checking');
   constructor(
@@ -64,12 +79,22 @@ export class OidcIdentityHandlerService implements IdentityHandler {
     private readonly ui: IdentityUiPort,
     private readonly logger: Logger,
   ) {
+    this.silentReturn = consumeSilentLoginMark(this.name);
+    this.recovering = this.silentReturn;
+    this.initiatedBy = takeThirdPartyInitiation();
     // Los eventos no listados se ignoran: pueden llevar claims que no deben acabar en los logs
     this.oauthService.events.subscribe((e) => {
       if (e.type === 'user_profile_load_error') {
-        this.resetCredentialsIfConfirmed('profile');
+        // Un 401 (token caducado o firmado con claves que ya no valen) lo recupera loadProfile() sin preguntar
+        if (!isUnauthorized((e as { reason?: unknown }).reason)) {
+          this.resetCredentialsIfConfirmed('profile');
+        }
       } else if (e.type === 'code_error') {
-        this.ui.notifyError('code');
+        // Si el login silencioso necesita interacción no es un error: simplemente no hay sesión en el proveedor
+        const error = (e as { params?: { error?: string } }).params?.error;
+        if (!(this.silentReturn && SILENT_LOGIN_ERRORS.includes(error ?? ''))) {
+          this.ui.notifyError('code');
+        }
       } else if (e.type === 'token_received') {
         this.updateToken();
       } else if (e.type === 'logout') {
@@ -79,7 +104,10 @@ export class OidcIdentityHandlerService implements IdentityHandler {
       } else if (e.type === 'silently_refreshed') {
         this.incomingLogin();
       } else if (e.type === 'token_refresh_error') {
-        this.resetUser();
+        // El refresco lanzado por recover() lo resuelve endSession(), que puede probar antes un login silencioso
+        if (!this.recovering) {
+          this.resetUser();
+        }
       } else if (e.type === 'discovery_document_load_error') {
         this.resetCredentialsIfConfirmed('discovery');
       } else if (e.type === 'silent_refresh_error') {
@@ -168,9 +196,48 @@ export class OidcIdentityHandlerService implements IdentityHandler {
     // The only refresh mechanism: refreshes on token_expires (timeoutFactor). Calling it again replaces the previous one.
     // Only the access token timer: listening to the id_token one too could refresh twice per expiry
     this.oauthService.setupAutomaticSilentRefresh({}, 'access_token');
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-      this.incomingLogin();
-    });
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(
+      () => {
+        stripUrlParams(['iss']);
+        if (!this.loginInitiatedByThirdParty()) {
+          this.incomingLogin();
+        }
+      },
+      (err: unknown) => {
+        // Discovery caído: lo gestiona el evento discovery_document_load_error (diálogo de reinicio)
+        if ((err as { type?: string } | null)?.type !== 'code_error') {
+          return;
+        }
+        // Respuesta de error del proveedor: la librería no la quita de la URL ni termina la carga
+        stripUrlParams(ERROR_RESPONSE_PARAMS);
+        if (this.silentReturn) {
+          this.signOutLocally();
+        } else {
+          this.incomingLogin();
+        }
+      },
+    );
+  }
+
+  /**
+   * Login iniciado por terceros (OIDC Core §4): el proveedor devuelve al usuario con `iss`. Si no queda nada con lo
+   * que recuperar la sesión se pide una nueva con `prompt=none`. Devuelve `true` si la página sale hacia el proveedor.
+   */
+  private loginInitiatedByThirdParty(): boolean {
+    const iss = this.initiatedBy;
+    this.initiatedBy = null;
+    if (!iss) {
+      return false;
+    }
+    if (!sameIssuer(iss, this.oauthService.issuer)) {
+      this.logger.warn(`identity.${this.name}: ignoring login initiated by an unknown issuer`);
+      return false;
+    }
+    if (this.oauthService.hasValidAccessToken() || this.oauthService.getRefreshToken() || this.silentReturn) {
+      return false;
+    }
+    this.silentLogin();
+    return true;
   }
 
   private forCurrent(str: string | undefined, tenant: string) {
@@ -214,27 +281,149 @@ export class OidcIdentityHandlerService implements IdentityHandler {
 
   private incomingLogin() {
     const valid = this.oauthService.hasValidAccessToken();
-    if (valid != this.logged) {
+    if (!valid && this.logged === undefined && this.canRecover()) {
+      // El access token caducó mientras la app no corría (p. ej. en la página de perfil del proveedor).
+      // Con el token caducado la librería no arma el temporizador de refresco: se renueva aquí.
+      this.recover();
+    } else if (!valid && this.logged === undefined && this.oauthService.getAccessToken() && !this.silentReturn) {
+      // Caducado y sin refresh token (scope sin offline_access): se pide uno nuevo a la sesión del proveedor
+      this.silentLogin();
+    } else if (valid != this.logged) {
       this.logged = valid;
       if (valid) {
-        this.phase.next('loading-user');
-        this.oauthService.loadUserProfile().then((info: any) => {
-          this.setUser(
-            {
-              name: info.info.name,
-              email: info.info.email,
-              authenticated: true,
-              roles: info.info[this.rolesClaim] || ['guest'],
-            },
-            this.oauthService.getAccessToken(),
-          );
-          this.boostrapSubject.next();
-        });
+        this.loadProfile();
       } else {
         this.resetUser();
       }
     }
   }
+
+  private loadProfile() {
+    this.phase.next('loading-user');
+    this.oauthService.loadUserProfile().then(
+      (info: any) => {
+        this.recovering = false;
+        this.setUser(
+          {
+            name: info.info.name,
+            email: info.info.email,
+            authenticated: true,
+            roles: info.info[this.rolesClaim] || ['guest'],
+          },
+          this.oauthService.getAccessToken(),
+        );
+        this.boostrapSubject.next();
+      },
+      (err: unknown) => {
+        if (!isUnauthorized(err)) {
+          // El resto de errores los gestiona el evento user_profile_load_error (diálogo de reinicio)
+          return;
+        }
+        this.logged = undefined;
+        if (this.canRecover()) {
+          // El userinfo rechaza el token aunque localmente parezca vigente: se pide uno nuevo y se reintenta
+          this.logger.warn(`identity.${this.name}: userinfo rejected the access token, refreshing it`);
+          this.recover();
+        } else {
+          this.endSession();
+        }
+      },
+    );
+  }
+
+  private canRecover(): boolean {
+    return !this.recovering && !!this.oauthService.getRefreshToken();
+  }
+
+  /** Refresca con el refresh token: si sale bien, token_received vuelve a incomingLogin y carga el perfil. */
+  private recover() {
+    this.recovering = true;
+    this.phase.next('loading-user');
+    this.oauthService.refreshToken().catch(() => this.endSession());
+  }
+
+  /**
+   * La sesión guardada no sirve. La del proveedor puede seguir viva (el usuario acaba de pasar por él): se prueba
+   * una vez un login silencioso y, si ya se probó en esta carga, se cierra la sesión solo en local.
+   */
+  private endSession() {
+    if (this.silentReturn) {
+      this.signOutLocally();
+    } else {
+      this.logger.warn(`identity.${this.name}: stored session is no longer valid, trying a silent login`);
+      this.silentLogin();
+    }
+  }
+
+  /** Autorización con `prompt=none` en la propia pestaña: sin iframes ni cookies de terceros. */
+  private silentLogin() {
+    markSilentLogin(this.name);
+    this.phase.next('signing-in');
+    this.oauthService.initCodeFlow('', { prompt: 'none' });
+  }
+
+  /** Se borran los tokens sin pasar por el end_session_endpoint y el usuario queda anónimo. */
+  private signOutLocally() {
+    this.logger.warn(`identity.${this.name}: no valid session, signing out locally`);
+    this.logged = false;
+    this.oauthService.logOut(true);
+    this.resetUser();
+  }
+}
+
+function silentLoginKey(name: string): string {
+  return `oidc.${name}.silent-login`;
+}
+
+/** Marca, en sessionStorage, que la pestaña sale hacia un login silencioso; dura solo hasta la vuelta. */
+function markSilentLogin(name: string) {
+  try {
+    sessionStorage.setItem(silentLoginKey(name), '1');
+  } catch {
+    // Sin almacenamiento no se distingue la vuelta: el login silencioso se intenta igual
+  }
+}
+
+function consumeSilentLoginMark(name: string): boolean {
+  try {
+    const marked = sessionStorage.getItem(silentLoginKey(name)) === '1';
+    sessionStorage.removeItem(silentLoginKey(name));
+    return marked;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * `iss` en la URL sin `code`, `state` ni `error`: es un login iniciado por terceros (OIDC Core §4), no una respuesta
+ * de autorización (que también puede traer `iss`, RFC 9207). Se quita de la URL para que no acabe en redirect_uri.
+ */
+function takeThirdPartyInitiation(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  const iss = params.get('iss');
+  if (!iss || params.has('code') || params.has('state') || params.has('error')) {
+    return null;
+  }
+  stripUrlParams(['iss', 'target_link_uri', 'login_hint']);
+  return iss;
+}
+
+function stripUrlParams(names: string[]) {
+  const url = new URL(window.location.href);
+  const present = names.filter((name) => url.searchParams.has(name));
+  if (present.length) {
+    present.forEach((name) => url.searchParams.delete(name));
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+}
+
+function sameIssuer(a: string, b: string | undefined): boolean {
+  const normalize = (value: string) => value.replace(/\/+$/, '');
+  return !!b && normalize(a) === normalize(b);
+}
+
+function isUnauthorized(err: unknown): boolean {
+  return (err as { status?: number } | null)?.status === 401;
 }
 
 /** Respuesta del proveedor de identidad en la URL (code flow): `code` y `state` en la query o en el fragmento. */

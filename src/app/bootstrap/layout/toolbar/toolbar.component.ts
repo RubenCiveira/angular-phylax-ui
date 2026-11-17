@@ -33,9 +33,9 @@ import { WorkspaceStateService } from 'app/bootstrap/workspace/workspace-state.s
 export class ToolbarComponent {
   menuClicked = output<void>();
   user = input<UserInfo | null>();
-  /** Inicial del nombre para el avatar. */
   /** Ancho del botón de cuenta al abrir el menú: el panel lo usa como ancho mínimo. */
   readonly menuWidth = signal(0);
+  /** Inicial del nombre para el avatar. */
   initial = computed(() => (this.user()?.name ?? '').trim().charAt(0).toUpperCase());
 
   /** Opciones del workspace activo, antes de las genéricas; las que exigen un selector sin valor no se muestran. */

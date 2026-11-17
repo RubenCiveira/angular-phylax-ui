@@ -19,11 +19,14 @@ function buildMocks(
   } = {},
 ) {
   const eventSubject = new Subject<any>();
+  // Marca de login silencioso que haya dejado un test anterior
+  sessionStorage.removeItem('oidc.main.silent-login');
 
   const oauthService = jasmine.createSpyObj('OAuthService', [
     'initCodeFlow',
     'revokeTokenAndLogout',
     'refreshToken',
+    'getRefreshToken',
     'hasValidAccessToken',
     'getAccessToken',
     'loadUserProfile',
@@ -36,8 +39,10 @@ function buildMocks(
   (oauthService as any).events = eventSubject.asObservable();
   oauthService.issuer = opts.issuer !== undefined ? opts.issuer : 'https://issuer.example.com';
   oauthService.hasValidAccessToken.and.returnValue(opts.hasValidToken ?? false);
-  oauthService.getAccessToken.and.returnValue('test-access-token');
+  // Solo hay access token guardado mientras es válido, salvo que el test diga otra cosa
+  oauthService.getAccessToken.and.callFake(() => (oauthService.hasValidAccessToken() ? 'test-access-token' : null));
   oauthService.refreshToken.and.returnValue(Promise.resolve({}));
+  oauthService.getRefreshToken.and.returnValue(null);
   oauthService.loadDiscoveryDocumentAndTryLogin.and.returnValue(Promise.resolve(true));
   const userProfile = opts.userProfile ?? { name: 'Test User', email: 'test@example.com', groups: ['admin'] };
   oauthService.loadUserProfile.and.returnValue(Promise.resolve({ info: userProfile }));
@@ -361,6 +366,11 @@ describe('OidcIdentityHandlerService', () => {
       expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
     });
 
+    it('user_profile_load_error with 401 does not ask: the handler recovers on its own', () => {
+      eventSubject.next({ type: 'user_profile_load_error', reason: { status: 401 } });
+      expect(ui.confirmResetCredentials).not.toHaveBeenCalled();
+    });
+
     it('ignores unknown events without logging them', () => {
       spyOn(console, 'log');
       eventSubject.next({ type: 'some_unknown_event' });
@@ -371,6 +381,216 @@ describe('OidcIdentityHandlerService', () => {
   });
 
   // ── configure() / configureForTenant() ────────────────────────────────────
+
+  describe('session recovery', () => {
+    const unauthorized = { status: 401 };
+
+    it('refreshes an access token that expired while the app was closed, then loads the profile', fakeAsync(() => {
+      oauthService.getRefreshToken.and.returnValue('refresh-1');
+      oauthService.hasValidAccessToken.and.returnValue(false);
+      oauthService.refreshToken.and.callFake(() => {
+        oauthService.hasValidAccessToken.and.returnValue(true);
+        eventSubject.next({ type: 'token_received' });
+        return Promise.resolve({});
+      });
+
+      eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+
+      expect(oauthService.refreshToken).toHaveBeenCalledTimes(1);
+      expect(userInfoSpy.set).not.toHaveBeenCalledWith({ authenticated: false });
+      expect(userInfoSpy.set).toHaveBeenCalledWith(jasmine.objectContaining({ authenticated: true }));
+    }));
+
+    it('stays anonymous without refreshing when there is no refresh token', () => {
+      oauthService.hasValidAccessToken.and.returnValue(false);
+      eventSubject.next({ type: 'silently_refreshed' });
+      expect(oauthService.refreshToken).not.toHaveBeenCalled();
+      expect(userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
+    });
+
+    it('tries a silent login when the refresh token is rejected', fakeAsync(() => {
+      oauthService.getRefreshToken.and.returnValue('refresh-1');
+      oauthService.hasValidAccessToken.and.returnValue(false);
+      oauthService.refreshToken.and.callFake(() => {
+        eventSubject.next({ type: 'token_refresh_error' });
+        return Promise.reject({ status: 400 });
+      });
+
+      eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+
+      expect(oauthService.initCodeFlow).toHaveBeenCalledWith('', { prompt: 'none' });
+      expect(sessionStorage.getItem('oidc.main.silent-login')).toBe('1');
+      expect(userInfoSpy.set).not.toHaveBeenCalled();
+    }));
+
+    it('tries a silent login when the access token expired and there is no refresh token', () => {
+      oauthService.hasValidAccessToken.and.returnValue(false);
+      oauthService.getAccessToken.and.returnValue('expired-token');
+      eventSubject.next({ type: 'silently_refreshed' });
+      expect(oauthService.initCodeFlow).toHaveBeenCalledWith('', { prompt: 'none' });
+    });
+
+    it('retries the profile once with a fresh token when userinfo answers 401', fakeAsync(() => {
+      oauthService.getRefreshToken.and.returnValue('refresh-1');
+      oauthService.hasValidAccessToken.and.returnValue(true);
+      oauthService.loadUserProfile.and.returnValues(
+        Promise.reject(unauthorized),
+        Promise.resolve({ info: { name: 'Test User', groups: ['admin'] } }),
+      );
+      oauthService.refreshToken.and.callFake(() => {
+        eventSubject.next({ type: 'token_received' });
+        return Promise.resolve({});
+      });
+
+      eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+
+      expect(oauthService.refreshToken).toHaveBeenCalledTimes(1);
+      expect(oauthService.loadUserProfile).toHaveBeenCalledTimes(2);
+      expect(userInfoSpy.set).toHaveBeenCalledWith(jasmine.objectContaining({ authenticated: true }));
+      expect(ui.confirmResetCredentials).not.toHaveBeenCalled();
+    }));
+
+    it('tries a silent login when userinfo keeps answering 401 after the refresh', fakeAsync(() => {
+      oauthService.getRefreshToken.and.returnValue('refresh-1');
+      oauthService.hasValidAccessToken.and.returnValue(true);
+      oauthService.loadUserProfile.and.returnValue(Promise.reject(unauthorized));
+      oauthService.refreshToken.and.callFake(() => {
+        eventSubject.next({ type: 'token_received' });
+        return Promise.resolve({});
+      });
+
+      eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+
+      expect(oauthService.refreshToken).toHaveBeenCalledTimes(1);
+      expect(oauthService.initCodeFlow).toHaveBeenCalledWith('', { prompt: 'none' });
+    }));
+
+    it('tries a silent login on a 401 when there is no refresh token', fakeAsync(() => {
+      oauthService.hasValidAccessToken.and.returnValue(true);
+      oauthService.loadUserProfile.and.returnValue(Promise.reject(unauthorized));
+
+      eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+
+      expect(oauthService.refreshToken).not.toHaveBeenCalled();
+      expect(oauthService.initCodeFlow).toHaveBeenCalledWith('', { prompt: 'none' });
+    }));
+  });
+
+  describe('silent login and third-party initiated login', () => {
+    let original: string;
+
+    beforeEach(() => {
+      original = window.location.href;
+      sessionStorage.removeItem('oidc.main.silent-login');
+    });
+
+    afterEach(() => {
+      history.replaceState(null, '', original);
+      sessionStorage.removeItem('oidc.main.silent-login');
+    });
+
+    function start(url: string | null, opts: { silentReturn?: boolean; refreshToken?: string } = {}) {
+      if (url !== null) {
+        history.replaceState(null, '', url);
+      }
+      const mocks = buildMocks();
+      if (opts.silentReturn) {
+        sessionStorage.setItem('oidc.main.silent-login', '1');
+      }
+      mocks.oauthService.getRefreshToken.and.returnValue(opts.refreshToken ?? null);
+      const h = new OidcIdentityHandlerService(
+        'main',
+        mocks.oauthService,
+        mocks.appConfig,
+        mocks.appState,
+        mocks.errors,
+        mocks.ui,
+        mocks.logger,
+      );
+      return { mocks, h };
+    }
+
+    it('asks for a session with prompt=none when the provider sends the user back with its iss', fakeAsync(() => {
+      const { mocks, h } = start('?iss=' + encodeURIComponent('https://issuer.example.com/') + '&tab=1');
+      expect(window.location.search).toBe('?tab=1'); // iss never reaches the redirect_uri
+      h.configure();
+      tick();
+      expect(mocks.oauthService.initCodeFlow).toHaveBeenCalledWith('', { prompt: 'none' });
+    }));
+
+    it('ignores an iss that is not the configured issuer', fakeAsync(() => {
+      const { mocks, h } = start('?iss=' + encodeURIComponent('https://evil.example.com'));
+      h.configure();
+      tick();
+      expect(mocks.oauthService.initCodeFlow).not.toHaveBeenCalled();
+      expect(mocks.logger.warn).toHaveBeenCalled();
+      expect(mocks.userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
+    }));
+
+    it('refreshes instead of redirecting when the initiated login finds a refresh token', fakeAsync(() => {
+      const { mocks, h } = start('?iss=' + encodeURIComponent('https://issuer.example.com'), {
+        refreshToken: 'refresh-1',
+      });
+      h.configure();
+      tick();
+      expect(mocks.oauthService.refreshToken).toHaveBeenCalled();
+      expect(mocks.oauthService.initCodeFlow).not.toHaveBeenCalled();
+    }));
+
+    it('does not treat the iss of an authorization response (RFC 9207) as an initiated login', fakeAsync(() => {
+      const { mocks, h } = start('?code=abc&state=xyz&iss=' + encodeURIComponent('https://issuer.example.com'));
+      h.configure();
+      tick();
+      expect(mocks.oauthService.initCodeFlow).not.toHaveBeenCalled();
+      expect(window.location.search).not.toContain('iss=');
+    }));
+
+    it('stays anonymous without notifying when the silent login answers login_required', fakeAsync(() => {
+      const { mocks, h } = start('?error=login_required&iss=x', { silentReturn: true });
+      const event = { type: 'code_error', params: { error: 'login_required' } };
+      mocks.oauthService.loadDiscoveryDocumentAndTryLogin.and.callFake(() => {
+        mocks.eventSubject.next(event);
+        return Promise.reject(event);
+      });
+      let bootstrapEmitted = false;
+      h.bootstrap().subscribe(() => (bootstrapEmitted = true));
+
+      h.configure();
+      tick();
+
+      expect(mocks.ui.notifyError).not.toHaveBeenCalled();
+      expect(mocks.oauthService.logOut).toHaveBeenCalledWith(true);
+      expect(mocks.oauthService.initCodeFlow).not.toHaveBeenCalled();
+      expect(mocks.userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
+      expect(bootstrapEmitted).toBeTrue();
+      expect(window.location.search).toBe('');
+      expect(sessionStorage.getItem('oidc.main.silent-login')).toBeNull();
+    }));
+
+    it('still notifies other authorization errors', fakeAsync(() => {
+      const { mocks } = start(null);
+      mocks.eventSubject.next({ type: 'code_error', params: { error: 'access_denied' } });
+      expect(mocks.ui.notifyError).toHaveBeenCalledWith('code');
+    }));
+
+    it('does not retry the silent login in the load that comes back from it', fakeAsync(() => {
+      const { mocks } = start(null, { silentReturn: true });
+      mocks.oauthService.hasValidAccessToken.and.returnValue(true);
+      mocks.oauthService.loadUserProfile.and.returnValue(Promise.reject({ status: 401 }));
+
+      mocks.eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+
+      expect(mocks.oauthService.initCodeFlow).not.toHaveBeenCalled();
+      expect(mocks.oauthService.logOut).toHaveBeenCalledWith(true);
+      expect(mocks.userInfoSpy.set).toHaveBeenCalledWith({ authenticated: false });
+    }));
+  });
 
   describe('configure() and configureForTenant()', () => {
     it('sets customQueryParams when audience is present', fakeAsync(() => {
