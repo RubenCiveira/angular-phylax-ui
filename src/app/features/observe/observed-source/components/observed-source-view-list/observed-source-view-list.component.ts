@@ -5,9 +5,9 @@ import {
   ObservedSourceTypes,
   ObservedSourceFilter,
 } from 'app/features/observe/observed-source/model/observed-source.model';
-import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal, contentChild } from '@angular/core';
 import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
+import { FormControl } from '@angular/forms';
+import { contentChild, input, effect, Component, signal } from '@angular/core';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({

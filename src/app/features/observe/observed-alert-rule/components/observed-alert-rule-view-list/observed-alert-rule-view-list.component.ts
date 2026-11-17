@@ -4,10 +4,10 @@ import {
   ObservedAlertRuleTypes,
 } from 'app/features/observe/observed-alert-rule/model/observed-alert-rule.model';
 import { Shift, Projected } from '@shared/data/repository/repository.model';
+import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
 import { ObservedAlertRuleRepository } from 'app/features/observe/observed-alert-rule/repository/observed-alert-rule-repository.service';
 import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal, contentChild } from '@angular/core';
-import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
+import { contentChild, input, effect, Component, signal } from '@angular/core';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({

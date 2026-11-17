@@ -49,7 +49,9 @@ import type { ActionContainerComponent } from './action-container.component';
             }
           </mat-menu>
         } @else {
-          <span class="crumb crumb-item"><span class="crumb-text">{{ label }}</span></span>
+          <span class="crumb crumb-item"
+            ><span class="crumb-text">{{ label }}</span></span
+          >
         }
         <mat-icon class="crumb-sep" aria-hidden="true">chevron_right</mat-icon>
       }

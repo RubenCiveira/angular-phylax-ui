@@ -4,9 +4,9 @@ import {
   TenantLoginProviderFilter,
   TenantLoginProviderTypes,
 } from 'app/features/identity/tenant-login-provider/model/tenant-login-provider.model';
-import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal, contentChild } from '@angular/core';
 import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
+import { FormControl } from '@angular/forms';
+import { contentChild, input, effect, Component, signal } from '@angular/core';
 import { DisplayProvider } from '@shared/data/display-provider';
 import { TenantLoginProviderRepository } from 'app/features/identity/tenant-login-provider/repository/tenant-login-provider-repository.service';
 

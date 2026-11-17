@@ -5,9 +5,9 @@ import {
   UserGroupMembershipTypes,
   UserGroupMembershipFilter,
 } from 'app/features/access/user-group-membership/model/user-group-membership.model';
-import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal, contentChild } from '@angular/core';
 import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
+import { FormControl } from '@angular/forms';
+import { contentChild, input, effect, Component, signal } from '@angular/core';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({
@@ -24,6 +24,8 @@ export class UserGroupMembershipViewListComponent {
   /** Estructura de fila o tarjeta que pasa quien usa el listado (`<list-view-row>`/`<list-view-card>` como contenido). */
   rowLayout = contentChild(ListViewRowTemplate);
   cardLayout = contentChild(ListViewCardTemplate);
+  /** Estructura propia del sublistado desde el que se abre (`<sublist>` con `<row>`/`<card>`). */
+  layout = input<string>();
   search = new FormControl<any>(undefined);
   showSearchLabel = signal('Refresh');
   hideSearchLabel = signal('Refresh');

@@ -58,7 +58,11 @@
       >
         <list-view-row>
           <ng-template listViewRowTitle let-row="$implicit">
-            {{ row.uid }}
+            @if (fixed()?.['tenant']) {
+              {{ row.title }}
+            } @else {
+              {{ row.uid }}
+            }
           </ng-template>
           <ng-template listViewRowAction let-row="$implicit">
             <ng-container

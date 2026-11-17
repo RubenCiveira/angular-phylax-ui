@@ -2,9 +2,9 @@
 import { TenantFilter, TenantTypes } from 'app/features/identity/tenant/model/tenant.model';
 import { TenantRepository } from 'app/features/identity/tenant/repository/tenant-repository.service';
 import { Shift, Projected } from '@shared/data/repository/repository.model';
-import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal, contentChild } from '@angular/core';
 import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
+import { FormControl } from '@angular/forms';
+import { contentChild, input, effect, Component, signal } from '@angular/core';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({

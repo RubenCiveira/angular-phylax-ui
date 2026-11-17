@@ -2,9 +2,9 @@
 import { Shift, Projected } from '@shared/data/repository/repository.model';
 import { RoleRepository } from 'app/features/access/role/repository/role-repository.service';
 import { RoleTypes, RoleFilter } from 'app/features/access/role/model/role.model';
-import { FormControl } from '@angular/forms';
-import { input, effect, Component, signal, contentChild } from '@angular/core';
 import { ListViewCardTemplate, ListViewRowTemplate } from '@shared/toolkit/list-view/list-view.directives';
+import { FormControl } from '@angular/forms';
+import { contentChild, input, effect, Component, signal } from '@angular/core';
 import { DisplayProvider } from '@shared/data/display-provider';
 
 @Component({
