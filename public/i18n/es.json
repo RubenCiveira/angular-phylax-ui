@@ -449,6 +449,20 @@
     }
   },
   "identity": {
+    "bootstrap": {
+      "checking": {
+        "message": "Un momento, estamos viendo si ya habías iniciado sesión.",
+        "title": "Comprobando tu sesión"
+      },
+      "signing-in": {
+        "message": "Validando el acceso con el proveedor de identidad…",
+        "title": "Inicio de sesión correcto"
+      },
+      "loading-user": {
+        "message": "Descargando tus datos de usuario y permisos…",
+        "title": "Preparando tu espacio"
+      }
+    },
     "errors": {
       "code": "La respuesta del inicio de sesión no es válida. Vuelve a iniciar sesión.",
       "discovery": "No se ha podido contactar con el proveedor de identidad. ¿Borrar las credenciales guardadas y empezar de nuevo?",

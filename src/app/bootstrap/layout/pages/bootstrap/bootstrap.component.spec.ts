@@ -2,31 +2,54 @@
 import { TestBed } from '@angular/core/testing';
 import { TranslocoTestingModule } from '@jsverse/transloco';
 import { BootstrapComponent } from './bootstrap.component';
+import { IdentityPhase } from '@shared/context/identity/identity-provider.interface';
+
+const phases = {
+  checking: { title: 'Checking', message: 'Checking your session' },
+  'signing-in': { title: 'Signed in', message: 'Validating access' },
+  'loading-user': { title: 'Almost there', message: 'Downloading your data' },
+};
 
 describe('BootstrapComponent', () => {
-  const create = (error: boolean) => {
+  const create = (error: boolean, phase: IdentityPhase = 'checking') => {
     TestBed.configureTestingModule({
       imports: [
         BootstrapComponent,
         TranslocoTestingModule.forRoot({
-          langs: { en: { identity: { errors: { title: 'No identity', notConfigured: 'Not configured' } } } },
+          langs: {
+            en: { identity: { bootstrap: phases, errors: { title: 'No identity', notConfigured: 'Not configured' } } },
+          },
           translocoConfig: { availableLangs: ['en'], defaultLang: 'en' },
         }),
       ],
     });
     const fixture = TestBed.createComponent(BootstrapComponent);
     fixture.componentRef.setInput('error', error);
+    fixture.componentRef.setInput('phase', phase);
     fixture.detectChanges();
     return fixture.nativeElement as HTMLElement;
   };
 
   afterEach(() => TestBed.resetTestingModule());
 
-  it('shows that it is loading', () => {
+  it('announces that it is checking the session, without steps', () => {
     const element = create(false);
 
-    expect(element.textContent).toContain('Loading...');
+    expect(element.querySelector('[role="status"]')?.textContent).toContain('Checking your session');
     expect(element.querySelector('[role="alert"]')).toBeNull();
+    expect(element.querySelector('.steps')).toBeNull();
+  });
+
+  it('explains each step after coming back from the login', () => {
+    const signingIn = create(false, 'signing-in');
+    expect(signingIn.textContent).toContain('Validating access');
+    expect(signingIn.querySelectorAll('.steps .current').length).toBe(1);
+    expect(signingIn.querySelectorAll('.steps .done').length).toBe(0);
+
+    TestBed.resetTestingModule();
+    const loading = create(false, 'loading-user');
+    expect(loading.textContent).toContain('Downloading your data');
+    expect(loading.querySelectorAll('.steps .done').length).toBe(1);
   });
 
   it('alerts when the identity is not configured', () => {

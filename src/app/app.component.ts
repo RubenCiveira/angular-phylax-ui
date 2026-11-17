@@ -11,6 +11,7 @@ import { NavItem } from './bootstrap/workspace/workspace.model';
 import { WorkspaceStateService } from './bootstrap/workspace/workspace-state.service';
 import { SelectorsOutletComponent } from './bootstrap/workspace/selectors-outlet.component';
 import { UserInfo } from '@shared/context/identity/user-info.model';
+import { IdentityPhase } from '@shared/context/identity/identity-provider.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { MenuComponent } from './bootstrap/layout/menu/menu.component';
@@ -45,6 +46,8 @@ export class AppComponent implements OnInit, OnDestroy {
   currentUser: Signal<UserInfo>;
   currentMenu: Signal<NavItem[]>;
   redirecting: Signal<'login' | 'logout' | null>;
+  /** Fase del arranque de la identidad, para la pantalla de espera. */
+  phase: Signal<IdentityPhase>;
 
   mobile = signal(false);
 
@@ -77,6 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.currentUser = appState.user('main');
     this.currentMenu = workspace.nav;
     this.redirecting = identity.redirecting;
+    this.phase = toSignal(identity.phase('main'), { initialValue: 'checking' });
 
     appState.language$.subscribe((lang) => {
       transloco.setActiveLang(lang);

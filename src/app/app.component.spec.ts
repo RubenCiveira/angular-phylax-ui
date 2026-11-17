@@ -45,6 +45,7 @@ class MockWorkspaceStateService {
 
 class MockIdentityService {
   bootstrap = jasmine.createSpy('bootstrap').and.returnValue(of(undefined));
+  phase = jasmine.createSpy('phase').and.returnValue(of('checking'));
   redirecting = signal(null);
 }
 

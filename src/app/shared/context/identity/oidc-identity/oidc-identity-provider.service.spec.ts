@@ -115,6 +115,28 @@ describe('OidcIdentityHandlerService', () => {
 
   // ── Basic methods ──────────────────────────────────────────────────────────
 
+  it('starts in signing-in when the page comes back from the provider with code and state', () => {
+    const mocks = buildMocks();
+    const original = window.location.href;
+    history.replaceState(null, '', '?code=abc&state=xyz');
+    try {
+      const returning = new OidcIdentityHandlerService(
+        'main',
+        mocks.oauthService,
+        mocks.appConfig,
+        mocks.appState,
+        mocks.errors,
+        mocks.ui,
+        mocks.logger,
+      );
+      let phase = '';
+      returning.phase$().subscribe((value) => (phase = value));
+      expect(phase).toBe('signing-in');
+    } finally {
+      history.replaceState(null, '', original);
+    }
+  });
+
   it('bootstrap() returns the boostrapSubject observable', () => {
     let emitted = false;
     handler.bootstrap().subscribe(() => {
@@ -216,6 +238,16 @@ describe('OidcIdentityHandlerService', () => {
       expect(userInfoSpy.set).toHaveBeenCalledWith(
         jasmine.objectContaining({ authenticated: true, name: 'Test User', roles: ['admin'] }),
       );
+    }));
+
+    it('reports that it is downloading the user once the session is valid', fakeAsync(() => {
+      const phases: string[] = [];
+      handler.phase$().subscribe((phase) => phases.push(phase));
+      oauthService.hasValidAccessToken.and.returnValue(true);
+      eventSubject.next({ type: 'silently_refreshed' });
+      tick();
+
+      expect(phases).toEqual(['checking', 'loading-user']);
     }));
 
     it('drops its tokens when another tab logs out', fakeAsync(() => {

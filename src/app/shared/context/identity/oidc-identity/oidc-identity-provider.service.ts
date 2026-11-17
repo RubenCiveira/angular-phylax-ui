@@ -5,7 +5,13 @@ import { IdentityConfig } from '@shared/context/config/app-config.model';
 import { Logger } from '@shared/context/observability/logger.service';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { BehaviorSubject, Observable, ReplaySubject, combineLatest, distinctUntilChanged, filter } from 'rxjs';
-import { IdentityErrorReason, IdentityHandler, IdentityProvider, IdentityUiPort } from '../identity-provider.interface';
+import {
+  IdentityErrorReason,
+  IdentityHandler,
+  IdentityPhase,
+  IdentityProvider,
+  IdentityUiPort,
+} from '../identity-provider.interface';
 import { AppStateService } from '@shared/context/state/app-state.service';
 import { ErrorService } from '@shared/context/observability/error.service';
 import { ANONYMOUS_USER, UserInfo } from '../user-info.model';
@@ -47,6 +53,8 @@ export class OidcIdentityHandlerService implements IdentityHandler {
   private currentUser: UserInfo = ANONYMOUS_USER;
   private readonly accessToken = new BehaviorSubject<string | null>(null);
   private rolesClaim = DEFAULT_ROLES_CLAIM;
+  /** Si la página se abre con `code` y `state` se vuelve del proveedor: lo que tarda es el canje del código. */
+  private readonly phase = new BehaviorSubject<IdentityPhase>(returningFromLogin() ? 'signing-in' : 'checking');
   constructor(
     private readonly name: string,
     private readonly oauthService: OAuthService,
@@ -92,6 +100,10 @@ export class OidcIdentityHandlerService implements IdentityHandler {
 
   bootstrap(): Observable<void> {
     return this.boostrapSubject;
+  }
+
+  phase$(): Observable<IdentityPhase> {
+    return this.phase.pipe(distinctUntilChanged());
   }
 
   token$(): Observable<string | null> {
@@ -205,6 +217,7 @@ export class OidcIdentityHandlerService implements IdentityHandler {
     if (valid != this.logged) {
       this.logged = valid;
       if (valid) {
+        this.phase.next('loading-user');
         this.oauthService.loadUserProfile().then((info: any) => {
           this.setUser(
             {
@@ -222,4 +235,10 @@ export class OidcIdentityHandlerService implements IdentityHandler {
       }
     }
   }
+}
+
+/** Respuesta del proveedor de identidad en la URL (code flow): `code` y `state` en la query o en el fragmento. */
+function returningFromLogin(): boolean {
+  const params = new URLSearchParams(window.location.search || window.location.hash.replace(/^#/, ''));
+  return params.has('code') && params.has('state');
 }

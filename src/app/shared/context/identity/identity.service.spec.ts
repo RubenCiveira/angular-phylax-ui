@@ -25,6 +25,26 @@ let logger: jasmine.SpyObj<Logger>;
 describe('IdentityService', () => {
   beforeEach(() => (logger = jasmine.createSpyObj<Logger>('Logger', ['error'])));
 
+  it('takes the bootstrap phase from the handler, or checking when it does not report one', () => {
+    const reporting = { ...handlerSpy(), phase$: () => of('loading-user' as const) };
+    const silent = handlerSpy();
+    const provider: IdentityProvider = {
+      accept: (type) => (type === 'oidc' ? reporting : type === 'x' ? silent : null),
+    };
+    const service = new IdentityService(
+      configOf(new BehaviorSubject({ main: { type: 'oidc' }, other: { type: 'x' } })),
+      [provider],
+      logger,
+    );
+    const phases: string[] = [];
+
+    service.phase('main').subscribe((phase) => phases.push(phase));
+    service.phase('other').subscribe((phase) => phases.push(phase));
+    service.phase('missing').subscribe((phase) => phases.push(phase));
+
+    expect(phases).toEqual(['loading-user', 'checking', 'checking']);
+  });
+
   it('selects handler based on identity config and delegates actions', () => {
     const handler = handlerSpy();
     const provider: IdentityProvider = {

@@ -8,10 +8,20 @@ export interface IdentityProvider {
   accept(type: string, name: string): IdentityHandler | null;
 }
 
+/**
+ * En qué punto está el arranque de la identidad, para explicar la espera al usuario:
+ * - `checking`: comprobando si hay una sesión guardada.
+ * - `signing-in`: se vuelve del proveedor de identidad y se canjea el código por los tokens.
+ * - `loading-user`: la sesión es válida y se descargan los datos del usuario.
+ */
+export type IdentityPhase = 'checking' | 'signing-in' | 'loading-user';
+
 export interface IdentityHandler {
   /** `false` si login y logout no salen de la página (por ejemplo, un diálogo): no se muestra el aviso de redirección. Por defecto `true`. */
   readonly redirects?: boolean;
   bootstrap(): Observable<void>;
+  /** Fase del arranque mientras `bootstrap()` no ha emitido. Sin ella se asume `checking`. */
+  phase$?(): Observable<IdentityPhase>;
   /** Access token vigente, o `null` sin sesión. Emite cada vez que cambia. */
   token$(): Observable<string | null>;
   login(): void;
