@@ -91,6 +91,15 @@ app-bootstrap {
   grid-column: 1 / -1;
   grid-row: 1 / -1;
 }
+/* sin sesión: la página de entrada ocupa todas las filas menos la del pie (también en móvil) */
+app-landing {
+  grid-column: 1 / -1;
+  grid-row: 1 / -2;
+}
+app-landing ~ footer {
+  grid-column: 1 / -1;
+  text-align: center;
+}
 
 .redirect-overlay {
   position: fixed;

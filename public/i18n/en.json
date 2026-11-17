@@ -491,6 +491,52 @@
       "unchanged": "Unchanged"
     }
   },
+  "home": {
+    "title": "Welcome",
+    "greeting": "Hello, {{name}}",
+    "subtitle": "Pick up where you need to: go straight to any section of the menu or review what each area of the application covers."
+  },
+  "landing": {
+    "title": "Identity, access and notifications for your platform",
+    "subtitle": "Phylax centralises who your users are, what each application can do and how you talk to them: tenants, sign-in, OAuth clients, roles, message templates and service monitoring in one console.",
+    "signIn": "Sign in",
+    "hint": "You need an account in this tenant to manage its configuration."
+  },
+  "sections": {
+    "features": {
+      "title": "What you can do",
+      "items": {
+        "identity": {
+          "icon": "badge",
+          "title": "Identity",
+          "text": "Tenants, users, federated sign-in providers, consent purposes and terms of use, isolated per tenant."
+        },
+        "access": {
+          "icon": "key",
+          "title": "Access",
+          "text": "OAuth clients, API keys, resource servers and roles: decide which applications and people reach each API."
+        },
+        "notification": {
+          "icon": "mail",
+          "title": "Notifications",
+          "text": "Outbound SMTP configuration and the messages your platform sends to its users."
+        },
+        "template": {
+          "icon": "palette",
+          "title": "Templates",
+          "text": "Versioned templates, snippets and themes with their assets to brand every page and email."
+        },
+        "observe": {
+          "icon": "monitoring",
+          "title": "Observability",
+          "text": "Probes, SLOs, alert rules, issues and dashboards to know how your services are doing."
+        }
+      }
+    },
+    "nav": {
+      "title": "Go to"
+    }
+  },
   "offline": {
     "action": {
       "cancel": "Cancel",

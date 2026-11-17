@@ -448,6 +448,11 @@
       "traceId": "Referencia para soporte"
     }
   },
+  "home": {
+    "greeting": "Hola, {{name}}",
+    "subtitle": "Empieza donde lo necesites: entra directamente en cualquier sección del menú o repasa qué cubre cada área de la aplicación.",
+    "title": "Te damos la bienvenida"
+  },
   "identity": {
     "bootstrap": {
       "checking": {
@@ -481,6 +486,12 @@
     }
   },
   "info": "Modulo",
+  "landing": {
+    "hint": "Necesitas una cuenta en este tenant para gestionar su configuración.",
+    "signIn": "Iniciar sesión",
+    "subtitle": "Phylax centraliza quiénes son tus usuarios, qué puede hacer cada aplicación y cómo te comunicas con ellos: tenants, inicio de sesión, clientes OAuth, roles, plantillas de mensajes y vigilancia de servicios en una sola consola.",
+    "title": "Identidad, acceso y notificaciones para tu plataforma"
+  },
   "offline": {
     "action": {
       "cancel": "Cancelar",
@@ -546,6 +557,41 @@
         "syncing": "Subiendo los cambios uno a uno…"
       },
       "title": "Cambios pendientes"
+    }
+  },
+  "sections": {
+    "features": {
+      "items": {
+        "identity": {
+          "icon": "badge",
+          "text": "Tenants, usuarios, proveedores de acceso federado, finalidades de consentimiento y condiciones de uso, aislados por tenant.",
+          "title": "Identidad"
+        },
+        "access": {
+          "icon": "key",
+          "text": "Clientes OAuth, API keys, servidores de recursos y roles: decide qué aplicaciones y personas llegan a cada API.",
+          "title": "Acceso"
+        },
+        "notification": {
+          "icon": "mail",
+          "text": "Configuración del SMTP de salida y los mensajes que tu plataforma envía a sus usuarios.",
+          "title": "Notificaciones"
+        },
+        "template": {
+          "icon": "palette",
+          "text": "Plantillas, fragmentos y temas versionados, con sus recursos, para dar imagen a cada página y correo.",
+          "title": "Plantillas"
+        },
+        "observe": {
+          "icon": "monitoring",
+          "text": "Sondas, SLOs, reglas de alerta, incidencias y paneles para saber cómo van tus servicios.",
+          "title": "Observabilidad"
+        }
+      },
+      "title": "Qué puedes hacer"
+    },
+    "nav": {
+      "title": "Ir a"
     }
   },
   "validation": {

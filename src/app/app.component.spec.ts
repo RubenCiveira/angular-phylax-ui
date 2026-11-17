@@ -12,9 +12,15 @@ import { IDENTITY_PROVIDER } from '@shared/context/identity/identity-provider.in
 import { IdentityService } from '@shared/context/identity/identity.service';
 import { RuntimeConfigService } from '@shared/context/config/app-config.service';
 import { RouteAccessService } from './bootstrap/layout/menu/route-accessible.service';
+import { LandingComponent } from './bootstrap/layout/pages/landing/landing.component';
 
 @Component({ selector: 'router-outlet', template: '' })
 class MockRouterOutlet {}
+
+@Component({ selector: 'app-landing', template: '' })
+class MockLanding {}
+
+const user = signal({ authenticated: false });
 
 // Mock para TranslocoService
 class MockTranslocoService {
@@ -28,7 +34,7 @@ class MockAppStateService {
   language = signal('lang');
   language$ = of('lang');
   tenant = signal('main');
-  user = () => signal({ authenticated: false });
+  user = () => user;
   contexts = signal({});
   contextScope = signal('');
 }
@@ -60,6 +66,11 @@ class MockRouteAccessService {
 
 describe('AppComponent', () => {
   beforeEach(async () => {
+    user.set({ authenticated: false });
+    TestBed.overrideComponent(AppComponent, {
+      remove: { imports: [LandingComponent] },
+      add: { imports: [MockLanding] },
+    });
     await TestBed.configureTestingModule({
       imports: [AppComponent, MockRouterOutlet], // Importar AppComponent en vez de declararlo
       providers: [
@@ -91,7 +102,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
+  it('shows the landing page instead of the shell without a session', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('app-landing')).toBeTruthy();
+    expect(compiled.querySelector('nav')).toBeNull();
+    expect(compiled.querySelector('router-outlet')).toBeNull();
+  });
+
   it('should contain a router-outlet', () => {
+    user.set({ authenticated: true });
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;

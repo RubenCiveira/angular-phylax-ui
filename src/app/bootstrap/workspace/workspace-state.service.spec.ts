@@ -6,6 +6,7 @@ import { AppStateService } from '@shared/context/state/app-state.service';
 import { WORKSPACES, WorkspaceStateService } from './workspace-state.service';
 import { workspaceRoutes } from './workspace.routes';
 import { WorkspaceDefinition } from './workspace.model';
+import { HomeComponent } from '../layout/pages/home/home.component';
 
 @Component({ template: '' })
 class PageComponent {}
@@ -78,6 +79,14 @@ describe('workspaceRoutes', () => {
     const routes = workspaceRoutes([MAIN, ADMIN], {} as any, {} as any);
     expect(routes.map((route) => route.path)).toEqual(['@admin', '']);
     expect(routes.map((route) => route.data?.['workspace'])).toEqual(['admin', 'main']);
-    expect(routes[0].children?.[0].path).toBe('clients');
+    expect(routes[0].children?.[1].path).toBe('clients');
+  });
+
+  it('opens each workspace on its home page', () => {
+    const routes = workspaceRoutes([MAIN, ADMIN], {} as any, {} as any);
+    routes.forEach((route) => {
+      expect(route.children?.[0]).toEqual(jasmine.objectContaining({ path: '', pathMatch: 'full' }));
+      expect(route.children?.[0].component).toBe(HomeComponent);
+    });
   });
 });

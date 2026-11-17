@@ -3,10 +3,12 @@ import { Routes } from '@angular/router';
 import { MicroFrontConfigService, RuntimeConfigService } from '@shared/context/config/app-config.service';
 import { WORKSPACE_DATA } from './workspace-state.service';
 import { WorkspaceDefinition } from './workspace.model';
+import { HomeComponent } from '../layout/pages/home/home.component';
 
 /**
  * Rutas de todos los workspaces bajo `/:language/:tenant`: cada uno en su segmento (`@admin/...`) y el de por
- * defecto directamente. Los que tienen segmento van antes para que el de por defecto no los tape.
+ * defecto directamente. Los que tienen segmento van antes para que el de por defecto no los tape. La raíz de cada
+ * uno es su portada.
  */
 export function workspaceRoutes(
   workspaces: WorkspaceDefinition[],
@@ -18,6 +20,6 @@ export function workspaceRoutes(
     .map((workspace) => ({
       path: workspace.path,
       data: { [WORKSPACE_DATA]: workspace.name },
-      children: workspace.routes(appConfig, mfeConfig),
+      children: [{ path: '', pathMatch: 'full', component: HomeComponent }, ...workspace.routes(appConfig, mfeConfig)],
     }));
 }

@@ -18,6 +18,7 @@ import { MenuComponent } from './bootstrap/layout/menu/menu.component';
 import { ToolbarComponent } from './bootstrap/layout/toolbar/toolbar.component';
 import { FooterComponent } from './bootstrap/layout/footer/footer.component';
 import { BootstrapComponent } from './bootstrap/layout/pages/bootstrap/bootstrap.component';
+import { LandingComponent } from './bootstrap/layout/pages/landing/landing.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -35,6 +36,7 @@ import { LAYOUT_MOBILE_QUERY } from './bootstrap/layout/layout.constants';
     ToolbarComponent,
     FooterComponent,
     BootstrapComponent,
+    LandingComponent,
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
